@@ -1,0 +1,49 @@
+{
+  "name": "@harmony-dev/harmony-web-sdk",
+  "version": "1.0.0",
+  "description": "A Node SDK for Harmony, adapted to work for the web",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/harmony-development/harmony-web-sdk.git"
+  },
+  "keywords": [
+    "harmony",
+    "chat-client",
+    "grpc"
+  ],
+  "author": "Harmony Development",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/harmony-development/harmony-web-sdk/issues"
+  },
+  "homepage": "https://github.com/harmony-development/harmony-web-sdk#readme",
+  "scripts": {
+    "build": "git submodule update --recursive --remote && ./genprotos.sh",
+    "commit": "git-cz",
+    "prepublish": "npm run build"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "dependencies": {
+    "@types/google-protobuf": "^3.7.2",
+    "google-protobuf": "^4.0.0-rc.1",
+    "grpc": "^1.24.3"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^9.1.1",
+    "@commitlint/config-conventional": "^9.1.1",
+    "commitizen": "^4.1.2",
+    "cz-conventional-changelog": "^3.2.0",
+    "grpc-tools": "^1.9.0",
+    "ts-protoc-gen": "^0.12.0",
+    "typescript": "^3.9.7"
+  }
+}
