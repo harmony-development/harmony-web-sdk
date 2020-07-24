@@ -95,6 +95,15 @@ type CoreServiceUpdateChannelName = {
   readonly responseType: typeof google_protobuf_empty_pb.Empty;
 };
 
+type CoreServiceUpdateChannelOrder = {
+  readonly methodName: string;
+  readonly service: typeof CoreService;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof core_v1_core_pb.UpdateChannelOrderRequest;
+  readonly responseType: typeof google_protobuf_empty_pb.Empty;
+};
+
 type CoreServiceUpdateMessage = {
   readonly methodName: string;
   readonly service: typeof CoreService;
@@ -215,6 +224,7 @@ export class CoreService {
   static readonly GetChannelMessages: CoreServiceGetChannelMessages;
   static readonly UpdateGuildName: CoreServiceUpdateGuildName;
   static readonly UpdateChannelName: CoreServiceUpdateChannelName;
+  static readonly UpdateChannelOrder: CoreServiceUpdateChannelOrder;
   static readonly UpdateMessage: CoreServiceUpdateMessage;
   static readonly DeleteGuild: CoreServiceDeleteGuild;
   static readonly DeleteInvite: CoreServiceDeleteInvite;
@@ -349,6 +359,15 @@ export class CoreServiceClient {
   ): UnaryResponse;
   updateChannelName(
     requestMessage: core_v1_core_pb.UpdateChannelNameRequest,
+    callback: (error: ServiceError|null, responseMessage: google_protobuf_empty_pb.Empty|null) => void
+  ): UnaryResponse;
+  updateChannelOrder(
+    requestMessage: core_v1_core_pb.UpdateChannelOrderRequest,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: google_protobuf_empty_pb.Empty|null) => void
+  ): UnaryResponse;
+  updateChannelOrder(
+    requestMessage: core_v1_core_pb.UpdateChannelOrderRequest,
     callback: (error: ServiceError|null, responseMessage: google_protobuf_empty_pb.Empty|null) => void
   ): UnaryResponse;
   updateMessage(

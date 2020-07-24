@@ -101,6 +101,15 @@ CoreService.UpdateChannelName = {
   responseType: google_protobuf_empty_pb.Empty
 };
 
+CoreService.UpdateChannelOrder = {
+  methodName: "UpdateChannelOrder",
+  service: CoreService,
+  requestStream: false,
+  responseStream: false,
+  requestType: core_v1_core_pb.UpdateChannelOrderRequest,
+  responseType: google_protobuf_empty_pb.Empty
+};
+
 CoreService.UpdateMessage = {
   methodName: "UpdateMessage",
   service: CoreService,
@@ -500,6 +509,37 @@ CoreServiceClient.prototype.updateChannelName = function updateChannelName(reque
     callback = arguments[1];
   }
   var client = grpc.unary(CoreService.UpdateChannelName, {
+    request: requestMessage,
+    host: this.serviceHost,
+    metadata: metadata,
+    transport: this.options.transport,
+    debug: this.options.debug,
+    onEnd: function (response) {
+      if (callback) {
+        if (response.status !== grpc.Code.OK) {
+          var err = new Error(response.statusMessage);
+          err.code = response.status;
+          err.metadata = response.trailers;
+          callback(err, null);
+        } else {
+          callback(null, response.message);
+        }
+      }
+    }
+  });
+  return {
+    cancel: function () {
+      callback = null;
+      client.close();
+    }
+  };
+};
+
+CoreServiceClient.prototype.updateChannelOrder = function updateChannelOrder(requestMessage, metadata, callback) {
+  if (arguments.length === 2) {
+    callback = arguments[1];
+  }
+  var client = grpc.unary(CoreService.UpdateChannelOrder, {
     request: requestMessage,
     host: this.serviceHost,
     metadata: metadata,

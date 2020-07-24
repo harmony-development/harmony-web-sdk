@@ -1,0 +1,35 @@
+import { Location, Embed, Action } from "../protocol/core/v1/core_pb";
+import { UnaryOutput } from "@improbable-eng/grpc-web/dist/typings/unary";
+import { ProtobufMessage } from "@improbable-eng/grpc-web/dist/typings/message";
+import { UnaryMethodDefinition } from "@improbable-eng/grpc-web/dist/typings/service";
+export declare class Connection {
+    host: string;
+    constructor(host: string);
+    unaryReq<T1 extends ProtobufMessage, T2 extends ProtobufMessage>(descriptor: UnaryMethodDefinition<T1, T2>, request: T1): Promise<UnaryOutput<T2>>;
+    newLocation(guildID: string, channelID?: string, messageID?: string): Location;
+    getKey(): Promise<UnaryOutput<import("../protocol/foundation/v1/foundation_pb").KeyReply>>;
+    loginLocal(email: string, password: string): Promise<UnaryOutput<import("../protocol/foundation/v1/foundation_pb").Session>>;
+    loginFederated(token: string, domain: string): Promise<UnaryOutput<import("../protocol/foundation/v1/foundation_pb").Session>>;
+    register(email: string, username: string, password: string): Promise<UnaryOutput<import("../protocol/foundation/v1/foundation_pb").Session>>;
+    federate(target: string): Promise<UnaryOutput<import("../protocol/foundation/v1/foundation_pb").FederateReply>>;
+    createGuild(guildName: string, pictureURL?: string): Promise<UnaryOutput<import("../protocol/core/v1/core_pb").CreateGuildResponse>>;
+    createInvite(guildID: string, name?: string, possibleUses?: number): Promise<UnaryOutput<import("../protocol/core/v1/core_pb").CreateInviteResponse>>;
+    createChannel(guildID: string, channelName: string): Promise<UnaryOutput<import("../protocol/core/v1/core_pb").CreateChannelResponse>>;
+    getGuild(guildID: string): Promise<UnaryOutput<import("../protocol/core/v1/core_pb").GetGuildResponse>>;
+    getGuildInvites(guildID: string): Promise<UnaryOutput<import("../protocol/core/v1/core_pb").GetGuildInvitesResponse>>;
+    getGuildMembers(guildID: string): Promise<UnaryOutput<import("../protocol/core/v1/core_pb").GetGuildMembersResponse>>;
+    getGuildChannels(guildID: string): Promise<UnaryOutput<import("../protocol/core/v1/core_pb").GetGuildChannelsResponse>>;
+    getChannelMessages(guildID: string, channelID: string, beforeMessage?: string): Promise<UnaryOutput<import("../protocol/core/v1/core_pb").GetChannelMessagesResponse>>;
+    updateGuildName(guildID: string, newName: string): Promise<UnaryOutput<import("google-protobuf/google/protobuf/empty_pb").Empty>>;
+    updateChannelName(guildID: string, channelID: string, newName: string): Promise<UnaryOutput<import("google-protobuf/google/protobuf/empty_pb").Empty>>;
+    updateMessage(guildID: string, channelID: string, messageID: string, newContent?: any, newAttachments?: any, newActions?: any, newEmbeds?: any): Promise<UnaryOutput<import("google-protobuf/google/protobuf/empty_pb").Empty>>;
+    deleteGuild(guildID: string): Promise<UnaryOutput<import("google-protobuf/google/protobuf/empty_pb").Empty>>;
+    deleteInvite(guildID: string, inviteID: string): Promise<UnaryOutput<import("google-protobuf/google/protobuf/empty_pb").Empty>>;
+    deleteChannel(guildID: string, channelID: string): Promise<UnaryOutput<import("google-protobuf/google/protobuf/empty_pb").Empty>>;
+    deleteMessage(guildID: string, channelID: string, messageID: string): Promise<UnaryOutput<import("google-protobuf/google/protobuf/empty_pb").Empty>>;
+    joinGuild(inviteID: string): Promise<UnaryOutput<import("../protocol/core/v1/core_pb").JoinGuildResponse>>;
+    leaveGuild(guildID: string): Promise<UnaryOutput<import("google-protobuf/google/protobuf/empty_pb").Empty>>;
+    triggerAction(guildID: string, channelID: string, messageID: string, actionID: string, actionData?: string): Promise<UnaryOutput<import("google-protobuf/google/protobuf/empty_pb").Empty>>;
+    sendMessage(guildID: string, channelID: string, content?: string, attachments?: string[], embeds?: Embed[], actions?: Action[]): Promise<UnaryOutput<import("google-protobuf/google/protobuf/empty_pb").Empty>>;
+    localGuilds(target: string): Promise<UnaryOutput<import("../protocol/core/v1/core_pb").JoinedLocalGuildsResponse>>;
+}

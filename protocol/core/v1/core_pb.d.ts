@@ -360,6 +360,15 @@ export class CreateChannelRequest extends jspb.Message {
   getChannelName(): string;
   setChannelName(value: string): void;
 
+  getIsCategory(): boolean;
+  setIsCategory(value: boolean): void;
+
+  getPreviousId(): number;
+  setPreviousId(value: number): void;
+
+  getNextId(): number;
+  setNextId(value: number): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): CreateChannelRequest.AsObject;
   static toObject(includeInstance: boolean, msg: CreateChannelRequest): CreateChannelRequest.AsObject;
@@ -374,6 +383,9 @@ export namespace CreateChannelRequest {
   export type AsObject = {
     location?: Location.AsObject,
     channelName: string,
+    isCategory: boolean,
+    previousId: number,
+    nextId: number,
   }
 }
 
@@ -613,6 +625,9 @@ export namespace GetGuildChannelsResponse {
     getChannelName(): string;
     setChannelName(value: string): void;
 
+    getIsCategory(): boolean;
+    setIsCategory(value: boolean): void;
+
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): Channel.AsObject;
     static toObject(includeInstance: boolean, msg: Channel): Channel.AsObject;
@@ -627,6 +642,7 @@ export namespace GetGuildChannelsResponse {
     export type AsObject = {
       channelId: string,
       channelName: string,
+      isCategory: boolean,
     }
   }
 }
@@ -728,6 +744,36 @@ export namespace UpdateChannelNameRequest {
   export type AsObject = {
     location?: Location.AsObject,
     newChannelName: string,
+  }
+}
+
+export class UpdateChannelOrderRequest extends jspb.Message {
+  hasLocation(): boolean;
+  clearLocation(): void;
+  getLocation(): Location | undefined;
+  setLocation(value?: Location): void;
+
+  getPreviousId(): number;
+  setPreviousId(value: number): void;
+
+  getNextId(): number;
+  setNextId(value: number): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): UpdateChannelOrderRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: UpdateChannelOrderRequest): UpdateChannelOrderRequest.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: UpdateChannelOrderRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): UpdateChannelOrderRequest;
+  static deserializeBinaryFromReader(message: UpdateChannelOrderRequest, reader: jspb.BinaryReader): UpdateChannelOrderRequest;
+}
+
+export namespace UpdateChannelOrderRequest {
+  export type AsObject = {
+    location?: Location.AsObject,
+    previousId: number,
+    nextId: number,
   }
 }
 
@@ -921,6 +967,11 @@ export class GuildEvent extends jspb.Message {
   getDeletedMessage(): GuildEvent.MessageDeleted | undefined;
   setDeletedMessage(value?: GuildEvent.MessageDeleted): void;
 
+  hasCreatedChannel(): boolean;
+  clearCreatedChannel(): void;
+  getCreatedChannel(): GuildEvent.ChannelCreated | undefined;
+  setCreatedChannel(value?: GuildEvent.ChannelCreated): void;
+
   hasEditedChannel(): boolean;
   clearEditedChannel(): void;
   getEditedChannel(): GuildEvent.ChannelUpdated | undefined;
@@ -967,6 +1018,7 @@ export namespace GuildEvent {
     sentMessage?: GuildEvent.MessageSent.AsObject,
     editedMessage?: GuildEvent.MessageUpdated.AsObject,
     deletedMessage?: GuildEvent.MessageDeleted.AsObject,
+    createdChannel?: GuildEvent.ChannelCreated.AsObject,
     editedChannel?: GuildEvent.ChannelUpdated.AsObject,
     deletedChannel?: GuildEvent.ChannelDeleted.AsObject,
     editedGuild?: GuildEvent.GuildUpdated.AsObject,
@@ -1085,6 +1137,44 @@ export namespace GuildEvent {
     }
   }
 
+  export class ChannelCreated extends jspb.Message {
+    hasLocation(): boolean;
+    clearLocation(): void;
+    getLocation(): Location | undefined;
+    setLocation(value?: Location): void;
+
+    getName(): string;
+    setName(value: string): void;
+
+    getPreviousId(): number;
+    setPreviousId(value: number): void;
+
+    getNextId(): number;
+    setNextId(value: number): void;
+
+    getIsCategory(): boolean;
+    setIsCategory(value: boolean): void;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): ChannelCreated.AsObject;
+    static toObject(includeInstance: boolean, msg: ChannelCreated): ChannelCreated.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: ChannelCreated, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): ChannelCreated;
+    static deserializeBinaryFromReader(message: ChannelCreated, reader: jspb.BinaryReader): ChannelCreated;
+  }
+
+  export namespace ChannelCreated {
+    export type AsObject = {
+      location?: Location.AsObject,
+      name: string,
+      previousId: number,
+      nextId: number,
+      isCategory: boolean,
+    }
+  }
+
   export class ChannelUpdated extends jspb.Message {
     hasLocation(): boolean;
     clearLocation(): void;
@@ -1096,6 +1186,15 @@ export namespace GuildEvent {
 
     getUpdateName(): boolean;
     setUpdateName(value: boolean): void;
+
+    getPreviousId(): number;
+    setPreviousId(value: number): void;
+
+    getNextId(): number;
+    setNextId(value: number): void;
+
+    getUpdateOrder(): boolean;
+    setUpdateOrder(value: boolean): void;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): ChannelUpdated.AsObject;
@@ -1112,6 +1211,9 @@ export namespace GuildEvent {
       location?: Location.AsObject,
       name: string,
       updateName: boolean,
+      previousId: number,
+      nextId: number,
+      updateOrder: boolean,
     }
   }
 
@@ -1222,12 +1324,13 @@ export namespace GuildEvent {
     SENT_MESSAGE = 1,
     EDITED_MESSAGE = 2,
     DELETED_MESSAGE = 3,
-    EDITED_CHANNEL = 4,
-    DELETED_CHANNEL = 5,
-    EDITED_GUILD = 6,
-    DELETED_GUILD = 7,
-    JOINED_MEMBER = 8,
-    LEFT_MEMBER = 9,
+    CREATED_CHANNEL = 4,
+    EDITED_CHANNEL = 5,
+    DELETED_CHANNEL = 6,
+    EDITED_GUILD = 7,
+    DELETED_GUILD = 8,
+    JOINED_MEMBER = 9,
+    LEFT_MEMBER = 10,
   }
 }
 
@@ -1438,10 +1541,28 @@ export namespace TriggerActionRequest {
 }
 
 export class SendMessageRequest extends jspb.Message {
-  hasMessage(): boolean;
-  clearMessage(): void;
-  getMessage(): Message | undefined;
-  setMessage(value?: Message): void;
+  hasLocation(): boolean;
+  clearLocation(): void;
+  getLocation(): Location | undefined;
+  setLocation(value?: Location): void;
+
+  getContent(): string;
+  setContent(value: string): void;
+
+  clearActionsList(): void;
+  getActionsList(): Array<Action>;
+  setActionsList(value: Array<Action>): void;
+  addActions(value?: Action, index?: number): Action;
+
+  clearEmbedsList(): void;
+  getEmbedsList(): Array<Embed>;
+  setEmbedsList(value: Array<Embed>): void;
+  addEmbeds(value?: Embed, index?: number): Embed;
+
+  clearAttachmentsList(): void;
+  getAttachmentsList(): Array<string>;
+  setAttachmentsList(value: Array<string>): void;
+  addAttachments(value: string, index?: number): string;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): SendMessageRequest.AsObject;
@@ -1455,7 +1576,11 @@ export class SendMessageRequest extends jspb.Message {
 
 export namespace SendMessageRequest {
   export type AsObject = {
-    message?: Message.AsObject,
+    location?: Location.AsObject,
+    content: string,
+    actionsList: Array<Action.AsObject>,
+    embedsList: Array<Embed.AsObject>,
+    attachmentsList: Array<string>,
   }
 }
 

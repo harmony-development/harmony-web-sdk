@@ -1,6 +1,6 @@
 {
   "name": "@harmony-dev/harmony-web-sdk",
-  "version": "1.0.1",
+  "version": "1.1.1",
   "description": "A Node SDK for Harmony, adapted to work for the web",
   "repository": {
     "type": "git",
@@ -16,9 +16,18 @@
   "bugs": {
     "url": "https://github.com/harmony-development/harmony-web-sdk/issues"
   },
+  "main": "dist/lib/index.js",
+  "module": "dist/lib/index.js",
+  "typings": "dist/types/index.d.ts",
+  "files": [
+    "dist",
+    "protocol"
+  ],
   "homepage": "https://github.com/harmony-development/harmony-web-sdk#readme",
   "scripts": {
-    "build": "git submodule update --recursive --remote && ./genprotos.sh",
+    "lint": "tslint  --project tsconfig.json -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
+    "prebuild": "rimraf dist",
+    "build": "git submodule update --recursive --remote && ./genprotos.sh && tsc",
     "commit": "git-cz",
     "prepublish": "npm run build"
   },
@@ -33,16 +42,24 @@
     ]
   },
   "dependencies": {
+    "@improbable-eng/grpc-web": "^0.13.0",
     "@types/google-protobuf": "^3.7.2",
     "google-protobuf": "^4.0.0-rc.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^9.1.1",
     "@commitlint/config-conventional": "^9.1.1",
+    "@types/node": "^14.0.24",
     "commitizen": "^4.1.2",
     "cz-conventional-changelog": "^3.2.0",
     "grpc-tools": "^1.9.0",
+    "lint-staged": "^10.2.11",
+    "prettier": "^2.0.5",
+    "rimraf": "^3.0.2",
     "ts-protoc-gen": "^0.12.0",
+    "tslint": "^6.1.2",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-config-standard": "^9.0.0",
     "typescript": "^3.9.7"
   }
 }
