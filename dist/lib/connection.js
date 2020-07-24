@@ -49,12 +49,17 @@ var Connection = /** @class */ (function () {
     function Connection(host) {
         this.host = host;
     }
-    Connection.prototype.unaryReq = function (descriptor, request) {
+    Connection.prototype.unaryReq = function (descriptor, request, auth) {
         var _this = this;
+        var metadata = new grpc_web_1.grpc.Metadata();
+        if (auth && this.session) {
+            metadata.set("auth", this.session);
+        }
         return new Promise(function (res, rej) {
             grpc_web_1.grpc.unary(descriptor, {
                 request: request,
                 host: _this.host,
+                metadata: metadata,
                 onEnd: function (resp) { return (resp.status === Code_1.Code.OK ? res(resp) : rej(resp)); },
             });
         });
@@ -123,7 +128,7 @@ var Connection = /** @class */ (function () {
             return __generator(this, function (_a) {
                 req = new foundation_pb_1.FederateRequest();
                 req.setTarget(target);
-                return [2 /*return*/, this.unaryReq(foundation_pb_service_1.FoundationService.Federate, req)];
+                return [2 /*return*/, this.unaryReq(foundation_pb_service_1.FoundationService.Federate, req, true)];
             });
         });
     };
@@ -136,7 +141,7 @@ var Connection = /** @class */ (function () {
                 if (pictureURL) {
                     req.setPictureUrl(pictureURL);
                 }
-                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.CreateGuild, req)];
+                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.CreateGuild, req, true)];
             });
         });
     };
@@ -152,7 +157,7 @@ var Connection = /** @class */ (function () {
                 if (possibleUses) {
                     req.setPossibleUses(possibleUses);
                 }
-                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.CreateInvite, req)];
+                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.CreateInvite, req, true)];
             });
         });
     };
@@ -163,7 +168,7 @@ var Connection = /** @class */ (function () {
                 req = new core_pb_1.CreateChannelRequest();
                 req.setLocation(this.newLocation(guildID));
                 req.setChannelName(channelName);
-                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.CreateChannel, req)];
+                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.CreateChannel, req, true)];
             });
         });
     };
@@ -173,7 +178,7 @@ var Connection = /** @class */ (function () {
             return __generator(this, function (_a) {
                 req = new core_pb_1.GetGuildRequest();
                 req.setLocation(this.newLocation(guildID));
-                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.GetGuild, req)];
+                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.GetGuild, req, true)];
             });
         });
     };
@@ -183,7 +188,7 @@ var Connection = /** @class */ (function () {
             return __generator(this, function (_a) {
                 req = new core_pb_1.GetGuildInvitesRequest();
                 req.setLocation(this.newLocation(guildID));
-                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.GetGuildInvites, req)];
+                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.GetGuildInvites, req, true)];
             });
         });
     };
@@ -193,7 +198,7 @@ var Connection = /** @class */ (function () {
             return __generator(this, function (_a) {
                 req = new core_pb_1.GetGuildMembersRequest();
                 req.setLocation(this.newLocation(guildID));
-                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.GetGuildMembers, req)];
+                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.GetGuildMembers, req, true)];
             });
         });
     };
@@ -203,7 +208,7 @@ var Connection = /** @class */ (function () {
             return __generator(this, function (_a) {
                 req = new core_pb_1.GetGuildChannelsRequest();
                 req.setLocation(this.newLocation(guildID));
-                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.GetGuildChannels, req)];
+                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.GetGuildChannels, req, true)];
             });
         });
     };
@@ -216,7 +221,7 @@ var Connection = /** @class */ (function () {
                 if (beforeMessage) {
                     req.setBeforeMessage(beforeMessage);
                 }
-                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.GetChannelMessages, req)];
+                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.GetChannelMessages, req, true)];
             });
         });
     };
@@ -227,7 +232,7 @@ var Connection = /** @class */ (function () {
                 req = new core_pb_1.UpdateGuildNameRequest();
                 req.setLocation(this.newLocation(guildID));
                 req.setNewGuildName(newName);
-                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.UpdateGuildName, req)];
+                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.UpdateGuildName, req, true)];
             });
         });
     };
@@ -238,7 +243,7 @@ var Connection = /** @class */ (function () {
                 req = new core_pb_1.UpdateChannelNameRequest();
                 req.setLocation(this.newLocation(guildID, channelID));
                 req.setNewChannelName(newName);
-                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.UpdateChannelName, req)];
+                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.UpdateChannelName, req, true)];
             });
         });
     };
@@ -265,7 +270,7 @@ var Connection = /** @class */ (function () {
                     req.setEmbedsList(newEmbeds);
                 }
                 req.setLocation(this.newLocation(guildID, channelID, messageID));
-                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.UpdateMessage, req)];
+                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.UpdateMessage, req, true)];
             });
         });
     };
@@ -275,7 +280,7 @@ var Connection = /** @class */ (function () {
             return __generator(this, function (_a) {
                 req = new core_pb_1.DeleteGuildRequest();
                 req.setLocation(this.newLocation(guildID));
-                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.DeleteGuild, req)];
+                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.DeleteGuild, req, true)];
             });
         });
     };
@@ -286,7 +291,7 @@ var Connection = /** @class */ (function () {
                 req = new core_pb_1.DeleteInviteRequest();
                 req.setLocation(this.newLocation(guildID));
                 req.setInviteId(inviteID);
-                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.DeleteInvite, req)];
+                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.DeleteInvite, req, true)];
             });
         });
     };
@@ -296,7 +301,7 @@ var Connection = /** @class */ (function () {
             return __generator(this, function (_a) {
                 req = new core_pb_1.DeleteChannelRequest();
                 req.setLocation(this.newLocation(guildID, channelID));
-                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.DeleteChannel, req)];
+                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.DeleteChannel, req, true)];
             });
         });
     };
@@ -306,7 +311,7 @@ var Connection = /** @class */ (function () {
             return __generator(this, function (_a) {
                 req = new core_pb_1.DeleteMessageRequest();
                 req.setLocation(this.newLocation(guildID, channelID, messageID));
-                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.DeleteMessage, req)];
+                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.DeleteMessage, req, true)];
             });
         });
     };
@@ -316,7 +321,7 @@ var Connection = /** @class */ (function () {
             return __generator(this, function (_a) {
                 req = new core_pb_1.JoinGuildRequest();
                 req.setInviteId(inviteID);
-                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.JoinGuild, req)];
+                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.JoinGuild, req, true)];
             });
         });
     };
@@ -326,7 +331,7 @@ var Connection = /** @class */ (function () {
             return __generator(this, function (_a) {
                 req = new core_pb_1.LeaveGuildRequest();
                 req.setLocation(this.newLocation(guildID));
-                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.LeaveGuild, req)];
+                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.LeaveGuild, req, true)];
             });
         });
     };
@@ -340,7 +345,7 @@ var Connection = /** @class */ (function () {
                 if (actionData) {
                     req.setActionData(actionData);
                 }
-                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.TriggerAction, req)];
+                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.TriggerAction, req, true)];
             });
         });
     };
@@ -361,7 +366,7 @@ var Connection = /** @class */ (function () {
                 if (attachments) {
                     req.setAttachmentsList(attachments);
                 }
-                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.SendMessage, req)];
+                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.SendMessage, req, true)];
             });
         });
     };
@@ -371,7 +376,7 @@ var Connection = /** @class */ (function () {
             return __generator(this, function (_a) {
                 req = new foundation_pb_1.FederateRequest();
                 req.setTarget(target);
-                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.LocalGuilds, req)];
+                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.LocalGuilds, req, true)];
             });
         });
     };
@@ -381,7 +386,7 @@ var Connection = /** @class */ (function () {
             return __generator(this, function (_a) {
                 req = new profile_pb_1.GetUserRequest();
                 req.setUserId(userID);
-                return [2 /*return*/, this.unaryReq(profile_pb_service_1.ProfileService.GetUser, req)];
+                return [2 /*return*/, this.unaryReq(profile_pb_service_1.ProfileService.GetUser, req, true)];
             });
         });
     };
@@ -401,7 +406,7 @@ var Connection = /** @class */ (function () {
             return __generator(this, function (_a) {
                 req = new profile_pb_1.UsernameUpdateRequest();
                 req.setUserName(newUsername);
-                return [2 /*return*/, this.unaryReq(profile_pb_service_1.ProfileService.UsernameUpdate, req)];
+                return [2 /*return*/, this.unaryReq(profile_pb_service_1.ProfileService.UsernameUpdate, req, true)];
             });
         });
     };

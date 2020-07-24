@@ -5,8 +5,9 @@ import { ProtobufMessage } from "@improbable-eng/grpc-web/dist/typings/message";
 import { UnaryMethodDefinition } from "@improbable-eng/grpc-web/dist/typings/service";
 export declare class Connection {
     host: string;
+    session?: string;
     constructor(host: string);
-    unaryReq<T1 extends ProtobufMessage, T2 extends ProtobufMessage>(descriptor: UnaryMethodDefinition<T1, T2>, request: T1): Promise<UnaryOutput<T2>>;
+    unaryReq<T1 extends ProtobufMessage, T2 extends ProtobufMessage>(descriptor: UnaryMethodDefinition<T1, T2>, request: T1, auth?: boolean): Promise<UnaryOutput<T2>>;
     newLocation(guildID: string, channelID?: string, messageID?: string): Location;
     getKey(): Promise<UnaryOutput<import("../protocol/foundation/v1/foundation_pb").KeyReply>>;
     loginLocal(email: string, password: string): Promise<UnaryOutput<import("../protocol/foundation/v1/foundation_pb").Session>>;

@@ -47,6 +47,7 @@ import { UnaryMethodDefinition } from "@improbable-eng/grpc-web/dist/typings/ser
 
 export class Connection {
   host: string;
+  session?: string;
 
   constructor(host: string) {
     this.host = host;
@@ -54,12 +55,18 @@ export class Connection {
 
   unaryReq<T1 extends ProtobufMessage, T2 extends ProtobufMessage>(
     descriptor: UnaryMethodDefinition<T1, T2>,
-    request: T1
+    request: T1,
+    auth?: boolean
   ) {
+    const metadata = new grpc.Metadata();
+    if (auth && this.session) {
+      metadata.set("auth", this.session);
+    }
     return new Promise<UnaryOutput<T2>>((res, rej) => {
       grpc.unary<T1, T2, UnaryMethodDefinition<T1, T2>>(descriptor, {
         request,
         host: this.host,
+        metadata,
         onEnd: (resp) => (resp.status === Code.OK ? res(resp) : rej(resp)),
       });
     });
@@ -111,7 +118,7 @@ export class Connection {
   async federate(target: string) {
     const req = new FederateRequest();
     req.setTarget(target);
-    return this.unaryReq(FoundationService.Federate, req);
+    return this.unaryReq(FoundationService.Federate, req, true);
   }
 
   async createGuild(guildName: string, pictureURL?: string) {
@@ -120,7 +127,7 @@ export class Connection {
     if (pictureURL) {
       req.setPictureUrl(pictureURL);
     }
-    return this.unaryReq(CoreService.CreateGuild, req);
+    return this.unaryReq(CoreService.CreateGuild, req, true);
   }
 
   async createInvite(guildID: string, name?: string, possibleUses?: number) {
@@ -132,38 +139,38 @@ export class Connection {
     if (possibleUses) {
       req.setPossibleUses(possibleUses);
     }
-    return this.unaryReq(CoreService.CreateInvite, req);
+    return this.unaryReq(CoreService.CreateInvite, req, true);
   }
 
   async createChannel(guildID: string, channelName: string) {
     const req = new CreateChannelRequest();
     req.setLocation(this.newLocation(guildID));
     req.setChannelName(channelName);
-    return this.unaryReq(CoreService.CreateChannel, req);
+    return this.unaryReq(CoreService.CreateChannel, req, true);
   }
 
   async getGuild(guildID: string) {
     const req = new GetGuildRequest();
     req.setLocation(this.newLocation(guildID));
-    return this.unaryReq(CoreService.GetGuild, req);
+    return this.unaryReq(CoreService.GetGuild, req, true);
   }
 
   async getGuildInvites(guildID: string) {
     const req = new GetGuildInvitesRequest();
     req.setLocation(this.newLocation(guildID));
-    return this.unaryReq(CoreService.GetGuildInvites, req);
+    return this.unaryReq(CoreService.GetGuildInvites, req, true);
   }
 
   async getGuildMembers(guildID: string) {
     const req = new GetGuildMembersRequest();
     req.setLocation(this.newLocation(guildID));
-    return this.unaryReq(CoreService.GetGuildMembers, req);
+    return this.unaryReq(CoreService.GetGuildMembers, req, true);
   }
 
   async getGuildChannels(guildID: string) {
     const req = new GetGuildChannelsRequest();
     req.setLocation(this.newLocation(guildID));
-    return this.unaryReq(CoreService.GetGuildChannels, req);
+    return this.unaryReq(CoreService.GetGuildChannels, req, true);
   }
 
   async getChannelMessages(
@@ -176,21 +183,21 @@ export class Connection {
     if (beforeMessage) {
       req.setBeforeMessage(beforeMessage);
     }
-    return this.unaryReq(CoreService.GetChannelMessages, req);
+    return this.unaryReq(CoreService.GetChannelMessages, req, true);
   }
 
   async updateGuildName(guildID: string, newName: string) {
     const req = new UpdateGuildNameRequest();
     req.setLocation(this.newLocation(guildID));
     req.setNewGuildName(newName);
-    return this.unaryReq(CoreService.UpdateGuildName, req);
+    return this.unaryReq(CoreService.UpdateGuildName, req, true);
   }
 
   async updateChannelName(guildID: string, channelID: string, newName: string) {
     const req = new UpdateChannelNameRequest();
     req.setLocation(this.newLocation(guildID, channelID));
     req.setNewChannelName(newName);
-    return this.unaryReq(CoreService.UpdateChannelName, req);
+    return this.unaryReq(CoreService.UpdateChannelName, req, true);
   }
 
   async updateMessage(
@@ -222,39 +229,39 @@ export class Connection {
     }
     req.setLocation(this.newLocation(guildID, channelID, messageID));
 
-    return this.unaryReq(CoreService.UpdateMessage, req);
+    return this.unaryReq(CoreService.UpdateMessage, req, true);
   }
   async deleteGuild(guildID: string) {
     const req = new DeleteGuildRequest();
     req.setLocation(this.newLocation(guildID));
-    return this.unaryReq(CoreService.DeleteGuild, req);
+    return this.unaryReq(CoreService.DeleteGuild, req, true);
   }
   async deleteInvite(guildID: string, inviteID: string) {
     const req = new DeleteInviteRequest();
     req.setLocation(this.newLocation(guildID));
     req.setInviteId(inviteID);
-    return this.unaryReq(CoreService.DeleteInvite, req);
+    return this.unaryReq(CoreService.DeleteInvite, req, true);
   }
   async deleteChannel(guildID: string, channelID: string) {
     const req = new DeleteChannelRequest();
     req.setLocation(this.newLocation(guildID, channelID));
-    return this.unaryReq(CoreService.DeleteChannel, req);
+    return this.unaryReq(CoreService.DeleteChannel, req, true);
   }
   async deleteMessage(guildID: string, channelID: string, messageID: string) {
     const req = new DeleteMessageRequest();
     req.setLocation(this.newLocation(guildID, channelID, messageID));
-    return this.unaryReq(CoreService.DeleteMessage, req);
+    return this.unaryReq(CoreService.DeleteMessage, req, true);
   }
   async joinGuild(inviteID: string) {
     const req = new JoinGuildRequest();
     req.setInviteId(inviteID);
-    return this.unaryReq(CoreService.JoinGuild, req);
+    return this.unaryReq(CoreService.JoinGuild, req, true);
   }
 
   async leaveGuild(guildID: string) {
     const req = new LeaveGuildRequest();
     req.setLocation(this.newLocation(guildID));
-    return this.unaryReq(CoreService.LeaveGuild, req);
+    return this.unaryReq(CoreService.LeaveGuild, req, true);
   }
 
   async triggerAction(
@@ -270,7 +277,7 @@ export class Connection {
     if (actionData) {
       req.setActionData(actionData);
     }
-    return this.unaryReq(CoreService.TriggerAction, req);
+    return this.unaryReq(CoreService.TriggerAction, req, true);
   }
 
   async sendMessage(
@@ -292,19 +299,19 @@ export class Connection {
     if (attachments) {
       req.setAttachmentsList(attachments);
     }
-    return this.unaryReq(CoreService.SendMessage, req);
+    return this.unaryReq(CoreService.SendMessage, req, true);
   }
 
   async localGuilds(target: string) {
     const req = new FederateRequest();
     req.setTarget(target);
-    return this.unaryReq(CoreService.LocalGuilds, req);
+    return this.unaryReq(CoreService.LocalGuilds, req, true);
   }
 
   async getUser(userID: string) {
     const req = new GetUserRequest();
     req.setUserId(userID);
-    return this.unaryReq(ProfileService.GetUser, req);
+    return this.unaryReq(ProfileService.GetUser, req, true);
   }
 
   async getUserMetadata(appID: string) {
@@ -315,7 +322,7 @@ export class Connection {
   async usernameUpdate(newUsername: string) {
     const req = new UsernameUpdateRequest();
     req.setUserName(newUsername);
-    return this.unaryReq(ProfileService.UsernameUpdate, req);
+    return this.unaryReq(ProfileService.UsernameUpdate, req, true);
   }
 
   async statusUpdate(newStatus: keyof UserStatusMap) {
