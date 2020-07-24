@@ -28,11 +28,18 @@ import {
   LeaveGuildRequest,
   TriggerActionRequest,
   SendMessageRequest,
-  Message,
   Embed,
   Action,
-  StreamGuildEventsRequest,
 } from "../protocol/core/v1/core_pb";
+import {
+  GetUserRequest,
+  GetUserMetadataRequest,
+  UsernameUpdateRequest,
+  StatusUpdateRequest,
+  UserStatusMap,
+  UserStatus,
+} from "../protocol/profile/v1/profile_pb";
+import { ProfileService } from "../protocol/profile/v1/profile_pb_service";
 import { Code } from "@improbable-eng/grpc-web/dist/typings/Code";
 import { UnaryOutput } from "@improbable-eng/grpc-web/dist/typings/unary";
 import { ProtobufMessage } from "@improbable-eng/grpc-web/dist/typings/message";
@@ -267,8 +274,6 @@ export class Connection {
   }
 
   async sendMessage(
-    guildID: string,
-    channelID: string,
     content?: string,
     attachments?: string[],
     embeds?: Embed[],
@@ -294,5 +299,27 @@ export class Connection {
     const req = new FederateRequest();
     req.setTarget(target);
     return this.unaryReq(CoreService.LocalGuilds, req);
+  }
+
+  async getUser(userID: string) {
+    const req = new GetUserRequest();
+    req.setUserId(userID);
+    return this.unaryReq(ProfileService.GetUser, req);
+  }
+
+  async getUserMetadata(appID: string) {
+    const req = new GetUserMetadataRequest();
+    req.setAppId(appID);
+  }
+
+  async usernameUpdate(newUsername: string) {
+    const req = new UsernameUpdateRequest();
+    req.setUserName(newUsername);
+    return this.unaryReq(ProfileService.UsernameUpdate, req);
+  }
+
+  async statusUpdate(newStatus: keyof UserStatusMap) {
+    const req = new StatusUpdateRequest();
+    req.setNewStatus(UserStatus[newStatus]);
   }
 }

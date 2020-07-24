@@ -5,8 +5,8 @@ import * as jspb from "google-protobuf";
 import * as google_protobuf_empty_pb from "google-protobuf/google/protobuf/empty_pb";
 
 export class GetUserRequest extends jspb.Message {
-  getUserId(): number;
-  setUserId(value: number): void;
+  getUserId(): string;
+  setUserId(value: string): void;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GetUserRequest.AsObject;
@@ -20,7 +20,7 @@ export class GetUserRequest extends jspb.Message {
 
 export namespace GetUserRequest {
   export type AsObject = {
-    userId: number,
+    userId: string,
   }
 }
 

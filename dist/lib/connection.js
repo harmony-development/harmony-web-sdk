@@ -42,6 +42,8 @@ var foundation_pb_service_1 = require("../protocol/foundation/v1/foundation_pb_s
 var foundation_pb_1 = require("../protocol/foundation/v1/foundation_pb");
 var core_pb_service_1 = require("../protocol/core/v1/core_pb_service");
 var core_pb_1 = require("../protocol/core/v1/core_pb");
+var profile_pb_1 = require("../protocol/profile/v1/profile_pb");
+var profile_pb_service_1 = require("../protocol/profile/v1/profile_pb_service");
 var Code_1 = require("@improbable-eng/grpc-web/dist/typings/Code");
 var Connection = /** @class */ (function () {
     function Connection(host) {
@@ -342,7 +344,7 @@ var Connection = /** @class */ (function () {
             });
         });
     };
-    Connection.prototype.sendMessage = function (guildID, channelID, content, attachments, embeds, actions) {
+    Connection.prototype.sendMessage = function (content, attachments, embeds, actions) {
         return __awaiter(this, void 0, void 0, function () {
             var req;
             return __generator(this, function (_a) {
@@ -370,6 +372,46 @@ var Connection = /** @class */ (function () {
                 req = new foundation_pb_1.FederateRequest();
                 req.setTarget(target);
                 return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.LocalGuilds, req)];
+            });
+        });
+    };
+    Connection.prototype.getUser = function (userID) {
+        return __awaiter(this, void 0, void 0, function () {
+            var req;
+            return __generator(this, function (_a) {
+                req = new profile_pb_1.GetUserRequest();
+                req.setUserId(userID);
+                return [2 /*return*/, this.unaryReq(profile_pb_service_1.ProfileService.GetUser, req)];
+            });
+        });
+    };
+    Connection.prototype.getUserMetadata = function (appID) {
+        return __awaiter(this, void 0, void 0, function () {
+            var req;
+            return __generator(this, function (_a) {
+                req = new profile_pb_1.GetUserMetadataRequest();
+                req.setAppId(appID);
+                return [2 /*return*/];
+            });
+        });
+    };
+    Connection.prototype.usernameUpdate = function (newUsername) {
+        return __awaiter(this, void 0, void 0, function () {
+            var req;
+            return __generator(this, function (_a) {
+                req = new profile_pb_1.UsernameUpdateRequest();
+                req.setUserName(newUsername);
+                return [2 /*return*/, this.unaryReq(profile_pb_service_1.ProfileService.UsernameUpdate, req)];
+            });
+        });
+    };
+    Connection.prototype.statusUpdate = function (newStatus) {
+        return __awaiter(this, void 0, void 0, function () {
+            var req;
+            return __generator(this, function (_a) {
+                req = new profile_pb_1.StatusUpdateRequest();
+                req.setNewStatus(profile_pb_1.UserStatus[newStatus]);
+                return [2 /*return*/];
             });
         });
     };

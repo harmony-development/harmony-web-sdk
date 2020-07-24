@@ -1,4 +1,5 @@
 import { Location, Embed, Action } from "../protocol/core/v1/core_pb";
+import { UserStatusMap } from "../protocol/profile/v1/profile_pb";
 import { UnaryOutput } from "@improbable-eng/grpc-web/dist/typings/unary";
 import { ProtobufMessage } from "@improbable-eng/grpc-web/dist/typings/message";
 import { UnaryMethodDefinition } from "@improbable-eng/grpc-web/dist/typings/service";
@@ -30,6 +31,10 @@ export declare class Connection {
     joinGuild(inviteID: string): Promise<UnaryOutput<import("../protocol/core/v1/core_pb").JoinGuildResponse>>;
     leaveGuild(guildID: string): Promise<UnaryOutput<import("google-protobuf/google/protobuf/empty_pb").Empty>>;
     triggerAction(guildID: string, channelID: string, messageID: string, actionID: string, actionData?: string): Promise<UnaryOutput<import("google-protobuf/google/protobuf/empty_pb").Empty>>;
-    sendMessage(guildID: string, channelID: string, content?: string, attachments?: string[], embeds?: Embed[], actions?: Action[]): Promise<UnaryOutput<import("google-protobuf/google/protobuf/empty_pb").Empty>>;
+    sendMessage(content?: string, attachments?: string[], embeds?: Embed[], actions?: Action[]): Promise<UnaryOutput<import("google-protobuf/google/protobuf/empty_pb").Empty>>;
     localGuilds(target: string): Promise<UnaryOutput<import("../protocol/core/v1/core_pb").JoinedLocalGuildsResponse>>;
+    getUser(userID: string): Promise<UnaryOutput<import("../protocol/profile/v1/profile_pb").GetUserResponse>>;
+    getUserMetadata(appID: string): Promise<void>;
+    usernameUpdate(newUsername: string): Promise<UnaryOutput<import("google-protobuf/google/protobuf/empty_pb").Empty>>;
+    statusUpdate(newStatus: keyof UserStatusMap): Promise<void>;
 }

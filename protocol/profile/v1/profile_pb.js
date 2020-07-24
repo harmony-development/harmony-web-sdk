@@ -179,7 +179,7 @@ proto.protocol.profile.v1.GetUserRequest.prototype.toObject = function(opt_inclu
  */
 proto.protocol.profile.v1.GetUserRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    userId: jspb.Message.getFieldWithDefault(msg, 1, 0)
+    userId: jspb.Message.getFieldWithDefault(msg, 1, "0")
   };
 
   if (includeInstance) {
@@ -217,7 +217,7 @@ proto.protocol.profile.v1.GetUserRequest.deserializeBinaryFromReader = function(
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {number} */ (reader.readUint64());
+      var value = /** @type {string} */ (reader.readUint64String());
       msg.setUserId(value);
       break;
     default:
@@ -250,8 +250,8 @@ proto.protocol.profile.v1.GetUserRequest.prototype.serializeBinary = function() 
 proto.protocol.profile.v1.GetUserRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getUserId();
-  if (f !== 0) {
-    writer.writeUint64(
+  if (parseInt(f, 10) !== 0) {
+    writer.writeUint64String(
       1,
       f
     );
@@ -261,19 +261,19 @@ proto.protocol.profile.v1.GetUserRequest.serializeBinaryToWriter = function(mess
 
 /**
  * optional uint64 user_id = 1;
- * @return {number}
+ * @return {string}
  */
 proto.protocol.profile.v1.GetUserRequest.prototype.getUserId = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, "0"));
 };
 
 
 /**
- * @param {number} value
+ * @param {string} value
  * @return {!proto.protocol.profile.v1.GetUserRequest} returns this
  */
 proto.protocol.profile.v1.GetUserRequest.prototype.setUserId = function(value) {
-  return jspb.Message.setProto3IntField(this, 1, value);
+  return jspb.Message.setProto3StringIntField(this, 1, value);
 };
 
 
