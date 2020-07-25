@@ -1,12 +1,12 @@
 import { grpc } from "@improbable-eng/grpc-web";
-import { FoundationService } from "../protocol/foundation/v1/foundation_pb_service";
+import { FoundationService } from "./protocol/foundation/v1/foundation_pb_service";
 import {
   KeyRequest,
   LoginRequest,
   RegisterRequest,
   FederateRequest,
-} from "../protocol/foundation/v1/foundation_pb";
-import { CoreService } from "../protocol/core/v1/core_pb_service";
+} from "./protocol/foundation/v1/foundation_pb";
+import { CoreService } from "./protocol/core/v1/core_pb_service";
 import {
   CreateGuildRequest,
   CreateInviteRequest,
@@ -30,7 +30,7 @@ import {
   SendMessageRequest,
   Embed,
   Action,
-} from "../protocol/core/v1/core_pb";
+} from "./protocol/core/v1/core_pb";
 import {
   GetUserRequest,
   GetUserMetadataRequest,
@@ -38,8 +38,8 @@ import {
   StatusUpdateRequest,
   UserStatusMap,
   UserStatus,
-} from "../protocol/profile/v1/profile_pb";
-import { ProfileService } from "../protocol/profile/v1/profile_pb_service";
+} from "./protocol/profile/v1/profile_pb";
+import { ProfileService } from "./protocol/profile/v1/profile_pb_service";
 import { Code } from "@improbable-eng/grpc-web/dist/typings/Code";
 import { UnaryOutput } from "@improbable-eng/grpc-web/dist/typings/unary";
 import { ProtobufMessage } from "@improbable-eng/grpc-web/dist/typings/message";

@@ -11,8 +11,10 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "declarationDir": "dist/types",
+    "allowJs": true,
     "outDir": "dist/lib",
-    "typeRoots": ["node_modules/@types"]
+    "typeRoots": ["node_modules/@types"],
+    "baseUrl": "."
   },
-  "include": ["src"]
+  "include": ["src", "protocol"]
 }
