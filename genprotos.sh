@@ -2,7 +2,7 @@
 
 PROTOC_GEN_TS_PATH=$(readlink -m "./node_modules/.bin/protoc-gen-ts")
 IN_DIR=$(readlink -m "./protobufs")
-OUT_DIR=$(readlink -m "./src/protocol")
+OUT_DIR=$(readlink -m "./protocol")
 PROTOCOL_BUILD_TMP=$(readlink -m "./protocol-build-tmp")
 
 mkdir -p $OUT_DIR
