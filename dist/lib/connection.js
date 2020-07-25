@@ -44,7 +44,6 @@ var core_pb_service_1 = require("../protocol/core/v1/core_pb_service");
 var core_pb_1 = require("../protocol/core/v1/core_pb");
 var profile_pb_1 = require("../protocol/profile/v1/profile_pb");
 var profile_pb_service_1 = require("../protocol/profile/v1/profile_pb_service");
-var Code_1 = require("@improbable-eng/grpc-web/dist/typings/Code");
 var Connection = /** @class */ (function () {
     function Connection(host) {
         this.host = host;
@@ -60,7 +59,7 @@ var Connection = /** @class */ (function () {
                 request: request,
                 host: _this.host,
                 metadata: metadata,
-                onEnd: function (resp) { return (resp.status === Code_1.Code.OK ? res(resp) : rej(resp)); },
+                onEnd: function (resp) { return (resp.status === grpc_web_1.grpc.Code.OK ? res(resp) : rej(resp)); },
             });
         });
     };

@@ -40,7 +40,6 @@ import {
   UserStatus,
 } from "../protocol/profile/v1/profile_pb";
 import { ProfileService } from "../protocol/profile/v1/profile_pb_service";
-import { Code } from "@improbable-eng/grpc-web/dist/typings/Code";
 import { UnaryOutput } from "@improbable-eng/grpc-web/dist/typings/unary";
 import { ProtobufMessage } from "@improbable-eng/grpc-web/dist/typings/message";
 import { UnaryMethodDefinition } from "@improbable-eng/grpc-web/dist/typings/service";
@@ -67,7 +66,7 @@ export class Connection {
         request,
         host: this.host,
         metadata,
-        onEnd: (resp) => (resp.status === Code.OK ? res(resp) : rej(resp)),
+        onEnd: (resp) => (resp.status === grpc.Code.OK ? res(resp) : rej(resp)),
       });
     });
   }
