@@ -369,12 +369,11 @@ var Connection = /** @class */ (function () {
             });
         });
     };
-    Connection.prototype.localGuilds = function (target) {
+    Connection.prototype.localGuilds = function () {
         return __awaiter(this, void 0, void 0, function () {
             var req;
             return __generator(this, function (_a) {
-                req = new foundation_pb_1.FederateRequest();
-                req.setTarget(target);
+                req = new core_pb_1.JoinedLocalGuildsRequest();
                 return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.LocalGuilds, req, true)];
             });
         });

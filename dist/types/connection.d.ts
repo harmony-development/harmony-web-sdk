@@ -33,7 +33,7 @@ export declare class Connection {
     leaveGuild(guildID: string): Promise<UnaryOutput<import("google-protobuf/google/protobuf/empty_pb").Empty>>;
     triggerAction(guildID: string, channelID: string, messageID: string, actionID: string, actionData?: string): Promise<UnaryOutput<import("google-protobuf/google/protobuf/empty_pb").Empty>>;
     sendMessage(content?: string, attachments?: string[], embeds?: Embed[], actions?: Action[]): Promise<UnaryOutput<import("google-protobuf/google/protobuf/empty_pb").Empty>>;
-    localGuilds(target: string): Promise<UnaryOutput<import("../protocol/core/v1/core_pb").JoinedLocalGuildsResponse>>;
+    localGuilds(): Promise<UnaryOutput<import("../protocol/core/v1/core_pb").JoinedLocalGuildsResponse>>;
     getUser(userID: string): Promise<UnaryOutput<import("../protocol/profile/v1/profile_pb").GetUserResponse>>;
     getUserMetadata(appID: string): Promise<void>;
     usernameUpdate(newUsername: string): Promise<UnaryOutput<import("google-protobuf/google/protobuf/empty_pb").Empty>>;
