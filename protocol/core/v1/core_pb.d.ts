@@ -363,11 +363,11 @@ export class CreateChannelRequest extends jspb.Message {
   getIsCategory(): boolean;
   setIsCategory(value: boolean): void;
 
-  getPreviousId(): number;
-  setPreviousId(value: number): void;
+  getPreviousId(): string;
+  setPreviousId(value: string): void;
 
-  getNextId(): number;
-  setNextId(value: number): void;
+  getNextId(): string;
+  setNextId(value: string): void;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): CreateChannelRequest.AsObject;
@@ -384,8 +384,8 @@ export namespace CreateChannelRequest {
     location?: Location.AsObject,
     channelName: string,
     isCategory: boolean,
-    previousId: number,
-    nextId: number,
+    previousId: string,
+    nextId: string,
   }
 }
 
@@ -753,11 +753,11 @@ export class UpdateChannelOrderRequest extends jspb.Message {
   getLocation(): Location | undefined;
   setLocation(value?: Location): void;
 
-  getPreviousId(): number;
-  setPreviousId(value: number): void;
+  getPreviousId(): string;
+  setPreviousId(value: string): void;
 
-  getNextId(): number;
-  setNextId(value: number): void;
+  getNextId(): string;
+  setNextId(value: string): void;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): UpdateChannelOrderRequest.AsObject;
@@ -772,8 +772,8 @@ export class UpdateChannelOrderRequest extends jspb.Message {
 export namespace UpdateChannelOrderRequest {
   export type AsObject = {
     location?: Location.AsObject,
-    previousId: number,
-    nextId: number,
+    previousId: string,
+    nextId: string,
   }
 }
 
@@ -1146,11 +1146,11 @@ export namespace GuildEvent {
     getName(): string;
     setName(value: string): void;
 
-    getPreviousId(): number;
-    setPreviousId(value: number): void;
+    getPreviousId(): string;
+    setPreviousId(value: string): void;
 
-    getNextId(): number;
-    setNextId(value: number): void;
+    getNextId(): string;
+    setNextId(value: string): void;
 
     getIsCategory(): boolean;
     setIsCategory(value: boolean): void;
@@ -1169,8 +1169,8 @@ export namespace GuildEvent {
     export type AsObject = {
       location?: Location.AsObject,
       name: string,
-      previousId: number,
-      nextId: number,
+      previousId: string,
+      nextId: string,
       isCategory: boolean,
     }
   }
@@ -1187,11 +1187,11 @@ export namespace GuildEvent {
     getUpdateName(): boolean;
     setUpdateName(value: boolean): void;
 
-    getPreviousId(): number;
-    setPreviousId(value: number): void;
+    getPreviousId(): string;
+    setPreviousId(value: string): void;
 
-    getNextId(): number;
-    setNextId(value: number): void;
+    getNextId(): string;
+    setNextId(value: string): void;
 
     getUpdateOrder(): boolean;
     setUpdateOrder(value: boolean): void;
@@ -1211,8 +1211,8 @@ export namespace GuildEvent {
       location?: Location.AsObject,
       name: string,
       updateName: boolean,
-      previousId: number,
-      nextId: number,
+      previousId: string,
+      nextId: string,
       updateOrder: boolean,
     }
   }
@@ -1490,9 +1490,9 @@ export namespace JoinedLocalGuildsRequest {
 
 export class JoinedLocalGuildsResponse extends jspb.Message {
   clearGuildIdList(): void;
-  getGuildIdList(): Array<number>;
-  setGuildIdList(value: Array<number>): void;
-  addGuildId(value: number, index?: number): number;
+  getGuildIdList(): Array<string>;
+  setGuildIdList(value: Array<string>): void;
+  addGuildId(value: string, index?: number): string;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): JoinedLocalGuildsResponse.AsObject;
@@ -1506,7 +1506,7 @@ export class JoinedLocalGuildsResponse extends jspb.Message {
 
 export namespace JoinedLocalGuildsResponse {
   export type AsObject = {
-    guildIdList: Array<number>,
+    guildIdList: Array<string>,
   }
 }
 

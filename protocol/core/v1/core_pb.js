@@ -3755,8 +3755,8 @@ proto.protocol.core.v1.CreateChannelRequest.toObject = function(includeInstance,
     location: (f = msg.getLocation()) && proto.protocol.core.v1.Location.toObject(includeInstance, f),
     channelName: jspb.Message.getFieldWithDefault(msg, 2, ""),
     isCategory: jspb.Message.getBooleanFieldWithDefault(msg, 3, false),
-    previousId: jspb.Message.getFieldWithDefault(msg, 5, 0),
-    nextId: jspb.Message.getFieldWithDefault(msg, 4, 0)
+    previousId: jspb.Message.getFieldWithDefault(msg, 5, "0"),
+    nextId: jspb.Message.getFieldWithDefault(msg, 4, "0")
   };
 
   if (includeInstance) {
@@ -3807,11 +3807,11 @@ proto.protocol.core.v1.CreateChannelRequest.deserializeBinaryFromReader = functi
       msg.setIsCategory(value);
       break;
     case 5:
-      var value = /** @type {number} */ (reader.readUint64());
+      var value = /** @type {string} */ (reader.readUint64String());
       msg.setPreviousId(value);
       break;
     case 4:
-      var value = /** @type {number} */ (reader.readUint64());
+      var value = /** @type {string} */ (reader.readUint64String());
       msg.setNextId(value);
       break;
     default:
@@ -3866,15 +3866,15 @@ proto.protocol.core.v1.CreateChannelRequest.serializeBinaryToWriter = function(m
     );
   }
   f = message.getPreviousId();
-  if (f !== 0) {
-    writer.writeUint64(
+  if (parseInt(f, 10) !== 0) {
+    writer.writeUint64String(
       5,
       f
     );
   }
   f = message.getNextId();
-  if (f !== 0) {
-    writer.writeUint64(
+  if (parseInt(f, 10) !== 0) {
+    writer.writeUint64String(
       4,
       f
     );
@@ -3957,37 +3957,37 @@ proto.protocol.core.v1.CreateChannelRequest.prototype.setIsCategory = function(v
 
 /**
  * optional uint64 previous_id = 5;
- * @return {number}
+ * @return {string}
  */
 proto.protocol.core.v1.CreateChannelRequest.prototype.getPreviousId = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, "0"));
 };
 
 
 /**
- * @param {number} value
+ * @param {string} value
  * @return {!proto.protocol.core.v1.CreateChannelRequest} returns this
  */
 proto.protocol.core.v1.CreateChannelRequest.prototype.setPreviousId = function(value) {
-  return jspb.Message.setProto3IntField(this, 5, value);
+  return jspb.Message.setProto3StringIntField(this, 5, value);
 };
 
 
 /**
  * optional uint64 next_id = 4;
- * @return {number}
+ * @return {string}
  */
 proto.protocol.core.v1.CreateChannelRequest.prototype.getNextId = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, "0"));
 };
 
 
 /**
- * @param {number} value
+ * @param {string} value
  * @return {!proto.protocol.core.v1.CreateChannelRequest} returns this
  */
 proto.protocol.core.v1.CreateChannelRequest.prototype.setNextId = function(value) {
-  return jspb.Message.setProto3IntField(this, 4, value);
+  return jspb.Message.setProto3StringIntField(this, 4, value);
 };
 
 
@@ -6507,8 +6507,8 @@ proto.protocol.core.v1.UpdateChannelOrderRequest.prototype.toObject = function(o
 proto.protocol.core.v1.UpdateChannelOrderRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     location: (f = msg.getLocation()) && proto.protocol.core.v1.Location.toObject(includeInstance, f),
-    previousId: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    nextId: jspb.Message.getFieldWithDefault(msg, 3, 0)
+    previousId: jspb.Message.getFieldWithDefault(msg, 2, "0"),
+    nextId: jspb.Message.getFieldWithDefault(msg, 3, "0")
   };
 
   if (includeInstance) {
@@ -6551,11 +6551,11 @@ proto.protocol.core.v1.UpdateChannelOrderRequest.deserializeBinaryFromReader = f
       msg.setLocation(value);
       break;
     case 2:
-      var value = /** @type {number} */ (reader.readUint64());
+      var value = /** @type {string} */ (reader.readUint64String());
       msg.setPreviousId(value);
       break;
     case 3:
-      var value = /** @type {number} */ (reader.readUint64());
+      var value = /** @type {string} */ (reader.readUint64String());
       msg.setNextId(value);
       break;
     default:
@@ -6596,15 +6596,15 @@ proto.protocol.core.v1.UpdateChannelOrderRequest.serializeBinaryToWriter = funct
     );
   }
   f = message.getPreviousId();
-  if (f !== 0) {
-    writer.writeUint64(
+  if (parseInt(f, 10) !== 0) {
+    writer.writeUint64String(
       2,
       f
     );
   }
   f = message.getNextId();
-  if (f !== 0) {
-    writer.writeUint64(
+  if (parseInt(f, 10) !== 0) {
+    writer.writeUint64String(
       3,
       f
     );
@@ -6651,37 +6651,37 @@ proto.protocol.core.v1.UpdateChannelOrderRequest.prototype.hasLocation = functio
 
 /**
  * optional uint64 previous_id = 2;
- * @return {number}
+ * @return {string}
  */
 proto.protocol.core.v1.UpdateChannelOrderRequest.prototype.getPreviousId = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, "0"));
 };
 
 
 /**
- * @param {number} value
+ * @param {string} value
  * @return {!proto.protocol.core.v1.UpdateChannelOrderRequest} returns this
  */
 proto.protocol.core.v1.UpdateChannelOrderRequest.prototype.setPreviousId = function(value) {
-  return jspb.Message.setProto3IntField(this, 2, value);
+  return jspb.Message.setProto3StringIntField(this, 2, value);
 };
 
 
 /**
  * optional uint64 next_id = 3;
- * @return {number}
+ * @return {string}
  */
 proto.protocol.core.v1.UpdateChannelOrderRequest.prototype.getNextId = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, "0"));
 };
 
 
 /**
- * @param {number} value
+ * @param {string} value
  * @return {!proto.protocol.core.v1.UpdateChannelOrderRequest} returns this
  */
 proto.protocol.core.v1.UpdateChannelOrderRequest.prototype.setNextId = function(value) {
-  return jspb.Message.setProto3IntField(this, 3, value);
+  return jspb.Message.setProto3StringIntField(this, 3, value);
 };
 
 
@@ -9057,8 +9057,8 @@ proto.protocol.core.v1.GuildEvent.ChannelCreated.toObject = function(includeInst
   var f, obj = {
     location: (f = msg.getLocation()) && proto.protocol.core.v1.Location.toObject(includeInstance, f),
     name: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    previousId: jspb.Message.getFieldWithDefault(msg, 3, 0),
-    nextId: jspb.Message.getFieldWithDefault(msg, 4, 0),
+    previousId: jspb.Message.getFieldWithDefault(msg, 3, "0"),
+    nextId: jspb.Message.getFieldWithDefault(msg, 4, "0"),
     isCategory: jspb.Message.getBooleanFieldWithDefault(msg, 5, false)
   };
 
@@ -9106,11 +9106,11 @@ proto.protocol.core.v1.GuildEvent.ChannelCreated.deserializeBinaryFromReader = f
       msg.setName(value);
       break;
     case 3:
-      var value = /** @type {number} */ (reader.readUint64());
+      var value = /** @type {string} */ (reader.readUint64String());
       msg.setPreviousId(value);
       break;
     case 4:
-      var value = /** @type {number} */ (reader.readUint64());
+      var value = /** @type {string} */ (reader.readUint64String());
       msg.setNextId(value);
       break;
     case 5:
@@ -9162,15 +9162,15 @@ proto.protocol.core.v1.GuildEvent.ChannelCreated.serializeBinaryToWriter = funct
     );
   }
   f = message.getPreviousId();
-  if (f !== 0) {
-    writer.writeUint64(
+  if (parseInt(f, 10) !== 0) {
+    writer.writeUint64String(
       3,
       f
     );
   }
   f = message.getNextId();
-  if (f !== 0) {
-    writer.writeUint64(
+  if (parseInt(f, 10) !== 0) {
+    writer.writeUint64String(
       4,
       f
     );
@@ -9242,37 +9242,37 @@ proto.protocol.core.v1.GuildEvent.ChannelCreated.prototype.setName = function(va
 
 /**
  * optional uint64 previous_id = 3;
- * @return {number}
+ * @return {string}
  */
 proto.protocol.core.v1.GuildEvent.ChannelCreated.prototype.getPreviousId = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, "0"));
 };
 
 
 /**
- * @param {number} value
+ * @param {string} value
  * @return {!proto.protocol.core.v1.GuildEvent.ChannelCreated} returns this
  */
 proto.protocol.core.v1.GuildEvent.ChannelCreated.prototype.setPreviousId = function(value) {
-  return jspb.Message.setProto3IntField(this, 3, value);
+  return jspb.Message.setProto3StringIntField(this, 3, value);
 };
 
 
 /**
  * optional uint64 next_id = 4;
- * @return {number}
+ * @return {string}
  */
 proto.protocol.core.v1.GuildEvent.ChannelCreated.prototype.getNextId = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, "0"));
 };
 
 
 /**
- * @param {number} value
+ * @param {string} value
  * @return {!proto.protocol.core.v1.GuildEvent.ChannelCreated} returns this
  */
 proto.protocol.core.v1.GuildEvent.ChannelCreated.prototype.setNextId = function(value) {
-  return jspb.Message.setProto3IntField(this, 4, value);
+  return jspb.Message.setProto3StringIntField(this, 4, value);
 };
 
 
@@ -9329,8 +9329,8 @@ proto.protocol.core.v1.GuildEvent.ChannelUpdated.toObject = function(includeInst
     location: (f = msg.getLocation()) && proto.protocol.core.v1.Location.toObject(includeInstance, f),
     name: jspb.Message.getFieldWithDefault(msg, 2, ""),
     updateName: jspb.Message.getBooleanFieldWithDefault(msg, 3, false),
-    previousId: jspb.Message.getFieldWithDefault(msg, 5, 0),
-    nextId: jspb.Message.getFieldWithDefault(msg, 4, 0),
+    previousId: jspb.Message.getFieldWithDefault(msg, 5, "0"),
+    nextId: jspb.Message.getFieldWithDefault(msg, 4, "0"),
     updateOrder: jspb.Message.getBooleanFieldWithDefault(msg, 6, false)
   };
 
@@ -9382,11 +9382,11 @@ proto.protocol.core.v1.GuildEvent.ChannelUpdated.deserializeBinaryFromReader = f
       msg.setUpdateName(value);
       break;
     case 5:
-      var value = /** @type {number} */ (reader.readUint64());
+      var value = /** @type {string} */ (reader.readUint64String());
       msg.setPreviousId(value);
       break;
     case 4:
-      var value = /** @type {number} */ (reader.readUint64());
+      var value = /** @type {string} */ (reader.readUint64String());
       msg.setNextId(value);
       break;
     case 6:
@@ -9445,15 +9445,15 @@ proto.protocol.core.v1.GuildEvent.ChannelUpdated.serializeBinaryToWriter = funct
     );
   }
   f = message.getPreviousId();
-  if (f !== 0) {
-    writer.writeUint64(
+  if (parseInt(f, 10) !== 0) {
+    writer.writeUint64String(
       5,
       f
     );
   }
   f = message.getNextId();
-  if (f !== 0) {
-    writer.writeUint64(
+  if (parseInt(f, 10) !== 0) {
+    writer.writeUint64String(
       4,
       f
     );
@@ -9543,37 +9543,37 @@ proto.protocol.core.v1.GuildEvent.ChannelUpdated.prototype.setUpdateName = funct
 
 /**
  * optional uint64 previous_id = 5;
- * @return {number}
+ * @return {string}
  */
 proto.protocol.core.v1.GuildEvent.ChannelUpdated.prototype.getPreviousId = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, "0"));
 };
 
 
 /**
- * @param {number} value
+ * @param {string} value
  * @return {!proto.protocol.core.v1.GuildEvent.ChannelUpdated} returns this
  */
 proto.protocol.core.v1.GuildEvent.ChannelUpdated.prototype.setPreviousId = function(value) {
-  return jspb.Message.setProto3IntField(this, 5, value);
+  return jspb.Message.setProto3StringIntField(this, 5, value);
 };
 
 
 /**
  * optional uint64 next_id = 4;
- * @return {number}
+ * @return {string}
  */
 proto.protocol.core.v1.GuildEvent.ChannelUpdated.prototype.getNextId = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, "0"));
 };
 
 
 /**
- * @param {number} value
+ * @param {string} value
  * @return {!proto.protocol.core.v1.GuildEvent.ChannelUpdated} returns this
  */
 proto.protocol.core.v1.GuildEvent.ChannelUpdated.prototype.setNextId = function(value) {
-  return jspb.Message.setProto3IntField(this, 4, value);
+  return jspb.Message.setProto3StringIntField(this, 4, value);
 };
 
 
@@ -11735,7 +11735,7 @@ proto.protocol.core.v1.JoinedLocalGuildsResponse.deserializeBinaryFromReader = f
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {!Array<number>} */ (reader.readPackedUint64());
+      var value = /** @type {!Array<string>} */ (reader.readPackedUint64String());
       msg.setGuildIdList(value);
       break;
     default:
@@ -11769,7 +11769,7 @@ proto.protocol.core.v1.JoinedLocalGuildsResponse.serializeBinaryToWriter = funct
   var f = undefined;
   f = message.getGuildIdList();
   if (f.length > 0) {
-    writer.writePackedUint64(
+    writer.writePackedUint64String(
       1,
       f
     );
@@ -11779,15 +11779,15 @@ proto.protocol.core.v1.JoinedLocalGuildsResponse.serializeBinaryToWriter = funct
 
 /**
  * repeated uint64 guild_id = 1;
- * @return {!Array<number>}
+ * @return {!Array<string>}
  */
 proto.protocol.core.v1.JoinedLocalGuildsResponse.prototype.getGuildIdList = function() {
-  return /** @type {!Array<number>} */ (jspb.Message.getRepeatedField(this, 1));
+  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 1));
 };
 
 
 /**
- * @param {!Array<number>} value
+ * @param {!Array<string>} value
  * @return {!proto.protocol.core.v1.JoinedLocalGuildsResponse} returns this
  */
 proto.protocol.core.v1.JoinedLocalGuildsResponse.prototype.setGuildIdList = function(value) {
@@ -11796,7 +11796,7 @@ proto.protocol.core.v1.JoinedLocalGuildsResponse.prototype.setGuildIdList = func
 
 
 /**
- * @param {number} value
+ * @param {string} value
  * @param {number=} opt_index
  * @return {!proto.protocol.core.v1.JoinedLocalGuildsResponse} returns this
  */
