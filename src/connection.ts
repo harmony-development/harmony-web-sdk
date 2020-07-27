@@ -30,7 +30,7 @@ import {
   SendMessageRequest,
   Embed,
   Action,
-  JoinedLocalGuildsRequest,
+  GetGuildListRequest,
 } from "../protocol/core/v1/core_pb";
 import {
   GetUserRequest,
@@ -302,9 +302,9 @@ export class Connection {
     return this.unaryReq(CoreService.SendMessage, req, true);
   }
 
-  async localGuilds() {
-    const req = new JoinedLocalGuildsRequest();
-    return this.unaryReq(CoreService.LocalGuilds, req, true);
+  async getGuildList() {
+    const req = new GetGuildListRequest();
+    return this.unaryReq(CoreService.GetGuildList, req, true);
   }
 
   async getUser(userID: string) {

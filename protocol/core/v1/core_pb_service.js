@@ -38,6 +38,15 @@ CoreService.CreateChannel = {
   responseType: core_v1_core_pb.CreateChannelResponse
 };
 
+CoreService.GetGuildList = {
+  methodName: "GetGuildList",
+  service: CoreService,
+  requestStream: false,
+  responseStream: false,
+  requestType: core_v1_core_pb.GetGuildListRequest,
+  responseType: core_v1_core_pb.GetGuildListResponse
+};
+
 CoreService.GetGuild = {
   methodName: "GetGuild",
   service: CoreService,
@@ -191,15 +200,6 @@ CoreService.SendMessage = {
   responseType: google_protobuf_empty_pb.Empty
 };
 
-CoreService.LocalGuilds = {
-  methodName: "LocalGuilds",
-  service: CoreService,
-  requestStream: false,
-  responseStream: false,
-  requestType: core_v1_core_pb.JoinedLocalGuildsRequest,
-  responseType: core_v1_core_pb.JoinedLocalGuildsResponse
-};
-
 CoreService.StreamGuildEvents = {
   methodName: "StreamGuildEvents",
   service: CoreService,
@@ -292,6 +292,37 @@ CoreServiceClient.prototype.createChannel = function createChannel(requestMessag
     callback = arguments[1];
   }
   var client = grpc.unary(CoreService.CreateChannel, {
+    request: requestMessage,
+    host: this.serviceHost,
+    metadata: metadata,
+    transport: this.options.transport,
+    debug: this.options.debug,
+    onEnd: function (response) {
+      if (callback) {
+        if (response.status !== grpc.Code.OK) {
+          var err = new Error(response.statusMessage);
+          err.code = response.status;
+          err.metadata = response.trailers;
+          callback(err, null);
+        } else {
+          callback(null, response.message);
+        }
+      }
+    }
+  });
+  return {
+    cancel: function () {
+      callback = null;
+      client.close();
+    }
+  };
+};
+
+CoreServiceClient.prototype.getGuildList = function getGuildList(requestMessage, metadata, callback) {
+  if (arguments.length === 2) {
+    callback = arguments[1];
+  }
+  var client = grpc.unary(CoreService.GetGuildList, {
     request: requestMessage,
     host: this.serviceHost,
     metadata: metadata,
@@ -819,37 +850,6 @@ CoreServiceClient.prototype.sendMessage = function sendMessage(requestMessage, m
     callback = arguments[1];
   }
   var client = grpc.unary(CoreService.SendMessage, {
-    request: requestMessage,
-    host: this.serviceHost,
-    metadata: metadata,
-    transport: this.options.transport,
-    debug: this.options.debug,
-    onEnd: function (response) {
-      if (callback) {
-        if (response.status !== grpc.Code.OK) {
-          var err = new Error(response.statusMessage);
-          err.code = response.status;
-          err.metadata = response.trailers;
-          callback(err, null);
-        } else {
-          callback(null, response.message);
-        }
-      }
-    }
-  });
-  return {
-    cancel: function () {
-      callback = null;
-      client.close();
-    }
-  };
-};
-
-CoreServiceClient.prototype.localGuilds = function localGuilds(requestMessage, metadata, callback) {
-  if (arguments.length === 2) {
-    callback = arguments[1];
-  }
-  var client = grpc.unary(CoreService.LocalGuilds, {
     request: requestMessage,
     host: this.serviceHost,
     metadata: metadata,

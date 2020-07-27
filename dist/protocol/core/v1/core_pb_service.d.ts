@@ -32,6 +32,15 @@ type CoreServiceCreateChannel = {
   readonly responseType: typeof core_v1_core_pb.CreateChannelResponse;
 };
 
+type CoreServiceGetGuildList = {
+  readonly methodName: string;
+  readonly service: typeof CoreService;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof core_v1_core_pb.GetGuildListRequest;
+  readonly responseType: typeof core_v1_core_pb.GetGuildListResponse;
+};
+
 type CoreServiceGetGuild = {
   readonly methodName: string;
   readonly service: typeof CoreService;
@@ -185,15 +194,6 @@ type CoreServiceSendMessage = {
   readonly responseType: typeof google_protobuf_empty_pb.Empty;
 };
 
-type CoreServiceLocalGuilds = {
-  readonly methodName: string;
-  readonly service: typeof CoreService;
-  readonly requestStream: false;
-  readonly responseStream: false;
-  readonly requestType: typeof core_v1_core_pb.JoinedLocalGuildsRequest;
-  readonly responseType: typeof core_v1_core_pb.JoinedLocalGuildsResponse;
-};
-
 type CoreServiceStreamGuildEvents = {
   readonly methodName: string;
   readonly service: typeof CoreService;
@@ -217,6 +217,7 @@ export class CoreService {
   static readonly CreateGuild: CoreServiceCreateGuild;
   static readonly CreateInvite: CoreServiceCreateInvite;
   static readonly CreateChannel: CoreServiceCreateChannel;
+  static readonly GetGuildList: CoreServiceGetGuildList;
   static readonly GetGuild: CoreServiceGetGuild;
   static readonly GetGuildInvites: CoreServiceGetGuildInvites;
   static readonly GetGuildMembers: CoreServiceGetGuildMembers;
@@ -234,7 +235,6 @@ export class CoreService {
   static readonly LeaveGuild: CoreServiceLeaveGuild;
   static readonly TriggerAction: CoreServiceTriggerAction;
   static readonly SendMessage: CoreServiceSendMessage;
-  static readonly LocalGuilds: CoreServiceLocalGuilds;
   static readonly StreamGuildEvents: CoreServiceStreamGuildEvents;
   static readonly StreamActionEvents: CoreServiceStreamActionEvents;
 }
@@ -298,6 +298,15 @@ export class CoreServiceClient {
     requestMessage: core_v1_core_pb.CreateChannelRequest,
     callback: (error: ServiceError|null, responseMessage: core_v1_core_pb.CreateChannelResponse|null) => void
   ): UnaryResponse;
+  getGuildList(
+    requestMessage: core_v1_core_pb.GetGuildListRequest,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: core_v1_core_pb.GetGuildListResponse|null) => void
+  ): UnaryResponse;
+  getGuildList(
+    requestMessage: core_v1_core_pb.GetGuildListRequest,
+    callback: (error: ServiceError|null, responseMessage: core_v1_core_pb.GetGuildListResponse|null) => void
+  ): UnaryResponse;
   getGuild(
     requestMessage: core_v1_core_pb.GetGuildRequest,
     metadata: grpc.Metadata,
@@ -450,15 +459,6 @@ export class CoreServiceClient {
   sendMessage(
     requestMessage: core_v1_core_pb.SendMessageRequest,
     callback: (error: ServiceError|null, responseMessage: google_protobuf_empty_pb.Empty|null) => void
-  ): UnaryResponse;
-  localGuilds(
-    requestMessage: core_v1_core_pb.JoinedLocalGuildsRequest,
-    metadata: grpc.Metadata,
-    callback: (error: ServiceError|null, responseMessage: core_v1_core_pb.JoinedLocalGuildsResponse|null) => void
-  ): UnaryResponse;
-  localGuilds(
-    requestMessage: core_v1_core_pb.JoinedLocalGuildsRequest,
-    callback: (error: ServiceError|null, responseMessage: core_v1_core_pb.JoinedLocalGuildsResponse|null) => void
   ): UnaryResponse;
   streamGuildEvents(requestMessage: core_v1_core_pb.StreamGuildEventsRequest, metadata?: grpc.Metadata): ResponseStream<core_v1_core_pb.GuildEvent>;
   streamActionEvents(requestMessage: core_v1_core_pb.StreamActionEventsRequest, metadata?: grpc.Metadata): ResponseStream<core_v1_core_pb.ActionEvent>;

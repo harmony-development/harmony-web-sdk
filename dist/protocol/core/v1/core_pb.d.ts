@@ -409,6 +409,68 @@ export namespace CreateChannelResponse {
   }
 }
 
+export class GetGuildListRequest extends jspb.Message {
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetGuildListRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: GetGuildListRequest): GetGuildListRequest.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: GetGuildListRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetGuildListRequest;
+  static deserializeBinaryFromReader(message: GetGuildListRequest, reader: jspb.BinaryReader): GetGuildListRequest;
+}
+
+export namespace GetGuildListRequest {
+  export type AsObject = {
+  }
+}
+
+export class GetGuildListResponse extends jspb.Message {
+  clearGuildsList(): void;
+  getGuildsList(): Array<GetGuildListResponse.GuildListEntry>;
+  setGuildsList(value: Array<GetGuildListResponse.GuildListEntry>): void;
+  addGuilds(value?: GetGuildListResponse.GuildListEntry, index?: number): GetGuildListResponse.GuildListEntry;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetGuildListResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: GetGuildListResponse): GetGuildListResponse.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: GetGuildListResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetGuildListResponse;
+  static deserializeBinaryFromReader(message: GetGuildListResponse, reader: jspb.BinaryReader): GetGuildListResponse;
+}
+
+export namespace GetGuildListResponse {
+  export type AsObject = {
+    guildsList: Array<GetGuildListResponse.GuildListEntry.AsObject>,
+  }
+
+  export class GuildListEntry extends jspb.Message {
+    getGuildId(): string;
+    setGuildId(value: string): void;
+
+    getHost(): string;
+    setHost(value: string): void;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GuildListEntry.AsObject;
+    static toObject(includeInstance: boolean, msg: GuildListEntry): GuildListEntry.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GuildListEntry, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GuildListEntry;
+    static deserializeBinaryFromReader(message: GuildListEntry, reader: jspb.BinaryReader): GuildListEntry;
+  }
+
+  export namespace GuildListEntry {
+    export type AsObject = {
+      guildId: string,
+      host: string,
+    }
+  }
+}
+
 export class GetGuildRequest extends jspb.Message {
   hasLocation(): boolean;
   clearLocation(): void;
@@ -1469,44 +1531,6 @@ export class LeaveGuildRequest extends jspb.Message {
 export namespace LeaveGuildRequest {
   export type AsObject = {
     location?: Location.AsObject,
-  }
-}
-
-export class JoinedLocalGuildsRequest extends jspb.Message {
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): JoinedLocalGuildsRequest.AsObject;
-  static toObject(includeInstance: boolean, msg: JoinedLocalGuildsRequest): JoinedLocalGuildsRequest.AsObject;
-  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-  static serializeBinaryToWriter(message: JoinedLocalGuildsRequest, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): JoinedLocalGuildsRequest;
-  static deserializeBinaryFromReader(message: JoinedLocalGuildsRequest, reader: jspb.BinaryReader): JoinedLocalGuildsRequest;
-}
-
-export namespace JoinedLocalGuildsRequest {
-  export type AsObject = {
-  }
-}
-
-export class JoinedLocalGuildsResponse extends jspb.Message {
-  clearGuildIdList(): void;
-  getGuildIdList(): Array<string>;
-  setGuildIdList(value: Array<string>): void;
-  addGuildId(value: string, index?: number): string;
-
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): JoinedLocalGuildsResponse.AsObject;
-  static toObject(includeInstance: boolean, msg: JoinedLocalGuildsResponse): JoinedLocalGuildsResponse.AsObject;
-  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-  static serializeBinaryToWriter(message: JoinedLocalGuildsResponse, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): JoinedLocalGuildsResponse;
-  static deserializeBinaryFromReader(message: JoinedLocalGuildsResponse, reader: jspb.BinaryReader): JoinedLocalGuildsResponse;
-}
-
-export namespace JoinedLocalGuildsResponse {
-  export type AsObject = {
-    guildIdList: Array<string>,
   }
 }
 
