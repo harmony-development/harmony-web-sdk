@@ -90,7 +90,7 @@ var Connection = /** @class */ (function () {
                 req = new foundation_pb_1.LoginRequest();
                 localMsg = new foundation_pb_1.LoginRequest.Local();
                 localMsg.setEmail(email);
-                localMsg.setPassword(password);
+                localMsg.setPassword(btoa(password));
                 req.setLocal(localMsg);
                 return [2 /*return*/, this.unaryReq(foundation_pb_service_1.FoundationService.Login, req)];
             });
@@ -116,7 +116,7 @@ var Connection = /** @class */ (function () {
                 req = new foundation_pb_1.RegisterRequest();
                 req.setEmail(email);
                 req.setUsername(username);
-                req.setPassword(password);
+                req.setPassword(btoa(password));
                 return [2 /*return*/, this.unaryReq(foundation_pb_service_1.FoundationService.Register, req)];
             });
         });

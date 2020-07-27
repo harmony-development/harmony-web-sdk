@@ -92,7 +92,7 @@ export class Connection {
     const req = new LoginRequest();
     const localMsg = new LoginRequest.Local();
     localMsg.setEmail(email);
-    localMsg.setPassword(password);
+    localMsg.setPassword(btoa(password));
     req.setLocal(localMsg);
     return this.unaryReq(FoundationService.Login, req);
   }
@@ -110,7 +110,7 @@ export class Connection {
     const req = new RegisterRequest();
     req.setEmail(email);
     req.setUsername(username);
-    req.setPassword(password);
+    req.setPassword(btoa(password));
     return this.unaryReq(FoundationService.Register, req);
   }
 
