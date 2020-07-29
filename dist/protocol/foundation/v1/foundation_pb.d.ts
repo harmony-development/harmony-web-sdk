@@ -141,8 +141,10 @@ export namespace LoginRequest {
     getEmail(): string;
     setEmail(value: string): void;
 
-    getPassword(): string;
-    setPassword(value: string): void;
+    getPassword(): Uint8Array | string;
+    getPassword_asU8(): Uint8Array;
+    getPassword_asB64(): string;
+    setPassword(value: Uint8Array | string): void;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): Local.AsObject;
@@ -157,7 +159,7 @@ export namespace LoginRequest {
   export namespace Local {
     export type AsObject = {
       email: string,
-      password: string,
+      password: Uint8Array | string,
     }
   }
 

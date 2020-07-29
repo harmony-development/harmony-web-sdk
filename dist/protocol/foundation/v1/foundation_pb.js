@@ -1083,7 +1083,7 @@ proto.protocol.foundation.v1.LoginRequest.Local.prototype.toObject = function(op
 proto.protocol.foundation.v1.LoginRequest.Local.toObject = function(includeInstance, msg) {
   var f, obj = {
     email: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    password: jspb.Message.getFieldWithDefault(msg, 2, "")
+    password: msg.getPassword_asB64()
   };
 
   if (includeInstance) {
@@ -1125,7 +1125,7 @@ proto.protocol.foundation.v1.LoginRequest.Local.deserializeBinaryFromReader = fu
       msg.setEmail(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {!Uint8Array} */ (reader.readBytes());
       msg.setPassword(value);
       break;
     default:
@@ -1164,9 +1164,9 @@ proto.protocol.foundation.v1.LoginRequest.Local.serializeBinaryToWriter = functi
       f
     );
   }
-  f = message.getPassword();
+  f = message.getPassword_asU8();
   if (f.length > 0) {
-    writer.writeString(
+    writer.writeBytes(
       2,
       f
     );
@@ -1193,20 +1193,44 @@ proto.protocol.foundation.v1.LoginRequest.Local.prototype.setEmail = function(va
 
 
 /**
- * optional string password = 2;
- * @return {string}
+ * optional bytes password = 2;
+ * @return {!(string|Uint8Array)}
  */
 proto.protocol.foundation.v1.LoginRequest.Local.prototype.getPassword = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+  return /** @type {!(string|Uint8Array)} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
 
 /**
- * @param {string} value
+ * optional bytes password = 2;
+ * This is a type-conversion wrapper around `getPassword()`
+ * @return {string}
+ */
+proto.protocol.foundation.v1.LoginRequest.Local.prototype.getPassword_asB64 = function() {
+  return /** @type {string} */ (jspb.Message.bytesAsB64(
+      this.getPassword()));
+};
+
+
+/**
+ * optional bytes password = 2;
+ * Note that Uint8Array is not supported on all browsers.
+ * @see http://caniuse.com/Uint8Array
+ * This is a type-conversion wrapper around `getPassword()`
+ * @return {!Uint8Array}
+ */
+proto.protocol.foundation.v1.LoginRequest.Local.prototype.getPassword_asU8 = function() {
+  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
+      this.getPassword()));
+};
+
+
+/**
+ * @param {!(string|Uint8Array)} value
  * @return {!proto.protocol.foundation.v1.LoginRequest.Local} returns this
  */
 proto.protocol.foundation.v1.LoginRequest.Local.prototype.setPassword = function(value) {
-  return jspb.Message.setProto3StringField(this, 2, value);
+  return jspb.Message.setProto3BytesField(this, 2, value);
 };
 
 
