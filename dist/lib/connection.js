@@ -418,6 +418,17 @@ var Connection = /** @class */ (function () {
             });
         });
     };
+    Connection.prototype.addGuildToGuildList = function (guildID, homeserver) {
+        return __awaiter(this, void 0, void 0, function () {
+            var req;
+            return __generator(this, function (_a) {
+                req = new core_pb_1.AddGuildToGuildListRequest();
+                req.setGuildId(guildID);
+                req.setHomeserver(homeserver);
+                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.AddGuildToGuildList, req, true)];
+            });
+        });
+    };
     return Connection;
 }());
 exports.Connection = Connection;

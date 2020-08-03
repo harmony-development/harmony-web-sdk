@@ -47,6 +47,15 @@ CoreService.GetGuildList = {
   responseType: core_v1_core_pb.GetGuildListResponse
 };
 
+CoreService.AddGuildToGuildList = {
+  methodName: "AddGuildToGuildList",
+  service: CoreService,
+  requestStream: false,
+  responseStream: false,
+  requestType: core_v1_core_pb.AddGuildToGuildListRequest,
+  responseType: core_v1_core_pb.AddGuildToGuildListResponse
+};
+
 CoreService.GetGuild = {
   methodName: "GetGuild",
   service: CoreService,
@@ -218,6 +227,15 @@ CoreService.StreamActionEvents = {
   responseType: core_v1_core_pb.ActionEvent
 };
 
+CoreService.StreamHomeserverEvents = {
+  methodName: "StreamHomeserverEvents",
+  service: CoreService,
+  requestStream: false,
+  responseStream: true,
+  requestType: core_v1_core_pb.StreamHomeserverEventsRequest,
+  responseType: core_v1_core_pb.HomeserverEvent
+};
+
 exports.CoreService = CoreService;
 
 function CoreServiceClient(serviceHost, options) {
@@ -323,6 +341,37 @@ CoreServiceClient.prototype.getGuildList = function getGuildList(requestMessage,
     callback = arguments[1];
   }
   var client = grpc.unary(CoreService.GetGuildList, {
+    request: requestMessage,
+    host: this.serviceHost,
+    metadata: metadata,
+    transport: this.options.transport,
+    debug: this.options.debug,
+    onEnd: function (response) {
+      if (callback) {
+        if (response.status !== grpc.Code.OK) {
+          var err = new Error(response.statusMessage);
+          err.code = response.status;
+          err.metadata = response.trailers;
+          callback(err, null);
+        } else {
+          callback(null, response.message);
+        }
+      }
+    }
+  });
+  return {
+    cancel: function () {
+      callback = null;
+      client.close();
+    }
+  };
+};
+
+CoreServiceClient.prototype.addGuildToGuildList = function addGuildToGuildList(requestMessage, metadata, callback) {
+  if (arguments.length === 2) {
+    callback = arguments[1];
+  }
+  var client = grpc.unary(CoreService.AddGuildToGuildList, {
     request: requestMessage,
     host: this.serviceHost,
     metadata: metadata,
@@ -922,6 +971,45 @@ CoreServiceClient.prototype.streamActionEvents = function streamActionEvents(req
     status: []
   };
   var client = grpc.invoke(CoreService.StreamActionEvents, {
+    request: requestMessage,
+    host: this.serviceHost,
+    metadata: metadata,
+    transport: this.options.transport,
+    debug: this.options.debug,
+    onMessage: function (responseMessage) {
+      listeners.data.forEach(function (handler) {
+        handler(responseMessage);
+      });
+    },
+    onEnd: function (status, statusMessage, trailers) {
+      listeners.status.forEach(function (handler) {
+        handler({ code: status, details: statusMessage, metadata: trailers });
+      });
+      listeners.end.forEach(function (handler) {
+        handler({ code: status, details: statusMessage, metadata: trailers });
+      });
+      listeners = null;
+    }
+  });
+  return {
+    on: function (type, handler) {
+      listeners[type].push(handler);
+      return this;
+    },
+    cancel: function () {
+      listeners = null;
+      client.close();
+    }
+  };
+};
+
+CoreServiceClient.prototype.streamHomeserverEvents = function streamHomeserverEvents(requestMessage, metadata) {
+  var listeners = {
+    data: [],
+    end: [],
+    status: []
+  };
+  var client = grpc.invoke(CoreService.StreamHomeserverEvents, {
     request: requestMessage,
     host: this.serviceHost,
     metadata: metadata,

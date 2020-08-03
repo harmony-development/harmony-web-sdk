@@ -41,6 +41,15 @@ type CoreServiceGetGuildList = {
   readonly responseType: typeof core_v1_core_pb.GetGuildListResponse;
 };
 
+type CoreServiceAddGuildToGuildList = {
+  readonly methodName: string;
+  readonly service: typeof CoreService;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof core_v1_core_pb.AddGuildToGuildListRequest;
+  readonly responseType: typeof core_v1_core_pb.AddGuildToGuildListResponse;
+};
+
 type CoreServiceGetGuild = {
   readonly methodName: string;
   readonly service: typeof CoreService;
@@ -212,12 +221,22 @@ type CoreServiceStreamActionEvents = {
   readonly responseType: typeof core_v1_core_pb.ActionEvent;
 };
 
+type CoreServiceStreamHomeserverEvents = {
+  readonly methodName: string;
+  readonly service: typeof CoreService;
+  readonly requestStream: false;
+  readonly responseStream: true;
+  readonly requestType: typeof core_v1_core_pb.StreamHomeserverEventsRequest;
+  readonly responseType: typeof core_v1_core_pb.HomeserverEvent;
+};
+
 export class CoreService {
   static readonly serviceName: string;
   static readonly CreateGuild: CoreServiceCreateGuild;
   static readonly CreateInvite: CoreServiceCreateInvite;
   static readonly CreateChannel: CoreServiceCreateChannel;
   static readonly GetGuildList: CoreServiceGetGuildList;
+  static readonly AddGuildToGuildList: CoreServiceAddGuildToGuildList;
   static readonly GetGuild: CoreServiceGetGuild;
   static readonly GetGuildInvites: CoreServiceGetGuildInvites;
   static readonly GetGuildMembers: CoreServiceGetGuildMembers;
@@ -237,6 +256,7 @@ export class CoreService {
   static readonly SendMessage: CoreServiceSendMessage;
   static readonly StreamGuildEvents: CoreServiceStreamGuildEvents;
   static readonly StreamActionEvents: CoreServiceStreamActionEvents;
+  static readonly StreamHomeserverEvents: CoreServiceStreamHomeserverEvents;
 }
 
 export type ServiceError = { message: string, code: number; metadata: grpc.Metadata }
@@ -306,6 +326,15 @@ export class CoreServiceClient {
   getGuildList(
     requestMessage: core_v1_core_pb.GetGuildListRequest,
     callback: (error: ServiceError|null, responseMessage: core_v1_core_pb.GetGuildListResponse|null) => void
+  ): UnaryResponse;
+  addGuildToGuildList(
+    requestMessage: core_v1_core_pb.AddGuildToGuildListRequest,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: core_v1_core_pb.AddGuildToGuildListResponse|null) => void
+  ): UnaryResponse;
+  addGuildToGuildList(
+    requestMessage: core_v1_core_pb.AddGuildToGuildListRequest,
+    callback: (error: ServiceError|null, responseMessage: core_v1_core_pb.AddGuildToGuildListResponse|null) => void
   ): UnaryResponse;
   getGuild(
     requestMessage: core_v1_core_pb.GetGuildRequest,
@@ -462,5 +491,6 @@ export class CoreServiceClient {
   ): UnaryResponse;
   streamGuildEvents(requestMessage: core_v1_core_pb.StreamGuildEventsRequest, metadata?: grpc.Metadata): ResponseStream<core_v1_core_pb.GuildEvent>;
   streamActionEvents(requestMessage: core_v1_core_pb.StreamActionEventsRequest, metadata?: grpc.Metadata): ResponseStream<core_v1_core_pb.ActionEvent>;
+  streamHomeserverEvents(requestMessage: core_v1_core_pb.StreamHomeserverEventsRequest, metadata?: grpc.Metadata): ResponseStream<core_v1_core_pb.HomeserverEvent>;
 }
 

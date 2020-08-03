@@ -31,6 +31,7 @@ import {
   Embed,
   Action,
   GetGuildListRequest,
+  AddGuildToGuildListRequest,
 } from "../protocol/core/v1/core_pb";
 import {
   GetUserRequest,
@@ -327,5 +328,12 @@ export class Connection {
   async statusUpdate(newStatus: keyof UserStatusMap) {
     const req = new StatusUpdateRequest();
     req.setNewStatus(UserStatus[newStatus]);
+  }
+
+  async addGuildToGuildList(guildID: string, homeserver: string) {
+    const req = new AddGuildToGuildListRequest();
+    req.setGuildId(guildID);
+    req.setHomeserver(homeserver);
+    return this.unaryReq(CoreService.AddGuildToGuildList, req, true);
   }
 }

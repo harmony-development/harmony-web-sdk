@@ -1396,6 +1396,98 @@ export namespace GuildEvent {
   }
 }
 
+export class HomeserverEvent extends jspb.Message {
+  hasGuildAddedToList(): boolean;
+  clearGuildAddedToList(): void;
+  getGuildAddedToList(): HomeserverEvent.GuildAddedToList | undefined;
+  setGuildAddedToList(value?: HomeserverEvent.GuildAddedToList): void;
+
+  getEventCase(): HomeserverEvent.EventCase;
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): HomeserverEvent.AsObject;
+  static toObject(includeInstance: boolean, msg: HomeserverEvent): HomeserverEvent.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: HomeserverEvent, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): HomeserverEvent;
+  static deserializeBinaryFromReader(message: HomeserverEvent, reader: jspb.BinaryReader): HomeserverEvent;
+}
+
+export namespace HomeserverEvent {
+  export type AsObject = {
+    guildAddedToList?: HomeserverEvent.GuildAddedToList.AsObject,
+  }
+
+  export class GuildAddedToList extends jspb.Message {
+    getGuildId(): number;
+    setGuildId(value: number): void;
+
+    getHomeserver(): string;
+    setHomeserver(value: string): void;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GuildAddedToList.AsObject;
+    static toObject(includeInstance: boolean, msg: GuildAddedToList): GuildAddedToList.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GuildAddedToList, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GuildAddedToList;
+    static deserializeBinaryFromReader(message: GuildAddedToList, reader: jspb.BinaryReader): GuildAddedToList;
+  }
+
+  export namespace GuildAddedToList {
+    export type AsObject = {
+      guildId: number,
+      homeserver: string,
+    }
+  }
+
+  export class GuildRemovedFromList extends jspb.Message {
+    getGuildId(): number;
+    setGuildId(value: number): void;
+
+    getHomeserver(): string;
+    setHomeserver(value: string): void;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GuildRemovedFromList.AsObject;
+    static toObject(includeInstance: boolean, msg: GuildRemovedFromList): GuildRemovedFromList.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GuildRemovedFromList, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GuildRemovedFromList;
+    static deserializeBinaryFromReader(message: GuildRemovedFromList, reader: jspb.BinaryReader): GuildRemovedFromList;
+  }
+
+  export namespace GuildRemovedFromList {
+    export type AsObject = {
+      guildId: number,
+      homeserver: string,
+    }
+  }
+
+  export enum EventCase {
+    EVENT_NOT_SET = 0,
+    GUILD_ADDED_TO_LIST = 1,
+  }
+}
+
+export class StreamHomeserverEventsRequest extends jspb.Message {
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): StreamHomeserverEventsRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: StreamHomeserverEventsRequest): StreamHomeserverEventsRequest.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: StreamHomeserverEventsRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): StreamHomeserverEventsRequest;
+  static deserializeBinaryFromReader(message: StreamHomeserverEventsRequest, reader: jspb.BinaryReader): StreamHomeserverEventsRequest;
+}
+
+export namespace StreamHomeserverEventsRequest {
+  export type AsObject = {
+  }
+}
+
 export class StreamActionEventsRequest extends jspb.Message {
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): StreamActionEventsRequest.AsObject;
@@ -1605,6 +1697,46 @@ export namespace SendMessageRequest {
     actionsList: Array<Action.AsObject>,
     embedsList: Array<Embed.AsObject>,
     attachmentsList: Array<string>,
+  }
+}
+
+export class AddGuildToGuildListRequest extends jspb.Message {
+  getGuildId(): string;
+  setGuildId(value: string): void;
+
+  getHomeserver(): string;
+  setHomeserver(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): AddGuildToGuildListRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: AddGuildToGuildListRequest): AddGuildToGuildListRequest.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: AddGuildToGuildListRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): AddGuildToGuildListRequest;
+  static deserializeBinaryFromReader(message: AddGuildToGuildListRequest, reader: jspb.BinaryReader): AddGuildToGuildListRequest;
+}
+
+export namespace AddGuildToGuildListRequest {
+  export type AsObject = {
+    guildId: string,
+    homeserver: string,
+  }
+}
+
+export class AddGuildToGuildListResponse extends jspb.Message {
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): AddGuildToGuildListResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: AddGuildToGuildListResponse): AddGuildToGuildListResponse.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: AddGuildToGuildListResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): AddGuildToGuildListResponse;
+  static deserializeBinaryFromReader(message: AddGuildToGuildListResponse, reader: jspb.BinaryReader): AddGuildToGuildListResponse;
+}
+
+export namespace AddGuildToGuildListResponse {
+  export type AsObject = {
   }
 }
 

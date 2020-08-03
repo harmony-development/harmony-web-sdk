@@ -38,4 +38,5 @@ export declare class Connection {
     getUserMetadata(appID: string): Promise<void>;
     usernameUpdate(newUsername: string): Promise<UnaryOutput<import("google-protobuf/google/protobuf/empty_pb").Empty>>;
     statusUpdate(newStatus: keyof UserStatusMap): Promise<void>;
+    addGuildToGuildList(guildID: string, homeserver: string): Promise<UnaryOutput<import("../protocol/core/v1/core_pb").AddGuildToGuildListResponse>>;
 }
