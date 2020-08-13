@@ -282,11 +282,17 @@ export class Connection {
   }
 
   async sendMessage(
+    guildID: string,
+    channelID: string,
     content?: string,
     attachments?: string[],
     embeds?: Embed[],
     actions?: Action[]
   ) {
+    const loc = new Location();
+    loc.setGuildId(guildID);
+    loc.setChannelId(channelID);
+
     const req = new SendMessageRequest();
     if (content) {
       req.setContent(content);

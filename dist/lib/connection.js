@@ -348,10 +348,13 @@ var Connection = /** @class */ (function () {
             });
         });
     };
-    Connection.prototype.sendMessage = function (content, attachments, embeds, actions) {
+    Connection.prototype.sendMessage = function (guildID, channelID, content, attachments, embeds, actions) {
         return __awaiter(this, void 0, void 0, function () {
-            var req;
+            var loc, req;
             return __generator(this, function (_a) {
+                loc = new core_pb_1.Location();
+                loc.setGuildId(guildID);
+                loc.setChannelId(channelID);
                 req = new core_pb_1.SendMessageRequest();
                 if (content) {
                     req.setContent(content);
