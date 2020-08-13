@@ -292,8 +292,8 @@ export class Connection {
     const loc = new Location();
     loc.setGuildId(guildID);
     loc.setChannelId(channelID);
-
     const req = new SendMessageRequest();
+    req.setLocation(loc);
     if (content) {
       req.setContent(content);
     }
