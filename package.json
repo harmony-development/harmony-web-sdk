@@ -1,6 +1,6 @@
 {
   "name": "@harmony-dev/harmony-web-sdk",
-  "version": "1.4.11",
+  "version": "1.4.12",
   "description": "A Node SDK for Harmony, adapted to work for the web",
   "repository": {
     "type": "git",
@@ -43,11 +43,13 @@
   "dependencies": {
     "@improbable-eng/grpc-web": "^0.13.0",
     "@types/google-protobuf": "^3.7.2",
+    "eventemitter3": "^4.0.4",
     "google-protobuf": "^4.0.0-rc.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^9.1.1",
     "@commitlint/config-conventional": "^9.1.1",
+    "@types/eventemitter3": "^2.0.2",
     "@types/node": "^14.0.24",
     "commitizen": "^4.1.2",
     "cz-conventional-changelog": "^3.2.0",

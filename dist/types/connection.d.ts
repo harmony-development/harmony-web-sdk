@@ -1,13 +1,33 @@
-import { Location, Embed, Action } from "../protocol/core/v1/core_pb";
+import { Location, Embed, Action, GuildEvent } from "../protocol/core/v1/core_pb";
 import { UserStatusMap } from "../protocol/profile/v1/profile_pb";
 import { UnaryOutput } from "@improbable-eng/grpc-web/dist/typings/unary";
 import { ProtobufMessage } from "@improbable-eng/grpc-web/dist/typings/message";
 import { UnaryMethodDefinition } from "@improbable-eng/grpc-web/dist/typings/service";
+import EventEmitter from "eventemitter3";
+declare type ServerStreamResponses = {
+    [GuildEvent.EventCase.SENT_MESSAGE]: [GuildEvent.MessageSent];
+    [GuildEvent.EventCase.LEFT_MEMBER]: [GuildEvent.MemberLeft];
+    [GuildEvent.EventCase.JOINED_MEMBER]: [GuildEvent.MemberJoined];
+    [GuildEvent.EventCase.EDITED_MESSAGE]: [GuildEvent.MessageUpdated];
+    [GuildEvent.EventCase.EDITED_GUILD]: [GuildEvent.GuildUpdated];
+    [GuildEvent.EventCase.EDITED_CHANNEL]: [GuildEvent.ChannelUpdated];
+    [GuildEvent.EventCase.DELETED_MESSAGE]: [GuildEvent.MessageDeleted];
+    [GuildEvent.EventCase.DELETED_GUILD]: [GuildEvent.GuildDeleted];
+    [GuildEvent.EventCase.DELETED_CHANNEL]: [GuildEvent.ChannelDeleted];
+    [GuildEvent.EventCase.CREATED_CHANNEL]: [GuildEvent.ChannelCreated];
+};
 export declare class Connection {
     host: string;
     session?: string;
+    events: EventEmitter<ServerStreamResponses>;
     constructor(host: string);
     unaryReq<T1 extends ProtobufMessage, T2 extends ProtobufMessage>(descriptor: UnaryMethodDefinition<T1, T2>, request: T1, auth?: boolean): Promise<UnaryOutput<T2>>;
+    /**
+     * This function is an ugly bastard
+     * @param msg an event message
+     */
+    onGuildEvent(msg: GuildEvent): void;
+    subscribe(guildID: string): void;
     newLocation(guildID: string, channelID?: string, messageID?: string): Location;
     getKey(): Promise<UnaryOutput<import("../protocol/foundation/v1/foundation_pb").KeyReply>>;
     loginLocal(email: string, password: string): Promise<UnaryOutput<import("../protocol/foundation/v1/foundation_pb").Session>>;
@@ -40,3 +60,4 @@ export declare class Connection {
     statusUpdate(newStatus: keyof UserStatusMap): Promise<void>;
     addGuildToGuildList(guildID: string, homeserver: string): Promise<UnaryOutput<import("../protocol/core/v1/core_pb").AddGuildToGuildListResponse>>;
 }
+export {};

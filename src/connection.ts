@@ -32,6 +32,9 @@ import {
   Action,
   GetGuildListRequest,
   AddGuildToGuildListRequest,
+  StreamHomeserverEventsRequest,
+  GuildEvent,
+  StreamGuildEventsRequest,
 } from "../protocol/core/v1/core_pb";
 import {
   GetUserRequest,
@@ -45,13 +48,29 @@ import { ProfileService } from "../protocol/profile/v1/profile_pb_service";
 import { UnaryOutput } from "@improbable-eng/grpc-web/dist/typings/unary";
 import { ProtobufMessage } from "@improbable-eng/grpc-web/dist/typings/message";
 import { UnaryMethodDefinition } from "@improbable-eng/grpc-web/dist/typings/service";
+import EventEmitter from "eventemitter3";
+
+type ServerStreamResponses = {
+  [GuildEvent.EventCase.SENT_MESSAGE]: [GuildEvent.MessageSent];
+  [GuildEvent.EventCase.LEFT_MEMBER]: [GuildEvent.MemberLeft];
+  [GuildEvent.EventCase.JOINED_MEMBER]: [GuildEvent.MemberJoined];
+  [GuildEvent.EventCase.EDITED_MESSAGE]: [GuildEvent.MessageUpdated];
+  [GuildEvent.EventCase.EDITED_GUILD]: [GuildEvent.GuildUpdated];
+  [GuildEvent.EventCase.EDITED_CHANNEL]: [GuildEvent.ChannelUpdated];
+  [GuildEvent.EventCase.DELETED_MESSAGE]: [GuildEvent.MessageDeleted];
+  [GuildEvent.EventCase.DELETED_GUILD]: [GuildEvent.GuildDeleted];
+  [GuildEvent.EventCase.DELETED_CHANNEL]: [GuildEvent.ChannelDeleted];
+  [GuildEvent.EventCase.CREATED_CHANNEL]: [GuildEvent.ChannelCreated];
+};
 
 export class Connection {
   host: string;
   session?: string;
+  events: EventEmitter<ServerStreamResponses>;
 
   constructor(host: string) {
     this.host = host;
+    this.events = new EventEmitter<ServerStreamResponses>();
   }
 
   unaryReq<T1 extends ProtobufMessage, T2 extends ProtobufMessage>(
@@ -70,6 +89,77 @@ export class Connection {
         metadata,
         onEnd: (resp) => (resp.status === grpc.Code.OK ? res(resp) : rej(resp)),
       });
+    });
+  }
+
+  /**
+   * This function is an ugly bastard
+   * @param msg an event message
+   */
+  onGuildEvent(msg: GuildEvent) {
+    if (msg.hasSentMessage()) {
+      this.events.emit(
+        GuildEvent.EventCase.SENT_MESSAGE,
+        msg.getSentMessage()!
+      );
+    } else if (msg.hasLeftMember()) {
+      this.events.emit(GuildEvent.EventCase.LEFT_MEMBER, msg.getLeftMember()!);
+    } else if (msg.hasJoinedMember()) {
+      this.events.emit(
+        GuildEvent.EventCase.JOINED_MEMBER,
+        msg.getJoinedMember()!
+      );
+    } else if (msg.hasEditedMessage()) {
+      this.events.emit(
+        GuildEvent.EventCase.EDITED_MESSAGE,
+        msg.getEditedMessage()!
+      );
+    } else if (msg.hasEditedGuild()) {
+      this.events.emit(
+        GuildEvent.EventCase.EDITED_GUILD,
+        msg.getEditedGuild()!
+      );
+    } else if (msg.hasEditedChannel()) {
+      this.events.emit(
+        GuildEvent.EventCase.EDITED_CHANNEL,
+        msg.getEditedChannel()!
+      );
+    } else if (msg.hasDeletedMessage()) {
+      this.events.emit(
+        GuildEvent.EventCase.DELETED_MESSAGE,
+        msg.getDeletedMessage()!
+      );
+    } else if (msg.hasDeletedGuild()) {
+      this.events.emit(
+        GuildEvent.EventCase.DELETED_GUILD,
+        msg.getDeletedGuild()!
+      );
+    } else if (msg.hasDeletedChannel()) {
+      this.events.emit(
+        GuildEvent.EventCase.DELETED_CHANNEL,
+        msg.getDeletedChannel()!
+      );
+    } else if (msg.hasCreatedChannel()) {
+      this.events.emit(
+        GuildEvent.EventCase.CREATED_CHANNEL,
+        msg.getCreatedChannel()!
+      );
+    }
+  }
+
+  subscribe(guildID: string) {
+    const req = new StreamGuildEventsRequest();
+    req.setLocation(this.newLocation(guildID));
+    const meta = new grpc.Metadata();
+    if (this.session) {
+      meta.set("auth", this.session);
+    }
+    grpc.invoke(CoreService.StreamGuildEvents, {
+      host: this.host,
+      request: new StreamHomeserverEventsRequest(),
+      metadata: meta,
+      onMessage: this.onGuildEvent,
+      onEnd: (code: grpc.Code, message: string, trailers: grpc.Metadata) => {},
     });
   }
 

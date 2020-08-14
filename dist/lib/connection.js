@@ -35,6 +35,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Connection = void 0;
 var grpc_web_1 = require("@improbable-eng/grpc-web");
@@ -44,9 +47,11 @@ var core_pb_service_1 = require("../protocol/core/v1/core_pb_service");
 var core_pb_1 = require("../protocol/core/v1/core_pb");
 var profile_pb_1 = require("../protocol/profile/v1/profile_pb");
 var profile_pb_service_1 = require("../protocol/profile/v1/profile_pb_service");
+var eventemitter3_1 = __importDefault(require("eventemitter3"));
 var Connection = /** @class */ (function () {
     function Connection(host) {
         this.host = host;
+        this.events = new eventemitter3_1.default();
     }
     Connection.prototype.unaryReq = function (descriptor, request, auth) {
         var _this = this;
@@ -61,6 +66,57 @@ var Connection = /** @class */ (function () {
                 metadata: metadata,
                 onEnd: function (resp) { return (resp.status === grpc_web_1.grpc.Code.OK ? res(resp) : rej(resp)); },
             });
+        });
+    };
+    /**
+     * This function is an ugly bastard
+     * @param msg an event message
+     */
+    Connection.prototype.onGuildEvent = function (msg) {
+        if (msg.hasSentMessage()) {
+            this.events.emit(core_pb_1.GuildEvent.EventCase.SENT_MESSAGE, msg.getSentMessage());
+        }
+        else if (msg.hasLeftMember()) {
+            this.events.emit(core_pb_1.GuildEvent.EventCase.LEFT_MEMBER, msg.getLeftMember());
+        }
+        else if (msg.hasJoinedMember()) {
+            this.events.emit(core_pb_1.GuildEvent.EventCase.JOINED_MEMBER, msg.getJoinedMember());
+        }
+        else if (msg.hasEditedMessage()) {
+            this.events.emit(core_pb_1.GuildEvent.EventCase.EDITED_MESSAGE, msg.getEditedMessage());
+        }
+        else if (msg.hasEditedGuild()) {
+            this.events.emit(core_pb_1.GuildEvent.EventCase.EDITED_GUILD, msg.getEditedGuild());
+        }
+        else if (msg.hasEditedChannel()) {
+            this.events.emit(core_pb_1.GuildEvent.EventCase.EDITED_CHANNEL, msg.getEditedChannel());
+        }
+        else if (msg.hasDeletedMessage()) {
+            this.events.emit(core_pb_1.GuildEvent.EventCase.DELETED_MESSAGE, msg.getDeletedMessage());
+        }
+        else if (msg.hasDeletedGuild()) {
+            this.events.emit(core_pb_1.GuildEvent.EventCase.DELETED_GUILD, msg.getDeletedGuild());
+        }
+        else if (msg.hasDeletedChannel()) {
+            this.events.emit(core_pb_1.GuildEvent.EventCase.DELETED_CHANNEL, msg.getDeletedChannel());
+        }
+        else if (msg.hasCreatedChannel()) {
+            this.events.emit(core_pb_1.GuildEvent.EventCase.CREATED_CHANNEL, msg.getCreatedChannel());
+        }
+    };
+    Connection.prototype.subscribe = function (guildID) {
+        var req = new core_pb_1.StreamGuildEventsRequest();
+        req.setLocation(this.newLocation(guildID));
+        var meta = new grpc_web_1.grpc.Metadata();
+        if (this.session) {
+            meta.set("auth", this.session);
+        }
+        grpc_web_1.grpc.invoke(core_pb_service_1.CoreService.StreamGuildEvents, {
+            host: this.host,
+            request: new core_pb_1.StreamHomeserverEventsRequest(),
+            metadata: meta,
+            onMessage: this.onGuildEvent,
+            onEnd: function (code, message, trailers) { },
         });
     };
     Connection.prototype.newLocation = function (guildID, channelID, messageID) {
@@ -356,6 +412,7 @@ var Connection = /** @class */ (function () {
                 loc.setGuildId(guildID);
                 loc.setChannelId(channelID);
                 req = new core_pb_1.SendMessageRequest();
+                req.setLocation(loc);
                 if (content) {
                     req.setContent(content);
                 }
