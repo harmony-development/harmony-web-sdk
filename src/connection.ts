@@ -51,16 +51,16 @@ import { UnaryMethodDefinition } from "@improbable-eng/grpc-web/dist/typings/ser
 import EventEmitter from "eventemitter3";
 
 type ServerStreamResponses = {
-  [GuildEvent.EventCase.SENT_MESSAGE]: [GuildEvent.MessageSent];
-  [GuildEvent.EventCase.LEFT_MEMBER]: [GuildEvent.MemberLeft];
-  [GuildEvent.EventCase.JOINED_MEMBER]: [GuildEvent.MemberJoined];
-  [GuildEvent.EventCase.EDITED_MESSAGE]: [GuildEvent.MessageUpdated];
-  [GuildEvent.EventCase.EDITED_GUILD]: [GuildEvent.GuildUpdated];
-  [GuildEvent.EventCase.EDITED_CHANNEL]: [GuildEvent.ChannelUpdated];
-  [GuildEvent.EventCase.DELETED_MESSAGE]: [GuildEvent.MessageDeleted];
-  [GuildEvent.EventCase.DELETED_GUILD]: [GuildEvent.GuildDeleted];
-  [GuildEvent.EventCase.DELETED_CHANNEL]: [GuildEvent.ChannelDeleted];
-  [GuildEvent.EventCase.CREATED_CHANNEL]: [GuildEvent.ChannelCreated];
+  [GuildEvent.EventCase.SENT_MESSAGE]: [string, GuildEvent.MessageSent];
+  [GuildEvent.EventCase.LEFT_MEMBER]: [string, GuildEvent.MemberLeft];
+  [GuildEvent.EventCase.JOINED_MEMBER]: [string, GuildEvent.MemberJoined];
+  [GuildEvent.EventCase.EDITED_MESSAGE]: [string, GuildEvent.MessageUpdated];
+  [GuildEvent.EventCase.EDITED_GUILD]: [string, GuildEvent.GuildUpdated];
+  [GuildEvent.EventCase.EDITED_CHANNEL]: [string, GuildEvent.ChannelUpdated];
+  [GuildEvent.EventCase.DELETED_MESSAGE]: [string, GuildEvent.MessageDeleted];
+  [GuildEvent.EventCase.DELETED_GUILD]: [string, GuildEvent.GuildDeleted];
+  [GuildEvent.EventCase.DELETED_CHANNEL]: [string, GuildEvent.ChannelDeleted];
+  [GuildEvent.EventCase.CREATED_CHANNEL]: [string, GuildEvent.ChannelCreated];
 };
 
 export class Connection {
@@ -100,48 +100,61 @@ export class Connection {
     if (msg.hasSentMessage()) {
       this.events.emit(
         GuildEvent.EventCase.SENT_MESSAGE,
+        this.host,
         msg.getSentMessage()!
       );
     } else if (msg.hasLeftMember()) {
-      this.events.emit(GuildEvent.EventCase.LEFT_MEMBER, msg.getLeftMember()!);
+      this.events.emit(
+        GuildEvent.EventCase.LEFT_MEMBER,
+        this.host,
+        msg.getLeftMember()!
+      );
     } else if (msg.hasJoinedMember()) {
       this.events.emit(
         GuildEvent.EventCase.JOINED_MEMBER,
+        this.host,
         msg.getJoinedMember()!
       );
     } else if (msg.hasEditedMessage()) {
       this.events.emit(
         GuildEvent.EventCase.EDITED_MESSAGE,
+        this.host,
         msg.getEditedMessage()!
       );
     } else if (msg.hasEditedGuild()) {
       this.events.emit(
         GuildEvent.EventCase.EDITED_GUILD,
+        this.host,
         msg.getEditedGuild()!
       );
     } else if (msg.hasEditedChannel()) {
       this.events.emit(
         GuildEvent.EventCase.EDITED_CHANNEL,
+        this.host,
         msg.getEditedChannel()!
       );
     } else if (msg.hasDeletedMessage()) {
       this.events.emit(
         GuildEvent.EventCase.DELETED_MESSAGE,
+        this.host,
         msg.getDeletedMessage()!
       );
     } else if (msg.hasDeletedGuild()) {
       this.events.emit(
         GuildEvent.EventCase.DELETED_GUILD,
+        this.host,
         msg.getDeletedGuild()!
       );
     } else if (msg.hasDeletedChannel()) {
       this.events.emit(
         GuildEvent.EventCase.DELETED_CHANNEL,
+        this.host,
         msg.getDeletedChannel()!
       );
     } else if (msg.hasCreatedChannel()) {
       this.events.emit(
         GuildEvent.EventCase.CREATED_CHANNEL,
+        this.host,
         msg.getCreatedChannel()!
       );
     }
