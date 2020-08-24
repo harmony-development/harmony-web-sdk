@@ -74,34 +74,34 @@ var Connection = /** @class */ (function () {
      */
     Connection.prototype.onGuildEvent = function (msg) {
         if (msg.hasSentMessage()) {
-            this.events.emit(core_pb_1.GuildEvent.EventCase.SENT_MESSAGE, msg.getSentMessage());
+            this.events.emit(core_pb_1.GuildEvent.EventCase.SENT_MESSAGE, this.host, msg.getSentMessage());
         }
         else if (msg.hasLeftMember()) {
-            this.events.emit(core_pb_1.GuildEvent.EventCase.LEFT_MEMBER, msg.getLeftMember());
+            this.events.emit(core_pb_1.GuildEvent.EventCase.LEFT_MEMBER, this.host, msg.getLeftMember());
         }
         else if (msg.hasJoinedMember()) {
-            this.events.emit(core_pb_1.GuildEvent.EventCase.JOINED_MEMBER, msg.getJoinedMember());
+            this.events.emit(core_pb_1.GuildEvent.EventCase.JOINED_MEMBER, this.host, msg.getJoinedMember());
         }
         else if (msg.hasEditedMessage()) {
-            this.events.emit(core_pb_1.GuildEvent.EventCase.EDITED_MESSAGE, msg.getEditedMessage());
+            this.events.emit(core_pb_1.GuildEvent.EventCase.EDITED_MESSAGE, this.host, msg.getEditedMessage());
         }
         else if (msg.hasEditedGuild()) {
-            this.events.emit(core_pb_1.GuildEvent.EventCase.EDITED_GUILD, msg.getEditedGuild());
+            this.events.emit(core_pb_1.GuildEvent.EventCase.EDITED_GUILD, this.host, msg.getEditedGuild());
         }
         else if (msg.hasEditedChannel()) {
-            this.events.emit(core_pb_1.GuildEvent.EventCase.EDITED_CHANNEL, msg.getEditedChannel());
+            this.events.emit(core_pb_1.GuildEvent.EventCase.EDITED_CHANNEL, this.host, msg.getEditedChannel());
         }
         else if (msg.hasDeletedMessage()) {
-            this.events.emit(core_pb_1.GuildEvent.EventCase.DELETED_MESSAGE, msg.getDeletedMessage());
+            this.events.emit(core_pb_1.GuildEvent.EventCase.DELETED_MESSAGE, this.host, msg.getDeletedMessage());
         }
         else if (msg.hasDeletedGuild()) {
-            this.events.emit(core_pb_1.GuildEvent.EventCase.DELETED_GUILD, msg.getDeletedGuild());
+            this.events.emit(core_pb_1.GuildEvent.EventCase.DELETED_GUILD, this.host, msg.getDeletedGuild());
         }
         else if (msg.hasDeletedChannel()) {
-            this.events.emit(core_pb_1.GuildEvent.EventCase.DELETED_CHANNEL, msg.getDeletedChannel());
+            this.events.emit(core_pb_1.GuildEvent.EventCase.DELETED_CHANNEL, this.host, msg.getDeletedChannel());
         }
         else if (msg.hasCreatedChannel()) {
-            this.events.emit(core_pb_1.GuildEvent.EventCase.CREATED_CHANNEL, msg.getCreatedChannel());
+            this.events.emit(core_pb_1.GuildEvent.EventCase.CREATED_CHANNEL, this.host, msg.getCreatedChannel());
         }
     };
     Connection.prototype.subscribe = function (guildID) {

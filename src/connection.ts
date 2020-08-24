@@ -61,6 +61,7 @@ type ServerStreamResponses = {
   [GuildEvent.EventCase.DELETED_GUILD]: [string, GuildEvent.GuildDeleted];
   [GuildEvent.EventCase.DELETED_CHANNEL]: [string, GuildEvent.ChannelDeleted];
   [GuildEvent.EventCase.CREATED_CHANNEL]: [string, GuildEvent.ChannelCreated];
+  disconnect: [grpc.Code, string, grpc.Metadata];
 };
 
 export class Connection {
@@ -172,7 +173,8 @@ export class Connection {
       request: new StreamHomeserverEventsRequest(),
       metadata: meta,
       onMessage: this.onGuildEvent,
-      onEnd: (code: grpc.Code, message: string, trailers: grpc.Metadata) => {},
+      onEnd: (code: grpc.Code, message: string, trailers: grpc.Metadata) =>
+        this.events.emit("disconnect", code, message, trailers),
     });
   }
 

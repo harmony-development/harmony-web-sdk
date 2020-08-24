@@ -5,16 +5,16 @@ import { ProtobufMessage } from "@improbable-eng/grpc-web/dist/typings/message";
 import { UnaryMethodDefinition } from "@improbable-eng/grpc-web/dist/typings/service";
 import EventEmitter from "eventemitter3";
 declare type ServerStreamResponses = {
-    [GuildEvent.EventCase.SENT_MESSAGE]: [GuildEvent.MessageSent];
-    [GuildEvent.EventCase.LEFT_MEMBER]: [GuildEvent.MemberLeft];
-    [GuildEvent.EventCase.JOINED_MEMBER]: [GuildEvent.MemberJoined];
-    [GuildEvent.EventCase.EDITED_MESSAGE]: [GuildEvent.MessageUpdated];
-    [GuildEvent.EventCase.EDITED_GUILD]: [GuildEvent.GuildUpdated];
-    [GuildEvent.EventCase.EDITED_CHANNEL]: [GuildEvent.ChannelUpdated];
-    [GuildEvent.EventCase.DELETED_MESSAGE]: [GuildEvent.MessageDeleted];
-    [GuildEvent.EventCase.DELETED_GUILD]: [GuildEvent.GuildDeleted];
-    [GuildEvent.EventCase.DELETED_CHANNEL]: [GuildEvent.ChannelDeleted];
-    [GuildEvent.EventCase.CREATED_CHANNEL]: [GuildEvent.ChannelCreated];
+    [GuildEvent.EventCase.SENT_MESSAGE]: [string, GuildEvent.MessageSent];
+    [GuildEvent.EventCase.LEFT_MEMBER]: [string, GuildEvent.MemberLeft];
+    [GuildEvent.EventCase.JOINED_MEMBER]: [string, GuildEvent.MemberJoined];
+    [GuildEvent.EventCase.EDITED_MESSAGE]: [string, GuildEvent.MessageUpdated];
+    [GuildEvent.EventCase.EDITED_GUILD]: [string, GuildEvent.GuildUpdated];
+    [GuildEvent.EventCase.EDITED_CHANNEL]: [string, GuildEvent.ChannelUpdated];
+    [GuildEvent.EventCase.DELETED_MESSAGE]: [string, GuildEvent.MessageDeleted];
+    [GuildEvent.EventCase.DELETED_GUILD]: [string, GuildEvent.GuildDeleted];
+    [GuildEvent.EventCase.DELETED_CHANNEL]: [string, GuildEvent.ChannelDeleted];
+    [GuildEvent.EventCase.CREATED_CHANNEL]: [string, GuildEvent.ChannelCreated];
 };
 export declare class Connection {
     host: string;
