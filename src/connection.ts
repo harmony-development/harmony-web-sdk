@@ -170,7 +170,7 @@ export class Connection {
     }
     grpc.invoke(CoreService.StreamGuildEvents, {
       host: this.host,
-      request: new StreamHomeserverEventsRequest(),
+      request: req,
       metadata: meta,
       onMessage: this.onGuildEvent,
       onEnd: (code: grpc.Code, message: string, trailers: grpc.Metadata) =>

@@ -1,3 +1,4 @@
+import { grpc } from "@improbable-eng/grpc-web";
 import { Location, Embed, Action, GuildEvent } from "../protocol/core/v1/core_pb";
 import { UserStatusMap } from "../protocol/profile/v1/profile_pb";
 import { UnaryOutput } from "@improbable-eng/grpc-web/dist/typings/unary";
@@ -15,6 +16,7 @@ declare type ServerStreamResponses = {
     [GuildEvent.EventCase.DELETED_GUILD]: [string, GuildEvent.GuildDeleted];
     [GuildEvent.EventCase.DELETED_CHANNEL]: [string, GuildEvent.ChannelDeleted];
     [GuildEvent.EventCase.CREATED_CHANNEL]: [string, GuildEvent.ChannelCreated];
+    disconnect: [grpc.Code, string, grpc.Metadata];
 };
 export declare class Connection {
     host: string;

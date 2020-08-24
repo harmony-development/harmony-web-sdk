@@ -105,6 +105,7 @@ var Connection = /** @class */ (function () {
         }
     };
     Connection.prototype.subscribe = function (guildID) {
+        var _this = this;
         var req = new core_pb_1.StreamGuildEventsRequest();
         req.setLocation(this.newLocation(guildID));
         var meta = new grpc_web_1.grpc.Metadata();
@@ -113,10 +114,12 @@ var Connection = /** @class */ (function () {
         }
         grpc_web_1.grpc.invoke(core_pb_service_1.CoreService.StreamGuildEvents, {
             host: this.host,
-            request: new core_pb_1.StreamHomeserverEventsRequest(),
+            request: req,
             metadata: meta,
             onMessage: this.onGuildEvent,
-            onEnd: function (code, message, trailers) { },
+            onEnd: function (code, message, trailers) {
+                return _this.events.emit("disconnect", code, message, trailers);
+            },
         });
     };
     Connection.prototype.newLocation = function (guildID, channelID, messageID) {
