@@ -116,7 +116,7 @@ var Connection = /** @class */ (function () {
             host: this.host,
             request: req,
             metadata: meta,
-            onMessage: this.onGuildEvent,
+            onMessage: this.onGuildEvent.bind(this),
             onEnd: function (code, message, trailers) {
                 return _this.events.emit("disconnect", code, message, trailers);
             },

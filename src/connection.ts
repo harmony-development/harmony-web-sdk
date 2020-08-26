@@ -172,7 +172,7 @@ export class Connection {
       host: this.host,
       request: req,
       metadata: meta,
-      onMessage: this.onGuildEvent,
+      onMessage: this.onGuildEvent.bind(this),
       onEnd: (code: grpc.Code, message: string, trailers: grpc.Metadata) =>
         this.events.emit("disconnect", code, message, trailers),
     });
