@@ -2,6 +2,7 @@
 // file: foundation/v1/foundation.proto
 
 import * as foundation_v1_foundation_pb from "../../foundation/v1/foundation_pb";
+import * as google_protobuf_empty_pb from "google-protobuf/google/protobuf/empty_pb";
 import {grpc} from "@improbable-eng/grpc-web";
 
 type FoundationServiceFederate = {
@@ -40,12 +41,22 @@ type FoundationServiceRegister = {
   readonly responseType: typeof foundation_v1_foundation_pb.Session;
 };
 
+type FoundationServiceGetConfig = {
+  readonly methodName: string;
+  readonly service: typeof FoundationService;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof google_protobuf_empty_pb.Empty;
+  readonly responseType: typeof foundation_v1_foundation_pb.GetConfigResponse;
+};
+
 export class FoundationService {
   static readonly serviceName: string;
   static readonly Federate: FoundationServiceFederate;
   static readonly Key: FoundationServiceKey;
   static readonly Login: FoundationServiceLogin;
   static readonly Register: FoundationServiceRegister;
+  static readonly GetConfig: FoundationServiceGetConfig;
 }
 
 export type ServiceError = { message: string, code: number; metadata: grpc.Metadata }
@@ -115,6 +126,15 @@ export class FoundationServiceClient {
   register(
     requestMessage: foundation_v1_foundation_pb.RegisterRequest,
     callback: (error: ServiceError|null, responseMessage: foundation_v1_foundation_pb.Session|null) => void
+  ): UnaryResponse;
+  getConfig(
+    requestMessage: google_protobuf_empty_pb.Empty,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: foundation_v1_foundation_pb.GetConfigResponse|null) => void
+  ): UnaryResponse;
+  getConfig(
+    requestMessage: google_protobuf_empty_pb.Empty,
+    callback: (error: ServiceError|null, responseMessage: foundation_v1_foundation_pb.GetConfigResponse|null) => void
   ): UnaryResponse;
 }
 

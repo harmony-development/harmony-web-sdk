@@ -2,6 +2,7 @@
 // file: foundation/v1/foundation.proto
 
 var foundation_v1_foundation_pb = require("../../foundation/v1/foundation_pb");
+var google_protobuf_empty_pb = require("google-protobuf/google/protobuf/empty_pb");
 var grpc = require("@improbable-eng/grpc-web").grpc;
 
 var FoundationService = (function () {
@@ -44,6 +45,15 @@ FoundationService.Register = {
   responseStream: false,
   requestType: foundation_v1_foundation_pb.RegisterRequest,
   responseType: foundation_v1_foundation_pb.Session
+};
+
+FoundationService.GetConfig = {
+  methodName: "GetConfig",
+  service: FoundationService,
+  requestStream: false,
+  responseStream: false,
+  requestType: google_protobuf_empty_pb.Empty,
+  responseType: foundation_v1_foundation_pb.GetConfigResponse
 };
 
 exports.FoundationService = FoundationService;
@@ -151,6 +161,37 @@ FoundationServiceClient.prototype.register = function register(requestMessage, m
     callback = arguments[1];
   }
   var client = grpc.unary(FoundationService.Register, {
+    request: requestMessage,
+    host: this.serviceHost,
+    metadata: metadata,
+    transport: this.options.transport,
+    debug: this.options.debug,
+    onEnd: function (response) {
+      if (callback) {
+        if (response.status !== grpc.Code.OK) {
+          var err = new Error(response.statusMessage);
+          err.code = response.status;
+          err.metadata = response.trailers;
+          callback(err, null);
+        } else {
+          callback(null, response.message);
+        }
+      }
+    }
+  });
+  return {
+    cancel: function () {
+      callback = null;
+      client.close();
+    }
+  };
+};
+
+FoundationServiceClient.prototype.getConfig = function getConfig(requestMessage, metadata, callback) {
+  if (arguments.length === 2) {
+    callback = arguments[1];
+  }
+  var client = grpc.unary(FoundationService.GetConfig, {
     request: requestMessage,
     host: this.serviceHost,
     metadata: metadata,

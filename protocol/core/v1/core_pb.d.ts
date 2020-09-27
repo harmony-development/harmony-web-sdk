@@ -46,6 +46,9 @@ export class Action extends jspb.Message {
   getType(): ActionTypeMap[keyof ActionTypeMap];
   setType(value: ActionTypeMap[keyof ActionTypeMap]): void;
 
+  getPresentation(): ActionPresentationMap[keyof ActionPresentationMap];
+  setPresentation(value: ActionPresentationMap[keyof ActionPresentationMap]): void;
+
   clearChildrenList(): void;
   getChildrenList(): Array<Action>;
   setChildrenList(value: Array<Action>): void;
@@ -67,6 +70,7 @@ export namespace Action {
     url: string,
     id: string,
     type: ActionTypeMap[keyof ActionTypeMap],
+    presentation: ActionPresentationMap[keyof ActionPresentationMap],
     childrenList: Array<Action.AsObject>,
   }
 }
@@ -690,6 +694,9 @@ export namespace GetGuildChannelsResponse {
     getIsCategory(): boolean;
     setIsCategory(value: boolean): void;
 
+    getIsVoice(): boolean;
+    setIsVoice(value: boolean): void;
+
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): Channel.AsObject;
     static toObject(includeInstance: boolean, msg: Channel): Channel.AsObject;
@@ -705,6 +712,7 @@ export namespace GetGuildChannelsResponse {
       channelId: string,
       channelName: string,
       isCategory: boolean,
+      isVoice: boolean,
     }
   }
 }
@@ -1419,8 +1427,8 @@ export namespace HomeserverEvent {
   }
 
   export class GuildAddedToList extends jspb.Message {
-    getGuildId(): number;
-    setGuildId(value: number): void;
+    getGuildId(): string;
+    setGuildId(value: string): void;
 
     getHomeserver(): string;
     setHomeserver(value: string): void;
@@ -1437,14 +1445,14 @@ export namespace HomeserverEvent {
 
   export namespace GuildAddedToList {
     export type AsObject = {
-      guildId: number,
+      guildId: string,
       homeserver: string,
     }
   }
 
   export class GuildRemovedFromList extends jspb.Message {
-    getGuildId(): number;
-    setGuildId(value: number): void;
+    getGuildId(): string;
+    setGuildId(value: string): void;
 
     getHomeserver(): string;
     setHomeserver(value: string): void;
@@ -1461,7 +1469,7 @@ export namespace HomeserverEvent {
 
   export namespace GuildRemovedFromList {
     export type AsObject = {
-      guildId: number,
+      guildId: string,
       homeserver: string,
     }
   }
@@ -1753,7 +1761,7 @@ export interface ActionPresentationMap {
   DROPDOWN: 1;
   MENU: 2;
   SMALLENTRY: 3;
-  LARGEENTR: 4;
+  LARGEENTRY: 4;
 }
 
 export const ActionPresentation: ActionPresentationMap;

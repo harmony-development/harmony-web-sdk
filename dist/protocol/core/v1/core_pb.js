@@ -1560,7 +1560,7 @@ proto.protocol.core.v1.Location.prototype.setMessageId = function(value) {
  * @private {!Array<number>}
  * @const
  */
-proto.protocol.core.v1.Action.repeatedFields_ = [5];
+proto.protocol.core.v1.Action.repeatedFields_ = [6];
 
 
 
@@ -1597,6 +1597,7 @@ proto.protocol.core.v1.Action.toObject = function(includeInstance, msg) {
     url: jspb.Message.getFieldWithDefault(msg, 2, ""),
     id: jspb.Message.getFieldWithDefault(msg, 3, ""),
     type: jspb.Message.getFieldWithDefault(msg, 4, 0),
+    presentation: jspb.Message.getFieldWithDefault(msg, 5, 0),
     childrenList: jspb.Message.toObjectList(msg.getChildrenList(),
     proto.protocol.core.v1.Action.toObject, includeInstance)
   };
@@ -1652,6 +1653,10 @@ proto.protocol.core.v1.Action.deserializeBinaryFromReader = function(msg, reader
       msg.setType(value);
       break;
     case 5:
+      var value = /** @type {!proto.protocol.core.v1.ActionPresentation} */ (reader.readEnum());
+      msg.setPresentation(value);
+      break;
+    case 6:
       var value = new proto.protocol.core.v1.Action;
       reader.readMessage(value,proto.protocol.core.v1.Action.deserializeBinaryFromReader);
       msg.addChildren(value);
@@ -1713,10 +1718,17 @@ proto.protocol.core.v1.Action.serializeBinaryToWriter = function(message, writer
       f
     );
   }
+  f = message.getPresentation();
+  if (f !== 0.0) {
+    writer.writeEnum(
+      5,
+      f
+    );
+  }
   f = message.getChildrenList();
   if (f.length > 0) {
     writer.writeRepeatedMessage(
-      5,
+      6,
       f,
       proto.protocol.core.v1.Action.serializeBinaryToWriter
     );
@@ -1797,12 +1809,30 @@ proto.protocol.core.v1.Action.prototype.setType = function(value) {
 
 
 /**
- * repeated Action children = 5;
+ * optional ActionPresentation presentation = 5;
+ * @return {!proto.protocol.core.v1.ActionPresentation}
+ */
+proto.protocol.core.v1.Action.prototype.getPresentation = function() {
+  return /** @type {!proto.protocol.core.v1.ActionPresentation} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
+};
+
+
+/**
+ * @param {!proto.protocol.core.v1.ActionPresentation} value
+ * @return {!proto.protocol.core.v1.Action} returns this
+ */
+proto.protocol.core.v1.Action.prototype.setPresentation = function(value) {
+  return jspb.Message.setProto3EnumField(this, 5, value);
+};
+
+
+/**
+ * repeated Action children = 6;
  * @return {!Array<!proto.protocol.core.v1.Action>}
  */
 proto.protocol.core.v1.Action.prototype.getChildrenList = function() {
   return /** @type{!Array<!proto.protocol.core.v1.Action>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.protocol.core.v1.Action, 5));
+    jspb.Message.getRepeatedWrapperField(this, proto.protocol.core.v1.Action, 6));
 };
 
 
@@ -1811,7 +1841,7 @@ proto.protocol.core.v1.Action.prototype.getChildrenList = function() {
  * @return {!proto.protocol.core.v1.Action} returns this
 */
 proto.protocol.core.v1.Action.prototype.setChildrenList = function(value) {
-  return jspb.Message.setRepeatedWrapperField(this, 5, value);
+  return jspb.Message.setRepeatedWrapperField(this, 6, value);
 };
 
 
@@ -1821,7 +1851,7 @@ proto.protocol.core.v1.Action.prototype.setChildrenList = function(value) {
  * @return {!proto.protocol.core.v1.Action}
  */
 proto.protocol.core.v1.Action.prototype.addChildren = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 5, opt_value, proto.protocol.core.v1.Action, opt_index);
+  return jspb.Message.addToRepeatedWrapperField(this, 6, opt_value, proto.protocol.core.v1.Action, opt_index);
 };
 
 
@@ -6153,7 +6183,8 @@ proto.protocol.core.v1.GetGuildChannelsResponse.Channel.toObject = function(incl
   var f, obj = {
     channelId: jspb.Message.getFieldWithDefault(msg, 1, "0"),
     channelName: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    isCategory: jspb.Message.getBooleanFieldWithDefault(msg, 3, false)
+    isCategory: jspb.Message.getBooleanFieldWithDefault(msg, 3, false),
+    isVoice: jspb.Message.getBooleanFieldWithDefault(msg, 4, false)
   };
 
   if (includeInstance) {
@@ -6202,6 +6233,10 @@ proto.protocol.core.v1.GetGuildChannelsResponse.Channel.deserializeBinaryFromRea
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setIsCategory(value);
       break;
+    case 4:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setIsVoice(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -6249,6 +6284,13 @@ proto.protocol.core.v1.GetGuildChannelsResponse.Channel.serializeBinaryToWriter 
   if (f) {
     writer.writeBool(
       3,
+      f
+    );
+  }
+  f = message.getIsVoice();
+  if (f) {
+    writer.writeBool(
+      4,
       f
     );
   }
@@ -6306,6 +6348,24 @@ proto.protocol.core.v1.GetGuildChannelsResponse.Channel.prototype.getIsCategory 
  */
 proto.protocol.core.v1.GetGuildChannelsResponse.Channel.prototype.setIsCategory = function(value) {
   return jspb.Message.setProto3BooleanField(this, 3, value);
+};
+
+
+/**
+ * optional bool is_voice = 4;
+ * @return {boolean}
+ */
+proto.protocol.core.v1.GetGuildChannelsResponse.Channel.prototype.getIsVoice = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 4, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.protocol.core.v1.GetGuildChannelsResponse.Channel} returns this
+ */
+proto.protocol.core.v1.GetGuildChannelsResponse.Channel.prototype.setIsVoice = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 4, value);
 };
 
 
@@ -11384,7 +11444,7 @@ proto.protocol.core.v1.HomeserverEvent.GuildAddedToList.prototype.toObject = fun
  */
 proto.protocol.core.v1.HomeserverEvent.GuildAddedToList.toObject = function(includeInstance, msg) {
   var f, obj = {
-    guildId: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    guildId: jspb.Message.getFieldWithDefault(msg, 1, "0"),
     homeserver: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
@@ -11423,7 +11483,7 @@ proto.protocol.core.v1.HomeserverEvent.GuildAddedToList.deserializeBinaryFromRea
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {number} */ (reader.readUint64());
+      var value = /** @type {string} */ (reader.readUint64String());
       msg.setGuildId(value);
       break;
     case 2:
@@ -11460,8 +11520,8 @@ proto.protocol.core.v1.HomeserverEvent.GuildAddedToList.prototype.serializeBinar
 proto.protocol.core.v1.HomeserverEvent.GuildAddedToList.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getGuildId();
-  if (f !== 0) {
-    writer.writeUint64(
+  if (parseInt(f, 10) !== 0) {
+    writer.writeUint64String(
       1,
       f
     );
@@ -11478,19 +11538,19 @@ proto.protocol.core.v1.HomeserverEvent.GuildAddedToList.serializeBinaryToWriter 
 
 /**
  * optional uint64 guild_id = 1;
- * @return {number}
+ * @return {string}
  */
 proto.protocol.core.v1.HomeserverEvent.GuildAddedToList.prototype.getGuildId = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, "0"));
 };
 
 
 /**
- * @param {number} value
+ * @param {string} value
  * @return {!proto.protocol.core.v1.HomeserverEvent.GuildAddedToList} returns this
  */
 proto.protocol.core.v1.HomeserverEvent.GuildAddedToList.prototype.setGuildId = function(value) {
-  return jspb.Message.setProto3IntField(this, 1, value);
+  return jspb.Message.setProto3StringIntField(this, 1, value);
 };
 
 
@@ -11544,7 +11604,7 @@ proto.protocol.core.v1.HomeserverEvent.GuildRemovedFromList.prototype.toObject =
  */
 proto.protocol.core.v1.HomeserverEvent.GuildRemovedFromList.toObject = function(includeInstance, msg) {
   var f, obj = {
-    guildId: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    guildId: jspb.Message.getFieldWithDefault(msg, 1, "0"),
     homeserver: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
@@ -11583,7 +11643,7 @@ proto.protocol.core.v1.HomeserverEvent.GuildRemovedFromList.deserializeBinaryFro
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {number} */ (reader.readUint64());
+      var value = /** @type {string} */ (reader.readUint64String());
       msg.setGuildId(value);
       break;
     case 2:
@@ -11620,8 +11680,8 @@ proto.protocol.core.v1.HomeserverEvent.GuildRemovedFromList.prototype.serializeB
 proto.protocol.core.v1.HomeserverEvent.GuildRemovedFromList.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getGuildId();
-  if (f !== 0) {
-    writer.writeUint64(
+  if (parseInt(f, 10) !== 0) {
+    writer.writeUint64String(
       1,
       f
     );
@@ -11638,19 +11698,19 @@ proto.protocol.core.v1.HomeserverEvent.GuildRemovedFromList.serializeBinaryToWri
 
 /**
  * optional uint64 guild_id = 1;
- * @return {number}
+ * @return {string}
  */
 proto.protocol.core.v1.HomeserverEvent.GuildRemovedFromList.prototype.getGuildId = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, "0"));
 };
 
 
 /**
- * @param {number} value
+ * @param {string} value
  * @return {!proto.protocol.core.v1.HomeserverEvent.GuildRemovedFromList} returns this
  */
 proto.protocol.core.v1.HomeserverEvent.GuildRemovedFromList.prototype.setGuildId = function(value) {
-  return jspb.Message.setProto3IntField(this, 1, value);
+  return jspb.Message.setProto3StringIntField(this, 1, value);
 };
 
 
@@ -13562,7 +13622,7 @@ proto.protocol.core.v1.ActionPresentation = {
   DROPDOWN: 1,
   MENU: 2,
   SMALLENTRY: 3,
-  LARGEENTR: 4
+  LARGEENTRY: 4
 };
 
 /**

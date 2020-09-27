@@ -224,3 +224,23 @@ export namespace Session {
   }
 }
 
+export class GetConfigResponse extends jspb.Message {
+  getRequire2fa(): boolean;
+  setRequire2fa(value: boolean): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetConfigResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: GetConfigResponse): GetConfigResponse.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: GetConfigResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetConfigResponse;
+  static deserializeBinaryFromReader(message: GetConfigResponse, reader: jspb.BinaryReader): GetConfigResponse;
+}
+
+export namespace GetConfigResponse {
+  export type AsObject = {
+    require2fa: boolean,
+  }
+}
+
