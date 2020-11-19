@@ -191,7 +191,6 @@ export class Connection {
       const req = new StreamEventsRequest();
       req.setSubscribeToGuild(streamEventsReq);
       this.client.send(req);
-      this.client.finishSend();
     }
   }
 

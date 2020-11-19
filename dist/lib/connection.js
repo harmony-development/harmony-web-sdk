@@ -126,7 +126,6 @@ var Connection = /** @class */ (function () {
             var req = new core_pb_1.StreamEventsRequest();
             req.setSubscribeToGuild(streamEventsReq);
             this.client.send(req);
-            this.client.finishSend();
         }
     };
     Connection.prototype.getKey = function () {
