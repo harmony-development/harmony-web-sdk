@@ -38,6 +38,15 @@ CoreService.CreateChannel = {
   responseType: core_v1_core_pb.CreateChannelResponse
 };
 
+CoreService.CreateEmotePack = {
+  methodName: "CreateEmotePack",
+  service: CoreService,
+  requestStream: false,
+  responseStream: false,
+  requestType: core_v1_core_pb.CreateEmotePackRequest,
+  responseType: core_v1_core_pb.CreateEmotePackResponse
+};
+
 CoreService.GetGuildList = {
   methodName: "GetGuildList",
   service: CoreService,
@@ -54,6 +63,15 @@ CoreService.AddGuildToGuildList = {
   responseStream: false,
   requestType: core_v1_core_pb.AddGuildToGuildListRequest,
   responseType: core_v1_core_pb.AddGuildToGuildListResponse
+};
+
+CoreService.RemoveGuildFromGuildList = {
+  methodName: "RemoveGuildFromGuildList",
+  service: CoreService,
+  requestStream: false,
+  responseStream: false,
+  requestType: core_v1_core_pb.RemoveGuildFromGuildListRequest,
+  responseType: core_v1_core_pb.RemoveGuildFromGuildListResponse
 };
 
 CoreService.GetGuild = {
@@ -101,6 +119,33 @@ CoreService.GetChannelMessages = {
   responseType: core_v1_core_pb.GetChannelMessagesResponse
 };
 
+CoreService.GetMessage = {
+  methodName: "GetMessage",
+  service: CoreService,
+  requestStream: false,
+  responseStream: false,
+  requestType: core_v1_core_pb.GetMessageRequest,
+  responseType: core_v1_core_pb.GetMessageResponse
+};
+
+CoreService.GetEmotePacks = {
+  methodName: "GetEmotePacks",
+  service: CoreService,
+  requestStream: false,
+  responseStream: false,
+  requestType: core_v1_core_pb.GetEmotePacksRequest,
+  responseType: core_v1_core_pb.GetEmotePacksResponse
+};
+
+CoreService.GetEmotePackEmotes = {
+  methodName: "GetEmotePackEmotes",
+  service: CoreService,
+  requestStream: false,
+  responseStream: false,
+  requestType: core_v1_core_pb.GetEmotePackEmotesRequest,
+  responseType: core_v1_core_pb.GetEmotePackEmotesResponse
+};
+
 CoreService.UpdateGuildName = {
   methodName: "UpdateGuildName",
   service: CoreService,
@@ -134,6 +179,15 @@ CoreService.UpdateMessage = {
   requestStream: false,
   responseStream: false,
   requestType: core_v1_core_pb.UpdateMessageRequest,
+  responseType: google_protobuf_empty_pb.Empty
+};
+
+CoreService.AddEmoteToPack = {
+  methodName: "AddEmoteToPack",
+  service: CoreService,
+  requestStream: false,
+  responseStream: false,
+  requestType: core_v1_core_pb.AddEmoteToPackRequest,
   responseType: google_protobuf_empty_pb.Empty
 };
 
@@ -173,6 +227,33 @@ CoreService.DeleteMessage = {
   responseType: google_protobuf_empty_pb.Empty
 };
 
+CoreService.DeleteEmoteFromPack = {
+  methodName: "DeleteEmoteFromPack",
+  service: CoreService,
+  requestStream: false,
+  responseStream: false,
+  requestType: core_v1_core_pb.DeleteEmoteFromPackRequest,
+  responseType: google_protobuf_empty_pb.Empty
+};
+
+CoreService.DeleteEmotePack = {
+  methodName: "DeleteEmotePack",
+  service: CoreService,
+  requestStream: false,
+  responseStream: false,
+  requestType: core_v1_core_pb.DeleteEmotePackRequest,
+  responseType: google_protobuf_empty_pb.Empty
+};
+
+CoreService.DequipEmotePack = {
+  methodName: "DequipEmotePack",
+  service: CoreService,
+  requestStream: false,
+  responseStream: false,
+  requestType: core_v1_core_pb.DequipEmotePackRequest,
+  responseType: google_protobuf_empty_pb.Empty
+};
+
 CoreService.JoinGuild = {
   methodName: "JoinGuild",
   service: CoreService,
@@ -206,34 +287,16 @@ CoreService.SendMessage = {
   requestStream: false,
   responseStream: false,
   requestType: core_v1_core_pb.SendMessageRequest,
-  responseType: google_protobuf_empty_pb.Empty
+  responseType: core_v1_core_pb.SendMessageResponse
 };
 
-CoreService.StreamGuildEvents = {
-  methodName: "StreamGuildEvents",
+CoreService.StreamEvents = {
+  methodName: "StreamEvents",
   service: CoreService,
-  requestStream: false,
+  requestStream: true,
   responseStream: true,
-  requestType: core_v1_core_pb.StreamGuildEventsRequest,
-  responseType: core_v1_core_pb.GuildEvent
-};
-
-CoreService.StreamActionEvents = {
-  methodName: "StreamActionEvents",
-  service: CoreService,
-  requestStream: false,
-  responseStream: true,
-  requestType: core_v1_core_pb.StreamActionEventsRequest,
-  responseType: core_v1_core_pb.ActionEvent
-};
-
-CoreService.StreamHomeserverEvents = {
-  methodName: "StreamHomeserverEvents",
-  service: CoreService,
-  requestStream: false,
-  responseStream: true,
-  requestType: core_v1_core_pb.StreamHomeserverEventsRequest,
-  responseType: core_v1_core_pb.HomeserverEvent
+  requestType: core_v1_core_pb.StreamEventsRequest,
+  responseType: core_v1_core_pb.Event
 };
 
 exports.CoreService = CoreService;
@@ -336,6 +399,37 @@ CoreServiceClient.prototype.createChannel = function createChannel(requestMessag
   };
 };
 
+CoreServiceClient.prototype.createEmotePack = function createEmotePack(requestMessage, metadata, callback) {
+  if (arguments.length === 2) {
+    callback = arguments[1];
+  }
+  var client = grpc.unary(CoreService.CreateEmotePack, {
+    request: requestMessage,
+    host: this.serviceHost,
+    metadata: metadata,
+    transport: this.options.transport,
+    debug: this.options.debug,
+    onEnd: function (response) {
+      if (callback) {
+        if (response.status !== grpc.Code.OK) {
+          var err = new Error(response.statusMessage);
+          err.code = response.status;
+          err.metadata = response.trailers;
+          callback(err, null);
+        } else {
+          callback(null, response.message);
+        }
+      }
+    }
+  });
+  return {
+    cancel: function () {
+      callback = null;
+      client.close();
+    }
+  };
+};
+
 CoreServiceClient.prototype.getGuildList = function getGuildList(requestMessage, metadata, callback) {
   if (arguments.length === 2) {
     callback = arguments[1];
@@ -372,6 +466,37 @@ CoreServiceClient.prototype.addGuildToGuildList = function addGuildToGuildList(r
     callback = arguments[1];
   }
   var client = grpc.unary(CoreService.AddGuildToGuildList, {
+    request: requestMessage,
+    host: this.serviceHost,
+    metadata: metadata,
+    transport: this.options.transport,
+    debug: this.options.debug,
+    onEnd: function (response) {
+      if (callback) {
+        if (response.status !== grpc.Code.OK) {
+          var err = new Error(response.statusMessage);
+          err.code = response.status;
+          err.metadata = response.trailers;
+          callback(err, null);
+        } else {
+          callback(null, response.message);
+        }
+      }
+    }
+  });
+  return {
+    cancel: function () {
+      callback = null;
+      client.close();
+    }
+  };
+};
+
+CoreServiceClient.prototype.removeGuildFromGuildList = function removeGuildFromGuildList(requestMessage, metadata, callback) {
+  if (arguments.length === 2) {
+    callback = arguments[1];
+  }
+  var client = grpc.unary(CoreService.RemoveGuildFromGuildList, {
     request: requestMessage,
     host: this.serviceHost,
     metadata: metadata,
@@ -553,6 +678,99 @@ CoreServiceClient.prototype.getChannelMessages = function getChannelMessages(req
   };
 };
 
+CoreServiceClient.prototype.getMessage = function getMessage(requestMessage, metadata, callback) {
+  if (arguments.length === 2) {
+    callback = arguments[1];
+  }
+  var client = grpc.unary(CoreService.GetMessage, {
+    request: requestMessage,
+    host: this.serviceHost,
+    metadata: metadata,
+    transport: this.options.transport,
+    debug: this.options.debug,
+    onEnd: function (response) {
+      if (callback) {
+        if (response.status !== grpc.Code.OK) {
+          var err = new Error(response.statusMessage);
+          err.code = response.status;
+          err.metadata = response.trailers;
+          callback(err, null);
+        } else {
+          callback(null, response.message);
+        }
+      }
+    }
+  });
+  return {
+    cancel: function () {
+      callback = null;
+      client.close();
+    }
+  };
+};
+
+CoreServiceClient.prototype.getEmotePacks = function getEmotePacks(requestMessage, metadata, callback) {
+  if (arguments.length === 2) {
+    callback = arguments[1];
+  }
+  var client = grpc.unary(CoreService.GetEmotePacks, {
+    request: requestMessage,
+    host: this.serviceHost,
+    metadata: metadata,
+    transport: this.options.transport,
+    debug: this.options.debug,
+    onEnd: function (response) {
+      if (callback) {
+        if (response.status !== grpc.Code.OK) {
+          var err = new Error(response.statusMessage);
+          err.code = response.status;
+          err.metadata = response.trailers;
+          callback(err, null);
+        } else {
+          callback(null, response.message);
+        }
+      }
+    }
+  });
+  return {
+    cancel: function () {
+      callback = null;
+      client.close();
+    }
+  };
+};
+
+CoreServiceClient.prototype.getEmotePackEmotes = function getEmotePackEmotes(requestMessage, metadata, callback) {
+  if (arguments.length === 2) {
+    callback = arguments[1];
+  }
+  var client = grpc.unary(CoreService.GetEmotePackEmotes, {
+    request: requestMessage,
+    host: this.serviceHost,
+    metadata: metadata,
+    transport: this.options.transport,
+    debug: this.options.debug,
+    onEnd: function (response) {
+      if (callback) {
+        if (response.status !== grpc.Code.OK) {
+          var err = new Error(response.statusMessage);
+          err.code = response.status;
+          err.metadata = response.trailers;
+          callback(err, null);
+        } else {
+          callback(null, response.message);
+        }
+      }
+    }
+  });
+  return {
+    cancel: function () {
+      callback = null;
+      client.close();
+    }
+  };
+};
+
 CoreServiceClient.prototype.updateGuildName = function updateGuildName(requestMessage, metadata, callback) {
   if (arguments.length === 2) {
     callback = arguments[1];
@@ -651,6 +869,37 @@ CoreServiceClient.prototype.updateMessage = function updateMessage(requestMessag
     callback = arguments[1];
   }
   var client = grpc.unary(CoreService.UpdateMessage, {
+    request: requestMessage,
+    host: this.serviceHost,
+    metadata: metadata,
+    transport: this.options.transport,
+    debug: this.options.debug,
+    onEnd: function (response) {
+      if (callback) {
+        if (response.status !== grpc.Code.OK) {
+          var err = new Error(response.statusMessage);
+          err.code = response.status;
+          err.metadata = response.trailers;
+          callback(err, null);
+        } else {
+          callback(null, response.message);
+        }
+      }
+    }
+  });
+  return {
+    cancel: function () {
+      callback = null;
+      client.close();
+    }
+  };
+};
+
+CoreServiceClient.prototype.addEmoteToPack = function addEmoteToPack(requestMessage, metadata, callback) {
+  if (arguments.length === 2) {
+    callback = arguments[1];
+  }
+  var client = grpc.unary(CoreService.AddEmoteToPack, {
     request: requestMessage,
     host: this.serviceHost,
     metadata: metadata,
@@ -801,6 +1050,99 @@ CoreServiceClient.prototype.deleteMessage = function deleteMessage(requestMessag
   };
 };
 
+CoreServiceClient.prototype.deleteEmoteFromPack = function deleteEmoteFromPack(requestMessage, metadata, callback) {
+  if (arguments.length === 2) {
+    callback = arguments[1];
+  }
+  var client = grpc.unary(CoreService.DeleteEmoteFromPack, {
+    request: requestMessage,
+    host: this.serviceHost,
+    metadata: metadata,
+    transport: this.options.transport,
+    debug: this.options.debug,
+    onEnd: function (response) {
+      if (callback) {
+        if (response.status !== grpc.Code.OK) {
+          var err = new Error(response.statusMessage);
+          err.code = response.status;
+          err.metadata = response.trailers;
+          callback(err, null);
+        } else {
+          callback(null, response.message);
+        }
+      }
+    }
+  });
+  return {
+    cancel: function () {
+      callback = null;
+      client.close();
+    }
+  };
+};
+
+CoreServiceClient.prototype.deleteEmotePack = function deleteEmotePack(requestMessage, metadata, callback) {
+  if (arguments.length === 2) {
+    callback = arguments[1];
+  }
+  var client = grpc.unary(CoreService.DeleteEmotePack, {
+    request: requestMessage,
+    host: this.serviceHost,
+    metadata: metadata,
+    transport: this.options.transport,
+    debug: this.options.debug,
+    onEnd: function (response) {
+      if (callback) {
+        if (response.status !== grpc.Code.OK) {
+          var err = new Error(response.statusMessage);
+          err.code = response.status;
+          err.metadata = response.trailers;
+          callback(err, null);
+        } else {
+          callback(null, response.message);
+        }
+      }
+    }
+  });
+  return {
+    cancel: function () {
+      callback = null;
+      client.close();
+    }
+  };
+};
+
+CoreServiceClient.prototype.dequipEmotePack = function dequipEmotePack(requestMessage, metadata, callback) {
+  if (arguments.length === 2) {
+    callback = arguments[1];
+  }
+  var client = grpc.unary(CoreService.DequipEmotePack, {
+    request: requestMessage,
+    host: this.serviceHost,
+    metadata: metadata,
+    transport: this.options.transport,
+    debug: this.options.debug,
+    onEnd: function (response) {
+      if (callback) {
+        if (response.status !== grpc.Code.OK) {
+          var err = new Error(response.statusMessage);
+          err.code = response.status;
+          err.metadata = response.trailers;
+          callback(err, null);
+        } else {
+          callback(null, response.message);
+        }
+      }
+    }
+  });
+  return {
+    cancel: function () {
+      callback = null;
+      client.close();
+    }
+  };
+};
+
 CoreServiceClient.prototype.joinGuild = function joinGuild(requestMessage, metadata, callback) {
   if (arguments.length === 2) {
     callback = arguments[1];
@@ -925,115 +1267,43 @@ CoreServiceClient.prototype.sendMessage = function sendMessage(requestMessage, m
   };
 };
 
-CoreServiceClient.prototype.streamGuildEvents = function streamGuildEvents(requestMessage, metadata) {
+CoreServiceClient.prototype.streamEvents = function streamEvents(metadata) {
   var listeners = {
     data: [],
     end: [],
     status: []
   };
-  var client = grpc.invoke(CoreService.StreamGuildEvents, {
-    request: requestMessage,
+  var client = grpc.client(CoreService.StreamEvents, {
     host: this.serviceHost,
     metadata: metadata,
-    transport: this.options.transport,
-    debug: this.options.debug,
-    onMessage: function (responseMessage) {
-      listeners.data.forEach(function (handler) {
-        handler(responseMessage);
-      });
-    },
-    onEnd: function (status, statusMessage, trailers) {
-      listeners.status.forEach(function (handler) {
-        handler({ code: status, details: statusMessage, metadata: trailers });
-      });
-      listeners.end.forEach(function (handler) {
-        handler({ code: status, details: statusMessage, metadata: trailers });
-      });
-      listeners = null;
-    }
+    transport: this.options.transport
   });
+  client.onEnd(function (status, statusMessage, trailers) {
+    listeners.status.forEach(function (handler) {
+      handler({ code: status, details: statusMessage, metadata: trailers });
+    });
+    listeners.end.forEach(function (handler) {
+      handler({ code: status, details: statusMessage, metadata: trailers });
+    });
+    listeners = null;
+  });
+  client.onMessage(function (message) {
+    listeners.data.forEach(function (handler) {
+      handler(message);
+    })
+  });
+  client.start(metadata);
   return {
     on: function (type, handler) {
       listeners[type].push(handler);
       return this;
     },
-    cancel: function () {
-      listeners = null;
-      client.close();
-    }
-  };
-};
-
-CoreServiceClient.prototype.streamActionEvents = function streamActionEvents(requestMessage, metadata) {
-  var listeners = {
-    data: [],
-    end: [],
-    status: []
-  };
-  var client = grpc.invoke(CoreService.StreamActionEvents, {
-    request: requestMessage,
-    host: this.serviceHost,
-    metadata: metadata,
-    transport: this.options.transport,
-    debug: this.options.debug,
-    onMessage: function (responseMessage) {
-      listeners.data.forEach(function (handler) {
-        handler(responseMessage);
-      });
-    },
-    onEnd: function (status, statusMessage, trailers) {
-      listeners.status.forEach(function (handler) {
-        handler({ code: status, details: statusMessage, metadata: trailers });
-      });
-      listeners.end.forEach(function (handler) {
-        handler({ code: status, details: statusMessage, metadata: trailers });
-      });
-      listeners = null;
-    }
-  });
-  return {
-    on: function (type, handler) {
-      listeners[type].push(handler);
+    write: function (requestMessage) {
+      client.send(requestMessage);
       return this;
     },
-    cancel: function () {
-      listeners = null;
-      client.close();
-    }
-  };
-};
-
-CoreServiceClient.prototype.streamHomeserverEvents = function streamHomeserverEvents(requestMessage, metadata) {
-  var listeners = {
-    data: [],
-    end: [],
-    status: []
-  };
-  var client = grpc.invoke(CoreService.StreamHomeserverEvents, {
-    request: requestMessage,
-    host: this.serviceHost,
-    metadata: metadata,
-    transport: this.options.transport,
-    debug: this.options.debug,
-    onMessage: function (responseMessage) {
-      listeners.data.forEach(function (handler) {
-        handler(responseMessage);
-      });
-    },
-    onEnd: function (status, statusMessage, trailers) {
-      listeners.status.forEach(function (handler) {
-        handler({ code: status, details: statusMessage, metadata: trailers });
-      });
-      listeners.end.forEach(function (handler) {
-        handler({ code: status, details: statusMessage, metadata: trailers });
-      });
-      listeners = null;
-    }
-  });
-  return {
-    on: function (type, handler) {
-      listeners[type].push(handler);
-      return this;
+    end: function () {
+      client.finishSend();
     },
     cancel: function () {
       listeners = null;

@@ -6,11 +6,13 @@ import {
   RegisterRequest,
   FederateRequest,
 } from "../protocol/foundation/v1/foundation_pb";
-import { CoreService } from "../protocol/core/v1/core_pb_service";
+import {
+  CoreService,
+  CoreServiceStreamEvents,
+} from "../protocol/core/v1/core_pb_service";
 import {
   CreateGuildRequest,
   CreateInviteRequest,
-  Location,
   CreateChannelRequest,
   GetGuildRequest,
   GetGuildInvitesRequest,
@@ -32,9 +34,8 @@ import {
   Action,
   GetGuildListRequest,
   AddGuildToGuildListRequest,
-  StreamHomeserverEventsRequest,
-  GuildEvent,
-  StreamGuildEventsRequest,
+  StreamEventsRequest,
+  Event,
 } from "../protocol/core/v1/core_pb";
 import {
   GetUserRequest,
@@ -51,16 +52,16 @@ import { UnaryMethodDefinition } from "@improbable-eng/grpc-web/dist/typings/ser
 import EventEmitter from "eventemitter3";
 
 type ServerStreamResponses = {
-  [GuildEvent.EventCase.SENT_MESSAGE]: [string, GuildEvent.MessageSent];
-  [GuildEvent.EventCase.LEFT_MEMBER]: [string, GuildEvent.MemberLeft];
-  [GuildEvent.EventCase.JOINED_MEMBER]: [string, GuildEvent.MemberJoined];
-  [GuildEvent.EventCase.EDITED_MESSAGE]: [string, GuildEvent.MessageUpdated];
-  [GuildEvent.EventCase.EDITED_GUILD]: [string, GuildEvent.GuildUpdated];
-  [GuildEvent.EventCase.EDITED_CHANNEL]: [string, GuildEvent.ChannelUpdated];
-  [GuildEvent.EventCase.DELETED_MESSAGE]: [string, GuildEvent.MessageDeleted];
-  [GuildEvent.EventCase.DELETED_GUILD]: [string, GuildEvent.GuildDeleted];
-  [GuildEvent.EventCase.DELETED_CHANNEL]: [string, GuildEvent.ChannelDeleted];
-  [GuildEvent.EventCase.CREATED_CHANNEL]: [string, GuildEvent.ChannelCreated];
+  [Event.EventCase.SENT_MESSAGE]: [string, Event.MessageSent];
+  [Event.EventCase.LEFT_MEMBER]: [string, Event.MemberLeft];
+  [Event.EventCase.JOINED_MEMBER]: [string, Event.MemberJoined];
+  [Event.EventCase.EDITED_MESSAGE]: [string, Event.MessageUpdated];
+  [Event.EventCase.EDITED_GUILD]: [string, Event.GuildUpdated];
+  [Event.EventCase.EDITED_CHANNEL]: [string, Event.ChannelUpdated];
+  [Event.EventCase.DELETED_MESSAGE]: [string, Event.MessageDeleted];
+  [Event.EventCase.DELETED_GUILD]: [string, Event.GuildDeleted];
+  [Event.EventCase.DELETED_CHANNEL]: [string, Event.ChannelDeleted];
+  [Event.EventCase.CREATED_CHANNEL]: [string, Event.ChannelCreated];
   disconnect: [grpc.Code, string, grpc.Metadata];
 };
 
@@ -68,6 +69,7 @@ export class Connection {
   host: string;
   session?: string;
   events: EventEmitter<ServerStreamResponses>;
+  client?: grpc.Client<StreamEventsRequest, Event>;
 
   constructor(host: string) {
     this.host = host;
@@ -97,97 +99,100 @@ export class Connection {
    * This function is an ugly bastard
    * @param msg an event message
    */
-  onGuildEvent(msg: GuildEvent) {
+  onGuildEvent(msg: Event) {
     if (msg.hasSentMessage()) {
       this.events.emit(
-        GuildEvent.EventCase.SENT_MESSAGE,
+        Event.EventCase.SENT_MESSAGE,
         this.host,
         msg.getSentMessage()!
       );
     } else if (msg.hasLeftMember()) {
       this.events.emit(
-        GuildEvent.EventCase.LEFT_MEMBER,
+        Event.EventCase.LEFT_MEMBER,
         this.host,
         msg.getLeftMember()!
       );
     } else if (msg.hasJoinedMember()) {
       this.events.emit(
-        GuildEvent.EventCase.JOINED_MEMBER,
+        Event.EventCase.JOINED_MEMBER,
         this.host,
         msg.getJoinedMember()!
       );
     } else if (msg.hasEditedMessage()) {
       this.events.emit(
-        GuildEvent.EventCase.EDITED_MESSAGE,
+        Event.EventCase.EDITED_MESSAGE,
         this.host,
         msg.getEditedMessage()!
       );
     } else if (msg.hasEditedGuild()) {
       this.events.emit(
-        GuildEvent.EventCase.EDITED_GUILD,
+        Event.EventCase.EDITED_GUILD,
         this.host,
         msg.getEditedGuild()!
       );
     } else if (msg.hasEditedChannel()) {
       this.events.emit(
-        GuildEvent.EventCase.EDITED_CHANNEL,
+        Event.EventCase.EDITED_CHANNEL,
         this.host,
         msg.getEditedChannel()!
       );
     } else if (msg.hasDeletedMessage()) {
       this.events.emit(
-        GuildEvent.EventCase.DELETED_MESSAGE,
+        Event.EventCase.DELETED_MESSAGE,
         this.host,
         msg.getDeletedMessage()!
       );
     } else if (msg.hasDeletedGuild()) {
       this.events.emit(
-        GuildEvent.EventCase.DELETED_GUILD,
+        Event.EventCase.DELETED_GUILD,
         this.host,
         msg.getDeletedGuild()!
       );
     } else if (msg.hasDeletedChannel()) {
       this.events.emit(
-        GuildEvent.EventCase.DELETED_CHANNEL,
+        Event.EventCase.DELETED_CHANNEL,
         this.host,
         msg.getDeletedChannel()!
       );
     } else if (msg.hasCreatedChannel()) {
       this.events.emit(
-        GuildEvent.EventCase.CREATED_CHANNEL,
+        Event.EventCase.CREATED_CHANNEL,
         this.host,
         msg.getCreatedChannel()!
       );
     }
   }
 
-  subscribe(guildID: string) {
-    const req = new StreamGuildEventsRequest();
-    req.setLocation(this.newLocation(guildID));
-    const meta = new grpc.Metadata();
-    if (this.session) {
-      meta.set("auth", this.session);
-    }
-    grpc.invoke(CoreService.StreamGuildEvents, {
+  beginStream() {
+    this.client = grpc.client<
+      StreamEventsRequest,
+      Event,
+      CoreServiceStreamEvents
+    >(CoreService.StreamEvents, {
       host: this.host,
-      request: req,
-      metadata: meta,
-      onMessage: this.onGuildEvent.bind(this),
-      onEnd: (code: grpc.Code, message: string, trailers: grpc.Metadata) =>
-        this.events.emit("disconnect", code, message, trailers),
+      transport: grpc.WebsocketTransport(),
     });
+
+    this.client.onEnd(
+      (code: grpc.Code, message: string, trailers: grpc.Metadata) =>
+        this.events.emit("disconnect", code, message, trailers)
+    );
+    this.client.onMessage(this.onGuildEvent.bind(this));
+
+    const metadata = new grpc.Metadata();
+    if (this.session) metadata.set("auth", this.session);
+    this.client.start(metadata);
   }
 
-  newLocation(guildID: string, channelID?: string, messageID?: string) {
-    const loc = new Location();
-    loc.setGuildId(guildID);
-    if (channelID) {
-      loc.setChannelId(channelID);
+  subscribe(guildID: string) {
+    if (this.client) {
+      const streamEventsReq = new StreamEventsRequest.SubscribeToGuild();
+      streamEventsReq.setGuildId(guildID);
+      const req = new StreamEventsRequest();
+      req.setSubscribeToGuild(streamEventsReq);
+      this.client.send(req);
+      this.client.finishSend();
     }
-    if (messageID) {
-      loc.setMessageId(messageID);
-    }
-    return loc;
   }
 
   async getKey() {
@@ -238,7 +243,7 @@ export class Connection {
 
   async createInvite(guildID: string, name?: string, possibleUses?: number) {
     const req = new CreateInviteRequest();
-    req.setLocation(this.newLocation(guildID));
+    req.setGuildId(guildID);
     if (name) {
       req.setName(name);
     }
@@ -250,32 +255,32 @@ export class Connection {
 
   async createChannel(guildID: string, channelName: string) {
     const req = new CreateChannelRequest();
-    req.setLocation(this.newLocation(guildID));
+    req.setGuildId(guildID);
     req.setChannelName(channelName);
     return this.unaryReq(CoreService.CreateChannel, req, true);
   }
 
   async getGuild(guildID: string) {
     const req = new GetGuildRequest();
-    req.setLocation(this.newLocation(guildID));
+    req.setGuildId(guildID);
     return this.unaryReq(CoreService.GetGuild, req, true);
   }
 
   async getGuildInvites(guildID: string) {
     const req = new GetGuildInvitesRequest();
-    req.setLocation(this.newLocation(guildID));
+    req.setGuildId(guildID);
     return this.unaryReq(CoreService.GetGuildInvites, req, true);
   }
 
   async getGuildMembers(guildID: string) {
     const req = new GetGuildMembersRequest();
-    req.setLocation(this.newLocation(guildID));
+    req.setGuildId(guildID);
     return this.unaryReq(CoreService.GetGuildMembers, req, true);
   }
 
   async getGuildChannels(guildID: string) {
     const req = new GetGuildChannelsRequest();
-    req.setLocation(this.newLocation(guildID));
+    req.setGuildId(guildID);
     return this.unaryReq(CoreService.GetGuildChannels, req, true);
   }
 
@@ -285,7 +290,8 @@ export class Connection {
     beforeMessage?: string
   ) {
     const req = new GetChannelMessagesRequest();
-    req.setLocation(this.newLocation(guildID, channelID));
+    req.setGuildId(guildID);
+    req.setGuildId(channelID);
     if (beforeMessage) {
       req.setBeforeMessage(beforeMessage);
     }
@@ -294,14 +300,15 @@ export class Connection {
 
   async updateGuildName(guildID: string, newName: string) {
     const req = new UpdateGuildNameRequest();
-    req.setLocation(this.newLocation(guildID));
+    req.setGuildId(guildID);
     req.setNewGuildName(newName);
     return this.unaryReq(CoreService.UpdateGuildName, req, true);
   }
 
   async updateChannelName(guildID: string, channelID: string, newName: string) {
     const req = new UpdateChannelNameRequest();
-    req.setLocation(this.newLocation(guildID, channelID));
+    req.setGuildId(guildID);
+    req.setGuildId(channelID);
     req.setNewChannelName(newName);
     return this.unaryReq(CoreService.UpdateChannelName, req, true);
   }
@@ -316,7 +323,8 @@ export class Connection {
     newEmbeds?: any
   ) {
     const req = new UpdateMessageRequest();
-    req.setLocation(this.newLocation(guildID, channelID, messageID));
+    req.setGuildId(guildID);
+    req.setGuildId(channelID);
     if (newContent) {
       req.setUpdateContent(true);
       req.setContent(newContent);
@@ -333,29 +341,34 @@ export class Connection {
       req.setUpdateEmbeds(true);
       req.setEmbedsList(newEmbeds);
     }
-    req.setLocation(this.newLocation(guildID, channelID, messageID));
+    req.setGuildId(guildID);
+    req.setGuildId(channelID);
+    req.setGuildId(messageID);
 
     return this.unaryReq(CoreService.UpdateMessage, req, true);
   }
   async deleteGuild(guildID: string) {
     const req = new DeleteGuildRequest();
-    req.setLocation(this.newLocation(guildID));
+    req.setGuildId(guildID);
     return this.unaryReq(CoreService.DeleteGuild, req, true);
   }
   async deleteInvite(guildID: string, inviteID: string) {
     const req = new DeleteInviteRequest();
-    req.setLocation(this.newLocation(guildID));
+    req.setGuildId(guildID);
     req.setInviteId(inviteID);
     return this.unaryReq(CoreService.DeleteInvite, req, true);
   }
   async deleteChannel(guildID: string, channelID: string) {
     const req = new DeleteChannelRequest();
-    req.setLocation(this.newLocation(guildID, channelID));
+    req.setGuildId(guildID);
+    req.setGuildId(channelID);
     return this.unaryReq(CoreService.DeleteChannel, req, true);
   }
   async deleteMessage(guildID: string, channelID: string, messageID: string) {
     const req = new DeleteMessageRequest();
-    req.setLocation(this.newLocation(guildID, channelID, messageID));
+    req.setGuildId(guildID);
+    req.setGuildId(channelID);
+    req.setGuildId(messageID);
     return this.unaryReq(CoreService.DeleteMessage, req, true);
   }
   async joinGuild(inviteID: string) {
@@ -366,7 +379,7 @@ export class Connection {
 
   async leaveGuild(guildID: string) {
     const req = new LeaveGuildRequest();
-    req.setLocation(this.newLocation(guildID));
+    req.setGuildId(guildID);
     return this.unaryReq(CoreService.LeaveGuild, req, true);
   }
 
@@ -378,7 +391,9 @@ export class Connection {
     actionData?: string
   ) {
     const req = new TriggerActionRequest();
-    req.setLocation(this.newLocation(guildID, channelID, messageID));
+    req.setGuildId(guildID);
+    req.setGuildId(channelID);
+    req.setGuildId(messageID);
     req.setActionId(actionID);
     if (actionData) {
       req.setActionData(actionData);
@@ -394,11 +409,9 @@ export class Connection {
     embeds?: Embed[],
     actions?: Action[]
   ) {
-    const loc = new Location();
-    loc.setGuildId(guildID);
-    loc.setChannelId(channelID);
     const req = new SendMessageRequest();
-    req.setLocation(loc);
+    req.setGuildId(guildID);
+    req.setChannelId(channelID);
     if (content) {
       req.setContent(content);
     }

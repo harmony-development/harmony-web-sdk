@@ -10,7 +10,7 @@ mkdir -p $PROTOCOL_BUILD_TMP
 cp -r $IN_DIR/* $PROTOCOL_BUILD_TMP
 for dir in $(find ${PROTOCOL_BUILD_TMP} -name '*.proto' -print0 | xargs -0 -n1 dirname | sort | uniq); do
   echo $(find "${dir}" -name '*.proto')
-  sed -i -E "s/ \[ \(validate.rules(.*)\];/;/g" $(find "${dir}" -name '*.proto')
+  sed -i -E "s/ \[\(validate.rules(.*)\];/;/g" $(find "${dir}" -name '*.proto')
   sed -i -E "/validate.proto/d" $(find "${dir}" -name '*.proto')
   protoc \
   --experimental_allow_proto3_optional \
