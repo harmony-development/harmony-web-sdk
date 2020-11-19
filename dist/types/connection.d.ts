@@ -6,16 +6,16 @@ import { ProtobufMessage } from "@improbable-eng/grpc-web/dist/typings/message";
 import { UnaryMethodDefinition } from "@improbable-eng/grpc-web/dist/typings/service";
 import EventEmitter from "eventemitter3";
 declare type ServerStreamResponses = {
-    [Event.EventCase.SENT_MESSAGE]: [string, Event.MessageSent];
-    [Event.EventCase.LEFT_MEMBER]: [string, Event.MemberLeft];
-    [Event.EventCase.JOINED_MEMBER]: [string, Event.MemberJoined];
-    [Event.EventCase.EDITED_MESSAGE]: [string, Event.MessageUpdated];
-    [Event.EventCase.EDITED_GUILD]: [string, Event.GuildUpdated];
-    [Event.EventCase.EDITED_CHANNEL]: [string, Event.ChannelUpdated];
-    [Event.EventCase.DELETED_MESSAGE]: [string, Event.MessageDeleted];
-    [Event.EventCase.DELETED_GUILD]: [string, Event.GuildDeleted];
-    [Event.EventCase.DELETED_CHANNEL]: [string, Event.ChannelDeleted];
-    [Event.EventCase.CREATED_CHANNEL]: [string, Event.ChannelCreated];
+    [Event.EventCase.SENT_MESSAGE]: [string, Event.MessageSent.AsObject];
+    [Event.EventCase.LEFT_MEMBER]: [string, Event.MemberLeft.AsObject];
+    [Event.EventCase.JOINED_MEMBER]: [string, Event.MemberJoined.AsObject];
+    [Event.EventCase.EDITED_MESSAGE]: [string, Event.MessageUpdated.AsObject];
+    [Event.EventCase.EDITED_GUILD]: [string, Event.GuildUpdated.AsObject];
+    [Event.EventCase.EDITED_CHANNEL]: [string, Event.ChannelUpdated.AsObject];
+    [Event.EventCase.DELETED_MESSAGE]: [string, Event.MessageDeleted.AsObject];
+    [Event.EventCase.DELETED_GUILD]: [string, Event.GuildDeleted.AsObject];
+    [Event.EventCase.DELETED_CHANNEL]: [string, Event.ChannelDeleted.AsObject];
+    [Event.EventCase.CREATED_CHANNEL]: [string, Event.ChannelCreated.AsObject];
     disconnect: [grpc.Code, string, grpc.Metadata];
 };
 export declare class Connection {

@@ -74,34 +74,34 @@ var Connection = /** @class */ (function () {
      */
     Connection.prototype.onGuildEvent = function (msg) {
         if (msg.hasSentMessage()) {
-            this.events.emit(core_pb_1.Event.EventCase.SENT_MESSAGE, this.host, msg.getSentMessage());
+            this.events.emit(core_pb_1.Event.EventCase.SENT_MESSAGE, this.host, msg.getSentMessage().toObject());
         }
         else if (msg.hasLeftMember()) {
-            this.events.emit(core_pb_1.Event.EventCase.LEFT_MEMBER, this.host, msg.getLeftMember());
+            this.events.emit(core_pb_1.Event.EventCase.LEFT_MEMBER, this.host, msg.getLeftMember().toObject());
         }
         else if (msg.hasJoinedMember()) {
-            this.events.emit(core_pb_1.Event.EventCase.JOINED_MEMBER, this.host, msg.getJoinedMember());
+            this.events.emit(core_pb_1.Event.EventCase.JOINED_MEMBER, this.host, msg.getJoinedMember().toObject());
         }
         else if (msg.hasEditedMessage()) {
-            this.events.emit(core_pb_1.Event.EventCase.EDITED_MESSAGE, this.host, msg.getEditedMessage());
+            this.events.emit(core_pb_1.Event.EventCase.EDITED_MESSAGE, this.host, msg.getEditedMessage().toObject());
         }
         else if (msg.hasEditedGuild()) {
-            this.events.emit(core_pb_1.Event.EventCase.EDITED_GUILD, this.host, msg.getEditedGuild());
+            this.events.emit(core_pb_1.Event.EventCase.EDITED_GUILD, this.host, msg.getEditedGuild().toObject());
         }
         else if (msg.hasEditedChannel()) {
-            this.events.emit(core_pb_1.Event.EventCase.EDITED_CHANNEL, this.host, msg.getEditedChannel());
+            this.events.emit(core_pb_1.Event.EventCase.EDITED_CHANNEL, this.host, msg.getEditedChannel().toObject());
         }
         else if (msg.hasDeletedMessage()) {
-            this.events.emit(core_pb_1.Event.EventCase.DELETED_MESSAGE, this.host, msg.getDeletedMessage());
+            this.events.emit(core_pb_1.Event.EventCase.DELETED_MESSAGE, this.host, msg.getDeletedMessage().toObject());
         }
         else if (msg.hasDeletedGuild()) {
-            this.events.emit(core_pb_1.Event.EventCase.DELETED_GUILD, this.host, msg.getDeletedGuild());
+            this.events.emit(core_pb_1.Event.EventCase.DELETED_GUILD, this.host, msg.getDeletedGuild().toObject());
         }
         else if (msg.hasDeletedChannel()) {
-            this.events.emit(core_pb_1.Event.EventCase.DELETED_CHANNEL, this.host, msg.getDeletedChannel());
+            this.events.emit(core_pb_1.Event.EventCase.DELETED_CHANNEL, this.host, msg.getDeletedChannel().toObject());
         }
         else if (msg.hasCreatedChannel()) {
-            this.events.emit(core_pb_1.Event.EventCase.CREATED_CHANNEL, this.host, msg.getCreatedChannel());
+            this.events.emit(core_pb_1.Event.EventCase.CREATED_CHANNEL, this.host, msg.getCreatedChannel().toObject());
         }
     };
     Connection.prototype.beginStream = function () {
