@@ -291,7 +291,7 @@ export class Connection {
   ) {
     const req = new GetChannelMessagesRequest();
     req.setGuildId(guildID);
-    req.setGuildId(channelID);
+    req.setChannelId(channelID);
     if (beforeMessage) {
       req.setBeforeMessage(beforeMessage);
     }
@@ -308,7 +308,7 @@ export class Connection {
   async updateChannelName(guildID: string, channelID: string, newName: string) {
     const req = new UpdateChannelNameRequest();
     req.setGuildId(guildID);
-    req.setGuildId(channelID);
+    req.setChannelId(channelID);
     req.setNewChannelName(newName);
     return this.unaryReq(CoreService.UpdateChannelName, req, true);
   }
@@ -324,7 +324,7 @@ export class Connection {
   ) {
     const req = new UpdateMessageRequest();
     req.setGuildId(guildID);
-    req.setGuildId(channelID);
+    req.setChannelId(channelID);
     if (newContent) {
       req.setUpdateContent(true);
       req.setContent(newContent);
@@ -342,7 +342,7 @@ export class Connection {
       req.setEmbedsList(newEmbeds);
     }
     req.setGuildId(guildID);
-    req.setGuildId(channelID);
+    req.setChannelId(channelID);
     req.setGuildId(messageID);
 
     return this.unaryReq(CoreService.UpdateMessage, req, true);
@@ -361,13 +361,13 @@ export class Connection {
   async deleteChannel(guildID: string, channelID: string) {
     const req = new DeleteChannelRequest();
     req.setGuildId(guildID);
-    req.setGuildId(channelID);
+    req.setChannelId(channelID);
     return this.unaryReq(CoreService.DeleteChannel, req, true);
   }
   async deleteMessage(guildID: string, channelID: string, messageID: string) {
     const req = new DeleteMessageRequest();
     req.setGuildId(guildID);
-    req.setGuildId(channelID);
+    req.setChannelId(channelID);
     req.setGuildId(messageID);
     return this.unaryReq(CoreService.DeleteMessage, req, true);
   }
@@ -392,7 +392,7 @@ export class Connection {
   ) {
     const req = new TriggerActionRequest();
     req.setGuildId(guildID);
-    req.setGuildId(channelID);
+    req.setChannelId(channelID);
     req.setGuildId(messageID);
     req.setActionId(actionID);
     if (actionData) {
