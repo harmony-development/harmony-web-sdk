@@ -1,36 +1,37 @@
 import { grpc } from "@improbable-eng/grpc-web";
-import { Location, Embed, Action, GuildEvent } from "../protocol/core/v1/core_pb";
+import { Embed, Action, StreamEventsRequest, Event } from "../protocol/core/v1/core_pb";
 import { UserStatusMap } from "../protocol/profile/v1/profile_pb";
 import { UnaryOutput } from "@improbable-eng/grpc-web/dist/typings/unary";
 import { ProtobufMessage } from "@improbable-eng/grpc-web/dist/typings/message";
 import { UnaryMethodDefinition } from "@improbable-eng/grpc-web/dist/typings/service";
 import EventEmitter from "eventemitter3";
 declare type ServerStreamResponses = {
-    [GuildEvent.EventCase.SENT_MESSAGE]: [string, GuildEvent.MessageSent];
-    [GuildEvent.EventCase.LEFT_MEMBER]: [string, GuildEvent.MemberLeft];
-    [GuildEvent.EventCase.JOINED_MEMBER]: [string, GuildEvent.MemberJoined];
-    [GuildEvent.EventCase.EDITED_MESSAGE]: [string, GuildEvent.MessageUpdated];
-    [GuildEvent.EventCase.EDITED_GUILD]: [string, GuildEvent.GuildUpdated];
-    [GuildEvent.EventCase.EDITED_CHANNEL]: [string, GuildEvent.ChannelUpdated];
-    [GuildEvent.EventCase.DELETED_MESSAGE]: [string, GuildEvent.MessageDeleted];
-    [GuildEvent.EventCase.DELETED_GUILD]: [string, GuildEvent.GuildDeleted];
-    [GuildEvent.EventCase.DELETED_CHANNEL]: [string, GuildEvent.ChannelDeleted];
-    [GuildEvent.EventCase.CREATED_CHANNEL]: [string, GuildEvent.ChannelCreated];
+    [Event.EventCase.SENT_MESSAGE]: [string, Event.MessageSent];
+    [Event.EventCase.LEFT_MEMBER]: [string, Event.MemberLeft];
+    [Event.EventCase.JOINED_MEMBER]: [string, Event.MemberJoined];
+    [Event.EventCase.EDITED_MESSAGE]: [string, Event.MessageUpdated];
+    [Event.EventCase.EDITED_GUILD]: [string, Event.GuildUpdated];
+    [Event.EventCase.EDITED_CHANNEL]: [string, Event.ChannelUpdated];
+    [Event.EventCase.DELETED_MESSAGE]: [string, Event.MessageDeleted];
+    [Event.EventCase.DELETED_GUILD]: [string, Event.GuildDeleted];
+    [Event.EventCase.DELETED_CHANNEL]: [string, Event.ChannelDeleted];
+    [Event.EventCase.CREATED_CHANNEL]: [string, Event.ChannelCreated];
     disconnect: [grpc.Code, string, grpc.Metadata];
 };
 export declare class Connection {
     host: string;
     session?: string;
     events: EventEmitter<ServerStreamResponses>;
+    client?: grpc.Client<StreamEventsRequest, Event>;
     constructor(host: string);
     unaryReq<T1 extends ProtobufMessage, T2 extends ProtobufMessage>(descriptor: UnaryMethodDefinition<T1, T2>, request: T1, auth?: boolean): Promise<UnaryOutput<T2>>;
     /**
      * This function is an ugly bastard
      * @param msg an event message
      */
-    onGuildEvent(msg: GuildEvent): void;
+    onGuildEvent(msg: Event): void;
+    beginStream(): void;
     subscribe(guildID: string): void;
-    newLocation(guildID: string, channelID?: string, messageID?: string): Location;
     getKey(): Promise<UnaryOutput<import("../protocol/foundation/v1/foundation_pb").KeyReply>>;
     loginLocal(email: string, password: string): Promise<UnaryOutput<import("../protocol/foundation/v1/foundation_pb").Session>>;
     loginFederated(token: string, domain: string): Promise<UnaryOutput<import("../protocol/foundation/v1/foundation_pb").Session>>;
@@ -54,7 +55,7 @@ export declare class Connection {
     joinGuild(inviteID: string): Promise<UnaryOutput<import("../protocol/core/v1/core_pb").JoinGuildResponse>>;
     leaveGuild(guildID: string): Promise<UnaryOutput<import("google-protobuf/google/protobuf/empty_pb").Empty>>;
     triggerAction(guildID: string, channelID: string, messageID: string, actionID: string, actionData?: string): Promise<UnaryOutput<import("google-protobuf/google/protobuf/empty_pb").Empty>>;
-    sendMessage(guildID: string, channelID: string, content?: string, attachments?: string[], embeds?: Embed[], actions?: Action[]): Promise<UnaryOutput<import("google-protobuf/google/protobuf/empty_pb").Empty>>;
+    sendMessage(guildID: string, channelID: string, content?: string, attachments?: string[], embeds?: Embed[], actions?: Action[]): Promise<UnaryOutput<import("../protocol/core/v1/core_pb").SendMessageResponse>>;
     getGuildList(): Promise<UnaryOutput<import("../protocol/core/v1/core_pb").GetGuildListResponse>>;
     getUser(userID: string): Promise<UnaryOutput<import("../protocol/profile/v1/profile_pb").GetUserResponse>>;
     getUserMetadata(appID: string): Promise<void>;

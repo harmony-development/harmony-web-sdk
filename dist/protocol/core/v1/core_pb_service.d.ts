@@ -32,6 +32,15 @@ type CoreServiceCreateChannel = {
   readonly responseType: typeof core_v1_core_pb.CreateChannelResponse;
 };
 
+type CoreServiceCreateEmotePack = {
+  readonly methodName: string;
+  readonly service: typeof CoreService;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof core_v1_core_pb.CreateEmotePackRequest;
+  readonly responseType: typeof core_v1_core_pb.CreateEmotePackResponse;
+};
+
 type CoreServiceGetGuildList = {
   readonly methodName: string;
   readonly service: typeof CoreService;
@@ -48,6 +57,15 @@ type CoreServiceAddGuildToGuildList = {
   readonly responseStream: false;
   readonly requestType: typeof core_v1_core_pb.AddGuildToGuildListRequest;
   readonly responseType: typeof core_v1_core_pb.AddGuildToGuildListResponse;
+};
+
+type CoreServiceRemoveGuildFromGuildList = {
+  readonly methodName: string;
+  readonly service: typeof CoreService;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof core_v1_core_pb.RemoveGuildFromGuildListRequest;
+  readonly responseType: typeof core_v1_core_pb.RemoveGuildFromGuildListResponse;
 };
 
 type CoreServiceGetGuild = {
@@ -95,6 +113,33 @@ type CoreServiceGetChannelMessages = {
   readonly responseType: typeof core_v1_core_pb.GetChannelMessagesResponse;
 };
 
+type CoreServiceGetMessage = {
+  readonly methodName: string;
+  readonly service: typeof CoreService;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof core_v1_core_pb.GetMessageRequest;
+  readonly responseType: typeof core_v1_core_pb.GetMessageResponse;
+};
+
+type CoreServiceGetEmotePacks = {
+  readonly methodName: string;
+  readonly service: typeof CoreService;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof core_v1_core_pb.GetEmotePacksRequest;
+  readonly responseType: typeof core_v1_core_pb.GetEmotePacksResponse;
+};
+
+type CoreServiceGetEmotePackEmotes = {
+  readonly methodName: string;
+  readonly service: typeof CoreService;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof core_v1_core_pb.GetEmotePackEmotesRequest;
+  readonly responseType: typeof core_v1_core_pb.GetEmotePackEmotesResponse;
+};
+
 type CoreServiceUpdateGuildName = {
   readonly methodName: string;
   readonly service: typeof CoreService;
@@ -128,6 +173,15 @@ type CoreServiceUpdateMessage = {
   readonly requestStream: false;
   readonly responseStream: false;
   readonly requestType: typeof core_v1_core_pb.UpdateMessageRequest;
+  readonly responseType: typeof google_protobuf_empty_pb.Empty;
+};
+
+type CoreServiceAddEmoteToPack = {
+  readonly methodName: string;
+  readonly service: typeof CoreService;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof core_v1_core_pb.AddEmoteToPackRequest;
   readonly responseType: typeof google_protobuf_empty_pb.Empty;
 };
 
@@ -167,6 +221,33 @@ type CoreServiceDeleteMessage = {
   readonly responseType: typeof google_protobuf_empty_pb.Empty;
 };
 
+type CoreServiceDeleteEmoteFromPack = {
+  readonly methodName: string;
+  readonly service: typeof CoreService;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof core_v1_core_pb.DeleteEmoteFromPackRequest;
+  readonly responseType: typeof google_protobuf_empty_pb.Empty;
+};
+
+type CoreServiceDeleteEmotePack = {
+  readonly methodName: string;
+  readonly service: typeof CoreService;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof core_v1_core_pb.DeleteEmotePackRequest;
+  readonly responseType: typeof google_protobuf_empty_pb.Empty;
+};
+
+type CoreServiceDequipEmotePack = {
+  readonly methodName: string;
+  readonly service: typeof CoreService;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof core_v1_core_pb.DequipEmotePackRequest;
+  readonly responseType: typeof google_protobuf_empty_pb.Empty;
+};
+
 type CoreServiceJoinGuild = {
   readonly methodName: string;
   readonly service: typeof CoreService;
@@ -200,34 +281,16 @@ type CoreServiceSendMessage = {
   readonly requestStream: false;
   readonly responseStream: false;
   readonly requestType: typeof core_v1_core_pb.SendMessageRequest;
-  readonly responseType: typeof google_protobuf_empty_pb.Empty;
+  readonly responseType: typeof core_v1_core_pb.SendMessageResponse;
 };
 
-type CoreServiceStreamGuildEvents = {
+type CoreServiceStreamEvents = {
   readonly methodName: string;
   readonly service: typeof CoreService;
-  readonly requestStream: false;
+  readonly requestStream: true;
   readonly responseStream: true;
-  readonly requestType: typeof core_v1_core_pb.StreamGuildEventsRequest;
-  readonly responseType: typeof core_v1_core_pb.GuildEvent;
-};
-
-type CoreServiceStreamActionEvents = {
-  readonly methodName: string;
-  readonly service: typeof CoreService;
-  readonly requestStream: false;
-  readonly responseStream: true;
-  readonly requestType: typeof core_v1_core_pb.StreamActionEventsRequest;
-  readonly responseType: typeof core_v1_core_pb.ActionEvent;
-};
-
-type CoreServiceStreamHomeserverEvents = {
-  readonly methodName: string;
-  readonly service: typeof CoreService;
-  readonly requestStream: false;
-  readonly responseStream: true;
-  readonly requestType: typeof core_v1_core_pb.StreamHomeserverEventsRequest;
-  readonly responseType: typeof core_v1_core_pb.HomeserverEvent;
+  readonly requestType: typeof core_v1_core_pb.StreamEventsRequest;
+  readonly responseType: typeof core_v1_core_pb.Event;
 };
 
 export class CoreService {
@@ -235,28 +298,35 @@ export class CoreService {
   static readonly CreateGuild: CoreServiceCreateGuild;
   static readonly CreateInvite: CoreServiceCreateInvite;
   static readonly CreateChannel: CoreServiceCreateChannel;
+  static readonly CreateEmotePack: CoreServiceCreateEmotePack;
   static readonly GetGuildList: CoreServiceGetGuildList;
   static readonly AddGuildToGuildList: CoreServiceAddGuildToGuildList;
+  static readonly RemoveGuildFromGuildList: CoreServiceRemoveGuildFromGuildList;
   static readonly GetGuild: CoreServiceGetGuild;
   static readonly GetGuildInvites: CoreServiceGetGuildInvites;
   static readonly GetGuildMembers: CoreServiceGetGuildMembers;
   static readonly GetGuildChannels: CoreServiceGetGuildChannels;
   static readonly GetChannelMessages: CoreServiceGetChannelMessages;
+  static readonly GetMessage: CoreServiceGetMessage;
+  static readonly GetEmotePacks: CoreServiceGetEmotePacks;
+  static readonly GetEmotePackEmotes: CoreServiceGetEmotePackEmotes;
   static readonly UpdateGuildName: CoreServiceUpdateGuildName;
   static readonly UpdateChannelName: CoreServiceUpdateChannelName;
   static readonly UpdateChannelOrder: CoreServiceUpdateChannelOrder;
   static readonly UpdateMessage: CoreServiceUpdateMessage;
+  static readonly AddEmoteToPack: CoreServiceAddEmoteToPack;
   static readonly DeleteGuild: CoreServiceDeleteGuild;
   static readonly DeleteInvite: CoreServiceDeleteInvite;
   static readonly DeleteChannel: CoreServiceDeleteChannel;
   static readonly DeleteMessage: CoreServiceDeleteMessage;
+  static readonly DeleteEmoteFromPack: CoreServiceDeleteEmoteFromPack;
+  static readonly DeleteEmotePack: CoreServiceDeleteEmotePack;
+  static readonly DequipEmotePack: CoreServiceDequipEmotePack;
   static readonly JoinGuild: CoreServiceJoinGuild;
   static readonly LeaveGuild: CoreServiceLeaveGuild;
   static readonly TriggerAction: CoreServiceTriggerAction;
   static readonly SendMessage: CoreServiceSendMessage;
-  static readonly StreamGuildEvents: CoreServiceStreamGuildEvents;
-  static readonly StreamActionEvents: CoreServiceStreamActionEvents;
-  static readonly StreamHomeserverEvents: CoreServiceStreamHomeserverEvents;
+  static readonly StreamEvents: CoreServiceStreamEvents;
 }
 
 export type ServiceError = { message: string, code: number; metadata: grpc.Metadata }
@@ -318,6 +388,15 @@ export class CoreServiceClient {
     requestMessage: core_v1_core_pb.CreateChannelRequest,
     callback: (error: ServiceError|null, responseMessage: core_v1_core_pb.CreateChannelResponse|null) => void
   ): UnaryResponse;
+  createEmotePack(
+    requestMessage: core_v1_core_pb.CreateEmotePackRequest,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: core_v1_core_pb.CreateEmotePackResponse|null) => void
+  ): UnaryResponse;
+  createEmotePack(
+    requestMessage: core_v1_core_pb.CreateEmotePackRequest,
+    callback: (error: ServiceError|null, responseMessage: core_v1_core_pb.CreateEmotePackResponse|null) => void
+  ): UnaryResponse;
   getGuildList(
     requestMessage: core_v1_core_pb.GetGuildListRequest,
     metadata: grpc.Metadata,
@@ -335,6 +414,15 @@ export class CoreServiceClient {
   addGuildToGuildList(
     requestMessage: core_v1_core_pb.AddGuildToGuildListRequest,
     callback: (error: ServiceError|null, responseMessage: core_v1_core_pb.AddGuildToGuildListResponse|null) => void
+  ): UnaryResponse;
+  removeGuildFromGuildList(
+    requestMessage: core_v1_core_pb.RemoveGuildFromGuildListRequest,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: core_v1_core_pb.RemoveGuildFromGuildListResponse|null) => void
+  ): UnaryResponse;
+  removeGuildFromGuildList(
+    requestMessage: core_v1_core_pb.RemoveGuildFromGuildListRequest,
+    callback: (error: ServiceError|null, responseMessage: core_v1_core_pb.RemoveGuildFromGuildListResponse|null) => void
   ): UnaryResponse;
   getGuild(
     requestMessage: core_v1_core_pb.GetGuildRequest,
@@ -381,6 +469,33 @@ export class CoreServiceClient {
     requestMessage: core_v1_core_pb.GetChannelMessagesRequest,
     callback: (error: ServiceError|null, responseMessage: core_v1_core_pb.GetChannelMessagesResponse|null) => void
   ): UnaryResponse;
+  getMessage(
+    requestMessage: core_v1_core_pb.GetMessageRequest,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: core_v1_core_pb.GetMessageResponse|null) => void
+  ): UnaryResponse;
+  getMessage(
+    requestMessage: core_v1_core_pb.GetMessageRequest,
+    callback: (error: ServiceError|null, responseMessage: core_v1_core_pb.GetMessageResponse|null) => void
+  ): UnaryResponse;
+  getEmotePacks(
+    requestMessage: core_v1_core_pb.GetEmotePacksRequest,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: core_v1_core_pb.GetEmotePacksResponse|null) => void
+  ): UnaryResponse;
+  getEmotePacks(
+    requestMessage: core_v1_core_pb.GetEmotePacksRequest,
+    callback: (error: ServiceError|null, responseMessage: core_v1_core_pb.GetEmotePacksResponse|null) => void
+  ): UnaryResponse;
+  getEmotePackEmotes(
+    requestMessage: core_v1_core_pb.GetEmotePackEmotesRequest,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: core_v1_core_pb.GetEmotePackEmotesResponse|null) => void
+  ): UnaryResponse;
+  getEmotePackEmotes(
+    requestMessage: core_v1_core_pb.GetEmotePackEmotesRequest,
+    callback: (error: ServiceError|null, responseMessage: core_v1_core_pb.GetEmotePackEmotesResponse|null) => void
+  ): UnaryResponse;
   updateGuildName(
     requestMessage: core_v1_core_pb.UpdateGuildNameRequest,
     metadata: grpc.Metadata,
@@ -415,6 +530,15 @@ export class CoreServiceClient {
   ): UnaryResponse;
   updateMessage(
     requestMessage: core_v1_core_pb.UpdateMessageRequest,
+    callback: (error: ServiceError|null, responseMessage: google_protobuf_empty_pb.Empty|null) => void
+  ): UnaryResponse;
+  addEmoteToPack(
+    requestMessage: core_v1_core_pb.AddEmoteToPackRequest,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: google_protobuf_empty_pb.Empty|null) => void
+  ): UnaryResponse;
+  addEmoteToPack(
+    requestMessage: core_v1_core_pb.AddEmoteToPackRequest,
     callback: (error: ServiceError|null, responseMessage: google_protobuf_empty_pb.Empty|null) => void
   ): UnaryResponse;
   deleteGuild(
@@ -453,6 +577,33 @@ export class CoreServiceClient {
     requestMessage: core_v1_core_pb.DeleteMessageRequest,
     callback: (error: ServiceError|null, responseMessage: google_protobuf_empty_pb.Empty|null) => void
   ): UnaryResponse;
+  deleteEmoteFromPack(
+    requestMessage: core_v1_core_pb.DeleteEmoteFromPackRequest,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: google_protobuf_empty_pb.Empty|null) => void
+  ): UnaryResponse;
+  deleteEmoteFromPack(
+    requestMessage: core_v1_core_pb.DeleteEmoteFromPackRequest,
+    callback: (error: ServiceError|null, responseMessage: google_protobuf_empty_pb.Empty|null) => void
+  ): UnaryResponse;
+  deleteEmotePack(
+    requestMessage: core_v1_core_pb.DeleteEmotePackRequest,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: google_protobuf_empty_pb.Empty|null) => void
+  ): UnaryResponse;
+  deleteEmotePack(
+    requestMessage: core_v1_core_pb.DeleteEmotePackRequest,
+    callback: (error: ServiceError|null, responseMessage: google_protobuf_empty_pb.Empty|null) => void
+  ): UnaryResponse;
+  dequipEmotePack(
+    requestMessage: core_v1_core_pb.DequipEmotePackRequest,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: google_protobuf_empty_pb.Empty|null) => void
+  ): UnaryResponse;
+  dequipEmotePack(
+    requestMessage: core_v1_core_pb.DequipEmotePackRequest,
+    callback: (error: ServiceError|null, responseMessage: google_protobuf_empty_pb.Empty|null) => void
+  ): UnaryResponse;
   joinGuild(
     requestMessage: core_v1_core_pb.JoinGuildRequest,
     metadata: grpc.Metadata,
@@ -483,14 +634,12 @@ export class CoreServiceClient {
   sendMessage(
     requestMessage: core_v1_core_pb.SendMessageRequest,
     metadata: grpc.Metadata,
-    callback: (error: ServiceError|null, responseMessage: google_protobuf_empty_pb.Empty|null) => void
+    callback: (error: ServiceError|null, responseMessage: core_v1_core_pb.SendMessageResponse|null) => void
   ): UnaryResponse;
   sendMessage(
     requestMessage: core_v1_core_pb.SendMessageRequest,
-    callback: (error: ServiceError|null, responseMessage: google_protobuf_empty_pb.Empty|null) => void
+    callback: (error: ServiceError|null, responseMessage: core_v1_core_pb.SendMessageResponse|null) => void
   ): UnaryResponse;
-  streamGuildEvents(requestMessage: core_v1_core_pb.StreamGuildEventsRequest, metadata?: grpc.Metadata): ResponseStream<core_v1_core_pb.GuildEvent>;
-  streamActionEvents(requestMessage: core_v1_core_pb.StreamActionEventsRequest, metadata?: grpc.Metadata): ResponseStream<core_v1_core_pb.ActionEvent>;
-  streamHomeserverEvents(requestMessage: core_v1_core_pb.StreamHomeserverEventsRequest, metadata?: grpc.Metadata): ResponseStream<core_v1_core_pb.HomeserverEvent>;
+  streamEvents(metadata?: grpc.Metadata): BidirectionalStream<core_v1_core_pb.StreamEventsRequest, core_v1_core_pb.Event>;
 }
 

@@ -74,64 +74,60 @@ var Connection = /** @class */ (function () {
      */
     Connection.prototype.onGuildEvent = function (msg) {
         if (msg.hasSentMessage()) {
-            this.events.emit(core_pb_1.GuildEvent.EventCase.SENT_MESSAGE, this.host, msg.getSentMessage());
+            this.events.emit(core_pb_1.Event.EventCase.SENT_MESSAGE, this.host, msg.getSentMessage());
         }
         else if (msg.hasLeftMember()) {
-            this.events.emit(core_pb_1.GuildEvent.EventCase.LEFT_MEMBER, this.host, msg.getLeftMember());
+            this.events.emit(core_pb_1.Event.EventCase.LEFT_MEMBER, this.host, msg.getLeftMember());
         }
         else if (msg.hasJoinedMember()) {
-            this.events.emit(core_pb_1.GuildEvent.EventCase.JOINED_MEMBER, this.host, msg.getJoinedMember());
+            this.events.emit(core_pb_1.Event.EventCase.JOINED_MEMBER, this.host, msg.getJoinedMember());
         }
         else if (msg.hasEditedMessage()) {
-            this.events.emit(core_pb_1.GuildEvent.EventCase.EDITED_MESSAGE, this.host, msg.getEditedMessage());
+            this.events.emit(core_pb_1.Event.EventCase.EDITED_MESSAGE, this.host, msg.getEditedMessage());
         }
         else if (msg.hasEditedGuild()) {
-            this.events.emit(core_pb_1.GuildEvent.EventCase.EDITED_GUILD, this.host, msg.getEditedGuild());
+            this.events.emit(core_pb_1.Event.EventCase.EDITED_GUILD, this.host, msg.getEditedGuild());
         }
         else if (msg.hasEditedChannel()) {
-            this.events.emit(core_pb_1.GuildEvent.EventCase.EDITED_CHANNEL, this.host, msg.getEditedChannel());
+            this.events.emit(core_pb_1.Event.EventCase.EDITED_CHANNEL, this.host, msg.getEditedChannel());
         }
         else if (msg.hasDeletedMessage()) {
-            this.events.emit(core_pb_1.GuildEvent.EventCase.DELETED_MESSAGE, this.host, msg.getDeletedMessage());
+            this.events.emit(core_pb_1.Event.EventCase.DELETED_MESSAGE, this.host, msg.getDeletedMessage());
         }
         else if (msg.hasDeletedGuild()) {
-            this.events.emit(core_pb_1.GuildEvent.EventCase.DELETED_GUILD, this.host, msg.getDeletedGuild());
+            this.events.emit(core_pb_1.Event.EventCase.DELETED_GUILD, this.host, msg.getDeletedGuild());
         }
         else if (msg.hasDeletedChannel()) {
-            this.events.emit(core_pb_1.GuildEvent.EventCase.DELETED_CHANNEL, this.host, msg.getDeletedChannel());
+            this.events.emit(core_pb_1.Event.EventCase.DELETED_CHANNEL, this.host, msg.getDeletedChannel());
         }
         else if (msg.hasCreatedChannel()) {
-            this.events.emit(core_pb_1.GuildEvent.EventCase.CREATED_CHANNEL, this.host, msg.getCreatedChannel());
+            this.events.emit(core_pb_1.Event.EventCase.CREATED_CHANNEL, this.host, msg.getCreatedChannel());
         }
+    };
+    Connection.prototype.beginStream = function () {
+        var _this = this;
+        this.client = grpc_web_1.grpc.client(core_pb_service_1.CoreService.StreamEvents, {
+            host: this.host,
+            transport: grpc_web_1.grpc.WebsocketTransport(),
+        });
+        this.client.onEnd(function (code, message, trailers) {
+            return _this.events.emit("disconnect", code, message, trailers);
+        });
+        this.client.onMessage(this.onGuildEvent.bind(this));
+        var metadata = new grpc_web_1.grpc.Metadata();
+        if (this.session)
+            metadata.set("auth", this.session);
+        this.client.start(metadata);
     };
     Connection.prototype.subscribe = function (guildID) {
-        var _this = this;
-        var req = new core_pb_1.StreamGuildEventsRequest();
-        req.setLocation(this.newLocation(guildID));
-        var meta = new grpc_web_1.grpc.Metadata();
-        if (this.session) {
-            meta.set("auth", this.session);
+        if (this.client) {
+            var streamEventsReq = new core_pb_1.StreamEventsRequest.SubscribeToGuild();
+            streamEventsReq.setGuildId(guildID);
+            var req = new core_pb_1.StreamEventsRequest();
+            req.setSubscribeToGuild(streamEventsReq);
+            this.client.send(req);
+            this.client.finishSend();
         }
-        grpc_web_1.grpc.invoke(core_pb_service_1.CoreService.StreamGuildEvents, {
-            host: this.host,
-            request: req,
-            metadata: meta,
-            onMessage: this.onGuildEvent.bind(this),
-            onEnd: function (code, message, trailers) {
-                return _this.events.emit("disconnect", code, message, trailers);
-            },
-        });
-    };
-    Connection.prototype.newLocation = function (guildID, channelID, messageID) {
-        var loc = new core_pb_1.Location();
-        loc.setGuildId(guildID);
-        if (channelID) {
-            loc.setChannelId(channelID);
-        }
-        if (messageID) {
-            loc.setMessageId(messageID);
-        }
-        return loc;
     };
     Connection.prototype.getKey = function () {
         return __awaiter(this, void 0, void 0, function () {
@@ -208,7 +204,7 @@ var Connection = /** @class */ (function () {
             var req;
             return __generator(this, function (_a) {
                 req = new core_pb_1.CreateInviteRequest();
-                req.setLocation(this.newLocation(guildID));
+                req.setGuildId(guildID);
                 if (name) {
                     req.setName(name);
                 }
@@ -224,7 +220,7 @@ var Connection = /** @class */ (function () {
             var req;
             return __generator(this, function (_a) {
                 req = new core_pb_1.CreateChannelRequest();
-                req.setLocation(this.newLocation(guildID));
+                req.setGuildId(guildID);
                 req.setChannelName(channelName);
                 return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.CreateChannel, req, true)];
             });
@@ -235,7 +231,7 @@ var Connection = /** @class */ (function () {
             var req;
             return __generator(this, function (_a) {
                 req = new core_pb_1.GetGuildRequest();
-                req.setLocation(this.newLocation(guildID));
+                req.setGuildId(guildID);
                 return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.GetGuild, req, true)];
             });
         });
@@ -245,7 +241,7 @@ var Connection = /** @class */ (function () {
             var req;
             return __generator(this, function (_a) {
                 req = new core_pb_1.GetGuildInvitesRequest();
-                req.setLocation(this.newLocation(guildID));
+                req.setGuildId(guildID);
                 return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.GetGuildInvites, req, true)];
             });
         });
@@ -255,7 +251,7 @@ var Connection = /** @class */ (function () {
             var req;
             return __generator(this, function (_a) {
                 req = new core_pb_1.GetGuildMembersRequest();
-                req.setLocation(this.newLocation(guildID));
+                req.setGuildId(guildID);
                 return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.GetGuildMembers, req, true)];
             });
         });
@@ -265,7 +261,7 @@ var Connection = /** @class */ (function () {
             var req;
             return __generator(this, function (_a) {
                 req = new core_pb_1.GetGuildChannelsRequest();
-                req.setLocation(this.newLocation(guildID));
+                req.setGuildId(guildID);
                 return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.GetGuildChannels, req, true)];
             });
         });
@@ -275,7 +271,8 @@ var Connection = /** @class */ (function () {
             var req;
             return __generator(this, function (_a) {
                 req = new core_pb_1.GetChannelMessagesRequest();
-                req.setLocation(this.newLocation(guildID, channelID));
+                req.setGuildId(guildID);
+                req.setGuildId(channelID);
                 if (beforeMessage) {
                     req.setBeforeMessage(beforeMessage);
                 }
@@ -288,7 +285,7 @@ var Connection = /** @class */ (function () {
             var req;
             return __generator(this, function (_a) {
                 req = new core_pb_1.UpdateGuildNameRequest();
-                req.setLocation(this.newLocation(guildID));
+                req.setGuildId(guildID);
                 req.setNewGuildName(newName);
                 return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.UpdateGuildName, req, true)];
             });
@@ -299,7 +296,8 @@ var Connection = /** @class */ (function () {
             var req;
             return __generator(this, function (_a) {
                 req = new core_pb_1.UpdateChannelNameRequest();
-                req.setLocation(this.newLocation(guildID, channelID));
+                req.setGuildId(guildID);
+                req.setGuildId(channelID);
                 req.setNewChannelName(newName);
                 return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.UpdateChannelName, req, true)];
             });
@@ -310,7 +308,8 @@ var Connection = /** @class */ (function () {
             var req;
             return __generator(this, function (_a) {
                 req = new core_pb_1.UpdateMessageRequest();
-                req.setLocation(this.newLocation(guildID, channelID, messageID));
+                req.setGuildId(guildID);
+                req.setGuildId(channelID);
                 if (newContent) {
                     req.setUpdateContent(true);
                     req.setContent(newContent);
@@ -327,7 +326,9 @@ var Connection = /** @class */ (function () {
                     req.setUpdateEmbeds(true);
                     req.setEmbedsList(newEmbeds);
                 }
-                req.setLocation(this.newLocation(guildID, channelID, messageID));
+                req.setGuildId(guildID);
+                req.setGuildId(channelID);
+                req.setGuildId(messageID);
                 return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.UpdateMessage, req, true)];
             });
         });
@@ -337,7 +338,7 @@ var Connection = /** @class */ (function () {
             var req;
             return __generator(this, function (_a) {
                 req = new core_pb_1.DeleteGuildRequest();
-                req.setLocation(this.newLocation(guildID));
+                req.setGuildId(guildID);
                 return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.DeleteGuild, req, true)];
             });
         });
@@ -347,7 +348,7 @@ var Connection = /** @class */ (function () {
             var req;
             return __generator(this, function (_a) {
                 req = new core_pb_1.DeleteInviteRequest();
-                req.setLocation(this.newLocation(guildID));
+                req.setGuildId(guildID);
                 req.setInviteId(inviteID);
                 return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.DeleteInvite, req, true)];
             });
@@ -358,7 +359,8 @@ var Connection = /** @class */ (function () {
             var req;
             return __generator(this, function (_a) {
                 req = new core_pb_1.DeleteChannelRequest();
-                req.setLocation(this.newLocation(guildID, channelID));
+                req.setGuildId(guildID);
+                req.setGuildId(channelID);
                 return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.DeleteChannel, req, true)];
             });
         });
@@ -368,7 +370,9 @@ var Connection = /** @class */ (function () {
             var req;
             return __generator(this, function (_a) {
                 req = new core_pb_1.DeleteMessageRequest();
-                req.setLocation(this.newLocation(guildID, channelID, messageID));
+                req.setGuildId(guildID);
+                req.setGuildId(channelID);
+                req.setGuildId(messageID);
                 return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.DeleteMessage, req, true)];
             });
         });
@@ -388,7 +392,7 @@ var Connection = /** @class */ (function () {
             var req;
             return __generator(this, function (_a) {
                 req = new core_pb_1.LeaveGuildRequest();
-                req.setLocation(this.newLocation(guildID));
+                req.setGuildId(guildID);
                 return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.LeaveGuild, req, true)];
             });
         });
@@ -398,7 +402,9 @@ var Connection = /** @class */ (function () {
             var req;
             return __generator(this, function (_a) {
                 req = new core_pb_1.TriggerActionRequest();
-                req.setLocation(this.newLocation(guildID, channelID, messageID));
+                req.setGuildId(guildID);
+                req.setGuildId(channelID);
+                req.setGuildId(messageID);
                 req.setActionId(actionID);
                 if (actionData) {
                     req.setActionData(actionData);
@@ -409,13 +415,11 @@ var Connection = /** @class */ (function () {
     };
     Connection.prototype.sendMessage = function (guildID, channelID, content, attachments, embeds, actions) {
         return __awaiter(this, void 0, void 0, function () {
-            var loc, req;
+            var req;
             return __generator(this, function (_a) {
-                loc = new core_pb_1.Location();
-                loc.setGuildId(guildID);
-                loc.setChannelId(channelID);
                 req = new core_pb_1.SendMessageRequest();
-                req.setLocation(loc);
+                req.setGuildId(guildID);
+                req.setChannelId(channelID);
                 if (content) {
                     req.setContent(content);
                 }

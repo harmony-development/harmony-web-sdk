@@ -5,31 +5,67 @@ import * as jspb from "google-protobuf";
 import * as google_protobuf_empty_pb from "google-protobuf/google/protobuf/empty_pb";
 import * as google_protobuf_timestamp_pb from "google-protobuf/google/protobuf/timestamp_pb";
 
-export class Location extends jspb.Message {
-  getGuildId(): string;
-  setGuildId(value: string): void;
+export class Override extends jspb.Message {
+  getName(): string;
+  setName(value: string): void;
 
-  getChannelId(): string;
-  setChannelId(value: string): void;
+  getAvatar(): string;
+  setAvatar(value: string): void;
 
-  getMessageId(): string;
-  setMessageId(value: string): void;
+  hasUserDefined(): boolean;
+  clearUserDefined(): void;
+  getUserDefined(): string;
+  setUserDefined(value: string): void;
 
+  hasWebhook(): boolean;
+  clearWebhook(): void;
+  getWebhook(): google_protobuf_empty_pb.Empty | undefined;
+  setWebhook(value?: google_protobuf_empty_pb.Empty): void;
+
+  hasSystemPlurality(): boolean;
+  clearSystemPlurality(): void;
+  getSystemPlurality(): google_protobuf_empty_pb.Empty | undefined;
+  setSystemPlurality(value?: google_protobuf_empty_pb.Empty): void;
+
+  hasSystemMessage(): boolean;
+  clearSystemMessage(): void;
+  getSystemMessage(): google_protobuf_empty_pb.Empty | undefined;
+  setSystemMessage(value?: google_protobuf_empty_pb.Empty): void;
+
+  hasBridge(): boolean;
+  clearBridge(): void;
+  getBridge(): google_protobuf_empty_pb.Empty | undefined;
+  setBridge(value?: google_protobuf_empty_pb.Empty): void;
+
+  getReasonCase(): Override.ReasonCase;
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): Location.AsObject;
-  static toObject(includeInstance: boolean, msg: Location): Location.AsObject;
+  toObject(includeInstance?: boolean): Override.AsObject;
+  static toObject(includeInstance: boolean, msg: Override): Override.AsObject;
   static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
   static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-  static serializeBinaryToWriter(message: Location, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): Location;
-  static deserializeBinaryFromReader(message: Location, reader: jspb.BinaryReader): Location;
+  static serializeBinaryToWriter(message: Override, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): Override;
+  static deserializeBinaryFromReader(message: Override, reader: jspb.BinaryReader): Override;
 }
 
-export namespace Location {
+export namespace Override {
   export type AsObject = {
-    guildId: string,
-    channelId: string,
-    messageId: string,
+    name: string,
+    avatar: string,
+    userDefined: string,
+    webhook?: google_protobuf_empty_pb.Empty.AsObject,
+    systemPlurality?: google_protobuf_empty_pb.Empty.AsObject,
+    systemMessage?: google_protobuf_empty_pb.Empty.AsObject,
+    bridge?: google_protobuf_empty_pb.Empty.AsObject,
+  }
+
+  export enum ReasonCase {
+    REASON_NOT_SET = 0,
+    USER_DEFINED = 3,
+    WEBHOOK = 4,
+    SYSTEM_PLURALITY = 5,
+    SYSTEM_MESSAGE = 6,
+    BRIDGE = 7,
   }
 }
 
@@ -202,10 +238,14 @@ export namespace Embed {
 }
 
 export class Message extends jspb.Message {
-  hasLocation(): boolean;
-  clearLocation(): void;
-  getLocation(): Location | undefined;
-  setLocation(value?: Location): void;
+  getGuildId(): string;
+  setGuildId(value: string): void;
+
+  getChannelId(): string;
+  setChannelId(value: string): void;
+
+  getMessageId(): string;
+  setMessageId(value: string): void;
 
   getAuthorId(): string;
   setAuthorId(value: string): void;
@@ -238,6 +278,14 @@ export class Message extends jspb.Message {
   setAttachmentsList(value: Array<string>): void;
   addAttachments(value: string, index?: number): string;
 
+  getInReplyTo(): string;
+  setInReplyTo(value: string): void;
+
+  hasOverrides(): boolean;
+  clearOverrides(): void;
+  getOverrides(): Override | undefined;
+  setOverrides(value?: Override): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Message.AsObject;
   static toObject(includeInstance: boolean, msg: Message): Message.AsObject;
@@ -250,7 +298,9 @@ export class Message extends jspb.Message {
 
 export namespace Message {
   export type AsObject = {
-    location?: Location.AsObject,
+    guildId: string,
+    channelId: string,
+    messageId: string,
     authorId: string,
     createdAt?: google_protobuf_timestamp_pb.Timestamp.AsObject,
     editedAt?: google_protobuf_timestamp_pb.Timestamp.AsObject,
@@ -258,6 +308,8 @@ export namespace Message {
     embedsList: Array<Embed.AsObject>,
     actionsList: Array<Action.AsObject>,
     attachmentsList: Array<string>,
+    inReplyTo: string,
+    overrides?: Override.AsObject,
   }
 }
 
@@ -306,10 +358,8 @@ export namespace CreateGuildResponse {
 }
 
 export class CreateInviteRequest extends jspb.Message {
-  hasLocation(): boolean;
-  clearLocation(): void;
-  getLocation(): Location | undefined;
-  setLocation(value?: Location): void;
+  getGuildId(): string;
+  setGuildId(value: string): void;
 
   getName(): string;
   setName(value: string): void;
@@ -329,7 +379,7 @@ export class CreateInviteRequest extends jspb.Message {
 
 export namespace CreateInviteRequest {
   export type AsObject = {
-    location?: Location.AsObject,
+    guildId: string,
     name: string,
     possibleUses: number,
   }
@@ -356,10 +406,8 @@ export namespace CreateInviteResponse {
 }
 
 export class CreateChannelRequest extends jspb.Message {
-  hasLocation(): boolean;
-  clearLocation(): void;
-  getLocation(): Location | undefined;
-  setLocation(value?: Location): void;
+  getGuildId(): string;
+  setGuildId(value: string): void;
 
   getChannelName(): string;
   setChannelName(value: string): void;
@@ -385,7 +433,7 @@ export class CreateChannelRequest extends jspb.Message {
 
 export namespace CreateChannelRequest {
   export type AsObject = {
-    location?: Location.AsObject,
+    guildId: string,
     channelName: string,
     isCategory: boolean,
     previousId: string,
@@ -410,6 +458,46 @@ export class CreateChannelResponse extends jspb.Message {
 export namespace CreateChannelResponse {
   export type AsObject = {
     channelId: string,
+  }
+}
+
+export class CreateEmotePackRequest extends jspb.Message {
+  getPackName(): string;
+  setPackName(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): CreateEmotePackRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: CreateEmotePackRequest): CreateEmotePackRequest.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: CreateEmotePackRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): CreateEmotePackRequest;
+  static deserializeBinaryFromReader(message: CreateEmotePackRequest, reader: jspb.BinaryReader): CreateEmotePackRequest;
+}
+
+export namespace CreateEmotePackRequest {
+  export type AsObject = {
+    packName: string,
+  }
+}
+
+export class CreateEmotePackResponse extends jspb.Message {
+  getPackId(): string;
+  setPackId(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): CreateEmotePackResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: CreateEmotePackResponse): CreateEmotePackResponse.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: CreateEmotePackResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): CreateEmotePackResponse;
+  static deserializeBinaryFromReader(message: CreateEmotePackResponse, reader: jspb.BinaryReader): CreateEmotePackResponse;
+}
+
+export namespace CreateEmotePackResponse {
+  export type AsObject = {
+    packId: string,
   }
 }
 
@@ -476,10 +564,8 @@ export namespace GetGuildListResponse {
 }
 
 export class GetGuildRequest extends jspb.Message {
-  hasLocation(): boolean;
-  clearLocation(): void;
-  getLocation(): Location | undefined;
-  setLocation(value?: Location): void;
+  getGuildId(): string;
+  setGuildId(value: string): void;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GetGuildRequest.AsObject;
@@ -493,7 +579,7 @@ export class GetGuildRequest extends jspb.Message {
 
 export namespace GetGuildRequest {
   export type AsObject = {
-    location?: Location.AsObject,
+    guildId: string,
   }
 }
 
@@ -526,10 +612,8 @@ export namespace GetGuildResponse {
 }
 
 export class GetGuildInvitesRequest extends jspb.Message {
-  hasLocation(): boolean;
-  clearLocation(): void;
-  getLocation(): Location | undefined;
-  setLocation(value?: Location): void;
+  getGuildId(): string;
+  setGuildId(value: string): void;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GetGuildInvitesRequest.AsObject;
@@ -543,7 +627,7 @@ export class GetGuildInvitesRequest extends jspb.Message {
 
 export namespace GetGuildInvitesRequest {
   export type AsObject = {
-    location?: Location.AsObject,
+    guildId: string,
   }
 }
 
@@ -598,10 +682,8 @@ export namespace GetGuildInvitesResponse {
 }
 
 export class GetGuildMembersRequest extends jspb.Message {
-  hasLocation(): boolean;
-  clearLocation(): void;
-  getLocation(): Location | undefined;
-  setLocation(value?: Location): void;
+  getGuildId(): string;
+  setGuildId(value: string): void;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GetGuildMembersRequest.AsObject;
@@ -615,7 +697,7 @@ export class GetGuildMembersRequest extends jspb.Message {
 
 export namespace GetGuildMembersRequest {
   export type AsObject = {
-    location?: Location.AsObject,
+    guildId: string,
   }
 }
 
@@ -642,10 +724,8 @@ export namespace GetGuildMembersResponse {
 }
 
 export class GetGuildChannelsRequest extends jspb.Message {
-  hasLocation(): boolean;
-  clearLocation(): void;
-  getLocation(): Location | undefined;
-  setLocation(value?: Location): void;
+  getGuildId(): string;
+  setGuildId(value: string): void;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GetGuildChannelsRequest.AsObject;
@@ -659,7 +739,7 @@ export class GetGuildChannelsRequest extends jspb.Message {
 
 export namespace GetGuildChannelsRequest {
   export type AsObject = {
-    location?: Location.AsObject,
+    guildId: string,
   }
 }
 
@@ -718,10 +798,11 @@ export namespace GetGuildChannelsResponse {
 }
 
 export class GetChannelMessagesRequest extends jspb.Message {
-  hasLocation(): boolean;
-  clearLocation(): void;
-  getLocation(): Location | undefined;
-  setLocation(value?: Location): void;
+  getGuildId(): string;
+  setGuildId(value: string): void;
+
+  getChannelId(): string;
+  setChannelId(value: string): void;
 
   getBeforeMessage(): string;
   setBeforeMessage(value: string): void;
@@ -738,7 +819,8 @@ export class GetChannelMessagesRequest extends jspb.Message {
 
 export namespace GetChannelMessagesRequest {
   export type AsObject = {
-    location?: Location.AsObject,
+    guildId: string,
+    channelId: string,
     beforeMessage: string,
   }
 }
@@ -765,11 +847,191 @@ export namespace GetChannelMessagesResponse {
   }
 }
 
+export class GetMessageRequest extends jspb.Message {
+  getGuildId(): string;
+  setGuildId(value: string): void;
+
+  getChannelId(): string;
+  setChannelId(value: string): void;
+
+  getMessageId(): string;
+  setMessageId(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetMessageRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: GetMessageRequest): GetMessageRequest.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: GetMessageRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetMessageRequest;
+  static deserializeBinaryFromReader(message: GetMessageRequest, reader: jspb.BinaryReader): GetMessageRequest;
+}
+
+export namespace GetMessageRequest {
+  export type AsObject = {
+    guildId: string,
+    channelId: string,
+    messageId: string,
+  }
+}
+
+export class GetMessageResponse extends jspb.Message {
+  hasMessage(): boolean;
+  clearMessage(): void;
+  getMessage(): Message | undefined;
+  setMessage(value?: Message): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetMessageResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: GetMessageResponse): GetMessageResponse.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: GetMessageResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetMessageResponse;
+  static deserializeBinaryFromReader(message: GetMessageResponse, reader: jspb.BinaryReader): GetMessageResponse;
+}
+
+export namespace GetMessageResponse {
+  export type AsObject = {
+    message?: Message.AsObject,
+  }
+}
+
+export class GetEmotePacksRequest extends jspb.Message {
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetEmotePacksRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: GetEmotePacksRequest): GetEmotePacksRequest.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: GetEmotePacksRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetEmotePacksRequest;
+  static deserializeBinaryFromReader(message: GetEmotePacksRequest, reader: jspb.BinaryReader): GetEmotePacksRequest;
+}
+
+export namespace GetEmotePacksRequest {
+  export type AsObject = {
+  }
+}
+
+export class GetEmotePacksResponse extends jspb.Message {
+  clearPacksList(): void;
+  getPacksList(): Array<GetEmotePacksResponse.EmotePack>;
+  setPacksList(value: Array<GetEmotePacksResponse.EmotePack>): void;
+  addPacks(value?: GetEmotePacksResponse.EmotePack, index?: number): GetEmotePacksResponse.EmotePack;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetEmotePacksResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: GetEmotePacksResponse): GetEmotePacksResponse.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: GetEmotePacksResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetEmotePacksResponse;
+  static deserializeBinaryFromReader(message: GetEmotePacksResponse, reader: jspb.BinaryReader): GetEmotePacksResponse;
+}
+
+export namespace GetEmotePacksResponse {
+  export type AsObject = {
+    packsList: Array<GetEmotePacksResponse.EmotePack.AsObject>,
+  }
+
+  export class EmotePack extends jspb.Message {
+    getPackId(): string;
+    setPackId(value: string): void;
+
+    getPackOwner(): string;
+    setPackOwner(value: string): void;
+
+    getPackName(): string;
+    setPackName(value: string): void;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): EmotePack.AsObject;
+    static toObject(includeInstance: boolean, msg: EmotePack): EmotePack.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: EmotePack, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): EmotePack;
+    static deserializeBinaryFromReader(message: EmotePack, reader: jspb.BinaryReader): EmotePack;
+  }
+
+  export namespace EmotePack {
+    export type AsObject = {
+      packId: string,
+      packOwner: string,
+      packName: string,
+    }
+  }
+}
+
+export class GetEmotePackEmotesRequest extends jspb.Message {
+  getPackId(): string;
+  setPackId(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetEmotePackEmotesRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: GetEmotePackEmotesRequest): GetEmotePackEmotesRequest.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: GetEmotePackEmotesRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetEmotePackEmotesRequest;
+  static deserializeBinaryFromReader(message: GetEmotePackEmotesRequest, reader: jspb.BinaryReader): GetEmotePackEmotesRequest;
+}
+
+export namespace GetEmotePackEmotesRequest {
+  export type AsObject = {
+    packId: string,
+  }
+}
+
+export class GetEmotePackEmotesResponse extends jspb.Message {
+  clearEmotesList(): void;
+  getEmotesList(): Array<GetEmotePackEmotesResponse.Emote>;
+  setEmotesList(value: Array<GetEmotePackEmotesResponse.Emote>): void;
+  addEmotes(value?: GetEmotePackEmotesResponse.Emote, index?: number): GetEmotePackEmotesResponse.Emote;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetEmotePackEmotesResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: GetEmotePackEmotesResponse): GetEmotePackEmotesResponse.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: GetEmotePackEmotesResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetEmotePackEmotesResponse;
+  static deserializeBinaryFromReader(message: GetEmotePackEmotesResponse, reader: jspb.BinaryReader): GetEmotePackEmotesResponse;
+}
+
+export namespace GetEmotePackEmotesResponse {
+  export type AsObject = {
+    emotesList: Array<GetEmotePackEmotesResponse.Emote.AsObject>,
+  }
+
+  export class Emote extends jspb.Message {
+    getImageId(): string;
+    setImageId(value: string): void;
+
+    getName(): string;
+    setName(value: string): void;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): Emote.AsObject;
+    static toObject(includeInstance: boolean, msg: Emote): Emote.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: Emote, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): Emote;
+    static deserializeBinaryFromReader(message: Emote, reader: jspb.BinaryReader): Emote;
+  }
+
+  export namespace Emote {
+    export type AsObject = {
+      imageId: string,
+      name: string,
+    }
+  }
+}
+
 export class UpdateGuildNameRequest extends jspb.Message {
-  hasLocation(): boolean;
-  clearLocation(): void;
-  getLocation(): Location | undefined;
-  setLocation(value?: Location): void;
+  getGuildId(): string;
+  setGuildId(value: string): void;
 
   getNewGuildName(): string;
   setNewGuildName(value: string): void;
@@ -786,16 +1048,17 @@ export class UpdateGuildNameRequest extends jspb.Message {
 
 export namespace UpdateGuildNameRequest {
   export type AsObject = {
-    location?: Location.AsObject,
+    guildId: string,
     newGuildName: string,
   }
 }
 
 export class UpdateChannelNameRequest extends jspb.Message {
-  hasLocation(): boolean;
-  clearLocation(): void;
-  getLocation(): Location | undefined;
-  setLocation(value?: Location): void;
+  getGuildId(): string;
+  setGuildId(value: string): void;
+
+  getChannelId(): string;
+  setChannelId(value: string): void;
 
   getNewChannelName(): string;
   setNewChannelName(value: string): void;
@@ -812,16 +1075,18 @@ export class UpdateChannelNameRequest extends jspb.Message {
 
 export namespace UpdateChannelNameRequest {
   export type AsObject = {
-    location?: Location.AsObject,
+    guildId: string,
+    channelId: string,
     newChannelName: string,
   }
 }
 
 export class UpdateChannelOrderRequest extends jspb.Message {
-  hasLocation(): boolean;
-  clearLocation(): void;
-  getLocation(): Location | undefined;
-  setLocation(value?: Location): void;
+  getGuildId(): string;
+  setGuildId(value: string): void;
+
+  getChannelId(): string;
+  setChannelId(value: string): void;
 
   getPreviousId(): string;
   setPreviousId(value: string): void;
@@ -841,17 +1106,22 @@ export class UpdateChannelOrderRequest extends jspb.Message {
 
 export namespace UpdateChannelOrderRequest {
   export type AsObject = {
-    location?: Location.AsObject,
+    guildId: string,
+    channelId: string,
     previousId: string,
     nextId: string,
   }
 }
 
 export class UpdateMessageRequest extends jspb.Message {
-  hasLocation(): boolean;
-  clearLocation(): void;
-  getLocation(): Location | undefined;
-  setLocation(value?: Location): void;
+  getGuildId(): string;
+  setGuildId(value: string): void;
+
+  getChannelId(): string;
+  setChannelId(value: string): void;
+
+  getMessageId(): string;
+  setMessageId(value: string): void;
 
   getContent(): string;
   setContent(value: string): void;
@@ -883,6 +1153,14 @@ export class UpdateMessageRequest extends jspb.Message {
   getUpdateAttachments(): boolean;
   setUpdateAttachments(value: boolean): void;
 
+  hasOverrides(): boolean;
+  clearOverrides(): void;
+  getOverrides(): Override | undefined;
+  setOverrides(value?: Override): void;
+
+  getUpdateOverrides(): boolean;
+  setUpdateOverrides(value: boolean): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): UpdateMessageRequest.AsObject;
   static toObject(includeInstance: boolean, msg: UpdateMessageRequest): UpdateMessageRequest.AsObject;
@@ -895,7 +1173,9 @@ export class UpdateMessageRequest extends jspb.Message {
 
 export namespace UpdateMessageRequest {
   export type AsObject = {
-    location?: Location.AsObject,
+    guildId: string,
+    channelId: string,
+    messageId: string,
     content: string,
     updateContent: boolean,
     embedsList: Array<Embed.AsObject>,
@@ -904,14 +1184,42 @@ export namespace UpdateMessageRequest {
     updateActions: boolean,
     attachmentsList: Array<string>,
     updateAttachments: boolean,
+    overrides?: Override.AsObject,
+    updateOverrides: boolean,
+  }
+}
+
+export class AddEmoteToPackRequest extends jspb.Message {
+  getPackId(): string;
+  setPackId(value: string): void;
+
+  getImageId(): string;
+  setImageId(value: string): void;
+
+  getName(): string;
+  setName(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): AddEmoteToPackRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: AddEmoteToPackRequest): AddEmoteToPackRequest.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: AddEmoteToPackRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): AddEmoteToPackRequest;
+  static deserializeBinaryFromReader(message: AddEmoteToPackRequest, reader: jspb.BinaryReader): AddEmoteToPackRequest;
+}
+
+export namespace AddEmoteToPackRequest {
+  export type AsObject = {
+    packId: string,
+    imageId: string,
+    name: string,
   }
 }
 
 export class DeleteGuildRequest extends jspb.Message {
-  hasLocation(): boolean;
-  clearLocation(): void;
-  getLocation(): Location | undefined;
-  setLocation(value?: Location): void;
+  getGuildId(): string;
+  setGuildId(value: string): void;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): DeleteGuildRequest.AsObject;
@@ -925,15 +1233,13 @@ export class DeleteGuildRequest extends jspb.Message {
 
 export namespace DeleteGuildRequest {
   export type AsObject = {
-    location?: Location.AsObject,
+    guildId: string,
   }
 }
 
 export class DeleteInviteRequest extends jspb.Message {
-  hasLocation(): boolean;
-  clearLocation(): void;
-  getLocation(): Location | undefined;
-  setLocation(value?: Location): void;
+  getGuildId(): string;
+  setGuildId(value: string): void;
 
   getInviteId(): string;
   setInviteId(value: string): void;
@@ -950,16 +1256,17 @@ export class DeleteInviteRequest extends jspb.Message {
 
 export namespace DeleteInviteRequest {
   export type AsObject = {
-    location?: Location.AsObject,
+    guildId: string,
     inviteId: string,
   }
 }
 
 export class DeleteChannelRequest extends jspb.Message {
-  hasLocation(): boolean;
-  clearLocation(): void;
-  getLocation(): Location | undefined;
-  setLocation(value?: Location): void;
+  getGuildId(): string;
+  setGuildId(value: string): void;
+
+  getChannelId(): string;
+  setChannelId(value: string): void;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): DeleteChannelRequest.AsObject;
@@ -973,15 +1280,20 @@ export class DeleteChannelRequest extends jspb.Message {
 
 export namespace DeleteChannelRequest {
   export type AsObject = {
-    location?: Location.AsObject,
+    guildId: string,
+    channelId: string,
   }
 }
 
 export class DeleteMessageRequest extends jspb.Message {
-  hasLocation(): boolean;
-  clearLocation(): void;
-  getLocation(): Location | undefined;
-  setLocation(value?: Location): void;
+  getGuildId(): string;
+  setGuildId(value: string): void;
+
+  getChannelId(): string;
+  setChannelId(value: string): void;
+
+  getMessageId(): string;
+  setMessageId(value: string): void;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): DeleteMessageRequest.AsObject;
@@ -995,109 +1307,268 @@ export class DeleteMessageRequest extends jspb.Message {
 
 export namespace DeleteMessageRequest {
   export type AsObject = {
-    location?: Location.AsObject,
+    guildId: string,
+    channelId: string,
+    messageId: string,
   }
 }
 
-export class StreamGuildEventsRequest extends jspb.Message {
-  hasLocation(): boolean;
-  clearLocation(): void;
-  getLocation(): Location | undefined;
-  setLocation(value?: Location): void;
+export class DeleteEmoteFromPackRequest extends jspb.Message {
+  getPackId(): string;
+  setPackId(value: string): void;
+
+  getImageId(): string;
+  setImageId(value: string): void;
 
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): StreamGuildEventsRequest.AsObject;
-  static toObject(includeInstance: boolean, msg: StreamGuildEventsRequest): StreamGuildEventsRequest.AsObject;
+  toObject(includeInstance?: boolean): DeleteEmoteFromPackRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: DeleteEmoteFromPackRequest): DeleteEmoteFromPackRequest.AsObject;
   static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
   static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-  static serializeBinaryToWriter(message: StreamGuildEventsRequest, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): StreamGuildEventsRequest;
-  static deserializeBinaryFromReader(message: StreamGuildEventsRequest, reader: jspb.BinaryReader): StreamGuildEventsRequest;
+  static serializeBinaryToWriter(message: DeleteEmoteFromPackRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): DeleteEmoteFromPackRequest;
+  static deserializeBinaryFromReader(message: DeleteEmoteFromPackRequest, reader: jspb.BinaryReader): DeleteEmoteFromPackRequest;
 }
 
-export namespace StreamGuildEventsRequest {
+export namespace DeleteEmoteFromPackRequest {
   export type AsObject = {
-    location?: Location.AsObject,
+    packId: string,
+    imageId: string,
   }
 }
 
-export class GuildEvent extends jspb.Message {
+export class DeleteEmotePackRequest extends jspb.Message {
+  getPackId(): string;
+  setPackId(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): DeleteEmotePackRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: DeleteEmotePackRequest): DeleteEmotePackRequest.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: DeleteEmotePackRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): DeleteEmotePackRequest;
+  static deserializeBinaryFromReader(message: DeleteEmotePackRequest, reader: jspb.BinaryReader): DeleteEmotePackRequest;
+}
+
+export namespace DeleteEmotePackRequest {
+  export type AsObject = {
+    packId: string,
+  }
+}
+
+export class DequipEmotePackRequest extends jspb.Message {
+  getPackId(): string;
+  setPackId(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): DequipEmotePackRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: DequipEmotePackRequest): DequipEmotePackRequest.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: DequipEmotePackRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): DequipEmotePackRequest;
+  static deserializeBinaryFromReader(message: DequipEmotePackRequest, reader: jspb.BinaryReader): DequipEmotePackRequest;
+}
+
+export namespace DequipEmotePackRequest {
+  export type AsObject = {
+    packId: string,
+  }
+}
+
+export class StreamEventsRequest extends jspb.Message {
+  hasSubscribeToGuild(): boolean;
+  clearSubscribeToGuild(): void;
+  getSubscribeToGuild(): StreamEventsRequest.SubscribeToGuild | undefined;
+  setSubscribeToGuild(value?: StreamEventsRequest.SubscribeToGuild): void;
+
+  hasSubscribeToActions(): boolean;
+  clearSubscribeToActions(): void;
+  getSubscribeToActions(): StreamEventsRequest.SubscribeToActions | undefined;
+  setSubscribeToActions(value?: StreamEventsRequest.SubscribeToActions): void;
+
+  hasSubscribeToHomeserverEvents(): boolean;
+  clearSubscribeToHomeserverEvents(): void;
+  getSubscribeToHomeserverEvents(): StreamEventsRequest.SubscribeToHomeserverEvents | undefined;
+  setSubscribeToHomeserverEvents(value?: StreamEventsRequest.SubscribeToHomeserverEvents): void;
+
+  getRequestCase(): StreamEventsRequest.RequestCase;
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): StreamEventsRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: StreamEventsRequest): StreamEventsRequest.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: StreamEventsRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): StreamEventsRequest;
+  static deserializeBinaryFromReader(message: StreamEventsRequest, reader: jspb.BinaryReader): StreamEventsRequest;
+}
+
+export namespace StreamEventsRequest {
+  export type AsObject = {
+    subscribeToGuild?: StreamEventsRequest.SubscribeToGuild.AsObject,
+    subscribeToActions?: StreamEventsRequest.SubscribeToActions.AsObject,
+    subscribeToHomeserverEvents?: StreamEventsRequest.SubscribeToHomeserverEvents.AsObject,
+  }
+
+  export class SubscribeToGuild extends jspb.Message {
+    getGuildId(): string;
+    setGuildId(value: string): void;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): SubscribeToGuild.AsObject;
+    static toObject(includeInstance: boolean, msg: SubscribeToGuild): SubscribeToGuild.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: SubscribeToGuild, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): SubscribeToGuild;
+    static deserializeBinaryFromReader(message: SubscribeToGuild, reader: jspb.BinaryReader): SubscribeToGuild;
+  }
+
+  export namespace SubscribeToGuild {
+    export type AsObject = {
+      guildId: string,
+    }
+  }
+
+  export class SubscribeToActions extends jspb.Message {
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): SubscribeToActions.AsObject;
+    static toObject(includeInstance: boolean, msg: SubscribeToActions): SubscribeToActions.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: SubscribeToActions, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): SubscribeToActions;
+    static deserializeBinaryFromReader(message: SubscribeToActions, reader: jspb.BinaryReader): SubscribeToActions;
+  }
+
+  export namespace SubscribeToActions {
+    export type AsObject = {
+    }
+  }
+
+  export class SubscribeToHomeserverEvents extends jspb.Message {
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): SubscribeToHomeserverEvents.AsObject;
+    static toObject(includeInstance: boolean, msg: SubscribeToHomeserverEvents): SubscribeToHomeserverEvents.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: SubscribeToHomeserverEvents, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): SubscribeToHomeserverEvents;
+    static deserializeBinaryFromReader(message: SubscribeToHomeserverEvents, reader: jspb.BinaryReader): SubscribeToHomeserverEvents;
+  }
+
+  export namespace SubscribeToHomeserverEvents {
+    export type AsObject = {
+    }
+  }
+
+  export enum RequestCase {
+    REQUEST_NOT_SET = 0,
+    SUBSCRIBE_TO_GUILD = 1,
+    SUBSCRIBE_TO_ACTIONS = 2,
+    SUBSCRIBE_TO_HOMESERVER_EVENTS = 3,
+  }
+}
+
+export class Event extends jspb.Message {
+  hasGuildAddedToList(): boolean;
+  clearGuildAddedToList(): void;
+  getGuildAddedToList(): Event.GuildAddedToList | undefined;
+  setGuildAddedToList(value?: Event.GuildAddedToList): void;
+
+  hasGuildRemovedFromList(): boolean;
+  clearGuildRemovedFromList(): void;
+  getGuildRemovedFromList(): Event.GuildRemovedFromList | undefined;
+  setGuildRemovedFromList(value?: Event.GuildRemovedFromList): void;
+
+  hasActionPerformed(): boolean;
+  clearActionPerformed(): void;
+  getActionPerformed(): Event.ActionPerformed | undefined;
+  setActionPerformed(value?: Event.ActionPerformed): void;
+
   hasSentMessage(): boolean;
   clearSentMessage(): void;
-  getSentMessage(): GuildEvent.MessageSent | undefined;
-  setSentMessage(value?: GuildEvent.MessageSent): void;
+  getSentMessage(): Event.MessageSent | undefined;
+  setSentMessage(value?: Event.MessageSent): void;
 
   hasEditedMessage(): boolean;
   clearEditedMessage(): void;
-  getEditedMessage(): GuildEvent.MessageUpdated | undefined;
-  setEditedMessage(value?: GuildEvent.MessageUpdated): void;
+  getEditedMessage(): Event.MessageUpdated | undefined;
+  setEditedMessage(value?: Event.MessageUpdated): void;
 
   hasDeletedMessage(): boolean;
   clearDeletedMessage(): void;
-  getDeletedMessage(): GuildEvent.MessageDeleted | undefined;
-  setDeletedMessage(value?: GuildEvent.MessageDeleted): void;
+  getDeletedMessage(): Event.MessageDeleted | undefined;
+  setDeletedMessage(value?: Event.MessageDeleted): void;
 
   hasCreatedChannel(): boolean;
   clearCreatedChannel(): void;
-  getCreatedChannel(): GuildEvent.ChannelCreated | undefined;
-  setCreatedChannel(value?: GuildEvent.ChannelCreated): void;
+  getCreatedChannel(): Event.ChannelCreated | undefined;
+  setCreatedChannel(value?: Event.ChannelCreated): void;
 
   hasEditedChannel(): boolean;
   clearEditedChannel(): void;
-  getEditedChannel(): GuildEvent.ChannelUpdated | undefined;
-  setEditedChannel(value?: GuildEvent.ChannelUpdated): void;
+  getEditedChannel(): Event.ChannelUpdated | undefined;
+  setEditedChannel(value?: Event.ChannelUpdated): void;
 
   hasDeletedChannel(): boolean;
   clearDeletedChannel(): void;
-  getDeletedChannel(): GuildEvent.ChannelDeleted | undefined;
-  setDeletedChannel(value?: GuildEvent.ChannelDeleted): void;
+  getDeletedChannel(): Event.ChannelDeleted | undefined;
+  setDeletedChannel(value?: Event.ChannelDeleted): void;
 
   hasEditedGuild(): boolean;
   clearEditedGuild(): void;
-  getEditedGuild(): GuildEvent.GuildUpdated | undefined;
-  setEditedGuild(value?: GuildEvent.GuildUpdated): void;
+  getEditedGuild(): Event.GuildUpdated | undefined;
+  setEditedGuild(value?: Event.GuildUpdated): void;
 
   hasDeletedGuild(): boolean;
   clearDeletedGuild(): void;
-  getDeletedGuild(): GuildEvent.GuildDeleted | undefined;
-  setDeletedGuild(value?: GuildEvent.GuildDeleted): void;
+  getDeletedGuild(): Event.GuildDeleted | undefined;
+  setDeletedGuild(value?: Event.GuildDeleted): void;
 
   hasJoinedMember(): boolean;
   clearJoinedMember(): void;
-  getJoinedMember(): GuildEvent.MemberJoined | undefined;
-  setJoinedMember(value?: GuildEvent.MemberJoined): void;
+  getJoinedMember(): Event.MemberJoined | undefined;
+  setJoinedMember(value?: Event.MemberJoined): void;
 
   hasLeftMember(): boolean;
   clearLeftMember(): void;
-  getLeftMember(): GuildEvent.MemberLeft | undefined;
-  setLeftMember(value?: GuildEvent.MemberLeft): void;
+  getLeftMember(): Event.MemberLeft | undefined;
+  setLeftMember(value?: Event.MemberLeft): void;
 
-  getEventCase(): GuildEvent.EventCase;
+  getEventCase(): Event.EventCase;
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): GuildEvent.AsObject;
-  static toObject(includeInstance: boolean, msg: GuildEvent): GuildEvent.AsObject;
+  toObject(includeInstance?: boolean): Event.AsObject;
+  static toObject(includeInstance: boolean, msg: Event): Event.AsObject;
   static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
   static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-  static serializeBinaryToWriter(message: GuildEvent, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): GuildEvent;
-  static deserializeBinaryFromReader(message: GuildEvent, reader: jspb.BinaryReader): GuildEvent;
+  static serializeBinaryToWriter(message: Event, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): Event;
+  static deserializeBinaryFromReader(message: Event, reader: jspb.BinaryReader): Event;
 }
 
-export namespace GuildEvent {
+export namespace Event {
   export type AsObject = {
-    sentMessage?: GuildEvent.MessageSent.AsObject,
-    editedMessage?: GuildEvent.MessageUpdated.AsObject,
-    deletedMessage?: GuildEvent.MessageDeleted.AsObject,
-    createdChannel?: GuildEvent.ChannelCreated.AsObject,
-    editedChannel?: GuildEvent.ChannelUpdated.AsObject,
-    deletedChannel?: GuildEvent.ChannelDeleted.AsObject,
-    editedGuild?: GuildEvent.GuildUpdated.AsObject,
-    deletedGuild?: GuildEvent.GuildDeleted.AsObject,
-    joinedMember?: GuildEvent.MemberJoined.AsObject,
-    leftMember?: GuildEvent.MemberLeft.AsObject,
+    guildAddedToList?: Event.GuildAddedToList.AsObject,
+    guildRemovedFromList?: Event.GuildRemovedFromList.AsObject,
+    actionPerformed?: Event.ActionPerformed.AsObject,
+    sentMessage?: Event.MessageSent.AsObject,
+    editedMessage?: Event.MessageUpdated.AsObject,
+    deletedMessage?: Event.MessageDeleted.AsObject,
+    createdChannel?: Event.ChannelCreated.AsObject,
+    editedChannel?: Event.ChannelUpdated.AsObject,
+    deletedChannel?: Event.ChannelDeleted.AsObject,
+    editedGuild?: Event.GuildUpdated.AsObject,
+    deletedGuild?: Event.GuildDeleted.AsObject,
+    joinedMember?: Event.MemberJoined.AsObject,
+    leftMember?: Event.MemberLeft.AsObject,
   }
 
   export class MessageSent extends jspb.Message {
+    getGuildId(): string;
+    setGuildId(value: string): void;
+
     hasMessage(): boolean;
     clearMessage(): void;
     getMessage(): Message | undefined;
@@ -1115,15 +1586,20 @@ export namespace GuildEvent {
 
   export namespace MessageSent {
     export type AsObject = {
+      guildId: string,
       message?: Message.AsObject,
     }
   }
 
   export class MessageUpdated extends jspb.Message {
-    hasLocation(): boolean;
-    clearLocation(): void;
-    getLocation(): Location | undefined;
-    setLocation(value?: Location): void;
+    getGuildId(): string;
+    setGuildId(value: string): void;
+
+    getChannelId(): string;
+    setChannelId(value: string): void;
+
+    getMessageId(): string;
+    setMessageId(value: string): void;
 
     hasEditedAt(): boolean;
     clearEditedAt(): void;
@@ -1160,6 +1636,14 @@ export namespace GuildEvent {
     getUpdateAttachments(): boolean;
     setUpdateAttachments(value: boolean): void;
 
+    hasOverrides(): boolean;
+    clearOverrides(): void;
+    getOverrides(): Override | undefined;
+    setOverrides(value?: Override): void;
+
+    getUpdateOverrides(): boolean;
+    setUpdateOverrides(value: boolean): void;
+
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): MessageUpdated.AsObject;
     static toObject(includeInstance: boolean, msg: MessageUpdated): MessageUpdated.AsObject;
@@ -1172,7 +1656,9 @@ export namespace GuildEvent {
 
   export namespace MessageUpdated {
     export type AsObject = {
-      location?: Location.AsObject,
+      guildId: string,
+      channelId: string,
+      messageId: string,
       editedAt?: google_protobuf_timestamp_pb.Timestamp.AsObject,
       content: string,
       updateContent: boolean,
@@ -1182,14 +1668,20 @@ export namespace GuildEvent {
       updateActions: boolean,
       attachmentsList: Array<string>,
       updateAttachments: boolean,
+      overrides?: Override.AsObject,
+      updateOverrides: boolean,
     }
   }
 
   export class MessageDeleted extends jspb.Message {
-    hasLocation(): boolean;
-    clearLocation(): void;
-    getLocation(): Location | undefined;
-    setLocation(value?: Location): void;
+    getGuildId(): string;
+    setGuildId(value: string): void;
+
+    getChannelId(): string;
+    setChannelId(value: string): void;
+
+    getMessageId(): string;
+    setMessageId(value: string): void;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): MessageDeleted.AsObject;
@@ -1203,15 +1695,18 @@ export namespace GuildEvent {
 
   export namespace MessageDeleted {
     export type AsObject = {
-      location?: Location.AsObject,
+      guildId: string,
+      channelId: string,
+      messageId: string,
     }
   }
 
   export class ChannelCreated extends jspb.Message {
-    hasLocation(): boolean;
-    clearLocation(): void;
-    getLocation(): Location | undefined;
-    setLocation(value?: Location): void;
+    getGuildId(): string;
+    setGuildId(value: string): void;
+
+    getChannelId(): string;
+    setChannelId(value: string): void;
 
     getName(): string;
     setName(value: string): void;
@@ -1237,7 +1732,8 @@ export namespace GuildEvent {
 
   export namespace ChannelCreated {
     export type AsObject = {
-      location?: Location.AsObject,
+      guildId: string,
+      channelId: string,
       name: string,
       previousId: string,
       nextId: string,
@@ -1246,10 +1742,11 @@ export namespace GuildEvent {
   }
 
   export class ChannelUpdated extends jspb.Message {
-    hasLocation(): boolean;
-    clearLocation(): void;
-    getLocation(): Location | undefined;
-    setLocation(value?: Location): void;
+    getGuildId(): string;
+    setGuildId(value: string): void;
+
+    getChannelId(): string;
+    setChannelId(value: string): void;
 
     getName(): string;
     setName(value: string): void;
@@ -1278,7 +1775,8 @@ export namespace GuildEvent {
 
   export namespace ChannelUpdated {
     export type AsObject = {
-      location?: Location.AsObject,
+      guildId: string,
+      channelId: string,
       name: string,
       updateName: boolean,
       previousId: string,
@@ -1288,10 +1786,11 @@ export namespace GuildEvent {
   }
 
   export class ChannelDeleted extends jspb.Message {
-    hasLocation(): boolean;
-    clearLocation(): void;
-    getLocation(): Location | undefined;
-    setLocation(value?: Location): void;
+    getGuildId(): string;
+    setGuildId(value: string): void;
+
+    getChannelId(): string;
+    setChannelId(value: string): void;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): ChannelDeleted.AsObject;
@@ -1305,11 +1804,15 @@ export namespace GuildEvent {
 
   export namespace ChannelDeleted {
     export type AsObject = {
-      location?: Location.AsObject,
+      guildId: string,
+      channelId: string,
     }
   }
 
   export class GuildUpdated extends jspb.Message {
+    getGuildId(): string;
+    setGuildId(value: string): void;
+
     getName(): string;
     setName(value: string): void;
 
@@ -1328,12 +1831,16 @@ export namespace GuildEvent {
 
   export namespace GuildUpdated {
     export type AsObject = {
+      guildId: string,
       name: string,
       updateName: boolean,
     }
   }
 
   export class GuildDeleted extends jspb.Message {
+    getGuildId(): string;
+    setGuildId(value: string): void;
+
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GuildDeleted.AsObject;
     static toObject(includeInstance: boolean, msg: GuildDeleted): GuildDeleted.AsObject;
@@ -1346,12 +1853,16 @@ export namespace GuildEvent {
 
   export namespace GuildDeleted {
     export type AsObject = {
+      guildId: string,
     }
   }
 
   export class MemberJoined extends jspb.Message {
     getMemberId(): string;
     setMemberId(value: string): void;
+
+    getGuildId(): string;
+    setGuildId(value: string): void;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): MemberJoined.AsObject;
@@ -1366,12 +1877,16 @@ export namespace GuildEvent {
   export namespace MemberJoined {
     export type AsObject = {
       memberId: string,
+      guildId: string,
     }
   }
 
   export class MemberLeft extends jspb.Message {
     getMemberId(): string;
     setMemberId(value: string): void;
+
+    getGuildId(): string;
+    setGuildId(value: string): void;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): MemberLeft.AsObject;
@@ -1386,44 +1901,8 @@ export namespace GuildEvent {
   export namespace MemberLeft {
     export type AsObject = {
       memberId: string,
+      guildId: string,
     }
-  }
-
-  export enum EventCase {
-    EVENT_NOT_SET = 0,
-    SENT_MESSAGE = 1,
-    EDITED_MESSAGE = 2,
-    DELETED_MESSAGE = 3,
-    CREATED_CHANNEL = 4,
-    EDITED_CHANNEL = 5,
-    DELETED_CHANNEL = 6,
-    EDITED_GUILD = 7,
-    DELETED_GUILD = 8,
-    JOINED_MEMBER = 9,
-    LEFT_MEMBER = 10,
-  }
-}
-
-export class HomeserverEvent extends jspb.Message {
-  hasGuildAddedToList(): boolean;
-  clearGuildAddedToList(): void;
-  getGuildAddedToList(): HomeserverEvent.GuildAddedToList | undefined;
-  setGuildAddedToList(value?: HomeserverEvent.GuildAddedToList): void;
-
-  getEventCase(): HomeserverEvent.EventCase;
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): HomeserverEvent.AsObject;
-  static toObject(includeInstance: boolean, msg: HomeserverEvent): HomeserverEvent.AsObject;
-  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-  static serializeBinaryToWriter(message: HomeserverEvent, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): HomeserverEvent;
-  static deserializeBinaryFromReader(message: HomeserverEvent, reader: jspb.BinaryReader): HomeserverEvent;
-}
-
-export namespace HomeserverEvent {
-  export type AsObject = {
-    guildAddedToList?: HomeserverEvent.GuildAddedToList.AsObject,
   }
 
   export class GuildAddedToList extends jspb.Message {
@@ -1474,71 +1953,15 @@ export namespace HomeserverEvent {
     }
   }
 
-  export enum EventCase {
-    EVENT_NOT_SET = 0,
-    GUILD_ADDED_TO_LIST = 1,
-  }
-}
+  export class ActionPerformed extends jspb.Message {
+    getGuildId(): string;
+    setGuildId(value: string): void;
 
-export class StreamHomeserverEventsRequest extends jspb.Message {
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): StreamHomeserverEventsRequest.AsObject;
-  static toObject(includeInstance: boolean, msg: StreamHomeserverEventsRequest): StreamHomeserverEventsRequest.AsObject;
-  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-  static serializeBinaryToWriter(message: StreamHomeserverEventsRequest, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): StreamHomeserverEventsRequest;
-  static deserializeBinaryFromReader(message: StreamHomeserverEventsRequest, reader: jspb.BinaryReader): StreamHomeserverEventsRequest;
-}
+    getChannelId(): string;
+    setChannelId(value: string): void;
 
-export namespace StreamHomeserverEventsRequest {
-  export type AsObject = {
-  }
-}
-
-export class StreamActionEventsRequest extends jspb.Message {
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): StreamActionEventsRequest.AsObject;
-  static toObject(includeInstance: boolean, msg: StreamActionEventsRequest): StreamActionEventsRequest.AsObject;
-  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-  static serializeBinaryToWriter(message: StreamActionEventsRequest, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): StreamActionEventsRequest;
-  static deserializeBinaryFromReader(message: StreamActionEventsRequest, reader: jspb.BinaryReader): StreamActionEventsRequest;
-}
-
-export namespace StreamActionEventsRequest {
-  export type AsObject = {
-  }
-}
-
-export class ActionEvent extends jspb.Message {
-  hasAction(): boolean;
-  clearAction(): void;
-  getAction(): ActionEvent.Action | undefined;
-  setAction(value?: ActionEvent.Action): void;
-
-  getEventCase(): ActionEvent.EventCase;
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): ActionEvent.AsObject;
-  static toObject(includeInstance: boolean, msg: ActionEvent): ActionEvent.AsObject;
-  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-  static serializeBinaryToWriter(message: ActionEvent, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): ActionEvent;
-  static deserializeBinaryFromReader(message: ActionEvent, reader: jspb.BinaryReader): ActionEvent;
-}
-
-export namespace ActionEvent {
-  export type AsObject = {
-    action?: ActionEvent.Action.AsObject,
-  }
-
-  export class Action extends jspb.Message {
-    hasLocation(): boolean;
-    clearLocation(): void;
-    getLocation(): Location | undefined;
-    setLocation(value?: Location): void;
+    getMessageId(): string;
+    setMessageId(value: string): void;
 
     getActionId(): string;
     setActionId(value: string): void;
@@ -1547,18 +1970,20 @@ export namespace ActionEvent {
     setActionData(value: string): void;
 
     serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): Action.AsObject;
-    static toObject(includeInstance: boolean, msg: Action): Action.AsObject;
+    toObject(includeInstance?: boolean): ActionPerformed.AsObject;
+    static toObject(includeInstance: boolean, msg: ActionPerformed): ActionPerformed.AsObject;
     static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
     static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: Action, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): Action;
-    static deserializeBinaryFromReader(message: Action, reader: jspb.BinaryReader): Action;
+    static serializeBinaryToWriter(message: ActionPerformed, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): ActionPerformed;
+    static deserializeBinaryFromReader(message: ActionPerformed, reader: jspb.BinaryReader): ActionPerformed;
   }
 
-  export namespace Action {
+  export namespace ActionPerformed {
     export type AsObject = {
-      location?: Location.AsObject,
+      guildId: string,
+      channelId: string,
+      messageId: string,
       actionId: string,
       actionData: string,
     }
@@ -1566,7 +1991,19 @@ export namespace ActionEvent {
 
   export enum EventCase {
     EVENT_NOT_SET = 0,
-    ACTION = 1,
+    GUILD_ADDED_TO_LIST = 1,
+    GUILD_REMOVED_FROM_LIST = 2,
+    ACTION_PERFORMED = 3,
+    SENT_MESSAGE = 4,
+    EDITED_MESSAGE = 5,
+    DELETED_MESSAGE = 6,
+    CREATED_CHANNEL = 7,
+    EDITED_CHANNEL = 8,
+    DELETED_CHANNEL = 9,
+    EDITED_GUILD = 10,
+    DELETED_GUILD = 11,
+    JOINED_MEMBER = 12,
+    LEFT_MEMBER = 13,
   }
 }
 
@@ -1591,10 +2028,8 @@ export namespace JoinGuildRequest {
 }
 
 export class JoinGuildResponse extends jspb.Message {
-  hasLocation(): boolean;
-  clearLocation(): void;
-  getLocation(): Location | undefined;
-  setLocation(value?: Location): void;
+  getGuildId(): string;
+  setGuildId(value: string): void;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): JoinGuildResponse.AsObject;
@@ -1608,15 +2043,13 @@ export class JoinGuildResponse extends jspb.Message {
 
 export namespace JoinGuildResponse {
   export type AsObject = {
-    location?: Location.AsObject,
+    guildId: string,
   }
 }
 
 export class LeaveGuildRequest extends jspb.Message {
-  hasLocation(): boolean;
-  clearLocation(): void;
-  getLocation(): Location | undefined;
-  setLocation(value?: Location): void;
+  getGuildId(): string;
+  setGuildId(value: string): void;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): LeaveGuildRequest.AsObject;
@@ -1630,15 +2063,19 @@ export class LeaveGuildRequest extends jspb.Message {
 
 export namespace LeaveGuildRequest {
   export type AsObject = {
-    location?: Location.AsObject,
+    guildId: string,
   }
 }
 
 export class TriggerActionRequest extends jspb.Message {
-  hasLocation(): boolean;
-  clearLocation(): void;
-  getLocation(): Location | undefined;
-  setLocation(value?: Location): void;
+  getGuildId(): string;
+  setGuildId(value: string): void;
+
+  getChannelId(): string;
+  setChannelId(value: string): void;
+
+  getMessageId(): string;
+  setMessageId(value: string): void;
 
   getActionId(): string;
   setActionId(value: string): void;
@@ -1658,17 +2095,20 @@ export class TriggerActionRequest extends jspb.Message {
 
 export namespace TriggerActionRequest {
   export type AsObject = {
-    location?: Location.AsObject,
+    guildId: string,
+    channelId: string,
+    messageId: string,
     actionId: string,
     actionData: string,
   }
 }
 
 export class SendMessageRequest extends jspb.Message {
-  hasLocation(): boolean;
-  clearLocation(): void;
-  getLocation(): Location | undefined;
-  setLocation(value?: Location): void;
+  getGuildId(): string;
+  setGuildId(value: string): void;
+
+  getChannelId(): string;
+  setChannelId(value: string): void;
 
   getContent(): string;
   setContent(value: string): void;
@@ -1688,6 +2128,14 @@ export class SendMessageRequest extends jspb.Message {
   setAttachmentsList(value: Array<string>): void;
   addAttachments(value: string, index?: number): string;
 
+  getInReplyTo(): number;
+  setInReplyTo(value: number): void;
+
+  hasOverrides(): boolean;
+  clearOverrides(): void;
+  getOverrides(): Override | undefined;
+  setOverrides(value?: Override): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): SendMessageRequest.AsObject;
   static toObject(includeInstance: boolean, msg: SendMessageRequest): SendMessageRequest.AsObject;
@@ -1700,11 +2148,34 @@ export class SendMessageRequest extends jspb.Message {
 
 export namespace SendMessageRequest {
   export type AsObject = {
-    location?: Location.AsObject,
+    guildId: string,
+    channelId: string,
     content: string,
     actionsList: Array<Action.AsObject>,
     embedsList: Array<Embed.AsObject>,
     attachmentsList: Array<string>,
+    inReplyTo: number,
+    overrides?: Override.AsObject,
+  }
+}
+
+export class SendMessageResponse extends jspb.Message {
+  getMessageId(): string;
+  setMessageId(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): SendMessageResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: SendMessageResponse): SendMessageResponse.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: SendMessageResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): SendMessageResponse;
+  static deserializeBinaryFromReader(message: SendMessageResponse, reader: jspb.BinaryReader): SendMessageResponse;
+}
+
+export namespace SendMessageResponse {
+  export type AsObject = {
+    messageId: string,
   }
 }
 
@@ -1744,6 +2215,46 @@ export class AddGuildToGuildListResponse extends jspb.Message {
 }
 
 export namespace AddGuildToGuildListResponse {
+  export type AsObject = {
+  }
+}
+
+export class RemoveGuildFromGuildListRequest extends jspb.Message {
+  getGuildId(): string;
+  setGuildId(value: string): void;
+
+  getHomeserver(): string;
+  setHomeserver(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): RemoveGuildFromGuildListRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: RemoveGuildFromGuildListRequest): RemoveGuildFromGuildListRequest.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: RemoveGuildFromGuildListRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): RemoveGuildFromGuildListRequest;
+  static deserializeBinaryFromReader(message: RemoveGuildFromGuildListRequest, reader: jspb.BinaryReader): RemoveGuildFromGuildListRequest;
+}
+
+export namespace RemoveGuildFromGuildListRequest {
+  export type AsObject = {
+    guildId: string,
+    homeserver: string,
+  }
+}
+
+export class RemoveGuildFromGuildListResponse extends jspb.Message {
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): RemoveGuildFromGuildListResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: RemoveGuildFromGuildListResponse): RemoveGuildFromGuildListResponse.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: RemoveGuildFromGuildListResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): RemoveGuildFromGuildListResponse;
+  static deserializeBinaryFromReader(message: RemoveGuildFromGuildListResponse, reader: jspb.BinaryReader): RemoveGuildFromGuildListResponse;
+}
+
+export namespace RemoveGuildFromGuildListResponse {
   export type AsObject = {
   }
 }
