@@ -1566,9 +1566,6 @@ export namespace Event {
   }
 
   export class MessageSent extends jspb.Message {
-    getGuildId(): string;
-    setGuildId(value: string): void;
-
     hasMessage(): boolean;
     clearMessage(): void;
     getMessage(): Message | undefined;
@@ -1586,7 +1583,6 @@ export namespace Event {
 
   export namespace MessageSent {
     export type AsObject = {
-      guildId: string,
       message?: Message.AsObject,
     }
   }

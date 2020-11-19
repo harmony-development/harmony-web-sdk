@@ -12222,7 +12222,6 @@ proto.protocol.core.v1.Event.MessageSent.prototype.toObject = function(opt_inclu
  */
 proto.protocol.core.v1.Event.MessageSent.toObject = function(includeInstance, msg) {
   var f, obj = {
-    guildId: jspb.Message.getFieldWithDefault(msg, 1, "0"),
     message: (f = msg.getMessage()) && proto.protocol.core.v1.Message.toObject(includeInstance, f)
   };
 
@@ -12260,10 +12259,6 @@ proto.protocol.core.v1.Event.MessageSent.deserializeBinaryFromReader = function(
     }
     var field = reader.getFieldNumber();
     switch (field) {
-    case 1:
-      var value = /** @type {string} */ (reader.readUint64String());
-      msg.setGuildId(value);
-      break;
     case 2:
       var value = new proto.protocol.core.v1.Message;
       reader.readMessage(value,proto.protocol.core.v1.Message.deserializeBinaryFromReader);
@@ -12298,13 +12293,6 @@ proto.protocol.core.v1.Event.MessageSent.prototype.serializeBinary = function() 
  */
 proto.protocol.core.v1.Event.MessageSent.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getGuildId();
-  if (parseInt(f, 10) !== 0) {
-    writer.writeUint64String(
-      1,
-      f
-    );
-  }
   f = message.getMessage();
   if (f != null) {
     writer.writeMessage(
@@ -12313,24 +12301,6 @@ proto.protocol.core.v1.Event.MessageSent.serializeBinaryToWriter = function(mess
       proto.protocol.core.v1.Message.serializeBinaryToWriter
     );
   }
-};
-
-
-/**
- * optional uint64 guild_id = 1;
- * @return {string}
- */
-proto.protocol.core.v1.Event.MessageSent.prototype.getGuildId = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, "0"));
-};
-
-
-/**
- * @param {string} value
- * @return {!proto.protocol.core.v1.Event.MessageSent} returns this
- */
-proto.protocol.core.v1.Event.MessageSent.prototype.setGuildId = function(value) {
-  return jspb.Message.setProto3StringIntField(this, 1, value);
 };
 
 
