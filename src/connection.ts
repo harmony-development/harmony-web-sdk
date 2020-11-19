@@ -343,7 +343,7 @@ export class Connection {
     }
     req.setGuildId(guildID);
     req.setChannelId(channelID);
-    req.setGuildId(messageID);
+    req.setMessageId(messageID);
 
     return this.unaryReq(CoreService.UpdateMessage, req, true);
   }
@@ -368,7 +368,7 @@ export class Connection {
     const req = new DeleteMessageRequest();
     req.setGuildId(guildID);
     req.setChannelId(channelID);
-    req.setGuildId(messageID);
+    req.setMessageId(messageID);
     return this.unaryReq(CoreService.DeleteMessage, req, true);
   }
   async joinGuild(inviteID: string) {
@@ -393,7 +393,7 @@ export class Connection {
     const req = new TriggerActionRequest();
     req.setGuildId(guildID);
     req.setChannelId(channelID);
-    req.setGuildId(messageID);
+    req.setMessageId(messageID);
     req.setActionId(actionID);
     if (actionData) {
       req.setActionData(actionData);

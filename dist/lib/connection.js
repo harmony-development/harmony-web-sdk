@@ -272,7 +272,7 @@ var Connection = /** @class */ (function () {
             return __generator(this, function (_a) {
                 req = new core_pb_1.GetChannelMessagesRequest();
                 req.setGuildId(guildID);
-                req.setGuildId(channelID);
+                req.setChannelId(channelID);
                 if (beforeMessage) {
                     req.setBeforeMessage(beforeMessage);
                 }
@@ -297,7 +297,7 @@ var Connection = /** @class */ (function () {
             return __generator(this, function (_a) {
                 req = new core_pb_1.UpdateChannelNameRequest();
                 req.setGuildId(guildID);
-                req.setGuildId(channelID);
+                req.setChannelId(channelID);
                 req.setNewChannelName(newName);
                 return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.UpdateChannelName, req, true)];
             });
@@ -309,7 +309,7 @@ var Connection = /** @class */ (function () {
             return __generator(this, function (_a) {
                 req = new core_pb_1.UpdateMessageRequest();
                 req.setGuildId(guildID);
-                req.setGuildId(channelID);
+                req.setChannelId(channelID);
                 if (newContent) {
                     req.setUpdateContent(true);
                     req.setContent(newContent);
@@ -327,8 +327,8 @@ var Connection = /** @class */ (function () {
                     req.setEmbedsList(newEmbeds);
                 }
                 req.setGuildId(guildID);
-                req.setGuildId(channelID);
-                req.setGuildId(messageID);
+                req.setChannelId(channelID);
+                req.setMessageId(messageID);
                 return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.UpdateMessage, req, true)];
             });
         });
@@ -360,7 +360,7 @@ var Connection = /** @class */ (function () {
             return __generator(this, function (_a) {
                 req = new core_pb_1.DeleteChannelRequest();
                 req.setGuildId(guildID);
-                req.setGuildId(channelID);
+                req.setChannelId(channelID);
                 return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.DeleteChannel, req, true)];
             });
         });
@@ -371,8 +371,8 @@ var Connection = /** @class */ (function () {
             return __generator(this, function (_a) {
                 req = new core_pb_1.DeleteMessageRequest();
                 req.setGuildId(guildID);
-                req.setGuildId(channelID);
-                req.setGuildId(messageID);
+                req.setChannelId(channelID);
+                req.setMessageId(messageID);
                 return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.DeleteMessage, req, true)];
             });
         });
@@ -403,8 +403,8 @@ var Connection = /** @class */ (function () {
             return __generator(this, function (_a) {
                 req = new core_pb_1.TriggerActionRequest();
                 req.setGuildId(guildID);
-                req.setGuildId(channelID);
-                req.setGuildId(messageID);
+                req.setChannelId(channelID);
+                req.setMessageId(messageID);
                 req.setActionId(actionID);
                 if (actionData) {
                     req.setActionData(actionData);
