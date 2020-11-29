@@ -284,6 +284,78 @@ type CoreServiceSendMessage = {
   readonly responseType: typeof core_v1_core_pb.SendMessageResponse;
 };
 
+type CoreServiceQueryHasPermission = {
+  readonly methodName: string;
+  readonly service: typeof CoreService;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof core_v1_core_pb.QueryPermissionsRequest;
+  readonly responseType: typeof core_v1_core_pb.QueryPermissionsResponse;
+};
+
+type CoreServiceSetPermissions = {
+  readonly methodName: string;
+  readonly service: typeof CoreService;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof core_v1_core_pb.SetPermissionsRequest;
+  readonly responseType: typeof google_protobuf_empty_pb.Empty;
+};
+
+type CoreServiceGetPermissions = {
+  readonly methodName: string;
+  readonly service: typeof CoreService;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof core_v1_core_pb.GetPermissionsRequest;
+  readonly responseType: typeof core_v1_core_pb.GetPermissionsResponse;
+};
+
+type CoreServiceGetGuildRoles = {
+  readonly methodName: string;
+  readonly service: typeof CoreService;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof core_v1_core_pb.GetGuildRolesRequest;
+  readonly responseType: typeof core_v1_core_pb.GetGuildRolesResponse;
+};
+
+type CoreServiceAddGuildRole = {
+  readonly methodName: string;
+  readonly service: typeof CoreService;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof core_v1_core_pb.AddGuildRoleRequest;
+  readonly responseType: typeof core_v1_core_pb.AddGuildRoleResponse;
+};
+
+type CoreServiceDeleteGuildRole = {
+  readonly methodName: string;
+  readonly service: typeof CoreService;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof core_v1_core_pb.DeleteGuildRoleRequest;
+  readonly responseType: typeof google_protobuf_empty_pb.Empty;
+};
+
+type CoreServiceManageUserRoles = {
+  readonly methodName: string;
+  readonly service: typeof CoreService;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof core_v1_core_pb.ManageUserRolesRequest;
+  readonly responseType: typeof google_protobuf_empty_pb.Empty;
+};
+
+type CoreServiceGetUserRoles = {
+  readonly methodName: string;
+  readonly service: typeof CoreService;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof core_v1_core_pb.GetUserRolesRequest;
+  readonly responseType: typeof core_v1_core_pb.GetUserRolesResponse;
+};
+
 type CoreServiceStreamEvents = {
   readonly methodName: string;
   readonly service: typeof CoreService;
@@ -326,6 +398,14 @@ export class CoreService {
   static readonly LeaveGuild: CoreServiceLeaveGuild;
   static readonly TriggerAction: CoreServiceTriggerAction;
   static readonly SendMessage: CoreServiceSendMessage;
+  static readonly QueryHasPermission: CoreServiceQueryHasPermission;
+  static readonly SetPermissions: CoreServiceSetPermissions;
+  static readonly GetPermissions: CoreServiceGetPermissions;
+  static readonly GetGuildRoles: CoreServiceGetGuildRoles;
+  static readonly AddGuildRole: CoreServiceAddGuildRole;
+  static readonly DeleteGuildRole: CoreServiceDeleteGuildRole;
+  static readonly ManageUserRoles: CoreServiceManageUserRoles;
+  static readonly GetUserRoles: CoreServiceGetUserRoles;
   static readonly StreamEvents: CoreServiceStreamEvents;
 }
 
@@ -639,6 +719,78 @@ export class CoreServiceClient {
   sendMessage(
     requestMessage: core_v1_core_pb.SendMessageRequest,
     callback: (error: ServiceError|null, responseMessage: core_v1_core_pb.SendMessageResponse|null) => void
+  ): UnaryResponse;
+  queryHasPermission(
+    requestMessage: core_v1_core_pb.QueryPermissionsRequest,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: core_v1_core_pb.QueryPermissionsResponse|null) => void
+  ): UnaryResponse;
+  queryHasPermission(
+    requestMessage: core_v1_core_pb.QueryPermissionsRequest,
+    callback: (error: ServiceError|null, responseMessage: core_v1_core_pb.QueryPermissionsResponse|null) => void
+  ): UnaryResponse;
+  setPermissions(
+    requestMessage: core_v1_core_pb.SetPermissionsRequest,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: google_protobuf_empty_pb.Empty|null) => void
+  ): UnaryResponse;
+  setPermissions(
+    requestMessage: core_v1_core_pb.SetPermissionsRequest,
+    callback: (error: ServiceError|null, responseMessage: google_protobuf_empty_pb.Empty|null) => void
+  ): UnaryResponse;
+  getPermissions(
+    requestMessage: core_v1_core_pb.GetPermissionsRequest,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: core_v1_core_pb.GetPermissionsResponse|null) => void
+  ): UnaryResponse;
+  getPermissions(
+    requestMessage: core_v1_core_pb.GetPermissionsRequest,
+    callback: (error: ServiceError|null, responseMessage: core_v1_core_pb.GetPermissionsResponse|null) => void
+  ): UnaryResponse;
+  getGuildRoles(
+    requestMessage: core_v1_core_pb.GetGuildRolesRequest,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: core_v1_core_pb.GetGuildRolesResponse|null) => void
+  ): UnaryResponse;
+  getGuildRoles(
+    requestMessage: core_v1_core_pb.GetGuildRolesRequest,
+    callback: (error: ServiceError|null, responseMessage: core_v1_core_pb.GetGuildRolesResponse|null) => void
+  ): UnaryResponse;
+  addGuildRole(
+    requestMessage: core_v1_core_pb.AddGuildRoleRequest,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: core_v1_core_pb.AddGuildRoleResponse|null) => void
+  ): UnaryResponse;
+  addGuildRole(
+    requestMessage: core_v1_core_pb.AddGuildRoleRequest,
+    callback: (error: ServiceError|null, responseMessage: core_v1_core_pb.AddGuildRoleResponse|null) => void
+  ): UnaryResponse;
+  deleteGuildRole(
+    requestMessage: core_v1_core_pb.DeleteGuildRoleRequest,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: google_protobuf_empty_pb.Empty|null) => void
+  ): UnaryResponse;
+  deleteGuildRole(
+    requestMessage: core_v1_core_pb.DeleteGuildRoleRequest,
+    callback: (error: ServiceError|null, responseMessage: google_protobuf_empty_pb.Empty|null) => void
+  ): UnaryResponse;
+  manageUserRoles(
+    requestMessage: core_v1_core_pb.ManageUserRolesRequest,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: google_protobuf_empty_pb.Empty|null) => void
+  ): UnaryResponse;
+  manageUserRoles(
+    requestMessage: core_v1_core_pb.ManageUserRolesRequest,
+    callback: (error: ServiceError|null, responseMessage: google_protobuf_empty_pb.Empty|null) => void
+  ): UnaryResponse;
+  getUserRoles(
+    requestMessage: core_v1_core_pb.GetUserRolesRequest,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: core_v1_core_pb.GetUserRolesResponse|null) => void
+  ): UnaryResponse;
+  getUserRoles(
+    requestMessage: core_v1_core_pb.GetUserRolesRequest,
+    callback: (error: ServiceError|null, responseMessage: core_v1_core_pb.GetUserRolesResponse|null) => void
   ): UnaryResponse;
   streamEvents(metadata?: grpc.Metadata): BidirectionalStream<core_v1_core_pb.StreamEventsRequest, core_v1_core_pb.Event>;
 }

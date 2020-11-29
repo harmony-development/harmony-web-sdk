@@ -290,6 +290,78 @@ CoreService.SendMessage = {
   responseType: core_v1_core_pb.SendMessageResponse
 };
 
+CoreService.QueryHasPermission = {
+  methodName: "QueryHasPermission",
+  service: CoreService,
+  requestStream: false,
+  responseStream: false,
+  requestType: core_v1_core_pb.QueryPermissionsRequest,
+  responseType: core_v1_core_pb.QueryPermissionsResponse
+};
+
+CoreService.SetPermissions = {
+  methodName: "SetPermissions",
+  service: CoreService,
+  requestStream: false,
+  responseStream: false,
+  requestType: core_v1_core_pb.SetPermissionsRequest,
+  responseType: google_protobuf_empty_pb.Empty
+};
+
+CoreService.GetPermissions = {
+  methodName: "GetPermissions",
+  service: CoreService,
+  requestStream: false,
+  responseStream: false,
+  requestType: core_v1_core_pb.GetPermissionsRequest,
+  responseType: core_v1_core_pb.GetPermissionsResponse
+};
+
+CoreService.GetGuildRoles = {
+  methodName: "GetGuildRoles",
+  service: CoreService,
+  requestStream: false,
+  responseStream: false,
+  requestType: core_v1_core_pb.GetGuildRolesRequest,
+  responseType: core_v1_core_pb.GetGuildRolesResponse
+};
+
+CoreService.AddGuildRole = {
+  methodName: "AddGuildRole",
+  service: CoreService,
+  requestStream: false,
+  responseStream: false,
+  requestType: core_v1_core_pb.AddGuildRoleRequest,
+  responseType: core_v1_core_pb.AddGuildRoleResponse
+};
+
+CoreService.DeleteGuildRole = {
+  methodName: "DeleteGuildRole",
+  service: CoreService,
+  requestStream: false,
+  responseStream: false,
+  requestType: core_v1_core_pb.DeleteGuildRoleRequest,
+  responseType: google_protobuf_empty_pb.Empty
+};
+
+CoreService.ManageUserRoles = {
+  methodName: "ManageUserRoles",
+  service: CoreService,
+  requestStream: false,
+  responseStream: false,
+  requestType: core_v1_core_pb.ManageUserRolesRequest,
+  responseType: google_protobuf_empty_pb.Empty
+};
+
+CoreService.GetUserRoles = {
+  methodName: "GetUserRoles",
+  service: CoreService,
+  requestStream: false,
+  responseStream: false,
+  requestType: core_v1_core_pb.GetUserRolesRequest,
+  responseType: core_v1_core_pb.GetUserRolesResponse
+};
+
 CoreService.StreamEvents = {
   methodName: "StreamEvents",
   service: CoreService,
@@ -1241,6 +1313,254 @@ CoreServiceClient.prototype.sendMessage = function sendMessage(requestMessage, m
     callback = arguments[1];
   }
   var client = grpc.unary(CoreService.SendMessage, {
+    request: requestMessage,
+    host: this.serviceHost,
+    metadata: metadata,
+    transport: this.options.transport,
+    debug: this.options.debug,
+    onEnd: function (response) {
+      if (callback) {
+        if (response.status !== grpc.Code.OK) {
+          var err = new Error(response.statusMessage);
+          err.code = response.status;
+          err.metadata = response.trailers;
+          callback(err, null);
+        } else {
+          callback(null, response.message);
+        }
+      }
+    }
+  });
+  return {
+    cancel: function () {
+      callback = null;
+      client.close();
+    }
+  };
+};
+
+CoreServiceClient.prototype.queryHasPermission = function queryHasPermission(requestMessage, metadata, callback) {
+  if (arguments.length === 2) {
+    callback = arguments[1];
+  }
+  var client = grpc.unary(CoreService.QueryHasPermission, {
+    request: requestMessage,
+    host: this.serviceHost,
+    metadata: metadata,
+    transport: this.options.transport,
+    debug: this.options.debug,
+    onEnd: function (response) {
+      if (callback) {
+        if (response.status !== grpc.Code.OK) {
+          var err = new Error(response.statusMessage);
+          err.code = response.status;
+          err.metadata = response.trailers;
+          callback(err, null);
+        } else {
+          callback(null, response.message);
+        }
+      }
+    }
+  });
+  return {
+    cancel: function () {
+      callback = null;
+      client.close();
+    }
+  };
+};
+
+CoreServiceClient.prototype.setPermissions = function setPermissions(requestMessage, metadata, callback) {
+  if (arguments.length === 2) {
+    callback = arguments[1];
+  }
+  var client = grpc.unary(CoreService.SetPermissions, {
+    request: requestMessage,
+    host: this.serviceHost,
+    metadata: metadata,
+    transport: this.options.transport,
+    debug: this.options.debug,
+    onEnd: function (response) {
+      if (callback) {
+        if (response.status !== grpc.Code.OK) {
+          var err = new Error(response.statusMessage);
+          err.code = response.status;
+          err.metadata = response.trailers;
+          callback(err, null);
+        } else {
+          callback(null, response.message);
+        }
+      }
+    }
+  });
+  return {
+    cancel: function () {
+      callback = null;
+      client.close();
+    }
+  };
+};
+
+CoreServiceClient.prototype.getPermissions = function getPermissions(requestMessage, metadata, callback) {
+  if (arguments.length === 2) {
+    callback = arguments[1];
+  }
+  var client = grpc.unary(CoreService.GetPermissions, {
+    request: requestMessage,
+    host: this.serviceHost,
+    metadata: metadata,
+    transport: this.options.transport,
+    debug: this.options.debug,
+    onEnd: function (response) {
+      if (callback) {
+        if (response.status !== grpc.Code.OK) {
+          var err = new Error(response.statusMessage);
+          err.code = response.status;
+          err.metadata = response.trailers;
+          callback(err, null);
+        } else {
+          callback(null, response.message);
+        }
+      }
+    }
+  });
+  return {
+    cancel: function () {
+      callback = null;
+      client.close();
+    }
+  };
+};
+
+CoreServiceClient.prototype.getGuildRoles = function getGuildRoles(requestMessage, metadata, callback) {
+  if (arguments.length === 2) {
+    callback = arguments[1];
+  }
+  var client = grpc.unary(CoreService.GetGuildRoles, {
+    request: requestMessage,
+    host: this.serviceHost,
+    metadata: metadata,
+    transport: this.options.transport,
+    debug: this.options.debug,
+    onEnd: function (response) {
+      if (callback) {
+        if (response.status !== grpc.Code.OK) {
+          var err = new Error(response.statusMessage);
+          err.code = response.status;
+          err.metadata = response.trailers;
+          callback(err, null);
+        } else {
+          callback(null, response.message);
+        }
+      }
+    }
+  });
+  return {
+    cancel: function () {
+      callback = null;
+      client.close();
+    }
+  };
+};
+
+CoreServiceClient.prototype.addGuildRole = function addGuildRole(requestMessage, metadata, callback) {
+  if (arguments.length === 2) {
+    callback = arguments[1];
+  }
+  var client = grpc.unary(CoreService.AddGuildRole, {
+    request: requestMessage,
+    host: this.serviceHost,
+    metadata: metadata,
+    transport: this.options.transport,
+    debug: this.options.debug,
+    onEnd: function (response) {
+      if (callback) {
+        if (response.status !== grpc.Code.OK) {
+          var err = new Error(response.statusMessage);
+          err.code = response.status;
+          err.metadata = response.trailers;
+          callback(err, null);
+        } else {
+          callback(null, response.message);
+        }
+      }
+    }
+  });
+  return {
+    cancel: function () {
+      callback = null;
+      client.close();
+    }
+  };
+};
+
+CoreServiceClient.prototype.deleteGuildRole = function deleteGuildRole(requestMessage, metadata, callback) {
+  if (arguments.length === 2) {
+    callback = arguments[1];
+  }
+  var client = grpc.unary(CoreService.DeleteGuildRole, {
+    request: requestMessage,
+    host: this.serviceHost,
+    metadata: metadata,
+    transport: this.options.transport,
+    debug: this.options.debug,
+    onEnd: function (response) {
+      if (callback) {
+        if (response.status !== grpc.Code.OK) {
+          var err = new Error(response.statusMessage);
+          err.code = response.status;
+          err.metadata = response.trailers;
+          callback(err, null);
+        } else {
+          callback(null, response.message);
+        }
+      }
+    }
+  });
+  return {
+    cancel: function () {
+      callback = null;
+      client.close();
+    }
+  };
+};
+
+CoreServiceClient.prototype.manageUserRoles = function manageUserRoles(requestMessage, metadata, callback) {
+  if (arguments.length === 2) {
+    callback = arguments[1];
+  }
+  var client = grpc.unary(CoreService.ManageUserRoles, {
+    request: requestMessage,
+    host: this.serviceHost,
+    metadata: metadata,
+    transport: this.options.transport,
+    debug: this.options.debug,
+    onEnd: function (response) {
+      if (callback) {
+        if (response.status !== grpc.Code.OK) {
+          var err = new Error(response.statusMessage);
+          err.code = response.status;
+          err.metadata = response.trailers;
+          callback(err, null);
+        } else {
+          callback(null, response.message);
+        }
+      }
+    }
+  });
+  return {
+    cancel: function () {
+      callback = null;
+      client.close();
+    }
+  };
+};
+
+CoreServiceClient.prototype.getUserRoles = function getUserRoles(requestMessage, metadata, callback) {
+  if (arguments.length === 2) {
+    callback = arguments[1];
+  }
+  var client = grpc.unary(CoreService.GetUserRoles, {
     request: requestMessage,
     host: this.serviceHost,
     metadata: metadata,
