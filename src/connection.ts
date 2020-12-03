@@ -426,14 +426,22 @@ export class Connection {
     return this.unaryReq(CoreService.SendMessage, req, true);
   }
 
-  async uploadFile(f: File) {
+  async uploadFile(
+    f: File
+  ): Promise<{
+    id: string;
+  }> {
     const data = new FormData();
     data.set("filename", f.name);
     data.set("contenttype", f.type);
     data.set("file", f);
-    return fetch(`${this.host}/media/upload`, {
+    const resp = await fetch(`${this.host}/media/upload`, {
       body: data,
     });
+    const asJSON = await resp.json();
+    return {
+      id: asJSON.id,
+    };
   }
 
   async getGuildList() {

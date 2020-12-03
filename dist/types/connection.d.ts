@@ -56,7 +56,9 @@ export declare class Connection {
     leaveGuild(guildID: string): Promise<UnaryOutput<import("google-protobuf/google/protobuf/empty_pb").Empty>>;
     triggerAction(guildID: string, channelID: string, messageID: string, actionID: string, actionData?: string): Promise<UnaryOutput<import("google-protobuf/google/protobuf/empty_pb").Empty>>;
     sendMessage(guildID: string, channelID: string, content?: string, attachments?: string[], embeds?: Embed[], actions?: Action[]): Promise<UnaryOutput<import("../protocol/core/v1/core_pb").SendMessageResponse>>;
-    uploadFile(f: File): Promise<Response>;
+    uploadFile(f: File): Promise<{
+        id: string;
+    }>;
     getGuildList(): Promise<UnaryOutput<import("../protocol/core/v1/core_pb").GetGuildListResponse>>;
     getUser(userID: string): Promise<UnaryOutput<import("../protocol/profile/v1/profile_pb").GetUserResponse>>;
     getUserMetadata(appID: string): Promise<void>;

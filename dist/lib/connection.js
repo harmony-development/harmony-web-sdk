@@ -437,15 +437,26 @@ var Connection = /** @class */ (function () {
     };
     Connection.prototype.uploadFile = function (f) {
         return __awaiter(this, void 0, void 0, function () {
-            var data;
+            var data, resp, asJSON;
             return __generator(this, function (_a) {
-                data = new FormData();
-                data.set("filename", f.name);
-                data.set("contenttype", f.type);
-                data.set("file", f);
-                return [2 /*return*/, fetch(this.host + "/media/upload", {
-                        body: data,
-                    })];
+                switch (_a.label) {
+                    case 0:
+                        data = new FormData();
+                        data.set("filename", f.name);
+                        data.set("contenttype", f.type);
+                        data.set("file", f);
+                        return [4 /*yield*/, fetch(this.host + "/media/upload", {
+                                body: data,
+                            })];
+                    case 1:
+                        resp = _a.sent();
+                        return [4 /*yield*/, resp.json()];
+                    case 2:
+                        asJSON = _a.sent();
+                        return [2 /*return*/, {
+                                id: asJSON.id,
+                            }];
+                }
             });
         });
     };
