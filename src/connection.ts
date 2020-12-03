@@ -437,6 +437,7 @@ export class Connection {
     data.set("file", f);
     const resp = await fetch(`${this.host}/media/upload`, {
       body: data,
+      method: "POST",
     });
     const asJSON = await resp.json();
     return {

@@ -447,6 +447,7 @@ var Connection = /** @class */ (function () {
                         data.set("file", f);
                         return [4 /*yield*/, fetch(this.host + "/media/upload", {
                                 body: data,
+                                method: "POST",
                             })];
                     case 1:
                         resp = _a.sent();
