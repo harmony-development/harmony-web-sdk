@@ -435,6 +435,20 @@ var Connection = /** @class */ (function () {
             });
         });
     };
+    Connection.prototype.uploadFile = function (f) {
+        return __awaiter(this, void 0, void 0, function () {
+            var data;
+            return __generator(this, function (_a) {
+                data = new FormData();
+                data.set("filename", f.name);
+                data.set("contenttype", f.type);
+                data.set("file", f);
+                return [2 /*return*/, fetch(this.host + "/media/upload", {
+                        body: data,
+                    })];
+            });
+        });
+    };
     Connection.prototype.getGuildList = function () {
         return __awaiter(this, void 0, void 0, function () {
             var req;

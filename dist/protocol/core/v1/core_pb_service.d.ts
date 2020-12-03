@@ -311,6 +311,15 @@ type CoreServiceGetPermissions = {
   readonly responseType: typeof core_v1_core_pb.GetPermissionsResponse;
 };
 
+type CoreServiceMoveRole = {
+  readonly methodName: string;
+  readonly service: typeof CoreService;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof core_v1_core_pb.MoveRoleRequest;
+  readonly responseType: typeof core_v1_core_pb.MoveRoleResponse;
+};
+
 type CoreServiceGetGuildRoles = {
   readonly methodName: string;
   readonly service: typeof CoreService;
@@ -327,6 +336,15 @@ type CoreServiceAddGuildRole = {
   readonly responseStream: false;
   readonly requestType: typeof core_v1_core_pb.AddGuildRoleRequest;
   readonly responseType: typeof core_v1_core_pb.AddGuildRoleResponse;
+};
+
+type CoreServiceModifyGuildRole = {
+  readonly methodName: string;
+  readonly service: typeof CoreService;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof core_v1_core_pb.ModifyGuildRoleRequest;
+  readonly responseType: typeof google_protobuf_empty_pb.Empty;
 };
 
 type CoreServiceDeleteGuildRole = {
@@ -401,8 +419,10 @@ export class CoreService {
   static readonly QueryHasPermission: CoreServiceQueryHasPermission;
   static readonly SetPermissions: CoreServiceSetPermissions;
   static readonly GetPermissions: CoreServiceGetPermissions;
+  static readonly MoveRole: CoreServiceMoveRole;
   static readonly GetGuildRoles: CoreServiceGetGuildRoles;
   static readonly AddGuildRole: CoreServiceAddGuildRole;
+  static readonly ModifyGuildRole: CoreServiceModifyGuildRole;
   static readonly DeleteGuildRole: CoreServiceDeleteGuildRole;
   static readonly ManageUserRoles: CoreServiceManageUserRoles;
   static readonly GetUserRoles: CoreServiceGetUserRoles;
@@ -747,6 +767,15 @@ export class CoreServiceClient {
     requestMessage: core_v1_core_pb.GetPermissionsRequest,
     callback: (error: ServiceError|null, responseMessage: core_v1_core_pb.GetPermissionsResponse|null) => void
   ): UnaryResponse;
+  moveRole(
+    requestMessage: core_v1_core_pb.MoveRoleRequest,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: core_v1_core_pb.MoveRoleResponse|null) => void
+  ): UnaryResponse;
+  moveRole(
+    requestMessage: core_v1_core_pb.MoveRoleRequest,
+    callback: (error: ServiceError|null, responseMessage: core_v1_core_pb.MoveRoleResponse|null) => void
+  ): UnaryResponse;
   getGuildRoles(
     requestMessage: core_v1_core_pb.GetGuildRolesRequest,
     metadata: grpc.Metadata,
@@ -764,6 +793,15 @@ export class CoreServiceClient {
   addGuildRole(
     requestMessage: core_v1_core_pb.AddGuildRoleRequest,
     callback: (error: ServiceError|null, responseMessage: core_v1_core_pb.AddGuildRoleResponse|null) => void
+  ): UnaryResponse;
+  modifyGuildRole(
+    requestMessage: core_v1_core_pb.ModifyGuildRoleRequest,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: google_protobuf_empty_pb.Empty|null) => void
+  ): UnaryResponse;
+  modifyGuildRole(
+    requestMessage: core_v1_core_pb.ModifyGuildRoleRequest,
+    callback: (error: ServiceError|null, responseMessage: google_protobuf_empty_pb.Empty|null) => void
   ): UnaryResponse;
   deleteGuildRole(
     requestMessage: core_v1_core_pb.DeleteGuildRoleRequest,

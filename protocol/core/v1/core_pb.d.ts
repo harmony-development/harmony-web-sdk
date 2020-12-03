@@ -1541,6 +1541,11 @@ export class Event extends jspb.Message {
   getLeftMember(): Event.MemberLeft | undefined;
   setLeftMember(value?: Event.MemberLeft): void;
 
+  hasRoleMoved(): boolean;
+  clearRoleMoved(): void;
+  getRoleMoved(): Event.RoleMoved | undefined;
+  setRoleMoved(value?: Event.RoleMoved): void;
+
   getEventCase(): Event.EventCase;
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Event.AsObject;
@@ -1567,6 +1572,7 @@ export namespace Event {
     deletedGuild?: Event.GuildDeleted.AsObject,
     joinedMember?: Event.MemberJoined.AsObject,
     leftMember?: Event.MemberLeft.AsObject,
+    roleMoved?: Event.RoleMoved.AsObject,
   }
 
   export class MessageSent extends jspb.Message {
@@ -1989,6 +1995,30 @@ export namespace Event {
     }
   }
 
+  export class RoleMoved extends jspb.Message {
+    getGuildId(): string;
+    setGuildId(value: string): void;
+
+    getRoleId(): string;
+    setRoleId(value: string): void;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): RoleMoved.AsObject;
+    static toObject(includeInstance: boolean, msg: RoleMoved): RoleMoved.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: RoleMoved, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): RoleMoved;
+    static deserializeBinaryFromReader(message: RoleMoved, reader: jspb.BinaryReader): RoleMoved;
+  }
+
+  export namespace RoleMoved {
+    export type AsObject = {
+      guildId: string,
+      roleId: string,
+    }
+  }
+
   export enum EventCase {
     EVENT_NOT_SET = 0,
     GUILD_ADDED_TO_LIST = 1,
@@ -2004,6 +2034,7 @@ export namespace Event {
     DELETED_GUILD = 11,
     JOINED_MEMBER = 12,
     LEFT_MEMBER = 13,
+    ROLE_MOVED = 14,
   }
 }
 
@@ -2484,6 +2515,54 @@ export namespace Role {
   }
 }
 
+export class MoveRoleRequest extends jspb.Message {
+  getGuildId(): string;
+  setGuildId(value: string): void;
+
+  getRoleId(): string;
+  setRoleId(value: string): void;
+
+  getBeforeId(): string;
+  setBeforeId(value: string): void;
+
+  getAfterId(): string;
+  setAfterId(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): MoveRoleRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: MoveRoleRequest): MoveRoleRequest.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: MoveRoleRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): MoveRoleRequest;
+  static deserializeBinaryFromReader(message: MoveRoleRequest, reader: jspb.BinaryReader): MoveRoleRequest;
+}
+
+export namespace MoveRoleRequest {
+  export type AsObject = {
+    guildId: string,
+    roleId: string,
+    beforeId: string,
+    afterId: string,
+  }
+}
+
+export class MoveRoleResponse extends jspb.Message {
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): MoveRoleResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: MoveRoleResponse): MoveRoleResponse.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: MoveRoleResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): MoveRoleResponse;
+  static deserializeBinaryFromReader(message: MoveRoleResponse, reader: jspb.BinaryReader): MoveRoleResponse;
+}
+
+export namespace MoveRoleResponse {
+  export type AsObject = {
+  }
+}
+
 export class GetGuildRolesRequest extends jspb.Message {
   getGuildId(): string;
   setGuildId(value: string): void;
@@ -2573,11 +2652,11 @@ export namespace AddGuildRoleResponse {
 }
 
 export class DeleteGuildRoleRequest extends jspb.Message {
-  getGuildId(): number;
-  setGuildId(value: number): void;
+  getGuildId(): string;
+  setGuildId(value: string): void;
 
-  getRoleId(): number;
-  setRoleId(value: number): void;
+  getRoleId(): string;
+  setRoleId(value: string): void;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): DeleteGuildRoleRequest.AsObject;
@@ -2591,8 +2670,50 @@ export class DeleteGuildRoleRequest extends jspb.Message {
 
 export namespace DeleteGuildRoleRequest {
   export type AsObject = {
-    guildId: number,
-    roleId: number,
+    guildId: string,
+    roleId: string,
+  }
+}
+
+export class ModifyGuildRoleRequest extends jspb.Message {
+  getGuildId(): string;
+  setGuildId(value: string): void;
+
+  hasRole(): boolean;
+  clearRole(): void;
+  getRole(): Role | undefined;
+  setRole(value?: Role): void;
+
+  getModifyName(): boolean;
+  setModifyName(value: boolean): void;
+
+  getModifyColor(): boolean;
+  setModifyColor(value: boolean): void;
+
+  getModifyHoist(): boolean;
+  setModifyHoist(value: boolean): void;
+
+  getModifyPingable(): boolean;
+  setModifyPingable(value: boolean): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): ModifyGuildRoleRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: ModifyGuildRoleRequest): ModifyGuildRoleRequest.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: ModifyGuildRoleRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ModifyGuildRoleRequest;
+  static deserializeBinaryFromReader(message: ModifyGuildRoleRequest, reader: jspb.BinaryReader): ModifyGuildRoleRequest;
+}
+
+export namespace ModifyGuildRoleRequest {
+  export type AsObject = {
+    guildId: string,
+    role?: Role.AsObject,
+    modifyName: boolean,
+    modifyColor: boolean,
+    modifyHoist: boolean,
+    modifyPingable: boolean,
   }
 }
 

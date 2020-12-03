@@ -426,6 +426,16 @@ export class Connection {
     return this.unaryReq(CoreService.SendMessage, req, true);
   }
 
+  async uploadFile(f: File) {
+    const data = new FormData();
+    data.set("filename", f.name);
+    data.set("contenttype", f.type);
+    data.set("file", f);
+    return fetch(`${this.host}/media/upload`, {
+      body: data,
+    });
+  }
+
   async getGuildList() {
     const req = new GetGuildListRequest();
     return this.unaryReq(CoreService.GetGuildList, req, true);

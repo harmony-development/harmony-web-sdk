@@ -317,6 +317,15 @@ CoreService.GetPermissions = {
   responseType: core_v1_core_pb.GetPermissionsResponse
 };
 
+CoreService.MoveRole = {
+  methodName: "MoveRole",
+  service: CoreService,
+  requestStream: false,
+  responseStream: false,
+  requestType: core_v1_core_pb.MoveRoleRequest,
+  responseType: core_v1_core_pb.MoveRoleResponse
+};
+
 CoreService.GetGuildRoles = {
   methodName: "GetGuildRoles",
   service: CoreService,
@@ -333,6 +342,15 @@ CoreService.AddGuildRole = {
   responseStream: false,
   requestType: core_v1_core_pb.AddGuildRoleRequest,
   responseType: core_v1_core_pb.AddGuildRoleResponse
+};
+
+CoreService.ModifyGuildRole = {
+  methodName: "ModifyGuildRole",
+  service: CoreService,
+  requestStream: false,
+  responseStream: false,
+  requestType: core_v1_core_pb.ModifyGuildRoleRequest,
+  responseType: google_protobuf_empty_pb.Empty
 };
 
 CoreService.DeleteGuildRole = {
@@ -1432,6 +1450,37 @@ CoreServiceClient.prototype.getPermissions = function getPermissions(requestMess
   };
 };
 
+CoreServiceClient.prototype.moveRole = function moveRole(requestMessage, metadata, callback) {
+  if (arguments.length === 2) {
+    callback = arguments[1];
+  }
+  var client = grpc.unary(CoreService.MoveRole, {
+    request: requestMessage,
+    host: this.serviceHost,
+    metadata: metadata,
+    transport: this.options.transport,
+    debug: this.options.debug,
+    onEnd: function (response) {
+      if (callback) {
+        if (response.status !== grpc.Code.OK) {
+          var err = new Error(response.statusMessage);
+          err.code = response.status;
+          err.metadata = response.trailers;
+          callback(err, null);
+        } else {
+          callback(null, response.message);
+        }
+      }
+    }
+  });
+  return {
+    cancel: function () {
+      callback = null;
+      client.close();
+    }
+  };
+};
+
 CoreServiceClient.prototype.getGuildRoles = function getGuildRoles(requestMessage, metadata, callback) {
   if (arguments.length === 2) {
     callback = arguments[1];
@@ -1468,6 +1517,37 @@ CoreServiceClient.prototype.addGuildRole = function addGuildRole(requestMessage,
     callback = arguments[1];
   }
   var client = grpc.unary(CoreService.AddGuildRole, {
+    request: requestMessage,
+    host: this.serviceHost,
+    metadata: metadata,
+    transport: this.options.transport,
+    debug: this.options.debug,
+    onEnd: function (response) {
+      if (callback) {
+        if (response.status !== grpc.Code.OK) {
+          var err = new Error(response.statusMessage);
+          err.code = response.status;
+          err.metadata = response.trailers;
+          callback(err, null);
+        } else {
+          callback(null, response.message);
+        }
+      }
+    }
+  });
+  return {
+    cancel: function () {
+      callback = null;
+      client.close();
+    }
+  };
+};
+
+CoreServiceClient.prototype.modifyGuildRole = function modifyGuildRole(requestMessage, metadata, callback) {
+  if (arguments.length === 2) {
+    callback = arguments[1];
+  }
+  var client = grpc.unary(CoreService.ModifyGuildRole, {
     request: requestMessage,
     host: this.serviceHost,
     metadata: metadata,
