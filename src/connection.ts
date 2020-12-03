@@ -435,9 +435,12 @@ export class Connection {
     data.set("filename", f.name);
     data.set("contenttype", f.type);
     data.set("file", f);
-    const resp = await fetch(`${this.host}/media/upload`, {
+    const headers = new Headers();
+    headers.set("Authorization", this.session || "");
+    const resp = await fetch(`${this.host}/_harmony/media/upload`, {
       body: data,
       method: "POST",
+      headers,
     });
     const asJSON = await resp.json();
     return {

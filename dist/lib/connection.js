@@ -437,7 +437,7 @@ var Connection = /** @class */ (function () {
     };
     Connection.prototype.uploadFile = function (f) {
         return __awaiter(this, void 0, void 0, function () {
-            var data, resp, asJSON;
+            var data, headers, resp, asJSON;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -445,9 +445,12 @@ var Connection = /** @class */ (function () {
                         data.set("filename", f.name);
                         data.set("contenttype", f.type);
                         data.set("file", f);
-                        return [4 /*yield*/, fetch(this.host + "/media/upload", {
+                        headers = new Headers();
+                        headers.set("Authorization", this.session || "");
+                        return [4 /*yield*/, fetch(this.host + "/_harmony/media/upload", {
                                 body: data,
                                 method: "POST",
+                                headers: headers,
                             })];
                     case 1:
                         resp = _a.sent();
