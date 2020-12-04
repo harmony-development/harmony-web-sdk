@@ -38,6 +38,11 @@ import {
   Event,
   GetGuildRolesRequest,
   MoveRoleRequest,
+  DeleteGuildRoleRequest,
+  ModifyGuildRoleRequest,
+  Role,
+  ManageUserRolesRequest,
+  GetUserRolesRequest,
 } from "../protocol/core/v1/core_pb";
 import {
   GetUserRequest,
@@ -233,6 +238,201 @@ export class Connection {
     return this.unaryReq(FoundationService.Federate, req, true);
   }
 
+  async createGuild(guildName: string, pictureURL?: string) {
+    const req = new CreateGuildRequest();
+    req.setGuildName(guildName);
+    if (pictureURL) {
+      req.setPictureUrl(pictureURL);
+    }
+    return this.unaryReq(CoreService.CreateGuild, req, true);
+  }
+
+  async createInvite(guildID: string, name?: string, possibleUses?: number) {
+    const req = new CreateInviteRequest();
+    req.setGuildId(guildID);
+    if (name) {
+      req.setName(name);
+    }
+    if (possibleUses) {
+      req.setPossibleUses(possibleUses);
+    }
+    return this.unaryReq(CoreService.CreateInvite, req, true);
+  }
+
+  async createChannel(guildID: string, channelName: string) {
+    const req = new CreateChannelRequest();
+    req.setGuildId(guildID);
+    req.setChannelName(channelName);
+    return this.unaryReq(CoreService.CreateChannel, req, true);
+  }
+
+  async getGuild(guildID: string) {
+    const req = new GetGuildRequest();
+    req.setGuildId(guildID);
+    return this.unaryReq(CoreService.GetGuild, req, true);
+  }
+
+  async getGuildInvites(guildID: string) {
+    const req = new GetGuildInvitesRequest();
+    req.setGuildId(guildID);
+    return this.unaryReq(CoreService.GetGuildInvites, req, true);
+  }
+
+  async getGuildMembers(guildID: string) {
+    const req = new GetGuildMembersRequest();
+    req.setGuildId(guildID);
+    return this.unaryReq(CoreService.GetGuildMembers, req, true);
+  }
+
+  async getGuildChannels(guildID: string) {
+    const req = new GetGuildChannelsRequest();
+    req.setGuildId(guildID);
+    return this.unaryReq(CoreService.GetGuildChannels, req, true);
+  }
+
+  async getChannelMessages(
+    guildID: string,
+    channelID: string,
+    beforeMessage?: string
+  ) {
+    const req = new GetChannelMessagesRequest();
+    req.setGuildId(guildID);
+    req.setChannelId(channelID);
+    if (beforeMessage) {
+      req.setBeforeMessage(beforeMessage);
+    }
+    return this.unaryReq(CoreService.GetChannelMessages, req, true);
+  }
+
+  async updateGuildName(guildID: string, newName: string) {
+    const req = new UpdateGuildNameRequest();
+    req.setGuildId(guildID);
+    req.setNewGuildName(newName);
+    return this.unaryReq(CoreService.UpdateGuildName, req, true);
+  }
+
+  async updateChannelName(guildID: string, channelID: string, newName: string) {
+    const req = new UpdateChannelNameRequest();
+    req.setGuildId(guildID);
+    req.setChannelId(channelID);
+    req.setNewChannelName(newName);
+    return this.unaryReq(CoreService.UpdateChannelName, req, true);
+  }
+
+  async updateMessage(
+    guildID: string,
+    channelID: string,
+    messageID: string,
+    newContent?: any,
+    newAttachments?: any,
+    newActions?: any,
+    newEmbeds?: any
+  ) {
+    const req = new UpdateMessageRequest();
+    req.setGuildId(guildID);
+    req.setChannelId(channelID);
+    if (newContent) {
+      req.setUpdateContent(true);
+      req.setContent(newContent);
+    }
+    if (newAttachments) {
+      req.setUpdateAttachments(true);
+      req.setAttachmentsList(newAttachments);
+    }
+    if (newActions) {
+      req.setUpdateActions(true);
+      req.setActionsList(newActions);
+    }
+    if (newEmbeds) {
+      req.setUpdateEmbeds(true);
+      req.setEmbedsList(newEmbeds);
+    }
+    req.setGuildId(guildID);
+    req.setChannelId(channelID);
+    req.setMessageId(messageID);
+
+    return this.unaryReq(CoreService.UpdateMessage, req, true);
+  }
+  async deleteGuild(guildID: string) {
+    const req = new DeleteGuildRequest();
+    req.setGuildId(guildID);
+    return this.unaryReq(CoreService.DeleteGuild, req, true);
+  }
+  async deleteInvite(guildID: string, inviteID: string) {
+    const req = new DeleteInviteRequest();
+    req.setGuildId(guildID);
+    req.setInviteId(inviteID);
+    return this.unaryReq(CoreService.DeleteInvite, req, true);
+  }
+  async deleteChannel(guildID: string, channelID: string) {
+    const req = new DeleteChannelRequest();
+    req.setGuildId(guildID);
+    req.setChannelId(channelID);
+    return this.unaryReq(CoreService.DeleteChannel, req, true);
+  }
+  async deleteMessage(guildID: string, channelID: string, messageID: string) {
+    const req = new DeleteMessageRequest();
+    req.setGuildId(guildID);
+    req.setChannelId(channelID);
+    req.setMessageId(messageID);
+    return this.unaryReq(CoreService.DeleteMessage, req, true);
+  }
+  async joinGuild(inviteID: string) {
+    const req = new JoinGuildRequest();
+    req.setInviteId(inviteID);
+    return this.unaryReq(CoreService.JoinGuild, req, true);
+  }
+
+  async leaveGuild(guildID: string) {
+    const req = new LeaveGuildRequest();
+    req.setGuildId(guildID);
+    return this.unaryReq(CoreService.LeaveGuild, req, true);
+  }
+
+  async triggerAction(
+    guildID: string,
+    channelID: string,
+    messageID: string,
+    actionID: string,
+    actionData?: string
+  ) {
+    const req = new TriggerActionRequest();
+    req.setGuildId(guildID);
+    req.setChannelId(channelID);
+    req.setMessageId(messageID);
+    req.setActionId(actionID);
+    if (actionData) {
+      req.setActionData(actionData);
+    }
+    return this.unaryReq(CoreService.TriggerAction, req, true);
+  }
+
+  async sendMessage(
+    guildID: string,
+    channelID: string,
+    content?: string,
+    attachments?: string[],
+    embeds?: Embed[],
+    actions?: Action[]
+  ) {
+    const req = new SendMessageRequest();
+    req.setGuildId(guildID);
+    req.setChannelId(channelID);
+    if (content) {
+      req.setContent(content);
+    }
+    if (embeds) {
+      req.setEmbedsList(embeds);
+    }
+    if (actions) {
+      req.setActionsList(actions);
+    }
+    if (attachments) {
+      req.setAttachmentsList(attachments);
+    }
+    return this.unaryReq(CoreService.SendMessage, req, true);
+  }
+
   async uploadFile(
     f: File
   ): Promise<{
@@ -253,5 +453,122 @@ export class Connection {
     return {
       id: asJSON.id,
     };
+  }
+
+  async getGuildList() {
+    const req = new GetGuildListRequest();
+    return this.unaryReq(CoreService.GetGuildList, req, true);
+  }
+
+  async getUser(userID: string) {
+    const req = new GetUserRequest();
+    req.setUserId(userID);
+    return this.unaryReq(ProfileService.GetUser, req, true);
+  }
+
+  async getUserMetadata(appID: string) {
+    const req = new GetUserMetadataRequest();
+    req.setAppId(appID);
+  }
+
+  async usernameUpdate(newUsername: string) {
+    const req = new UsernameUpdateRequest();
+    req.setUserName(newUsername);
+    return this.unaryReq(ProfileService.UsernameUpdate, req, true);
+  }
+
+  async statusUpdate(newStatus: keyof UserStatusMap) {
+    const req = new StatusUpdateRequest();
+    req.setNewStatus(UserStatus[newStatus]);
+  }
+
+  async addGuildToGuildList(guildID: string, homeserver: string) {
+    const req = new AddGuildToGuildListRequest();
+    req.setGuildId(guildID);
+    req.setHomeserver(homeserver);
+    return this.unaryReq(CoreService.AddGuildToGuildList, req, true);
+  }
+
+  async getGuildRoles(guildID: string) {
+    const req = new GetGuildRolesRequest();
+    req.setGuildId(guildID);
+    return this.unaryReq(CoreService.GetGuildRoles, req, true);
+  }
+
+  async moveRole(
+    guildID: string,
+    roleID: string,
+    beforeID: string,
+    afterID: string
+  ) {
+    const req = new MoveRoleRequest();
+    req.setGuildId(guildID);
+    req.setRoleId(roleID);
+    req.setBeforeId(beforeID);
+    req.setAfterId(afterID);
+    return this.unaryReq(CoreService.MoveRole, req, true);
+  }
+
+  async deleteGuildRole(guildID: string, roleID: string) {
+    const req = new DeleteGuildRoleRequest();
+    req.setGuildId(guildID);
+    req.setRoleId(roleID);
+    return this.unaryReq(CoreService.DeleteGuildRole, req, true);
+  }
+
+  async modifyGuildRole(
+    guildID: string,
+    roleID: string,
+    modify: {
+      name?: string;
+      color?: number;
+      hoist?: boolean;
+      pingable?: boolean;
+    }
+  ) {
+    const req = new ModifyGuildRoleRequest();
+    req.setGuildId(guildID);
+    const modified = new Role();
+    if (modify.name) {
+      modified.setName(modify.name);
+      req.setModifyName(true);
+    }
+    if (modify.color) {
+      modified.setColor(modify.color);
+      req.setModifyColor(true);
+    }
+    if (modify.hoist) {
+      modified.setHoist(modify.hoist);
+      req.setModifyHoist(true);
+    }
+    if (modify.pingable) {
+      modified.setPingable(modify.pingable);
+      req.setModifyPingable(true);
+    }
+  }
+
+  async manageUserRoles(
+    guildID: string,
+    userID: string,
+    giveRoleIDs?: string[],
+    takeRoleIDs?: string[]
+  ) {
+    const req = new ManageUserRolesRequest();
+    req.setGuildId(guildID);
+    req.setUserId(userID);
+    if (giveRoleIDs) {
+      req.setGiveRoleIdsList(giveRoleIDs);
+    }
+    if (takeRoleIDs) {
+      req.setTakeRoleIdsList(takeRoleIDs);
+    }
+    return this.unaryReq(CoreService.ManageUserRoles, req, true);
+  }
+
+  async getUserRoles(guildID: string, userID: string) {
+    const req = new GetUserRolesRequest();
+    req.setGuildId(guildID);
+    req.setUserId(userID);
+    return this.unaryReq(CoreService.GetUserRoles, req, true);
   }
 }

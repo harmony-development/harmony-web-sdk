@@ -2718,21 +2718,21 @@ export namespace ModifyGuildRoleRequest {
 }
 
 export class ManageUserRolesRequest extends jspb.Message {
-  getGuildId(): number;
-  setGuildId(value: number): void;
+  getGuildId(): string;
+  setGuildId(value: string): void;
 
-  getUserId(): number;
-  setUserId(value: number): void;
+  getUserId(): string;
+  setUserId(value: string): void;
 
   clearGiveRoleIdsList(): void;
-  getGiveRoleIdsList(): Array<number>;
-  setGiveRoleIdsList(value: Array<number>): void;
-  addGiveRoleIds(value: number, index?: number): number;
+  getGiveRoleIdsList(): Array<string>;
+  setGiveRoleIdsList(value: Array<string>): void;
+  addGiveRoleIds(value: string, index?: number): string;
 
   clearTakeRoleIdsList(): void;
-  getTakeRoleIdsList(): Array<number>;
-  setTakeRoleIdsList(value: Array<number>): void;
-  addTakeRoleIds(value: number, index?: number): number;
+  getTakeRoleIdsList(): Array<string>;
+  setTakeRoleIdsList(value: Array<string>): void;
+  addTakeRoleIds(value: string, index?: number): string;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ManageUserRolesRequest.AsObject;
@@ -2746,19 +2746,19 @@ export class ManageUserRolesRequest extends jspb.Message {
 
 export namespace ManageUserRolesRequest {
   export type AsObject = {
-    guildId: number,
-    userId: number,
-    giveRoleIdsList: Array<number>,
-    takeRoleIdsList: Array<number>,
+    guildId: string,
+    userId: string,
+    giveRoleIdsList: Array<string>,
+    takeRoleIdsList: Array<string>,
   }
 }
 
 export class GetUserRolesRequest extends jspb.Message {
-  getGuildId(): number;
-  setGuildId(value: number): void;
+  getGuildId(): string;
+  setGuildId(value: string): void;
 
-  getUserId(): number;
-  setUserId(value: number): void;
+  getUserId(): string;
+  setUserId(value: string): void;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GetUserRolesRequest.AsObject;
@@ -2772,16 +2772,16 @@ export class GetUserRolesRequest extends jspb.Message {
 
 export namespace GetUserRolesRequest {
   export type AsObject = {
-    guildId: number,
-    userId: number,
+    guildId: string,
+    userId: string,
   }
 }
 
 export class GetUserRolesResponse extends jspb.Message {
   clearRolesList(): void;
-  getRolesList(): Array<number>;
-  setRolesList(value: Array<number>): void;
-  addRoles(value: number, index?: number): number;
+  getRolesList(): Array<string>;
+  setRolesList(value: Array<string>): void;
+  addRoles(value: string, index?: number): string;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GetUserRolesResponse.AsObject;
@@ -2795,7 +2795,7 @@ export class GetUserRolesResponse extends jspb.Message {
 
 export namespace GetUserRolesResponse {
   export type AsObject = {
-    rolesList: Array<number>,
+    rolesList: Array<string>,
   }
 }
 

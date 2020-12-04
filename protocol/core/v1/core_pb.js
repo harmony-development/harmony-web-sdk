@@ -20946,8 +20946,8 @@ proto.protocol.core.v1.ManageUserRolesRequest.prototype.toObject = function(opt_
  */
 proto.protocol.core.v1.ManageUserRolesRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    guildId: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    userId: jspb.Message.getFieldWithDefault(msg, 2, 0),
+    guildId: jspb.Message.getFieldWithDefault(msg, 1, "0"),
+    userId: jspb.Message.getFieldWithDefault(msg, 2, "0"),
     giveRoleIdsList: (f = jspb.Message.getRepeatedField(msg, 3)) == null ? undefined : f,
     takeRoleIdsList: (f = jspb.Message.getRepeatedField(msg, 4)) == null ? undefined : f
   };
@@ -20987,19 +20987,19 @@ proto.protocol.core.v1.ManageUserRolesRequest.deserializeBinaryFromReader = func
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {number} */ (reader.readUint64());
+      var value = /** @type {string} */ (reader.readUint64String());
       msg.setGuildId(value);
       break;
     case 2:
-      var value = /** @type {number} */ (reader.readUint64());
+      var value = /** @type {string} */ (reader.readUint64String());
       msg.setUserId(value);
       break;
     case 3:
-      var value = /** @type {!Array<number>} */ (reader.readPackedUint64());
+      var value = /** @type {!Array<string>} */ (reader.readPackedUint64String());
       msg.setGiveRoleIdsList(value);
       break;
     case 4:
-      var value = /** @type {!Array<number>} */ (reader.readPackedUint64());
+      var value = /** @type {!Array<string>} */ (reader.readPackedUint64String());
       msg.setTakeRoleIdsList(value);
       break;
     default:
@@ -21032,29 +21032,29 @@ proto.protocol.core.v1.ManageUserRolesRequest.prototype.serializeBinary = functi
 proto.protocol.core.v1.ManageUserRolesRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getGuildId();
-  if (f !== 0) {
-    writer.writeUint64(
+  if (parseInt(f, 10) !== 0) {
+    writer.writeUint64String(
       1,
       f
     );
   }
   f = message.getUserId();
-  if (f !== 0) {
-    writer.writeUint64(
+  if (parseInt(f, 10) !== 0) {
+    writer.writeUint64String(
       2,
       f
     );
   }
   f = message.getGiveRoleIdsList();
   if (f.length > 0) {
-    writer.writePackedUint64(
+    writer.writePackedUint64String(
       3,
       f
     );
   }
   f = message.getTakeRoleIdsList();
   if (f.length > 0) {
-    writer.writePackedUint64(
+    writer.writePackedUint64String(
       4,
       f
     );
@@ -21064,51 +21064,51 @@ proto.protocol.core.v1.ManageUserRolesRequest.serializeBinaryToWriter = function
 
 /**
  * optional uint64 guild_id = 1;
- * @return {number}
+ * @return {string}
  */
 proto.protocol.core.v1.ManageUserRolesRequest.prototype.getGuildId = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, "0"));
 };
 
 
 /**
- * @param {number} value
+ * @param {string} value
  * @return {!proto.protocol.core.v1.ManageUserRolesRequest} returns this
  */
 proto.protocol.core.v1.ManageUserRolesRequest.prototype.setGuildId = function(value) {
-  return jspb.Message.setProto3IntField(this, 1, value);
+  return jspb.Message.setProto3StringIntField(this, 1, value);
 };
 
 
 /**
  * optional uint64 user_id = 2;
- * @return {number}
+ * @return {string}
  */
 proto.protocol.core.v1.ManageUserRolesRequest.prototype.getUserId = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, "0"));
 };
 
 
 /**
- * @param {number} value
+ * @param {string} value
  * @return {!proto.protocol.core.v1.ManageUserRolesRequest} returns this
  */
 proto.protocol.core.v1.ManageUserRolesRequest.prototype.setUserId = function(value) {
-  return jspb.Message.setProto3IntField(this, 2, value);
+  return jspb.Message.setProto3StringIntField(this, 2, value);
 };
 
 
 /**
  * repeated uint64 give_role_ids = 3;
- * @return {!Array<number>}
+ * @return {!Array<string>}
  */
 proto.protocol.core.v1.ManageUserRolesRequest.prototype.getGiveRoleIdsList = function() {
-  return /** @type {!Array<number>} */ (jspb.Message.getRepeatedField(this, 3));
+  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 3));
 };
 
 
 /**
- * @param {!Array<number>} value
+ * @param {!Array<string>} value
  * @return {!proto.protocol.core.v1.ManageUserRolesRequest} returns this
  */
 proto.protocol.core.v1.ManageUserRolesRequest.prototype.setGiveRoleIdsList = function(value) {
@@ -21117,7 +21117,7 @@ proto.protocol.core.v1.ManageUserRolesRequest.prototype.setGiveRoleIdsList = fun
 
 
 /**
- * @param {number} value
+ * @param {string} value
  * @param {number=} opt_index
  * @return {!proto.protocol.core.v1.ManageUserRolesRequest} returns this
  */
@@ -21137,15 +21137,15 @@ proto.protocol.core.v1.ManageUserRolesRequest.prototype.clearGiveRoleIdsList = f
 
 /**
  * repeated uint64 take_role_ids = 4;
- * @return {!Array<number>}
+ * @return {!Array<string>}
  */
 proto.protocol.core.v1.ManageUserRolesRequest.prototype.getTakeRoleIdsList = function() {
-  return /** @type {!Array<number>} */ (jspb.Message.getRepeatedField(this, 4));
+  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 4));
 };
 
 
 /**
- * @param {!Array<number>} value
+ * @param {!Array<string>} value
  * @return {!proto.protocol.core.v1.ManageUserRolesRequest} returns this
  */
 proto.protocol.core.v1.ManageUserRolesRequest.prototype.setTakeRoleIdsList = function(value) {
@@ -21154,7 +21154,7 @@ proto.protocol.core.v1.ManageUserRolesRequest.prototype.setTakeRoleIdsList = fun
 
 
 /**
- * @param {number} value
+ * @param {string} value
  * @param {number=} opt_index
  * @return {!proto.protocol.core.v1.ManageUserRolesRequest} returns this
  */
@@ -21204,8 +21204,8 @@ proto.protocol.core.v1.GetUserRolesRequest.prototype.toObject = function(opt_inc
  */
 proto.protocol.core.v1.GetUserRolesRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    guildId: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    userId: jspb.Message.getFieldWithDefault(msg, 2, 0)
+    guildId: jspb.Message.getFieldWithDefault(msg, 1, "0"),
+    userId: jspb.Message.getFieldWithDefault(msg, 2, "0")
   };
 
   if (includeInstance) {
@@ -21243,11 +21243,11 @@ proto.protocol.core.v1.GetUserRolesRequest.deserializeBinaryFromReader = functio
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {number} */ (reader.readUint64());
+      var value = /** @type {string} */ (reader.readUint64String());
       msg.setGuildId(value);
       break;
     case 2:
-      var value = /** @type {number} */ (reader.readUint64());
+      var value = /** @type {string} */ (reader.readUint64String());
       msg.setUserId(value);
       break;
     default:
@@ -21280,15 +21280,15 @@ proto.protocol.core.v1.GetUserRolesRequest.prototype.serializeBinary = function(
 proto.protocol.core.v1.GetUserRolesRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getGuildId();
-  if (f !== 0) {
-    writer.writeUint64(
+  if (parseInt(f, 10) !== 0) {
+    writer.writeUint64String(
       1,
       f
     );
   }
   f = message.getUserId();
-  if (f !== 0) {
-    writer.writeUint64(
+  if (parseInt(f, 10) !== 0) {
+    writer.writeUint64String(
       2,
       f
     );
@@ -21298,37 +21298,37 @@ proto.protocol.core.v1.GetUserRolesRequest.serializeBinaryToWriter = function(me
 
 /**
  * optional uint64 guild_id = 1;
- * @return {number}
+ * @return {string}
  */
 proto.protocol.core.v1.GetUserRolesRequest.prototype.getGuildId = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, "0"));
 };
 
 
 /**
- * @param {number} value
+ * @param {string} value
  * @return {!proto.protocol.core.v1.GetUserRolesRequest} returns this
  */
 proto.protocol.core.v1.GetUserRolesRequest.prototype.setGuildId = function(value) {
-  return jspb.Message.setProto3IntField(this, 1, value);
+  return jspb.Message.setProto3StringIntField(this, 1, value);
 };
 
 
 /**
  * optional uint64 user_id = 2;
- * @return {number}
+ * @return {string}
  */
 proto.protocol.core.v1.GetUserRolesRequest.prototype.getUserId = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, "0"));
 };
 
 
 /**
- * @param {number} value
+ * @param {string} value
  * @return {!proto.protocol.core.v1.GetUserRolesRequest} returns this
  */
 proto.protocol.core.v1.GetUserRolesRequest.prototype.setUserId = function(value) {
-  return jspb.Message.setProto3IntField(this, 2, value);
+  return jspb.Message.setProto3StringIntField(this, 2, value);
 };
 
 
@@ -21409,7 +21409,7 @@ proto.protocol.core.v1.GetUserRolesResponse.deserializeBinaryFromReader = functi
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {!Array<number>} */ (reader.readPackedUint64());
+      var value = /** @type {!Array<string>} */ (reader.readPackedUint64String());
       msg.setRolesList(value);
       break;
     default:
@@ -21443,7 +21443,7 @@ proto.protocol.core.v1.GetUserRolesResponse.serializeBinaryToWriter = function(m
   var f = undefined;
   f = message.getRolesList();
   if (f.length > 0) {
-    writer.writePackedUint64(
+    writer.writePackedUint64String(
       1,
       f
     );
@@ -21453,15 +21453,15 @@ proto.protocol.core.v1.GetUserRolesResponse.serializeBinaryToWriter = function(m
 
 /**
  * repeated uint64 roles = 1;
- * @return {!Array<number>}
+ * @return {!Array<string>}
  */
 proto.protocol.core.v1.GetUserRolesResponse.prototype.getRolesList = function() {
-  return /** @type {!Array<number>} */ (jspb.Message.getRepeatedField(this, 1));
+  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 1));
 };
 
 
 /**
- * @param {!Array<number>} value
+ * @param {!Array<string>} value
  * @return {!proto.protocol.core.v1.GetUserRolesResponse} returns this
  */
 proto.protocol.core.v1.GetUserRolesResponse.prototype.setRolesList = function(value) {
@@ -21470,7 +21470,7 @@ proto.protocol.core.v1.GetUserRolesResponse.prototype.setRolesList = function(va
 
 
 /**
- * @param {number} value
+ * @param {string} value
  * @param {number=} opt_index
  * @return {!proto.protocol.core.v1.GetUserRolesResponse} returns this
  */
