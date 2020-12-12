@@ -274,9 +274,9 @@ export class Message extends jspb.Message {
   addActions(value?: Action, index?: number): Action;
 
   clearAttachmentsList(): void;
-  getAttachmentsList(): Array<string>;
-  setAttachmentsList(value: Array<string>): void;
-  addAttachments(value: string, index?: number): string;
+  getAttachmentsList(): Array<Message.Attachment>;
+  setAttachmentsList(value: Array<Message.Attachment>): void;
+  addAttachments(value?: Message.Attachment, index?: number): Message.Attachment;
 
   getInReplyTo(): string;
   setInReplyTo(value: string): void;
@@ -307,9 +307,41 @@ export namespace Message {
     content: string,
     embedsList: Array<Embed.AsObject>,
     actionsList: Array<Action.AsObject>,
-    attachmentsList: Array<string>,
+    attachmentsList: Array<Message.Attachment.AsObject>,
     inReplyTo: string,
     overrides?: Override.AsObject,
+  }
+
+  export class Attachment extends jspb.Message {
+    getId(): string;
+    setId(value: string): void;
+
+    getName(): string;
+    setName(value: string): void;
+
+    getType(): string;
+    setType(value: string): void;
+
+    getSize(): number;
+    setSize(value: number): void;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): Attachment.AsObject;
+    static toObject(includeInstance: boolean, msg: Attachment): Attachment.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: Attachment, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): Attachment;
+    static deserializeBinaryFromReader(message: Attachment, reader: jspb.BinaryReader): Attachment;
+  }
+
+  export namespace Attachment {
+    export type AsObject = {
+      id: string,
+      name: string,
+      type: string,
+      size: number,
+    }
   }
 }
 
