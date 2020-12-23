@@ -41,13 +41,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Connection = void 0;
 var grpc_web_1 = require("@improbable-eng/grpc-web");
-var foundation_pb_service_1 = require("../protocol/foundation/v1/foundation_pb_service");
-var foundation_pb_1 = require("../protocol/foundation/v1/foundation_pb");
-var core_pb_service_1 = require("../protocol/core/v1/core_pb_service");
-var core_pb_1 = require("../protocol/core/v1/core_pb");
-var profile_pb_1 = require("../protocol/profile/v1/profile_pb");
-var profile_pb_service_1 = require("../protocol/profile/v1/profile_pb_service");
+var auth_pb_service_1 = require("../protocol/auth/v1/auth_pb_service");
+var auth_pb_1 = require("../protocol/auth/v1/auth_pb");
+var chat_pb_service_1 = require("../protocol/chat/v1/chat_pb_service");
+var streaming_pb_1 = require("../protocol/chat/v1/streaming_pb");
+var profile_pb_1 = require("../protocol/chat/v1/profile_pb");
+var types_pb_1 = require("../protocol/harmonytypes/v1/types_pb");
 var eventemitter3_1 = __importDefault(require("eventemitter3"));
+var channels_pb_1 = require("protocol/chat/v1/channels_pb");
+var guilds_pb_1 = require("protocol/chat/v1/guilds_pb");
+var messages_pb_1 = require("protocol/chat/v1/messages_pb");
+var permissions_pb_1 = require("protocol/chat/v1/permissions_pb");
 var Connection = /** @class */ (function () {
     function Connection(host) {
         this.host = host;
@@ -74,39 +78,39 @@ var Connection = /** @class */ (function () {
      */
     Connection.prototype.onGuildEvent = function (msg) {
         if (msg.hasSentMessage()) {
-            this.events.emit(core_pb_1.Event.EventCase.SENT_MESSAGE, this.host, msg.getSentMessage().toObject());
+            this.events.emit(streaming_pb_1.Event.EventCase.SENT_MESSAGE, this.host, msg.getSentMessage().toObject());
         }
         else if (msg.hasLeftMember()) {
-            this.events.emit(core_pb_1.Event.EventCase.LEFT_MEMBER, this.host, msg.getLeftMember().toObject());
+            this.events.emit(streaming_pb_1.Event.EventCase.LEFT_MEMBER, this.host, msg.getLeftMember().toObject());
         }
         else if (msg.hasJoinedMember()) {
-            this.events.emit(core_pb_1.Event.EventCase.JOINED_MEMBER, this.host, msg.getJoinedMember().toObject());
+            this.events.emit(streaming_pb_1.Event.EventCase.JOINED_MEMBER, this.host, msg.getJoinedMember().toObject());
         }
         else if (msg.hasEditedMessage()) {
-            this.events.emit(core_pb_1.Event.EventCase.EDITED_MESSAGE, this.host, msg.getEditedMessage().toObject());
+            this.events.emit(streaming_pb_1.Event.EventCase.EDITED_MESSAGE, this.host, msg.getEditedMessage().toObject());
         }
         else if (msg.hasEditedGuild()) {
-            this.events.emit(core_pb_1.Event.EventCase.EDITED_GUILD, this.host, msg.getEditedGuild().toObject());
+            this.events.emit(streaming_pb_1.Event.EventCase.EDITED_GUILD, this.host, msg.getEditedGuild().toObject());
         }
         else if (msg.hasEditedChannel()) {
-            this.events.emit(core_pb_1.Event.EventCase.EDITED_CHANNEL, this.host, msg.getEditedChannel().toObject());
+            this.events.emit(streaming_pb_1.Event.EventCase.EDITED_CHANNEL, this.host, msg.getEditedChannel().toObject());
         }
         else if (msg.hasDeletedMessage()) {
-            this.events.emit(core_pb_1.Event.EventCase.DELETED_MESSAGE, this.host, msg.getDeletedMessage().toObject());
+            this.events.emit(streaming_pb_1.Event.EventCase.DELETED_MESSAGE, this.host, msg.getDeletedMessage().toObject());
         }
         else if (msg.hasDeletedGuild()) {
-            this.events.emit(core_pb_1.Event.EventCase.DELETED_GUILD, this.host, msg.getDeletedGuild().toObject());
+            this.events.emit(streaming_pb_1.Event.EventCase.DELETED_GUILD, this.host, msg.getDeletedGuild().toObject());
         }
         else if (msg.hasDeletedChannel()) {
-            this.events.emit(core_pb_1.Event.EventCase.DELETED_CHANNEL, this.host, msg.getDeletedChannel().toObject());
+            this.events.emit(streaming_pb_1.Event.EventCase.DELETED_CHANNEL, this.host, msg.getDeletedChannel().toObject());
         }
         else if (msg.hasCreatedChannel()) {
-            this.events.emit(core_pb_1.Event.EventCase.CREATED_CHANNEL, this.host, msg.getCreatedChannel().toObject());
+            this.events.emit(streaming_pb_1.Event.EventCase.CREATED_CHANNEL, this.host, msg.getCreatedChannel().toObject());
         }
     };
     Connection.prototype.beginStream = function () {
         var _this = this;
-        this.client = grpc_web_1.grpc.client(core_pb_service_1.CoreService.StreamEvents, {
+        this.client = grpc_web_1.grpc.client(chat_pb_service_1.ChatService.StreamEvents, {
             host: this.host,
             transport: grpc_web_1.grpc.WebsocketTransport(),
         });
@@ -121,9 +125,9 @@ var Connection = /** @class */ (function () {
     };
     Connection.prototype.subscribe = function (guildID) {
         if (this.client) {
-            var streamEventsReq = new core_pb_1.StreamEventsRequest.SubscribeToGuild();
+            var streamEventsReq = new streaming_pb_1.StreamEventsRequest.SubscribeToGuild();
             streamEventsReq.setGuildId(guildID);
-            var req = new core_pb_1.StreamEventsRequest();
+            var req = new streaming_pb_1.StreamEventsRequest();
             req.setSubscribeToGuild(streamEventsReq);
             this.client.send(req);
         }
@@ -132,8 +136,8 @@ var Connection = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             var req;
             return __generator(this, function (_a) {
-                req = new foundation_pb_1.KeyRequest();
-                return [2 /*return*/, this.unaryReq(foundation_pb_service_1.FoundationService.Key, req)];
+                req = new auth_pb_1.KeyRequest();
+                return [2 /*return*/, this.unaryReq(auth_pb_service_1.AuthService.Key, req)];
             });
         });
     };
@@ -141,12 +145,12 @@ var Connection = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             var req, localMsg;
             return __generator(this, function (_a) {
-                req = new foundation_pb_1.LoginRequest();
-                localMsg = new foundation_pb_1.LoginRequest.Local();
+                req = new auth_pb_1.LoginRequest();
+                localMsg = new auth_pb_1.LoginRequest.Local();
                 localMsg.setEmail(email);
                 localMsg.setPassword(btoa(password));
                 req.setLocal(localMsg);
-                return [2 /*return*/, this.unaryReq(foundation_pb_service_1.FoundationService.Login, req)];
+                return [2 /*return*/, this.unaryReq(auth_pb_service_1.AuthService.Login, req)];
             });
         });
     };
@@ -154,12 +158,12 @@ var Connection = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             var req, federatedMsg;
             return __generator(this, function (_a) {
-                req = new foundation_pb_1.LoginRequest();
-                federatedMsg = new foundation_pb_1.LoginRequest.Federated();
+                req = new auth_pb_1.LoginRequest();
+                federatedMsg = new auth_pb_1.LoginRequest.Federated();
                 federatedMsg.setAuthToken(token);
                 federatedMsg.setDomain(domain);
                 req.setFederated(federatedMsg);
-                return [2 /*return*/, this.unaryReq(foundation_pb_service_1.FoundationService.Login, req)];
+                return [2 /*return*/, this.unaryReq(auth_pb_service_1.AuthService.Login, req)];
             });
         });
     };
@@ -167,11 +171,11 @@ var Connection = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             var req;
             return __generator(this, function (_a) {
-                req = new foundation_pb_1.RegisterRequest();
+                req = new auth_pb_1.RegisterRequest();
                 req.setEmail(email);
                 req.setUsername(username);
                 req.setPassword(btoa(password));
-                return [2 /*return*/, this.unaryReq(foundation_pb_service_1.FoundationService.Register, req)];
+                return [2 /*return*/, this.unaryReq(auth_pb_service_1.AuthService.Register, req)];
             });
         });
     };
@@ -179,9 +183,9 @@ var Connection = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             var req;
             return __generator(this, function (_a) {
-                req = new foundation_pb_1.FederateRequest();
+                req = new auth_pb_1.FederateRequest();
                 req.setTarget(target);
-                return [2 /*return*/, this.unaryReq(foundation_pb_service_1.FoundationService.Federate, req, true)];
+                return [2 /*return*/, this.unaryReq(auth_pb_service_1.AuthService.Federate, req, true)];
             });
         });
     };
@@ -189,12 +193,12 @@ var Connection = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             var req;
             return __generator(this, function (_a) {
-                req = new core_pb_1.CreateGuildRequest();
+                req = new guilds_pb_1.CreateGuildRequest();
                 req.setGuildName(guildName);
                 if (pictureURL) {
                     req.setPictureUrl(pictureURL);
                 }
-                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.CreateGuild, req, true)];
+                return [2 /*return*/, this.unaryReq(chat_pb_service_1.ChatService.CreateGuild, req, true)];
             });
         });
     };
@@ -202,7 +206,7 @@ var Connection = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             var req;
             return __generator(this, function (_a) {
-                req = new core_pb_1.CreateInviteRequest();
+                req = new guilds_pb_1.CreateInviteRequest();
                 req.setGuildId(guildID);
                 if (name) {
                     req.setName(name);
@@ -210,7 +214,7 @@ var Connection = /** @class */ (function () {
                 if (possibleUses) {
                     req.setPossibleUses(possibleUses);
                 }
-                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.CreateInvite, req, true)];
+                return [2 /*return*/, this.unaryReq(chat_pb_service_1.ChatService.CreateInvite, req, true)];
             });
         });
     };
@@ -218,10 +222,10 @@ var Connection = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             var req;
             return __generator(this, function (_a) {
-                req = new core_pb_1.CreateChannelRequest();
+                req = new channels_pb_1.CreateChannelRequest();
                 req.setGuildId(guildID);
                 req.setChannelName(channelName);
-                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.CreateChannel, req, true)];
+                return [2 /*return*/, this.unaryReq(chat_pb_service_1.ChatService.CreateChannel, req, true)];
             });
         });
     };
@@ -229,9 +233,9 @@ var Connection = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             var req;
             return __generator(this, function (_a) {
-                req = new core_pb_1.GetGuildRequest();
+                req = new guilds_pb_1.GetGuildRequest();
                 req.setGuildId(guildID);
-                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.GetGuild, req, true)];
+                return [2 /*return*/, this.unaryReq(chat_pb_service_1.ChatService.GetGuild, req, true)];
             });
         });
     };
@@ -239,9 +243,9 @@ var Connection = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             var req;
             return __generator(this, function (_a) {
-                req = new core_pb_1.GetGuildInvitesRequest();
+                req = new guilds_pb_1.GetGuildInvitesRequest();
                 req.setGuildId(guildID);
-                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.GetGuildInvites, req, true)];
+                return [2 /*return*/, this.unaryReq(chat_pb_service_1.ChatService.GetGuildInvites, req, true)];
             });
         });
     };
@@ -249,9 +253,9 @@ var Connection = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             var req;
             return __generator(this, function (_a) {
-                req = new core_pb_1.GetGuildMembersRequest();
+                req = new guilds_pb_1.GetGuildMembersRequest();
                 req.setGuildId(guildID);
-                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.GetGuildMembers, req, true)];
+                return [2 /*return*/, this.unaryReq(chat_pb_service_1.ChatService.GetGuildMembers, req, true)];
             });
         });
     };
@@ -259,9 +263,9 @@ var Connection = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             var req;
             return __generator(this, function (_a) {
-                req = new core_pb_1.GetGuildChannelsRequest();
+                req = new channels_pb_1.GetGuildChannelsRequest();
                 req.setGuildId(guildID);
-                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.GetGuildChannels, req, true)];
+                return [2 /*return*/, this.unaryReq(chat_pb_service_1.ChatService.GetGuildChannels, req, true)];
             });
         });
     };
@@ -269,13 +273,13 @@ var Connection = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             var req;
             return __generator(this, function (_a) {
-                req = new core_pb_1.GetChannelMessagesRequest();
+                req = new messages_pb_1.GetChannelMessagesRequest();
                 req.setGuildId(guildID);
                 req.setChannelId(channelID);
                 if (beforeMessage) {
                     req.setBeforeMessage(beforeMessage);
                 }
-                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.GetChannelMessages, req, true)];
+                return [2 /*return*/, this.unaryReq(chat_pb_service_1.ChatService.GetChannelMessages, req, true)];
             });
         });
     };
@@ -283,10 +287,10 @@ var Connection = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             var req;
             return __generator(this, function (_a) {
-                req = new core_pb_1.UpdateGuildNameRequest();
+                req = new guilds_pb_1.UpdateGuildNameRequest();
                 req.setGuildId(guildID);
                 req.setNewGuildName(newName);
-                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.UpdateGuildName, req, true)];
+                return [2 /*return*/, this.unaryReq(chat_pb_service_1.ChatService.UpdateGuildName, req, true)];
             });
         });
     };
@@ -294,11 +298,11 @@ var Connection = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             var req;
             return __generator(this, function (_a) {
-                req = new core_pb_1.UpdateChannelNameRequest();
+                req = new channels_pb_1.UpdateChannelNameRequest();
                 req.setGuildId(guildID);
                 req.setChannelId(channelID);
                 req.setNewChannelName(newName);
-                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.UpdateChannelName, req, true)];
+                return [2 /*return*/, this.unaryReq(chat_pb_service_1.ChatService.UpdateChannelName, req, true)];
             });
         });
     };
@@ -306,7 +310,7 @@ var Connection = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             var req;
             return __generator(this, function (_a) {
-                req = new core_pb_1.UpdateMessageRequest();
+                req = new messages_pb_1.UpdateMessageRequest();
                 req.setGuildId(guildID);
                 req.setChannelId(channelID);
                 if (newContent) {
@@ -328,7 +332,7 @@ var Connection = /** @class */ (function () {
                 req.setGuildId(guildID);
                 req.setChannelId(channelID);
                 req.setMessageId(messageID);
-                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.UpdateMessage, req, true)];
+                return [2 /*return*/, this.unaryReq(chat_pb_service_1.ChatService.UpdateMessage, req, true)];
             });
         });
     };
@@ -336,9 +340,9 @@ var Connection = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             var req;
             return __generator(this, function (_a) {
-                req = new core_pb_1.DeleteGuildRequest();
+                req = new guilds_pb_1.DeleteGuildRequest();
                 req.setGuildId(guildID);
-                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.DeleteGuild, req, true)];
+                return [2 /*return*/, this.unaryReq(chat_pb_service_1.ChatService.DeleteGuild, req, true)];
             });
         });
     };
@@ -346,10 +350,10 @@ var Connection = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             var req;
             return __generator(this, function (_a) {
-                req = new core_pb_1.DeleteInviteRequest();
+                req = new guilds_pb_1.DeleteInviteRequest();
                 req.setGuildId(guildID);
                 req.setInviteId(inviteID);
-                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.DeleteInvite, req, true)];
+                return [2 /*return*/, this.unaryReq(chat_pb_service_1.ChatService.DeleteInvite, req, true)];
             });
         });
     };
@@ -357,10 +361,10 @@ var Connection = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             var req;
             return __generator(this, function (_a) {
-                req = new core_pb_1.DeleteChannelRequest();
+                req = new channels_pb_1.DeleteChannelRequest();
                 req.setGuildId(guildID);
                 req.setChannelId(channelID);
-                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.DeleteChannel, req, true)];
+                return [2 /*return*/, this.unaryReq(chat_pb_service_1.ChatService.DeleteChannel, req, true)];
             });
         });
     };
@@ -368,11 +372,11 @@ var Connection = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             var req;
             return __generator(this, function (_a) {
-                req = new core_pb_1.DeleteMessageRequest();
+                req = new messages_pb_1.DeleteMessageRequest();
                 req.setGuildId(guildID);
                 req.setChannelId(channelID);
                 req.setMessageId(messageID);
-                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.DeleteMessage, req, true)];
+                return [2 /*return*/, this.unaryReq(chat_pb_service_1.ChatService.DeleteMessage, req, true)];
             });
         });
     };
@@ -380,9 +384,9 @@ var Connection = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             var req;
             return __generator(this, function (_a) {
-                req = new core_pb_1.JoinGuildRequest();
+                req = new guilds_pb_1.JoinGuildRequest();
                 req.setInviteId(inviteID);
-                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.JoinGuild, req, true)];
+                return [2 /*return*/, this.unaryReq(chat_pb_service_1.ChatService.JoinGuild, req, true)];
             });
         });
     };
@@ -390,9 +394,9 @@ var Connection = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             var req;
             return __generator(this, function (_a) {
-                req = new core_pb_1.LeaveGuildRequest();
+                req = new guilds_pb_1.LeaveGuildRequest();
                 req.setGuildId(guildID);
-                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.LeaveGuild, req, true)];
+                return [2 /*return*/, this.unaryReq(chat_pb_service_1.ChatService.LeaveGuild, req, true)];
             });
         });
     };
@@ -400,7 +404,7 @@ var Connection = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             var req;
             return __generator(this, function (_a) {
-                req = new core_pb_1.TriggerActionRequest();
+                req = new messages_pb_1.TriggerActionRequest();
                 req.setGuildId(guildID);
                 req.setChannelId(channelID);
                 req.setMessageId(messageID);
@@ -408,7 +412,7 @@ var Connection = /** @class */ (function () {
                 if (actionData) {
                     req.setActionData(actionData);
                 }
-                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.TriggerAction, req, true)];
+                return [2 /*return*/, this.unaryReq(chat_pb_service_1.ChatService.TriggerAction, req, true)];
             });
         });
     };
@@ -416,7 +420,7 @@ var Connection = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             var req;
             return __generator(this, function (_a) {
-                req = new core_pb_1.SendMessageRequest();
+                req = new messages_pb_1.SendMessageRequest();
                 req.setGuildId(guildID);
                 req.setChannelId(channelID);
                 if (content) {
@@ -431,7 +435,7 @@ var Connection = /** @class */ (function () {
                 if (attachments) {
                     req.setAttachmentsList(attachments);
                 }
-                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.SendMessage, req, true)];
+                return [2 /*return*/, this.unaryReq(chat_pb_service_1.ChatService.SendMessage, req, true)];
             });
         });
     };
@@ -468,8 +472,8 @@ var Connection = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             var req;
             return __generator(this, function (_a) {
-                req = new core_pb_1.GetGuildListRequest();
-                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.GetGuildList, req, true)];
+                req = new guilds_pb_1.GetGuildListRequest();
+                return [2 /*return*/, this.unaryReq(chat_pb_service_1.ChatService.GetGuildList, req, true)];
             });
         });
     };
@@ -479,7 +483,7 @@ var Connection = /** @class */ (function () {
             return __generator(this, function (_a) {
                 req = new profile_pb_1.GetUserRequest();
                 req.setUserId(userID);
-                return [2 /*return*/, this.unaryReq(profile_pb_service_1.ProfileService.GetUser, req, true)];
+                return [2 /*return*/, this.unaryReq(chat_pb_service_1.ChatService.GetUser, req, true)];
             });
         });
     };
@@ -493,13 +497,24 @@ var Connection = /** @class */ (function () {
             });
         });
     };
-    Connection.prototype.usernameUpdate = function (newUsername) {
+    Connection.prototype.profileUpdate = function (profile) {
         return __awaiter(this, void 0, void 0, function () {
             var req;
             return __generator(this, function (_a) {
-                req = new profile_pb_1.UsernameUpdateRequest();
-                req.setUserName(newUsername);
-                return [2 /*return*/, this.unaryReq(profile_pb_service_1.ProfileService.UsernameUpdate, req, true)];
+                req = new profile_pb_1.ProfileUpdateRequest();
+                if (profile.newUsername !== undefined) {
+                    req.setNewUsername(profile.newUsername);
+                    req.setUpdateUsername(true);
+                }
+                if (profile.newAvatar !== undefined) {
+                    req.setNewAvatar(profile.newAvatar);
+                    req.setUpdateAvatar(true);
+                }
+                if (profile.newStatus !== undefined) {
+                    req.setNewStatus(profile.newStatus);
+                    req.setUpdateStatus(true);
+                }
+                return [2 /*return*/, this.unaryReq(chat_pb_service_1.ChatService.ProfileUpdate, req, true)];
             });
         });
     };
@@ -508,7 +523,7 @@ var Connection = /** @class */ (function () {
             var req;
             return __generator(this, function (_a) {
                 req = new profile_pb_1.StatusUpdateRequest();
-                req.setNewStatus(profile_pb_1.UserStatus[newStatus]);
+                req.setNewStatus(types_pb_1.UserStatus[newStatus]);
                 return [2 /*return*/];
             });
         });
@@ -517,10 +532,10 @@ var Connection = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             var req;
             return __generator(this, function (_a) {
-                req = new core_pb_1.AddGuildToGuildListRequest();
+                req = new guilds_pb_1.AddGuildToGuildListRequest();
                 req.setGuildId(guildID);
                 req.setHomeserver(homeserver);
-                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.AddGuildToGuildList, req, true)];
+                return [2 /*return*/, this.unaryReq(chat_pb_service_1.ChatService.AddGuildToGuildList, req, true)];
             });
         });
     };
@@ -528,9 +543,9 @@ var Connection = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             var req;
             return __generator(this, function (_a) {
-                req = new core_pb_1.GetGuildRolesRequest();
+                req = new permissions_pb_1.GetGuildRolesRequest();
                 req.setGuildId(guildID);
-                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.GetGuildRoles, req, true)];
+                return [2 /*return*/, this.unaryReq(chat_pb_service_1.ChatService.GetGuildRoles, req, true)];
             });
         });
     };
@@ -538,12 +553,12 @@ var Connection = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             var req;
             return __generator(this, function (_a) {
-                req = new core_pb_1.MoveRoleRequest();
+                req = new permissions_pb_1.MoveRoleRequest();
                 req.setGuildId(guildID);
                 req.setRoleId(roleID);
                 req.setBeforeId(beforeID);
                 req.setAfterId(afterID);
-                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.MoveRole, req, true)];
+                return [2 /*return*/, this.unaryReq(chat_pb_service_1.ChatService.MoveRole, req, true)];
             });
         });
     };
@@ -551,10 +566,10 @@ var Connection = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             var req;
             return __generator(this, function (_a) {
-                req = new core_pb_1.DeleteGuildRoleRequest();
+                req = new permissions_pb_1.DeleteGuildRoleRequest();
                 req.setGuildId(guildID);
                 req.setRoleId(roleID);
-                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.DeleteGuildRole, req, true)];
+                return [2 /*return*/, this.unaryReq(chat_pb_service_1.ChatService.DeleteGuildRole, req, true)];
             });
         });
     };
@@ -562,9 +577,9 @@ var Connection = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             var req, modified;
             return __generator(this, function (_a) {
-                req = new core_pb_1.ModifyGuildRoleRequest();
+                req = new permissions_pb_1.ModifyGuildRoleRequest();
                 req.setGuildId(guildID);
-                modified = new core_pb_1.Role();
+                modified = new permissions_pb_1.Role();
                 if (modify.name) {
                     modified.setName(modify.name);
                     req.setModifyName(true);
@@ -589,7 +604,7 @@ var Connection = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             var req;
             return __generator(this, function (_a) {
-                req = new core_pb_1.ManageUserRolesRequest();
+                req = new permissions_pb_1.ManageUserRolesRequest();
                 req.setGuildId(guildID);
                 req.setUserId(userID);
                 if (giveRoleIDs) {
@@ -598,7 +613,7 @@ var Connection = /** @class */ (function () {
                 if (takeRoleIDs) {
                     req.setTakeRoleIdsList(takeRoleIDs);
                 }
-                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.ManageUserRoles, req, true)];
+                return [2 /*return*/, this.unaryReq(chat_pb_service_1.ChatService.ManageUserRoles, req, true)];
             });
         });
     };
@@ -606,10 +621,10 @@ var Connection = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             var req;
             return __generator(this, function (_a) {
-                req = new core_pb_1.GetUserRolesRequest();
+                req = new permissions_pb_1.GetUserRolesRequest();
                 req.setGuildId(guildID);
                 req.setUserId(userID);
-                return [2 /*return*/, this.unaryReq(core_pb_service_1.CoreService.GetUserRoles, req, true)];
+                return [2 /*return*/, this.unaryReq(chat_pb_service_1.ChatService.GetUserRoles, req, true)];
             });
         });
     };

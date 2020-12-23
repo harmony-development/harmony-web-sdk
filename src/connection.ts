@@ -1,41 +1,61 @@
 import { grpc } from "@improbable-eng/grpc-web";
-import { FoundationService } from "../protocol/foundation/v1/foundation_pb_service";
+import { AuthService } from "../protocol/auth/v1/auth_pb_service";
 import {
   KeyRequest,
   LoginRequest,
   RegisterRequest,
   FederateRequest,
-} from "../protocol/foundation/v1/foundation_pb";
+} from "../protocol/auth/v1/auth_pb";
 import {
-  CoreService,
-  CoreServiceStreamEvents,
-} from "../protocol/core/v1/core_pb_service";
+  ChatService,
+  ChatServiceStreamEvents,
+} from "../protocol/chat/v1/chat_pb_service";
+import { Event, StreamEventsRequest } from "../protocol/chat/v1/streaming_pb";
+import {
+  GetUserRequest,
+  GetUserMetadataRequest,
+  UsernameUpdateRequest,
+  StatusUpdateRequest,
+  ProfileUpdateRequest,
+} from "../protocol/chat/v1/profile_pb";
+import {
+  UserStatusMap,
+  UserStatus,
+  Action,
+  Embed,
+} from "../protocol/harmonytypes/v1/types_pb";
+import { UnaryOutput } from "@improbable-eng/grpc-web/dist/typings/unary";
+import { ProtobufMessage } from "@improbable-eng/grpc-web/dist/typings/message";
+import { UnaryMethodDefinition } from "@improbable-eng/grpc-web/dist/typings/service";
+import EventEmitter from "eventemitter3";
+import {
+  CreateChannelRequest,
+  GetGuildChannelsRequest,
+  UpdateChannelNameRequest,
+  DeleteChannelRequest,
+} from "protocol/chat/v1/channels_pb";
 import {
   CreateGuildRequest,
   CreateInviteRequest,
-  CreateChannelRequest,
   GetGuildRequest,
   GetGuildInvitesRequest,
   GetGuildMembersRequest,
-  GetGuildChannelsRequest,
-  GetChannelMessagesRequest,
   UpdateGuildNameRequest,
-  UpdateChannelNameRequest,
-  UpdateMessageRequest,
   DeleteGuildRequest,
   DeleteInviteRequest,
-  DeleteChannelRequest,
-  DeleteMessageRequest,
   JoinGuildRequest,
   LeaveGuildRequest,
-  TriggerActionRequest,
-  SendMessageRequest,
-  Embed,
-  Action,
   GetGuildListRequest,
   AddGuildToGuildListRequest,
-  StreamEventsRequest,
-  Event,
+} from "protocol/chat/v1/guilds_pb";
+import {
+  GetChannelMessagesRequest,
+  UpdateMessageRequest,
+  DeleteMessageRequest,
+  TriggerActionRequest,
+  SendMessageRequest,
+} from "protocol/chat/v1/messages_pb";
+import {
   GetGuildRolesRequest,
   MoveRoleRequest,
   DeleteGuildRoleRequest,
@@ -43,20 +63,7 @@ import {
   Role,
   ManageUserRolesRequest,
   GetUserRolesRequest,
-} from "../protocol/core/v1/core_pb";
-import {
-  GetUserRequest,
-  GetUserMetadataRequest,
-  UsernameUpdateRequest,
-  StatusUpdateRequest,
-  UserStatusMap,
-  UserStatus,
-} from "../protocol/profile/v1/profile_pb";
-import { ProfileService } from "../protocol/profile/v1/profile_pb_service";
-import { UnaryOutput } from "@improbable-eng/grpc-web/dist/typings/unary";
-import { ProtobufMessage } from "@improbable-eng/grpc-web/dist/typings/message";
-import { UnaryMethodDefinition } from "@improbable-eng/grpc-web/dist/typings/service";
-import EventEmitter from "eventemitter3";
+} from "protocol/chat/v1/permissions_pb";
 
 type ServerStreamResponses = {
   [Event.EventCase.SENT_MESSAGE]: [string, Event.MessageSent.AsObject];
@@ -174,8 +181,8 @@ export class Connection {
     this.client = grpc.client<
       StreamEventsRequest,
       Event,
-      CoreServiceStreamEvents
-    >(CoreService.StreamEvents, {
+      ChatServiceStreamEvents
+    >(ChatService.StreamEvents, {
       host: this.host,
       transport: grpc.WebsocketTransport(),
     });
@@ -203,7 +210,7 @@ export class Connection {
 
   async getKey() {
     const req = new KeyRequest();
-    return this.unaryReq(FoundationService.Key, req);
+    return this.unaryReq(AuthService.Key, req);
   }
 
   async loginLocal(email: string, password: string) {
@@ -212,7 +219,7 @@ export class Connection {
     localMsg.setEmail(email);
     localMsg.setPassword(btoa(password));
     req.setLocal(localMsg);
-    return this.unaryReq(FoundationService.Login, req);
+    return this.unaryReq(AuthService.Login, req);
   }
 
   async loginFederated(token: string, domain: string) {
@@ -221,7 +228,7 @@ export class Connection {
     federatedMsg.setAuthToken(token);
     federatedMsg.setDomain(domain);
     req.setFederated(federatedMsg);
-    return this.unaryReq(FoundationService.Login, req);
+    return this.unaryReq(AuthService.Login, req);
   }
 
   async register(email: string, username: string, password: string) {
@@ -229,13 +236,13 @@ export class Connection {
     req.setEmail(email);
     req.setUsername(username);
     req.setPassword(btoa(password));
-    return this.unaryReq(FoundationService.Register, req);
+    return this.unaryReq(AuthService.Register, req);
   }
 
   async federate(target: string) {
     const req = new FederateRequest();
     req.setTarget(target);
-    return this.unaryReq(FoundationService.Federate, req, true);
+    return this.unaryReq(AuthService.Federate, req, true);
   }
 
   async createGuild(guildName: string, pictureURL?: string) {
@@ -244,7 +251,7 @@ export class Connection {
     if (pictureURL) {
       req.setPictureUrl(pictureURL);
     }
-    return this.unaryReq(CoreService.CreateGuild, req, true);
+    return this.unaryReq(ChatService.CreateGuild, req, true);
   }
 
   async createInvite(guildID: string, name?: string, possibleUses?: number) {
@@ -256,38 +263,38 @@ export class Connection {
     if (possibleUses) {
       req.setPossibleUses(possibleUses);
     }
-    return this.unaryReq(CoreService.CreateInvite, req, true);
+    return this.unaryReq(ChatService.CreateInvite, req, true);
   }
 
   async createChannel(guildID: string, channelName: string) {
     const req = new CreateChannelRequest();
     req.setGuildId(guildID);
     req.setChannelName(channelName);
-    return this.unaryReq(CoreService.CreateChannel, req, true);
+    return this.unaryReq(ChatService.CreateChannel, req, true);
   }
 
   async getGuild(guildID: string) {
     const req = new GetGuildRequest();
     req.setGuildId(guildID);
-    return this.unaryReq(CoreService.GetGuild, req, true);
+    return this.unaryReq(ChatService.GetGuild, req, true);
   }
 
   async getGuildInvites(guildID: string) {
     const req = new GetGuildInvitesRequest();
     req.setGuildId(guildID);
-    return this.unaryReq(CoreService.GetGuildInvites, req, true);
+    return this.unaryReq(ChatService.GetGuildInvites, req, true);
   }
 
   async getGuildMembers(guildID: string) {
     const req = new GetGuildMembersRequest();
     req.setGuildId(guildID);
-    return this.unaryReq(CoreService.GetGuildMembers, req, true);
+    return this.unaryReq(ChatService.GetGuildMembers, req, true);
   }
 
   async getGuildChannels(guildID: string) {
     const req = new GetGuildChannelsRequest();
     req.setGuildId(guildID);
-    return this.unaryReq(CoreService.GetGuildChannels, req, true);
+    return this.unaryReq(ChatService.GetGuildChannels, req, true);
   }
 
   async getChannelMessages(
@@ -301,14 +308,14 @@ export class Connection {
     if (beforeMessage) {
       req.setBeforeMessage(beforeMessage);
     }
-    return this.unaryReq(CoreService.GetChannelMessages, req, true);
+    return this.unaryReq(ChatService.GetChannelMessages, req, true);
   }
 
   async updateGuildName(guildID: string, newName: string) {
     const req = new UpdateGuildNameRequest();
     req.setGuildId(guildID);
     req.setNewGuildName(newName);
-    return this.unaryReq(CoreService.UpdateGuildName, req, true);
+    return this.unaryReq(ChatService.UpdateGuildName, req, true);
   }
 
   async updateChannelName(guildID: string, channelID: string, newName: string) {
@@ -316,7 +323,7 @@ export class Connection {
     req.setGuildId(guildID);
     req.setChannelId(channelID);
     req.setNewChannelName(newName);
-    return this.unaryReq(CoreService.UpdateChannelName, req, true);
+    return this.unaryReq(ChatService.UpdateChannelName, req, true);
   }
 
   async updateMessage(
@@ -351,42 +358,42 @@ export class Connection {
     req.setChannelId(channelID);
     req.setMessageId(messageID);
 
-    return this.unaryReq(CoreService.UpdateMessage, req, true);
+    return this.unaryReq(ChatService.UpdateMessage, req, true);
   }
   async deleteGuild(guildID: string) {
     const req = new DeleteGuildRequest();
     req.setGuildId(guildID);
-    return this.unaryReq(CoreService.DeleteGuild, req, true);
+    return this.unaryReq(ChatService.DeleteGuild, req, true);
   }
   async deleteInvite(guildID: string, inviteID: string) {
     const req = new DeleteInviteRequest();
     req.setGuildId(guildID);
     req.setInviteId(inviteID);
-    return this.unaryReq(CoreService.DeleteInvite, req, true);
+    return this.unaryReq(ChatService.DeleteInvite, req, true);
   }
   async deleteChannel(guildID: string, channelID: string) {
     const req = new DeleteChannelRequest();
     req.setGuildId(guildID);
     req.setChannelId(channelID);
-    return this.unaryReq(CoreService.DeleteChannel, req, true);
+    return this.unaryReq(ChatService.DeleteChannel, req, true);
   }
   async deleteMessage(guildID: string, channelID: string, messageID: string) {
     const req = new DeleteMessageRequest();
     req.setGuildId(guildID);
     req.setChannelId(channelID);
     req.setMessageId(messageID);
-    return this.unaryReq(CoreService.DeleteMessage, req, true);
+    return this.unaryReq(ChatService.DeleteMessage, req, true);
   }
   async joinGuild(inviteID: string) {
     const req = new JoinGuildRequest();
     req.setInviteId(inviteID);
-    return this.unaryReq(CoreService.JoinGuild, req, true);
+    return this.unaryReq(ChatService.JoinGuild, req, true);
   }
 
   async leaveGuild(guildID: string) {
     const req = new LeaveGuildRequest();
     req.setGuildId(guildID);
-    return this.unaryReq(CoreService.LeaveGuild, req, true);
+    return this.unaryReq(ChatService.LeaveGuild, req, true);
   }
 
   async triggerAction(
@@ -404,7 +411,7 @@ export class Connection {
     if (actionData) {
       req.setActionData(actionData);
     }
-    return this.unaryReq(CoreService.TriggerAction, req, true);
+    return this.unaryReq(ChatService.TriggerAction, req, true);
   }
 
   async sendMessage(
@@ -430,7 +437,7 @@ export class Connection {
     if (attachments) {
       req.setAttachmentsList(attachments);
     }
-    return this.unaryReq(CoreService.SendMessage, req, true);
+    return this.unaryReq(ChatService.SendMessage, req, true);
   }
 
   async uploadFile(
@@ -457,13 +464,13 @@ export class Connection {
 
   async getGuildList() {
     const req = new GetGuildListRequest();
-    return this.unaryReq(CoreService.GetGuildList, req, true);
+    return this.unaryReq(ChatService.GetGuildList, req, true);
   }
 
   async getUser(userID: string) {
     const req = new GetUserRequest();
     req.setUserId(userID);
-    return this.unaryReq(ProfileService.GetUser, req, true);
+    return this.unaryReq(ChatService.GetUser, req, true);
   }
 
   async getUserMetadata(appID: string) {
@@ -471,10 +478,25 @@ export class Connection {
     req.setAppId(appID);
   }
 
-  async usernameUpdate(newUsername: string) {
-    const req = new UsernameUpdateRequest();
-    req.setUserName(newUsername);
-    return this.unaryReq(ProfileService.UsernameUpdate, req, true);
+  async profileUpdate(profile: {
+    newUsername?: string;
+    newAvatar?: string;
+    newStatus: UserStatusMap;
+  }) {
+    const req = new ProfileUpdateRequest();
+    if (profile.newUsername !== undefined) {
+      req.setNewUsername(profile.newUsername);
+      req.setUpdateUsername(true);
+    }
+    if (profile.newAvatar !== undefined) {
+      req.setNewAvatar(profile.newAvatar);
+      req.setUpdateAvatar(true);
+    }
+    if (profile.newStatus !== undefined) {
+      req.setNewStatus(profile.newStatus as any);
+      req.setUpdateStatus(true);
+    }
+    return this.unaryReq(ChatService.ProfileUpdate, req, true);
   }
 
   async statusUpdate(newStatus: keyof UserStatusMap) {
@@ -486,13 +508,13 @@ export class Connection {
     const req = new AddGuildToGuildListRequest();
     req.setGuildId(guildID);
     req.setHomeserver(homeserver);
-    return this.unaryReq(CoreService.AddGuildToGuildList, req, true);
+    return this.unaryReq(ChatService.AddGuildToGuildList, req, true);
   }
 
   async getGuildRoles(guildID: string) {
     const req = new GetGuildRolesRequest();
     req.setGuildId(guildID);
-    return this.unaryReq(CoreService.GetGuildRoles, req, true);
+    return this.unaryReq(ChatService.GetGuildRoles, req, true);
   }
 
   async moveRole(
@@ -506,14 +528,14 @@ export class Connection {
     req.setRoleId(roleID);
     req.setBeforeId(beforeID);
     req.setAfterId(afterID);
-    return this.unaryReq(CoreService.MoveRole, req, true);
+    return this.unaryReq(ChatService.MoveRole, req, true);
   }
 
   async deleteGuildRole(guildID: string, roleID: string) {
     const req = new DeleteGuildRoleRequest();
     req.setGuildId(guildID);
     req.setRoleId(roleID);
-    return this.unaryReq(CoreService.DeleteGuildRole, req, true);
+    return this.unaryReq(ChatService.DeleteGuildRole, req, true);
   }
 
   async modifyGuildRole(
@@ -562,13 +584,13 @@ export class Connection {
     if (takeRoleIDs) {
       req.setTakeRoleIdsList(takeRoleIDs);
     }
-    return this.unaryReq(CoreService.ManageUserRoles, req, true);
+    return this.unaryReq(ChatService.ManageUserRoles, req, true);
   }
 
   async getUserRoles(guildID: string, userID: string) {
     const req = new GetUserRolesRequest();
     req.setGuildId(guildID);
     req.setUserId(userID);
-    return this.unaryReq(CoreService.GetUserRoles, req, true);
+    return this.unaryReq(ChatService.GetUserRoles, req, true);
   }
 }
