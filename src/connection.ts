@@ -482,7 +482,7 @@ export class Connection {
   async profileUpdate(profile: {
     newUsername?: string;
     newAvatar?: string;
-    newStatus?: UserStatusMap;
+    newStatus?: UserStatusMap[keyof UserStatusMap];
   }) {
     const req = new ProfileUpdateRequest();
     if (profile.newUsername !== undefined) {
@@ -494,7 +494,7 @@ export class Connection {
       req.setUpdateAvatar(true);
     }
     if (profile.newStatus !== undefined) {
-      req.setNewStatus(profile.newStatus as any);
+      req.setNewStatus(profile.newStatus);
       req.setUpdateStatus(true);
     }
     return this.unaryReq(ChatService.ProfileUpdate, req, true);
