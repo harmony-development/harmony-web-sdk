@@ -16,6 +16,7 @@ declare type ServerStreamResponses = {
     [Event.EventCase.DELETED_GUILD]: [string, Event.GuildDeleted.AsObject];
     [Event.EventCase.DELETED_CHANNEL]: [string, Event.ChannelDeleted.AsObject];
     [Event.EventCase.CREATED_CHANNEL]: [string, Event.ChannelCreated.AsObject];
+    [Event.EventCase.PROFILE_UPDATED]: [string, Event.ProfileUpdated.AsObject];
     disconnect: [grpc.Code, string, grpc.Metadata];
 };
 export declare class Connection {
