@@ -75,6 +75,14 @@ type ServerStreamResponses = {
   [Event.EventCase.DELETED_CHANNEL]: [string, Event.ChannelDeleted.AsObject];
   [Event.EventCase.CREATED_CHANNEL]: [string, Event.ChannelCreated.AsObject];
   [Event.EventCase.PROFILE_UPDATED]: [string, Event.ProfileUpdated.AsObject];
+  [Event.EventCase.GUILD_ADDED_TO_LIST]: [
+    string,
+    Event.GuildAddedToList.AsObject
+  ];
+  [Event.EventCase.GUILD_REMOVED_FROM_LIST]: [
+    string,
+    Event.GuildRemovedFromList.AsObject
+  ];
   disconnect: [grpc.Code, string, grpc.Metadata];
 };
 
@@ -178,6 +186,18 @@ export class Connection {
         Event.EventCase.PROFILE_UPDATED,
         this.host,
         msg.getProfileUpdated()!.toObject()
+      );
+    } else if (msg.hasGuildAddedToList()) {
+      this.events.emit(
+        Event.EventCase.GUILD_ADDED_TO_LIST,
+        this.host,
+        msg.getGuildAddedToList()!.toObject()
+      );
+    } else if (msg.hasGuildRemovedFromList()) {
+      this.events.emit(
+        Event.EventCase.GUILD_REMOVED_FROM_LIST,
+        this.host,
+        msg.getGuildRemovedFromList()!.toObject()
       );
     }
   }

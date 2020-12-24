@@ -69,6 +69,15 @@ class Connection {
         else if (msg.hasCreatedChannel()) {
             this.events.emit(streaming_pb_1.Event.EventCase.CREATED_CHANNEL, this.host, msg.getCreatedChannel().toObject());
         }
+        else if (msg.hasProfileUpdated()) {
+            this.events.emit(streaming_pb_1.Event.EventCase.PROFILE_UPDATED, this.host, msg.getProfileUpdated().toObject());
+        }
+        else if (msg.hasGuildAddedToList()) {
+            this.events.emit(streaming_pb_1.Event.EventCase.GUILD_ADDED_TO_LIST, this.host, msg.getGuildAddedToList().toObject());
+        }
+        else if (msg.hasGuildRemovedFromList()) {
+            this.events.emit(streaming_pb_1.Event.EventCase.GUILD_REMOVED_FROM_LIST, this.host, msg.getGuildRemovedFromList().toObject());
+        }
     }
     beginStream() {
         this.client = grpc_web_1.grpc.client(chat_pb_service_1.ChatService.StreamEvents, {
