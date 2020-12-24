@@ -173,6 +173,12 @@ export class Connection {
         this.host,
         msg.getCreatedChannel()!.toObject()
       );
+    } else if (msg.hasProfileUpdated()) {
+      this.events.emit(
+        Event.EventCase.PROFILE_UPDATED,
+        this.host,
+        msg.getProfileUpdated()!.toObject()
+      );
     }
   }
 
