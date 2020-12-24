@@ -65,7 +65,7 @@ export declare class Connection {
     profileUpdate(profile: {
         newUsername?: string;
         newAvatar?: string;
-        newStatus: UserStatusMap;
+        newStatus?: UserStatusMap;
     }): Promise<UnaryOutput<import("google-protobuf/google/protobuf/empty_pb").Empty>>;
     statusUpdate(newStatus: keyof UserStatusMap): Promise<void>;
     addGuildToGuildList(guildID: string, homeserver: string): Promise<UnaryOutput<import("../protocol/chat/v1/guilds_pb").AddGuildToGuildListResponse>>;

@@ -481,7 +481,7 @@ export class Connection {
   async profileUpdate(profile: {
     newUsername?: string;
     newAvatar?: string;
-    newStatus: UserStatusMap;
+    newStatus?: UserStatusMap;
   }) {
     const req = new ProfileUpdateRequest();
     if (profile.newUsername !== undefined) {
