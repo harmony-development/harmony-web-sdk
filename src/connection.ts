@@ -33,7 +33,7 @@ import {
   GetGuildChannelsRequest,
   UpdateChannelNameRequest,
   DeleteChannelRequest,
-} from "protocol/chat/v1/channels_pb";
+} from "../protocol/chat/v1/channels_pb";
 import {
   CreateGuildRequest,
   CreateInviteRequest,
@@ -47,14 +47,14 @@ import {
   LeaveGuildRequest,
   GetGuildListRequest,
   AddGuildToGuildListRequest,
-} from "protocol/chat/v1/guilds_pb";
+} from "../protocol/chat/v1/guilds_pb";
 import {
   GetChannelMessagesRequest,
   UpdateMessageRequest,
   DeleteMessageRequest,
   TriggerActionRequest,
   SendMessageRequest,
-} from "protocol/chat/v1/messages_pb";
+} from "../protocol/chat/v1/messages_pb";
 import {
   GetGuildRolesRequest,
   MoveRoleRequest,
@@ -63,7 +63,7 @@ import {
   Role,
   ManageUserRolesRequest,
   GetUserRolesRequest,
-} from "protocol/chat/v1/permissions_pb";
+} from "../protocol/chat/v1/permissions_pb";
 
 type ServerStreamResponses = {
   [Event.EventCase.SENT_MESSAGE]: [string, Event.MessageSent.AsObject];
