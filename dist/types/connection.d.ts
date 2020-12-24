@@ -68,7 +68,6 @@ export declare class Connection {
         newAvatar?: string;
         newStatus?: UserStatusMap[keyof UserStatusMap];
     }): Promise<UnaryOutput<import("google-protobuf/google/protobuf/empty_pb").Empty>>;
-    statusUpdate(newStatus: keyof UserStatusMap): Promise<void>;
     addGuildToGuildList(guildID: string, homeserver: string): Promise<UnaryOutput<import("../protocol/chat/v1/guilds_pb").AddGuildToGuildListResponse>>;
     getGuildRoles(guildID: string): Promise<UnaryOutput<import("../protocol/chat/v1/permissions_pb").GetGuildRolesResponse>>;
     moveRole(guildID: string, roleID: string, beforeID: string, afterID: string): Promise<UnaryOutput<import("../protocol/chat/v1/permissions_pb").MoveRoleResponse>>;

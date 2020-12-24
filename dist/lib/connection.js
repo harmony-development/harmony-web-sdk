@@ -10,7 +10,6 @@ const auth_pb_1 = require("../protocol/auth/v1/auth_pb");
 const chat_pb_service_1 = require("../protocol/chat/v1/chat_pb_service");
 const streaming_pb_1 = require("../protocol/chat/v1/streaming_pb");
 const profile_pb_1 = require("../protocol/chat/v1/profile_pb");
-const types_pb_1 = require("../protocol/harmonytypes/v1/types_pb");
 const eventemitter3_1 = __importDefault(require("eventemitter3"));
 const channels_pb_1 = require("../protocol/chat/v1/channels_pb");
 const guilds_pb_1 = require("../protocol/chat/v1/guilds_pb");
@@ -324,10 +323,6 @@ class Connection {
             req.setUpdateStatus(true);
         }
         return this.unaryReq(chat_pb_service_1.ChatService.ProfileUpdate, req, true);
-    }
-    async statusUpdate(newStatus) {
-        const req = new profile_pb_1.StatusUpdateRequest();
-        req.setNewStatus(types_pb_1.UserStatus[newStatus]);
     }
     async addGuildToGuildList(guildID, homeserver) {
         const req = new guilds_pb_1.AddGuildToGuildListRequest();

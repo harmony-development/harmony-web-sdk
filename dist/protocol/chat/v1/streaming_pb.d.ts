@@ -654,6 +654,9 @@ export namespace Event {
   }
 
   export class ProfileUpdated extends jspb.Message {
+    getUserId(): string;
+    setUserId(value: string): void;
+
     getNewUsername(): string;
     setNewUsername(value: string): void;
 
@@ -684,6 +687,7 @@ export namespace Event {
 
   export namespace ProfileUpdated {
     export type AsObject = {
+      userId: string,
       newUsername: string,
       updateUsername: boolean,
       newAvatar: string,

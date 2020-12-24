@@ -4580,12 +4580,13 @@ proto.protocol.chat.v1.Event.ProfileUpdated.prototype.toObject = function(opt_in
  */
 proto.protocol.chat.v1.Event.ProfileUpdated.toObject = function(includeInstance, msg) {
   var f, obj = {
-    newUsername: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    updateUsername: jspb.Message.getBooleanFieldWithDefault(msg, 2, false),
-    newAvatar: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    updateAvatar: jspb.Message.getBooleanFieldWithDefault(msg, 4, false),
-    newStatus: jspb.Message.getFieldWithDefault(msg, 5, 0),
-    updateStatus: jspb.Message.getBooleanFieldWithDefault(msg, 6, false)
+    userId: jspb.Message.getFieldWithDefault(msg, 1, "0"),
+    newUsername: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    updateUsername: jspb.Message.getBooleanFieldWithDefault(msg, 3, false),
+    newAvatar: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    updateAvatar: jspb.Message.getBooleanFieldWithDefault(msg, 5, false),
+    newStatus: jspb.Message.getFieldWithDefault(msg, 6, 0),
+    updateStatus: jspb.Message.getBooleanFieldWithDefault(msg, 7, false)
   };
 
   if (includeInstance) {
@@ -4623,26 +4624,30 @@ proto.protocol.chat.v1.Event.ProfileUpdated.deserializeBinaryFromReader = functi
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
+      var value = /** @type {string} */ (reader.readUint64String());
+      msg.setUserId(value);
+      break;
+    case 2:
       var value = /** @type {string} */ (reader.readString());
       msg.setNewUsername(value);
       break;
-    case 2:
+    case 3:
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setUpdateUsername(value);
       break;
-    case 3:
+    case 4:
       var value = /** @type {string} */ (reader.readString());
       msg.setNewAvatar(value);
       break;
-    case 4:
+    case 5:
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setUpdateAvatar(value);
       break;
-    case 5:
+    case 6:
       var value = /** @type {!proto.protocol.harmonytypes.v1.UserStatus} */ (reader.readEnum());
       msg.setNewStatus(value);
       break;
-    case 6:
+    case 7:
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setUpdateStatus(value);
       break;
@@ -4675,45 +4680,52 @@ proto.protocol.chat.v1.Event.ProfileUpdated.prototype.serializeBinary = function
  */
 proto.protocol.chat.v1.Event.ProfileUpdated.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
+  f = message.getUserId();
+  if (parseInt(f, 10) !== 0) {
+    writer.writeUint64String(
+      1,
+      f
+    );
+  }
   f = message.getNewUsername();
   if (f.length > 0) {
     writer.writeString(
-      1,
+      2,
       f
     );
   }
   f = message.getUpdateUsername();
   if (f) {
     writer.writeBool(
-      2,
+      3,
       f
     );
   }
   f = message.getNewAvatar();
   if (f.length > 0) {
     writer.writeString(
-      3,
+      4,
       f
     );
   }
   f = message.getUpdateAvatar();
   if (f) {
     writer.writeBool(
-      4,
+      5,
       f
     );
   }
   f = message.getNewStatus();
   if (f !== 0.0) {
     writer.writeEnum(
-      5,
+      6,
       f
     );
   }
   f = message.getUpdateStatus();
   if (f) {
     writer.writeBool(
-      6,
+      7,
       f
     );
   }
@@ -4721,11 +4733,29 @@ proto.protocol.chat.v1.Event.ProfileUpdated.serializeBinaryToWriter = function(m
 
 
 /**
- * optional string new_username = 1;
+ * optional uint64 user_id = 1;
+ * @return {string}
+ */
+proto.protocol.chat.v1.Event.ProfileUpdated.prototype.getUserId = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, "0"));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.protocol.chat.v1.Event.ProfileUpdated} returns this
+ */
+proto.protocol.chat.v1.Event.ProfileUpdated.prototype.setUserId = function(value) {
+  return jspb.Message.setProto3StringIntField(this, 1, value);
+};
+
+
+/**
+ * optional string new_username = 2;
  * @return {string}
  */
 proto.protocol.chat.v1.Event.ProfileUpdated.prototype.getNewUsername = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
 
@@ -4734,16 +4764,16 @@ proto.protocol.chat.v1.Event.ProfileUpdated.prototype.getNewUsername = function(
  * @return {!proto.protocol.chat.v1.Event.ProfileUpdated} returns this
  */
 proto.protocol.chat.v1.Event.ProfileUpdated.prototype.setNewUsername = function(value) {
-  return jspb.Message.setProto3StringField(this, 1, value);
+  return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
 /**
- * optional bool update_username = 2;
+ * optional bool update_username = 3;
  * @return {boolean}
  */
 proto.protocol.chat.v1.Event.ProfileUpdated.prototype.getUpdateUsername = function() {
-  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 2, false));
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 3, false));
 };
 
 
@@ -4752,16 +4782,16 @@ proto.protocol.chat.v1.Event.ProfileUpdated.prototype.getUpdateUsername = functi
  * @return {!proto.protocol.chat.v1.Event.ProfileUpdated} returns this
  */
 proto.protocol.chat.v1.Event.ProfileUpdated.prototype.setUpdateUsername = function(value) {
-  return jspb.Message.setProto3BooleanField(this, 2, value);
+  return jspb.Message.setProto3BooleanField(this, 3, value);
 };
 
 
 /**
- * optional string new_avatar = 3;
+ * optional string new_avatar = 4;
  * @return {string}
  */
 proto.protocol.chat.v1.Event.ProfileUpdated.prototype.getNewAvatar = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
 };
 
 
@@ -4770,16 +4800,16 @@ proto.protocol.chat.v1.Event.ProfileUpdated.prototype.getNewAvatar = function() 
  * @return {!proto.protocol.chat.v1.Event.ProfileUpdated} returns this
  */
 proto.protocol.chat.v1.Event.ProfileUpdated.prototype.setNewAvatar = function(value) {
-  return jspb.Message.setProto3StringField(this, 3, value);
+  return jspb.Message.setProto3StringField(this, 4, value);
 };
 
 
 /**
- * optional bool update_avatar = 4;
+ * optional bool update_avatar = 5;
  * @return {boolean}
  */
 proto.protocol.chat.v1.Event.ProfileUpdated.prototype.getUpdateAvatar = function() {
-  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 4, false));
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 5, false));
 };
 
 
@@ -4788,16 +4818,16 @@ proto.protocol.chat.v1.Event.ProfileUpdated.prototype.getUpdateAvatar = function
  * @return {!proto.protocol.chat.v1.Event.ProfileUpdated} returns this
  */
 proto.protocol.chat.v1.Event.ProfileUpdated.prototype.setUpdateAvatar = function(value) {
-  return jspb.Message.setProto3BooleanField(this, 4, value);
+  return jspb.Message.setProto3BooleanField(this, 5, value);
 };
 
 
 /**
- * optional protocol.harmonytypes.v1.UserStatus new_status = 5;
+ * optional protocol.harmonytypes.v1.UserStatus new_status = 6;
  * @return {!proto.protocol.harmonytypes.v1.UserStatus}
  */
 proto.protocol.chat.v1.Event.ProfileUpdated.prototype.getNewStatus = function() {
-  return /** @type {!proto.protocol.harmonytypes.v1.UserStatus} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
+  return /** @type {!proto.protocol.harmonytypes.v1.UserStatus} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
 };
 
 
@@ -4806,16 +4836,16 @@ proto.protocol.chat.v1.Event.ProfileUpdated.prototype.getNewStatus = function() 
  * @return {!proto.protocol.chat.v1.Event.ProfileUpdated} returns this
  */
 proto.protocol.chat.v1.Event.ProfileUpdated.prototype.setNewStatus = function(value) {
-  return jspb.Message.setProto3EnumField(this, 5, value);
+  return jspb.Message.setProto3EnumField(this, 6, value);
 };
 
 
 /**
- * optional bool update_status = 6;
+ * optional bool update_status = 7;
  * @return {boolean}
  */
 proto.protocol.chat.v1.Event.ProfileUpdated.prototype.getUpdateStatus = function() {
-  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 6, false));
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 7, false));
 };
 
 
@@ -4824,7 +4854,7 @@ proto.protocol.chat.v1.Event.ProfileUpdated.prototype.getUpdateStatus = function
  * @return {!proto.protocol.chat.v1.Event.ProfileUpdated} returns this
  */
 proto.protocol.chat.v1.Event.ProfileUpdated.prototype.setUpdateStatus = function(value) {
-  return jspb.Message.setProto3BooleanField(this, 6, value);
+  return jspb.Message.setProto3BooleanField(this, 7, value);
 };
 
 

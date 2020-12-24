@@ -14,8 +14,6 @@ import { Event, StreamEventsRequest } from "../protocol/chat/v1/streaming_pb";
 import {
   GetUserRequest,
   GetUserMetadataRequest,
-  UsernameUpdateRequest,
-  StatusUpdateRequest,
   ProfileUpdateRequest,
 } from "../protocol/chat/v1/profile_pb";
 import {
@@ -498,11 +496,6 @@ export class Connection {
       req.setUpdateStatus(true);
     }
     return this.unaryReq(ChatService.ProfileUpdate, req, true);
-  }
-
-  async statusUpdate(newStatus: keyof UserStatusMap) {
-    const req = new StatusUpdateRequest();
-    req.setNewStatus(UserStatus[newStatus]);
   }
 
   async addGuildToGuildList(guildID: string, homeserver: string) {
