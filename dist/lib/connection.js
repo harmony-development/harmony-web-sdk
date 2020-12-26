@@ -78,6 +78,9 @@ class Connection {
         else if (msg.hasGuildRemovedFromList()) {
             this.events.emit(streaming_pb_1.Event.EventCase.GUILD_REMOVED_FROM_LIST, this.host, msg.getGuildRemovedFromList().toObject());
         }
+        else if (msg.hasEditedGuild()) {
+            this.events.emit(streaming_pb_1.Event.EventCase.EDITED_GUILD, this.host, msg.getEditedGuild().toObject());
+        }
     }
     beginStream() {
         this.client = grpc_web_1.grpc.client(chat_pb_service_1.ChatService.StreamEvents, {
@@ -187,10 +190,10 @@ class Connection {
         return this.unaryReq(chat_pb_service_1.ChatService.GetChannelMessages, req, true);
     }
     async updateGuildName(guildID, newName) {
-        const req = new guilds_pb_1.UpdateGuildNameRequest();
+        const req = new guilds_pb_1.UpdateGuildInformationRequest();
         req.setGuildId(guildID);
         req.setNewGuildName(newName);
-        return this.unaryReq(chat_pb_service_1.ChatService.UpdateGuildName, req, true);
+        return this.unaryReq(chat_pb_service_1.ChatService.UpdateGuildInformation, req, true);
     }
     async updateChannelName(guildID, channelID, newName) {
         const req = new channels_pb_1.UpdateChannelNameRequest();

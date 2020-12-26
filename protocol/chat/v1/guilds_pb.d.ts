@@ -317,27 +317,39 @@ export namespace GetGuildMembersResponse {
   }
 }
 
-export class UpdateGuildNameRequest extends jspb.Message {
+export class UpdateGuildInformationRequest extends jspb.Message {
   getGuildId(): string;
   setGuildId(value: string): void;
 
   getNewGuildName(): string;
   setNewGuildName(value: string): void;
 
+  getUpdateGuildName(): boolean;
+  setUpdateGuildName(value: boolean): void;
+
+  getNewGuildPicture(): string;
+  setNewGuildPicture(value: string): void;
+
+  getUpdateGuildPicture(): boolean;
+  setUpdateGuildPicture(value: boolean): void;
+
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): UpdateGuildNameRequest.AsObject;
-  static toObject(includeInstance: boolean, msg: UpdateGuildNameRequest): UpdateGuildNameRequest.AsObject;
+  toObject(includeInstance?: boolean): UpdateGuildInformationRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: UpdateGuildInformationRequest): UpdateGuildInformationRequest.AsObject;
   static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
   static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-  static serializeBinaryToWriter(message: UpdateGuildNameRequest, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): UpdateGuildNameRequest;
-  static deserializeBinaryFromReader(message: UpdateGuildNameRequest, reader: jspb.BinaryReader): UpdateGuildNameRequest;
+  static serializeBinaryToWriter(message: UpdateGuildInformationRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): UpdateGuildInformationRequest;
+  static deserializeBinaryFromReader(message: UpdateGuildInformationRequest, reader: jspb.BinaryReader): UpdateGuildInformationRequest;
 }
 
-export namespace UpdateGuildNameRequest {
+export namespace UpdateGuildInformationRequest {
   export type AsObject = {
     guildId: string,
     newGuildName: string,
+    updateGuildName: boolean,
+    newGuildPicture: string,
+    updateGuildPicture: boolean,
   }
 }
 

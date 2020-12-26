@@ -459,6 +459,12 @@ export namespace Event {
     getUpdateName(): boolean;
     setUpdateName(value: boolean): void;
 
+    getPicture(): string;
+    setPicture(value: string): void;
+
+    getUpdatePicture(): boolean;
+    setUpdatePicture(value: boolean): void;
+
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GuildUpdated.AsObject;
     static toObject(includeInstance: boolean, msg: GuildUpdated): GuildUpdated.AsObject;
@@ -474,6 +480,8 @@ export namespace Event {
       guildId: string,
       name: string,
       updateName: boolean,
+      picture: string,
+      updatePicture: boolean,
     }
   }
 

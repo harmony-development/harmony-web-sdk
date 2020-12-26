@@ -153,12 +153,12 @@ ChatService.GetEmotePackEmotes = {
   responseType: chat_v1_emotes_pb.GetEmotePackEmotesResponse
 };
 
-ChatService.UpdateGuildName = {
-  methodName: "UpdateGuildName",
+ChatService.UpdateGuildInformation = {
+  methodName: "UpdateGuildInformation",
   service: ChatService,
   requestStream: false,
   responseStream: false,
-  requestType: chat_v1_guilds_pb.UpdateGuildNameRequest,
+  requestType: chat_v1_guilds_pb.UpdateGuildInformationRequest,
   responseType: google_protobuf_empty_pb.Empty
 };
 
@@ -895,11 +895,11 @@ ChatServiceClient.prototype.getEmotePackEmotes = function getEmotePackEmotes(req
   };
 };
 
-ChatServiceClient.prototype.updateGuildName = function updateGuildName(requestMessage, metadata, callback) {
+ChatServiceClient.prototype.updateGuildInformation = function updateGuildInformation(requestMessage, metadata, callback) {
   if (arguments.length === 2) {
     callback = arguments[1];
   }
-  var client = grpc.unary(ChatService.UpdateGuildName, {
+  var client = grpc.unary(ChatService.UpdateGuildInformation, {
     request: requestMessage,
     host: this.serviceHost,
     metadata: metadata,

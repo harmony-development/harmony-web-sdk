@@ -3212,7 +3212,9 @@ proto.protocol.chat.v1.Event.GuildUpdated.toObject = function(includeInstance, m
   var f, obj = {
     guildId: jspb.Message.getFieldWithDefault(msg, 1, "0"),
     name: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    updateName: jspb.Message.getBooleanFieldWithDefault(msg, 3, false)
+    updateName: jspb.Message.getBooleanFieldWithDefault(msg, 3, false),
+    picture: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    updatePicture: jspb.Message.getBooleanFieldWithDefault(msg, 5, false)
   };
 
   if (includeInstance) {
@@ -3261,6 +3263,14 @@ proto.protocol.chat.v1.Event.GuildUpdated.deserializeBinaryFromReader = function
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setUpdateName(value);
       break;
+    case 4:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setPicture(value);
+      break;
+    case 5:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setUpdatePicture(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -3308,6 +3318,20 @@ proto.protocol.chat.v1.Event.GuildUpdated.serializeBinaryToWriter = function(mes
   if (f) {
     writer.writeBool(
       3,
+      f
+    );
+  }
+  f = message.getPicture();
+  if (f.length > 0) {
+    writer.writeString(
+      4,
+      f
+    );
+  }
+  f = message.getUpdatePicture();
+  if (f) {
+    writer.writeBool(
+      5,
       f
     );
   }
@@ -3365,6 +3389,42 @@ proto.protocol.chat.v1.Event.GuildUpdated.prototype.getUpdateName = function() {
  */
 proto.protocol.chat.v1.Event.GuildUpdated.prototype.setUpdateName = function(value) {
   return jspb.Message.setProto3BooleanField(this, 3, value);
+};
+
+
+/**
+ * optional string picture = 4;
+ * @return {string}
+ */
+proto.protocol.chat.v1.Event.GuildUpdated.prototype.getPicture = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.protocol.chat.v1.Event.GuildUpdated} returns this
+ */
+proto.protocol.chat.v1.Event.GuildUpdated.prototype.setPicture = function(value) {
+  return jspb.Message.setProto3StringField(this, 4, value);
+};
+
+
+/**
+ * optional bool update_picture = 5;
+ * @return {boolean}
+ */
+proto.protocol.chat.v1.Event.GuildUpdated.prototype.getUpdatePicture = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 5, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.protocol.chat.v1.Event.GuildUpdated} returns this
+ */
+proto.protocol.chat.v1.Event.GuildUpdated.prototype.setUpdatePicture = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 5, value);
 };
 
 

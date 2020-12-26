@@ -38,13 +38,13 @@ import {
   GetGuildRequest,
   GetGuildInvitesRequest,
   GetGuildMembersRequest,
-  UpdateGuildNameRequest,
   DeleteGuildRequest,
   DeleteInviteRequest,
   JoinGuildRequest,
   LeaveGuildRequest,
   GetGuildListRequest,
   AddGuildToGuildListRequest,
+  UpdateGuildInformationRequest,
 } from "../protocol/chat/v1/guilds_pb";
 import {
   GetChannelMessagesRequest,
@@ -344,10 +344,10 @@ export class Connection {
   }
 
   async updateGuildName(guildID: string, newName: string) {
-    const req = new UpdateGuildNameRequest();
+    const req = new UpdateGuildInformationRequest();
     req.setGuildId(guildID);
     req.setNewGuildName(newName);
-    return this.unaryReq(ChatService.UpdateGuildName, req, true);
+    return this.unaryReq(ChatService.UpdateGuildInformation, req, true);
   }
 
   async updateChannelName(guildID: string, channelID: string, newName: string) {

@@ -147,12 +147,12 @@ type ChatServiceGetEmotePackEmotes = {
   readonly responseType: typeof chat_v1_emotes_pb.GetEmotePackEmotesResponse;
 };
 
-type ChatServiceUpdateGuildName = {
+type ChatServiceUpdateGuildInformation = {
   readonly methodName: string;
   readonly service: typeof ChatService;
   readonly requestStream: false;
   readonly responseStream: false;
-  readonly requestType: typeof chat_v1_guilds_pb.UpdateGuildNameRequest;
+  readonly requestType: typeof chat_v1_guilds_pb.UpdateGuildInformationRequest;
   readonly responseType: typeof google_protobuf_empty_pb.Empty;
 };
 
@@ -434,7 +434,7 @@ export class ChatService {
   static readonly GetMessage: ChatServiceGetMessage;
   static readonly GetEmotePacks: ChatServiceGetEmotePacks;
   static readonly GetEmotePackEmotes: ChatServiceGetEmotePackEmotes;
-  static readonly UpdateGuildName: ChatServiceUpdateGuildName;
+  static readonly UpdateGuildInformation: ChatServiceUpdateGuildInformation;
   static readonly UpdateChannelName: ChatServiceUpdateChannelName;
   static readonly UpdateChannelOrder: ChatServiceUpdateChannelOrder;
   static readonly UpdateMessage: ChatServiceUpdateMessage;
@@ -633,13 +633,13 @@ export class ChatServiceClient {
     requestMessage: chat_v1_emotes_pb.GetEmotePackEmotesRequest,
     callback: (error: ServiceError|null, responseMessage: chat_v1_emotes_pb.GetEmotePackEmotesResponse|null) => void
   ): UnaryResponse;
-  updateGuildName(
-    requestMessage: chat_v1_guilds_pb.UpdateGuildNameRequest,
+  updateGuildInformation(
+    requestMessage: chat_v1_guilds_pb.UpdateGuildInformationRequest,
     metadata: grpc.Metadata,
     callback: (error: ServiceError|null, responseMessage: google_protobuf_empty_pb.Empty|null) => void
   ): UnaryResponse;
-  updateGuildName(
-    requestMessage: chat_v1_guilds_pb.UpdateGuildNameRequest,
+  updateGuildInformation(
+    requestMessage: chat_v1_guilds_pb.UpdateGuildInformationRequest,
     callback: (error: ServiceError|null, responseMessage: google_protobuf_empty_pb.Empty|null) => void
   ): UnaryResponse;
   updateChannelName(
