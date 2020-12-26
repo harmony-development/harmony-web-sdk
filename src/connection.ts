@@ -75,6 +75,7 @@ type ServerStreamResponses = {
   [Event.EventCase.DELETED_CHANNEL]: [string, Event.ChannelDeleted.AsObject];
   [Event.EventCase.CREATED_CHANNEL]: [string, Event.ChannelCreated.AsObject];
   [Event.EventCase.PROFILE_UPDATED]: [string, Event.ProfileUpdated.AsObject];
+  [Event.EventCase.EDITED_GUILD]: [string, Event.GuildUpdated.AsObject];
   [Event.EventCase.GUILD_ADDED_TO_LIST]: [
     string,
     Event.GuildAddedToList.AsObject
@@ -198,6 +199,12 @@ export class Connection {
         Event.EventCase.GUILD_REMOVED_FROM_LIST,
         this.host,
         msg.getGuildRemovedFromList()!.toObject()
+      );
+    } else if (msg.hasEditedGuild()) {
+      this.events.emit(
+        Event.EventCase.EDITED_GUILD,
+        this.host,
+        msg.getEditedGuild()!.toObject()
       );
     }
   }
