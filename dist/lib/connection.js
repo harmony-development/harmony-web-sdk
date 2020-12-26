@@ -39,48 +39,7 @@ class Connection {
      * @param msg an event message
      */
     onGuildEvent(msg) {
-        if (msg.hasSentMessage()) {
-            this.events.emit(streaming_pb_1.Event.EventCase.SENT_MESSAGE, this.host, msg.getSentMessage().toObject());
-        }
-        else if (msg.hasLeftMember()) {
-            this.events.emit(streaming_pb_1.Event.EventCase.LEFT_MEMBER, this.host, msg.getLeftMember().toObject());
-        }
-        else if (msg.hasJoinedMember()) {
-            this.events.emit(streaming_pb_1.Event.EventCase.JOINED_MEMBER, this.host, msg.getJoinedMember().toObject());
-        }
-        else if (msg.hasEditedMessage()) {
-            this.events.emit(streaming_pb_1.Event.EventCase.EDITED_MESSAGE, this.host, msg.getEditedMessage().toObject());
-        }
-        else if (msg.hasEditedGuild()) {
-            this.events.emit(streaming_pb_1.Event.EventCase.EDITED_GUILD, this.host, msg.getEditedGuild().toObject());
-        }
-        else if (msg.hasEditedChannel()) {
-            this.events.emit(streaming_pb_1.Event.EventCase.EDITED_CHANNEL, this.host, msg.getEditedChannel().toObject());
-        }
-        else if (msg.hasDeletedMessage()) {
-            this.events.emit(streaming_pb_1.Event.EventCase.DELETED_MESSAGE, this.host, msg.getDeletedMessage().toObject());
-        }
-        else if (msg.hasDeletedGuild()) {
-            this.events.emit(streaming_pb_1.Event.EventCase.DELETED_GUILD, this.host, msg.getDeletedGuild().toObject());
-        }
-        else if (msg.hasDeletedChannel()) {
-            this.events.emit(streaming_pb_1.Event.EventCase.DELETED_CHANNEL, this.host, msg.getDeletedChannel().toObject());
-        }
-        else if (msg.hasCreatedChannel()) {
-            this.events.emit(streaming_pb_1.Event.EventCase.CREATED_CHANNEL, this.host, msg.getCreatedChannel().toObject());
-        }
-        else if (msg.hasProfileUpdated()) {
-            this.events.emit(streaming_pb_1.Event.EventCase.PROFILE_UPDATED, this.host, msg.getProfileUpdated().toObject());
-        }
-        else if (msg.hasGuildAddedToList()) {
-            this.events.emit(streaming_pb_1.Event.EventCase.GUILD_ADDED_TO_LIST, this.host, msg.getGuildAddedToList().toObject());
-        }
-        else if (msg.hasGuildRemovedFromList()) {
-            this.events.emit(streaming_pb_1.Event.EventCase.GUILD_REMOVED_FROM_LIST, this.host, msg.getGuildRemovedFromList().toObject());
-        }
-        else if (msg.hasEditedGuild()) {
-            this.events.emit(streaming_pb_1.Event.EventCase.EDITED_GUILD, this.host, msg.getEditedGuild().toObject());
-        }
+        this.events.emit("event", this.host, msg.toObject());
     }
     beginStream() {
         this.client = grpc_web_1.grpc.client(chat_pb_service_1.ChatService.StreamEvents, {
@@ -272,7 +231,7 @@ class Connection {
         }
         return this.unaryReq(chat_pb_service_1.ChatService.TriggerAction, req, true);
     }
-    async sendMessage(guildID, channelID, content, attachments, embeds, actions) {
+    async sendMessage(guildID, channelID, content, attachments, embeds, actions, echoID) {
         const req = new messages_pb_1.SendMessageRequest();
         req.setGuildId(guildID);
         req.setChannelId(channelID);
@@ -287,6 +246,9 @@ class Connection {
         }
         if (attachments) {
             req.setAttachmentsList(attachments);
+        }
+        if (echoID) {
+            req.setEchoId(echoID);
         }
         return this.unaryReq(chat_pb_service_1.ChatService.SendMessage, req, true);
     }

@@ -64,26 +64,7 @@ import {
 } from "../protocol/chat/v1/permissions_pb";
 
 type ServerStreamResponses = {
-  [Event.EventCase.SENT_MESSAGE]: [string, Event.MessageSent.AsObject];
-  [Event.EventCase.LEFT_MEMBER]: [string, Event.MemberLeft.AsObject];
-  [Event.EventCase.JOINED_MEMBER]: [string, Event.MemberJoined.AsObject];
-  [Event.EventCase.EDITED_MESSAGE]: [string, Event.MessageUpdated.AsObject];
-  [Event.EventCase.EDITED_GUILD]: [string, Event.GuildUpdated.AsObject];
-  [Event.EventCase.EDITED_CHANNEL]: [string, Event.ChannelUpdated.AsObject];
-  [Event.EventCase.DELETED_MESSAGE]: [string, Event.MessageDeleted.AsObject];
-  [Event.EventCase.DELETED_GUILD]: [string, Event.GuildDeleted.AsObject];
-  [Event.EventCase.DELETED_CHANNEL]: [string, Event.ChannelDeleted.AsObject];
-  [Event.EventCase.CREATED_CHANNEL]: [string, Event.ChannelCreated.AsObject];
-  [Event.EventCase.PROFILE_UPDATED]: [string, Event.ProfileUpdated.AsObject];
-  [Event.EventCase.EDITED_GUILD]: [string, Event.GuildUpdated.AsObject];
-  [Event.EventCase.GUILD_ADDED_TO_LIST]: [
-    string,
-    Event.GuildAddedToList.AsObject
-  ];
-  [Event.EventCase.GUILD_REMOVED_FROM_LIST]: [
-    string,
-    Event.GuildRemovedFromList.AsObject
-  ];
+  event: [string, Event.AsObject];
   disconnect: [grpc.Code, string, grpc.Metadata];
 };
 
@@ -122,91 +103,7 @@ export class Connection {
    * @param msg an event message
    */
   onGuildEvent(msg: Event) {
-    if (msg.hasSentMessage()) {
-      this.events.emit(
-        Event.EventCase.SENT_MESSAGE,
-        this.host,
-        msg.getSentMessage()!.toObject()
-      );
-    } else if (msg.hasLeftMember()) {
-      this.events.emit(
-        Event.EventCase.LEFT_MEMBER,
-        this.host,
-        msg.getLeftMember()!.toObject()
-      );
-    } else if (msg.hasJoinedMember()) {
-      this.events.emit(
-        Event.EventCase.JOINED_MEMBER,
-        this.host,
-        msg.getJoinedMember()!.toObject()
-      );
-    } else if (msg.hasEditedMessage()) {
-      this.events.emit(
-        Event.EventCase.EDITED_MESSAGE,
-        this.host,
-        msg.getEditedMessage()!.toObject()
-      );
-    } else if (msg.hasEditedGuild()) {
-      this.events.emit(
-        Event.EventCase.EDITED_GUILD,
-        this.host,
-        msg.getEditedGuild()!.toObject()
-      );
-    } else if (msg.hasEditedChannel()) {
-      this.events.emit(
-        Event.EventCase.EDITED_CHANNEL,
-        this.host,
-        msg.getEditedChannel()!.toObject()
-      );
-    } else if (msg.hasDeletedMessage()) {
-      this.events.emit(
-        Event.EventCase.DELETED_MESSAGE,
-        this.host,
-        msg.getDeletedMessage()!.toObject()
-      );
-    } else if (msg.hasDeletedGuild()) {
-      this.events.emit(
-        Event.EventCase.DELETED_GUILD,
-        this.host,
-        msg.getDeletedGuild()!.toObject()
-      );
-    } else if (msg.hasDeletedChannel()) {
-      this.events.emit(
-        Event.EventCase.DELETED_CHANNEL,
-        this.host,
-        msg.getDeletedChannel()!.toObject()
-      );
-    } else if (msg.hasCreatedChannel()) {
-      this.events.emit(
-        Event.EventCase.CREATED_CHANNEL,
-        this.host,
-        msg.getCreatedChannel()!.toObject()
-      );
-    } else if (msg.hasProfileUpdated()) {
-      this.events.emit(
-        Event.EventCase.PROFILE_UPDATED,
-        this.host,
-        msg.getProfileUpdated()!.toObject()
-      );
-    } else if (msg.hasGuildAddedToList()) {
-      this.events.emit(
-        Event.EventCase.GUILD_ADDED_TO_LIST,
-        this.host,
-        msg.getGuildAddedToList()!.toObject()
-      );
-    } else if (msg.hasGuildRemovedFromList()) {
-      this.events.emit(
-        Event.EventCase.GUILD_REMOVED_FROM_LIST,
-        this.host,
-        msg.getGuildRemovedFromList()!.toObject()
-      );
-    } else if (msg.hasEditedGuild()) {
-      this.events.emit(
-        Event.EventCase.EDITED_GUILD,
-        this.host,
-        msg.getEditedGuild()!.toObject()
-      );
-    }
+    this.events.emit("event", this.host, msg.toObject());
   }
 
   beginStream() {
@@ -452,7 +349,8 @@ export class Connection {
     content?: string,
     attachments?: string[],
     embeds?: Embed[],
-    actions?: Action[]
+    actions?: Action[],
+    echoID?: number
   ) {
     const req = new SendMessageRequest();
     req.setGuildId(guildID);
@@ -468,6 +366,9 @@ export class Connection {
     }
     if (attachments) {
       req.setAttachmentsList(attachments);
+    }
+    if (echoID) {
+      req.setEchoId(echoID);
     }
     return this.unaryReq(ChatService.SendMessage, req, true);
   }

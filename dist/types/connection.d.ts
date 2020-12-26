@@ -6,20 +6,7 @@ import { ProtobufMessage } from "@improbable-eng/grpc-web/dist/typings/message";
 import { UnaryMethodDefinition } from "@improbable-eng/grpc-web/dist/typings/service";
 import EventEmitter from "eventemitter3";
 declare type ServerStreamResponses = {
-    [Event.EventCase.SENT_MESSAGE]: [string, Event.MessageSent.AsObject];
-    [Event.EventCase.LEFT_MEMBER]: [string, Event.MemberLeft.AsObject];
-    [Event.EventCase.JOINED_MEMBER]: [string, Event.MemberJoined.AsObject];
-    [Event.EventCase.EDITED_MESSAGE]: [string, Event.MessageUpdated.AsObject];
-    [Event.EventCase.EDITED_GUILD]: [string, Event.GuildUpdated.AsObject];
-    [Event.EventCase.EDITED_CHANNEL]: [string, Event.ChannelUpdated.AsObject];
-    [Event.EventCase.DELETED_MESSAGE]: [string, Event.MessageDeleted.AsObject];
-    [Event.EventCase.DELETED_GUILD]: [string, Event.GuildDeleted.AsObject];
-    [Event.EventCase.DELETED_CHANNEL]: [string, Event.ChannelDeleted.AsObject];
-    [Event.EventCase.CREATED_CHANNEL]: [string, Event.ChannelCreated.AsObject];
-    [Event.EventCase.PROFILE_UPDATED]: [string, Event.ProfileUpdated.AsObject];
-    [Event.EventCase.EDITED_GUILD]: [string, Event.GuildUpdated.AsObject];
-    [Event.EventCase.GUILD_ADDED_TO_LIST]: [string, Event.GuildAddedToList.AsObject];
-    [Event.EventCase.GUILD_REMOVED_FROM_LIST]: [string, Event.GuildRemovedFromList.AsObject];
+    event: [string, Event.AsObject];
     disconnect: [grpc.Code, string, grpc.Metadata];
 };
 export declare class Connection {
@@ -59,7 +46,7 @@ export declare class Connection {
     joinGuild(inviteID: string): Promise<UnaryOutput<import("../protocol/chat/v1/guilds_pb").JoinGuildResponse>>;
     leaveGuild(guildID: string): Promise<UnaryOutput<import("google-protobuf/google/protobuf/empty_pb").Empty>>;
     triggerAction(guildID: string, channelID: string, messageID: string, actionID: string, actionData?: string): Promise<UnaryOutput<import("google-protobuf/google/protobuf/empty_pb").Empty>>;
-    sendMessage(guildID: string, channelID: string, content?: string, attachments?: string[], embeds?: Embed[], actions?: Action[]): Promise<UnaryOutput<import("../protocol/chat/v1/messages_pb").SendMessageResponse>>;
+    sendMessage(guildID: string, channelID: string, content?: string, attachments?: string[], embeds?: Embed[], actions?: Action[], echoID?: number): Promise<UnaryOutput<import("../protocol/chat/v1/messages_pb").SendMessageResponse>>;
     uploadFile(f: File): Promise<{
         id: string;
     }>;
