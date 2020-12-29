@@ -8,6 +8,7 @@ import {
   FederateRequest,
   LoginFederatedRequest,
   NextStepRequest,
+  StepBackRequest,
   StreamStepsRequest,
 } from "../protocol/auth/v1/auth_pb";
 import {
@@ -179,6 +180,14 @@ export class Connection {
     req.setForm(data?.form);
 
     return this.unaryReq(AuthService.NextStep, req, false);
+  }
+
+  stepBack(authID: string) {
+    const req = new StepBackRequest();
+
+    req.setAuthId(authID);
+
+    return this.unaryReq(AuthService.StepBack, req, false);
   }
 
   subscribe(guildID: string) {
