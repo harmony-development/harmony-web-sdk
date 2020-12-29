@@ -139,18 +139,29 @@ export class Connection {
   }
 
   streamSteps(authID: string) {
+    const c = grpc.client<StreamStepsRequest, AuthStep, AuthServiceStreamSteps>(
+      AuthService.StreamSteps,
+      {
+        host: this.host,
+        transport: grpc.WebsocketTransport(),
+      }
+    );
+
+    c.onEnd((code: grpc.Code, message: string, trailers: grpc.Metadata) =>
+      this.events.emit("auth-disconnect", code, message, trailers)
+    );
+    c.onMessage((ev: AuthStep) =>
+      this.events.emit("auth-event", this.host, ev.toObject())
+    );
+
     const req = new StreamStepsRequest();
 
     req.setAuthId(authID);
 
-    return grpc.invoke(AuthService.StreamSteps, {
-      host: this.host,
-      onMessage: (ev: AuthStep) =>
-        this.events.emit("auth-event", this.host, ev.toObject()),
-      onEnd: (code, message, trailers) =>
-        this.events.emit("auth-disconnect", code, message, trailers),
-      request: req,
-    });
+    c.send(req);
+    c.finishSend();
+
+    return c;
   }
 
   nextAuthStep(

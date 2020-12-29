@@ -1,5 +1,5 @@
 import { grpc } from "@improbable-eng/grpc-web";
-import { AuthStep, NextStepRequest } from "../protocol/auth/v1/auth_pb";
+import { AuthStep, NextStepRequest, StreamStepsRequest } from "../protocol/auth/v1/auth_pb";
 import { Event, StreamEventsRequest } from "../protocol/chat/v1/streaming_pb";
 import { UserStatusMap, Action, Embed } from "../protocol/harmonytypes/v1/types_pb";
 import { UnaryOutput } from "@improbable-eng/grpc-web/dist/typings/unary";
@@ -27,7 +27,7 @@ export declare class Connection {
     onGuildEvent(msg: Event): void;
     beginStream(): void;
     beginAuth(): Promise<UnaryOutput<import("../protocol/auth/v1/auth_pb").BeginAuthResponse>>;
-    streamSteps(authID: string): import("@improbable-eng/grpc-web/dist/typings/invoke").Request;
+    streamSteps(authID: string): grpc.Client<StreamStepsRequest, AuthStep>;
     nextAuthStep(authID: string, data?: {
         choice?: NextStepRequest.Choice;
         form?: NextStepRequest.Form;

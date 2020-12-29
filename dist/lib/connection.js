@@ -58,14 +58,17 @@ class Connection {
         return this.unaryReq(auth_pb_service_1.AuthService.BeginAuth, new empty_pb_1.Empty(), false);
     }
     streamSteps(authID) {
+        const c = grpc_web_1.grpc.client(auth_pb_service_1.AuthService.StreamSteps, {
+            host: this.host,
+            transport: grpc_web_1.grpc.WebsocketTransport(),
+        });
+        c.onEnd((code, message, trailers) => this.events.emit("auth-disconnect", code, message, trailers));
+        c.onMessage((ev) => this.events.emit("auth-event", this.host, ev.toObject()));
         const req = new auth_pb_1.StreamStepsRequest();
         req.setAuthId(authID);
-        return grpc_web_1.grpc.invoke(auth_pb_service_1.AuthService.StreamSteps, {
-            host: this.host,
-            onMessage: (ev) => this.events.emit("auth-event", this.host, ev.toObject()),
-            onEnd: (code, message, trailers) => this.events.emit("auth-disconnect", code, message, trailers),
-            request: req,
-        });
+        c.send(req);
+        c.finishSend();
+        return c;
     }
     nextAuthStep(authID, data) {
         const req = new auth_pb_1.NextStepRequest();
