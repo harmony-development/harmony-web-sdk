@@ -135,7 +135,7 @@ export class Connection {
   }
 
   beginAuth() {
-    this.unaryReq(AuthService.BeginAuth, new Empty(), false);
+    return this.unaryReq(AuthService.BeginAuth, new Empty(), false);
   }
 
   streamSteps() {

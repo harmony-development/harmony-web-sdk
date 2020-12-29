@@ -55,7 +55,7 @@ class Connection {
         this.client.start(metadata);
     }
     beginAuth() {
-        this.unaryReq(auth_pb_service_1.AuthService.BeginAuth, new empty_pb_1.Empty(), false);
+        return this.unaryReq(auth_pb_service_1.AuthService.BeginAuth, new empty_pb_1.Empty(), false);
     }
     streamSteps() {
         const authStreamClient = grpc_web_1.grpc.client(auth_pb_service_1.AuthService.StreamSteps, {

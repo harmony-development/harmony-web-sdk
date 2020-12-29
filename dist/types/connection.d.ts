@@ -26,7 +26,7 @@ export declare class Connection {
      */
     onGuildEvent(msg: Event): void;
     beginStream(): void;
-    beginAuth(): void;
+    beginAuth(): Promise<UnaryOutput<import("../protocol/auth/v1/auth_pb").BeginAuthResponse>>;
     streamSteps(): grpc.Client<StreamStepsRequest, AuthStep>;
     nextAuthStep(authID: string, data?: {
         choice?: NextStepRequest.Choice;
