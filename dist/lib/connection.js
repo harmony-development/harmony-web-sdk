@@ -66,6 +66,7 @@ class Connection {
         c.onMessage((ev) => this.events.emit("auth-event", this.host, ev.toObject()));
         const req = new auth_pb_1.StreamStepsRequest();
         req.setAuthId(authID);
+        c.start();
         c.send(req);
         c.finishSend();
         return c;

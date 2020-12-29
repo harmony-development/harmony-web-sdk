@@ -158,6 +158,7 @@ export class Connection {
 
     req.setAuthId(authID);
 
+    c.start();
     c.send(req);
     c.finishSend();
 
