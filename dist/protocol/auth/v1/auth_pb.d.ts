@@ -55,6 +55,9 @@ export class AuthStep extends jspb.Message {
   getFallbackUrl(): string;
   setFallbackUrl(value: string): void;
 
+  getCanGoBack(): boolean;
+  setCanGoBack(value: boolean): void;
+
   hasChoice(): boolean;
   clearChoice(): void;
   getChoice(): AuthStep.Choice | undefined;
@@ -89,6 +92,7 @@ export class AuthStep extends jspb.Message {
 export namespace AuthStep {
   export type AsObject = {
     fallbackUrl: string,
+    canGoBack: boolean,
     choice?: AuthStep.Choice.AsObject,
     form?: AuthStep.Form.AsObject,
     session?: Session.AsObject,
@@ -197,10 +201,10 @@ export namespace AuthStep {
 
   export enum StepCase {
     STEP_NOT_SET = 0,
-    CHOICE = 2,
-    FORM = 3,
-    SESSION = 4,
-    WAITING = 5,
+    CHOICE = 3,
+    FORM = 4,
+    SESSION = 5,
+    WAITING = 6,
   }
 }
 

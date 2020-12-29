@@ -696,17 +696,17 @@ proto.protocol.auth.v1.Session.prototype.setSessionToken = function(value) {
  * @private {!Array<!Array<number>>}
  * @const
  */
-proto.protocol.auth.v1.AuthStep.oneofGroups_ = [[2,3,4,5]];
+proto.protocol.auth.v1.AuthStep.oneofGroups_ = [[3,4,5,6]];
 
 /**
  * @enum {number}
  */
 proto.protocol.auth.v1.AuthStep.StepCase = {
   STEP_NOT_SET: 0,
-  CHOICE: 2,
-  FORM: 3,
-  SESSION: 4,
-  WAITING: 5
+  CHOICE: 3,
+  FORM: 4,
+  SESSION: 5,
+  WAITING: 6
 };
 
 /**
@@ -748,6 +748,7 @@ proto.protocol.auth.v1.AuthStep.prototype.toObject = function(opt_includeInstanc
 proto.protocol.auth.v1.AuthStep.toObject = function(includeInstance, msg) {
   var f, obj = {
     fallbackUrl: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    canGoBack: jspb.Message.getBooleanFieldWithDefault(msg, 2, false),
     choice: (f = msg.getChoice()) && proto.protocol.auth.v1.AuthStep.Choice.toObject(includeInstance, f),
     form: (f = msg.getForm()) && proto.protocol.auth.v1.AuthStep.Form.toObject(includeInstance, f),
     session: (f = msg.getSession()) && proto.protocol.auth.v1.Session.toObject(includeInstance, f),
@@ -793,21 +794,25 @@ proto.protocol.auth.v1.AuthStep.deserializeBinaryFromReader = function(msg, read
       msg.setFallbackUrl(value);
       break;
     case 2:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setCanGoBack(value);
+      break;
+    case 3:
       var value = new proto.protocol.auth.v1.AuthStep.Choice;
       reader.readMessage(value,proto.protocol.auth.v1.AuthStep.Choice.deserializeBinaryFromReader);
       msg.setChoice(value);
       break;
-    case 3:
+    case 4:
       var value = new proto.protocol.auth.v1.AuthStep.Form;
       reader.readMessage(value,proto.protocol.auth.v1.AuthStep.Form.deserializeBinaryFromReader);
       msg.setForm(value);
       break;
-    case 4:
+    case 5:
       var value = new proto.protocol.auth.v1.Session;
       reader.readMessage(value,proto.protocol.auth.v1.Session.deserializeBinaryFromReader);
       msg.setSession(value);
       break;
-    case 5:
+    case 6:
       var value = new proto.protocol.auth.v1.AuthStep.Waiting;
       reader.readMessage(value,proto.protocol.auth.v1.AuthStep.Waiting.deserializeBinaryFromReader);
       msg.setWaiting(value);
@@ -848,10 +853,17 @@ proto.protocol.auth.v1.AuthStep.serializeBinaryToWriter = function(message, writ
       f
     );
   }
+  f = message.getCanGoBack();
+  if (f) {
+    writer.writeBool(
+      2,
+      f
+    );
+  }
   f = message.getChoice();
   if (f != null) {
     writer.writeMessage(
-      2,
+      3,
       f,
       proto.protocol.auth.v1.AuthStep.Choice.serializeBinaryToWriter
     );
@@ -859,7 +871,7 @@ proto.protocol.auth.v1.AuthStep.serializeBinaryToWriter = function(message, writ
   f = message.getForm();
   if (f != null) {
     writer.writeMessage(
-      3,
+      4,
       f,
       proto.protocol.auth.v1.AuthStep.Form.serializeBinaryToWriter
     );
@@ -867,7 +879,7 @@ proto.protocol.auth.v1.AuthStep.serializeBinaryToWriter = function(message, writ
   f = message.getSession();
   if (f != null) {
     writer.writeMessage(
-      4,
+      5,
       f,
       proto.protocol.auth.v1.Session.serializeBinaryToWriter
     );
@@ -875,7 +887,7 @@ proto.protocol.auth.v1.AuthStep.serializeBinaryToWriter = function(message, writ
   f = message.getWaiting();
   if (f != null) {
     writer.writeMessage(
-      5,
+      6,
       f,
       proto.protocol.auth.v1.AuthStep.Waiting.serializeBinaryToWriter
     );
@@ -1598,12 +1610,30 @@ proto.protocol.auth.v1.AuthStep.prototype.setFallbackUrl = function(value) {
 
 
 /**
- * optional Choice choice = 2;
+ * optional bool can_go_back = 2;
+ * @return {boolean}
+ */
+proto.protocol.auth.v1.AuthStep.prototype.getCanGoBack = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 2, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.protocol.auth.v1.AuthStep} returns this
+ */
+proto.protocol.auth.v1.AuthStep.prototype.setCanGoBack = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 2, value);
+};
+
+
+/**
+ * optional Choice choice = 3;
  * @return {?proto.protocol.auth.v1.AuthStep.Choice}
  */
 proto.protocol.auth.v1.AuthStep.prototype.getChoice = function() {
   return /** @type{?proto.protocol.auth.v1.AuthStep.Choice} */ (
-    jspb.Message.getWrapperField(this, proto.protocol.auth.v1.AuthStep.Choice, 2));
+    jspb.Message.getWrapperField(this, proto.protocol.auth.v1.AuthStep.Choice, 3));
 };
 
 
@@ -1612,7 +1642,7 @@ proto.protocol.auth.v1.AuthStep.prototype.getChoice = function() {
  * @return {!proto.protocol.auth.v1.AuthStep} returns this
 */
 proto.protocol.auth.v1.AuthStep.prototype.setChoice = function(value) {
-  return jspb.Message.setOneofWrapperField(this, 2, proto.protocol.auth.v1.AuthStep.oneofGroups_[0], value);
+  return jspb.Message.setOneofWrapperField(this, 3, proto.protocol.auth.v1.AuthStep.oneofGroups_[0], value);
 };
 
 
@@ -1630,17 +1660,17 @@ proto.protocol.auth.v1.AuthStep.prototype.clearChoice = function() {
  * @return {boolean}
  */
 proto.protocol.auth.v1.AuthStep.prototype.hasChoice = function() {
-  return jspb.Message.getField(this, 2) != null;
+  return jspb.Message.getField(this, 3) != null;
 };
 
 
 /**
- * optional Form form = 3;
+ * optional Form form = 4;
  * @return {?proto.protocol.auth.v1.AuthStep.Form}
  */
 proto.protocol.auth.v1.AuthStep.prototype.getForm = function() {
   return /** @type{?proto.protocol.auth.v1.AuthStep.Form} */ (
-    jspb.Message.getWrapperField(this, proto.protocol.auth.v1.AuthStep.Form, 3));
+    jspb.Message.getWrapperField(this, proto.protocol.auth.v1.AuthStep.Form, 4));
 };
 
 
@@ -1649,7 +1679,7 @@ proto.protocol.auth.v1.AuthStep.prototype.getForm = function() {
  * @return {!proto.protocol.auth.v1.AuthStep} returns this
 */
 proto.protocol.auth.v1.AuthStep.prototype.setForm = function(value) {
-  return jspb.Message.setOneofWrapperField(this, 3, proto.protocol.auth.v1.AuthStep.oneofGroups_[0], value);
+  return jspb.Message.setOneofWrapperField(this, 4, proto.protocol.auth.v1.AuthStep.oneofGroups_[0], value);
 };
 
 
@@ -1667,17 +1697,17 @@ proto.protocol.auth.v1.AuthStep.prototype.clearForm = function() {
  * @return {boolean}
  */
 proto.protocol.auth.v1.AuthStep.prototype.hasForm = function() {
-  return jspb.Message.getField(this, 3) != null;
+  return jspb.Message.getField(this, 4) != null;
 };
 
 
 /**
- * optional Session session = 4;
+ * optional Session session = 5;
  * @return {?proto.protocol.auth.v1.Session}
  */
 proto.protocol.auth.v1.AuthStep.prototype.getSession = function() {
   return /** @type{?proto.protocol.auth.v1.Session} */ (
-    jspb.Message.getWrapperField(this, proto.protocol.auth.v1.Session, 4));
+    jspb.Message.getWrapperField(this, proto.protocol.auth.v1.Session, 5));
 };
 
 
@@ -1686,7 +1716,7 @@ proto.protocol.auth.v1.AuthStep.prototype.getSession = function() {
  * @return {!proto.protocol.auth.v1.AuthStep} returns this
 */
 proto.protocol.auth.v1.AuthStep.prototype.setSession = function(value) {
-  return jspb.Message.setOneofWrapperField(this, 4, proto.protocol.auth.v1.AuthStep.oneofGroups_[0], value);
+  return jspb.Message.setOneofWrapperField(this, 5, proto.protocol.auth.v1.AuthStep.oneofGroups_[0], value);
 };
 
 
@@ -1704,17 +1734,17 @@ proto.protocol.auth.v1.AuthStep.prototype.clearSession = function() {
  * @return {boolean}
  */
 proto.protocol.auth.v1.AuthStep.prototype.hasSession = function() {
-  return jspb.Message.getField(this, 4) != null;
+  return jspb.Message.getField(this, 5) != null;
 };
 
 
 /**
- * optional Waiting waiting = 5;
+ * optional Waiting waiting = 6;
  * @return {?proto.protocol.auth.v1.AuthStep.Waiting}
  */
 proto.protocol.auth.v1.AuthStep.prototype.getWaiting = function() {
   return /** @type{?proto.protocol.auth.v1.AuthStep.Waiting} */ (
-    jspb.Message.getWrapperField(this, proto.protocol.auth.v1.AuthStep.Waiting, 5));
+    jspb.Message.getWrapperField(this, proto.protocol.auth.v1.AuthStep.Waiting, 6));
 };
 
 
@@ -1723,7 +1753,7 @@ proto.protocol.auth.v1.AuthStep.prototype.getWaiting = function() {
  * @return {!proto.protocol.auth.v1.AuthStep} returns this
 */
 proto.protocol.auth.v1.AuthStep.prototype.setWaiting = function(value) {
-  return jspb.Message.setOneofWrapperField(this, 5, proto.protocol.auth.v1.AuthStep.oneofGroups_[0], value);
+  return jspb.Message.setOneofWrapperField(this, 6, proto.protocol.auth.v1.AuthStep.oneofGroups_[0], value);
 };
 
 
@@ -1741,7 +1771,7 @@ proto.protocol.auth.v1.AuthStep.prototype.clearWaiting = function() {
  * @return {boolean}
  */
 proto.protocol.auth.v1.AuthStep.prototype.hasWaiting = function() {
-  return jspb.Message.getField(this, 5) != null;
+  return jspb.Message.getField(this, 6) != null;
 };
 
 
