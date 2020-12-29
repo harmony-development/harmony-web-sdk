@@ -70,6 +70,11 @@ export class AuthStep extends jspb.Message {
   getSession(): Session | undefined;
   setSession(value?: Session): void;
 
+  hasWaiting(): boolean;
+  clearWaiting(): void;
+  getWaiting(): AuthStep.Waiting | undefined;
+  setWaiting(value?: AuthStep.Waiting): void;
+
   getStepCase(): AuthStep.StepCase;
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): AuthStep.AsObject;
@@ -87,6 +92,7 @@ export namespace AuthStep {
     choice?: AuthStep.Choice.AsObject,
     form?: AuthStep.Form.AsObject,
     session?: Session.AsObject,
+    waiting?: AuthStep.Waiting.AsObject,
   }
 
   export class Choice extends jspb.Message {
@@ -165,11 +171,36 @@ export namespace AuthStep {
     }
   }
 
+  export class Waiting extends jspb.Message {
+    getTitle(): string;
+    setTitle(value: string): void;
+
+    getDescription(): string;
+    setDescription(value: string): void;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): Waiting.AsObject;
+    static toObject(includeInstance: boolean, msg: Waiting): Waiting.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: Waiting, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): Waiting;
+    static deserializeBinaryFromReader(message: Waiting, reader: jspb.BinaryReader): Waiting;
+  }
+
+  export namespace Waiting {
+    export type AsObject = {
+      title: string,
+      description: string,
+    }
+  }
+
   export enum StepCase {
     STEP_NOT_SET = 0,
     CHOICE = 2,
     FORM = 3,
     SESSION = 4,
+    WAITING = 5,
   }
 }
 
@@ -295,6 +326,26 @@ export namespace NextStepRequest {
     STEP_NOT_SET = 0,
     CHOICE = 2,
     FORM = 3,
+  }
+}
+
+export class StepBackRequest extends jspb.Message {
+  getAuthId(): string;
+  setAuthId(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): StepBackRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: StepBackRequest): StepBackRequest.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: StepBackRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): StepBackRequest;
+  static deserializeBinaryFromReader(message: StepBackRequest, reader: jspb.BinaryReader): StepBackRequest;
+}
+
+export namespace StepBackRequest {
+  export type AsObject = {
+    authId: string,
   }
 }
 

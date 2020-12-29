@@ -56,6 +56,15 @@ AuthService.NextStep = {
   responseType: auth_v1_auth_pb.AuthStep
 };
 
+AuthService.StepBack = {
+  methodName: "StepBack",
+  service: AuthService,
+  requestStream: false,
+  responseStream: false,
+  requestType: auth_v1_auth_pb.StepBackRequest,
+  responseType: auth_v1_auth_pb.AuthStep
+};
+
 AuthService.StreamSteps = {
   methodName: "StreamSteps",
   service: AuthService,
@@ -201,6 +210,37 @@ AuthServiceClient.prototype.nextStep = function nextStep(requestMessage, metadat
     callback = arguments[1];
   }
   var client = grpc.unary(AuthService.NextStep, {
+    request: requestMessage,
+    host: this.serviceHost,
+    metadata: metadata,
+    transport: this.options.transport,
+    debug: this.options.debug,
+    onEnd: function (response) {
+      if (callback) {
+        if (response.status !== grpc.Code.OK) {
+          var err = new Error(response.statusMessage);
+          err.code = response.status;
+          err.metadata = response.trailers;
+          callback(err, null);
+        } else {
+          callback(null, response.message);
+        }
+      }
+    }
+  });
+  return {
+    cancel: function () {
+      callback = null;
+      client.close();
+    }
+  };
+};
+
+AuthServiceClient.prototype.stepBack = function stepBack(requestMessage, metadata, callback) {
+  if (arguments.length === 2) {
+    callback = arguments[1];
+  }
+  var client = grpc.unary(AuthService.StepBack, {
     request: requestMessage,
     host: this.serviceHost,
     metadata: metadata,

@@ -78,6 +78,11 @@ class Connection {
         req.setForm(data === null || data === void 0 ? void 0 : data.form);
         return this.unaryReq(auth_pb_service_1.AuthService.NextStep, req, false);
     }
+    stepBack(authID) {
+        const req = new auth_pb_1.StepBackRequest();
+        req.setAuthId(authID);
+        return this.unaryReq(auth_pb_service_1.AuthService.StepBack, req, false);
+    }
     subscribe(guildID) {
         if (this.client) {
             const streamEventsReq = new streaming_pb_1.StreamEventsRequest.SubscribeToGuild();

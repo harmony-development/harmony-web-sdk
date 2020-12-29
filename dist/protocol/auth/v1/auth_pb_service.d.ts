@@ -50,6 +50,15 @@ type AuthServiceNextStep = {
   readonly responseType: typeof auth_v1_auth_pb.AuthStep;
 };
 
+type AuthServiceStepBack = {
+  readonly methodName: string;
+  readonly service: typeof AuthService;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof auth_v1_auth_pb.StepBackRequest;
+  readonly responseType: typeof auth_v1_auth_pb.AuthStep;
+};
+
 type AuthServiceStreamSteps = {
   readonly methodName: string;
   readonly service: typeof AuthService;
@@ -66,6 +75,7 @@ export class AuthService {
   static readonly Key: AuthServiceKey;
   static readonly BeginAuth: AuthServiceBeginAuth;
   static readonly NextStep: AuthServiceNextStep;
+  static readonly StepBack: AuthServiceStepBack;
   static readonly StreamSteps: AuthServiceStreamSteps;
 }
 
@@ -144,6 +154,15 @@ export class AuthServiceClient {
   ): UnaryResponse;
   nextStep(
     requestMessage: auth_v1_auth_pb.NextStepRequest,
+    callback: (error: ServiceError|null, responseMessage: auth_v1_auth_pb.AuthStep|null) => void
+  ): UnaryResponse;
+  stepBack(
+    requestMessage: auth_v1_auth_pb.StepBackRequest,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: auth_v1_auth_pb.AuthStep|null) => void
+  ): UnaryResponse;
+  stepBack(
+    requestMessage: auth_v1_auth_pb.StepBackRequest,
     callback: (error: ServiceError|null, responseMessage: auth_v1_auth_pb.AuthStep|null) => void
   ): UnaryResponse;
   streamSteps(requestMessage: auth_v1_auth_pb.StreamStepsRequest, metadata?: grpc.Metadata): ResponseStream<auth_v1_auth_pb.AuthStep>;

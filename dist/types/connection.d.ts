@@ -32,6 +32,7 @@ export declare class Connection {
         choice?: NextStepRequest.Choice;
         form?: NextStepRequest.Form;
     }): Promise<UnaryOutput<AuthStep>>;
+    stepBack(authID: string): Promise<UnaryOutput<AuthStep>>;
     subscribe(guildID: string): void;
     getKey(): Promise<UnaryOutput<import("../protocol/auth/v1/auth_pb").KeyReply>>;
     loginFederated(token: string, domain: string): Promise<UnaryOutput<import("../protocol/auth/v1/auth_pb").Session>>;
