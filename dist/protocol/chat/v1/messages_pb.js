@@ -986,7 +986,9 @@ proto.protocol.chat.v1.UpdateMessageRequest.toObject = function(includeInstance,
     attachmentsList: (f = jspb.Message.getRepeatedField(msg, 10)) == null ? undefined : f,
     updateAttachments: jspb.Message.getBooleanFieldWithDefault(msg, 11, false),
     overrides: (f = msg.getOverrides()) && harmonytypes_v1_types_pb.Override.toObject(includeInstance, f),
-    updateOverrides: jspb.Message.getBooleanFieldWithDefault(msg, 13, false)
+    updateOverrides: jspb.Message.getBooleanFieldWithDefault(msg, 13, false),
+    metadata: (f = msg.getMetadata()) && harmonytypes_v1_types_pb.Metadata.toObject(includeInstance, f),
+    updateMetadata: jspb.Message.getBooleanFieldWithDefault(msg, 15, false)
   };
 
   if (includeInstance) {
@@ -1077,6 +1079,15 @@ proto.protocol.chat.v1.UpdateMessageRequest.deserializeBinaryFromReader = functi
     case 13:
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setUpdateOverrides(value);
+      break;
+    case 14:
+      var value = new harmonytypes_v1_types_pb.Metadata;
+      reader.readMessage(value,harmonytypes_v1_types_pb.Metadata.deserializeBinaryFromReader);
+      msg.setMetadata(value);
+      break;
+    case 15:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setUpdateMetadata(value);
       break;
     default:
       reader.skipField();
@@ -1198,6 +1209,21 @@ proto.protocol.chat.v1.UpdateMessageRequest.serializeBinaryToWriter = function(m
   if (f) {
     writer.writeBool(
       13,
+      f
+    );
+  }
+  f = message.getMetadata();
+  if (f != null) {
+    writer.writeMessage(
+      14,
+      f,
+      harmonytypes_v1_types_pb.Metadata.serializeBinaryToWriter
+    );
+  }
+  f = message.getUpdateMetadata();
+  if (f) {
+    writer.writeBool(
+      15,
       f
     );
   }
@@ -1513,6 +1539,61 @@ proto.protocol.chat.v1.UpdateMessageRequest.prototype.getUpdateOverrides = funct
  */
 proto.protocol.chat.v1.UpdateMessageRequest.prototype.setUpdateOverrides = function(value) {
   return jspb.Message.setProto3BooleanField(this, 13, value);
+};
+
+
+/**
+ * optional protocol.harmonytypes.v1.Metadata metadata = 14;
+ * @return {?proto.protocol.harmonytypes.v1.Metadata}
+ */
+proto.protocol.chat.v1.UpdateMessageRequest.prototype.getMetadata = function() {
+  return /** @type{?proto.protocol.harmonytypes.v1.Metadata} */ (
+    jspb.Message.getWrapperField(this, harmonytypes_v1_types_pb.Metadata, 14));
+};
+
+
+/**
+ * @param {?proto.protocol.harmonytypes.v1.Metadata|undefined} value
+ * @return {!proto.protocol.chat.v1.UpdateMessageRequest} returns this
+*/
+proto.protocol.chat.v1.UpdateMessageRequest.prototype.setMetadata = function(value) {
+  return jspb.Message.setWrapperField(this, 14, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.protocol.chat.v1.UpdateMessageRequest} returns this
+ */
+proto.protocol.chat.v1.UpdateMessageRequest.prototype.clearMetadata = function() {
+  return this.setMetadata(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.protocol.chat.v1.UpdateMessageRequest.prototype.hasMetadata = function() {
+  return jspb.Message.getField(this, 14) != null;
+};
+
+
+/**
+ * optional bool update_metadata = 15;
+ * @return {boolean}
+ */
+proto.protocol.chat.v1.UpdateMessageRequest.prototype.getUpdateMetadata = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 15, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.protocol.chat.v1.UpdateMessageRequest} returns this
+ */
+proto.protocol.chat.v1.UpdateMessageRequest.prototype.setUpdateMetadata = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 15, value);
 };
 
 
@@ -2005,7 +2086,8 @@ proto.protocol.chat.v1.SendMessageRequest.toObject = function(includeInstance, m
     attachmentsList: (f = jspb.Message.getRepeatedField(msg, 6)) == null ? undefined : f,
     inReplyTo: jspb.Message.getFieldWithDefault(msg, 7, 0),
     overrides: (f = msg.getOverrides()) && harmonytypes_v1_types_pb.Override.toObject(includeInstance, f),
-    echoId: jspb.Message.getFieldWithDefault(msg, 9, 0)
+    echoId: jspb.Message.getFieldWithDefault(msg, 9, 0),
+    metadata: (f = msg.getMetadata()) && harmonytypes_v1_types_pb.Metadata.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -2080,6 +2162,11 @@ proto.protocol.chat.v1.SendMessageRequest.deserializeBinaryFromReader = function
     case 9:
       var value = /** @type {number} */ (reader.readUint64());
       msg.setEchoId(value);
+      break;
+    case 10:
+      var value = new harmonytypes_v1_types_pb.Metadata;
+      reader.readMessage(value,harmonytypes_v1_types_pb.Metadata.deserializeBinaryFromReader);
+      msg.setMetadata(value);
       break;
     default:
       reader.skipField();
@@ -2174,6 +2261,14 @@ proto.protocol.chat.v1.SendMessageRequest.serializeBinaryToWriter = function(mes
     writer.writeUint64(
       9,
       f
+    );
+  }
+  f = message.getMetadata();
+  if (f != null) {
+    writer.writeMessage(
+      10,
+      f,
+      harmonytypes_v1_types_pb.Metadata.serializeBinaryToWriter
     );
   }
 };
@@ -2416,6 +2511,43 @@ proto.protocol.chat.v1.SendMessageRequest.prototype.getEchoId = function() {
  */
 proto.protocol.chat.v1.SendMessageRequest.prototype.setEchoId = function(value) {
   return jspb.Message.setProto3IntField(this, 9, value);
+};
+
+
+/**
+ * optional protocol.harmonytypes.v1.Metadata metadata = 10;
+ * @return {?proto.protocol.harmonytypes.v1.Metadata}
+ */
+proto.protocol.chat.v1.SendMessageRequest.prototype.getMetadata = function() {
+  return /** @type{?proto.protocol.harmonytypes.v1.Metadata} */ (
+    jspb.Message.getWrapperField(this, harmonytypes_v1_types_pb.Metadata, 10));
+};
+
+
+/**
+ * @param {?proto.protocol.harmonytypes.v1.Metadata|undefined} value
+ * @return {!proto.protocol.chat.v1.SendMessageRequest} returns this
+*/
+proto.protocol.chat.v1.SendMessageRequest.prototype.setMetadata = function(value) {
+  return jspb.Message.setWrapperField(this, 10, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.protocol.chat.v1.SendMessageRequest} returns this
+ */
+proto.protocol.chat.v1.SendMessageRequest.prototype.clearMetadata = function() {
+  return this.setMetadata(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.protocol.chat.v1.SendMessageRequest.prototype.hasMetadata = function() {
+  return jspb.Message.getField(this, 10) != null;
 };
 
 

@@ -4,6 +4,7 @@
 import * as jspb from "google-protobuf";
 import * as google_protobuf_timestamp_pb from "google-protobuf/google/protobuf/timestamp_pb";
 import * as google_protobuf_empty_pb from "google-protobuf/google/protobuf/empty_pb";
+import * as google_protobuf_any_pb from "google-protobuf/google/protobuf/any_pb";
 
 export class Override extends jspb.Message {
   getName(): string;
@@ -269,7 +270,35 @@ export namespace Attachment {
   }
 }
 
+export class Metadata extends jspb.Message {
+  getKind(): string;
+  setKind(value: string): void;
+
+  getExtensionMap(): jspb.Map<string, google_protobuf_any_pb.Any>;
+  clearExtensionMap(): void;
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): Metadata.AsObject;
+  static toObject(includeInstance: boolean, msg: Metadata): Metadata.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: Metadata, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): Metadata;
+  static deserializeBinaryFromReader(message: Metadata, reader: jspb.BinaryReader): Metadata;
+}
+
+export namespace Metadata {
+  export type AsObject = {
+    kind: string,
+    extensionMap: Array<[string, google_protobuf_any_pb.Any.AsObject]>,
+  }
+}
+
 export class Message extends jspb.Message {
+  hasMetadata(): boolean;
+  clearMetadata(): void;
+  getMetadata(): Metadata | undefined;
+  setMetadata(value?: Metadata): void;
+
   getGuildId(): string;
   setGuildId(value: string): void;
 
@@ -330,6 +359,7 @@ export class Message extends jspb.Message {
 
 export namespace Message {
   export type AsObject = {
+    metadata?: Metadata.AsObject,
     guildId: string,
     channelId: string,
     messageId: string,

@@ -12,6 +12,8 @@ var jspb = require('google-protobuf');
 var goog = jspb;
 var global = Function('return this')();
 
+var harmonytypes_v1_types_pb = require('../../harmonytypes/v1/types_pb.js');
+goog.object.extend(proto, harmonytypes_v1_types_pb);
 goog.exportSymbol('proto.protocol.chat.v1.AddGuildToGuildListRequest', null, global);
 goog.exportSymbol('proto.protocol.chat.v1.AddGuildToGuildListResponse', null, global);
 goog.exportSymbol('proto.protocol.chat.v1.CreateGuildRequest', null, global);
@@ -572,6 +574,7 @@ proto.protocol.chat.v1.CreateGuildRequest.prototype.toObject = function(opt_incl
  */
 proto.protocol.chat.v1.CreateGuildRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
+    metadata: (f = msg.getMetadata()) && harmonytypes_v1_types_pb.Metadata.toObject(includeInstance, f),
     guildName: jspb.Message.getFieldWithDefault(msg, 1, ""),
     pictureUrl: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
@@ -610,6 +613,11 @@ proto.protocol.chat.v1.CreateGuildRequest.deserializeBinaryFromReader = function
     }
     var field = reader.getFieldNumber();
     switch (field) {
+    case 3:
+      var value = new harmonytypes_v1_types_pb.Metadata;
+      reader.readMessage(value,harmonytypes_v1_types_pb.Metadata.deserializeBinaryFromReader);
+      msg.setMetadata(value);
+      break;
     case 1:
       var value = /** @type {string} */ (reader.readString());
       msg.setGuildName(value);
@@ -647,6 +655,14 @@ proto.protocol.chat.v1.CreateGuildRequest.prototype.serializeBinary = function()
  */
 proto.protocol.chat.v1.CreateGuildRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
+  f = message.getMetadata();
+  if (f != null) {
+    writer.writeMessage(
+      3,
+      f,
+      harmonytypes_v1_types_pb.Metadata.serializeBinaryToWriter
+    );
+  }
   f = message.getGuildName();
   if (f.length > 0) {
     writer.writeString(
@@ -661,6 +677,43 @@ proto.protocol.chat.v1.CreateGuildRequest.serializeBinaryToWriter = function(mes
       f
     );
   }
+};
+
+
+/**
+ * optional protocol.harmonytypes.v1.Metadata metadata = 3;
+ * @return {?proto.protocol.harmonytypes.v1.Metadata}
+ */
+proto.protocol.chat.v1.CreateGuildRequest.prototype.getMetadata = function() {
+  return /** @type{?proto.protocol.harmonytypes.v1.Metadata} */ (
+    jspb.Message.getWrapperField(this, harmonytypes_v1_types_pb.Metadata, 3));
+};
+
+
+/**
+ * @param {?proto.protocol.harmonytypes.v1.Metadata|undefined} value
+ * @return {!proto.protocol.chat.v1.CreateGuildRequest} returns this
+*/
+proto.protocol.chat.v1.CreateGuildRequest.prototype.setMetadata = function(value) {
+  return jspb.Message.setWrapperField(this, 3, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.protocol.chat.v1.CreateGuildRequest} returns this
+ */
+proto.protocol.chat.v1.CreateGuildRequest.prototype.clearMetadata = function() {
+  return this.setMetadata(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.protocol.chat.v1.CreateGuildRequest.prototype.hasMetadata = function() {
+  return jspb.Message.getField(this, 3) != null;
 };
 
 
@@ -1733,6 +1786,7 @@ proto.protocol.chat.v1.GetGuildResponse.prototype.toObject = function(opt_includ
  */
 proto.protocol.chat.v1.GetGuildResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
+    metadata: (f = msg.getMetadata()) && harmonytypes_v1_types_pb.Metadata.toObject(includeInstance, f),
     guildName: jspb.Message.getFieldWithDefault(msg, 1, ""),
     guildOwner: jspb.Message.getFieldWithDefault(msg, 2, "0"),
     guildPicture: jspb.Message.getFieldWithDefault(msg, 3, "")
@@ -1772,6 +1826,11 @@ proto.protocol.chat.v1.GetGuildResponse.deserializeBinaryFromReader = function(m
     }
     var field = reader.getFieldNumber();
     switch (field) {
+    case 4:
+      var value = new harmonytypes_v1_types_pb.Metadata;
+      reader.readMessage(value,harmonytypes_v1_types_pb.Metadata.deserializeBinaryFromReader);
+      msg.setMetadata(value);
+      break;
     case 1:
       var value = /** @type {string} */ (reader.readString());
       msg.setGuildName(value);
@@ -1813,6 +1872,14 @@ proto.protocol.chat.v1.GetGuildResponse.prototype.serializeBinary = function() {
  */
 proto.protocol.chat.v1.GetGuildResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
+  f = message.getMetadata();
+  if (f != null) {
+    writer.writeMessage(
+      4,
+      f,
+      harmonytypes_v1_types_pb.Metadata.serializeBinaryToWriter
+    );
+  }
   f = message.getGuildName();
   if (f.length > 0) {
     writer.writeString(
@@ -1834,6 +1901,43 @@ proto.protocol.chat.v1.GetGuildResponse.serializeBinaryToWriter = function(messa
       f
     );
   }
+};
+
+
+/**
+ * optional protocol.harmonytypes.v1.Metadata metadata = 4;
+ * @return {?proto.protocol.harmonytypes.v1.Metadata}
+ */
+proto.protocol.chat.v1.GetGuildResponse.prototype.getMetadata = function() {
+  return /** @type{?proto.protocol.harmonytypes.v1.Metadata} */ (
+    jspb.Message.getWrapperField(this, harmonytypes_v1_types_pb.Metadata, 4));
+};
+
+
+/**
+ * @param {?proto.protocol.harmonytypes.v1.Metadata|undefined} value
+ * @return {!proto.protocol.chat.v1.GetGuildResponse} returns this
+*/
+proto.protocol.chat.v1.GetGuildResponse.prototype.setMetadata = function(value) {
+  return jspb.Message.setWrapperField(this, 4, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.protocol.chat.v1.GetGuildResponse} returns this
+ */
+proto.protocol.chat.v1.GetGuildResponse.prototype.clearMetadata = function() {
+  return this.setMetadata(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.protocol.chat.v1.GetGuildResponse.prototype.hasMetadata = function() {
+  return jspb.Message.getField(this, 4) != null;
 };
 
 
@@ -2693,7 +2797,9 @@ proto.protocol.chat.v1.UpdateGuildInformationRequest.toObject = function(include
     newGuildName: jspb.Message.getFieldWithDefault(msg, 2, ""),
     updateGuildName: jspb.Message.getBooleanFieldWithDefault(msg, 3, false),
     newGuildPicture: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    updateGuildPicture: jspb.Message.getBooleanFieldWithDefault(msg, 5, false)
+    updateGuildPicture: jspb.Message.getBooleanFieldWithDefault(msg, 5, false),
+    metadata: (f = msg.getMetadata()) && harmonytypes_v1_types_pb.Metadata.toObject(includeInstance, f),
+    updateMetadata: jspb.Message.getBooleanFieldWithDefault(msg, 7, false)
   };
 
   if (includeInstance) {
@@ -2749,6 +2855,15 @@ proto.protocol.chat.v1.UpdateGuildInformationRequest.deserializeBinaryFromReader
     case 5:
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setUpdateGuildPicture(value);
+      break;
+    case 6:
+      var value = new harmonytypes_v1_types_pb.Metadata;
+      reader.readMessage(value,harmonytypes_v1_types_pb.Metadata.deserializeBinaryFromReader);
+      msg.setMetadata(value);
+      break;
+    case 7:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setUpdateMetadata(value);
       break;
     default:
       reader.skipField();
@@ -2811,6 +2926,21 @@ proto.protocol.chat.v1.UpdateGuildInformationRequest.serializeBinaryToWriter = f
   if (f) {
     writer.writeBool(
       5,
+      f
+    );
+  }
+  f = message.getMetadata();
+  if (f != null) {
+    writer.writeMessage(
+      6,
+      f,
+      harmonytypes_v1_types_pb.Metadata.serializeBinaryToWriter
+    );
+  }
+  f = message.getUpdateMetadata();
+  if (f) {
+    writer.writeBool(
+      7,
       f
     );
   }
@@ -2904,6 +3034,61 @@ proto.protocol.chat.v1.UpdateGuildInformationRequest.prototype.getUpdateGuildPic
  */
 proto.protocol.chat.v1.UpdateGuildInformationRequest.prototype.setUpdateGuildPicture = function(value) {
   return jspb.Message.setProto3BooleanField(this, 5, value);
+};
+
+
+/**
+ * optional protocol.harmonytypes.v1.Metadata metadata = 6;
+ * @return {?proto.protocol.harmonytypes.v1.Metadata}
+ */
+proto.protocol.chat.v1.UpdateGuildInformationRequest.prototype.getMetadata = function() {
+  return /** @type{?proto.protocol.harmonytypes.v1.Metadata} */ (
+    jspb.Message.getWrapperField(this, harmonytypes_v1_types_pb.Metadata, 6));
+};
+
+
+/**
+ * @param {?proto.protocol.harmonytypes.v1.Metadata|undefined} value
+ * @return {!proto.protocol.chat.v1.UpdateGuildInformationRequest} returns this
+*/
+proto.protocol.chat.v1.UpdateGuildInformationRequest.prototype.setMetadata = function(value) {
+  return jspb.Message.setWrapperField(this, 6, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.protocol.chat.v1.UpdateGuildInformationRequest} returns this
+ */
+proto.protocol.chat.v1.UpdateGuildInformationRequest.prototype.clearMetadata = function() {
+  return this.setMetadata(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.protocol.chat.v1.UpdateGuildInformationRequest.prototype.hasMetadata = function() {
+  return jspb.Message.getField(this, 6) != null;
+};
+
+
+/**
+ * optional bool update_metadata = 7;
+ * @return {boolean}
+ */
+proto.protocol.chat.v1.UpdateGuildInformationRequest.prototype.getUpdateMetadata = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 7, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.protocol.chat.v1.UpdateGuildInformationRequest} returns this
+ */
+proto.protocol.chat.v1.UpdateGuildInformationRequest.prototype.setUpdateMetadata = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 7, value);
 };
 
 

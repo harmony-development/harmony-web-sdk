@@ -15,6 +15,7 @@ const channels_pb_1 = require("../protocol/chat/v1/channels_pb");
 const guilds_pb_1 = require("../protocol/chat/v1/guilds_pb");
 const messages_pb_1 = require("../protocol/chat/v1/messages_pb");
 const permissions_pb_1 = require("../protocol/chat/v1/permissions_pb");
+const empty_pb_1 = require("google-protobuf/google/protobuf/empty_pb");
 class Connection {
     constructor(host) {
         this.host = host;
@@ -53,6 +54,29 @@ class Connection {
             metadata.set("auth", this.session);
         this.client.start(metadata);
     }
+    beginAuth() {
+        this.unaryReq(auth_pb_service_1.AuthService.BeginAuth, new empty_pb_1.Empty(), false);
+    }
+    streamSteps() {
+        const authStreamClient = grpc_web_1.grpc.client(auth_pb_service_1.AuthService.StreamSteps, {
+            host: this.host,
+            transport: grpc_web_1.grpc.WebsocketTransport(),
+        });
+        authStreamClient.onEnd((code, message, trailers) => this.events.emit("auth-disconnect", code, message, trailers));
+        authStreamClient.onMessage((ev) => this.events.emit("auth-event", this.host, ev.toObject()));
+        const metadata = new grpc_web_1.grpc.Metadata();
+        if (this.session)
+            metadata.set("auth", this.session);
+        authStreamClient.start(metadata);
+        return authStreamClient;
+    }
+    nextAuthStep(authID, data) {
+        const req = new auth_pb_1.NextStepRequest();
+        req.setAuthId(authID);
+        req.setChoice(data === null || data === void 0 ? void 0 : data.choice);
+        req.setForm(data === null || data === void 0 ? void 0 : data.form);
+        return this.unaryReq(auth_pb_service_1.AuthService.NextStep, req, false);
+    }
     subscribe(guildID) {
         if (this.client) {
             const streamEventsReq = new streaming_pb_1.StreamEventsRequest.SubscribeToGuild();
@@ -63,31 +87,13 @@ class Connection {
         }
     }
     async getKey() {
-        const req = new auth_pb_1.KeyRequest();
-        return this.unaryReq(auth_pb_service_1.AuthService.Key, req);
-    }
-    async loginLocal(email, password) {
-        const req = new auth_pb_1.LoginRequest();
-        const localMsg = new auth_pb_1.LoginRequest.Local();
-        localMsg.setEmail(email);
-        localMsg.setPassword(btoa(password));
-        req.setLocal(localMsg);
-        return this.unaryReq(auth_pb_service_1.AuthService.Login, req);
+        return this.unaryReq(auth_pb_service_1.AuthService.Key, new empty_pb_1.Empty());
     }
     async loginFederated(token, domain) {
-        const req = new auth_pb_1.LoginRequest();
-        const federatedMsg = new auth_pb_1.LoginRequest.Federated();
-        federatedMsg.setAuthToken(token);
-        federatedMsg.setDomain(domain);
-        req.setFederated(federatedMsg);
-        return this.unaryReq(auth_pb_service_1.AuthService.Login, req);
-    }
-    async register(email, username, password) {
-        const req = new auth_pb_1.RegisterRequest();
-        req.setEmail(email);
-        req.setUsername(username);
-        req.setPassword(btoa(password));
-        return this.unaryReq(auth_pb_service_1.AuthService.Register, req);
+        const req = new auth_pb_1.LoginFederatedRequest();
+        req.setAuthToken(token);
+        req.setDomain(domain);
+        return this.unaryReq(auth_pb_service_1.AuthService.LoginFederated, req);
     }
     async federate(target) {
         const req = new auth_pb_1.FederateRequest();
@@ -155,11 +161,12 @@ class Connection {
         return this.unaryReq(chat_pb_service_1.ChatService.UpdateGuildInformation, req, true);
     }
     async updateChannelName(guildID, channelID, newName) {
-        const req = new channels_pb_1.UpdateChannelNameRequest();
+        const req = new channels_pb_1.UpdateChannelInformationRequest();
         req.setGuildId(guildID);
         req.setChannelId(channelID);
-        req.setNewChannelName(newName);
-        return this.unaryReq(chat_pb_service_1.ChatService.UpdateChannelName, req, true);
+        req.setName(newName);
+        req.setUpdateName(true);
+        return this.unaryReq(chat_pb_service_1.ChatService.UpdateChannelInformation, req, true);
     }
     async updateMessage(guildID, channelID, messageID, newContent, newAttachments, newActions, newEmbeds) {
         const req = new messages_pb_1.UpdateMessageRequest();

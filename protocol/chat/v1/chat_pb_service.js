@@ -162,12 +162,12 @@ ChatService.UpdateGuildInformation = {
   responseType: google_protobuf_empty_pb.Empty
 };
 
-ChatService.UpdateChannelName = {
-  methodName: "UpdateChannelName",
+ChatService.UpdateChannelInformation = {
+  methodName: "UpdateChannelInformation",
   service: ChatService,
   requestStream: false,
   responseStream: false,
-  requestType: chat_v1_channels_pb.UpdateChannelNameRequest,
+  requestType: chat_v1_channels_pb.UpdateChannelInformationRequest,
   responseType: google_protobuf_empty_pb.Empty
 };
 
@@ -420,6 +420,15 @@ ChatService.ProfileUpdate = {
   requestStream: false,
   responseStream: false,
   requestType: chat_v1_profile_pb.ProfileUpdateRequest,
+  responseType: google_protobuf_empty_pb.Empty
+};
+
+ChatService.Typing = {
+  methodName: "Typing",
+  service: ChatService,
+  requestStream: false,
+  responseStream: false,
+  requestType: chat_v1_channels_pb.TypingRequest,
   responseType: google_protobuf_empty_pb.Empty
 };
 
@@ -926,11 +935,11 @@ ChatServiceClient.prototype.updateGuildInformation = function updateGuildInforma
   };
 };
 
-ChatServiceClient.prototype.updateChannelName = function updateChannelName(requestMessage, metadata, callback) {
+ChatServiceClient.prototype.updateChannelInformation = function updateChannelInformation(requestMessage, metadata, callback) {
   if (arguments.length === 2) {
     callback = arguments[1];
   }
-  var client = grpc.unary(ChatService.UpdateChannelName, {
+  var client = grpc.unary(ChatService.UpdateChannelInformation, {
     request: requestMessage,
     host: this.serviceHost,
     metadata: metadata,
@@ -1813,6 +1822,37 @@ ChatServiceClient.prototype.profileUpdate = function profileUpdate(requestMessag
     callback = arguments[1];
   }
   var client = grpc.unary(ChatService.ProfileUpdate, {
+    request: requestMessage,
+    host: this.serviceHost,
+    metadata: metadata,
+    transport: this.options.transport,
+    debug: this.options.debug,
+    onEnd: function (response) {
+      if (callback) {
+        if (response.status !== grpc.Code.OK) {
+          var err = new Error(response.statusMessage);
+          err.code = response.status;
+          err.metadata = response.trailers;
+          callback(err, null);
+        } else {
+          callback(null, response.message);
+        }
+      }
+    }
+  });
+  return {
+    cancel: function () {
+      callback = null;
+      client.close();
+    }
+  };
+};
+
+ChatServiceClient.prototype.typing = function typing(requestMessage, metadata, callback) {
+  if (arguments.length === 2) {
+    callback = arguments[1];
+  }
+  var client = grpc.unary(ChatService.Typing, {
     request: requestMessage,
     host: this.serviceHost,
     metadata: metadata,

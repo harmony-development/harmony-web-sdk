@@ -156,12 +156,12 @@ type ChatServiceUpdateGuildInformation = {
   readonly responseType: typeof google_protobuf_empty_pb.Empty;
 };
 
-type ChatServiceUpdateChannelName = {
+type ChatServiceUpdateChannelInformation = {
   readonly methodName: string;
   readonly service: typeof ChatService;
   readonly requestStream: false;
   readonly responseStream: false;
-  readonly requestType: typeof chat_v1_channels_pb.UpdateChannelNameRequest;
+  readonly requestType: typeof chat_v1_channels_pb.UpdateChannelInformationRequest;
   readonly responseType: typeof google_protobuf_empty_pb.Empty;
 };
 
@@ -417,6 +417,15 @@ type ChatServiceProfileUpdate = {
   readonly responseType: typeof google_protobuf_empty_pb.Empty;
 };
 
+type ChatServiceTyping = {
+  readonly methodName: string;
+  readonly service: typeof ChatService;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof chat_v1_channels_pb.TypingRequest;
+  readonly responseType: typeof google_protobuf_empty_pb.Empty;
+};
+
 export class ChatService {
   static readonly serviceName: string;
   static readonly CreateGuild: ChatServiceCreateGuild;
@@ -435,7 +444,7 @@ export class ChatService {
   static readonly GetEmotePacks: ChatServiceGetEmotePacks;
   static readonly GetEmotePackEmotes: ChatServiceGetEmotePackEmotes;
   static readonly UpdateGuildInformation: ChatServiceUpdateGuildInformation;
-  static readonly UpdateChannelName: ChatServiceUpdateChannelName;
+  static readonly UpdateChannelInformation: ChatServiceUpdateChannelInformation;
   static readonly UpdateChannelOrder: ChatServiceUpdateChannelOrder;
   static readonly UpdateMessage: ChatServiceUpdateMessage;
   static readonly AddEmoteToPack: ChatServiceAddEmoteToPack;
@@ -464,6 +473,7 @@ export class ChatService {
   static readonly GetUser: ChatServiceGetUser;
   static readonly GetUserMetadata: ChatServiceGetUserMetadata;
   static readonly ProfileUpdate: ChatServiceProfileUpdate;
+  static readonly Typing: ChatServiceTyping;
 }
 
 export type ServiceError = { message: string, code: number; metadata: grpc.Metadata }
@@ -642,13 +652,13 @@ export class ChatServiceClient {
     requestMessage: chat_v1_guilds_pb.UpdateGuildInformationRequest,
     callback: (error: ServiceError|null, responseMessage: google_protobuf_empty_pb.Empty|null) => void
   ): UnaryResponse;
-  updateChannelName(
-    requestMessage: chat_v1_channels_pb.UpdateChannelNameRequest,
+  updateChannelInformation(
+    requestMessage: chat_v1_channels_pb.UpdateChannelInformationRequest,
     metadata: grpc.Metadata,
     callback: (error: ServiceError|null, responseMessage: google_protobuf_empty_pb.Empty|null) => void
   ): UnaryResponse;
-  updateChannelName(
-    requestMessage: chat_v1_channels_pb.UpdateChannelNameRequest,
+  updateChannelInformation(
+    requestMessage: chat_v1_channels_pb.UpdateChannelInformationRequest,
     callback: (error: ServiceError|null, responseMessage: google_protobuf_empty_pb.Empty|null) => void
   ): UnaryResponse;
   updateChannelOrder(
@@ -893,6 +903,15 @@ export class ChatServiceClient {
   ): UnaryResponse;
   profileUpdate(
     requestMessage: chat_v1_profile_pb.ProfileUpdateRequest,
+    callback: (error: ServiceError|null, responseMessage: google_protobuf_empty_pb.Empty|null) => void
+  ): UnaryResponse;
+  typing(
+    requestMessage: chat_v1_channels_pb.TypingRequest,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: google_protobuf_empty_pb.Empty|null) => void
+  ): UnaryResponse;
+  typing(
+    requestMessage: chat_v1_channels_pb.TypingRequest,
     callback: (error: ServiceError|null, responseMessage: google_protobuf_empty_pb.Empty|null) => void
   ): UnaryResponse;
 }

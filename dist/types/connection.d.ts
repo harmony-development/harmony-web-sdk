@@ -1,13 +1,17 @@
 import { grpc } from "@improbable-eng/grpc-web";
+import { AuthStep, NextStepRequest, StreamStepsRequest } from "../protocol/auth/v1/auth_pb";
 import { Event, StreamEventsRequest } from "../protocol/chat/v1/streaming_pb";
 import { UserStatusMap, Action, Embed } from "../protocol/harmonytypes/v1/types_pb";
 import { UnaryOutput } from "@improbable-eng/grpc-web/dist/typings/unary";
 import { ProtobufMessage } from "@improbable-eng/grpc-web/dist/typings/message";
 import { UnaryMethodDefinition } from "@improbable-eng/grpc-web/dist/typings/service";
 import EventEmitter from "eventemitter3";
+import { Empty } from "google-protobuf/google/protobuf/empty_pb";
 declare type ServerStreamResponses = {
     event: [string, Event.AsObject];
+    "auth-event": [string, AuthStep.AsObject];
     disconnect: [grpc.Code, string, grpc.Metadata];
+    "auth-disconnect": [grpc.Code, string, grpc.Metadata];
 };
 export declare class Connection {
     host: string;
@@ -22,11 +26,15 @@ export declare class Connection {
      */
     onGuildEvent(msg: Event): void;
     beginStream(): void;
+    beginAuth(): void;
+    streamSteps(): grpc.Client<StreamStepsRequest, AuthStep>;
+    nextAuthStep(authID: string, data?: {
+        choice?: NextStepRequest.Choice;
+        form?: NextStepRequest.Form;
+    }): Promise<UnaryOutput<AuthStep>>;
     subscribe(guildID: string): void;
     getKey(): Promise<UnaryOutput<import("../protocol/auth/v1/auth_pb").KeyReply>>;
-    loginLocal(email: string, password: string): Promise<UnaryOutput<import("../protocol/auth/v1/auth_pb").Session>>;
     loginFederated(token: string, domain: string): Promise<UnaryOutput<import("../protocol/auth/v1/auth_pb").Session>>;
-    register(email: string, username: string, password: string): Promise<UnaryOutput<import("../protocol/auth/v1/auth_pb").Session>>;
     federate(target: string): Promise<UnaryOutput<import("../protocol/auth/v1/auth_pb").FederateReply>>;
     createGuild(guildName: string, pictureURL?: string): Promise<UnaryOutput<import("../protocol/chat/v1/guilds_pb").CreateGuildResponse>>;
     createInvite(guildID: string, name?: string, possibleUses?: number): Promise<UnaryOutput<import("../protocol/chat/v1/guilds_pb").CreateInviteResponse>>;
@@ -36,16 +44,16 @@ export declare class Connection {
     getGuildMembers(guildID: string): Promise<UnaryOutput<import("../protocol/chat/v1/guilds_pb").GetGuildMembersResponse>>;
     getGuildChannels(guildID: string): Promise<UnaryOutput<import("../protocol/chat/v1/channels_pb").GetGuildChannelsResponse>>;
     getChannelMessages(guildID: string, channelID: string, beforeMessage?: string): Promise<UnaryOutput<import("../protocol/chat/v1/messages_pb").GetChannelMessagesResponse>>;
-    updateGuildName(guildID: string, newName: string): Promise<UnaryOutput<import("google-protobuf/google/protobuf/empty_pb").Empty>>;
-    updateChannelName(guildID: string, channelID: string, newName: string): Promise<UnaryOutput<import("google-protobuf/google/protobuf/empty_pb").Empty>>;
-    updateMessage(guildID: string, channelID: string, messageID: string, newContent?: any, newAttachments?: any, newActions?: any, newEmbeds?: any): Promise<UnaryOutput<import("google-protobuf/google/protobuf/empty_pb").Empty>>;
-    deleteGuild(guildID: string): Promise<UnaryOutput<import("google-protobuf/google/protobuf/empty_pb").Empty>>;
-    deleteInvite(guildID: string, inviteID: string): Promise<UnaryOutput<import("google-protobuf/google/protobuf/empty_pb").Empty>>;
-    deleteChannel(guildID: string, channelID: string): Promise<UnaryOutput<import("google-protobuf/google/protobuf/empty_pb").Empty>>;
-    deleteMessage(guildID: string, channelID: string, messageID: string): Promise<UnaryOutput<import("google-protobuf/google/protobuf/empty_pb").Empty>>;
+    updateGuildName(guildID: string, newName: string): Promise<UnaryOutput<Empty>>;
+    updateChannelName(guildID: string, channelID: string, newName: string): Promise<UnaryOutput<Empty>>;
+    updateMessage(guildID: string, channelID: string, messageID: string, newContent?: string, newAttachments?: string[], newActions?: Action[], newEmbeds?: Embed[]): Promise<UnaryOutput<Empty>>;
+    deleteGuild(guildID: string): Promise<UnaryOutput<Empty>>;
+    deleteInvite(guildID: string, inviteID: string): Promise<UnaryOutput<Empty>>;
+    deleteChannel(guildID: string, channelID: string): Promise<UnaryOutput<Empty>>;
+    deleteMessage(guildID: string, channelID: string, messageID: string): Promise<UnaryOutput<Empty>>;
     joinGuild(inviteID: string): Promise<UnaryOutput<import("../protocol/chat/v1/guilds_pb").JoinGuildResponse>>;
-    leaveGuild(guildID: string): Promise<UnaryOutput<import("google-protobuf/google/protobuf/empty_pb").Empty>>;
-    triggerAction(guildID: string, channelID: string, messageID: string, actionID: string, actionData?: string): Promise<UnaryOutput<import("google-protobuf/google/protobuf/empty_pb").Empty>>;
+    leaveGuild(guildID: string): Promise<UnaryOutput<Empty>>;
+    triggerAction(guildID: string, channelID: string, messageID: string, actionID: string, actionData?: string): Promise<UnaryOutput<Empty>>;
     sendMessage(guildID: string, channelID: string, content?: string, attachments?: string[], embeds?: Embed[], actions?: Action[], echoID?: number): Promise<UnaryOutput<import("../protocol/chat/v1/messages_pb").SendMessageResponse>>;
     uploadFile(f: File): Promise<{
         id: string;
@@ -57,18 +65,18 @@ export declare class Connection {
         newUsername?: string;
         newAvatar?: string;
         newStatus?: UserStatusMap[keyof UserStatusMap];
-    }): Promise<UnaryOutput<import("google-protobuf/google/protobuf/empty_pb").Empty>>;
+    }): Promise<UnaryOutput<Empty>>;
     addGuildToGuildList(guildID: string, homeserver: string): Promise<UnaryOutput<import("../protocol/chat/v1/guilds_pb").AddGuildToGuildListResponse>>;
     getGuildRoles(guildID: string): Promise<UnaryOutput<import("../protocol/chat/v1/permissions_pb").GetGuildRolesResponse>>;
     moveRole(guildID: string, roleID: string, beforeID: string, afterID: string): Promise<UnaryOutput<import("../protocol/chat/v1/permissions_pb").MoveRoleResponse>>;
-    deleteGuildRole(guildID: string, roleID: string): Promise<UnaryOutput<import("google-protobuf/google/protobuf/empty_pb").Empty>>;
+    deleteGuildRole(guildID: string, roleID: string): Promise<UnaryOutput<Empty>>;
     modifyGuildRole(guildID: string, roleID: string, modify: {
         name?: string;
         color?: number;
         hoist?: boolean;
         pingable?: boolean;
     }): Promise<void>;
-    manageUserRoles(guildID: string, userID: string, giveRoleIDs?: string[], takeRoleIDs?: string[]): Promise<UnaryOutput<import("google-protobuf/google/protobuf/empty_pb").Empty>>;
+    manageUserRoles(guildID: string, userID: string, giveRoleIDs?: string[], takeRoleIDs?: string[]): Promise<UnaryOutput<Empty>>;
     getUserRoles(guildID: string, userID: string): Promise<UnaryOutput<import("../protocol/chat/v1/permissions_pb").GetUserRolesResponse>>;
 }
 export {};

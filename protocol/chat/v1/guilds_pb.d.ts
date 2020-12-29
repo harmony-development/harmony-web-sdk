@@ -2,8 +2,14 @@
 // file: chat/v1/guilds.proto
 
 import * as jspb from "google-protobuf";
+import * as harmonytypes_v1_types_pb from "../../harmonytypes/v1/types_pb";
 
 export class CreateGuildRequest extends jspb.Message {
+  hasMetadata(): boolean;
+  clearMetadata(): void;
+  getMetadata(): harmonytypes_v1_types_pb.Metadata | undefined;
+  setMetadata(value?: harmonytypes_v1_types_pb.Metadata): void;
+
   getGuildName(): string;
   setGuildName(value: string): void;
 
@@ -22,6 +28,7 @@ export class CreateGuildRequest extends jspb.Message {
 
 export namespace CreateGuildRequest {
   export type AsObject = {
+    metadata?: harmonytypes_v1_types_pb.Metadata.AsObject,
     guildName: string,
     pictureUrl: string,
   }
@@ -178,6 +185,11 @@ export namespace GetGuildRequest {
 }
 
 export class GetGuildResponse extends jspb.Message {
+  hasMetadata(): boolean;
+  clearMetadata(): void;
+  getMetadata(): harmonytypes_v1_types_pb.Metadata | undefined;
+  setMetadata(value?: harmonytypes_v1_types_pb.Metadata): void;
+
   getGuildName(): string;
   setGuildName(value: string): void;
 
@@ -199,6 +211,7 @@ export class GetGuildResponse extends jspb.Message {
 
 export namespace GetGuildResponse {
   export type AsObject = {
+    metadata?: harmonytypes_v1_types_pb.Metadata.AsObject,
     guildName: string,
     guildOwner: string,
     guildPicture: string,
@@ -333,6 +346,14 @@ export class UpdateGuildInformationRequest extends jspb.Message {
   getUpdateGuildPicture(): boolean;
   setUpdateGuildPicture(value: boolean): void;
 
+  hasMetadata(): boolean;
+  clearMetadata(): void;
+  getMetadata(): harmonytypes_v1_types_pb.Metadata | undefined;
+  setMetadata(value?: harmonytypes_v1_types_pb.Metadata): void;
+
+  getUpdateMetadata(): boolean;
+  setUpdateMetadata(value: boolean): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): UpdateGuildInformationRequest.AsObject;
   static toObject(includeInstance: boolean, msg: UpdateGuildInformationRequest): UpdateGuildInformationRequest.AsObject;
@@ -350,6 +371,8 @@ export namespace UpdateGuildInformationRequest {
     updateGuildName: boolean,
     newGuildPicture: string,
     updateGuildPicture: boolean,
+    metadata?: harmonytypes_v1_types_pb.Metadata.AsObject,
+    updateMetadata: boolean,
   }
 }
 

@@ -2,6 +2,7 @@
 // file: chat/v1/channels.proto
 
 import * as jspb from "google-protobuf";
+import * as harmonytypes_v1_types_pb from "../../harmonytypes/v1/types_pb";
 
 export class CreateChannelRequest extends jspb.Message {
   getGuildId(): string;
@@ -19,8 +20,10 @@ export class CreateChannelRequest extends jspb.Message {
   getNextId(): string;
   setNextId(value: string): void;
 
-  getChannelKind(): string;
-  setChannelKind(value: string): void;
+  hasMetadata(): boolean;
+  clearMetadata(): void;
+  getMetadata(): harmonytypes_v1_types_pb.Metadata | undefined;
+  setMetadata(value?: harmonytypes_v1_types_pb.Metadata): void;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): CreateChannelRequest.AsObject;
@@ -39,7 +42,7 @@ export namespace CreateChannelRequest {
     isCategory: boolean,
     previousId: string,
     nextId: string,
-    channelKind: string,
+    metadata?: harmonytypes_v1_types_pb.Metadata.AsObject,
   }
 }
 
@@ -105,6 +108,11 @@ export namespace GetGuildChannelsResponse {
   }
 
   export class Channel extends jspb.Message {
+    hasMetadata(): boolean;
+    clearMetadata(): void;
+    getMetadata(): harmonytypes_v1_types_pb.Metadata | undefined;
+    setMetadata(value?: harmonytypes_v1_types_pb.Metadata): void;
+
     getChannelId(): string;
     setChannelId(value: string): void;
 
@@ -113,9 +121,6 @@ export namespace GetGuildChannelsResponse {
 
     getIsCategory(): boolean;
     setIsCategory(value: boolean): void;
-
-    getKind(): string;
-    setKind(value: string): void;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): Channel.AsObject;
@@ -129,39 +134,53 @@ export namespace GetGuildChannelsResponse {
 
   export namespace Channel {
     export type AsObject = {
+      metadata?: harmonytypes_v1_types_pb.Metadata.AsObject,
       channelId: string,
       channelName: string,
       isCategory: boolean,
-      kind: string,
     }
   }
 }
 
-export class UpdateChannelNameRequest extends jspb.Message {
+export class UpdateChannelInformationRequest extends jspb.Message {
   getGuildId(): string;
   setGuildId(value: string): void;
 
   getChannelId(): string;
   setChannelId(value: string): void;
 
-  getNewChannelName(): string;
-  setNewChannelName(value: string): void;
+  getName(): string;
+  setName(value: string): void;
+
+  getUpdateName(): boolean;
+  setUpdateName(value: boolean): void;
+
+  hasMetadata(): boolean;
+  clearMetadata(): void;
+  getMetadata(): harmonytypes_v1_types_pb.Metadata | undefined;
+  setMetadata(value?: harmonytypes_v1_types_pb.Metadata): void;
+
+  getUpdateMetadata(): boolean;
+  setUpdateMetadata(value: boolean): void;
 
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): UpdateChannelNameRequest.AsObject;
-  static toObject(includeInstance: boolean, msg: UpdateChannelNameRequest): UpdateChannelNameRequest.AsObject;
+  toObject(includeInstance?: boolean): UpdateChannelInformationRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: UpdateChannelInformationRequest): UpdateChannelInformationRequest.AsObject;
   static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
   static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-  static serializeBinaryToWriter(message: UpdateChannelNameRequest, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): UpdateChannelNameRequest;
-  static deserializeBinaryFromReader(message: UpdateChannelNameRequest, reader: jspb.BinaryReader): UpdateChannelNameRequest;
+  static serializeBinaryToWriter(message: UpdateChannelInformationRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): UpdateChannelInformationRequest;
+  static deserializeBinaryFromReader(message: UpdateChannelInformationRequest, reader: jspb.BinaryReader): UpdateChannelInformationRequest;
 }
 
-export namespace UpdateChannelNameRequest {
+export namespace UpdateChannelInformationRequest {
   export type AsObject = {
     guildId: string,
     channelId: string,
-    newChannelName: string,
+    name: string,
+    updateName: boolean,
+    metadata?: harmonytypes_v1_types_pb.Metadata.AsObject,
+    updateMetadata: boolean,
   }
 }
 
@@ -215,6 +234,30 @@ export class DeleteChannelRequest extends jspb.Message {
 }
 
 export namespace DeleteChannelRequest {
+  export type AsObject = {
+    guildId: string,
+    channelId: string,
+  }
+}
+
+export class TypingRequest extends jspb.Message {
+  getGuildId(): string;
+  setGuildId(value: string): void;
+
+  getChannelId(): string;
+  setChannelId(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): TypingRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: TypingRequest): TypingRequest.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: TypingRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): TypingRequest;
+  static deserializeBinaryFromReader(message: TypingRequest, reader: jspb.BinaryReader): TypingRequest;
+}
+
+export namespace TypingRequest {
   export type AsObject = {
     guildId: string,
     channelId: string,

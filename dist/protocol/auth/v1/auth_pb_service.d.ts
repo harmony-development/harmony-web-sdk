@@ -14,49 +14,59 @@ type AuthServiceFederate = {
   readonly responseType: typeof auth_v1_auth_pb.FederateReply;
 };
 
+type AuthServiceLoginFederated = {
+  readonly methodName: string;
+  readonly service: typeof AuthService;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof auth_v1_auth_pb.LoginFederatedRequest;
+  readonly responseType: typeof auth_v1_auth_pb.Session;
+};
+
 type AuthServiceKey = {
   readonly methodName: string;
   readonly service: typeof AuthService;
   readonly requestStream: false;
   readonly responseStream: false;
-  readonly requestType: typeof auth_v1_auth_pb.KeyRequest;
+  readonly requestType: typeof google_protobuf_empty_pb.Empty;
   readonly responseType: typeof auth_v1_auth_pb.KeyReply;
 };
 
-type AuthServiceLogin = {
-  readonly methodName: string;
-  readonly service: typeof AuthService;
-  readonly requestStream: false;
-  readonly responseStream: false;
-  readonly requestType: typeof auth_v1_auth_pb.LoginRequest;
-  readonly responseType: typeof auth_v1_auth_pb.Session;
-};
-
-type AuthServiceRegister = {
-  readonly methodName: string;
-  readonly service: typeof AuthService;
-  readonly requestStream: false;
-  readonly responseStream: false;
-  readonly requestType: typeof auth_v1_auth_pb.RegisterRequest;
-  readonly responseType: typeof auth_v1_auth_pb.Session;
-};
-
-type AuthServiceGetConfig = {
+type AuthServiceBeginAuth = {
   readonly methodName: string;
   readonly service: typeof AuthService;
   readonly requestStream: false;
   readonly responseStream: false;
   readonly requestType: typeof google_protobuf_empty_pb.Empty;
-  readonly responseType: typeof auth_v1_auth_pb.GetConfigResponse;
+  readonly responseType: typeof auth_v1_auth_pb.BeginAuthResponse;
+};
+
+type AuthServiceNextStep = {
+  readonly methodName: string;
+  readonly service: typeof AuthService;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof auth_v1_auth_pb.NextStepRequest;
+  readonly responseType: typeof auth_v1_auth_pb.AuthStep;
+};
+
+type AuthServiceStreamSteps = {
+  readonly methodName: string;
+  readonly service: typeof AuthService;
+  readonly requestStream: false;
+  readonly responseStream: true;
+  readonly requestType: typeof auth_v1_auth_pb.StreamStepsRequest;
+  readonly responseType: typeof auth_v1_auth_pb.AuthStep;
 };
 
 export class AuthService {
   static readonly serviceName: string;
   static readonly Federate: AuthServiceFederate;
+  static readonly LoginFederated: AuthServiceLoginFederated;
   static readonly Key: AuthServiceKey;
-  static readonly Login: AuthServiceLogin;
-  static readonly Register: AuthServiceRegister;
-  static readonly GetConfig: AuthServiceGetConfig;
+  static readonly BeginAuth: AuthServiceBeginAuth;
+  static readonly NextStep: AuthServiceNextStep;
+  static readonly StreamSteps: AuthServiceStreamSteps;
 }
 
 export type ServiceError = { message: string, code: number; metadata: grpc.Metadata }
@@ -100,41 +110,42 @@ export class AuthServiceClient {
     requestMessage: auth_v1_auth_pb.FederateRequest,
     callback: (error: ServiceError|null, responseMessage: auth_v1_auth_pb.FederateReply|null) => void
   ): UnaryResponse;
+  loginFederated(
+    requestMessage: auth_v1_auth_pb.LoginFederatedRequest,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: auth_v1_auth_pb.Session|null) => void
+  ): UnaryResponse;
+  loginFederated(
+    requestMessage: auth_v1_auth_pb.LoginFederatedRequest,
+    callback: (error: ServiceError|null, responseMessage: auth_v1_auth_pb.Session|null) => void
+  ): UnaryResponse;
   key(
-    requestMessage: auth_v1_auth_pb.KeyRequest,
+    requestMessage: google_protobuf_empty_pb.Empty,
     metadata: grpc.Metadata,
     callback: (error: ServiceError|null, responseMessage: auth_v1_auth_pb.KeyReply|null) => void
   ): UnaryResponse;
   key(
-    requestMessage: auth_v1_auth_pb.KeyRequest,
+    requestMessage: google_protobuf_empty_pb.Empty,
     callback: (error: ServiceError|null, responseMessage: auth_v1_auth_pb.KeyReply|null) => void
   ): UnaryResponse;
-  login(
-    requestMessage: auth_v1_auth_pb.LoginRequest,
-    metadata: grpc.Metadata,
-    callback: (error: ServiceError|null, responseMessage: auth_v1_auth_pb.Session|null) => void
-  ): UnaryResponse;
-  login(
-    requestMessage: auth_v1_auth_pb.LoginRequest,
-    callback: (error: ServiceError|null, responseMessage: auth_v1_auth_pb.Session|null) => void
-  ): UnaryResponse;
-  register(
-    requestMessage: auth_v1_auth_pb.RegisterRequest,
-    metadata: grpc.Metadata,
-    callback: (error: ServiceError|null, responseMessage: auth_v1_auth_pb.Session|null) => void
-  ): UnaryResponse;
-  register(
-    requestMessage: auth_v1_auth_pb.RegisterRequest,
-    callback: (error: ServiceError|null, responseMessage: auth_v1_auth_pb.Session|null) => void
-  ): UnaryResponse;
-  getConfig(
+  beginAuth(
     requestMessage: google_protobuf_empty_pb.Empty,
     metadata: grpc.Metadata,
-    callback: (error: ServiceError|null, responseMessage: auth_v1_auth_pb.GetConfigResponse|null) => void
+    callback: (error: ServiceError|null, responseMessage: auth_v1_auth_pb.BeginAuthResponse|null) => void
   ): UnaryResponse;
-  getConfig(
+  beginAuth(
     requestMessage: google_protobuf_empty_pb.Empty,
-    callback: (error: ServiceError|null, responseMessage: auth_v1_auth_pb.GetConfigResponse|null) => void
+    callback: (error: ServiceError|null, responseMessage: auth_v1_auth_pb.BeginAuthResponse|null) => void
   ): UnaryResponse;
+  nextStep(
+    requestMessage: auth_v1_auth_pb.NextStepRequest,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: auth_v1_auth_pb.AuthStep|null) => void
+  ): UnaryResponse;
+  nextStep(
+    requestMessage: auth_v1_auth_pb.NextStepRequest,
+    callback: (error: ServiceError|null, responseMessage: auth_v1_auth_pb.AuthStep|null) => void
+  ): UnaryResponse;
+  streamSteps(requestMessage: auth_v1_auth_pb.StreamStepsRequest, metadata?: grpc.Metadata): ResponseStream<auth_v1_auth_pb.AuthStep>;
 }
 

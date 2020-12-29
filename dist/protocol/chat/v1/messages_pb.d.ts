@@ -156,6 +156,14 @@ export class UpdateMessageRequest extends jspb.Message {
   getUpdateOverrides(): boolean;
   setUpdateOverrides(value: boolean): void;
 
+  hasMetadata(): boolean;
+  clearMetadata(): void;
+  getMetadata(): harmonytypes_v1_types_pb.Metadata | undefined;
+  setMetadata(value?: harmonytypes_v1_types_pb.Metadata): void;
+
+  getUpdateMetadata(): boolean;
+  setUpdateMetadata(value: boolean): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): UpdateMessageRequest.AsObject;
   static toObject(includeInstance: boolean, msg: UpdateMessageRequest): UpdateMessageRequest.AsObject;
@@ -181,6 +189,8 @@ export namespace UpdateMessageRequest {
     updateAttachments: boolean,
     overrides?: harmonytypes_v1_types_pb.Override.AsObject,
     updateOverrides: boolean,
+    metadata?: harmonytypes_v1_types_pb.Metadata.AsObject,
+    updateMetadata: boolean,
   }
 }
 
@@ -284,6 +294,11 @@ export class SendMessageRequest extends jspb.Message {
   getEchoId(): number;
   setEchoId(value: number): void;
 
+  hasMetadata(): boolean;
+  clearMetadata(): void;
+  getMetadata(): harmonytypes_v1_types_pb.Metadata | undefined;
+  setMetadata(value?: harmonytypes_v1_types_pb.Metadata): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): SendMessageRequest.AsObject;
   static toObject(includeInstance: boolean, msg: SendMessageRequest): SendMessageRequest.AsObject;
@@ -305,6 +320,7 @@ export namespace SendMessageRequest {
     inReplyTo: number,
     overrides?: harmonytypes_v1_types_pb.Override.AsObject,
     echoId: number,
+    metadata?: harmonytypes_v1_types_pb.Metadata.AsObject,
   }
 }
 

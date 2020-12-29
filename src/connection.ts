@@ -1,10 +1,14 @@
 import { grpc } from "@improbable-eng/grpc-web";
-import { AuthService } from "../protocol/auth/v1/auth_pb_service";
 import {
-  KeyRequest,
-  LoginRequest,
-  RegisterRequest,
+  AuthService,
+  AuthServiceStreamSteps,
+} from "../protocol/auth/v1/auth_pb_service";
+import {
+  AuthStep,
   FederateRequest,
+  LoginFederatedRequest,
+  NextStepRequest,
+  StreamStepsRequest,
 } from "../protocol/auth/v1/auth_pb";
 import {
   ChatService,
@@ -29,8 +33,8 @@ import EventEmitter from "eventemitter3";
 import {
   CreateChannelRequest,
   GetGuildChannelsRequest,
-  UpdateChannelNameRequest,
   DeleteChannelRequest,
+  UpdateChannelInformationRequest,
 } from "../protocol/chat/v1/channels_pb";
 import {
   CreateGuildRequest,
@@ -62,10 +66,13 @@ import {
   ManageUserRolesRequest,
   GetUserRolesRequest,
 } from "../protocol/chat/v1/permissions_pb";
+import { Empty } from "google-protobuf/google/protobuf/empty_pb";
 
 type ServerStreamResponses = {
   event: [string, Event.AsObject];
+  "auth-event": [string, AuthStep.AsObject];
   disconnect: [grpc.Code, string, grpc.Metadata];
+  "auth-disconnect": [grpc.Code, string, grpc.Metadata];
 };
 
 export class Connection {
@@ -127,6 +134,50 @@ export class Connection {
     this.client.start(metadata);
   }
 
+  beginAuth() {
+    this.unaryReq(AuthService.BeginAuth, new Empty(), false);
+  }
+
+  streamSteps() {
+    const authStreamClient = grpc.client<
+      StreamStepsRequest,
+      AuthStep,
+      AuthServiceStreamSteps
+    >(AuthService.StreamSteps, {
+      host: this.host,
+      transport: grpc.WebsocketTransport(),
+    });
+
+    authStreamClient.onEnd(
+      (code: grpc.Code, message: string, trailers: grpc.Metadata) =>
+        this.events.emit("auth-disconnect", code, message, trailers)
+    );
+    authStreamClient.onMessage((ev: AuthStep) =>
+      this.events.emit("auth-event", this.host, ev.toObject())
+    );
+
+    const metadata = new grpc.Metadata();
+    if (this.session) metadata.set("auth", this.session);
+    authStreamClient.start(metadata);
+    return authStreamClient;
+  }
+
+  nextAuthStep(
+    authID: string,
+    data?: {
+      choice?: NextStepRequest.Choice;
+      form?: NextStepRequest.Form;
+    }
+  ) {
+    const req = new NextStepRequest();
+
+    req.setAuthId(authID);
+    req.setChoice(data?.choice);
+    req.setForm(data?.form);
+
+    return this.unaryReq(AuthService.NextStep, req, false);
+  }
+
   subscribe(guildID: string) {
     if (this.client) {
       const streamEventsReq = new StreamEventsRequest.SubscribeToGuild();
@@ -138,34 +189,14 @@ export class Connection {
   }
 
   async getKey() {
-    const req = new KeyRequest();
-    return this.unaryReq(AuthService.Key, req);
-  }
-
-  async loginLocal(email: string, password: string) {
-    const req = new LoginRequest();
-    const localMsg = new LoginRequest.Local();
-    localMsg.setEmail(email);
-    localMsg.setPassword(btoa(password));
-    req.setLocal(localMsg);
-    return this.unaryReq(AuthService.Login, req);
+    return this.unaryReq(AuthService.Key, new Empty());
   }
 
   async loginFederated(token: string, domain: string) {
-    const req = new LoginRequest();
-    const federatedMsg = new LoginRequest.Federated();
-    federatedMsg.setAuthToken(token);
-    federatedMsg.setDomain(domain);
-    req.setFederated(federatedMsg);
-    return this.unaryReq(AuthService.Login, req);
-  }
-
-  async register(email: string, username: string, password: string) {
-    const req = new RegisterRequest();
-    req.setEmail(email);
-    req.setUsername(username);
-    req.setPassword(btoa(password));
-    return this.unaryReq(AuthService.Register, req);
+    const req = new LoginFederatedRequest();
+    req.setAuthToken(token);
+    req.setDomain(domain);
+    return this.unaryReq(AuthService.LoginFederated, req);
   }
 
   async federate(target: string) {
@@ -248,21 +279,22 @@ export class Connection {
   }
 
   async updateChannelName(guildID: string, channelID: string, newName: string) {
-    const req = new UpdateChannelNameRequest();
+    const req = new UpdateChannelInformationRequest();
     req.setGuildId(guildID);
     req.setChannelId(channelID);
-    req.setNewChannelName(newName);
-    return this.unaryReq(ChatService.UpdateChannelName, req, true);
+    req.setName(newName);
+    req.setUpdateName(true);
+    return this.unaryReq(ChatService.UpdateChannelInformation, req, true);
   }
 
   async updateMessage(
     guildID: string,
     channelID: string,
     messageID: string,
-    newContent?: any,
-    newAttachments?: any,
-    newActions?: any,
-    newEmbeds?: any
+    newContent?: string,
+    newAttachments?: string[],
+    newActions?: Action[],
+    newEmbeds?: Embed[]
   ) {
     const req = new UpdateMessageRequest();
     req.setGuildId(guildID);

@@ -175,6 +175,11 @@ export class Event extends jspb.Message {
   getProfileUpdated(): Event.ProfileUpdated | undefined;
   setProfileUpdated(value?: Event.ProfileUpdated): void;
 
+  hasTyping(): boolean;
+  clearTyping(): void;
+  getTyping(): Event.Typing | undefined;
+  setTyping(value?: Event.Typing): void;
+
   getEventCase(): Event.EventCase;
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Event.AsObject;
@@ -203,6 +208,7 @@ export namespace Event {
     leftMember?: Event.MemberLeft.AsObject,
     roleMoved?: Event.RoleMoved.AsObject,
     profileUpdated?: Event.ProfileUpdated.AsObject,
+    typing?: Event.Typing.AsObject,
   }
 
   export class MessageSent extends jspb.Message {
@@ -284,6 +290,14 @@ export namespace Event {
     getUpdateOverrides(): boolean;
     setUpdateOverrides(value: boolean): void;
 
+    hasMetadata(): boolean;
+    clearMetadata(): void;
+    getMetadata(): harmonytypes_v1_types_pb.Metadata | undefined;
+    setMetadata(value?: harmonytypes_v1_types_pb.Metadata): void;
+
+    getUpdateMetadata(): boolean;
+    setUpdateMetadata(value: boolean): void;
+
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): MessageUpdated.AsObject;
     static toObject(includeInstance: boolean, msg: MessageUpdated): MessageUpdated.AsObject;
@@ -310,6 +324,8 @@ export namespace Event {
       updateAttachments: boolean,
       overrides?: harmonytypes_v1_types_pb.Override.AsObject,
       updateOverrides: boolean,
+      metadata?: harmonytypes_v1_types_pb.Metadata.AsObject,
+      updateMetadata: boolean,
     }
   }
 
@@ -360,6 +376,11 @@ export namespace Event {
     getIsCategory(): boolean;
     setIsCategory(value: boolean): void;
 
+    hasMetadata(): boolean;
+    clearMetadata(): void;
+    getMetadata(): harmonytypes_v1_types_pb.Metadata | undefined;
+    setMetadata(value?: harmonytypes_v1_types_pb.Metadata): void;
+
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): ChannelCreated.AsObject;
     static toObject(includeInstance: boolean, msg: ChannelCreated): ChannelCreated.AsObject;
@@ -378,6 +399,7 @@ export namespace Event {
       previousId: string,
       nextId: string,
       isCategory: boolean,
+      metadata?: harmonytypes_v1_types_pb.Metadata.AsObject,
     }
   }
 
@@ -403,6 +425,14 @@ export namespace Event {
     getUpdateOrder(): boolean;
     setUpdateOrder(value: boolean): void;
 
+    hasMetadata(): boolean;
+    clearMetadata(): void;
+    getMetadata(): harmonytypes_v1_types_pb.Metadata | undefined;
+    setMetadata(value?: harmonytypes_v1_types_pb.Metadata): void;
+
+    getUpdateMetadata(): boolean;
+    setUpdateMetadata(value: boolean): void;
+
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): ChannelUpdated.AsObject;
     static toObject(includeInstance: boolean, msg: ChannelUpdated): ChannelUpdated.AsObject;
@@ -422,6 +452,8 @@ export namespace Event {
       previousId: string,
       nextId: string,
       updateOrder: boolean,
+      metadata?: harmonytypes_v1_types_pb.Metadata.AsObject,
+      updateMetadata: boolean,
     }
   }
 
@@ -465,6 +497,14 @@ export namespace Event {
     getUpdatePicture(): boolean;
     setUpdatePicture(value: boolean): void;
 
+    hasMetadata(): boolean;
+    clearMetadata(): void;
+    getMetadata(): harmonytypes_v1_types_pb.Metadata | undefined;
+    setMetadata(value?: harmonytypes_v1_types_pb.Metadata): void;
+
+    getUpdateMetadata(): boolean;
+    setUpdateMetadata(value: boolean): void;
+
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GuildUpdated.AsObject;
     static toObject(includeInstance: boolean, msg: GuildUpdated): GuildUpdated.AsObject;
@@ -482,6 +522,8 @@ export namespace Event {
       updateName: boolean,
       picture: string,
       updatePicture: boolean,
+      metadata?: harmonytypes_v1_types_pb.Metadata.AsObject,
+      updateMetadata: boolean,
     }
   }
 
@@ -705,6 +747,34 @@ export namespace Event {
     }
   }
 
+  export class Typing extends jspb.Message {
+    getUserId(): string;
+    setUserId(value: string): void;
+
+    getGuildId(): string;
+    setGuildId(value: string): void;
+
+    getChannelId(): string;
+    setChannelId(value: string): void;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): Typing.AsObject;
+    static toObject(includeInstance: boolean, msg: Typing): Typing.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: Typing, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): Typing;
+    static deserializeBinaryFromReader(message: Typing, reader: jspb.BinaryReader): Typing;
+  }
+
+  export namespace Typing {
+    export type AsObject = {
+      userId: string,
+      guildId: string,
+      channelId: string,
+    }
+  }
+
   export enum EventCase {
     EVENT_NOT_SET = 0,
     GUILD_ADDED_TO_LIST = 1,
@@ -722,6 +792,7 @@ export namespace Event {
     LEFT_MEMBER = 13,
     ROLE_MOVED = 14,
     PROFILE_UPDATED = 15,
+    TYPING = 16,
   }
 }
 
