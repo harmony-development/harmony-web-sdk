@@ -459,6 +459,7 @@ export class Connection {
     newUsername?: string;
     newAvatar?: string;
     newStatus?: UserStatusMap[keyof UserStatusMap];
+    newIsBot?: boolean;
   }) {
     const req = new ProfileUpdateRequest();
     if (profile.newUsername !== undefined) {
@@ -472,6 +473,10 @@ export class Connection {
     if (profile.newStatus !== undefined) {
       req.setNewStatus(profile.newStatus);
       req.setUpdateStatus(true);
+    }
+    if (profile.newIsBot !== undefined) {
+      req.setIsBot(profile.newIsBot);
+      req.setUpdateIsBot(true);
     }
     return this.unaryReq(ChatService.ProfileUpdate, req, true);
   }
