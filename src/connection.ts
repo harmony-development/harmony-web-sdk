@@ -36,6 +36,7 @@ import {
   GetGuildChannelsRequest,
   DeleteChannelRequest,
   UpdateChannelInformationRequest,
+  TypingRequest,
 } from "../protocol/chat/v1/channels_pb";
 import {
   CreateGuildRequest,
@@ -569,5 +570,12 @@ export class Connection {
     req.setGuildId(guildID);
     req.setUserId(userID);
     return this.unaryReq(ChatService.GetUserRoles, req, true);
+  }
+
+  async sendTyping(guildID: string, channelID: string) {
+    const req = new TypingRequest();
+    req.setGuildId(guildID);
+    req.setChannelId(channelID);
+    return this.unaryReq(ChatService.Typing, req, true);
   }
 }
