@@ -34,6 +34,9 @@ export class GetUserResponse extends jspb.Message {
   getUserStatus(): harmonytypes_v1_types_pb.UserStatusMap[keyof harmonytypes_v1_types_pb.UserStatusMap];
   setUserStatus(value: harmonytypes_v1_types_pb.UserStatusMap[keyof harmonytypes_v1_types_pb.UserStatusMap]): void;
 
+  getIsBot(): boolean;
+  setIsBot(value: boolean): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GetUserResponse.AsObject;
   static toObject(includeInstance: boolean, msg: GetUserResponse): GetUserResponse.AsObject;
@@ -49,6 +52,7 @@ export namespace GetUserResponse {
     userName: string,
     userAvatar: string,
     userStatus: harmonytypes_v1_types_pb.UserStatusMap[keyof harmonytypes_v1_types_pb.UserStatusMap],
+    isBot: boolean,
   }
 }
 
@@ -111,6 +115,12 @@ export class ProfileUpdateRequest extends jspb.Message {
   getUpdateStatus(): boolean;
   setUpdateStatus(value: boolean): void;
 
+  getIsBot(): boolean;
+  setIsBot(value: boolean): void;
+
+  getUpdateIsBot(): boolean;
+  setUpdateIsBot(value: boolean): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ProfileUpdateRequest.AsObject;
   static toObject(includeInstance: boolean, msg: ProfileUpdateRequest): ProfileUpdateRequest.AsObject;
@@ -129,6 +139,8 @@ export namespace ProfileUpdateRequest {
     updateAvatar: boolean,
     newStatus: harmonytypes_v1_types_pb.UserStatusMap[keyof harmonytypes_v1_types_pb.UserStatusMap],
     updateStatus: boolean,
+    isBot: boolean,
+    updateIsBot: boolean,
   }
 }
 
