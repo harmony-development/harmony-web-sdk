@@ -725,6 +725,12 @@ export namespace Event {
     getUpdateStatus(): boolean;
     setUpdateStatus(value: boolean): void;
 
+    getIsBot(): boolean;
+    setIsBot(value: boolean): void;
+
+    getUpdateIsBot(): boolean;
+    setUpdateIsBot(value: boolean): void;
+
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): ProfileUpdated.AsObject;
     static toObject(includeInstance: boolean, msg: ProfileUpdated): ProfileUpdated.AsObject;
@@ -744,6 +750,8 @@ export namespace Event {
       updateAvatar: boolean,
       newStatus: harmonytypes_v1_types_pb.UserStatusMap[keyof harmonytypes_v1_types_pb.UserStatusMap],
       updateStatus: boolean,
+      isBot: boolean,
+      updateIsBot: boolean,
     }
   }
 

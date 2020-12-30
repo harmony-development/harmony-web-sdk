@@ -66,6 +66,7 @@ export declare class Connection {
         newUsername?: string;
         newAvatar?: string;
         newStatus?: UserStatusMap[keyof UserStatusMap];
+        newIsBot?: boolean;
     }): Promise<UnaryOutput<Empty>>;
     addGuildToGuildList(guildID: string, homeserver: string): Promise<UnaryOutput<import("../protocol/chat/v1/guilds_pb").AddGuildToGuildListResponse>>;
     getGuildRoles(guildID: string): Promise<UnaryOutput<import("../protocol/chat/v1/permissions_pb").GetGuildRolesResponse>>;

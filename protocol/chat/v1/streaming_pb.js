@@ -4977,7 +4977,9 @@ proto.protocol.chat.v1.Event.ProfileUpdated.toObject = function(includeInstance,
     newAvatar: jspb.Message.getFieldWithDefault(msg, 4, ""),
     updateAvatar: jspb.Message.getBooleanFieldWithDefault(msg, 5, false),
     newStatus: jspb.Message.getFieldWithDefault(msg, 6, 0),
-    updateStatus: jspb.Message.getBooleanFieldWithDefault(msg, 7, false)
+    updateStatus: jspb.Message.getBooleanFieldWithDefault(msg, 7, false),
+    isBot: jspb.Message.getBooleanFieldWithDefault(msg, 8, false),
+    updateIsBot: jspb.Message.getBooleanFieldWithDefault(msg, 9, false)
   };
 
   if (includeInstance) {
@@ -5041,6 +5043,14 @@ proto.protocol.chat.v1.Event.ProfileUpdated.deserializeBinaryFromReader = functi
     case 7:
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setUpdateStatus(value);
+      break;
+    case 8:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setIsBot(value);
+      break;
+    case 9:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setUpdateIsBot(value);
       break;
     default:
       reader.skipField();
@@ -5117,6 +5127,20 @@ proto.protocol.chat.v1.Event.ProfileUpdated.serializeBinaryToWriter = function(m
   if (f) {
     writer.writeBool(
       7,
+      f
+    );
+  }
+  f = message.getIsBot();
+  if (f) {
+    writer.writeBool(
+      8,
+      f
+    );
+  }
+  f = message.getUpdateIsBot();
+  if (f) {
+    writer.writeBool(
+      9,
       f
     );
   }
@@ -5246,6 +5270,42 @@ proto.protocol.chat.v1.Event.ProfileUpdated.prototype.getUpdateStatus = function
  */
 proto.protocol.chat.v1.Event.ProfileUpdated.prototype.setUpdateStatus = function(value) {
   return jspb.Message.setProto3BooleanField(this, 7, value);
+};
+
+
+/**
+ * optional bool is_bot = 8;
+ * @return {boolean}
+ */
+proto.protocol.chat.v1.Event.ProfileUpdated.prototype.getIsBot = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 8, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.protocol.chat.v1.Event.ProfileUpdated} returns this
+ */
+proto.protocol.chat.v1.Event.ProfileUpdated.prototype.setIsBot = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 8, value);
+};
+
+
+/**
+ * optional bool update_is_bot = 9;
+ * @return {boolean}
+ */
+proto.protocol.chat.v1.Event.ProfileUpdated.prototype.getUpdateIsBot = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 9, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.protocol.chat.v1.Event.ProfileUpdated} returns this
+ */
+proto.protocol.chat.v1.Event.ProfileUpdated.prototype.setUpdateIsBot = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 9, value);
 };
 
 

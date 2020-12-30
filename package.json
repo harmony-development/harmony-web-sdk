@@ -1,6 +1,6 @@
 {
   "name": "@harmony-dev/harmony-web-sdk",
-  "version": "4.0.8",
+  "version": "4.0.9",
   "description": "A Node SDK for Harmony, adapted to work for the web",
   "repository": {
     "type": "git",

@@ -309,6 +309,10 @@ class Connection {
             req.setNewStatus(profile.newStatus);
             req.setUpdateStatus(true);
         }
+        if (profile.newIsBot !== undefined) {
+            req.setIsBot(profile.newIsBot);
+            req.setUpdateIsBot(true);
+        }
         return this.unaryReq(chat_pb_service_1.ChatService.ProfileUpdate, req, true);
     }
     async addGuildToGuildList(guildID, homeserver) {
