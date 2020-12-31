@@ -426,6 +426,15 @@ type ChatServiceTyping = {
   readonly responseType: typeof google_protobuf_empty_pb.Empty;
 };
 
+type ChatServicePreviewGuild = {
+  readonly methodName: string;
+  readonly service: typeof ChatService;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof chat_v1_guilds_pb.PreviewGuildRequest;
+  readonly responseType: typeof chat_v1_guilds_pb.PreviewGuildResponse;
+};
+
 export class ChatService {
   static readonly serviceName: string;
   static readonly CreateGuild: ChatServiceCreateGuild;
@@ -474,6 +483,7 @@ export class ChatService {
   static readonly GetUserMetadata: ChatServiceGetUserMetadata;
   static readonly ProfileUpdate: ChatServiceProfileUpdate;
   static readonly Typing: ChatServiceTyping;
+  static readonly PreviewGuild: ChatServicePreviewGuild;
 }
 
 export type ServiceError = { message: string, code: number; metadata: grpc.Metadata }
@@ -913,6 +923,15 @@ export class ChatServiceClient {
   typing(
     requestMessage: chat_v1_channels_pb.TypingRequest,
     callback: (error: ServiceError|null, responseMessage: google_protobuf_empty_pb.Empty|null) => void
+  ): UnaryResponse;
+  previewGuild(
+    requestMessage: chat_v1_guilds_pb.PreviewGuildRequest,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: chat_v1_guilds_pb.PreviewGuildResponse|null) => void
+  ): UnaryResponse;
+  previewGuild(
+    requestMessage: chat_v1_guilds_pb.PreviewGuildRequest,
+    callback: (error: ServiceError|null, responseMessage: chat_v1_guilds_pb.PreviewGuildResponse|null) => void
   ): UnaryResponse;
 }
 

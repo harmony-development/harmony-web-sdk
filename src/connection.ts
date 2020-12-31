@@ -51,6 +51,7 @@ import {
   GetGuildListRequest,
   AddGuildToGuildListRequest,
   UpdateGuildInformationRequest,
+  PreviewGuildRequest,
 } from "../protocol/chat/v1/guilds_pb";
 import {
   GetChannelMessagesRequest,
@@ -587,5 +588,12 @@ export class Connection {
     req.setGuildId(guildID);
     req.setChannelId(channelID);
     return this.unaryReq(ChatService.Typing, req, true);
+  }
+
+  async previewInvite(invite: string) {
+    const req = new PreviewGuildRequest();
+    req.setInviteId(invite);
+
+    return this.unaryReq(ChatService.PreviewGuild, req, false);
   }
 }

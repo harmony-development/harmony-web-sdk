@@ -432,6 +432,15 @@ ChatService.Typing = {
   responseType: google_protobuf_empty_pb.Empty
 };
 
+ChatService.PreviewGuild = {
+  methodName: "PreviewGuild",
+  service: ChatService,
+  requestStream: false,
+  responseStream: false,
+  requestType: chat_v1_guilds_pb.PreviewGuildRequest,
+  responseType: chat_v1_guilds_pb.PreviewGuildResponse
+};
+
 exports.ChatService = ChatService;
 
 function ChatServiceClient(serviceHost, options) {
@@ -1853,6 +1862,37 @@ ChatServiceClient.prototype.typing = function typing(requestMessage, metadata, c
     callback = arguments[1];
   }
   var client = grpc.unary(ChatService.Typing, {
+    request: requestMessage,
+    host: this.serviceHost,
+    metadata: metadata,
+    transport: this.options.transport,
+    debug: this.options.debug,
+    onEnd: function (response) {
+      if (callback) {
+        if (response.status !== grpc.Code.OK) {
+          var err = new Error(response.statusMessage);
+          err.code = response.status;
+          err.metadata = response.trailers;
+          callback(err, null);
+        } else {
+          callback(null, response.message);
+        }
+      }
+    }
+  });
+  return {
+    cancel: function () {
+      callback = null;
+      client.close();
+    }
+  };
+};
+
+ChatServiceClient.prototype.previewGuild = function previewGuild(requestMessage, metadata, callback) {
+  if (arguments.length === 2) {
+    callback = arguments[1];
+  }
+  var client = grpc.unary(ChatService.PreviewGuild, {
     request: requestMessage,
     host: this.serviceHost,
     metadata: metadata,

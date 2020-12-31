@@ -393,6 +393,11 @@ class Connection {
         req.setChannelId(channelID);
         return this.unaryReq(chat_pb_service_1.ChatService.Typing, req, true);
     }
+    async previewInvite(invite) {
+        const req = new guilds_pb_1.PreviewGuildRequest();
+        req.setInviteId(invite);
+        return this.unaryReq(chat_pb_service_1.ChatService.PreviewGuild, req, false);
+    }
 }
 exports.Connection = Connection;
 //# sourceMappingURL=connection.js.map

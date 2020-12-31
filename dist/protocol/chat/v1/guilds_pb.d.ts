@@ -460,6 +460,54 @@ export namespace JoinGuildResponse {
   }
 }
 
+export class PreviewGuildRequest extends jspb.Message {
+  getInviteId(): string;
+  setInviteId(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): PreviewGuildRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: PreviewGuildRequest): PreviewGuildRequest.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: PreviewGuildRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): PreviewGuildRequest;
+  static deserializeBinaryFromReader(message: PreviewGuildRequest, reader: jspb.BinaryReader): PreviewGuildRequest;
+}
+
+export namespace PreviewGuildRequest {
+  export type AsObject = {
+    inviteId: string,
+  }
+}
+
+export class PreviewGuildResponse extends jspb.Message {
+  getName(): string;
+  setName(value: string): void;
+
+  getAvatar(): string;
+  setAvatar(value: string): void;
+
+  getMemeberCount(): string;
+  setMemeberCount(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): PreviewGuildResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: PreviewGuildResponse): PreviewGuildResponse.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: PreviewGuildResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): PreviewGuildResponse;
+  static deserializeBinaryFromReader(message: PreviewGuildResponse, reader: jspb.BinaryReader): PreviewGuildResponse;
+}
+
+export namespace PreviewGuildResponse {
+  export type AsObject = {
+    name: string,
+    avatar: string,
+    memeberCount: string,
+  }
+}
+
 export class LeaveGuildRequest extends jspb.Message {
   getGuildId(): string;
   setGuildId(value: string): void;

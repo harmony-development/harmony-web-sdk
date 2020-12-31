@@ -82,5 +82,6 @@ export declare class Connection {
     manageUserRoles(guildID: string, userID: string, giveRoleIDs?: string[], takeRoleIDs?: string[]): Promise<UnaryOutput<Empty>>;
     getUserRoles(guildID: string, userID: string): Promise<UnaryOutput<import("../protocol/chat/v1/permissions_pb").GetUserRolesResponse>>;
     sendTyping(guildID: string, channelID: string): Promise<UnaryOutput<Empty>>;
+    previewInvite(invite: string): Promise<UnaryOutput<import("../protocol/chat/v1/guilds_pb").PreviewGuildResponse>>;
 }
 export {};
