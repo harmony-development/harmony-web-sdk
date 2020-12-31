@@ -34,6 +34,7 @@ export declare class Connection {
     }): Promise<UnaryOutput<AuthStep>>;
     stepBack(authID: string): Promise<UnaryOutput<AuthStep>>;
     subscribe(guildID: string): void;
+    subscribeToHomeserverEvents(): void;
     getKey(): Promise<UnaryOutput<import("../protocol/auth/v1/auth_pb").KeyReply>>;
     loginFederated(token: string, domain: string): Promise<UnaryOutput<import("../protocol/auth/v1/auth_pb").Session>>;
     federate(target: string): Promise<UnaryOutput<import("../protocol/auth/v1/auth_pb").FederateReply>>;
@@ -80,5 +81,6 @@ export declare class Connection {
     }): Promise<void>;
     manageUserRoles(guildID: string, userID: string, giveRoleIDs?: string[], takeRoleIDs?: string[]): Promise<UnaryOutput<Empty>>;
     getUserRoles(guildID: string, userID: string): Promise<UnaryOutput<import("../protocol/chat/v1/permissions_pb").GetUserRolesResponse>>;
+    sendTyping(guildID: string, channelID: string): Promise<UnaryOutput<Empty>>;
 }
 export {};

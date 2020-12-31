@@ -92,6 +92,14 @@ class Connection {
             this.client.send(req);
         }
     }
+    subscribeToHomeserverEvents() {
+        if (this.client) {
+            const streamHomeserverEventsReq = new streaming_pb_1.StreamEventsRequest.SubscribeToHomeserverEvents();
+            const req = new streaming_pb_1.StreamEventsRequest();
+            req.setSubscribeToHomeserverEvents(streamHomeserverEventsReq);
+            this.client.send(req);
+        }
+    }
     async getKey() {
         return this.unaryReq(auth_pb_service_1.AuthService.Key, new empty_pb_1.Empty());
     }
@@ -378,6 +386,12 @@ class Connection {
         req.setGuildId(guildID);
         req.setUserId(userID);
         return this.unaryReq(chat_pb_service_1.ChatService.GetUserRoles, req, true);
+    }
+    async sendTyping(guildID, channelID) {
+        const req = new channels_pb_1.TypingRequest();
+        req.setGuildId(guildID);
+        req.setChannelId(channelID);
+        return this.unaryReq(chat_pb_service_1.ChatService.Typing, req, true);
     }
 }
 exports.Connection = Connection;

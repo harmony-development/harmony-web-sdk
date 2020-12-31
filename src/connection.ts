@@ -201,6 +201,16 @@ export class Connection {
     }
   }
 
+  subscribeToHomeserverEvents() {
+    if (this.client) {
+      const streamHomeserverEventsReq = new StreamEventsRequest.SubscribeToHomeserverEvents();
+
+      const req = new StreamEventsRequest();
+      req.setSubscribeToHomeserverEvents(streamHomeserverEventsReq);
+      this.client.send(req);
+    }
+  }
+
   async getKey() {
     return this.unaryReq(AuthService.Key, new Empty());
   }
