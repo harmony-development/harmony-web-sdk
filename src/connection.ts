@@ -26,6 +26,7 @@ import {
   UserStatus,
   Action,
   Embed,
+  Override,
 } from "../protocol/harmonytypes/v1/types_pb";
 import { UnaryOutput } from "@improbable-eng/grpc-web/dist/typings/unary";
 import { ProtobufMessage } from "@improbable-eng/grpc-web/dist/typings/message";
@@ -295,10 +296,21 @@ export class Connection {
     return this.unaryReq(ChatService.GetChannelMessages, req, true);
   }
 
-  async updateGuildName(guildID: string, newName: string) {
+  async updateGuildInfo(
+    guildID: string,
+    newName?: string,
+    newPicture?: string
+  ) {
     const req = new UpdateGuildInformationRequest();
     req.setGuildId(guildID);
-    req.setNewGuildName(newName);
+    if (newName) {
+      req.setNewGuildName(newName);
+      req.setUpdateGuildName(true);
+    }
+    if (newPicture) {
+      req.setNewGuildPicture(newPicture);
+      req.setUpdateGuildPicture(true);
+    }
     return this.unaryReq(ChatService.UpdateGuildInformation, req, true);
   }
 
@@ -406,7 +418,9 @@ export class Connection {
     attachments?: string[],
     embeds?: Embed[],
     actions?: Action[],
-    echoID?: number
+    echoID?: number,
+    overrideName?: string,
+    overrideAvatar?: string
   ) {
     const req = new SendMessageRequest();
     req.setGuildId(guildID);
@@ -425,6 +439,15 @@ export class Connection {
     }
     if (echoID) {
       req.setEchoId(echoID);
+    }
+    if (overrideName || overrideAvatar) {
+      const overrides = new Override();
+      if (overrideName) {
+        overrides.setName(overrideName);
+      }
+      if (overrideAvatar) {
+        overrides.setAvatar(overrideAvatar);
+      }
     }
     return this.unaryReq(ChatService.SendMessage, req, true);
   }

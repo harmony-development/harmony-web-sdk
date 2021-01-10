@@ -46,7 +46,7 @@ export declare class Connection {
     getGuildMembers(guildID: string): Promise<UnaryOutput<import("../protocol/chat/v1/guilds_pb").GetGuildMembersResponse>>;
     getGuildChannels(guildID: string): Promise<UnaryOutput<import("../protocol/chat/v1/channels_pb").GetGuildChannelsResponse>>;
     getChannelMessages(guildID: string, channelID: string, beforeMessage?: string): Promise<UnaryOutput<import("../protocol/chat/v1/messages_pb").GetChannelMessagesResponse>>;
-    updateGuildName(guildID: string, newName: string): Promise<UnaryOutput<Empty>>;
+    updateGuildInfo(guildID: string, newName?: string, newPicture?: string): Promise<UnaryOutput<Empty>>;
     updateChannelName(guildID: string, channelID: string, newName: string): Promise<UnaryOutput<Empty>>;
     updateMessage(guildID: string, channelID: string, messageID: string, newContent?: string, newAttachments?: string[], newActions?: Action[], newEmbeds?: Embed[]): Promise<UnaryOutput<Empty>>;
     deleteGuild(guildID: string): Promise<UnaryOutput<Empty>>;
@@ -56,7 +56,7 @@ export declare class Connection {
     joinGuild(inviteID: string): Promise<UnaryOutput<import("../protocol/chat/v1/guilds_pb").JoinGuildResponse>>;
     leaveGuild(guildID: string): Promise<UnaryOutput<Empty>>;
     triggerAction(guildID: string, channelID: string, messageID: string, actionID: string, actionData?: string): Promise<UnaryOutput<Empty>>;
-    sendMessage(guildID: string, channelID: string, content?: string, attachments?: string[], embeds?: Embed[], actions?: Action[], echoID?: number): Promise<UnaryOutput<import("../protocol/chat/v1/messages_pb").SendMessageResponse>>;
+    sendMessage(guildID: string, channelID: string, content?: string, attachments?: string[], embeds?: Embed[], actions?: Action[], echoID?: number, overrideName?: string, overrideAvatar?: string): Promise<UnaryOutput<import("../protocol/chat/v1/messages_pb").SendMessageResponse>>;
     uploadFile(f: File): Promise<{
         id: string;
     }>;

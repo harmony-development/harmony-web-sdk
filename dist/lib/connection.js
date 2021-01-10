@@ -10,6 +10,7 @@ const auth_pb_1 = require("../protocol/auth/v1/auth_pb");
 const chat_pb_service_1 = require("../protocol/chat/v1/chat_pb_service");
 const streaming_pb_1 = require("../protocol/chat/v1/streaming_pb");
 const profile_pb_1 = require("../protocol/chat/v1/profile_pb");
+const types_pb_1 = require("../protocol/harmonytypes/v1/types_pb");
 const eventemitter3_1 = __importDefault(require("eventemitter3"));
 const channels_pb_1 = require("../protocol/chat/v1/channels_pb");
 const guilds_pb_1 = require("../protocol/chat/v1/guilds_pb");
@@ -168,10 +169,17 @@ class Connection {
         }
         return this.unaryReq(chat_pb_service_1.ChatService.GetChannelMessages, req, true);
     }
-    async updateGuildName(guildID, newName) {
+    async updateGuildInfo(guildID, newName, newPicture) {
         const req = new guilds_pb_1.UpdateGuildInformationRequest();
         req.setGuildId(guildID);
-        req.setNewGuildName(newName);
+        if (newName) {
+            req.setNewGuildName(newName);
+            req.setUpdateGuildName(true);
+        }
+        if (newPicture) {
+            req.setNewGuildPicture(newPicture);
+            req.setUpdateGuildPicture(true);
+        }
         return this.unaryReq(chat_pb_service_1.ChatService.UpdateGuildInformation, req, true);
     }
     async updateChannelName(guildID, channelID, newName) {
@@ -252,7 +260,7 @@ class Connection {
         }
         return this.unaryReq(chat_pb_service_1.ChatService.TriggerAction, req, true);
     }
-    async sendMessage(guildID, channelID, content, attachments, embeds, actions, echoID) {
+    async sendMessage(guildID, channelID, content, attachments, embeds, actions, echoID, overrideName, overrideAvatar) {
         const req = new messages_pb_1.SendMessageRequest();
         req.setGuildId(guildID);
         req.setChannelId(channelID);
@@ -270,6 +278,15 @@ class Connection {
         }
         if (echoID) {
             req.setEchoId(echoID);
+        }
+        if (overrideName || overrideAvatar) {
+            const overrides = new types_pb_1.Override();
+            if (overrideName) {
+                overrides.setName(overrideName);
+            }
+            if (overrideAvatar) {
+                overrides.setAvatar(overrideAvatar);
+            }
         }
         return this.unaryReq(chat_pb_service_1.ChatService.SendMessage, req, true);
     }
