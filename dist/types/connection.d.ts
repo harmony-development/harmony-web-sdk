@@ -71,6 +71,7 @@ export declare class Connection {
     }): Promise<UnaryOutput<Empty>>;
     addGuildToGuildList(guildID: string, homeserver: string): Promise<UnaryOutput<import("../protocol/chat/v1/guilds_pb").AddGuildToGuildListResponse>>;
     getGuildRoles(guildID: string): Promise<UnaryOutput<import("../protocol/chat/v1/permissions_pb").GetGuildRolesResponse>>;
+    getPermissions(guildID: string, channelID: string, roleID: string): Promise<UnaryOutput<import("../protocol/chat/v1/permissions_pb").GetPermissionsResponse>>;
     moveRole(guildID: string, roleID: string, beforeID: string, afterID: string): Promise<UnaryOutput<import("../protocol/chat/v1/permissions_pb").MoveRoleResponse>>;
     deleteGuildRole(guildID: string, roleID: string): Promise<UnaryOutput<Empty>>;
     modifyGuildRole(guildID: string, roleID: string, modify: {

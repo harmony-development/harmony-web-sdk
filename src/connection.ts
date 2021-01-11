@@ -69,6 +69,7 @@ import {
   Role,
   ManageUserRolesRequest,
   GetUserRolesRequest,
+  GetPermissionsRequest,
 } from "../protocol/chat/v1/permissions_pb";
 import { Empty } from "google-protobuf/google/protobuf/empty_pb";
 
@@ -527,6 +528,14 @@ export class Connection {
     const req = new GetGuildRolesRequest();
     req.setGuildId(guildID);
     return this.unaryReq(ChatService.GetGuildRoles, req, true);
+  }
+
+  async getPermissions(guildID: string, channelID: string, roleID: string) {
+    const req = new GetPermissionsRequest();
+    req.setGuildId(guildID);
+    req.setChannelId(channelID);
+    req.setRoleId(roleID);
+    return this.unaryReq(ChatService.GetPermissions, req, true);
   }
 
   async moveRole(

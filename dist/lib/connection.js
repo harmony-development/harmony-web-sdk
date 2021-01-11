@@ -351,6 +351,13 @@ class Connection {
         req.setGuildId(guildID);
         return this.unaryReq(chat_pb_service_1.ChatService.GetGuildRoles, req, true);
     }
+    async getPermissions(guildID, channelID, roleID) {
+        const req = new permissions_pb_1.GetPermissionsRequest();
+        req.setGuildId(guildID);
+        req.setChannelId(channelID);
+        req.setRoleId(roleID);
+        return this.unaryReq(chat_pb_service_1.ChatService.GetPermissions, req, true);
+    }
     async moveRole(guildID, roleID, beforeID, afterID) {
         const req = new permissions_pb_1.MoveRoleRequest();
         req.setGuildId(guildID);
