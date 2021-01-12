@@ -70,6 +70,8 @@ import {
   ManageUserRolesRequest,
   GetUserRolesRequest,
   GetPermissionsRequest,
+  SetPermissionsRequest,
+  PermissionList,
 } from "../protocol/chat/v1/permissions_pb";
 import { Empty } from "google-protobuf/google/protobuf/empty_pb";
 
@@ -588,6 +590,20 @@ export class Connection {
       modified.setPingable(modify.pingable);
       req.setModifyPingable(true);
     }
+  }
+
+  async setRolePermissions(
+    guildID: string,
+    channelID: string | undefined,
+    roleID: string,
+    perms: PermissionList
+  ) {
+    const req = new SetPermissionsRequest();
+    req.setGuildId(guildID);
+    if (channelID) req.setChannelId(channelID);
+    req.setRoleId(roleID);
+    req.setPerms(perms);
+    return this.unaryReq(ChatService.SetPermissions, req, true);
   }
 
   async manageUserRoles(

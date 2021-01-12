@@ -393,6 +393,15 @@ class Connection {
             req.setModifyPingable(true);
         }
     }
+    async setRolePermissions(guildID, channelID, roleID, perms) {
+        const req = new permissions_pb_1.SetPermissionsRequest();
+        req.setGuildId(guildID);
+        if (channelID)
+            req.setChannelId(channelID);
+        req.setRoleId(roleID);
+        req.setPerms(perms);
+        return this.unaryReq(chat_pb_service_1.ChatService.SetPermissions, req, true);
+    }
     async manageUserRoles(guildID, userID, giveRoleIDs, takeRoleIDs) {
         const req = new permissions_pb_1.ManageUserRolesRequest();
         req.setGuildId(guildID);

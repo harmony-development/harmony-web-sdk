@@ -6,6 +6,7 @@ import { UnaryOutput } from "@improbable-eng/grpc-web/dist/typings/unary";
 import { ProtobufMessage } from "@improbable-eng/grpc-web/dist/typings/message";
 import { UnaryMethodDefinition } from "@improbable-eng/grpc-web/dist/typings/service";
 import EventEmitter from "eventemitter3";
+import { PermissionList } from "../protocol/chat/v1/permissions_pb";
 import { Empty } from "google-protobuf/google/protobuf/empty_pb";
 declare type ServerStreamResponses = {
     event: [string, Event.AsObject];
@@ -80,6 +81,7 @@ export declare class Connection {
         hoist?: boolean;
         pingable?: boolean;
     }): Promise<void>;
+    setRolePermissions(guildID: string, channelID: string | undefined, roleID: string, perms: PermissionList): Promise<UnaryOutput<Empty>>;
     manageUserRoles(guildID: string, userID: string, giveRoleIDs?: string[], takeRoleIDs?: string[]): Promise<UnaryOutput<Empty>>;
     getUserRoles(guildID: string, userID: string): Promise<UnaryOutput<import("../protocol/chat/v1/permissions_pb").GetUserRolesResponse>>;
     sendTyping(guildID: string, channelID: string): Promise<UnaryOutput<Empty>>;
