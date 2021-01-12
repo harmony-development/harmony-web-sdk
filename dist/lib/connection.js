@@ -402,6 +402,12 @@ class Connection {
         req.setPerms(perms);
         return this.unaryReq(chat_pb_service_1.ChatService.SetPermissions, req, true);
     }
+    async createRole(guildID, role) {
+        const req = new permissions_pb_1.AddGuildRoleRequest();
+        req.setGuildId(guildID);
+        req.setRole(role);
+        return this.unaryReq(chat_pb_service_1.ChatService.AddGuildRole, req, true);
+    }
     async manageUserRoles(guildID, userID, giveRoleIDs, takeRoleIDs) {
         const req = new permissions_pb_1.ManageUserRolesRequest();
         req.setGuildId(guildID);
