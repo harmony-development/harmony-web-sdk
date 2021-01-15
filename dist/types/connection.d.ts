@@ -87,5 +87,8 @@ export declare class Connection {
     getUserRoles(guildID: string, userID: string): Promise<UnaryOutput<import("../protocol/chat/v1/permissions_pb").GetUserRolesResponse>>;
     sendTyping(guildID: string, channelID: string): Promise<UnaryOutput<Empty>>;
     previewInvite(invite: string): Promise<UnaryOutput<import("../protocol/chat/v1/guilds_pb").PreviewGuildResponse>>;
+    fetchLinkMetadata(url: string): Promise<UnaryOutput<import("../protocol/mediaproxy/v1/mediaproxy_pb").SiteMetadata>>;
+    canInstantView(url: string): Promise<UnaryOutput<import("../protocol/mediaproxy/v1/mediaproxy_pb").CanInstantViewResponse>>;
+    instantView(url: string): Promise<UnaryOutput<import("../protocol/mediaproxy/v1/mediaproxy_pb").InstantViewResponse>>;
 }
 export {};

@@ -75,6 +75,11 @@ import {
   AddGuildRoleRequest,
 } from "../protocol/chat/v1/permissions_pb";
 import { Empty } from "google-protobuf/google/protobuf/empty_pb";
+import {
+  FetchLinkMetadataRequest,
+  InstantViewRequest,
+} from "protocol/mediaproxy/v1/mediaproxy_pb";
+import { MediaProxyService } from "protocol/mediaproxy/v1/mediaproxy_pb_service";
 
 type ServerStreamResponses = {
   event: [string, Event.AsObject];
@@ -651,5 +656,23 @@ export class Connection {
     req.setInviteId(invite);
 
     return this.unaryReq(ChatService.PreviewGuild, req, false);
+  }
+
+  async fetchLinkMetadata(url: string) {
+    const req = new FetchLinkMetadataRequest();
+    req.setUrl(url);
+    return this.unaryReq(MediaProxyService.FetchLinkMetadata, req, true);
+  }
+
+  async canInstantView(url: string) {
+    const req = new InstantViewRequest();
+    req.setUrl(url);
+    return this.unaryReq(MediaProxyService.CanInstantView, req, true);
+  }
+
+  async instantView(url: string) {
+    const req = new InstantViewRequest();
+    req.setUrl(url);
+    return this.unaryReq(MediaProxyService.InstantView, req, true);
   }
 }

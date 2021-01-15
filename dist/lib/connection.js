@@ -17,6 +17,8 @@ const guilds_pb_1 = require("../protocol/chat/v1/guilds_pb");
 const messages_pb_1 = require("../protocol/chat/v1/messages_pb");
 const permissions_pb_1 = require("../protocol/chat/v1/permissions_pb");
 const empty_pb_1 = require("google-protobuf/google/protobuf/empty_pb");
+const mediaproxy_pb_1 = require("protocol/mediaproxy/v1/mediaproxy_pb");
+const mediaproxy_pb_service_1 = require("protocol/mediaproxy/v1/mediaproxy_pb_service");
 class Connection {
     constructor(host) {
         this.host = host;
@@ -436,6 +438,21 @@ class Connection {
         const req = new guilds_pb_1.PreviewGuildRequest();
         req.setInviteId(invite);
         return this.unaryReq(chat_pb_service_1.ChatService.PreviewGuild, req, false);
+    }
+    async fetchLinkMetadata(url) {
+        const req = new mediaproxy_pb_1.FetchLinkMetadataRequest();
+        req.setUrl(url);
+        return this.unaryReq(mediaproxy_pb_service_1.MediaProxyService.FetchLinkMetadata, req, true);
+    }
+    async canInstantView(url) {
+        const req = new mediaproxy_pb_1.InstantViewRequest();
+        req.setUrl(url);
+        return this.unaryReq(mediaproxy_pb_service_1.MediaProxyService.CanInstantView, req, true);
+    }
+    async instantView(url) {
+        const req = new mediaproxy_pb_1.InstantViewRequest();
+        req.setUrl(url);
+        return this.unaryReq(mediaproxy_pb_service_1.MediaProxyService.InstantView, req, true);
     }
 }
 exports.Connection = Connection;
