@@ -17,8 +17,8 @@ const guilds_pb_1 = require("../protocol/chat/v1/guilds_pb");
 const messages_pb_1 = require("../protocol/chat/v1/messages_pb");
 const permissions_pb_1 = require("../protocol/chat/v1/permissions_pb");
 const empty_pb_1 = require("google-protobuf/google/protobuf/empty_pb");
-const mediaproxy_pb_1 = require("protocol/mediaproxy/v1/mediaproxy_pb");
-const mediaproxy_pb_service_1 = require("protocol/mediaproxy/v1/mediaproxy_pb_service");
+const mediaproxy_pb_1 = require("../protocol/mediaproxy/v1/mediaproxy_pb");
+const mediaproxy_pb_service_1 = require("../protocol/mediaproxy/v1/mediaproxy_pb_service");
 class Connection {
     constructor(host) {
         this.host = host;

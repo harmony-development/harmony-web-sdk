@@ -78,8 +78,8 @@ import { Empty } from "google-protobuf/google/protobuf/empty_pb";
 import {
   FetchLinkMetadataRequest,
   InstantViewRequest,
-} from "protocol/mediaproxy/v1/mediaproxy_pb";
-import { MediaProxyService } from "protocol/mediaproxy/v1/mediaproxy_pb_service";
+} from "../protocol/mediaproxy/v1/mediaproxy_pb";
+import { MediaProxyService } from "../protocol/mediaproxy/v1/mediaproxy_pb_service";
 
 type ServerStreamResponses = {
   event: [string, Event.AsObject];
