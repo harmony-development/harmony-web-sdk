@@ -44,7 +44,9 @@
     "@improbable-eng/grpc-web": "^0.13.0",
     "@types/google-protobuf": "^3.7.4",
     "eventemitter3": "^4.0.7",
-    "google-protobuf": "^4.0.0-rc.2"
+    "google-protobuf": "^4.0.0-rc.2",
+    "protobufjs": "^6.10.2",
+    "protobufjs-cli": "file:protobuf.js/cli"
   },
   "devDependencies": {
     "@commitlint/cli": "^9.1.2",
