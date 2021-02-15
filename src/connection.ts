@@ -3,11 +3,14 @@ import Auth from "../protocol/auth/v1/output";
 import Chat from "../protocol/chat/v1/output";
 import MediaProxy from "../protocol/mediaproxy/v1/output";
 
+import authv1 = Auth.protocol.auth.v1;
+import chatv1 = Chat.protocol.chat.v1;
+
 export class Connection {
   host: string;
   session?: string;
   auth: Auth.protocol.auth.v1.AuthService;
-  chat: Chat.protocol.chat.v1.ChatService;
+  chat: chatv1.ChatService;
   mediaproxy: MediaProxy.protocol.mediaproxy.v1.MediaProxyService;
 
   constructor(host: string) {
@@ -17,6 +20,14 @@ export class Connection {
     this.mediaproxy = MediaProxy.protocol.mediaproxy.v1.MediaProxyService.create(
       this.sendReq
     );
+  }
+
+  async getMessages(data: Chat.protocol.chat.v1.IGetMessageRequest) {
+    const buffer = Chat.protocol.chat.v1.GetMessageRequest.encode(
+      Chat.protocol.chat.v1.GetMessageRequest.create(data)
+    ).finish();
+
+    await fetch(``);
   }
 
   async sendReq(
@@ -36,5 +47,13 @@ export class Connection {
     } catch (e) {
       if (cb) return cb(e);
     }
+  }
+
+  streamReq(method: string): Promise<WebSocket> {
+    const ws = new WebSocket(`wss://${this.host}/${method}`);
+    return new Promise((resolve, reject) => {
+      ws.onopen = () => resolve(ws);
+      ws.onclose = (err) => reject(err);
+    });
   }
 }

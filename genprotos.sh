@@ -18,20 +18,25 @@ for dir in $(find ${PROTOCOL_BUILD_TMP} -name '*.proto' -print0 | xargs -0 -n1 d
   sed -i -E "/validate.proto/d" $(find "${dir}" -name '*.proto')
   mkdir -p $OUT_DIR/$cleaned
   $PBJS_PATH -p $PROTOCOL_BUILD_TMP \
-  -t json-module \
-  -w es6 \
-  -o $OUT_DIR/$cleaned/output.js \
-  --no-comments \
-  --es6 \
-  --no-verify \
-  --no-create \
-  --force-number \
-  --sparse \
-  $target
+    -t json-module \
+    -w es6 \
+    -o $OUT_DIR/$cleaned/output.js \
+    --no-comments \
+    --es6 \
+    --no-verify \
+    --no-create \
+    --force-number \
+    --sparse \
+    $target
   $PBJS_PATH -p $PROTOCOL_BUILD_TMP \
   -t static-module \
   $target |
   $PBTS_PATH -o $OUT_DIR/$cleaned/output.d.ts -
+  protoc \
+    --proto_path=${PROTOCOL_BUILD_TMP} \
+		--hrpc_out=. \
+    --hrpc_opt="ts_client" \
+    $target
 done
 
 rm -r $PROTOCOL_BUILD_TMP
