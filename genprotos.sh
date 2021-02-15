@@ -40,3 +40,4 @@ for dir in $(find ${PROTOCOL_BUILD_TMP} -name '*.proto' -print0 | xargs -0 -n1 d
 done
 
 rm -r $PROTOCOL_BUILD_TMP
+prettier --write "./protocol/**/*.ts"

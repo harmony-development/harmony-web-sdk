@@ -50,9 +50,7 @@ class AuthService {
       gen.google.protobuf.Empty.create(req)
     ).finish();
     const resp = await this.unary("/protocol.auth.v1.AuthService/Key", buffer);
-    return gen.protocol.auth.v1.KeyReply.decode(
-      new Uint8Array(await resp.arrayBuffer())
-    );
+    return svc.KeyReply.decode(new Uint8Array(await resp.arrayBuffer()));
   }
   async BeginAuth(req: gen.google.protobuf.IEmpty) {
     const buffer = gen.google.protobuf.Empty.encode(
@@ -62,7 +60,7 @@ class AuthService {
       "/protocol.auth.v1.AuthService/BeginAuth",
       buffer
     );
-    return gen.protocol.auth.v1.BeginAuthResponse.decode(
+    return svc.BeginAuthResponse.decode(
       new Uint8Array(await resp.arrayBuffer())
     );
   }

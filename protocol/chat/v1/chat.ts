@@ -213,7 +213,9 @@ class ChatService {
       "/protocol.chat.v1.ChatService/UpdateGuildInformation",
       buffer
     );
-    return svc.Empty.decode(new Uint8Array(await resp.arrayBuffer()));
+    return gen.google.protobuf.Empty.decode(
+      new Uint8Array(await resp.arrayBuffer())
+    );
   }
   async UpdateChannelInformation(req: svc.IUpdateChannelInformationRequest) {
     const buffer = svc.UpdateChannelInformationRequest.encode(
@@ -223,7 +225,9 @@ class ChatService {
       "/protocol.chat.v1.ChatService/UpdateChannelInformation",
       buffer
     );
-    return svc.Empty.decode(new Uint8Array(await resp.arrayBuffer()));
+    return gen.google.protobuf.Empty.decode(
+      new Uint8Array(await resp.arrayBuffer())
+    );
   }
   async UpdateChannelOrder(req: svc.IUpdateChannelOrderRequest) {
     const buffer = svc.UpdateChannelOrderRequest.encode(
@@ -233,7 +237,9 @@ class ChatService {
       "/protocol.chat.v1.ChatService/UpdateChannelOrder",
       buffer
     );
-    return svc.Empty.decode(new Uint8Array(await resp.arrayBuffer()));
+    return gen.google.protobuf.Empty.decode(
+      new Uint8Array(await resp.arrayBuffer())
+    );
   }
   async UpdateMessage(req: svc.IUpdateMessageRequest) {
     const buffer = svc.UpdateMessageRequest.encode(
@@ -243,7 +249,9 @@ class ChatService {
       "/protocol.chat.v1.ChatService/UpdateMessage",
       buffer
     );
-    return svc.Empty.decode(new Uint8Array(await resp.arrayBuffer()));
+    return gen.google.protobuf.Empty.decode(
+      new Uint8Array(await resp.arrayBuffer())
+    );
   }
   async AddEmoteToPack(req: svc.IAddEmoteToPackRequest) {
     const buffer = svc.AddEmoteToPackRequest.encode(
@@ -253,7 +261,9 @@ class ChatService {
       "/protocol.chat.v1.ChatService/AddEmoteToPack",
       buffer
     );
-    return svc.Empty.decode(new Uint8Array(await resp.arrayBuffer()));
+    return gen.google.protobuf.Empty.decode(
+      new Uint8Array(await resp.arrayBuffer())
+    );
   }
   async DeleteGuild(req: svc.IDeleteGuildRequest) {
     const buffer = svc.DeleteGuildRequest.encode(
@@ -263,7 +273,9 @@ class ChatService {
       "/protocol.chat.v1.ChatService/DeleteGuild",
       buffer
     );
-    return svc.Empty.decode(new Uint8Array(await resp.arrayBuffer()));
+    return gen.google.protobuf.Empty.decode(
+      new Uint8Array(await resp.arrayBuffer())
+    );
   }
   async DeleteInvite(req: svc.IDeleteInviteRequest) {
     const buffer = svc.DeleteInviteRequest.encode(
@@ -273,7 +285,9 @@ class ChatService {
       "/protocol.chat.v1.ChatService/DeleteInvite",
       buffer
     );
-    return svc.Empty.decode(new Uint8Array(await resp.arrayBuffer()));
+    return gen.google.protobuf.Empty.decode(
+      new Uint8Array(await resp.arrayBuffer())
+    );
   }
   async DeleteChannel(req: svc.IDeleteChannelRequest) {
     const buffer = svc.DeleteChannelRequest.encode(
@@ -283,7 +297,9 @@ class ChatService {
       "/protocol.chat.v1.ChatService/DeleteChannel",
       buffer
     );
-    return svc.Empty.decode(new Uint8Array(await resp.arrayBuffer()));
+    return gen.google.protobuf.Empty.decode(
+      new Uint8Array(await resp.arrayBuffer())
+    );
   }
   async DeleteMessage(req: svc.IDeleteMessageRequest) {
     const buffer = svc.DeleteMessageRequest.encode(
@@ -293,7 +309,9 @@ class ChatService {
       "/protocol.chat.v1.ChatService/DeleteMessage",
       buffer
     );
-    return svc.Empty.decode(new Uint8Array(await resp.arrayBuffer()));
+    return gen.google.protobuf.Empty.decode(
+      new Uint8Array(await resp.arrayBuffer())
+    );
   }
   async DeleteEmoteFromPack(req: svc.IDeleteEmoteFromPackRequest) {
     const buffer = svc.DeleteEmoteFromPackRequest.encode(
@@ -303,7 +321,9 @@ class ChatService {
       "/protocol.chat.v1.ChatService/DeleteEmoteFromPack",
       buffer
     );
-    return svc.Empty.decode(new Uint8Array(await resp.arrayBuffer()));
+    return gen.google.protobuf.Empty.decode(
+      new Uint8Array(await resp.arrayBuffer())
+    );
   }
   async DeleteEmotePack(req: svc.IDeleteEmotePackRequest) {
     const buffer = svc.DeleteEmotePackRequest.encode(
@@ -313,7 +333,9 @@ class ChatService {
       "/protocol.chat.v1.ChatService/DeleteEmotePack",
       buffer
     );
-    return svc.Empty.decode(new Uint8Array(await resp.arrayBuffer()));
+    return gen.google.protobuf.Empty.decode(
+      new Uint8Array(await resp.arrayBuffer())
+    );
   }
   async DequipEmotePack(req: svc.IDequipEmotePackRequest) {
     const buffer = svc.DequipEmotePackRequest.encode(
@@ -323,7 +345,9 @@ class ChatService {
       "/protocol.chat.v1.ChatService/DequipEmotePack",
       buffer
     );
-    return svc.Empty.decode(new Uint8Array(await resp.arrayBuffer()));
+    return gen.google.protobuf.Empty.decode(
+      new Uint8Array(await resp.arrayBuffer())
+    );
   }
   async JoinGuild(req: svc.IJoinGuildRequest) {
     const buffer = svc.JoinGuildRequest.encode(
@@ -345,7 +369,9 @@ class ChatService {
       "/protocol.chat.v1.ChatService/LeaveGuild",
       buffer
     );
-    return svc.Empty.decode(new Uint8Array(await resp.arrayBuffer()));
+    return gen.google.protobuf.Empty.decode(
+      new Uint8Array(await resp.arrayBuffer())
+    );
   }
   async TriggerAction(req: svc.ITriggerActionRequest) {
     const buffer = svc.TriggerActionRequest.encode(
@@ -355,7 +381,9 @@ class ChatService {
       "/protocol.chat.v1.ChatService/TriggerAction",
       buffer
     );
-    return svc.Empty.decode(new Uint8Array(await resp.arrayBuffer()));
+    return gen.google.protobuf.Empty.decode(
+      new Uint8Array(await resp.arrayBuffer())
+    );
   }
   async SendMessage(req: svc.ISendMessageRequest) {
     const buffer = svc.SendMessageRequest.encode(
@@ -389,7 +417,9 @@ class ChatService {
       "/protocol.chat.v1.ChatService/SetPermissions",
       buffer
     );
-    return svc.Empty.decode(new Uint8Array(await resp.arrayBuffer()));
+    return gen.google.protobuf.Empty.decode(
+      new Uint8Array(await resp.arrayBuffer())
+    );
   }
   async GetPermissions(req: svc.IGetPermissionsRequest) {
     const buffer = svc.GetPermissionsRequest.encode(
@@ -447,7 +477,9 @@ class ChatService {
       "/protocol.chat.v1.ChatService/ModifyGuildRole",
       buffer
     );
-    return svc.Empty.decode(new Uint8Array(await resp.arrayBuffer()));
+    return gen.google.protobuf.Empty.decode(
+      new Uint8Array(await resp.arrayBuffer())
+    );
   }
   async DeleteGuildRole(req: svc.IDeleteGuildRoleRequest) {
     const buffer = svc.DeleteGuildRoleRequest.encode(
@@ -457,7 +489,9 @@ class ChatService {
       "/protocol.chat.v1.ChatService/DeleteGuildRole",
       buffer
     );
-    return svc.Empty.decode(new Uint8Array(await resp.arrayBuffer()));
+    return gen.google.protobuf.Empty.decode(
+      new Uint8Array(await resp.arrayBuffer())
+    );
   }
   async ManageUserRoles(req: svc.IManageUserRolesRequest) {
     const buffer = svc.ManageUserRolesRequest.encode(
@@ -467,7 +501,9 @@ class ChatService {
       "/protocol.chat.v1.ChatService/ManageUserRoles",
       buffer
     );
-    return svc.Empty.decode(new Uint8Array(await resp.arrayBuffer()));
+    return gen.google.protobuf.Empty.decode(
+      new Uint8Array(await resp.arrayBuffer())
+    );
   }
   async GetUserRoles(req: svc.IGetUserRolesRequest) {
     const buffer = svc.GetUserRolesRequest.encode(
@@ -514,7 +550,9 @@ class ChatService {
       "/protocol.chat.v1.ChatService/ProfileUpdate",
       buffer
     );
-    return svc.Empty.decode(new Uint8Array(await resp.arrayBuffer()));
+    return gen.google.protobuf.Empty.decode(
+      new Uint8Array(await resp.arrayBuffer())
+    );
   }
   async Typing(req: svc.ITypingRequest) {
     const buffer = svc.TypingRequest.encode(
@@ -524,7 +562,9 @@ class ChatService {
       "/protocol.chat.v1.ChatService/Typing",
       buffer
     );
-    return svc.Empty.decode(new Uint8Array(await resp.arrayBuffer()));
+    return gen.google.protobuf.Empty.decode(
+      new Uint8Array(await resp.arrayBuffer())
+    );
   }
   async PreviewGuild(req: svc.IPreviewGuildRequest) {
     const buffer = svc.PreviewGuildRequest.encode(
