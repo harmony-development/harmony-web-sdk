@@ -1,6 +1,6 @@
 import gen from "./output";
 import svc = gen.protocol.auth.v1;
-class AuthService {
+export default class AuthService {
   host: string;
   session?: string;
 

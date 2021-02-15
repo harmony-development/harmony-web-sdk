@@ -1,6 +1,6 @@
 import gen from "./output";
 import svc = gen.protocol.mediaproxy.v1;
-class MediaProxyService {
+export default class MediaProxyService {
   host: string;
   session?: string;
 

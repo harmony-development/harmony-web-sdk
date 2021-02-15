@@ -1,6 +1,6 @@
 import gen from "./output";
 import svc = gen.protocol.chat.v1;
-class ChatService {
+export default class ChatService {
   host: string;
   session?: string;
 
