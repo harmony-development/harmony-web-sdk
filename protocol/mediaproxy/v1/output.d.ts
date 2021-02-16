@@ -53,32 +53,12 @@ export namespace protocol {
         public image: string;
 
         /**
-         * Creates a new SiteMetadata instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns SiteMetadata instance
-         */
-        public static create(
-          properties?: protocol.mediaproxy.v1.ISiteMetadata
-        ): protocol.mediaproxy.v1.SiteMetadata;
-
-        /**
          * Encodes the specified SiteMetadata message. Does not implicitly {@link protocol.mediaproxy.v1.SiteMetadata.verify|verify} messages.
          * @param message SiteMetadata message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.mediaproxy.v1.ISiteMetadata,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified SiteMetadata message, length delimited. Does not implicitly {@link protocol.mediaproxy.v1.SiteMetadata.verify|verify} messages.
-         * @param message SiteMetadata message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.mediaproxy.v1.ISiteMetadata,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -95,24 +75,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.mediaproxy.v1.SiteMetadata;
-
-        /**
-         * Decodes a SiteMetadata message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns SiteMetadata
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.mediaproxy.v1.SiteMetadata;
-
-        /**
-         * Verifies a SiteMetadata message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a SiteMetadata message from a plain object. Also converts values to their respective internal types.
@@ -161,32 +123,12 @@ export namespace protocol {
         public url: string;
 
         /**
-         * Creates a new FetchLinkMetadataRequest instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns FetchLinkMetadataRequest instance
-         */
-        public static create(
-          properties?: protocol.mediaproxy.v1.IFetchLinkMetadataRequest
-        ): protocol.mediaproxy.v1.FetchLinkMetadataRequest;
-
-        /**
          * Encodes the specified FetchLinkMetadataRequest message. Does not implicitly {@link protocol.mediaproxy.v1.FetchLinkMetadataRequest.verify|verify} messages.
          * @param message FetchLinkMetadataRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.mediaproxy.v1.IFetchLinkMetadataRequest,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified FetchLinkMetadataRequest message, length delimited. Does not implicitly {@link protocol.mediaproxy.v1.FetchLinkMetadataRequest.verify|verify} messages.
-         * @param message FetchLinkMetadataRequest message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.mediaproxy.v1.IFetchLinkMetadataRequest,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -203,24 +145,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.mediaproxy.v1.FetchLinkMetadataRequest;
-
-        /**
-         * Decodes a FetchLinkMetadataRequest message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns FetchLinkMetadataRequest
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.mediaproxy.v1.FetchLinkMetadataRequest;
-
-        /**
-         * Verifies a FetchLinkMetadataRequest message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a FetchLinkMetadataRequest message from a plain object. Also converts values to their respective internal types.
@@ -267,32 +191,12 @@ export namespace protocol {
         public url: string;
 
         /**
-         * Creates a new InstantViewRequest instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns InstantViewRequest instance
-         */
-        public static create(
-          properties?: protocol.mediaproxy.v1.IInstantViewRequest
-        ): protocol.mediaproxy.v1.InstantViewRequest;
-
-        /**
          * Encodes the specified InstantViewRequest message. Does not implicitly {@link protocol.mediaproxy.v1.InstantViewRequest.verify|verify} messages.
          * @param message InstantViewRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.mediaproxy.v1.IInstantViewRequest,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified InstantViewRequest message, length delimited. Does not implicitly {@link protocol.mediaproxy.v1.InstantViewRequest.verify|verify} messages.
-         * @param message InstantViewRequest message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.mediaproxy.v1.IInstantViewRequest,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -309,24 +213,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.mediaproxy.v1.InstantViewRequest;
-
-        /**
-         * Decodes an InstantViewRequest message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns InstantViewRequest
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.mediaproxy.v1.InstantViewRequest;
-
-        /**
-         * Verifies an InstantViewRequest message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates an InstantViewRequest message from a plain object. Also converts values to their respective internal types.
@@ -385,32 +271,12 @@ export namespace protocol {
         public isValid: boolean;
 
         /**
-         * Creates a new InstantViewResponse instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns InstantViewResponse instance
-         */
-        public static create(
-          properties?: protocol.mediaproxy.v1.IInstantViewResponse
-        ): protocol.mediaproxy.v1.InstantViewResponse;
-
-        /**
          * Encodes the specified InstantViewResponse message. Does not implicitly {@link protocol.mediaproxy.v1.InstantViewResponse.verify|verify} messages.
          * @param message InstantViewResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.mediaproxy.v1.IInstantViewResponse,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified InstantViewResponse message, length delimited. Does not implicitly {@link protocol.mediaproxy.v1.InstantViewResponse.verify|verify} messages.
-         * @param message InstantViewResponse message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.mediaproxy.v1.IInstantViewResponse,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -427,24 +293,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.mediaproxy.v1.InstantViewResponse;
-
-        /**
-         * Decodes an InstantViewResponse message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns InstantViewResponse
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.mediaproxy.v1.InstantViewResponse;
-
-        /**
-         * Verifies an InstantViewResponse message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates an InstantViewResponse message from a plain object. Also converts values to their respective internal types.
@@ -493,32 +341,12 @@ export namespace protocol {
         public canInstantView: boolean;
 
         /**
-         * Creates a new CanInstantViewResponse instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns CanInstantViewResponse instance
-         */
-        public static create(
-          properties?: protocol.mediaproxy.v1.ICanInstantViewResponse
-        ): protocol.mediaproxy.v1.CanInstantViewResponse;
-
-        /**
          * Encodes the specified CanInstantViewResponse message. Does not implicitly {@link protocol.mediaproxy.v1.CanInstantViewResponse.verify|verify} messages.
          * @param message CanInstantViewResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.mediaproxy.v1.ICanInstantViewResponse,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified CanInstantViewResponse message, length delimited. Does not implicitly {@link protocol.mediaproxy.v1.CanInstantViewResponse.verify|verify} messages.
-         * @param message CanInstantViewResponse message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.mediaproxy.v1.ICanInstantViewResponse,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -535,24 +363,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.mediaproxy.v1.CanInstantViewResponse;
-
-        /**
-         * Decodes a CanInstantViewResponse message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns CanInstantViewResponse
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.mediaproxy.v1.CanInstantViewResponse;
-
-        /**
-         * Verifies a CanInstantViewResponse message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a CanInstantViewResponse message from a plain object. Also converts values to their respective internal types.
@@ -594,19 +404,6 @@ export namespace protocol {
           requestDelimited?: boolean,
           responseDelimited?: boolean
         );
-
-        /**
-         * Creates new MediaProxyService service using the specified rpc implementation.
-         * @param rpcImpl RPC implementation
-         * @param [requestDelimited=false] Whether requests are length-delimited
-         * @param [responseDelimited=false] Whether responses are length-delimited
-         * @returns RPC service. Useful where requests and/or responses are streamed.
-         */
-        public static create(
-          rpcImpl: $protobuf.RPCImpl,
-          requestDelimited?: boolean,
-          responseDelimited?: boolean
-        ): MediaProxyService;
 
         /**
          * Calls FetchLinkMetadata.

@@ -23,32 +23,12 @@ export namespace protocol {
         public authId: string;
 
         /**
-         * Creates a new BeginAuthResponse instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns BeginAuthResponse instance
-         */
-        public static create(
-          properties?: protocol.auth.v1.IBeginAuthResponse
-        ): protocol.auth.v1.BeginAuthResponse;
-
-        /**
          * Encodes the specified BeginAuthResponse message. Does not implicitly {@link protocol.auth.v1.BeginAuthResponse.verify|verify} messages.
          * @param message BeginAuthResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.auth.v1.IBeginAuthResponse,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified BeginAuthResponse message, length delimited. Does not implicitly {@link protocol.auth.v1.BeginAuthResponse.verify|verify} messages.
-         * @param message BeginAuthResponse message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.auth.v1.IBeginAuthResponse,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -65,24 +45,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.auth.v1.BeginAuthResponse;
-
-        /**
-         * Decodes a BeginAuthResponse message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns BeginAuthResponse
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.auth.v1.BeginAuthResponse;
-
-        /**
-         * Verifies a BeginAuthResponse message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a BeginAuthResponse message from a plain object. Also converts values to their respective internal types.
@@ -114,7 +76,7 @@ export namespace protocol {
       /** Properties of a Session. */
       interface ISession {
         /** Session userId */
-        userId?: number | Long | null;
+        userId?: number | null;
 
         /** Session sessionToken */
         sessionToken?: string | null;
@@ -129,19 +91,10 @@ export namespace protocol {
         constructor(properties?: protocol.auth.v1.ISession);
 
         /** Session userId. */
-        public userId: number | Long;
+        public userId: number;
 
         /** Session sessionToken. */
         public sessionToken: string;
-
-        /**
-         * Creates a new Session instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns Session instance
-         */
-        public static create(
-          properties?: protocol.auth.v1.ISession
-        ): protocol.auth.v1.Session;
 
         /**
          * Encodes the specified Session message. Does not implicitly {@link protocol.auth.v1.Session.verify|verify} messages.
@@ -150,17 +103,6 @@ export namespace protocol {
          * @returns Writer
          */
         public static encode(
-          message: protocol.auth.v1.ISession,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified Session message, length delimited. Does not implicitly {@link protocol.auth.v1.Session.verify|verify} messages.
-         * @param message Session message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.auth.v1.ISession,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -177,24 +119,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.auth.v1.Session;
-
-        /**
-         * Decodes a Session message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns Session
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.auth.v1.Session;
-
-        /**
-         * Verifies a Session message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a Session message from a plain object. Also converts values to their respective internal types.
@@ -274,32 +198,12 @@ export namespace protocol {
         public step?: "choice" | "form" | "session" | "waiting";
 
         /**
-         * Creates a new AuthStep instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns AuthStep instance
-         */
-        public static create(
-          properties?: protocol.auth.v1.IAuthStep
-        ): protocol.auth.v1.AuthStep;
-
-        /**
          * Encodes the specified AuthStep message. Does not implicitly {@link protocol.auth.v1.AuthStep.verify|verify} messages.
          * @param message AuthStep message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.auth.v1.IAuthStep,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified AuthStep message, length delimited. Does not implicitly {@link protocol.auth.v1.AuthStep.verify|verify} messages.
-         * @param message AuthStep message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.auth.v1.IAuthStep,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -316,24 +220,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.auth.v1.AuthStep;
-
-        /**
-         * Decodes an AuthStep message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns AuthStep
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.auth.v1.AuthStep;
-
-        /**
-         * Verifies an AuthStep message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates an AuthStep message from a plain object. Also converts values to their respective internal types.
@@ -387,32 +273,12 @@ export namespace protocol {
           public options: string[];
 
           /**
-           * Creates a new Choice instance using the specified properties.
-           * @param [properties] Properties to set
-           * @returns Choice instance
-           */
-          public static create(
-            properties?: protocol.auth.v1.AuthStep.IChoice
-          ): protocol.auth.v1.AuthStep.Choice;
-
-          /**
            * Encodes the specified Choice message. Does not implicitly {@link protocol.auth.v1.AuthStep.Choice.verify|verify} messages.
            * @param message Choice message or plain object to encode
            * @param [writer] Writer to encode to
            * @returns Writer
            */
           public static encode(
-            message: protocol.auth.v1.AuthStep.IChoice,
-            writer?: $protobuf.Writer
-          ): $protobuf.Writer;
-
-          /**
-           * Encodes the specified Choice message, length delimited. Does not implicitly {@link protocol.auth.v1.AuthStep.Choice.verify|verify} messages.
-           * @param message Choice message or plain object to encode
-           * @param [writer] Writer to encode to
-           * @returns Writer
-           */
-          public static encodeDelimited(
             message: protocol.auth.v1.AuthStep.IChoice,
             writer?: $protobuf.Writer
           ): $protobuf.Writer;
@@ -429,24 +295,6 @@ export namespace protocol {
             reader: $protobuf.Reader | Uint8Array,
             length?: number
           ): protocol.auth.v1.AuthStep.Choice;
-
-          /**
-           * Decodes a Choice message from the specified reader or buffer, length delimited.
-           * @param reader Reader or buffer to decode from
-           * @returns Choice
-           * @throws {Error} If the payload is not a reader or valid buffer
-           * @throws {$protobuf.util.ProtocolError} If required fields are missing
-           */
-          public static decodeDelimited(
-            reader: $protobuf.Reader | Uint8Array
-          ): protocol.auth.v1.AuthStep.Choice;
-
-          /**
-           * Verifies a Choice message.
-           * @param message Plain object to verify
-           * @returns `null` if valid, otherwise the reason why it is not
-           */
-          public static verify(message: { [k: string]: any }): string | null;
 
           /**
            * Creates a Choice message from a plain object. Also converts values to their respective internal types.
@@ -499,32 +347,12 @@ export namespace protocol {
           public fields: protocol.auth.v1.AuthStep.Form.IFormField[];
 
           /**
-           * Creates a new Form instance using the specified properties.
-           * @param [properties] Properties to set
-           * @returns Form instance
-           */
-          public static create(
-            properties?: protocol.auth.v1.AuthStep.IForm
-          ): protocol.auth.v1.AuthStep.Form;
-
-          /**
            * Encodes the specified Form message. Does not implicitly {@link protocol.auth.v1.AuthStep.Form.verify|verify} messages.
            * @param message Form message or plain object to encode
            * @param [writer] Writer to encode to
            * @returns Writer
            */
           public static encode(
-            message: protocol.auth.v1.AuthStep.IForm,
-            writer?: $protobuf.Writer
-          ): $protobuf.Writer;
-
-          /**
-           * Encodes the specified Form message, length delimited. Does not implicitly {@link protocol.auth.v1.AuthStep.Form.verify|verify} messages.
-           * @param message Form message or plain object to encode
-           * @param [writer] Writer to encode to
-           * @returns Writer
-           */
-          public static encodeDelimited(
             message: protocol.auth.v1.AuthStep.IForm,
             writer?: $protobuf.Writer
           ): $protobuf.Writer;
@@ -541,24 +369,6 @@ export namespace protocol {
             reader: $protobuf.Reader | Uint8Array,
             length?: number
           ): protocol.auth.v1.AuthStep.Form;
-
-          /**
-           * Decodes a Form message from the specified reader or buffer, length delimited.
-           * @param reader Reader or buffer to decode from
-           * @returns Form
-           * @throws {Error} If the payload is not a reader or valid buffer
-           * @throws {$protobuf.util.ProtocolError} If required fields are missing
-           */
-          public static decodeDelimited(
-            reader: $protobuf.Reader | Uint8Array
-          ): protocol.auth.v1.AuthStep.Form;
-
-          /**
-           * Verifies a Form message.
-           * @param message Plain object to verify
-           * @returns `null` if valid, otherwise the reason why it is not
-           */
-          public static verify(message: { [k: string]: any }): string | null;
 
           /**
            * Creates a Form message from a plain object. Also converts values to their respective internal types.
@@ -612,32 +422,12 @@ export namespace protocol {
             public type: string;
 
             /**
-             * Creates a new FormField instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns FormField instance
-             */
-            public static create(
-              properties?: protocol.auth.v1.AuthStep.Form.IFormField
-            ): protocol.auth.v1.AuthStep.Form.FormField;
-
-            /**
              * Encodes the specified FormField message. Does not implicitly {@link protocol.auth.v1.AuthStep.Form.FormField.verify|verify} messages.
              * @param message FormField message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
             public static encode(
-              message: protocol.auth.v1.AuthStep.Form.IFormField,
-              writer?: $protobuf.Writer
-            ): $protobuf.Writer;
-
-            /**
-             * Encodes the specified FormField message, length delimited. Does not implicitly {@link protocol.auth.v1.AuthStep.Form.FormField.verify|verify} messages.
-             * @param message FormField message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(
               message: protocol.auth.v1.AuthStep.Form.IFormField,
               writer?: $protobuf.Writer
             ): $protobuf.Writer;
@@ -654,24 +444,6 @@ export namespace protocol {
               reader: $protobuf.Reader | Uint8Array,
               length?: number
             ): protocol.auth.v1.AuthStep.Form.FormField;
-
-            /**
-             * Decodes a FormField message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns FormField
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(
-              reader: $protobuf.Reader | Uint8Array
-            ): protocol.auth.v1.AuthStep.Form.FormField;
-
-            /**
-             * Verifies a FormField message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): string | null;
 
             /**
              * Creates a FormField message from a plain object. Also converts values to their respective internal types.
@@ -725,32 +497,12 @@ export namespace protocol {
           public description: string;
 
           /**
-           * Creates a new Waiting instance using the specified properties.
-           * @param [properties] Properties to set
-           * @returns Waiting instance
-           */
-          public static create(
-            properties?: protocol.auth.v1.AuthStep.IWaiting
-          ): protocol.auth.v1.AuthStep.Waiting;
-
-          /**
            * Encodes the specified Waiting message. Does not implicitly {@link protocol.auth.v1.AuthStep.Waiting.verify|verify} messages.
            * @param message Waiting message or plain object to encode
            * @param [writer] Writer to encode to
            * @returns Writer
            */
           public static encode(
-            message: protocol.auth.v1.AuthStep.IWaiting,
-            writer?: $protobuf.Writer
-          ): $protobuf.Writer;
-
-          /**
-           * Encodes the specified Waiting message, length delimited. Does not implicitly {@link protocol.auth.v1.AuthStep.Waiting.verify|verify} messages.
-           * @param message Waiting message or plain object to encode
-           * @param [writer] Writer to encode to
-           * @returns Writer
-           */
-          public static encodeDelimited(
             message: protocol.auth.v1.AuthStep.IWaiting,
             writer?: $protobuf.Writer
           ): $protobuf.Writer;
@@ -767,24 +519,6 @@ export namespace protocol {
             reader: $protobuf.Reader | Uint8Array,
             length?: number
           ): protocol.auth.v1.AuthStep.Waiting;
-
-          /**
-           * Decodes a Waiting message from the specified reader or buffer, length delimited.
-           * @param reader Reader or buffer to decode from
-           * @returns Waiting
-           * @throws {Error} If the payload is not a reader or valid buffer
-           * @throws {$protobuf.util.ProtocolError} If required fields are missing
-           */
-          public static decodeDelimited(
-            reader: $protobuf.Reader | Uint8Array
-          ): protocol.auth.v1.AuthStep.Waiting;
-
-          /**
-           * Verifies a Waiting message.
-           * @param message Plain object to verify
-           * @returns `null` if valid, otherwise the reason why it is not
-           */
-          public static verify(message: { [k: string]: any }): string | null;
 
           /**
            * Creates a Waiting message from a plain object. Also converts values to their respective internal types.
@@ -847,32 +581,12 @@ export namespace protocol {
         public step?: "choice" | "form";
 
         /**
-         * Creates a new NextStepRequest instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns NextStepRequest instance
-         */
-        public static create(
-          properties?: protocol.auth.v1.INextStepRequest
-        ): protocol.auth.v1.NextStepRequest;
-
-        /**
          * Encodes the specified NextStepRequest message. Does not implicitly {@link protocol.auth.v1.NextStepRequest.verify|verify} messages.
          * @param message NextStepRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.auth.v1.INextStepRequest,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified NextStepRequest message, length delimited. Does not implicitly {@link protocol.auth.v1.NextStepRequest.verify|verify} messages.
-         * @param message NextStepRequest message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.auth.v1.INextStepRequest,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -889,24 +603,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.auth.v1.NextStepRequest;
-
-        /**
-         * Decodes a NextStepRequest message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns NextStepRequest
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.auth.v1.NextStepRequest;
-
-        /**
-         * Verifies a NextStepRequest message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a NextStepRequest message from a plain object. Also converts values to their respective internal types.
@@ -954,32 +650,12 @@ export namespace protocol {
           public choice: string;
 
           /**
-           * Creates a new Choice instance using the specified properties.
-           * @param [properties] Properties to set
-           * @returns Choice instance
-           */
-          public static create(
-            properties?: protocol.auth.v1.NextStepRequest.IChoice
-          ): protocol.auth.v1.NextStepRequest.Choice;
-
-          /**
            * Encodes the specified Choice message. Does not implicitly {@link protocol.auth.v1.NextStepRequest.Choice.verify|verify} messages.
            * @param message Choice message or plain object to encode
            * @param [writer] Writer to encode to
            * @returns Writer
            */
           public static encode(
-            message: protocol.auth.v1.NextStepRequest.IChoice,
-            writer?: $protobuf.Writer
-          ): $protobuf.Writer;
-
-          /**
-           * Encodes the specified Choice message, length delimited. Does not implicitly {@link protocol.auth.v1.NextStepRequest.Choice.verify|verify} messages.
-           * @param message Choice message or plain object to encode
-           * @param [writer] Writer to encode to
-           * @returns Writer
-           */
-          public static encodeDelimited(
             message: protocol.auth.v1.NextStepRequest.IChoice,
             writer?: $protobuf.Writer
           ): $protobuf.Writer;
@@ -996,24 +672,6 @@ export namespace protocol {
             reader: $protobuf.Reader | Uint8Array,
             length?: number
           ): protocol.auth.v1.NextStepRequest.Choice;
-
-          /**
-           * Decodes a Choice message from the specified reader or buffer, length delimited.
-           * @param reader Reader or buffer to decode from
-           * @returns Choice
-           * @throws {Error} If the payload is not a reader or valid buffer
-           * @throws {$protobuf.util.ProtocolError} If required fields are missing
-           */
-          public static decodeDelimited(
-            reader: $protobuf.Reader | Uint8Array
-          ): protocol.auth.v1.NextStepRequest.Choice;
-
-          /**
-           * Verifies a Choice message.
-           * @param message Plain object to verify
-           * @returns `null` if valid, otherwise the reason why it is not
-           */
-          public static verify(message: { [k: string]: any }): string | null;
 
           /**
            * Creates a Choice message from a plain object. Also converts values to their respective internal types.
@@ -1051,7 +709,7 @@ export namespace protocol {
           string?: string | null;
 
           /** FormFields number */
-          number?: number | Long | null;
+          number?: number | null;
         }
 
         /** Represents a FormFields. */
@@ -1071,19 +729,10 @@ export namespace protocol {
           public string: string;
 
           /** FormFields number. */
-          public number: number | Long;
+          public number: number;
 
           /** FormFields field. */
           public field?: "bytes" | "string" | "number";
-
-          /**
-           * Creates a new FormFields instance using the specified properties.
-           * @param [properties] Properties to set
-           * @returns FormFields instance
-           */
-          public static create(
-            properties?: protocol.auth.v1.NextStepRequest.IFormFields
-          ): protocol.auth.v1.NextStepRequest.FormFields;
 
           /**
            * Encodes the specified FormFields message. Does not implicitly {@link protocol.auth.v1.NextStepRequest.FormFields.verify|verify} messages.
@@ -1092,17 +741,6 @@ export namespace protocol {
            * @returns Writer
            */
           public static encode(
-            message: protocol.auth.v1.NextStepRequest.IFormFields,
-            writer?: $protobuf.Writer
-          ): $protobuf.Writer;
-
-          /**
-           * Encodes the specified FormFields message, length delimited. Does not implicitly {@link protocol.auth.v1.NextStepRequest.FormFields.verify|verify} messages.
-           * @param message FormFields message or plain object to encode
-           * @param [writer] Writer to encode to
-           * @returns Writer
-           */
-          public static encodeDelimited(
             message: protocol.auth.v1.NextStepRequest.IFormFields,
             writer?: $protobuf.Writer
           ): $protobuf.Writer;
@@ -1119,24 +757,6 @@ export namespace protocol {
             reader: $protobuf.Reader | Uint8Array,
             length?: number
           ): protocol.auth.v1.NextStepRequest.FormFields;
-
-          /**
-           * Decodes a FormFields message from the specified reader or buffer, length delimited.
-           * @param reader Reader or buffer to decode from
-           * @returns FormFields
-           * @throws {Error} If the payload is not a reader or valid buffer
-           * @throws {$protobuf.util.ProtocolError} If required fields are missing
-           */
-          public static decodeDelimited(
-            reader: $protobuf.Reader | Uint8Array
-          ): protocol.auth.v1.NextStepRequest.FormFields;
-
-          /**
-           * Verifies a FormFields message.
-           * @param message Plain object to verify
-           * @returns `null` if valid, otherwise the reason why it is not
-           */
-          public static verify(message: { [k: string]: any }): string | null;
 
           /**
            * Creates a FormFields message from a plain object. Also converts values to their respective internal types.
@@ -1183,32 +803,12 @@ export namespace protocol {
           public fields: protocol.auth.v1.NextStepRequest.IFormFields[];
 
           /**
-           * Creates a new Form instance using the specified properties.
-           * @param [properties] Properties to set
-           * @returns Form instance
-           */
-          public static create(
-            properties?: protocol.auth.v1.NextStepRequest.IForm
-          ): protocol.auth.v1.NextStepRequest.Form;
-
-          /**
            * Encodes the specified Form message. Does not implicitly {@link protocol.auth.v1.NextStepRequest.Form.verify|verify} messages.
            * @param message Form message or plain object to encode
            * @param [writer] Writer to encode to
            * @returns Writer
            */
           public static encode(
-            message: protocol.auth.v1.NextStepRequest.IForm,
-            writer?: $protobuf.Writer
-          ): $protobuf.Writer;
-
-          /**
-           * Encodes the specified Form message, length delimited. Does not implicitly {@link protocol.auth.v1.NextStepRequest.Form.verify|verify} messages.
-           * @param message Form message or plain object to encode
-           * @param [writer] Writer to encode to
-           * @returns Writer
-           */
-          public static encodeDelimited(
             message: protocol.auth.v1.NextStepRequest.IForm,
             writer?: $protobuf.Writer
           ): $protobuf.Writer;
@@ -1225,24 +825,6 @@ export namespace protocol {
             reader: $protobuf.Reader | Uint8Array,
             length?: number
           ): protocol.auth.v1.NextStepRequest.Form;
-
-          /**
-           * Decodes a Form message from the specified reader or buffer, length delimited.
-           * @param reader Reader or buffer to decode from
-           * @returns Form
-           * @throws {Error} If the payload is not a reader or valid buffer
-           * @throws {$protobuf.util.ProtocolError} If required fields are missing
-           */
-          public static decodeDelimited(
-            reader: $protobuf.Reader | Uint8Array
-          ): protocol.auth.v1.NextStepRequest.Form;
-
-          /**
-           * Verifies a Form message.
-           * @param message Plain object to verify
-           * @returns `null` if valid, otherwise the reason why it is not
-           */
-          public static verify(message: { [k: string]: any }): string | null;
 
           /**
            * Creates a Form message from a plain object. Also converts values to their respective internal types.
@@ -1290,32 +872,12 @@ export namespace protocol {
         public authId: string;
 
         /**
-         * Creates a new StepBackRequest instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns StepBackRequest instance
-         */
-        public static create(
-          properties?: protocol.auth.v1.IStepBackRequest
-        ): protocol.auth.v1.StepBackRequest;
-
-        /**
          * Encodes the specified StepBackRequest message. Does not implicitly {@link protocol.auth.v1.StepBackRequest.verify|verify} messages.
          * @param message StepBackRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.auth.v1.IStepBackRequest,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified StepBackRequest message, length delimited. Does not implicitly {@link protocol.auth.v1.StepBackRequest.verify|verify} messages.
-         * @param message StepBackRequest message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.auth.v1.IStepBackRequest,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -1332,24 +894,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.auth.v1.StepBackRequest;
-
-        /**
-         * Decodes a StepBackRequest message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns StepBackRequest
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.auth.v1.StepBackRequest;
-
-        /**
-         * Verifies a StepBackRequest message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a StepBackRequest message from a plain object. Also converts values to their respective internal types.
@@ -1396,32 +940,12 @@ export namespace protocol {
         public authId: string;
 
         /**
-         * Creates a new StreamStepsRequest instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns StreamStepsRequest instance
-         */
-        public static create(
-          properties?: protocol.auth.v1.IStreamStepsRequest
-        ): protocol.auth.v1.StreamStepsRequest;
-
-        /**
          * Encodes the specified StreamStepsRequest message. Does not implicitly {@link protocol.auth.v1.StreamStepsRequest.verify|verify} messages.
          * @param message StreamStepsRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.auth.v1.IStreamStepsRequest,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified StreamStepsRequest message, length delimited. Does not implicitly {@link protocol.auth.v1.StreamStepsRequest.verify|verify} messages.
-         * @param message StreamStepsRequest message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.auth.v1.IStreamStepsRequest,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -1438,24 +962,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.auth.v1.StreamStepsRequest;
-
-        /**
-         * Decodes a StreamStepsRequest message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns StreamStepsRequest
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.auth.v1.StreamStepsRequest;
-
-        /**
-         * Verifies a StreamStepsRequest message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a StreamStepsRequest message from a plain object. Also converts values to their respective internal types.
@@ -1502,32 +1008,12 @@ export namespace protocol {
         public target: string;
 
         /**
-         * Creates a new FederateRequest instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns FederateRequest instance
-         */
-        public static create(
-          properties?: protocol.auth.v1.IFederateRequest
-        ): protocol.auth.v1.FederateRequest;
-
-        /**
          * Encodes the specified FederateRequest message. Does not implicitly {@link protocol.auth.v1.FederateRequest.verify|verify} messages.
          * @param message FederateRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.auth.v1.IFederateRequest,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified FederateRequest message, length delimited. Does not implicitly {@link protocol.auth.v1.FederateRequest.verify|verify} messages.
-         * @param message FederateRequest message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.auth.v1.IFederateRequest,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -1544,24 +1030,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.auth.v1.FederateRequest;
-
-        /**
-         * Decodes a FederateRequest message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns FederateRequest
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.auth.v1.FederateRequest;
-
-        /**
-         * Verifies a FederateRequest message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a FederateRequest message from a plain object. Also converts values to their respective internal types.
@@ -1614,32 +1082,12 @@ export namespace protocol {
         public nonce: string;
 
         /**
-         * Creates a new FederateReply instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns FederateReply instance
-         */
-        public static create(
-          properties?: protocol.auth.v1.IFederateReply
-        ): protocol.auth.v1.FederateReply;
-
-        /**
          * Encodes the specified FederateReply message. Does not implicitly {@link protocol.auth.v1.FederateReply.verify|verify} messages.
          * @param message FederateReply message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.auth.v1.IFederateReply,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified FederateReply message, length delimited. Does not implicitly {@link protocol.auth.v1.FederateReply.verify|verify} messages.
-         * @param message FederateReply message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.auth.v1.IFederateReply,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -1656,24 +1104,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.auth.v1.FederateReply;
-
-        /**
-         * Decodes a FederateReply message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns FederateReply
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.auth.v1.FederateReply;
-
-        /**
-         * Verifies a FederateReply message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a FederateReply message from a plain object. Also converts values to their respective internal types.
@@ -1720,32 +1150,12 @@ export namespace protocol {
         public key: string;
 
         /**
-         * Creates a new KeyReply instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns KeyReply instance
-         */
-        public static create(
-          properties?: protocol.auth.v1.IKeyReply
-        ): protocol.auth.v1.KeyReply;
-
-        /**
          * Encodes the specified KeyReply message. Does not implicitly {@link protocol.auth.v1.KeyReply.verify|verify} messages.
          * @param message KeyReply message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.auth.v1.IKeyReply,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified KeyReply message, length delimited. Does not implicitly {@link protocol.auth.v1.KeyReply.verify|verify} messages.
-         * @param message KeyReply message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.auth.v1.IKeyReply,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -1762,24 +1172,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.auth.v1.KeyReply;
-
-        /**
-         * Decodes a KeyReply message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns KeyReply
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.auth.v1.KeyReply;
-
-        /**
-         * Verifies a KeyReply message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a KeyReply message from a plain object. Also converts values to their respective internal types.
@@ -1832,32 +1224,12 @@ export namespace protocol {
         public domain: string;
 
         /**
-         * Creates a new LoginFederatedRequest instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns LoginFederatedRequest instance
-         */
-        public static create(
-          properties?: protocol.auth.v1.ILoginFederatedRequest
-        ): protocol.auth.v1.LoginFederatedRequest;
-
-        /**
          * Encodes the specified LoginFederatedRequest message. Does not implicitly {@link protocol.auth.v1.LoginFederatedRequest.verify|verify} messages.
          * @param message LoginFederatedRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.auth.v1.ILoginFederatedRequest,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified LoginFederatedRequest message, length delimited. Does not implicitly {@link protocol.auth.v1.LoginFederatedRequest.verify|verify} messages.
-         * @param message LoginFederatedRequest message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.auth.v1.ILoginFederatedRequest,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -1874,24 +1246,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.auth.v1.LoginFederatedRequest;
-
-        /**
-         * Decodes a LoginFederatedRequest message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns LoginFederatedRequest
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.auth.v1.LoginFederatedRequest;
-
-        /**
-         * Verifies a LoginFederatedRequest message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a LoginFederatedRequest message from a plain object. Also converts values to their respective internal types.
@@ -1933,19 +1287,6 @@ export namespace protocol {
           requestDelimited?: boolean,
           responseDelimited?: boolean
         );
-
-        /**
-         * Creates new AuthService service using the specified rpc implementation.
-         * @param rpcImpl RPC implementation
-         * @param [requestDelimited=false] Whether requests are length-delimited
-         * @param [responseDelimited=false] Whether responses are length-delimited
-         * @returns RPC service. Useful where requests and/or responses are streamed.
-         */
-        public static create(
-          rpcImpl: $protobuf.RPCImpl,
-          requestDelimited?: boolean,
-          responseDelimited?: boolean
-        ): AuthService;
 
         /**
          * Calls Federate.
@@ -2230,32 +1571,12 @@ export namespace protocol {
           | "bridge";
 
         /**
-         * Creates a new Override instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns Override instance
-         */
-        public static create(
-          properties?: protocol.harmonytypes.v1.IOverride
-        ): protocol.harmonytypes.v1.Override;
-
-        /**
          * Encodes the specified Override message. Does not implicitly {@link protocol.harmonytypes.v1.Override.verify|verify} messages.
          * @param message Override message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.harmonytypes.v1.IOverride,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified Override message, length delimited. Does not implicitly {@link protocol.harmonytypes.v1.Override.verify|verify} messages.
-         * @param message Override message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.harmonytypes.v1.IOverride,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -2272,24 +1593,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.harmonytypes.v1.Override;
-
-        /**
-         * Decodes an Override message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns Override
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.harmonytypes.v1.Override;
-
-        /**
-         * Verifies an Override message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates an Override message from a plain object. Also converts values to their respective internal types.
@@ -2389,32 +1692,12 @@ export namespace protocol {
         public children: protocol.harmonytypes.v1.IAction[];
 
         /**
-         * Creates a new Action instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns Action instance
-         */
-        public static create(
-          properties?: protocol.harmonytypes.v1.IAction
-        ): protocol.harmonytypes.v1.Action;
-
-        /**
          * Encodes the specified Action message. Does not implicitly {@link protocol.harmonytypes.v1.Action.verify|verify} messages.
          * @param message Action message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.harmonytypes.v1.IAction,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified Action message, length delimited. Does not implicitly {@link protocol.harmonytypes.v1.Action.verify|verify} messages.
-         * @param message Action message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.harmonytypes.v1.IAction,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -2431,24 +1714,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.harmonytypes.v1.Action;
-
-        /**
-         * Decodes an Action message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns Action
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.harmonytypes.v1.Action;
-
-        /**
-         * Verifies an Action message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates an Action message from a plain object. Also converts values to their respective internal types.
@@ -2513,32 +1778,12 @@ export namespace protocol {
         public icon: string;
 
         /**
-         * Creates a new EmbedHeading instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns EmbedHeading instance
-         */
-        public static create(
-          properties?: protocol.harmonytypes.v1.IEmbedHeading
-        ): protocol.harmonytypes.v1.EmbedHeading;
-
-        /**
          * Encodes the specified EmbedHeading message. Does not implicitly {@link protocol.harmonytypes.v1.EmbedHeading.verify|verify} messages.
          * @param message EmbedHeading message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.harmonytypes.v1.IEmbedHeading,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified EmbedHeading message, length delimited. Does not implicitly {@link protocol.harmonytypes.v1.EmbedHeading.verify|verify} messages.
-         * @param message EmbedHeading message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.harmonytypes.v1.IEmbedHeading,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -2555,24 +1800,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.harmonytypes.v1.EmbedHeading;
-
-        /**
-         * Decodes an EmbedHeading message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns EmbedHeading
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.harmonytypes.v1.EmbedHeading;
-
-        /**
-         * Verifies an EmbedHeading message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates an EmbedHeading message from a plain object. Also converts values to their respective internal types.
@@ -2649,32 +1876,12 @@ export namespace protocol {
         public actions: protocol.harmonytypes.v1.IAction[];
 
         /**
-         * Creates a new EmbedField instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns EmbedField instance
-         */
-        public static create(
-          properties?: protocol.harmonytypes.v1.IEmbedField
-        ): protocol.harmonytypes.v1.EmbedField;
-
-        /**
          * Encodes the specified EmbedField message. Does not implicitly {@link protocol.harmonytypes.v1.EmbedField.verify|verify} messages.
          * @param message EmbedField message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.harmonytypes.v1.IEmbedField,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified EmbedField message, length delimited. Does not implicitly {@link protocol.harmonytypes.v1.EmbedField.verify|verify} messages.
-         * @param message EmbedField message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.harmonytypes.v1.IEmbedField,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -2691,24 +1898,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.harmonytypes.v1.EmbedField;
-
-        /**
-         * Decodes an EmbedField message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns EmbedField
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.harmonytypes.v1.EmbedField;
-
-        /**
-         * Verifies an EmbedField message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates an EmbedField message from a plain object. Also converts values to their respective internal types.
@@ -2746,7 +1935,7 @@ export namespace protocol {
         body?: string | null;
 
         /** Embed color */
-        color?: number | Long | null;
+        color?: number | null;
 
         /** Embed header */
         header?: protocol.harmonytypes.v1.IEmbedHeading | null;
@@ -2776,7 +1965,7 @@ export namespace protocol {
         public body: string;
 
         /** Embed color. */
-        public color: number | Long;
+        public color: number;
 
         /** Embed header. */
         public header?: protocol.harmonytypes.v1.IEmbedHeading | null;
@@ -2791,32 +1980,12 @@ export namespace protocol {
         public actions: protocol.harmonytypes.v1.IAction[];
 
         /**
-         * Creates a new Embed instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns Embed instance
-         */
-        public static create(
-          properties?: protocol.harmonytypes.v1.IEmbed
-        ): protocol.harmonytypes.v1.Embed;
-
-        /**
          * Encodes the specified Embed message. Does not implicitly {@link protocol.harmonytypes.v1.Embed.verify|verify} messages.
          * @param message Embed message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.harmonytypes.v1.IEmbed,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified Embed message, length delimited. Does not implicitly {@link protocol.harmonytypes.v1.Embed.verify|verify} messages.
-         * @param message Embed message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.harmonytypes.v1.IEmbed,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -2833,24 +2002,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.harmonytypes.v1.Embed;
-
-        /**
-         * Decodes an Embed message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns Embed
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.harmonytypes.v1.Embed;
-
-        /**
-         * Verifies an Embed message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates an Embed message from a plain object. Also converts values to their respective internal types.
@@ -2915,32 +2066,12 @@ export namespace protocol {
         public size: number;
 
         /**
-         * Creates a new Attachment instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns Attachment instance
-         */
-        public static create(
-          properties?: protocol.harmonytypes.v1.IAttachment
-        ): protocol.harmonytypes.v1.Attachment;
-
-        /**
          * Encodes the specified Attachment message. Does not implicitly {@link protocol.harmonytypes.v1.Attachment.verify|verify} messages.
          * @param message Attachment message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.harmonytypes.v1.IAttachment,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified Attachment message, length delimited. Does not implicitly {@link protocol.harmonytypes.v1.Attachment.verify|verify} messages.
-         * @param message Attachment message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.harmonytypes.v1.IAttachment,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -2957,24 +2088,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.harmonytypes.v1.Attachment;
-
-        /**
-         * Decodes an Attachment message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns Attachment
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.harmonytypes.v1.Attachment;
-
-        /**
-         * Verifies an Attachment message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates an Attachment message from a plain object. Also converts values to their respective internal types.
@@ -3027,32 +2140,12 @@ export namespace protocol {
         public extension: { [k: string]: google.protobuf.IAny };
 
         /**
-         * Creates a new Metadata instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns Metadata instance
-         */
-        public static create(
-          properties?: protocol.harmonytypes.v1.IMetadata
-        ): protocol.harmonytypes.v1.Metadata;
-
-        /**
          * Encodes the specified Metadata message. Does not implicitly {@link protocol.harmonytypes.v1.Metadata.verify|verify} messages.
          * @param message Metadata message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.harmonytypes.v1.IMetadata,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified Metadata message, length delimited. Does not implicitly {@link protocol.harmonytypes.v1.Metadata.verify|verify} messages.
-         * @param message Metadata message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.harmonytypes.v1.IMetadata,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -3069,24 +2162,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.harmonytypes.v1.Metadata;
-
-        /**
-         * Decodes a Metadata message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns Metadata
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.harmonytypes.v1.Metadata;
-
-        /**
-         * Verifies a Metadata message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a Metadata message from a plain object. Also converts values to their respective internal types.
@@ -3121,16 +2196,16 @@ export namespace protocol {
         metadata?: protocol.harmonytypes.v1.IMetadata | null;
 
         /** Message guildId */
-        guildId?: number | Long | null;
+        guildId?: number | null;
 
         /** Message channelId */
-        channelId?: number | Long | null;
+        channelId?: number | null;
 
         /** Message messageId */
-        messageId?: number | Long | null;
+        messageId?: number | null;
 
         /** Message authorId */
-        authorId?: number | Long | null;
+        authorId?: number | null;
 
         /** Message createdAt */
         createdAt?: google.protobuf.ITimestamp | null;
@@ -3151,7 +2226,7 @@ export namespace protocol {
         attachments?: protocol.harmonytypes.v1.IAttachment[] | null;
 
         /** Message inReplyTo */
-        inReplyTo?: number | Long | null;
+        inReplyTo?: number | null;
 
         /** Message overrides */
         overrides?: protocol.harmonytypes.v1.IOverride | null;
@@ -3169,16 +2244,16 @@ export namespace protocol {
         public metadata?: protocol.harmonytypes.v1.IMetadata | null;
 
         /** Message guildId. */
-        public guildId: number | Long;
+        public guildId: number;
 
         /** Message channelId. */
-        public channelId: number | Long;
+        public channelId: number;
 
         /** Message messageId. */
-        public messageId: number | Long;
+        public messageId: number;
 
         /** Message authorId. */
-        public authorId: number | Long;
+        public authorId: number;
 
         /** Message createdAt. */
         public createdAt?: google.protobuf.ITimestamp | null;
@@ -3199,19 +2274,10 @@ export namespace protocol {
         public attachments: protocol.harmonytypes.v1.IAttachment[];
 
         /** Message inReplyTo. */
-        public inReplyTo: number | Long;
+        public inReplyTo: number;
 
         /** Message overrides. */
         public overrides?: protocol.harmonytypes.v1.IOverride | null;
-
-        /**
-         * Creates a new Message instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns Message instance
-         */
-        public static create(
-          properties?: protocol.harmonytypes.v1.IMessage
-        ): protocol.harmonytypes.v1.Message;
 
         /**
          * Encodes the specified Message message. Does not implicitly {@link protocol.harmonytypes.v1.Message.verify|verify} messages.
@@ -3220,17 +2286,6 @@ export namespace protocol {
          * @returns Writer
          */
         public static encode(
-          message: protocol.harmonytypes.v1.IMessage,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified Message message, length delimited. Does not implicitly {@link protocol.harmonytypes.v1.Message.verify|verify} messages.
-         * @param message Message message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.harmonytypes.v1.IMessage,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -3247,24 +2302,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.harmonytypes.v1.Message;
-
-        /**
-         * Decodes a Message message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns Message
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.harmonytypes.v1.Message;
-
-        /**
-         * Verifies a Message message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a Message message from a plain object. Also converts values to their respective internal types.
@@ -3312,32 +2349,12 @@ export namespace google {
       constructor(properties?: google.protobuf.IEmpty);
 
       /**
-       * Creates a new Empty instance using the specified properties.
-       * @param [properties] Properties to set
-       * @returns Empty instance
-       */
-      public static create(
-        properties?: google.protobuf.IEmpty
-      ): google.protobuf.Empty;
-
-      /**
        * Encodes the specified Empty message. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
        * @param message Empty message or plain object to encode
        * @param [writer] Writer to encode to
        * @returns Writer
        */
       public static encode(
-        message: google.protobuf.IEmpty,
-        writer?: $protobuf.Writer
-      ): $protobuf.Writer;
-
-      /**
-       * Encodes the specified Empty message, length delimited. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
-       * @param message Empty message or plain object to encode
-       * @param [writer] Writer to encode to
-       * @returns Writer
-       */
-      public static encodeDelimited(
         message: google.protobuf.IEmpty,
         writer?: $protobuf.Writer
       ): $protobuf.Writer;
@@ -3354,24 +2371,6 @@ export namespace google {
         reader: $protobuf.Reader | Uint8Array,
         length?: number
       ): google.protobuf.Empty;
-
-      /**
-       * Decodes an Empty message from the specified reader or buffer, length delimited.
-       * @param reader Reader or buffer to decode from
-       * @returns Empty
-       * @throws {Error} If the payload is not a reader or valid buffer
-       * @throws {$protobuf.util.ProtocolError} If required fields are missing
-       */
-      public static decodeDelimited(
-        reader: $protobuf.Reader | Uint8Array
-      ): google.protobuf.Empty;
-
-      /**
-       * Verifies an Empty message.
-       * @param message Plain object to verify
-       * @returns `null` if valid, otherwise the reason why it is not
-       */
-      public static verify(message: { [k: string]: any }): string | null;
 
       /**
        * Creates an Empty message from a plain object. Also converts values to their respective internal types.
@@ -3424,32 +2423,12 @@ export namespace google {
       public value: Uint8Array;
 
       /**
-       * Creates a new Any instance using the specified properties.
-       * @param [properties] Properties to set
-       * @returns Any instance
-       */
-      public static create(
-        properties?: google.protobuf.IAny
-      ): google.protobuf.Any;
-
-      /**
        * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
        * @param message Any message or plain object to encode
        * @param [writer] Writer to encode to
        * @returns Writer
        */
       public static encode(
-        message: google.protobuf.IAny,
-        writer?: $protobuf.Writer
-      ): $protobuf.Writer;
-
-      /**
-       * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
-       * @param message Any message or plain object to encode
-       * @param [writer] Writer to encode to
-       * @returns Writer
-       */
-      public static encodeDelimited(
         message: google.protobuf.IAny,
         writer?: $protobuf.Writer
       ): $protobuf.Writer;
@@ -3466,24 +2445,6 @@ export namespace google {
         reader: $protobuf.Reader | Uint8Array,
         length?: number
       ): google.protobuf.Any;
-
-      /**
-       * Decodes an Any message from the specified reader or buffer, length delimited.
-       * @param reader Reader or buffer to decode from
-       * @returns Any
-       * @throws {Error} If the payload is not a reader or valid buffer
-       * @throws {$protobuf.util.ProtocolError} If required fields are missing
-       */
-      public static decodeDelimited(
-        reader: $protobuf.Reader | Uint8Array
-      ): google.protobuf.Any;
-
-      /**
-       * Verifies an Any message.
-       * @param message Plain object to verify
-       * @returns `null` if valid, otherwise the reason why it is not
-       */
-      public static verify(message: { [k: string]: any }): string | null;
 
       /**
        * Creates an Any message from a plain object. Also converts values to their respective internal types.
@@ -3515,7 +2476,7 @@ export namespace google {
     /** Properties of a Timestamp. */
     interface ITimestamp {
       /** Timestamp seconds */
-      seconds?: number | Long | null;
+      seconds?: number | null;
 
       /** Timestamp nanos */
       nanos?: number | null;
@@ -3530,19 +2491,10 @@ export namespace google {
       constructor(properties?: google.protobuf.ITimestamp);
 
       /** Timestamp seconds. */
-      public seconds: number | Long;
+      public seconds: number;
 
       /** Timestamp nanos. */
       public nanos: number;
-
-      /**
-       * Creates a new Timestamp instance using the specified properties.
-       * @param [properties] Properties to set
-       * @returns Timestamp instance
-       */
-      public static create(
-        properties?: google.protobuf.ITimestamp
-      ): google.protobuf.Timestamp;
 
       /**
        * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
@@ -3551,17 +2503,6 @@ export namespace google {
        * @returns Writer
        */
       public static encode(
-        message: google.protobuf.ITimestamp,
-        writer?: $protobuf.Writer
-      ): $protobuf.Writer;
-
-      /**
-       * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-       * @param message Timestamp message or plain object to encode
-       * @param [writer] Writer to encode to
-       * @returns Writer
-       */
-      public static encodeDelimited(
         message: google.protobuf.ITimestamp,
         writer?: $protobuf.Writer
       ): $protobuf.Writer;
@@ -3578,24 +2519,6 @@ export namespace google {
         reader: $protobuf.Reader | Uint8Array,
         length?: number
       ): google.protobuf.Timestamp;
-
-      /**
-       * Decodes a Timestamp message from the specified reader or buffer, length delimited.
-       * @param reader Reader or buffer to decode from
-       * @returns Timestamp
-       * @throws {Error} If the payload is not a reader or valid buffer
-       * @throws {$protobuf.util.ProtocolError} If required fields are missing
-       */
-      public static decodeDelimited(
-        reader: $protobuf.Reader | Uint8Array
-      ): google.protobuf.Timestamp;
-
-      /**
-       * Verifies a Timestamp message.
-       * @param message Plain object to verify
-       * @returns `null` if valid, otherwise the reason why it is not
-       */
-      public static verify(message: { [k: string]: any }): string | null;
 
       /**
        * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.

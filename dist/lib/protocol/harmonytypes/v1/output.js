@@ -1,26 +1,24 @@
 /*eslint-disable block-scoped-var, id-length, no-control-regex, no-magic-numbers, no-prototype-builtins, no-redeclare, no-shadow, no-var, sort-vars*/
-"use strict";
+import * as $protobuf from "protobufjs/minimal";
 
-var $protobuf = require("protobufjs/minimal");
+const $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.util;
 
-var $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.util;
+const $root = $protobuf.roots["harmonytypes/v1"] || ($protobuf.roots["harmonytypes/v1"] = {});
 
-var $root = $protobuf.roots["harmonytypes/v1"] || ($protobuf.roots["harmonytypes/v1"] = {});
+export const protocol = $root.protocol = (() => {
 
-$root.protocol = (function() {
-
-    var protocol = {};
+    const protocol = {};
 
     protocol.harmonytypes = (function() {
 
-        var harmonytypes = {};
+        const harmonytypes = {};
 
         harmonytypes.v1 = (function() {
 
-            var v1 = {};
+            const v1 = {};
 
             v1.UserStatus = (function() {
-                var valuesById = {}, values = Object.create(valuesById);
+                const valuesById = {}, values = Object.create(valuesById);
                 values[valuesById[0] = "USER_STATUS_ONLINE_UNSPECIFIED"] = 0;
                 values[valuesById[1] = "USER_STATUS_STREAMING"] = 1;
                 values[valuesById[2] = "USER_STATUS_DO_NOT_DISTURB"] = 2;
@@ -33,7 +31,7 @@ $root.protocol = (function() {
 
                 function Override(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -46,7 +44,7 @@ $root.protocol = (function() {
                 Override.prototype.systemMessage = null;
                 Override.prototype.bridge = null;
 
-                var $oneOfFields;
+                let $oneOfFields;
 
                 Object.defineProperty(Override.prototype, "reason", {
                     get: $util.oneOfGetter($oneOfFields = ["userDefined", "webhook", "systemPlurality", "systemMessage", "bridge"]),
@@ -76,9 +74,9 @@ $root.protocol = (function() {
                 Override.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.harmonytypes.v1.Override();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.harmonytypes.v1.Override();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.name = reader.string();
@@ -112,7 +110,7 @@ $root.protocol = (function() {
                 Override.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.harmonytypes.v1.Override)
                         return object;
-                    var message = new $root.protocol.harmonytypes.v1.Override();
+                    let message = new $root.protocol.harmonytypes.v1.Override();
                     if (object.name != null)
                         message.name = String(object.name);
                     if (object.avatar != null)
@@ -145,7 +143,7 @@ $root.protocol = (function() {
                 Override.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults) {
                         object.name = "";
                         object.avatar = "";
@@ -190,7 +188,7 @@ $root.protocol = (function() {
             })();
 
             v1.ActionType = (function() {
-                var valuesById = {}, values = Object.create(valuesById);
+                const valuesById = {}, values = Object.create(valuesById);
                 values[valuesById[0] = "Normal"] = 0;
                 values[valuesById[1] = "Primary"] = 1;
                 values[valuesById[2] = "Destructive"] = 2;
@@ -198,7 +196,7 @@ $root.protocol = (function() {
             })();
 
             v1.ActionPresentation = (function() {
-                var valuesById = {}, values = Object.create(valuesById);
+                const valuesById = {}, values = Object.create(valuesById);
                 values[valuesById[0] = "Button"] = 0;
                 values[valuesById[1] = "Dropdown"] = 1;
                 values[valuesById[2] = "Menu"] = 2;
@@ -208,7 +206,7 @@ $root.protocol = (function() {
             })();
 
             v1.FieldPresentation = (function() {
-                var valuesById = {}, values = Object.create(valuesById);
+                const valuesById = {}, values = Object.create(valuesById);
                 values[valuesById[0] = "Data"] = 0;
                 values[valuesById[1] = "CaptionedImage"] = 1;
                 values[valuesById[2] = "Row"] = 2;
@@ -220,7 +218,7 @@ $root.protocol = (function() {
                 function Action(properties) {
                     this.children = [];
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -246,7 +244,7 @@ $root.protocol = (function() {
                     if (message.presentation != null && Object.hasOwnProperty.call(message, "presentation"))
                         writer.uint32(40).int32(message.presentation);
                     if (message.children != null && message.children.length)
-                        for (var i = 0; i < message.children.length; ++i)
+                        for (let i = 0; i < message.children.length; ++i)
                             $root.protocol.harmonytypes.v1.Action.encode(message.children[i], writer.uint32(50).fork()).ldelim();
                     return writer;
                 };
@@ -254,9 +252,9 @@ $root.protocol = (function() {
                 Action.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.harmonytypes.v1.Action();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.harmonytypes.v1.Action();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.text = reader.string();
@@ -289,7 +287,7 @@ $root.protocol = (function() {
                 Action.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.harmonytypes.v1.Action)
                         return object;
-                    var message = new $root.protocol.harmonytypes.v1.Action();
+                    let message = new $root.protocol.harmonytypes.v1.Action();
                     if (object.text != null)
                         message.text = String(object.text);
                     if (object.url != null)
@@ -336,7 +334,7 @@ $root.protocol = (function() {
                         if (!Array.isArray(object.children))
                             throw TypeError(".protocol.harmonytypes.v1.Action.children: array expected");
                         message.children = [];
-                        for (var i = 0; i < object.children.length; ++i) {
+                        for (let i = 0; i < object.children.length; ++i) {
                             if (typeof object.children[i] !== "object")
                                 throw TypeError(".protocol.harmonytypes.v1.Action.children: object expected");
                             message.children[i] = $root.protocol.harmonytypes.v1.Action.fromObject(object.children[i]);
@@ -348,7 +346,7 @@ $root.protocol = (function() {
                 Action.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.arrays || options.defaults)
                         object.children = [];
                     if (options.defaults) {
@@ -370,7 +368,7 @@ $root.protocol = (function() {
                         object.presentation = options.enums === String ? $root.protocol.harmonytypes.v1.ActionPresentation[message.presentation] : message.presentation;
                     if (message.children && message.children.length) {
                         object.children = [];
-                        for (var j = 0; j < message.children.length; ++j)
+                        for (let j = 0; j < message.children.length; ++j)
                             object.children[j] = $root.protocol.harmonytypes.v1.Action.toObject(message.children[j], options);
                     }
                     return object;
@@ -387,7 +385,7 @@ $root.protocol = (function() {
 
                 function EmbedHeading(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -414,9 +412,9 @@ $root.protocol = (function() {
                 EmbedHeading.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.harmonytypes.v1.EmbedHeading();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.harmonytypes.v1.EmbedHeading();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.text = reader.string();
@@ -441,7 +439,7 @@ $root.protocol = (function() {
                 EmbedHeading.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.harmonytypes.v1.EmbedHeading)
                         return object;
-                    var message = new $root.protocol.harmonytypes.v1.EmbedHeading();
+                    let message = new $root.protocol.harmonytypes.v1.EmbedHeading();
                     if (object.text != null)
                         message.text = String(object.text);
                     if (object.subtext != null)
@@ -456,7 +454,7 @@ $root.protocol = (function() {
                 EmbedHeading.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults) {
                         object.text = "";
                         object.subtext = "";
@@ -486,7 +484,7 @@ $root.protocol = (function() {
                 function EmbedField(properties) {
                     this.actions = [];
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -512,7 +510,7 @@ $root.protocol = (function() {
                     if (message.presentation != null && Object.hasOwnProperty.call(message, "presentation"))
                         writer.uint32(40).int32(message.presentation);
                     if (message.actions != null && message.actions.length)
-                        for (var i = 0; i < message.actions.length; ++i)
+                        for (let i = 0; i < message.actions.length; ++i)
                             $root.protocol.harmonytypes.v1.Action.encode(message.actions[i], writer.uint32(50).fork()).ldelim();
                     return writer;
                 };
@@ -520,9 +518,9 @@ $root.protocol = (function() {
                 EmbedField.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.harmonytypes.v1.EmbedField();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.harmonytypes.v1.EmbedField();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.title = reader.string();
@@ -555,7 +553,7 @@ $root.protocol = (function() {
                 EmbedField.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.harmonytypes.v1.EmbedField)
                         return object;
-                    var message = new $root.protocol.harmonytypes.v1.EmbedField();
+                    let message = new $root.protocol.harmonytypes.v1.EmbedField();
                     if (object.title != null)
                         message.title = String(object.title);
                     if (object.subtitle != null)
@@ -582,7 +580,7 @@ $root.protocol = (function() {
                         if (!Array.isArray(object.actions))
                             throw TypeError(".protocol.harmonytypes.v1.EmbedField.actions: array expected");
                         message.actions = [];
-                        for (var i = 0; i < object.actions.length; ++i) {
+                        for (let i = 0; i < object.actions.length; ++i) {
                             if (typeof object.actions[i] !== "object")
                                 throw TypeError(".protocol.harmonytypes.v1.EmbedField.actions: object expected");
                             message.actions[i] = $root.protocol.harmonytypes.v1.Action.fromObject(object.actions[i]);
@@ -594,7 +592,7 @@ $root.protocol = (function() {
                 EmbedField.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.arrays || options.defaults)
                         object.actions = [];
                     if (options.defaults) {
@@ -616,7 +614,7 @@ $root.protocol = (function() {
                         object.presentation = options.enums === String ? $root.protocol.harmonytypes.v1.FieldPresentation[message.presentation] : message.presentation;
                     if (message.actions && message.actions.length) {
                         object.actions = [];
-                        for (var j = 0; j < message.actions.length; ++j)
+                        for (let j = 0; j < message.actions.length; ++j)
                             object.actions[j] = $root.protocol.harmonytypes.v1.Action.toObject(message.actions[j], options);
                     }
                     return object;
@@ -635,7 +633,7 @@ $root.protocol = (function() {
                     this.fields = [];
                     this.actions = [];
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -662,10 +660,10 @@ $root.protocol = (function() {
                     if (message.footer != null && Object.hasOwnProperty.call(message, "footer"))
                         $root.protocol.harmonytypes.v1.EmbedHeading.encode(message.footer, writer.uint32(42).fork()).ldelim();
                     if (message.fields != null && message.fields.length)
-                        for (var i = 0; i < message.fields.length; ++i)
+                        for (let i = 0; i < message.fields.length; ++i)
                             $root.protocol.harmonytypes.v1.EmbedField.encode(message.fields[i], writer.uint32(50).fork()).ldelim();
                     if (message.actions != null && message.actions.length)
-                        for (var i = 0; i < message.actions.length; ++i)
+                        for (let i = 0; i < message.actions.length; ++i)
                             $root.protocol.harmonytypes.v1.Action.encode(message.actions[i], writer.uint32(58).fork()).ldelim();
                     return writer;
                 };
@@ -673,9 +671,9 @@ $root.protocol = (function() {
                 Embed.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.harmonytypes.v1.Embed();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.harmonytypes.v1.Embed();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.title = reader.string();
@@ -713,7 +711,7 @@ $root.protocol = (function() {
                 Embed.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.harmonytypes.v1.Embed)
                         return object;
-                    var message = new $root.protocol.harmonytypes.v1.Embed();
+                    let message = new $root.protocol.harmonytypes.v1.Embed();
                     if (object.title != null)
                         message.title = String(object.title);
                     if (object.body != null)
@@ -741,7 +739,7 @@ $root.protocol = (function() {
                         if (!Array.isArray(object.fields))
                             throw TypeError(".protocol.harmonytypes.v1.Embed.fields: array expected");
                         message.fields = [];
-                        for (var i = 0; i < object.fields.length; ++i) {
+                        for (let i = 0; i < object.fields.length; ++i) {
                             if (typeof object.fields[i] !== "object")
                                 throw TypeError(".protocol.harmonytypes.v1.Embed.fields: object expected");
                             message.fields[i] = $root.protocol.harmonytypes.v1.EmbedField.fromObject(object.fields[i]);
@@ -751,7 +749,7 @@ $root.protocol = (function() {
                         if (!Array.isArray(object.actions))
                             throw TypeError(".protocol.harmonytypes.v1.Embed.actions: array expected");
                         message.actions = [];
-                        for (var i = 0; i < object.actions.length; ++i) {
+                        for (let i = 0; i < object.actions.length; ++i) {
                             if (typeof object.actions[i] !== "object")
                                 throw TypeError(".protocol.harmonytypes.v1.Embed.actions: object expected");
                             message.actions[i] = $root.protocol.harmonytypes.v1.Action.fromObject(object.actions[i]);
@@ -763,7 +761,7 @@ $root.protocol = (function() {
                 Embed.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.arrays || options.defaults) {
                         object.fields = [];
                         object.actions = [];
@@ -772,7 +770,7 @@ $root.protocol = (function() {
                         object.title = "";
                         object.body = "";
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, false);
+                            let long = new $util.Long(0, 0, false);
                             object.color = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.color = options.longs === String ? "0" : 0;
@@ -794,12 +792,12 @@ $root.protocol = (function() {
                         object.footer = $root.protocol.harmonytypes.v1.EmbedHeading.toObject(message.footer, options);
                     if (message.fields && message.fields.length) {
                         object.fields = [];
-                        for (var j = 0; j < message.fields.length; ++j)
+                        for (let j = 0; j < message.fields.length; ++j)
                             object.fields[j] = $root.protocol.harmonytypes.v1.EmbedField.toObject(message.fields[j], options);
                     }
                     if (message.actions && message.actions.length) {
                         object.actions = [];
-                        for (var j = 0; j < message.actions.length; ++j)
+                        for (let j = 0; j < message.actions.length; ++j)
                             object.actions[j] = $root.protocol.harmonytypes.v1.Action.toObject(message.actions[j], options);
                     }
                     return object;
@@ -816,7 +814,7 @@ $root.protocol = (function() {
 
                 function Attachment(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -843,9 +841,9 @@ $root.protocol = (function() {
                 Attachment.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.harmonytypes.v1.Attachment();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.harmonytypes.v1.Attachment();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.id = reader.string();
@@ -870,7 +868,7 @@ $root.protocol = (function() {
                 Attachment.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.harmonytypes.v1.Attachment)
                         return object;
-                    var message = new $root.protocol.harmonytypes.v1.Attachment();
+                    let message = new $root.protocol.harmonytypes.v1.Attachment();
                     if (object.id != null)
                         message.id = String(object.id);
                     if (object.name != null)
@@ -885,7 +883,7 @@ $root.protocol = (function() {
                 Attachment.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults) {
                         object.id = "";
                         object.name = "";
@@ -915,7 +913,7 @@ $root.protocol = (function() {
                 function Metadata(properties) {
                     this.extension = {};
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -929,7 +927,7 @@ $root.protocol = (function() {
                     if (message.kind != null && Object.hasOwnProperty.call(message, "kind"))
                         writer.uint32(10).string(message.kind);
                     if (message.extension != null && Object.hasOwnProperty.call(message, "extension"))
-                        for (var keys = Object.keys(message.extension), i = 0; i < keys.length; ++i) {
+                        for (let keys = Object.keys(message.extension), i = 0; i < keys.length; ++i) {
                             writer.uint32(18).fork().uint32(10).string(keys[i]);
                             $root.google.protobuf.Any.encode(message.extension[keys[i]], writer.uint32(18).fork()).ldelim().ldelim();
                         }
@@ -939,9 +937,9 @@ $root.protocol = (function() {
                 Metadata.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.harmonytypes.v1.Metadata(), key, value;
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.harmonytypes.v1.Metadata(), key, value;
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.kind = reader.string();
@@ -949,11 +947,11 @@ $root.protocol = (function() {
                         case 2:
                             if (message.extension === $util.emptyObject)
                                 message.extension = {};
-                            var end2 = reader.uint32() + reader.pos;
+                            let end2 = reader.uint32() + reader.pos;
                             key = "";
                             value = null;
                             while (reader.pos < end2) {
-                                var tag2 = reader.uint32();
+                                let tag2 = reader.uint32();
                                 switch (tag2 >>> 3) {
                                 case 1:
                                     key = reader.string();
@@ -979,14 +977,14 @@ $root.protocol = (function() {
                 Metadata.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.harmonytypes.v1.Metadata)
                         return object;
-                    var message = new $root.protocol.harmonytypes.v1.Metadata();
+                    let message = new $root.protocol.harmonytypes.v1.Metadata();
                     if (object.kind != null)
                         message.kind = String(object.kind);
                     if (object.extension) {
                         if (typeof object.extension !== "object")
                             throw TypeError(".protocol.harmonytypes.v1.Metadata.extension: object expected");
                         message.extension = {};
-                        for (var keys = Object.keys(object.extension), i = 0; i < keys.length; ++i) {
+                        for (let keys = Object.keys(object.extension), i = 0; i < keys.length; ++i) {
                             if (typeof object.extension[keys[i]] !== "object")
                                 throw TypeError(".protocol.harmonytypes.v1.Metadata.extension: object expected");
                             message.extension[keys[i]] = $root.google.protobuf.Any.fromObject(object.extension[keys[i]]);
@@ -998,17 +996,17 @@ $root.protocol = (function() {
                 Metadata.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.objects || options.defaults)
                         object.extension = {};
                     if (options.defaults)
                         object.kind = "";
                     if (message.kind != null && message.hasOwnProperty("kind"))
                         object.kind = message.kind;
-                    var keys2;
+                    let keys2;
                     if (message.extension && (keys2 = Object.keys(message.extension)).length) {
                         object.extension = {};
-                        for (var j = 0; j < keys2.length; ++j)
+                        for (let j = 0; j < keys2.length; ++j)
                             object.extension[keys2[j]] = $root.google.protobuf.Any.toObject(message.extension[keys2[j]], options);
                     }
                     return object;
@@ -1028,7 +1026,7 @@ $root.protocol = (function() {
                     this.actions = [];
                     this.attachments = [];
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -1065,13 +1063,13 @@ $root.protocol = (function() {
                     if (message.content != null && Object.hasOwnProperty.call(message, "content"))
                         writer.uint32(58).string(message.content);
                     if (message.embeds != null && message.embeds.length)
-                        for (var i = 0; i < message.embeds.length; ++i)
+                        for (let i = 0; i < message.embeds.length; ++i)
                             $root.protocol.harmonytypes.v1.Embed.encode(message.embeds[i], writer.uint32(66).fork()).ldelim();
                     if (message.actions != null && message.actions.length)
-                        for (var i = 0; i < message.actions.length; ++i)
+                        for (let i = 0; i < message.actions.length; ++i)
                             $root.protocol.harmonytypes.v1.Action.encode(message.actions[i], writer.uint32(74).fork()).ldelim();
                     if (message.attachments != null && message.attachments.length)
-                        for (var i = 0; i < message.attachments.length; ++i)
+                        for (let i = 0; i < message.attachments.length; ++i)
                             $root.protocol.harmonytypes.v1.Attachment.encode(message.attachments[i], writer.uint32(82).fork()).ldelim();
                     if (message.inReplyTo != null && Object.hasOwnProperty.call(message, "inReplyTo"))
                         writer.uint32(88).uint64(message.inReplyTo);
@@ -1085,9 +1083,9 @@ $root.protocol = (function() {
                 Message.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.harmonytypes.v1.Message();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.harmonytypes.v1.Message();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 13:
                             message.metadata = $root.protocol.harmonytypes.v1.Metadata.decode(reader, reader.uint32());
@@ -1145,7 +1143,7 @@ $root.protocol = (function() {
                 Message.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.harmonytypes.v1.Message)
                         return object;
-                    var message = new $root.protocol.harmonytypes.v1.Message();
+                    let message = new $root.protocol.harmonytypes.v1.Message();
                     if (object.metadata != null) {
                         if (typeof object.metadata !== "object")
                             throw TypeError(".protocol.harmonytypes.v1.Message.metadata: object expected");
@@ -1203,7 +1201,7 @@ $root.protocol = (function() {
                         if (!Array.isArray(object.embeds))
                             throw TypeError(".protocol.harmonytypes.v1.Message.embeds: array expected");
                         message.embeds = [];
-                        for (var i = 0; i < object.embeds.length; ++i) {
+                        for (let i = 0; i < object.embeds.length; ++i) {
                             if (typeof object.embeds[i] !== "object")
                                 throw TypeError(".protocol.harmonytypes.v1.Message.embeds: object expected");
                             message.embeds[i] = $root.protocol.harmonytypes.v1.Embed.fromObject(object.embeds[i]);
@@ -1213,7 +1211,7 @@ $root.protocol = (function() {
                         if (!Array.isArray(object.actions))
                             throw TypeError(".protocol.harmonytypes.v1.Message.actions: array expected");
                         message.actions = [];
-                        for (var i = 0; i < object.actions.length; ++i) {
+                        for (let i = 0; i < object.actions.length; ++i) {
                             if (typeof object.actions[i] !== "object")
                                 throw TypeError(".protocol.harmonytypes.v1.Message.actions: object expected");
                             message.actions[i] = $root.protocol.harmonytypes.v1.Action.fromObject(object.actions[i]);
@@ -1223,7 +1221,7 @@ $root.protocol = (function() {
                         if (!Array.isArray(object.attachments))
                             throw TypeError(".protocol.harmonytypes.v1.Message.attachments: array expected");
                         message.attachments = [];
-                        for (var i = 0; i < object.attachments.length; ++i) {
+                        for (let i = 0; i < object.attachments.length; ++i) {
                             if (typeof object.attachments[i] !== "object")
                                 throw TypeError(".protocol.harmonytypes.v1.Message.attachments: object expected");
                             message.attachments[i] = $root.protocol.harmonytypes.v1.Attachment.fromObject(object.attachments[i]);
@@ -1249,7 +1247,7 @@ $root.protocol = (function() {
                 Message.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.arrays || options.defaults) {
                         object.embeds = [];
                         object.actions = [];
@@ -1257,22 +1255,22 @@ $root.protocol = (function() {
                     }
                     if (options.defaults) {
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.guildId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.guildId = options.longs === String ? "0" : 0;
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.channelId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.channelId = options.longs === String ? "0" : 0;
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.messageId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.messageId = options.longs === String ? "0" : 0;
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.authorId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.authorId = options.longs === String ? "0" : 0;
@@ -1280,7 +1278,7 @@ $root.protocol = (function() {
                         object.editedAt = null;
                         object.content = "";
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.inReplyTo = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.inReplyTo = options.longs === String ? "0" : 0;
@@ -1315,17 +1313,17 @@ $root.protocol = (function() {
                         object.content = message.content;
                     if (message.embeds && message.embeds.length) {
                         object.embeds = [];
-                        for (var j = 0; j < message.embeds.length; ++j)
+                        for (let j = 0; j < message.embeds.length; ++j)
                             object.embeds[j] = $root.protocol.harmonytypes.v1.Embed.toObject(message.embeds[j], options);
                     }
                     if (message.actions && message.actions.length) {
                         object.actions = [];
-                        for (var j = 0; j < message.actions.length; ++j)
+                        for (let j = 0; j < message.actions.length; ++j)
                             object.actions[j] = $root.protocol.harmonytypes.v1.Action.toObject(message.actions[j], options);
                     }
                     if (message.attachments && message.attachments.length) {
                         object.attachments = [];
-                        for (var j = 0; j < message.attachments.length; ++j)
+                        for (let j = 0; j < message.attachments.length; ++j)
                             object.attachments[j] = $root.protocol.harmonytypes.v1.Attachment.toObject(message.attachments[j], options);
                     }
                     if (message.inReplyTo != null && message.hasOwnProperty("inReplyTo"))
@@ -1356,19 +1354,19 @@ $root.protocol = (function() {
     return protocol;
 })();
 
-$root.google = (function() {
+export const google = $root.google = (() => {
 
-    var google = {};
+    const google = {};
 
     google.protobuf = (function() {
 
-        var protobuf = {};
+        const protobuf = {};
 
         protobuf.Timestamp = (function() {
 
             function Timestamp(properties) {
                 if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                         if (properties[keys[i]] != null)
                             this[keys[i]] = properties[keys[i]];
             }
@@ -1389,9 +1387,9 @@ $root.google = (function() {
             Timestamp.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
-                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Timestamp();
+                let end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Timestamp();
                 while (reader.pos < end) {
-                    var tag = reader.uint32();
+                    let tag = reader.uint32();
                     switch (tag >>> 3) {
                     case 1:
                         message.seconds = reader.int64();
@@ -1410,7 +1408,7 @@ $root.google = (function() {
             Timestamp.fromObject = function fromObject(object) {
                 if (object instanceof $root.google.protobuf.Timestamp)
                     return object;
-                var message = new $root.google.protobuf.Timestamp();
+                let message = new $root.google.protobuf.Timestamp();
                 if (object.seconds != null)
                     if ($util.Long)
                         (message.seconds = $util.Long.fromValue(object.seconds)).unsigned = false;
@@ -1428,10 +1426,10 @@ $root.google = (function() {
             Timestamp.toObject = function toObject(message, options) {
                 if (!options)
                     options = {};
-                var object = {};
+                let object = {};
                 if (options.defaults) {
                     if ($util.Long) {
-                        var long = new $util.Long(0, 0, false);
+                        let long = new $util.Long(0, 0, false);
                         object.seconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                     } else
                         object.seconds = options.longs === String ? "0" : 0;
@@ -1458,7 +1456,7 @@ $root.google = (function() {
 
             function Empty(properties) {
                 if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                         if (properties[keys[i]] != null)
                             this[keys[i]] = properties[keys[i]];
             }
@@ -1472,9 +1470,9 @@ $root.google = (function() {
             Empty.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
-                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Empty();
+                let end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Empty();
                 while (reader.pos < end) {
-                    var tag = reader.uint32();
+                    let tag = reader.uint32();
                     switch (tag >>> 3) {
                     default:
                         reader.skipType(tag & 7);
@@ -1505,7 +1503,7 @@ $root.google = (function() {
 
             function Any(properties) {
                 if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                         if (properties[keys[i]] != null)
                             this[keys[i]] = properties[keys[i]];
             }
@@ -1526,9 +1524,9 @@ $root.google = (function() {
             Any.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
-                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Any();
+                let end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Any();
                 while (reader.pos < end) {
-                    var tag = reader.uint32();
+                    let tag = reader.uint32();
                     switch (tag >>> 3) {
                     case 1:
                         message.type_url = reader.string();
@@ -1547,7 +1545,7 @@ $root.google = (function() {
             Any.fromObject = function fromObject(object) {
                 if (object instanceof $root.google.protobuf.Any)
                     return object;
-                var message = new $root.google.protobuf.Any();
+                let message = new $root.google.protobuf.Any();
                 if (object.type_url != null)
                     message.type_url = String(object.type_url);
                 if (object.value != null)
@@ -1561,7 +1559,7 @@ $root.google = (function() {
             Any.toObject = function toObject(message, options) {
                 if (!options)
                     options = {};
-                var object = {};
+                let object = {};
                 if (options.defaults) {
                     object.type_url = "";
                     if (options.bytes === String)
@@ -1592,4 +1590,4 @@ $root.google = (function() {
     return google;
 })();
 
-module.exports = $root;
+export { $root as default };

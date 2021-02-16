@@ -1,4 +1,3 @@
-import { Message, Method, rpc, RPCImplCallback } from "protobufjs";
 import Auth from "../protocol/auth/v1/auth";
 import Chat from "../protocol/chat/v1/chat";
 import MediaProxy from "../protocol/mediaproxy/v1/mediaproxy";

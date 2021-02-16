@@ -1,29 +1,27 @@
 /*eslint-disable block-scoped-var, id-length, no-control-regex, no-magic-numbers, no-prototype-builtins, no-redeclare, no-shadow, no-var, sort-vars*/
-"use strict";
+import * as $protobuf from "protobufjs/minimal";
 
-var $protobuf = require("protobufjs/minimal");
+const $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.util;
 
-var $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.util;
+const $root = $protobuf.roots["mediaproxy/v1"] || ($protobuf.roots["mediaproxy/v1"] = {});
 
-var $root = $protobuf.roots["mediaproxy/v1"] || ($protobuf.roots["mediaproxy/v1"] = {});
+export const protocol = $root.protocol = (() => {
 
-$root.protocol = (function() {
-
-    var protocol = {};
+    const protocol = {};
 
     protocol.mediaproxy = (function() {
 
-        var mediaproxy = {};
+        const mediaproxy = {};
 
         mediaproxy.v1 = (function() {
 
-            var v1 = {};
+            const v1 = {};
 
             v1.SiteMetadata = (function() {
 
                 function SiteMetadata(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -56,9 +54,9 @@ $root.protocol = (function() {
                 SiteMetadata.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.mediaproxy.v1.SiteMetadata();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.mediaproxy.v1.SiteMetadata();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.siteTitle = reader.string();
@@ -89,7 +87,7 @@ $root.protocol = (function() {
                 SiteMetadata.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.mediaproxy.v1.SiteMetadata)
                         return object;
-                    var message = new $root.protocol.mediaproxy.v1.SiteMetadata();
+                    let message = new $root.protocol.mediaproxy.v1.SiteMetadata();
                     if (object.siteTitle != null)
                         message.siteTitle = String(object.siteTitle);
                     if (object.pageTitle != null)
@@ -108,7 +106,7 @@ $root.protocol = (function() {
                 SiteMetadata.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults) {
                         object.siteTitle = "";
                         object.pageTitle = "";
@@ -143,7 +141,7 @@ $root.protocol = (function() {
 
                 function FetchLinkMetadataRequest(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -161,9 +159,9 @@ $root.protocol = (function() {
                 FetchLinkMetadataRequest.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.mediaproxy.v1.FetchLinkMetadataRequest();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.mediaproxy.v1.FetchLinkMetadataRequest();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.url = reader.string();
@@ -179,7 +177,7 @@ $root.protocol = (function() {
                 FetchLinkMetadataRequest.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.mediaproxy.v1.FetchLinkMetadataRequest)
                         return object;
-                    var message = new $root.protocol.mediaproxy.v1.FetchLinkMetadataRequest();
+                    let message = new $root.protocol.mediaproxy.v1.FetchLinkMetadataRequest();
                     if (object.url != null)
                         message.url = String(object.url);
                     return message;
@@ -188,7 +186,7 @@ $root.protocol = (function() {
                 FetchLinkMetadataRequest.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults)
                         object.url = "";
                     if (message.url != null && message.hasOwnProperty("url"))
@@ -207,7 +205,7 @@ $root.protocol = (function() {
 
                 function InstantViewRequest(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -225,9 +223,9 @@ $root.protocol = (function() {
                 InstantViewRequest.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.mediaproxy.v1.InstantViewRequest();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.mediaproxy.v1.InstantViewRequest();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.url = reader.string();
@@ -243,7 +241,7 @@ $root.protocol = (function() {
                 InstantViewRequest.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.mediaproxy.v1.InstantViewRequest)
                         return object;
-                    var message = new $root.protocol.mediaproxy.v1.InstantViewRequest();
+                    let message = new $root.protocol.mediaproxy.v1.InstantViewRequest();
                     if (object.url != null)
                         message.url = String(object.url);
                     return message;
@@ -252,7 +250,7 @@ $root.protocol = (function() {
                 InstantViewRequest.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults)
                         object.url = "";
                     if (message.url != null && message.hasOwnProperty("url"))
@@ -271,7 +269,7 @@ $root.protocol = (function() {
 
                 function InstantViewResponse(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -295,9 +293,9 @@ $root.protocol = (function() {
                 InstantViewResponse.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.mediaproxy.v1.InstantViewResponse();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.mediaproxy.v1.InstantViewResponse();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.metadata = $root.protocol.mediaproxy.v1.SiteMetadata.decode(reader, reader.uint32());
@@ -319,7 +317,7 @@ $root.protocol = (function() {
                 InstantViewResponse.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.mediaproxy.v1.InstantViewResponse)
                         return object;
-                    var message = new $root.protocol.mediaproxy.v1.InstantViewResponse();
+                    let message = new $root.protocol.mediaproxy.v1.InstantViewResponse();
                     if (object.metadata != null) {
                         if (typeof object.metadata !== "object")
                             throw TypeError(".protocol.mediaproxy.v1.InstantViewResponse.metadata: object expected");
@@ -335,7 +333,7 @@ $root.protocol = (function() {
                 InstantViewResponse.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults) {
                         object.metadata = null;
                         object.content = "";
@@ -361,7 +359,7 @@ $root.protocol = (function() {
 
                 function CanInstantViewResponse(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -379,9 +377,9 @@ $root.protocol = (function() {
                 CanInstantViewResponse.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.mediaproxy.v1.CanInstantViewResponse();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.mediaproxy.v1.CanInstantViewResponse();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.canInstantView = reader.bool();
@@ -397,7 +395,7 @@ $root.protocol = (function() {
                 CanInstantViewResponse.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.mediaproxy.v1.CanInstantViewResponse)
                         return object;
-                    var message = new $root.protocol.mediaproxy.v1.CanInstantViewResponse();
+                    let message = new $root.protocol.mediaproxy.v1.CanInstantViewResponse();
                     if (object.canInstantView != null)
                         message.canInstantView = Boolean(object.canInstantView);
                     return message;
@@ -406,7 +404,7 @@ $root.protocol = (function() {
                 CanInstantViewResponse.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults)
                         object.canInstantView = false;
                     if (message.canInstantView != null && message.hasOwnProperty("canInstantView"))
@@ -456,4 +454,4 @@ $root.protocol = (function() {
     return protocol;
 })();
 
-module.exports = $root;
+export { $root as default };

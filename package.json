@@ -26,7 +26,7 @@
   "scripts": {
     "lint": "tslint  --project tsconfig.json -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
     "prebuild": "rimraf dist",
-    "build": "git submodule update --recursive --remote && ./genprotos.sh && tsc && cp -r protocol dist/protocol",
+    "build": "git submodule update --recursive --remote && ./genprotos.sh && tsc && copyfiles -u 1 \"protocol/**/*.d.ts\" dist/lib/protocol && copyfiles -u 1 \"protocol/**/*.js\" dist/lib/protocol",
     "commit": "git-cz",
     "prepublish": "npm run build",
     "test": "jest"
@@ -45,19 +45,27 @@
     "protobufjs": "^6.10.2"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.12.16",
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
+    "@types/jest": "^26.0.20",
     "@types/node": "^14.14.28",
+    "babel-jest": "^26.6.3",
     "commitizen": "^4.2.3",
+    "copyfiles": "^2.4.1",
     "cz-conventional-changelog": "^3.3.0",
     "jest": "^26.6.3",
     "lint-staged": "^10.5.4",
     "prettier": "^2.2.1",
     "protobufjs-cli": "file:protobuf.js/cli",
     "rimraf": "^3.0.2",
+    "ts-jest": "^26.5.1",
+    "ts-node": "^9.1.1",
+    "ts-proto": "^1.65.0",
     "tslint": "^6.1.3",
     "tslint-config-prettier": "^1.18.0",
     "tslint-config-standard": "^9.0.0",
-    "typescript": "^4.1.5"
+    "typescript": "^4.1.5",
+    "whatwg-fetch": "^3.5.0"
   }
 }

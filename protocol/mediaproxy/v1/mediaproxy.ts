@@ -1,5 +1,4 @@
 import gen from "./output";
-import svc = gen.protocol.mediaproxy.v1;
 export default class MediaProxyService {
   host: string;
   session?: string;
@@ -25,37 +24,32 @@ export default class MediaProxyService {
       this.session || "",
     ]);
   }
-  async FetchLinkMetadata(req: svc.IFetchLinkMetadataRequest) {
-    const buffer = svc.FetchLinkMetadataRequest.encode(
-      svc.FetchLinkMetadataRequest.create(req)
-    ).finish();
+  async FetchLinkMetadata(
+    req: gen.protocol.mediaproxy.v1.IFetchLinkMetadataRequest
+  ) {
     const resp = await this.unary(
       "/protocol.mediaproxy.v1.MediaProxyService/FetchLinkMetadata",
-      buffer
+      gen.protocol.mediaproxy.v1.FetchLinkMetadataRequest.encode(req).finish()
     );
-    return svc.SiteMetadata.decode(new Uint8Array(await resp.arrayBuffer()));
-  }
-  async InstantView(req: svc.IInstantViewRequest) {
-    const buffer = svc.InstantViewRequest.encode(
-      svc.InstantViewRequest.create(req)
-    ).finish();
-    const resp = await this.unary(
-      "/protocol.mediaproxy.v1.MediaProxyService/InstantView",
-      buffer
-    );
-    return svc.InstantViewResponse.decode(
+    return gen.protocol.mediaproxy.v1.SiteMetadata.decode(
       new Uint8Array(await resp.arrayBuffer())
     );
   }
-  async CanInstantView(req: svc.IInstantViewRequest) {
-    const buffer = svc.InstantViewRequest.encode(
-      svc.InstantViewRequest.create(req)
-    ).finish();
+  async InstantView(req: gen.protocol.mediaproxy.v1.IInstantViewRequest) {
+    const resp = await this.unary(
+      "/protocol.mediaproxy.v1.MediaProxyService/InstantView",
+      gen.protocol.mediaproxy.v1.InstantViewRequest.encode(req).finish()
+    );
+    return gen.protocol.mediaproxy.v1.InstantViewResponse.decode(
+      new Uint8Array(await resp.arrayBuffer())
+    );
+  }
+  async CanInstantView(req: gen.protocol.mediaproxy.v1.IInstantViewRequest) {
     const resp = await this.unary(
       "/protocol.mediaproxy.v1.MediaProxyService/CanInstantView",
-      buffer
+      gen.protocol.mediaproxy.v1.InstantViewRequest.encode(req).finish()
     );
-    return svc.CanInstantViewResponse.decode(
+    return gen.protocol.mediaproxy.v1.CanInstantViewResponse.decode(
       new Uint8Array(await resp.arrayBuffer())
     );
   }

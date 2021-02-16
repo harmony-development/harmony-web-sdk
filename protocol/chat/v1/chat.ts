@@ -1,5 +1,4 @@
 import gen from "./output";
-import svc = gen.protocol.chat.v1;
 export default class ChatService {
   host: string;
   session?: string;
@@ -25,556 +24,436 @@ export default class ChatService {
       this.session || "",
     ]);
   }
-  async CreateGuild(req: svc.ICreateGuildRequest) {
-    const buffer = svc.CreateGuildRequest.encode(
-      svc.CreateGuildRequest.create(req)
-    ).finish();
+  async CreateGuild(req: gen.protocol.chat.v1.ICreateGuildRequest) {
     const resp = await this.unary(
       "/protocol.chat.v1.ChatService/CreateGuild",
-      buffer
+      gen.protocol.chat.v1.CreateGuildRequest.encode(req).finish()
     );
-    return svc.CreateGuildResponse.decode(
+    return gen.protocol.chat.v1.CreateGuildResponse.decode(
       new Uint8Array(await resp.arrayBuffer())
     );
   }
-  async CreateInvite(req: svc.ICreateInviteRequest) {
-    const buffer = svc.CreateInviteRequest.encode(
-      svc.CreateInviteRequest.create(req)
-    ).finish();
+  async CreateInvite(req: gen.protocol.chat.v1.ICreateInviteRequest) {
     const resp = await this.unary(
       "/protocol.chat.v1.ChatService/CreateInvite",
-      buffer
+      gen.protocol.chat.v1.CreateInviteRequest.encode(req).finish()
     );
-    return svc.CreateInviteResponse.decode(
+    return gen.protocol.chat.v1.CreateInviteResponse.decode(
       new Uint8Array(await resp.arrayBuffer())
     );
   }
-  async CreateChannel(req: svc.ICreateChannelRequest) {
-    const buffer = svc.CreateChannelRequest.encode(
-      svc.CreateChannelRequest.create(req)
-    ).finish();
+  async CreateChannel(req: gen.protocol.chat.v1.ICreateChannelRequest) {
     const resp = await this.unary(
       "/protocol.chat.v1.ChatService/CreateChannel",
-      buffer
+      gen.protocol.chat.v1.CreateChannelRequest.encode(req).finish()
     );
-    return svc.CreateChannelResponse.decode(
+    return gen.protocol.chat.v1.CreateChannelResponse.decode(
       new Uint8Array(await resp.arrayBuffer())
     );
   }
-  async CreateEmotePack(req: svc.ICreateEmotePackRequest) {
-    const buffer = svc.CreateEmotePackRequest.encode(
-      svc.CreateEmotePackRequest.create(req)
-    ).finish();
+  async CreateEmotePack(req: gen.protocol.chat.v1.ICreateEmotePackRequest) {
     const resp = await this.unary(
       "/protocol.chat.v1.ChatService/CreateEmotePack",
-      buffer
+      gen.protocol.chat.v1.CreateEmotePackRequest.encode(req).finish()
     );
-    return svc.CreateEmotePackResponse.decode(
+    return gen.protocol.chat.v1.CreateEmotePackResponse.decode(
       new Uint8Array(await resp.arrayBuffer())
     );
   }
-  async GetGuildList(req: svc.IGetGuildListRequest) {
-    const buffer = svc.GetGuildListRequest.encode(
-      svc.GetGuildListRequest.create(req)
-    ).finish();
+  async GetGuildList(req: gen.protocol.chat.v1.IGetGuildListRequest) {
     const resp = await this.unary(
       "/protocol.chat.v1.ChatService/GetGuildList",
-      buffer
+      gen.protocol.chat.v1.GetGuildListRequest.encode(req).finish()
     );
-    return svc.GetGuildListResponse.decode(
+    return gen.protocol.chat.v1.GetGuildListResponse.decode(
       new Uint8Array(await resp.arrayBuffer())
     );
   }
-  async AddGuildToGuildList(req: svc.IAddGuildToGuildListRequest) {
-    const buffer = svc.AddGuildToGuildListRequest.encode(
-      svc.AddGuildToGuildListRequest.create(req)
-    ).finish();
+  async AddGuildToGuildList(
+    req: gen.protocol.chat.v1.IAddGuildToGuildListRequest
+  ) {
     const resp = await this.unary(
       "/protocol.chat.v1.ChatService/AddGuildToGuildList",
-      buffer
+      gen.protocol.chat.v1.AddGuildToGuildListRequest.encode(req).finish()
     );
-    return svc.AddGuildToGuildListResponse.decode(
+    return gen.protocol.chat.v1.AddGuildToGuildListResponse.decode(
       new Uint8Array(await resp.arrayBuffer())
     );
   }
-  async RemoveGuildFromGuildList(req: svc.IRemoveGuildFromGuildListRequest) {
-    const buffer = svc.RemoveGuildFromGuildListRequest.encode(
-      svc.RemoveGuildFromGuildListRequest.create(req)
-    ).finish();
+  async RemoveGuildFromGuildList(
+    req: gen.protocol.chat.v1.IRemoveGuildFromGuildListRequest
+  ) {
     const resp = await this.unary(
       "/protocol.chat.v1.ChatService/RemoveGuildFromGuildList",
-      buffer
+      gen.protocol.chat.v1.RemoveGuildFromGuildListRequest.encode(req).finish()
     );
-    return svc.RemoveGuildFromGuildListResponse.decode(
+    return gen.protocol.chat.v1.RemoveGuildFromGuildListResponse.decode(
       new Uint8Array(await resp.arrayBuffer())
     );
   }
-  async GetGuild(req: svc.IGetGuildRequest) {
-    const buffer = svc.GetGuildRequest.encode(
-      svc.GetGuildRequest.create(req)
-    ).finish();
+  async GetGuild(req: gen.protocol.chat.v1.IGetGuildRequest) {
     const resp = await this.unary(
       "/protocol.chat.v1.ChatService/GetGuild",
-      buffer
+      gen.protocol.chat.v1.GetGuildRequest.encode(req).finish()
     );
-    return svc.GetGuildResponse.decode(
+    return gen.protocol.chat.v1.GetGuildResponse.decode(
       new Uint8Array(await resp.arrayBuffer())
     );
   }
-  async GetGuildInvites(req: svc.IGetGuildInvitesRequest) {
-    const buffer = svc.GetGuildInvitesRequest.encode(
-      svc.GetGuildInvitesRequest.create(req)
-    ).finish();
+  async GetGuildInvites(req: gen.protocol.chat.v1.IGetGuildInvitesRequest) {
     const resp = await this.unary(
       "/protocol.chat.v1.ChatService/GetGuildInvites",
-      buffer
+      gen.protocol.chat.v1.GetGuildInvitesRequest.encode(req).finish()
     );
-    return svc.GetGuildInvitesResponse.decode(
+    return gen.protocol.chat.v1.GetGuildInvitesResponse.decode(
       new Uint8Array(await resp.arrayBuffer())
     );
   }
-  async GetGuildMembers(req: svc.IGetGuildMembersRequest) {
-    const buffer = svc.GetGuildMembersRequest.encode(
-      svc.GetGuildMembersRequest.create(req)
-    ).finish();
+  async GetGuildMembers(req: gen.protocol.chat.v1.IGetGuildMembersRequest) {
     const resp = await this.unary(
       "/protocol.chat.v1.ChatService/GetGuildMembers",
-      buffer
+      gen.protocol.chat.v1.GetGuildMembersRequest.encode(req).finish()
     );
-    return svc.GetGuildMembersResponse.decode(
+    return gen.protocol.chat.v1.GetGuildMembersResponse.decode(
       new Uint8Array(await resp.arrayBuffer())
     );
   }
-  async GetGuildChannels(req: svc.IGetGuildChannelsRequest) {
-    const buffer = svc.GetGuildChannelsRequest.encode(
-      svc.GetGuildChannelsRequest.create(req)
-    ).finish();
+  async GetGuildChannels(req: gen.protocol.chat.v1.IGetGuildChannelsRequest) {
     const resp = await this.unary(
       "/protocol.chat.v1.ChatService/GetGuildChannels",
-      buffer
+      gen.protocol.chat.v1.GetGuildChannelsRequest.encode(req).finish()
     );
-    return svc.GetGuildChannelsResponse.decode(
+    return gen.protocol.chat.v1.GetGuildChannelsResponse.decode(
       new Uint8Array(await resp.arrayBuffer())
     );
   }
-  async GetChannelMessages(req: svc.IGetChannelMessagesRequest) {
-    const buffer = svc.GetChannelMessagesRequest.encode(
-      svc.GetChannelMessagesRequest.create(req)
-    ).finish();
+  async GetChannelMessages(
+    req: gen.protocol.chat.v1.IGetChannelMessagesRequest
+  ) {
     const resp = await this.unary(
       "/protocol.chat.v1.ChatService/GetChannelMessages",
-      buffer
+      gen.protocol.chat.v1.GetChannelMessagesRequest.encode(req).finish()
     );
-    return svc.GetChannelMessagesResponse.decode(
+    return gen.protocol.chat.v1.GetChannelMessagesResponse.decode(
       new Uint8Array(await resp.arrayBuffer())
     );
   }
-  async GetMessage(req: svc.IGetMessageRequest) {
-    const buffer = svc.GetMessageRequest.encode(
-      svc.GetMessageRequest.create(req)
-    ).finish();
+  async GetMessage(req: gen.protocol.chat.v1.IGetMessageRequest) {
     const resp = await this.unary(
       "/protocol.chat.v1.ChatService/GetMessage",
-      buffer
+      gen.protocol.chat.v1.GetMessageRequest.encode(req).finish()
     );
-    return svc.GetMessageResponse.decode(
+    return gen.protocol.chat.v1.GetMessageResponse.decode(
       new Uint8Array(await resp.arrayBuffer())
     );
   }
-  async GetEmotePacks(req: svc.IGetEmotePacksRequest) {
-    const buffer = svc.GetEmotePacksRequest.encode(
-      svc.GetEmotePacksRequest.create(req)
-    ).finish();
+  async GetEmotePacks(req: gen.protocol.chat.v1.IGetEmotePacksRequest) {
     const resp = await this.unary(
       "/protocol.chat.v1.ChatService/GetEmotePacks",
-      buffer
+      gen.protocol.chat.v1.GetEmotePacksRequest.encode(req).finish()
     );
-    return svc.GetEmotePacksResponse.decode(
+    return gen.protocol.chat.v1.GetEmotePacksResponse.decode(
       new Uint8Array(await resp.arrayBuffer())
     );
   }
-  async GetEmotePackEmotes(req: svc.IGetEmotePackEmotesRequest) {
-    const buffer = svc.GetEmotePackEmotesRequest.encode(
-      svc.GetEmotePackEmotesRequest.create(req)
-    ).finish();
+  async GetEmotePackEmotes(
+    req: gen.protocol.chat.v1.IGetEmotePackEmotesRequest
+  ) {
     const resp = await this.unary(
       "/protocol.chat.v1.ChatService/GetEmotePackEmotes",
-      buffer
+      gen.protocol.chat.v1.GetEmotePackEmotesRequest.encode(req).finish()
     );
-    return svc.GetEmotePackEmotesResponse.decode(
+    return gen.protocol.chat.v1.GetEmotePackEmotesResponse.decode(
       new Uint8Array(await resp.arrayBuffer())
     );
   }
-  async UpdateGuildInformation(req: svc.IUpdateGuildInformationRequest) {
-    const buffer = svc.UpdateGuildInformationRequest.encode(
-      svc.UpdateGuildInformationRequest.create(req)
-    ).finish();
+  async UpdateGuildInformation(
+    req: gen.protocol.chat.v1.IUpdateGuildInformationRequest
+  ) {
     const resp = await this.unary(
       "/protocol.chat.v1.ChatService/UpdateGuildInformation",
-      buffer
+      gen.protocol.chat.v1.UpdateGuildInformationRequest.encode(req).finish()
     );
     return gen.google.protobuf.Empty.decode(
       new Uint8Array(await resp.arrayBuffer())
     );
   }
-  async UpdateChannelInformation(req: svc.IUpdateChannelInformationRequest) {
-    const buffer = svc.UpdateChannelInformationRequest.encode(
-      svc.UpdateChannelInformationRequest.create(req)
-    ).finish();
+  async UpdateChannelInformation(
+    req: gen.protocol.chat.v1.IUpdateChannelInformationRequest
+  ) {
     const resp = await this.unary(
       "/protocol.chat.v1.ChatService/UpdateChannelInformation",
-      buffer
+      gen.protocol.chat.v1.UpdateChannelInformationRequest.encode(req).finish()
     );
     return gen.google.protobuf.Empty.decode(
       new Uint8Array(await resp.arrayBuffer())
     );
   }
-  async UpdateChannelOrder(req: svc.IUpdateChannelOrderRequest) {
-    const buffer = svc.UpdateChannelOrderRequest.encode(
-      svc.UpdateChannelOrderRequest.create(req)
-    ).finish();
+  async UpdateChannelOrder(
+    req: gen.protocol.chat.v1.IUpdateChannelOrderRequest
+  ) {
     const resp = await this.unary(
       "/protocol.chat.v1.ChatService/UpdateChannelOrder",
-      buffer
+      gen.protocol.chat.v1.UpdateChannelOrderRequest.encode(req).finish()
     );
     return gen.google.protobuf.Empty.decode(
       new Uint8Array(await resp.arrayBuffer())
     );
   }
-  async UpdateMessage(req: svc.IUpdateMessageRequest) {
-    const buffer = svc.UpdateMessageRequest.encode(
-      svc.UpdateMessageRequest.create(req)
-    ).finish();
+  async UpdateMessage(req: gen.protocol.chat.v1.IUpdateMessageRequest) {
     const resp = await this.unary(
       "/protocol.chat.v1.ChatService/UpdateMessage",
-      buffer
+      gen.protocol.chat.v1.UpdateMessageRequest.encode(req).finish()
     );
     return gen.google.protobuf.Empty.decode(
       new Uint8Array(await resp.arrayBuffer())
     );
   }
-  async AddEmoteToPack(req: svc.IAddEmoteToPackRequest) {
-    const buffer = svc.AddEmoteToPackRequest.encode(
-      svc.AddEmoteToPackRequest.create(req)
-    ).finish();
+  async AddEmoteToPack(req: gen.protocol.chat.v1.IAddEmoteToPackRequest) {
     const resp = await this.unary(
       "/protocol.chat.v1.ChatService/AddEmoteToPack",
-      buffer
+      gen.protocol.chat.v1.AddEmoteToPackRequest.encode(req).finish()
     );
     return gen.google.protobuf.Empty.decode(
       new Uint8Array(await resp.arrayBuffer())
     );
   }
-  async DeleteGuild(req: svc.IDeleteGuildRequest) {
-    const buffer = svc.DeleteGuildRequest.encode(
-      svc.DeleteGuildRequest.create(req)
-    ).finish();
+  async DeleteGuild(req: gen.protocol.chat.v1.IDeleteGuildRequest) {
     const resp = await this.unary(
       "/protocol.chat.v1.ChatService/DeleteGuild",
-      buffer
+      gen.protocol.chat.v1.DeleteGuildRequest.encode(req).finish()
     );
     return gen.google.protobuf.Empty.decode(
       new Uint8Array(await resp.arrayBuffer())
     );
   }
-  async DeleteInvite(req: svc.IDeleteInviteRequest) {
-    const buffer = svc.DeleteInviteRequest.encode(
-      svc.DeleteInviteRequest.create(req)
-    ).finish();
+  async DeleteInvite(req: gen.protocol.chat.v1.IDeleteInviteRequest) {
     const resp = await this.unary(
       "/protocol.chat.v1.ChatService/DeleteInvite",
-      buffer
+      gen.protocol.chat.v1.DeleteInviteRequest.encode(req).finish()
     );
     return gen.google.protobuf.Empty.decode(
       new Uint8Array(await resp.arrayBuffer())
     );
   }
-  async DeleteChannel(req: svc.IDeleteChannelRequest) {
-    const buffer = svc.DeleteChannelRequest.encode(
-      svc.DeleteChannelRequest.create(req)
-    ).finish();
+  async DeleteChannel(req: gen.protocol.chat.v1.IDeleteChannelRequest) {
     const resp = await this.unary(
       "/protocol.chat.v1.ChatService/DeleteChannel",
-      buffer
+      gen.protocol.chat.v1.DeleteChannelRequest.encode(req).finish()
     );
     return gen.google.protobuf.Empty.decode(
       new Uint8Array(await resp.arrayBuffer())
     );
   }
-  async DeleteMessage(req: svc.IDeleteMessageRequest) {
-    const buffer = svc.DeleteMessageRequest.encode(
-      svc.DeleteMessageRequest.create(req)
-    ).finish();
+  async DeleteMessage(req: gen.protocol.chat.v1.IDeleteMessageRequest) {
     const resp = await this.unary(
       "/protocol.chat.v1.ChatService/DeleteMessage",
-      buffer
+      gen.protocol.chat.v1.DeleteMessageRequest.encode(req).finish()
     );
     return gen.google.protobuf.Empty.decode(
       new Uint8Array(await resp.arrayBuffer())
     );
   }
-  async DeleteEmoteFromPack(req: svc.IDeleteEmoteFromPackRequest) {
-    const buffer = svc.DeleteEmoteFromPackRequest.encode(
-      svc.DeleteEmoteFromPackRequest.create(req)
-    ).finish();
+  async DeleteEmoteFromPack(
+    req: gen.protocol.chat.v1.IDeleteEmoteFromPackRequest
+  ) {
     const resp = await this.unary(
       "/protocol.chat.v1.ChatService/DeleteEmoteFromPack",
-      buffer
+      gen.protocol.chat.v1.DeleteEmoteFromPackRequest.encode(req).finish()
     );
     return gen.google.protobuf.Empty.decode(
       new Uint8Array(await resp.arrayBuffer())
     );
   }
-  async DeleteEmotePack(req: svc.IDeleteEmotePackRequest) {
-    const buffer = svc.DeleteEmotePackRequest.encode(
-      svc.DeleteEmotePackRequest.create(req)
-    ).finish();
+  async DeleteEmotePack(req: gen.protocol.chat.v1.IDeleteEmotePackRequest) {
     const resp = await this.unary(
       "/protocol.chat.v1.ChatService/DeleteEmotePack",
-      buffer
+      gen.protocol.chat.v1.DeleteEmotePackRequest.encode(req).finish()
     );
     return gen.google.protobuf.Empty.decode(
       new Uint8Array(await resp.arrayBuffer())
     );
   }
-  async DequipEmotePack(req: svc.IDequipEmotePackRequest) {
-    const buffer = svc.DequipEmotePackRequest.encode(
-      svc.DequipEmotePackRequest.create(req)
-    ).finish();
+  async DequipEmotePack(req: gen.protocol.chat.v1.IDequipEmotePackRequest) {
     const resp = await this.unary(
       "/protocol.chat.v1.ChatService/DequipEmotePack",
-      buffer
+      gen.protocol.chat.v1.DequipEmotePackRequest.encode(req).finish()
     );
     return gen.google.protobuf.Empty.decode(
       new Uint8Array(await resp.arrayBuffer())
     );
   }
-  async JoinGuild(req: svc.IJoinGuildRequest) {
-    const buffer = svc.JoinGuildRequest.encode(
-      svc.JoinGuildRequest.create(req)
-    ).finish();
+  async JoinGuild(req: gen.protocol.chat.v1.IJoinGuildRequest) {
     const resp = await this.unary(
       "/protocol.chat.v1.ChatService/JoinGuild",
-      buffer
+      gen.protocol.chat.v1.JoinGuildRequest.encode(req).finish()
     );
-    return svc.JoinGuildResponse.decode(
+    return gen.protocol.chat.v1.JoinGuildResponse.decode(
       new Uint8Array(await resp.arrayBuffer())
     );
   }
-  async LeaveGuild(req: svc.ILeaveGuildRequest) {
-    const buffer = svc.LeaveGuildRequest.encode(
-      svc.LeaveGuildRequest.create(req)
-    ).finish();
+  async LeaveGuild(req: gen.protocol.chat.v1.ILeaveGuildRequest) {
     const resp = await this.unary(
       "/protocol.chat.v1.ChatService/LeaveGuild",
-      buffer
+      gen.protocol.chat.v1.LeaveGuildRequest.encode(req).finish()
     );
     return gen.google.protobuf.Empty.decode(
       new Uint8Array(await resp.arrayBuffer())
     );
   }
-  async TriggerAction(req: svc.ITriggerActionRequest) {
-    const buffer = svc.TriggerActionRequest.encode(
-      svc.TriggerActionRequest.create(req)
-    ).finish();
+  async TriggerAction(req: gen.protocol.chat.v1.ITriggerActionRequest) {
     const resp = await this.unary(
       "/protocol.chat.v1.ChatService/TriggerAction",
-      buffer
+      gen.protocol.chat.v1.TriggerActionRequest.encode(req).finish()
     );
     return gen.google.protobuf.Empty.decode(
       new Uint8Array(await resp.arrayBuffer())
     );
   }
-  async SendMessage(req: svc.ISendMessageRequest) {
-    const buffer = svc.SendMessageRequest.encode(
-      svc.SendMessageRequest.create(req)
-    ).finish();
+  async SendMessage(req: gen.protocol.chat.v1.ISendMessageRequest) {
     const resp = await this.unary(
       "/protocol.chat.v1.ChatService/SendMessage",
-      buffer
+      gen.protocol.chat.v1.SendMessageRequest.encode(req).finish()
     );
-    return svc.SendMessageResponse.decode(
+    return gen.protocol.chat.v1.SendMessageResponse.decode(
       new Uint8Array(await resp.arrayBuffer())
     );
   }
-  async QueryHasPermission(req: svc.IQueryPermissionsRequest) {
-    const buffer = svc.QueryPermissionsRequest.encode(
-      svc.QueryPermissionsRequest.create(req)
-    ).finish();
+  async QueryHasPermission(req: gen.protocol.chat.v1.IQueryPermissionsRequest) {
     const resp = await this.unary(
       "/protocol.chat.v1.ChatService/QueryHasPermission",
-      buffer
+      gen.protocol.chat.v1.QueryPermissionsRequest.encode(req).finish()
     );
-    return svc.QueryPermissionsResponse.decode(
+    return gen.protocol.chat.v1.QueryPermissionsResponse.decode(
       new Uint8Array(await resp.arrayBuffer())
     );
   }
-  async SetPermissions(req: svc.ISetPermissionsRequest) {
-    const buffer = svc.SetPermissionsRequest.encode(
-      svc.SetPermissionsRequest.create(req)
-    ).finish();
+  async SetPermissions(req: gen.protocol.chat.v1.ISetPermissionsRequest) {
     const resp = await this.unary(
       "/protocol.chat.v1.ChatService/SetPermissions",
-      buffer
+      gen.protocol.chat.v1.SetPermissionsRequest.encode(req).finish()
     );
     return gen.google.protobuf.Empty.decode(
       new Uint8Array(await resp.arrayBuffer())
     );
   }
-  async GetPermissions(req: svc.IGetPermissionsRequest) {
-    const buffer = svc.GetPermissionsRequest.encode(
-      svc.GetPermissionsRequest.create(req)
-    ).finish();
+  async GetPermissions(req: gen.protocol.chat.v1.IGetPermissionsRequest) {
     const resp = await this.unary(
       "/protocol.chat.v1.ChatService/GetPermissions",
-      buffer
+      gen.protocol.chat.v1.GetPermissionsRequest.encode(req).finish()
     );
-    return svc.GetPermissionsResponse.decode(
+    return gen.protocol.chat.v1.GetPermissionsResponse.decode(
       new Uint8Array(await resp.arrayBuffer())
     );
   }
-  async MoveRole(req: svc.IMoveRoleRequest) {
-    const buffer = svc.MoveRoleRequest.encode(
-      svc.MoveRoleRequest.create(req)
-    ).finish();
+  async MoveRole(req: gen.protocol.chat.v1.IMoveRoleRequest) {
     const resp = await this.unary(
       "/protocol.chat.v1.ChatService/MoveRole",
-      buffer
+      gen.protocol.chat.v1.MoveRoleRequest.encode(req).finish()
     );
-    return svc.MoveRoleResponse.decode(
+    return gen.protocol.chat.v1.MoveRoleResponse.decode(
       new Uint8Array(await resp.arrayBuffer())
     );
   }
-  async GetGuildRoles(req: svc.IGetGuildRolesRequest) {
-    const buffer = svc.GetGuildRolesRequest.encode(
-      svc.GetGuildRolesRequest.create(req)
-    ).finish();
+  async GetGuildRoles(req: gen.protocol.chat.v1.IGetGuildRolesRequest) {
     const resp = await this.unary(
       "/protocol.chat.v1.ChatService/GetGuildRoles",
-      buffer
+      gen.protocol.chat.v1.GetGuildRolesRequest.encode(req).finish()
     );
-    return svc.GetGuildRolesResponse.decode(
+    return gen.protocol.chat.v1.GetGuildRolesResponse.decode(
       new Uint8Array(await resp.arrayBuffer())
     );
   }
-  async AddGuildRole(req: svc.IAddGuildRoleRequest) {
-    const buffer = svc.AddGuildRoleRequest.encode(
-      svc.AddGuildRoleRequest.create(req)
-    ).finish();
+  async AddGuildRole(req: gen.protocol.chat.v1.IAddGuildRoleRequest) {
     const resp = await this.unary(
       "/protocol.chat.v1.ChatService/AddGuildRole",
-      buffer
+      gen.protocol.chat.v1.AddGuildRoleRequest.encode(req).finish()
     );
-    return svc.AddGuildRoleResponse.decode(
+    return gen.protocol.chat.v1.AddGuildRoleResponse.decode(
       new Uint8Array(await resp.arrayBuffer())
     );
   }
-  async ModifyGuildRole(req: svc.IModifyGuildRoleRequest) {
-    const buffer = svc.ModifyGuildRoleRequest.encode(
-      svc.ModifyGuildRoleRequest.create(req)
-    ).finish();
+  async ModifyGuildRole(req: gen.protocol.chat.v1.IModifyGuildRoleRequest) {
     const resp = await this.unary(
       "/protocol.chat.v1.ChatService/ModifyGuildRole",
-      buffer
+      gen.protocol.chat.v1.ModifyGuildRoleRequest.encode(req).finish()
     );
     return gen.google.protobuf.Empty.decode(
       new Uint8Array(await resp.arrayBuffer())
     );
   }
-  async DeleteGuildRole(req: svc.IDeleteGuildRoleRequest) {
-    const buffer = svc.DeleteGuildRoleRequest.encode(
-      svc.DeleteGuildRoleRequest.create(req)
-    ).finish();
+  async DeleteGuildRole(req: gen.protocol.chat.v1.IDeleteGuildRoleRequest) {
     const resp = await this.unary(
       "/protocol.chat.v1.ChatService/DeleteGuildRole",
-      buffer
+      gen.protocol.chat.v1.DeleteGuildRoleRequest.encode(req).finish()
     );
     return gen.google.protobuf.Empty.decode(
       new Uint8Array(await resp.arrayBuffer())
     );
   }
-  async ManageUserRoles(req: svc.IManageUserRolesRequest) {
-    const buffer = svc.ManageUserRolesRequest.encode(
-      svc.ManageUserRolesRequest.create(req)
-    ).finish();
+  async ManageUserRoles(req: gen.protocol.chat.v1.IManageUserRolesRequest) {
     const resp = await this.unary(
       "/protocol.chat.v1.ChatService/ManageUserRoles",
-      buffer
+      gen.protocol.chat.v1.ManageUserRolesRequest.encode(req).finish()
     );
     return gen.google.protobuf.Empty.decode(
       new Uint8Array(await resp.arrayBuffer())
     );
   }
-  async GetUserRoles(req: svc.IGetUserRolesRequest) {
-    const buffer = svc.GetUserRolesRequest.encode(
-      svc.GetUserRolesRequest.create(req)
-    ).finish();
+  async GetUserRoles(req: gen.protocol.chat.v1.IGetUserRolesRequest) {
     const resp = await this.unary(
       "/protocol.chat.v1.ChatService/GetUserRoles",
-      buffer
+      gen.protocol.chat.v1.GetUserRolesRequest.encode(req).finish()
     );
-    return svc.GetUserRolesResponse.decode(
+    return gen.protocol.chat.v1.GetUserRolesResponse.decode(
       new Uint8Array(await resp.arrayBuffer())
     );
   }
   StreamEvents() {
     return this.stream("/protocol.chat.v1.ChatService/StreamEvents");
   }
-  async GetUser(req: svc.IGetUserRequest) {
-    const buffer = svc.GetUserRequest.encode(
-      svc.GetUserRequest.create(req)
-    ).finish();
+  async GetUser(req: gen.protocol.chat.v1.IGetUserRequest) {
     const resp = await this.unary(
       "/protocol.chat.v1.ChatService/GetUser",
-      buffer
+      gen.protocol.chat.v1.GetUserRequest.encode(req).finish()
     );
-    return svc.GetUserResponse.decode(new Uint8Array(await resp.arrayBuffer()));
+    return gen.protocol.chat.v1.GetUserResponse.decode(
+      new Uint8Array(await resp.arrayBuffer())
+    );
   }
-  async GetUserMetadata(req: svc.IGetUserMetadataRequest) {
-    const buffer = svc.GetUserMetadataRequest.encode(
-      svc.GetUserMetadataRequest.create(req)
-    ).finish();
+  async GetUserMetadata(req: gen.protocol.chat.v1.IGetUserMetadataRequest) {
     const resp = await this.unary(
       "/protocol.chat.v1.ChatService/GetUserMetadata",
-      buffer
+      gen.protocol.chat.v1.GetUserMetadataRequest.encode(req).finish()
     );
-    return svc.GetUserMetadataResponse.decode(
+    return gen.protocol.chat.v1.GetUserMetadataResponse.decode(
       new Uint8Array(await resp.arrayBuffer())
     );
   }
-  async ProfileUpdate(req: svc.IProfileUpdateRequest) {
-    const buffer = svc.ProfileUpdateRequest.encode(
-      svc.ProfileUpdateRequest.create(req)
-    ).finish();
+  async ProfileUpdate(req: gen.protocol.chat.v1.IProfileUpdateRequest) {
     const resp = await this.unary(
       "/protocol.chat.v1.ChatService/ProfileUpdate",
-      buffer
+      gen.protocol.chat.v1.ProfileUpdateRequest.encode(req).finish()
     );
     return gen.google.protobuf.Empty.decode(
       new Uint8Array(await resp.arrayBuffer())
     );
   }
-  async Typing(req: svc.ITypingRequest) {
-    const buffer = svc.TypingRequest.encode(
-      svc.TypingRequest.create(req)
-    ).finish();
+  async Typing(req: gen.protocol.chat.v1.ITypingRequest) {
     const resp = await this.unary(
       "/protocol.chat.v1.ChatService/Typing",
-      buffer
+      gen.protocol.chat.v1.TypingRequest.encode(req).finish()
     );
     return gen.google.protobuf.Empty.decode(
       new Uint8Array(await resp.arrayBuffer())
     );
   }
-  async PreviewGuild(req: svc.IPreviewGuildRequest) {
-    const buffer = svc.PreviewGuildRequest.encode(
-      svc.PreviewGuildRequest.create(req)
-    ).finish();
+  async PreviewGuild(req: gen.protocol.chat.v1.IPreviewGuildRequest) {
     const resp = await this.unary(
       "/protocol.chat.v1.ChatService/PreviewGuild",
-      buffer
+      gen.protocol.chat.v1.PreviewGuildRequest.encode(req).finish()
     );
-    return svc.PreviewGuildResponse.decode(
+    return gen.protocol.chat.v1.PreviewGuildResponse.decode(
       new Uint8Array(await resp.arrayBuffer())
     );
   }

@@ -8,16 +8,16 @@ export namespace protocol {
       /** Properties of a QueryPermissionsRequest. */
       interface IQueryPermissionsRequest {
         /** QueryPermissionsRequest guildId */
-        guildId?: number | Long | null;
+        guildId?: number | null;
 
         /** QueryPermissionsRequest channelId */
-        channelId?: number | Long | null;
+        channelId?: number | null;
 
         /** QueryPermissionsRequest checkFor */
         checkFor?: string | null;
 
         /** QueryPermissionsRequest as */
-        as?: number | Long | null;
+        as?: number | null;
       }
 
       /** Represents a QueryPermissionsRequest. */
@@ -29,25 +29,16 @@ export namespace protocol {
         constructor(properties?: protocol.chat.v1.IQueryPermissionsRequest);
 
         /** QueryPermissionsRequest guildId. */
-        public guildId: number | Long;
+        public guildId: number;
 
         /** QueryPermissionsRequest channelId. */
-        public channelId: number | Long;
+        public channelId: number;
 
         /** QueryPermissionsRequest checkFor. */
         public checkFor: string;
 
         /** QueryPermissionsRequest as. */
-        public as: number | Long;
-
-        /**
-         * Creates a new QueryPermissionsRequest instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns QueryPermissionsRequest instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IQueryPermissionsRequest
-        ): protocol.chat.v1.QueryPermissionsRequest;
+        public as: number;
 
         /**
          * Encodes the specified QueryPermissionsRequest message. Does not implicitly {@link protocol.chat.v1.QueryPermissionsRequest.verify|verify} messages.
@@ -56,17 +47,6 @@ export namespace protocol {
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IQueryPermissionsRequest,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified QueryPermissionsRequest message, length delimited. Does not implicitly {@link protocol.chat.v1.QueryPermissionsRequest.verify|verify} messages.
-         * @param message QueryPermissionsRequest message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IQueryPermissionsRequest,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -83,24 +63,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.QueryPermissionsRequest;
-
-        /**
-         * Decodes a QueryPermissionsRequest message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns QueryPermissionsRequest
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.QueryPermissionsRequest;
-
-        /**
-         * Verifies a QueryPermissionsRequest message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a QueryPermissionsRequest message from a plain object. Also converts values to their respective internal types.
@@ -147,32 +109,12 @@ export namespace protocol {
         public ok: boolean;
 
         /**
-         * Creates a new QueryPermissionsResponse instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns QueryPermissionsResponse instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IQueryPermissionsResponse
-        ): protocol.chat.v1.QueryPermissionsResponse;
-
-        /**
          * Encodes the specified QueryPermissionsResponse message. Does not implicitly {@link protocol.chat.v1.QueryPermissionsResponse.verify|verify} messages.
          * @param message QueryPermissionsResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IQueryPermissionsResponse,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified QueryPermissionsResponse message, length delimited. Does not implicitly {@link protocol.chat.v1.QueryPermissionsResponse.verify|verify} messages.
-         * @param message QueryPermissionsResponse message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IQueryPermissionsResponse,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -189,24 +131,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.QueryPermissionsResponse;
-
-        /**
-         * Decodes a QueryPermissionsResponse message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns QueryPermissionsResponse
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.QueryPermissionsResponse;
-
-        /**
-         * Verifies a QueryPermissionsResponse message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a QueryPermissionsResponse message from a plain object. Also converts values to their respective internal types.
@@ -259,32 +183,12 @@ export namespace protocol {
         public mode: protocol.chat.v1.Permission.Mode;
 
         /**
-         * Creates a new Permission instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns Permission instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IPermission
-        ): protocol.chat.v1.Permission;
-
-        /**
          * Encodes the specified Permission message. Does not implicitly {@link protocol.chat.v1.Permission.verify|verify} messages.
          * @param message Permission message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IPermission,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified Permission message, length delimited. Does not implicitly {@link protocol.chat.v1.Permission.verify|verify} messages.
-         * @param message Permission message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IPermission,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -301,24 +205,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.Permission;
-
-        /**
-         * Decodes a Permission message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns Permission
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.Permission;
-
-        /**
-         * Verifies a Permission message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a Permission message from a plain object. Also converts values to their respective internal types.
@@ -373,32 +259,12 @@ export namespace protocol {
         public permissions: protocol.chat.v1.IPermission[];
 
         /**
-         * Creates a new PermissionList instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns PermissionList instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IPermissionList
-        ): protocol.chat.v1.PermissionList;
-
-        /**
          * Encodes the specified PermissionList message. Does not implicitly {@link protocol.chat.v1.PermissionList.verify|verify} messages.
          * @param message PermissionList message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IPermissionList,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified PermissionList message, length delimited. Does not implicitly {@link protocol.chat.v1.PermissionList.verify|verify} messages.
-         * @param message PermissionList message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IPermissionList,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -415,24 +281,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.PermissionList;
-
-        /**
-         * Decodes a PermissionList message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns PermissionList
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.PermissionList;
-
-        /**
-         * Verifies a PermissionList message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a PermissionList message from a plain object. Also converts values to their respective internal types.
@@ -464,13 +312,13 @@ export namespace protocol {
       /** Properties of a SetPermissionsRequest. */
       interface ISetPermissionsRequest {
         /** SetPermissionsRequest guildId */
-        guildId?: number | Long | null;
+        guildId?: number | null;
 
         /** SetPermissionsRequest channelId */
-        channelId?: number | Long | null;
+        channelId?: number | null;
 
         /** SetPermissionsRequest roleId */
-        roleId?: number | Long | null;
+        roleId?: number | null;
 
         /** SetPermissionsRequest perms */
         perms?: protocol.chat.v1.IPermissionList | null;
@@ -485,25 +333,16 @@ export namespace protocol {
         constructor(properties?: protocol.chat.v1.ISetPermissionsRequest);
 
         /** SetPermissionsRequest guildId. */
-        public guildId: number | Long;
+        public guildId: number;
 
         /** SetPermissionsRequest channelId. */
-        public channelId: number | Long;
+        public channelId: number;
 
         /** SetPermissionsRequest roleId. */
-        public roleId: number | Long;
+        public roleId: number;
 
         /** SetPermissionsRequest perms. */
         public perms?: protocol.chat.v1.IPermissionList | null;
-
-        /**
-         * Creates a new SetPermissionsRequest instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns SetPermissionsRequest instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.ISetPermissionsRequest
-        ): protocol.chat.v1.SetPermissionsRequest;
 
         /**
          * Encodes the specified SetPermissionsRequest message. Does not implicitly {@link protocol.chat.v1.SetPermissionsRequest.verify|verify} messages.
@@ -512,17 +351,6 @@ export namespace protocol {
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.ISetPermissionsRequest,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified SetPermissionsRequest message, length delimited. Does not implicitly {@link protocol.chat.v1.SetPermissionsRequest.verify|verify} messages.
-         * @param message SetPermissionsRequest message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.ISetPermissionsRequest,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -539,24 +367,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.SetPermissionsRequest;
-
-        /**
-         * Decodes a SetPermissionsRequest message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns SetPermissionsRequest
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.SetPermissionsRequest;
-
-        /**
-         * Verifies a SetPermissionsRequest message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a SetPermissionsRequest message from a plain object. Also converts values to their respective internal types.
@@ -588,13 +398,13 @@ export namespace protocol {
       /** Properties of a GetPermissionsRequest. */
       interface IGetPermissionsRequest {
         /** GetPermissionsRequest guildId */
-        guildId?: number | Long | null;
+        guildId?: number | null;
 
         /** GetPermissionsRequest channelId */
-        channelId?: number | Long | null;
+        channelId?: number | null;
 
         /** GetPermissionsRequest roleId */
-        roleId?: number | Long | null;
+        roleId?: number | null;
       }
 
       /** Represents a GetPermissionsRequest. */
@@ -606,22 +416,13 @@ export namespace protocol {
         constructor(properties?: protocol.chat.v1.IGetPermissionsRequest);
 
         /** GetPermissionsRequest guildId. */
-        public guildId: number | Long;
+        public guildId: number;
 
         /** GetPermissionsRequest channelId. */
-        public channelId: number | Long;
+        public channelId: number;
 
         /** GetPermissionsRequest roleId. */
-        public roleId: number | Long;
-
-        /**
-         * Creates a new GetPermissionsRequest instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns GetPermissionsRequest instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IGetPermissionsRequest
-        ): protocol.chat.v1.GetPermissionsRequest;
+        public roleId: number;
 
         /**
          * Encodes the specified GetPermissionsRequest message. Does not implicitly {@link protocol.chat.v1.GetPermissionsRequest.verify|verify} messages.
@@ -630,17 +431,6 @@ export namespace protocol {
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IGetPermissionsRequest,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified GetPermissionsRequest message, length delimited. Does not implicitly {@link protocol.chat.v1.GetPermissionsRequest.verify|verify} messages.
-         * @param message GetPermissionsRequest message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IGetPermissionsRequest,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -657,24 +447,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.GetPermissionsRequest;
-
-        /**
-         * Decodes a GetPermissionsRequest message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns GetPermissionsRequest
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.GetPermissionsRequest;
-
-        /**
-         * Verifies a GetPermissionsRequest message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a GetPermissionsRequest message from a plain object. Also converts values to their respective internal types.
@@ -721,32 +493,12 @@ export namespace protocol {
         public perms?: protocol.chat.v1.IPermissionList | null;
 
         /**
-         * Creates a new GetPermissionsResponse instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns GetPermissionsResponse instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IGetPermissionsResponse
-        ): protocol.chat.v1.GetPermissionsResponse;
-
-        /**
          * Encodes the specified GetPermissionsResponse message. Does not implicitly {@link protocol.chat.v1.GetPermissionsResponse.verify|verify} messages.
          * @param message GetPermissionsResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IGetPermissionsResponse,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified GetPermissionsResponse message, length delimited. Does not implicitly {@link protocol.chat.v1.GetPermissionsResponse.verify|verify} messages.
-         * @param message GetPermissionsResponse message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IGetPermissionsResponse,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -763,24 +515,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.GetPermissionsResponse;
-
-        /**
-         * Decodes a GetPermissionsResponse message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns GetPermissionsResponse
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.GetPermissionsResponse;
-
-        /**
-         * Verifies a GetPermissionsResponse message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a GetPermissionsResponse message from a plain object. Also converts values to their respective internal types.
@@ -812,7 +546,7 @@ export namespace protocol {
       /** Properties of a Role. */
       interface IRole {
         /** Role roleId */
-        roleId?: number | Long | null;
+        roleId?: number | null;
 
         /** Role name */
         name?: string | null;
@@ -836,7 +570,7 @@ export namespace protocol {
         constructor(properties?: protocol.chat.v1.IRole);
 
         /** Role roleId. */
-        public roleId: number | Long;
+        public roleId: number;
 
         /** Role name. */
         public name: string;
@@ -851,32 +585,12 @@ export namespace protocol {
         public pingable: boolean;
 
         /**
-         * Creates a new Role instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns Role instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IRole
-        ): protocol.chat.v1.Role;
-
-        /**
          * Encodes the specified Role message. Does not implicitly {@link protocol.chat.v1.Role.verify|verify} messages.
          * @param message Role message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IRole,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified Role message, length delimited. Does not implicitly {@link protocol.chat.v1.Role.verify|verify} messages.
-         * @param message Role message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IRole,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -893,24 +607,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.Role;
-
-        /**
-         * Decodes a Role message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns Role
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.Role;
-
-        /**
-         * Verifies a Role message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a Role message from a plain object. Also converts values to their respective internal types.
@@ -942,16 +638,16 @@ export namespace protocol {
       /** Properties of a MoveRoleRequest. */
       interface IMoveRoleRequest {
         /** MoveRoleRequest guildId */
-        guildId?: number | Long | null;
+        guildId?: number | null;
 
         /** MoveRoleRequest roleId */
-        roleId?: number | Long | null;
+        roleId?: number | null;
 
         /** MoveRoleRequest beforeId */
-        beforeId?: number | Long | null;
+        beforeId?: number | null;
 
         /** MoveRoleRequest afterId */
-        afterId?: number | Long | null;
+        afterId?: number | null;
       }
 
       /** Represents a MoveRoleRequest. */
@@ -963,25 +659,16 @@ export namespace protocol {
         constructor(properties?: protocol.chat.v1.IMoveRoleRequest);
 
         /** MoveRoleRequest guildId. */
-        public guildId: number | Long;
+        public guildId: number;
 
         /** MoveRoleRequest roleId. */
-        public roleId: number | Long;
+        public roleId: number;
 
         /** MoveRoleRequest beforeId. */
-        public beforeId: number | Long;
+        public beforeId: number;
 
         /** MoveRoleRequest afterId. */
-        public afterId: number | Long;
-
-        /**
-         * Creates a new MoveRoleRequest instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns MoveRoleRequest instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IMoveRoleRequest
-        ): protocol.chat.v1.MoveRoleRequest;
+        public afterId: number;
 
         /**
          * Encodes the specified MoveRoleRequest message. Does not implicitly {@link protocol.chat.v1.MoveRoleRequest.verify|verify} messages.
@@ -990,17 +677,6 @@ export namespace protocol {
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IMoveRoleRequest,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified MoveRoleRequest message, length delimited. Does not implicitly {@link protocol.chat.v1.MoveRoleRequest.verify|verify} messages.
-         * @param message MoveRoleRequest message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IMoveRoleRequest,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -1017,24 +693,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.MoveRoleRequest;
-
-        /**
-         * Decodes a MoveRoleRequest message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns MoveRoleRequest
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.MoveRoleRequest;
-
-        /**
-         * Verifies a MoveRoleRequest message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a MoveRoleRequest message from a plain object. Also converts values to their respective internal types.
@@ -1075,32 +733,12 @@ export namespace protocol {
         constructor(properties?: protocol.chat.v1.IMoveRoleResponse);
 
         /**
-         * Creates a new MoveRoleResponse instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns MoveRoleResponse instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IMoveRoleResponse
-        ): protocol.chat.v1.MoveRoleResponse;
-
-        /**
          * Encodes the specified MoveRoleResponse message. Does not implicitly {@link protocol.chat.v1.MoveRoleResponse.verify|verify} messages.
          * @param message MoveRoleResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IMoveRoleResponse,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified MoveRoleResponse message, length delimited. Does not implicitly {@link protocol.chat.v1.MoveRoleResponse.verify|verify} messages.
-         * @param message MoveRoleResponse message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IMoveRoleResponse,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -1117,24 +755,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.MoveRoleResponse;
-
-        /**
-         * Decodes a MoveRoleResponse message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns MoveRoleResponse
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.MoveRoleResponse;
-
-        /**
-         * Verifies a MoveRoleResponse message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a MoveRoleResponse message from a plain object. Also converts values to their respective internal types.
@@ -1166,7 +786,7 @@ export namespace protocol {
       /** Properties of a GetGuildRolesRequest. */
       interface IGetGuildRolesRequest {
         /** GetGuildRolesRequest guildId */
-        guildId?: number | Long | null;
+        guildId?: number | null;
       }
 
       /** Represents a GetGuildRolesRequest. */
@@ -1178,16 +798,7 @@ export namespace protocol {
         constructor(properties?: protocol.chat.v1.IGetGuildRolesRequest);
 
         /** GetGuildRolesRequest guildId. */
-        public guildId: number | Long;
-
-        /**
-         * Creates a new GetGuildRolesRequest instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns GetGuildRolesRequest instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IGetGuildRolesRequest
-        ): protocol.chat.v1.GetGuildRolesRequest;
+        public guildId: number;
 
         /**
          * Encodes the specified GetGuildRolesRequest message. Does not implicitly {@link protocol.chat.v1.GetGuildRolesRequest.verify|verify} messages.
@@ -1196,17 +807,6 @@ export namespace protocol {
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IGetGuildRolesRequest,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified GetGuildRolesRequest message, length delimited. Does not implicitly {@link protocol.chat.v1.GetGuildRolesRequest.verify|verify} messages.
-         * @param message GetGuildRolesRequest message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IGetGuildRolesRequest,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -1223,24 +823,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.GetGuildRolesRequest;
-
-        /**
-         * Decodes a GetGuildRolesRequest message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns GetGuildRolesRequest
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.GetGuildRolesRequest;
-
-        /**
-         * Verifies a GetGuildRolesRequest message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a GetGuildRolesRequest message from a plain object. Also converts values to their respective internal types.
@@ -1287,32 +869,12 @@ export namespace protocol {
         public roles: protocol.chat.v1.IRole[];
 
         /**
-         * Creates a new GetGuildRolesResponse instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns GetGuildRolesResponse instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IGetGuildRolesResponse
-        ): protocol.chat.v1.GetGuildRolesResponse;
-
-        /**
          * Encodes the specified GetGuildRolesResponse message. Does not implicitly {@link protocol.chat.v1.GetGuildRolesResponse.verify|verify} messages.
          * @param message GetGuildRolesResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IGetGuildRolesResponse,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified GetGuildRolesResponse message, length delimited. Does not implicitly {@link protocol.chat.v1.GetGuildRolesResponse.verify|verify} messages.
-         * @param message GetGuildRolesResponse message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IGetGuildRolesResponse,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -1329,24 +891,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.GetGuildRolesResponse;
-
-        /**
-         * Decodes a GetGuildRolesResponse message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns GetGuildRolesResponse
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.GetGuildRolesResponse;
-
-        /**
-         * Verifies a GetGuildRolesResponse message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a GetGuildRolesResponse message from a plain object. Also converts values to their respective internal types.
@@ -1378,7 +922,7 @@ export namespace protocol {
       /** Properties of an AddGuildRoleRequest. */
       interface IAddGuildRoleRequest {
         /** AddGuildRoleRequest guildId */
-        guildId?: number | Long | null;
+        guildId?: number | null;
 
         /** AddGuildRoleRequest role */
         role?: protocol.chat.v1.IRole | null;
@@ -1393,19 +937,10 @@ export namespace protocol {
         constructor(properties?: protocol.chat.v1.IAddGuildRoleRequest);
 
         /** AddGuildRoleRequest guildId. */
-        public guildId: number | Long;
+        public guildId: number;
 
         /** AddGuildRoleRequest role. */
         public role?: protocol.chat.v1.IRole | null;
-
-        /**
-         * Creates a new AddGuildRoleRequest instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns AddGuildRoleRequest instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IAddGuildRoleRequest
-        ): protocol.chat.v1.AddGuildRoleRequest;
 
         /**
          * Encodes the specified AddGuildRoleRequest message. Does not implicitly {@link protocol.chat.v1.AddGuildRoleRequest.verify|verify} messages.
@@ -1414,17 +949,6 @@ export namespace protocol {
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IAddGuildRoleRequest,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified AddGuildRoleRequest message, length delimited. Does not implicitly {@link protocol.chat.v1.AddGuildRoleRequest.verify|verify} messages.
-         * @param message AddGuildRoleRequest message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IAddGuildRoleRequest,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -1441,24 +965,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.AddGuildRoleRequest;
-
-        /**
-         * Decodes an AddGuildRoleRequest message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns AddGuildRoleRequest
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.AddGuildRoleRequest;
-
-        /**
-         * Verifies an AddGuildRoleRequest message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates an AddGuildRoleRequest message from a plain object. Also converts values to their respective internal types.
@@ -1490,7 +996,7 @@ export namespace protocol {
       /** Properties of an AddGuildRoleResponse. */
       interface IAddGuildRoleResponse {
         /** AddGuildRoleResponse roleId */
-        roleId?: number | Long | null;
+        roleId?: number | null;
       }
 
       /** Represents an AddGuildRoleResponse. */
@@ -1502,16 +1008,7 @@ export namespace protocol {
         constructor(properties?: protocol.chat.v1.IAddGuildRoleResponse);
 
         /** AddGuildRoleResponse roleId. */
-        public roleId: number | Long;
-
-        /**
-         * Creates a new AddGuildRoleResponse instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns AddGuildRoleResponse instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IAddGuildRoleResponse
-        ): protocol.chat.v1.AddGuildRoleResponse;
+        public roleId: number;
 
         /**
          * Encodes the specified AddGuildRoleResponse message. Does not implicitly {@link protocol.chat.v1.AddGuildRoleResponse.verify|verify} messages.
@@ -1520,17 +1017,6 @@ export namespace protocol {
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IAddGuildRoleResponse,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified AddGuildRoleResponse message, length delimited. Does not implicitly {@link protocol.chat.v1.AddGuildRoleResponse.verify|verify} messages.
-         * @param message AddGuildRoleResponse message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IAddGuildRoleResponse,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -1547,24 +1033,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.AddGuildRoleResponse;
-
-        /**
-         * Decodes an AddGuildRoleResponse message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns AddGuildRoleResponse
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.AddGuildRoleResponse;
-
-        /**
-         * Verifies an AddGuildRoleResponse message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates an AddGuildRoleResponse message from a plain object. Also converts values to their respective internal types.
@@ -1596,10 +1064,10 @@ export namespace protocol {
       /** Properties of a DeleteGuildRoleRequest. */
       interface IDeleteGuildRoleRequest {
         /** DeleteGuildRoleRequest guildId */
-        guildId?: number | Long | null;
+        guildId?: number | null;
 
         /** DeleteGuildRoleRequest roleId */
-        roleId?: number | Long | null;
+        roleId?: number | null;
       }
 
       /** Represents a DeleteGuildRoleRequest. */
@@ -1611,19 +1079,10 @@ export namespace protocol {
         constructor(properties?: protocol.chat.v1.IDeleteGuildRoleRequest);
 
         /** DeleteGuildRoleRequest guildId. */
-        public guildId: number | Long;
+        public guildId: number;
 
         /** DeleteGuildRoleRequest roleId. */
-        public roleId: number | Long;
-
-        /**
-         * Creates a new DeleteGuildRoleRequest instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns DeleteGuildRoleRequest instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IDeleteGuildRoleRequest
-        ): protocol.chat.v1.DeleteGuildRoleRequest;
+        public roleId: number;
 
         /**
          * Encodes the specified DeleteGuildRoleRequest message. Does not implicitly {@link protocol.chat.v1.DeleteGuildRoleRequest.verify|verify} messages.
@@ -1632,17 +1091,6 @@ export namespace protocol {
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IDeleteGuildRoleRequest,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified DeleteGuildRoleRequest message, length delimited. Does not implicitly {@link protocol.chat.v1.DeleteGuildRoleRequest.verify|verify} messages.
-         * @param message DeleteGuildRoleRequest message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IDeleteGuildRoleRequest,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -1659,24 +1107,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.DeleteGuildRoleRequest;
-
-        /**
-         * Decodes a DeleteGuildRoleRequest message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns DeleteGuildRoleRequest
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.DeleteGuildRoleRequest;
-
-        /**
-         * Verifies a DeleteGuildRoleRequest message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a DeleteGuildRoleRequest message from a plain object. Also converts values to their respective internal types.
@@ -1708,7 +1138,7 @@ export namespace protocol {
       /** Properties of a ModifyGuildRoleRequest. */
       interface IModifyGuildRoleRequest {
         /** ModifyGuildRoleRequest guildId */
-        guildId?: number | Long | null;
+        guildId?: number | null;
 
         /** ModifyGuildRoleRequest role */
         role?: protocol.chat.v1.IRole | null;
@@ -1735,7 +1165,7 @@ export namespace protocol {
         constructor(properties?: protocol.chat.v1.IModifyGuildRoleRequest);
 
         /** ModifyGuildRoleRequest guildId. */
-        public guildId: number | Long;
+        public guildId: number;
 
         /** ModifyGuildRoleRequest role. */
         public role?: protocol.chat.v1.IRole | null;
@@ -1753,32 +1183,12 @@ export namespace protocol {
         public modifyPingable: boolean;
 
         /**
-         * Creates a new ModifyGuildRoleRequest instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns ModifyGuildRoleRequest instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IModifyGuildRoleRequest
-        ): protocol.chat.v1.ModifyGuildRoleRequest;
-
-        /**
          * Encodes the specified ModifyGuildRoleRequest message. Does not implicitly {@link protocol.chat.v1.ModifyGuildRoleRequest.verify|verify} messages.
          * @param message ModifyGuildRoleRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IModifyGuildRoleRequest,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified ModifyGuildRoleRequest message, length delimited. Does not implicitly {@link protocol.chat.v1.ModifyGuildRoleRequest.verify|verify} messages.
-         * @param message ModifyGuildRoleRequest message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IModifyGuildRoleRequest,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -1795,24 +1205,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.ModifyGuildRoleRequest;
-
-        /**
-         * Decodes a ModifyGuildRoleRequest message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns ModifyGuildRoleRequest
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.ModifyGuildRoleRequest;
-
-        /**
-         * Verifies a ModifyGuildRoleRequest message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a ModifyGuildRoleRequest message from a plain object. Also converts values to their respective internal types.
@@ -1844,16 +1236,16 @@ export namespace protocol {
       /** Properties of a ManageUserRolesRequest. */
       interface IManageUserRolesRequest {
         /** ManageUserRolesRequest guildId */
-        guildId?: number | Long | null;
+        guildId?: number | null;
 
         /** ManageUserRolesRequest userId */
-        userId?: number | Long | null;
+        userId?: number | null;
 
         /** ManageUserRolesRequest giveRoleIds */
-        giveRoleIds?: (number | Long)[] | null;
+        giveRoleIds?: number[] | null;
 
         /** ManageUserRolesRequest takeRoleIds */
-        takeRoleIds?: (number | Long)[] | null;
+        takeRoleIds?: number[] | null;
       }
 
       /** Represents a ManageUserRolesRequest. */
@@ -1865,25 +1257,16 @@ export namespace protocol {
         constructor(properties?: protocol.chat.v1.IManageUserRolesRequest);
 
         /** ManageUserRolesRequest guildId. */
-        public guildId: number | Long;
+        public guildId: number;
 
         /** ManageUserRolesRequest userId. */
-        public userId: number | Long;
+        public userId: number;
 
         /** ManageUserRolesRequest giveRoleIds. */
-        public giveRoleIds: (number | Long)[];
+        public giveRoleIds: number[];
 
         /** ManageUserRolesRequest takeRoleIds. */
-        public takeRoleIds: (number | Long)[];
-
-        /**
-         * Creates a new ManageUserRolesRequest instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns ManageUserRolesRequest instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IManageUserRolesRequest
-        ): protocol.chat.v1.ManageUserRolesRequest;
+        public takeRoleIds: number[];
 
         /**
          * Encodes the specified ManageUserRolesRequest message. Does not implicitly {@link protocol.chat.v1.ManageUserRolesRequest.verify|verify} messages.
@@ -1892,17 +1275,6 @@ export namespace protocol {
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IManageUserRolesRequest,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified ManageUserRolesRequest message, length delimited. Does not implicitly {@link protocol.chat.v1.ManageUserRolesRequest.verify|verify} messages.
-         * @param message ManageUserRolesRequest message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IManageUserRolesRequest,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -1919,24 +1291,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.ManageUserRolesRequest;
-
-        /**
-         * Decodes a ManageUserRolesRequest message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns ManageUserRolesRequest
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.ManageUserRolesRequest;
-
-        /**
-         * Verifies a ManageUserRolesRequest message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a ManageUserRolesRequest message from a plain object. Also converts values to their respective internal types.
@@ -1968,10 +1322,10 @@ export namespace protocol {
       /** Properties of a GetUserRolesRequest. */
       interface IGetUserRolesRequest {
         /** GetUserRolesRequest guildId */
-        guildId?: number | Long | null;
+        guildId?: number | null;
 
         /** GetUserRolesRequest userId */
-        userId?: number | Long | null;
+        userId?: number | null;
       }
 
       /** Represents a GetUserRolesRequest. */
@@ -1983,19 +1337,10 @@ export namespace protocol {
         constructor(properties?: protocol.chat.v1.IGetUserRolesRequest);
 
         /** GetUserRolesRequest guildId. */
-        public guildId: number | Long;
+        public guildId: number;
 
         /** GetUserRolesRequest userId. */
-        public userId: number | Long;
-
-        /**
-         * Creates a new GetUserRolesRequest instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns GetUserRolesRequest instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IGetUserRolesRequest
-        ): protocol.chat.v1.GetUserRolesRequest;
+        public userId: number;
 
         /**
          * Encodes the specified GetUserRolesRequest message. Does not implicitly {@link protocol.chat.v1.GetUserRolesRequest.verify|verify} messages.
@@ -2004,17 +1349,6 @@ export namespace protocol {
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IGetUserRolesRequest,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified GetUserRolesRequest message, length delimited. Does not implicitly {@link protocol.chat.v1.GetUserRolesRequest.verify|verify} messages.
-         * @param message GetUserRolesRequest message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IGetUserRolesRequest,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -2031,24 +1365,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.GetUserRolesRequest;
-
-        /**
-         * Decodes a GetUserRolesRequest message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns GetUserRolesRequest
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.GetUserRolesRequest;
-
-        /**
-         * Verifies a GetUserRolesRequest message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a GetUserRolesRequest message from a plain object. Also converts values to their respective internal types.
@@ -2080,7 +1396,7 @@ export namespace protocol {
       /** Properties of a GetUserRolesResponse. */
       interface IGetUserRolesResponse {
         /** GetUserRolesResponse roles */
-        roles?: (number | Long)[] | null;
+        roles?: number[] | null;
       }
 
       /** Represents a GetUserRolesResponse. */
@@ -2092,16 +1408,7 @@ export namespace protocol {
         constructor(properties?: protocol.chat.v1.IGetUserRolesResponse);
 
         /** GetUserRolesResponse roles. */
-        public roles: (number | Long)[];
-
-        /**
-         * Creates a new GetUserRolesResponse instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns GetUserRolesResponse instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IGetUserRolesResponse
-        ): protocol.chat.v1.GetUserRolesResponse;
+        public roles: number[];
 
         /**
          * Encodes the specified GetUserRolesResponse message. Does not implicitly {@link protocol.chat.v1.GetUserRolesResponse.verify|verify} messages.
@@ -2110,17 +1417,6 @@ export namespace protocol {
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IGetUserRolesResponse,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified GetUserRolesResponse message, length delimited. Does not implicitly {@link protocol.chat.v1.GetUserRolesResponse.verify|verify} messages.
-         * @param message GetUserRolesResponse message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IGetUserRolesResponse,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -2137,24 +1433,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.GetUserRolesResponse;
-
-        /**
-         * Decodes a GetUserRolesResponse message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns GetUserRolesResponse
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.GetUserRolesResponse;
-
-        /**
-         * Verifies a GetUserRolesResponse message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a GetUserRolesResponse message from a plain object. Also converts values to their respective internal types.
@@ -2213,32 +1491,12 @@ export namespace protocol {
         public pictureUrl: string;
 
         /**
-         * Creates a new CreateGuildRequest instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns CreateGuildRequest instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.ICreateGuildRequest
-        ): protocol.chat.v1.CreateGuildRequest;
-
-        /**
          * Encodes the specified CreateGuildRequest message. Does not implicitly {@link protocol.chat.v1.CreateGuildRequest.verify|verify} messages.
          * @param message CreateGuildRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.ICreateGuildRequest,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified CreateGuildRequest message, length delimited. Does not implicitly {@link protocol.chat.v1.CreateGuildRequest.verify|verify} messages.
-         * @param message CreateGuildRequest message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.ICreateGuildRequest,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -2255,24 +1513,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.CreateGuildRequest;
-
-        /**
-         * Decodes a CreateGuildRequest message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns CreateGuildRequest
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.CreateGuildRequest;
-
-        /**
-         * Verifies a CreateGuildRequest message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a CreateGuildRequest message from a plain object. Also converts values to their respective internal types.
@@ -2304,7 +1544,7 @@ export namespace protocol {
       /** Properties of a CreateGuildResponse. */
       interface ICreateGuildResponse {
         /** CreateGuildResponse guildId */
-        guildId?: number | Long | null;
+        guildId?: number | null;
       }
 
       /** Represents a CreateGuildResponse. */
@@ -2316,16 +1556,7 @@ export namespace protocol {
         constructor(properties?: protocol.chat.v1.ICreateGuildResponse);
 
         /** CreateGuildResponse guildId. */
-        public guildId: number | Long;
-
-        /**
-         * Creates a new CreateGuildResponse instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns CreateGuildResponse instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.ICreateGuildResponse
-        ): protocol.chat.v1.CreateGuildResponse;
+        public guildId: number;
 
         /**
          * Encodes the specified CreateGuildResponse message. Does not implicitly {@link protocol.chat.v1.CreateGuildResponse.verify|verify} messages.
@@ -2334,17 +1565,6 @@ export namespace protocol {
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.ICreateGuildResponse,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified CreateGuildResponse message, length delimited. Does not implicitly {@link protocol.chat.v1.CreateGuildResponse.verify|verify} messages.
-         * @param message CreateGuildResponse message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.ICreateGuildResponse,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -2361,24 +1581,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.CreateGuildResponse;
-
-        /**
-         * Decodes a CreateGuildResponse message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns CreateGuildResponse
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.CreateGuildResponse;
-
-        /**
-         * Verifies a CreateGuildResponse message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a CreateGuildResponse message from a plain object. Also converts values to their respective internal types.
@@ -2410,7 +1612,7 @@ export namespace protocol {
       /** Properties of a CreateInviteRequest. */
       interface ICreateInviteRequest {
         /** CreateInviteRequest guildId */
-        guildId?: number | Long | null;
+        guildId?: number | null;
 
         /** CreateInviteRequest name */
         name?: string | null;
@@ -2428,7 +1630,7 @@ export namespace protocol {
         constructor(properties?: protocol.chat.v1.ICreateInviteRequest);
 
         /** CreateInviteRequest guildId. */
-        public guildId: number | Long;
+        public guildId: number;
 
         /** CreateInviteRequest name. */
         public name: string;
@@ -2437,32 +1639,12 @@ export namespace protocol {
         public possibleUses: number;
 
         /**
-         * Creates a new CreateInviteRequest instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns CreateInviteRequest instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.ICreateInviteRequest
-        ): protocol.chat.v1.CreateInviteRequest;
-
-        /**
          * Encodes the specified CreateInviteRequest message. Does not implicitly {@link protocol.chat.v1.CreateInviteRequest.verify|verify} messages.
          * @param message CreateInviteRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.ICreateInviteRequest,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified CreateInviteRequest message, length delimited. Does not implicitly {@link protocol.chat.v1.CreateInviteRequest.verify|verify} messages.
-         * @param message CreateInviteRequest message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.ICreateInviteRequest,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -2479,24 +1661,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.CreateInviteRequest;
-
-        /**
-         * Decodes a CreateInviteRequest message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns CreateInviteRequest
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.CreateInviteRequest;
-
-        /**
-         * Verifies a CreateInviteRequest message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a CreateInviteRequest message from a plain object. Also converts values to their respective internal types.
@@ -2543,32 +1707,12 @@ export namespace protocol {
         public name: string;
 
         /**
-         * Creates a new CreateInviteResponse instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns CreateInviteResponse instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.ICreateInviteResponse
-        ): protocol.chat.v1.CreateInviteResponse;
-
-        /**
          * Encodes the specified CreateInviteResponse message. Does not implicitly {@link protocol.chat.v1.CreateInviteResponse.verify|verify} messages.
          * @param message CreateInviteResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.ICreateInviteResponse,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified CreateInviteResponse message, length delimited. Does not implicitly {@link protocol.chat.v1.CreateInviteResponse.verify|verify} messages.
-         * @param message CreateInviteResponse message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.ICreateInviteResponse,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -2585,24 +1729,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.CreateInviteResponse;
-
-        /**
-         * Decodes a CreateInviteResponse message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns CreateInviteResponse
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.CreateInviteResponse;
-
-        /**
-         * Verifies a CreateInviteResponse message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a CreateInviteResponse message from a plain object. Also converts values to their respective internal types.
@@ -2643,32 +1769,12 @@ export namespace protocol {
         constructor(properties?: protocol.chat.v1.IGetGuildListRequest);
 
         /**
-         * Creates a new GetGuildListRequest instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns GetGuildListRequest instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IGetGuildListRequest
-        ): protocol.chat.v1.GetGuildListRequest;
-
-        /**
          * Encodes the specified GetGuildListRequest message. Does not implicitly {@link protocol.chat.v1.GetGuildListRequest.verify|verify} messages.
          * @param message GetGuildListRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IGetGuildListRequest,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified GetGuildListRequest message, length delimited. Does not implicitly {@link protocol.chat.v1.GetGuildListRequest.verify|verify} messages.
-         * @param message GetGuildListRequest message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IGetGuildListRequest,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -2685,24 +1791,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.GetGuildListRequest;
-
-        /**
-         * Decodes a GetGuildListRequest message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns GetGuildListRequest
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.GetGuildListRequest;
-
-        /**
-         * Verifies a GetGuildListRequest message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a GetGuildListRequest message from a plain object. Also converts values to their respective internal types.
@@ -2749,32 +1837,12 @@ export namespace protocol {
         public guilds: protocol.chat.v1.GetGuildListResponse.IGuildListEntry[];
 
         /**
-         * Creates a new GetGuildListResponse instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns GetGuildListResponse instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IGetGuildListResponse
-        ): protocol.chat.v1.GetGuildListResponse;
-
-        /**
          * Encodes the specified GetGuildListResponse message. Does not implicitly {@link protocol.chat.v1.GetGuildListResponse.verify|verify} messages.
          * @param message GetGuildListResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IGetGuildListResponse,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified GetGuildListResponse message, length delimited. Does not implicitly {@link protocol.chat.v1.GetGuildListResponse.verify|verify} messages.
-         * @param message GetGuildListResponse message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IGetGuildListResponse,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -2791,24 +1859,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.GetGuildListResponse;
-
-        /**
-         * Decodes a GetGuildListResponse message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns GetGuildListResponse
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.GetGuildListResponse;
-
-        /**
-         * Verifies a GetGuildListResponse message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a GetGuildListResponse message from a plain object. Also converts values to their respective internal types.
@@ -2841,7 +1891,7 @@ export namespace protocol {
         /** Properties of a GuildListEntry. */
         interface IGuildListEntry {
           /** GuildListEntry guildId */
-          guildId?: number | Long | null;
+          guildId?: number | null;
 
           /** GuildListEntry host */
           host?: string | null;
@@ -2858,19 +1908,10 @@ export namespace protocol {
           );
 
           /** GuildListEntry guildId. */
-          public guildId: number | Long;
+          public guildId: number;
 
           /** GuildListEntry host. */
           public host: string;
-
-          /**
-           * Creates a new GuildListEntry instance using the specified properties.
-           * @param [properties] Properties to set
-           * @returns GuildListEntry instance
-           */
-          public static create(
-            properties?: protocol.chat.v1.GetGuildListResponse.IGuildListEntry
-          ): protocol.chat.v1.GetGuildListResponse.GuildListEntry;
 
           /**
            * Encodes the specified GuildListEntry message. Does not implicitly {@link protocol.chat.v1.GetGuildListResponse.GuildListEntry.verify|verify} messages.
@@ -2879,17 +1920,6 @@ export namespace protocol {
            * @returns Writer
            */
           public static encode(
-            message: protocol.chat.v1.GetGuildListResponse.IGuildListEntry,
-            writer?: $protobuf.Writer
-          ): $protobuf.Writer;
-
-          /**
-           * Encodes the specified GuildListEntry message, length delimited. Does not implicitly {@link protocol.chat.v1.GetGuildListResponse.GuildListEntry.verify|verify} messages.
-           * @param message GuildListEntry message or plain object to encode
-           * @param [writer] Writer to encode to
-           * @returns Writer
-           */
-          public static encodeDelimited(
             message: protocol.chat.v1.GetGuildListResponse.IGuildListEntry,
             writer?: $protobuf.Writer
           ): $protobuf.Writer;
@@ -2906,24 +1936,6 @@ export namespace protocol {
             reader: $protobuf.Reader | Uint8Array,
             length?: number
           ): protocol.chat.v1.GetGuildListResponse.GuildListEntry;
-
-          /**
-           * Decodes a GuildListEntry message from the specified reader or buffer, length delimited.
-           * @param reader Reader or buffer to decode from
-           * @returns GuildListEntry
-           * @throws {Error} If the payload is not a reader or valid buffer
-           * @throws {$protobuf.util.ProtocolError} If required fields are missing
-           */
-          public static decodeDelimited(
-            reader: $protobuf.Reader | Uint8Array
-          ): protocol.chat.v1.GetGuildListResponse.GuildListEntry;
-
-          /**
-           * Verifies a GuildListEntry message.
-           * @param message Plain object to verify
-           * @returns `null` if valid, otherwise the reason why it is not
-           */
-          public static verify(message: { [k: string]: any }): string | null;
 
           /**
            * Creates a GuildListEntry message from a plain object. Also converts values to their respective internal types.
@@ -2956,7 +1968,7 @@ export namespace protocol {
       /** Properties of a GetGuildRequest. */
       interface IGetGuildRequest {
         /** GetGuildRequest guildId */
-        guildId?: number | Long | null;
+        guildId?: number | null;
       }
 
       /** Represents a GetGuildRequest. */
@@ -2968,16 +1980,7 @@ export namespace protocol {
         constructor(properties?: protocol.chat.v1.IGetGuildRequest);
 
         /** GetGuildRequest guildId. */
-        public guildId: number | Long;
-
-        /**
-         * Creates a new GetGuildRequest instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns GetGuildRequest instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IGetGuildRequest
-        ): protocol.chat.v1.GetGuildRequest;
+        public guildId: number;
 
         /**
          * Encodes the specified GetGuildRequest message. Does not implicitly {@link protocol.chat.v1.GetGuildRequest.verify|verify} messages.
@@ -2986,17 +1989,6 @@ export namespace protocol {
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IGetGuildRequest,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified GetGuildRequest message, length delimited. Does not implicitly {@link protocol.chat.v1.GetGuildRequest.verify|verify} messages.
-         * @param message GetGuildRequest message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IGetGuildRequest,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -3013,24 +2005,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.GetGuildRequest;
-
-        /**
-         * Decodes a GetGuildRequest message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns GetGuildRequest
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.GetGuildRequest;
-
-        /**
-         * Verifies a GetGuildRequest message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a GetGuildRequest message from a plain object. Also converts values to their respective internal types.
@@ -3068,7 +2042,7 @@ export namespace protocol {
         guildName?: string | null;
 
         /** GetGuildResponse guildOwner */
-        guildOwner?: number | Long | null;
+        guildOwner?: number | null;
 
         /** GetGuildResponse guildPicture */
         guildPicture?: string | null;
@@ -3089,19 +2063,10 @@ export namespace protocol {
         public guildName: string;
 
         /** GetGuildResponse guildOwner. */
-        public guildOwner: number | Long;
+        public guildOwner: number;
 
         /** GetGuildResponse guildPicture. */
         public guildPicture: string;
-
-        /**
-         * Creates a new GetGuildResponse instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns GetGuildResponse instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IGetGuildResponse
-        ): protocol.chat.v1.GetGuildResponse;
 
         /**
          * Encodes the specified GetGuildResponse message. Does not implicitly {@link protocol.chat.v1.GetGuildResponse.verify|verify} messages.
@@ -3110,17 +2075,6 @@ export namespace protocol {
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IGetGuildResponse,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified GetGuildResponse message, length delimited. Does not implicitly {@link protocol.chat.v1.GetGuildResponse.verify|verify} messages.
-         * @param message GetGuildResponse message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IGetGuildResponse,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -3137,24 +2091,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.GetGuildResponse;
-
-        /**
-         * Decodes a GetGuildResponse message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns GetGuildResponse
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.GetGuildResponse;
-
-        /**
-         * Verifies a GetGuildResponse message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a GetGuildResponse message from a plain object. Also converts values to their respective internal types.
@@ -3186,7 +2122,7 @@ export namespace protocol {
       /** Properties of a GetGuildInvitesRequest. */
       interface IGetGuildInvitesRequest {
         /** GetGuildInvitesRequest guildId */
-        guildId?: number | Long | null;
+        guildId?: number | null;
       }
 
       /** Represents a GetGuildInvitesRequest. */
@@ -3198,16 +2134,7 @@ export namespace protocol {
         constructor(properties?: protocol.chat.v1.IGetGuildInvitesRequest);
 
         /** GetGuildInvitesRequest guildId. */
-        public guildId: number | Long;
-
-        /**
-         * Creates a new GetGuildInvitesRequest instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns GetGuildInvitesRequest instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IGetGuildInvitesRequest
-        ): protocol.chat.v1.GetGuildInvitesRequest;
+        public guildId: number;
 
         /**
          * Encodes the specified GetGuildInvitesRequest message. Does not implicitly {@link protocol.chat.v1.GetGuildInvitesRequest.verify|verify} messages.
@@ -3216,17 +2143,6 @@ export namespace protocol {
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IGetGuildInvitesRequest,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified GetGuildInvitesRequest message, length delimited. Does not implicitly {@link protocol.chat.v1.GetGuildInvitesRequest.verify|verify} messages.
-         * @param message GetGuildInvitesRequest message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IGetGuildInvitesRequest,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -3243,24 +2159,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.GetGuildInvitesRequest;
-
-        /**
-         * Decodes a GetGuildInvitesRequest message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns GetGuildInvitesRequest
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.GetGuildInvitesRequest;
-
-        /**
-         * Verifies a GetGuildInvitesRequest message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a GetGuildInvitesRequest message from a plain object. Also converts values to their respective internal types.
@@ -3307,32 +2205,12 @@ export namespace protocol {
         public invites: protocol.chat.v1.GetGuildInvitesResponse.IInvite[];
 
         /**
-         * Creates a new GetGuildInvitesResponse instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns GetGuildInvitesResponse instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IGetGuildInvitesResponse
-        ): protocol.chat.v1.GetGuildInvitesResponse;
-
-        /**
          * Encodes the specified GetGuildInvitesResponse message. Does not implicitly {@link protocol.chat.v1.GetGuildInvitesResponse.verify|verify} messages.
          * @param message GetGuildInvitesResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IGetGuildInvitesResponse,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified GetGuildInvitesResponse message, length delimited. Does not implicitly {@link protocol.chat.v1.GetGuildInvitesResponse.verify|verify} messages.
-         * @param message GetGuildInvitesResponse message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IGetGuildInvitesResponse,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -3349,24 +2227,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.GetGuildInvitesResponse;
-
-        /**
-         * Decodes a GetGuildInvitesResponse message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns GetGuildInvitesResponse
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.GetGuildInvitesResponse;
-
-        /**
-         * Verifies a GetGuildInvitesResponse message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a GetGuildInvitesResponse message from a plain object. Also converts values to their respective internal types.
@@ -3428,32 +2288,12 @@ export namespace protocol {
           public useCount: number;
 
           /**
-           * Creates a new Invite instance using the specified properties.
-           * @param [properties] Properties to set
-           * @returns Invite instance
-           */
-          public static create(
-            properties?: protocol.chat.v1.GetGuildInvitesResponse.IInvite
-          ): protocol.chat.v1.GetGuildInvitesResponse.Invite;
-
-          /**
            * Encodes the specified Invite message. Does not implicitly {@link protocol.chat.v1.GetGuildInvitesResponse.Invite.verify|verify} messages.
            * @param message Invite message or plain object to encode
            * @param [writer] Writer to encode to
            * @returns Writer
            */
           public static encode(
-            message: protocol.chat.v1.GetGuildInvitesResponse.IInvite,
-            writer?: $protobuf.Writer
-          ): $protobuf.Writer;
-
-          /**
-           * Encodes the specified Invite message, length delimited. Does not implicitly {@link protocol.chat.v1.GetGuildInvitesResponse.Invite.verify|verify} messages.
-           * @param message Invite message or plain object to encode
-           * @param [writer] Writer to encode to
-           * @returns Writer
-           */
-          public static encodeDelimited(
             message: protocol.chat.v1.GetGuildInvitesResponse.IInvite,
             writer?: $protobuf.Writer
           ): $protobuf.Writer;
@@ -3470,24 +2310,6 @@ export namespace protocol {
             reader: $protobuf.Reader | Uint8Array,
             length?: number
           ): protocol.chat.v1.GetGuildInvitesResponse.Invite;
-
-          /**
-           * Decodes an Invite message from the specified reader or buffer, length delimited.
-           * @param reader Reader or buffer to decode from
-           * @returns Invite
-           * @throws {Error} If the payload is not a reader or valid buffer
-           * @throws {$protobuf.util.ProtocolError} If required fields are missing
-           */
-          public static decodeDelimited(
-            reader: $protobuf.Reader | Uint8Array
-          ): protocol.chat.v1.GetGuildInvitesResponse.Invite;
-
-          /**
-           * Verifies an Invite message.
-           * @param message Plain object to verify
-           * @returns `null` if valid, otherwise the reason why it is not
-           */
-          public static verify(message: { [k: string]: any }): string | null;
 
           /**
            * Creates an Invite message from a plain object. Also converts values to their respective internal types.
@@ -3520,7 +2342,7 @@ export namespace protocol {
       /** Properties of a GetGuildMembersRequest. */
       interface IGetGuildMembersRequest {
         /** GetGuildMembersRequest guildId */
-        guildId?: number | Long | null;
+        guildId?: number | null;
       }
 
       /** Represents a GetGuildMembersRequest. */
@@ -3532,16 +2354,7 @@ export namespace protocol {
         constructor(properties?: protocol.chat.v1.IGetGuildMembersRequest);
 
         /** GetGuildMembersRequest guildId. */
-        public guildId: number | Long;
-
-        /**
-         * Creates a new GetGuildMembersRequest instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns GetGuildMembersRequest instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IGetGuildMembersRequest
-        ): protocol.chat.v1.GetGuildMembersRequest;
+        public guildId: number;
 
         /**
          * Encodes the specified GetGuildMembersRequest message. Does not implicitly {@link protocol.chat.v1.GetGuildMembersRequest.verify|verify} messages.
@@ -3550,17 +2363,6 @@ export namespace protocol {
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IGetGuildMembersRequest,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified GetGuildMembersRequest message, length delimited. Does not implicitly {@link protocol.chat.v1.GetGuildMembersRequest.verify|verify} messages.
-         * @param message GetGuildMembersRequest message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IGetGuildMembersRequest,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -3577,24 +2379,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.GetGuildMembersRequest;
-
-        /**
-         * Decodes a GetGuildMembersRequest message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns GetGuildMembersRequest
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.GetGuildMembersRequest;
-
-        /**
-         * Verifies a GetGuildMembersRequest message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a GetGuildMembersRequest message from a plain object. Also converts values to their respective internal types.
@@ -3626,7 +2410,7 @@ export namespace protocol {
       /** Properties of a GetGuildMembersResponse. */
       interface IGetGuildMembersResponse {
         /** GetGuildMembersResponse members */
-        members?: (number | Long)[] | null;
+        members?: number[] | null;
       }
 
       /** Represents a GetGuildMembersResponse. */
@@ -3638,16 +2422,7 @@ export namespace protocol {
         constructor(properties?: protocol.chat.v1.IGetGuildMembersResponse);
 
         /** GetGuildMembersResponse members. */
-        public members: (number | Long)[];
-
-        /**
-         * Creates a new GetGuildMembersResponse instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns GetGuildMembersResponse instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IGetGuildMembersResponse
-        ): protocol.chat.v1.GetGuildMembersResponse;
+        public members: number[];
 
         /**
          * Encodes the specified GetGuildMembersResponse message. Does not implicitly {@link protocol.chat.v1.GetGuildMembersResponse.verify|verify} messages.
@@ -3656,17 +2431,6 @@ export namespace protocol {
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IGetGuildMembersResponse,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified GetGuildMembersResponse message, length delimited. Does not implicitly {@link protocol.chat.v1.GetGuildMembersResponse.verify|verify} messages.
-         * @param message GetGuildMembersResponse message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IGetGuildMembersResponse,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -3683,24 +2447,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.GetGuildMembersResponse;
-
-        /**
-         * Decodes a GetGuildMembersResponse message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns GetGuildMembersResponse
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.GetGuildMembersResponse;
-
-        /**
-         * Verifies a GetGuildMembersResponse message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a GetGuildMembersResponse message from a plain object. Also converts values to their respective internal types.
@@ -3732,7 +2478,7 @@ export namespace protocol {
       /** Properties of an UpdateGuildInformationRequest. */
       interface IUpdateGuildInformationRequest {
         /** UpdateGuildInformationRequest guildId */
-        guildId?: number | Long | null;
+        guildId?: number | null;
 
         /** UpdateGuildInformationRequest newGuildName */
         newGuildName?: string | null;
@@ -3765,7 +2511,7 @@ export namespace protocol {
         );
 
         /** UpdateGuildInformationRequest guildId. */
-        public guildId: number | Long;
+        public guildId: number;
 
         /** UpdateGuildInformationRequest newGuildName. */
         public newGuildName: string;
@@ -3786,32 +2532,12 @@ export namespace protocol {
         public updateMetadata: boolean;
 
         /**
-         * Creates a new UpdateGuildInformationRequest instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns UpdateGuildInformationRequest instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IUpdateGuildInformationRequest
-        ): protocol.chat.v1.UpdateGuildInformationRequest;
-
-        /**
          * Encodes the specified UpdateGuildInformationRequest message. Does not implicitly {@link protocol.chat.v1.UpdateGuildInformationRequest.verify|verify} messages.
          * @param message UpdateGuildInformationRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IUpdateGuildInformationRequest,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified UpdateGuildInformationRequest message, length delimited. Does not implicitly {@link protocol.chat.v1.UpdateGuildInformationRequest.verify|verify} messages.
-         * @param message UpdateGuildInformationRequest message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IUpdateGuildInformationRequest,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -3828,24 +2554,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.UpdateGuildInformationRequest;
-
-        /**
-         * Decodes an UpdateGuildInformationRequest message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns UpdateGuildInformationRequest
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.UpdateGuildInformationRequest;
-
-        /**
-         * Verifies an UpdateGuildInformationRequest message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates an UpdateGuildInformationRequest message from a plain object. Also converts values to their respective internal types.
@@ -3877,7 +2585,7 @@ export namespace protocol {
       /** Properties of a DeleteGuildRequest. */
       interface IDeleteGuildRequest {
         /** DeleteGuildRequest guildId */
-        guildId?: number | Long | null;
+        guildId?: number | null;
       }
 
       /** Represents a DeleteGuildRequest. */
@@ -3889,16 +2597,7 @@ export namespace protocol {
         constructor(properties?: protocol.chat.v1.IDeleteGuildRequest);
 
         /** DeleteGuildRequest guildId. */
-        public guildId: number | Long;
-
-        /**
-         * Creates a new DeleteGuildRequest instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns DeleteGuildRequest instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IDeleteGuildRequest
-        ): protocol.chat.v1.DeleteGuildRequest;
+        public guildId: number;
 
         /**
          * Encodes the specified DeleteGuildRequest message. Does not implicitly {@link protocol.chat.v1.DeleteGuildRequest.verify|verify} messages.
@@ -3907,17 +2606,6 @@ export namespace protocol {
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IDeleteGuildRequest,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified DeleteGuildRequest message, length delimited. Does not implicitly {@link protocol.chat.v1.DeleteGuildRequest.verify|verify} messages.
-         * @param message DeleteGuildRequest message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IDeleteGuildRequest,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -3934,24 +2622,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.DeleteGuildRequest;
-
-        /**
-         * Decodes a DeleteGuildRequest message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns DeleteGuildRequest
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.DeleteGuildRequest;
-
-        /**
-         * Verifies a DeleteGuildRequest message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a DeleteGuildRequest message from a plain object. Also converts values to their respective internal types.
@@ -3983,7 +2653,7 @@ export namespace protocol {
       /** Properties of a DeleteInviteRequest. */
       interface IDeleteInviteRequest {
         /** DeleteInviteRequest guildId */
-        guildId?: number | Long | null;
+        guildId?: number | null;
 
         /** DeleteInviteRequest inviteId */
         inviteId?: string | null;
@@ -3998,19 +2668,10 @@ export namespace protocol {
         constructor(properties?: protocol.chat.v1.IDeleteInviteRequest);
 
         /** DeleteInviteRequest guildId. */
-        public guildId: number | Long;
+        public guildId: number;
 
         /** DeleteInviteRequest inviteId. */
         public inviteId: string;
-
-        /**
-         * Creates a new DeleteInviteRequest instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns DeleteInviteRequest instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IDeleteInviteRequest
-        ): protocol.chat.v1.DeleteInviteRequest;
 
         /**
          * Encodes the specified DeleteInviteRequest message. Does not implicitly {@link protocol.chat.v1.DeleteInviteRequest.verify|verify} messages.
@@ -4019,17 +2680,6 @@ export namespace protocol {
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IDeleteInviteRequest,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified DeleteInviteRequest message, length delimited. Does not implicitly {@link protocol.chat.v1.DeleteInviteRequest.verify|verify} messages.
-         * @param message DeleteInviteRequest message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IDeleteInviteRequest,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -4046,24 +2696,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.DeleteInviteRequest;
-
-        /**
-         * Decodes a DeleteInviteRequest message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns DeleteInviteRequest
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.DeleteInviteRequest;
-
-        /**
-         * Verifies a DeleteInviteRequest message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a DeleteInviteRequest message from a plain object. Also converts values to their respective internal types.
@@ -4110,32 +2742,12 @@ export namespace protocol {
         public inviteId: string;
 
         /**
-         * Creates a new JoinGuildRequest instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns JoinGuildRequest instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IJoinGuildRequest
-        ): protocol.chat.v1.JoinGuildRequest;
-
-        /**
          * Encodes the specified JoinGuildRequest message. Does not implicitly {@link protocol.chat.v1.JoinGuildRequest.verify|verify} messages.
          * @param message JoinGuildRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IJoinGuildRequest,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified JoinGuildRequest message, length delimited. Does not implicitly {@link protocol.chat.v1.JoinGuildRequest.verify|verify} messages.
-         * @param message JoinGuildRequest message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IJoinGuildRequest,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -4152,24 +2764,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.JoinGuildRequest;
-
-        /**
-         * Decodes a JoinGuildRequest message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns JoinGuildRequest
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.JoinGuildRequest;
-
-        /**
-         * Verifies a JoinGuildRequest message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a JoinGuildRequest message from a plain object. Also converts values to their respective internal types.
@@ -4201,7 +2795,7 @@ export namespace protocol {
       /** Properties of a JoinGuildResponse. */
       interface IJoinGuildResponse {
         /** JoinGuildResponse guildId */
-        guildId?: number | Long | null;
+        guildId?: number | null;
       }
 
       /** Represents a JoinGuildResponse. */
@@ -4213,16 +2807,7 @@ export namespace protocol {
         constructor(properties?: protocol.chat.v1.IJoinGuildResponse);
 
         /** JoinGuildResponse guildId. */
-        public guildId: number | Long;
-
-        /**
-         * Creates a new JoinGuildResponse instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns JoinGuildResponse instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IJoinGuildResponse
-        ): protocol.chat.v1.JoinGuildResponse;
+        public guildId: number;
 
         /**
          * Encodes the specified JoinGuildResponse message. Does not implicitly {@link protocol.chat.v1.JoinGuildResponse.verify|verify} messages.
@@ -4231,17 +2816,6 @@ export namespace protocol {
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IJoinGuildResponse,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified JoinGuildResponse message, length delimited. Does not implicitly {@link protocol.chat.v1.JoinGuildResponse.verify|verify} messages.
-         * @param message JoinGuildResponse message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IJoinGuildResponse,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -4258,24 +2832,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.JoinGuildResponse;
-
-        /**
-         * Decodes a JoinGuildResponse message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns JoinGuildResponse
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.JoinGuildResponse;
-
-        /**
-         * Verifies a JoinGuildResponse message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a JoinGuildResponse message from a plain object. Also converts values to their respective internal types.
@@ -4322,32 +2878,12 @@ export namespace protocol {
         public inviteId: string;
 
         /**
-         * Creates a new PreviewGuildRequest instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns PreviewGuildRequest instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IPreviewGuildRequest
-        ): protocol.chat.v1.PreviewGuildRequest;
-
-        /**
          * Encodes the specified PreviewGuildRequest message. Does not implicitly {@link protocol.chat.v1.PreviewGuildRequest.verify|verify} messages.
          * @param message PreviewGuildRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IPreviewGuildRequest,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified PreviewGuildRequest message, length delimited. Does not implicitly {@link protocol.chat.v1.PreviewGuildRequest.verify|verify} messages.
-         * @param message PreviewGuildRequest message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IPreviewGuildRequest,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -4364,24 +2900,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.PreviewGuildRequest;
-
-        /**
-         * Decodes a PreviewGuildRequest message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns PreviewGuildRequest
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.PreviewGuildRequest;
-
-        /**
-         * Verifies a PreviewGuildRequest message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a PreviewGuildRequest message from a plain object. Also converts values to their respective internal types.
@@ -4419,7 +2937,7 @@ export namespace protocol {
         avatar?: string | null;
 
         /** PreviewGuildResponse memeberCount */
-        memeberCount?: number | Long | null;
+        memeberCount?: number | null;
       }
 
       /** Represents a PreviewGuildResponse. */
@@ -4437,16 +2955,7 @@ export namespace protocol {
         public avatar: string;
 
         /** PreviewGuildResponse memeberCount. */
-        public memeberCount: number | Long;
-
-        /**
-         * Creates a new PreviewGuildResponse instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns PreviewGuildResponse instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IPreviewGuildResponse
-        ): protocol.chat.v1.PreviewGuildResponse;
+        public memeberCount: number;
 
         /**
          * Encodes the specified PreviewGuildResponse message. Does not implicitly {@link protocol.chat.v1.PreviewGuildResponse.verify|verify} messages.
@@ -4455,17 +2964,6 @@ export namespace protocol {
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IPreviewGuildResponse,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified PreviewGuildResponse message, length delimited. Does not implicitly {@link protocol.chat.v1.PreviewGuildResponse.verify|verify} messages.
-         * @param message PreviewGuildResponse message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IPreviewGuildResponse,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -4482,24 +2980,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.PreviewGuildResponse;
-
-        /**
-         * Decodes a PreviewGuildResponse message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns PreviewGuildResponse
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.PreviewGuildResponse;
-
-        /**
-         * Verifies a PreviewGuildResponse message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a PreviewGuildResponse message from a plain object. Also converts values to their respective internal types.
@@ -4531,7 +3011,7 @@ export namespace protocol {
       /** Properties of a LeaveGuildRequest. */
       interface ILeaveGuildRequest {
         /** LeaveGuildRequest guildId */
-        guildId?: number | Long | null;
+        guildId?: number | null;
       }
 
       /** Represents a LeaveGuildRequest. */
@@ -4543,16 +3023,7 @@ export namespace protocol {
         constructor(properties?: protocol.chat.v1.ILeaveGuildRequest);
 
         /** LeaveGuildRequest guildId. */
-        public guildId: number | Long;
-
-        /**
-         * Creates a new LeaveGuildRequest instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns LeaveGuildRequest instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.ILeaveGuildRequest
-        ): protocol.chat.v1.LeaveGuildRequest;
+        public guildId: number;
 
         /**
          * Encodes the specified LeaveGuildRequest message. Does not implicitly {@link protocol.chat.v1.LeaveGuildRequest.verify|verify} messages.
@@ -4561,17 +3032,6 @@ export namespace protocol {
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.ILeaveGuildRequest,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified LeaveGuildRequest message, length delimited. Does not implicitly {@link protocol.chat.v1.LeaveGuildRequest.verify|verify} messages.
-         * @param message LeaveGuildRequest message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.ILeaveGuildRequest,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -4588,24 +3048,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.LeaveGuildRequest;
-
-        /**
-         * Decodes a LeaveGuildRequest message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns LeaveGuildRequest
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.LeaveGuildRequest;
-
-        /**
-         * Verifies a LeaveGuildRequest message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a LeaveGuildRequest message from a plain object. Also converts values to their respective internal types.
@@ -4637,7 +3079,7 @@ export namespace protocol {
       /** Properties of an AddGuildToGuildListRequest. */
       interface IAddGuildToGuildListRequest {
         /** AddGuildToGuildListRequest guildId */
-        guildId?: number | Long | null;
+        guildId?: number | null;
 
         /** AddGuildToGuildListRequest homeserver */
         homeserver?: string | null;
@@ -4652,19 +3094,10 @@ export namespace protocol {
         constructor(properties?: protocol.chat.v1.IAddGuildToGuildListRequest);
 
         /** AddGuildToGuildListRequest guildId. */
-        public guildId: number | Long;
+        public guildId: number;
 
         /** AddGuildToGuildListRequest homeserver. */
         public homeserver: string;
-
-        /**
-         * Creates a new AddGuildToGuildListRequest instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns AddGuildToGuildListRequest instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IAddGuildToGuildListRequest
-        ): protocol.chat.v1.AddGuildToGuildListRequest;
 
         /**
          * Encodes the specified AddGuildToGuildListRequest message. Does not implicitly {@link protocol.chat.v1.AddGuildToGuildListRequest.verify|verify} messages.
@@ -4673,17 +3106,6 @@ export namespace protocol {
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IAddGuildToGuildListRequest,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified AddGuildToGuildListRequest message, length delimited. Does not implicitly {@link protocol.chat.v1.AddGuildToGuildListRequest.verify|verify} messages.
-         * @param message AddGuildToGuildListRequest message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IAddGuildToGuildListRequest,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -4700,24 +3122,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.AddGuildToGuildListRequest;
-
-        /**
-         * Decodes an AddGuildToGuildListRequest message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns AddGuildToGuildListRequest
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.AddGuildToGuildListRequest;
-
-        /**
-         * Verifies an AddGuildToGuildListRequest message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates an AddGuildToGuildListRequest message from a plain object. Also converts values to their respective internal types.
@@ -4759,32 +3163,12 @@ export namespace protocol {
         constructor(properties?: protocol.chat.v1.IAddGuildToGuildListResponse);
 
         /**
-         * Creates a new AddGuildToGuildListResponse instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns AddGuildToGuildListResponse instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IAddGuildToGuildListResponse
-        ): protocol.chat.v1.AddGuildToGuildListResponse;
-
-        /**
          * Encodes the specified AddGuildToGuildListResponse message. Does not implicitly {@link protocol.chat.v1.AddGuildToGuildListResponse.verify|verify} messages.
          * @param message AddGuildToGuildListResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IAddGuildToGuildListResponse,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified AddGuildToGuildListResponse message, length delimited. Does not implicitly {@link protocol.chat.v1.AddGuildToGuildListResponse.verify|verify} messages.
-         * @param message AddGuildToGuildListResponse message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IAddGuildToGuildListResponse,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -4801,24 +3185,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.AddGuildToGuildListResponse;
-
-        /**
-         * Decodes an AddGuildToGuildListResponse message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns AddGuildToGuildListResponse
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.AddGuildToGuildListResponse;
-
-        /**
-         * Verifies an AddGuildToGuildListResponse message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates an AddGuildToGuildListResponse message from a plain object. Also converts values to their respective internal types.
@@ -4850,7 +3216,7 @@ export namespace protocol {
       /** Properties of a RemoveGuildFromGuildListRequest. */
       interface IRemoveGuildFromGuildListRequest {
         /** RemoveGuildFromGuildListRequest guildId */
-        guildId?: number | Long | null;
+        guildId?: number | null;
 
         /** RemoveGuildFromGuildListRequest homeserver */
         homeserver?: string | null;
@@ -4868,19 +3234,10 @@ export namespace protocol {
         );
 
         /** RemoveGuildFromGuildListRequest guildId. */
-        public guildId: number | Long;
+        public guildId: number;
 
         /** RemoveGuildFromGuildListRequest homeserver. */
         public homeserver: string;
-
-        /**
-         * Creates a new RemoveGuildFromGuildListRequest instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns RemoveGuildFromGuildListRequest instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IRemoveGuildFromGuildListRequest
-        ): protocol.chat.v1.RemoveGuildFromGuildListRequest;
 
         /**
          * Encodes the specified RemoveGuildFromGuildListRequest message. Does not implicitly {@link protocol.chat.v1.RemoveGuildFromGuildListRequest.verify|verify} messages.
@@ -4889,17 +3246,6 @@ export namespace protocol {
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IRemoveGuildFromGuildListRequest,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified RemoveGuildFromGuildListRequest message, length delimited. Does not implicitly {@link protocol.chat.v1.RemoveGuildFromGuildListRequest.verify|verify} messages.
-         * @param message RemoveGuildFromGuildListRequest message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IRemoveGuildFromGuildListRequest,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -4916,24 +3262,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.RemoveGuildFromGuildListRequest;
-
-        /**
-         * Decodes a RemoveGuildFromGuildListRequest message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns RemoveGuildFromGuildListRequest
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.RemoveGuildFromGuildListRequest;
-
-        /**
-         * Verifies a RemoveGuildFromGuildListRequest message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a RemoveGuildFromGuildListRequest message from a plain object. Also converts values to their respective internal types.
@@ -4977,32 +3305,12 @@ export namespace protocol {
         );
 
         /**
-         * Creates a new RemoveGuildFromGuildListResponse instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns RemoveGuildFromGuildListResponse instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IRemoveGuildFromGuildListResponse
-        ): protocol.chat.v1.RemoveGuildFromGuildListResponse;
-
-        /**
          * Encodes the specified RemoveGuildFromGuildListResponse message. Does not implicitly {@link protocol.chat.v1.RemoveGuildFromGuildListResponse.verify|verify} messages.
          * @param message RemoveGuildFromGuildListResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IRemoveGuildFromGuildListResponse,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified RemoveGuildFromGuildListResponse message, length delimited. Does not implicitly {@link protocol.chat.v1.RemoveGuildFromGuildListResponse.verify|verify} messages.
-         * @param message RemoveGuildFromGuildListResponse message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IRemoveGuildFromGuildListResponse,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -5019,24 +3327,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.RemoveGuildFromGuildListResponse;
-
-        /**
-         * Decodes a RemoveGuildFromGuildListResponse message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns RemoveGuildFromGuildListResponse
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.RemoveGuildFromGuildListResponse;
-
-        /**
-         * Verifies a RemoveGuildFromGuildListResponse message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a RemoveGuildFromGuildListResponse message from a plain object. Also converts values to their respective internal types.
@@ -5083,32 +3373,12 @@ export namespace protocol {
         public packName: string;
 
         /**
-         * Creates a new CreateEmotePackRequest instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns CreateEmotePackRequest instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.ICreateEmotePackRequest
-        ): protocol.chat.v1.CreateEmotePackRequest;
-
-        /**
          * Encodes the specified CreateEmotePackRequest message. Does not implicitly {@link protocol.chat.v1.CreateEmotePackRequest.verify|verify} messages.
          * @param message CreateEmotePackRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.ICreateEmotePackRequest,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified CreateEmotePackRequest message, length delimited. Does not implicitly {@link protocol.chat.v1.CreateEmotePackRequest.verify|verify} messages.
-         * @param message CreateEmotePackRequest message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.ICreateEmotePackRequest,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -5125,24 +3395,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.CreateEmotePackRequest;
-
-        /**
-         * Decodes a CreateEmotePackRequest message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns CreateEmotePackRequest
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.CreateEmotePackRequest;
-
-        /**
-         * Verifies a CreateEmotePackRequest message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a CreateEmotePackRequest message from a plain object. Also converts values to their respective internal types.
@@ -5174,7 +3426,7 @@ export namespace protocol {
       /** Properties of a CreateEmotePackResponse. */
       interface ICreateEmotePackResponse {
         /** CreateEmotePackResponse packId */
-        packId?: number | Long | null;
+        packId?: number | null;
       }
 
       /** Represents a CreateEmotePackResponse. */
@@ -5186,16 +3438,7 @@ export namespace protocol {
         constructor(properties?: protocol.chat.v1.ICreateEmotePackResponse);
 
         /** CreateEmotePackResponse packId. */
-        public packId: number | Long;
-
-        /**
-         * Creates a new CreateEmotePackResponse instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns CreateEmotePackResponse instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.ICreateEmotePackResponse
-        ): protocol.chat.v1.CreateEmotePackResponse;
+        public packId: number;
 
         /**
          * Encodes the specified CreateEmotePackResponse message. Does not implicitly {@link protocol.chat.v1.CreateEmotePackResponse.verify|verify} messages.
@@ -5204,17 +3447,6 @@ export namespace protocol {
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.ICreateEmotePackResponse,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified CreateEmotePackResponse message, length delimited. Does not implicitly {@link protocol.chat.v1.CreateEmotePackResponse.verify|verify} messages.
-         * @param message CreateEmotePackResponse message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.ICreateEmotePackResponse,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -5231,24 +3463,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.CreateEmotePackResponse;
-
-        /**
-         * Decodes a CreateEmotePackResponse message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns CreateEmotePackResponse
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.CreateEmotePackResponse;
-
-        /**
-         * Verifies a CreateEmotePackResponse message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a CreateEmotePackResponse message from a plain object. Also converts values to their respective internal types.
@@ -5289,32 +3503,12 @@ export namespace protocol {
         constructor(properties?: protocol.chat.v1.IGetEmotePacksRequest);
 
         /**
-         * Creates a new GetEmotePacksRequest instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns GetEmotePacksRequest instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IGetEmotePacksRequest
-        ): protocol.chat.v1.GetEmotePacksRequest;
-
-        /**
          * Encodes the specified GetEmotePacksRequest message. Does not implicitly {@link protocol.chat.v1.GetEmotePacksRequest.verify|verify} messages.
          * @param message GetEmotePacksRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IGetEmotePacksRequest,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified GetEmotePacksRequest message, length delimited. Does not implicitly {@link protocol.chat.v1.GetEmotePacksRequest.verify|verify} messages.
-         * @param message GetEmotePacksRequest message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IGetEmotePacksRequest,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -5331,24 +3525,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.GetEmotePacksRequest;
-
-        /**
-         * Decodes a GetEmotePacksRequest message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns GetEmotePacksRequest
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.GetEmotePacksRequest;
-
-        /**
-         * Verifies a GetEmotePacksRequest message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a GetEmotePacksRequest message from a plain object. Also converts values to their respective internal types.
@@ -5395,32 +3571,12 @@ export namespace protocol {
         public packs: protocol.chat.v1.GetEmotePacksResponse.IEmotePack[];
 
         /**
-         * Creates a new GetEmotePacksResponse instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns GetEmotePacksResponse instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IGetEmotePacksResponse
-        ): protocol.chat.v1.GetEmotePacksResponse;
-
-        /**
          * Encodes the specified GetEmotePacksResponse message. Does not implicitly {@link protocol.chat.v1.GetEmotePacksResponse.verify|verify} messages.
          * @param message GetEmotePacksResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IGetEmotePacksResponse,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified GetEmotePacksResponse message, length delimited. Does not implicitly {@link protocol.chat.v1.GetEmotePacksResponse.verify|verify} messages.
-         * @param message GetEmotePacksResponse message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IGetEmotePacksResponse,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -5437,24 +3593,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.GetEmotePacksResponse;
-
-        /**
-         * Decodes a GetEmotePacksResponse message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns GetEmotePacksResponse
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.GetEmotePacksResponse;
-
-        /**
-         * Verifies a GetEmotePacksResponse message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a GetEmotePacksResponse message from a plain object. Also converts values to their respective internal types.
@@ -5487,10 +3625,10 @@ export namespace protocol {
         /** Properties of an EmotePack. */
         interface IEmotePack {
           /** EmotePack packId */
-          packId?: number | Long | null;
+          packId?: number | null;
 
           /** EmotePack packOwner */
-          packOwner?: number | Long | null;
+          packOwner?: number | null;
 
           /** EmotePack packName */
           packName?: string | null;
@@ -5507,22 +3645,13 @@ export namespace protocol {
           );
 
           /** EmotePack packId. */
-          public packId: number | Long;
+          public packId: number;
 
           /** EmotePack packOwner. */
-          public packOwner: number | Long;
+          public packOwner: number;
 
           /** EmotePack packName. */
           public packName: string;
-
-          /**
-           * Creates a new EmotePack instance using the specified properties.
-           * @param [properties] Properties to set
-           * @returns EmotePack instance
-           */
-          public static create(
-            properties?: protocol.chat.v1.GetEmotePacksResponse.IEmotePack
-          ): protocol.chat.v1.GetEmotePacksResponse.EmotePack;
 
           /**
            * Encodes the specified EmotePack message. Does not implicitly {@link protocol.chat.v1.GetEmotePacksResponse.EmotePack.verify|verify} messages.
@@ -5531,17 +3660,6 @@ export namespace protocol {
            * @returns Writer
            */
           public static encode(
-            message: protocol.chat.v1.GetEmotePacksResponse.IEmotePack,
-            writer?: $protobuf.Writer
-          ): $protobuf.Writer;
-
-          /**
-           * Encodes the specified EmotePack message, length delimited. Does not implicitly {@link protocol.chat.v1.GetEmotePacksResponse.EmotePack.verify|verify} messages.
-           * @param message EmotePack message or plain object to encode
-           * @param [writer] Writer to encode to
-           * @returns Writer
-           */
-          public static encodeDelimited(
             message: protocol.chat.v1.GetEmotePacksResponse.IEmotePack,
             writer?: $protobuf.Writer
           ): $protobuf.Writer;
@@ -5558,24 +3676,6 @@ export namespace protocol {
             reader: $protobuf.Reader | Uint8Array,
             length?: number
           ): protocol.chat.v1.GetEmotePacksResponse.EmotePack;
-
-          /**
-           * Decodes an EmotePack message from the specified reader or buffer, length delimited.
-           * @param reader Reader or buffer to decode from
-           * @returns EmotePack
-           * @throws {Error} If the payload is not a reader or valid buffer
-           * @throws {$protobuf.util.ProtocolError} If required fields are missing
-           */
-          public static decodeDelimited(
-            reader: $protobuf.Reader | Uint8Array
-          ): protocol.chat.v1.GetEmotePacksResponse.EmotePack;
-
-          /**
-           * Verifies an EmotePack message.
-           * @param message Plain object to verify
-           * @returns `null` if valid, otherwise the reason why it is not
-           */
-          public static verify(message: { [k: string]: any }): string | null;
 
           /**
            * Creates an EmotePack message from a plain object. Also converts values to their respective internal types.
@@ -5608,7 +3708,7 @@ export namespace protocol {
       /** Properties of a GetEmotePackEmotesRequest. */
       interface IGetEmotePackEmotesRequest {
         /** GetEmotePackEmotesRequest packId */
-        packId?: number | Long | null;
+        packId?: number | null;
       }
 
       /** Represents a GetEmotePackEmotesRequest. */
@@ -5620,16 +3720,7 @@ export namespace protocol {
         constructor(properties?: protocol.chat.v1.IGetEmotePackEmotesRequest);
 
         /** GetEmotePackEmotesRequest packId. */
-        public packId: number | Long;
-
-        /**
-         * Creates a new GetEmotePackEmotesRequest instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns GetEmotePackEmotesRequest instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IGetEmotePackEmotesRequest
-        ): protocol.chat.v1.GetEmotePackEmotesRequest;
+        public packId: number;
 
         /**
          * Encodes the specified GetEmotePackEmotesRequest message. Does not implicitly {@link protocol.chat.v1.GetEmotePackEmotesRequest.verify|verify} messages.
@@ -5638,17 +3729,6 @@ export namespace protocol {
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IGetEmotePackEmotesRequest,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified GetEmotePackEmotesRequest message, length delimited. Does not implicitly {@link protocol.chat.v1.GetEmotePackEmotesRequest.verify|verify} messages.
-         * @param message GetEmotePackEmotesRequest message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IGetEmotePackEmotesRequest,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -5665,24 +3745,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.GetEmotePackEmotesRequest;
-
-        /**
-         * Decodes a GetEmotePackEmotesRequest message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns GetEmotePackEmotesRequest
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.GetEmotePackEmotesRequest;
-
-        /**
-         * Verifies a GetEmotePackEmotesRequest message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a GetEmotePackEmotesRequest message from a plain object. Also converts values to their respective internal types.
@@ -5729,32 +3791,12 @@ export namespace protocol {
         public emotes: protocol.chat.v1.GetEmotePackEmotesResponse.IEmote[];
 
         /**
-         * Creates a new GetEmotePackEmotesResponse instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns GetEmotePackEmotesResponse instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IGetEmotePackEmotesResponse
-        ): protocol.chat.v1.GetEmotePackEmotesResponse;
-
-        /**
          * Encodes the specified GetEmotePackEmotesResponse message. Does not implicitly {@link protocol.chat.v1.GetEmotePackEmotesResponse.verify|verify} messages.
          * @param message GetEmotePackEmotesResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IGetEmotePackEmotesResponse,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified GetEmotePackEmotesResponse message, length delimited. Does not implicitly {@link protocol.chat.v1.GetEmotePackEmotesResponse.verify|verify} messages.
-         * @param message GetEmotePackEmotesResponse message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IGetEmotePackEmotesResponse,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -5771,24 +3813,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.GetEmotePackEmotesResponse;
-
-        /**
-         * Decodes a GetEmotePackEmotesResponse message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns GetEmotePackEmotesResponse
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.GetEmotePackEmotesResponse;
-
-        /**
-         * Verifies a GetEmotePackEmotesResponse message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a GetEmotePackEmotesResponse message from a plain object. Also converts values to their respective internal types.
@@ -5844,32 +3868,12 @@ export namespace protocol {
           public name: string;
 
           /**
-           * Creates a new Emote instance using the specified properties.
-           * @param [properties] Properties to set
-           * @returns Emote instance
-           */
-          public static create(
-            properties?: protocol.chat.v1.GetEmotePackEmotesResponse.IEmote
-          ): protocol.chat.v1.GetEmotePackEmotesResponse.Emote;
-
-          /**
            * Encodes the specified Emote message. Does not implicitly {@link protocol.chat.v1.GetEmotePackEmotesResponse.Emote.verify|verify} messages.
            * @param message Emote message or plain object to encode
            * @param [writer] Writer to encode to
            * @returns Writer
            */
           public static encode(
-            message: protocol.chat.v1.GetEmotePackEmotesResponse.IEmote,
-            writer?: $protobuf.Writer
-          ): $protobuf.Writer;
-
-          /**
-           * Encodes the specified Emote message, length delimited. Does not implicitly {@link protocol.chat.v1.GetEmotePackEmotesResponse.Emote.verify|verify} messages.
-           * @param message Emote message or plain object to encode
-           * @param [writer] Writer to encode to
-           * @returns Writer
-           */
-          public static encodeDelimited(
             message: protocol.chat.v1.GetEmotePackEmotesResponse.IEmote,
             writer?: $protobuf.Writer
           ): $protobuf.Writer;
@@ -5886,24 +3890,6 @@ export namespace protocol {
             reader: $protobuf.Reader | Uint8Array,
             length?: number
           ): protocol.chat.v1.GetEmotePackEmotesResponse.Emote;
-
-          /**
-           * Decodes an Emote message from the specified reader or buffer, length delimited.
-           * @param reader Reader or buffer to decode from
-           * @returns Emote
-           * @throws {Error} If the payload is not a reader or valid buffer
-           * @throws {$protobuf.util.ProtocolError} If required fields are missing
-           */
-          public static decodeDelimited(
-            reader: $protobuf.Reader | Uint8Array
-          ): protocol.chat.v1.GetEmotePackEmotesResponse.Emote;
-
-          /**
-           * Verifies an Emote message.
-           * @param message Plain object to verify
-           * @returns `null` if valid, otherwise the reason why it is not
-           */
-          public static verify(message: { [k: string]: any }): string | null;
 
           /**
            * Creates an Emote message from a plain object. Also converts values to their respective internal types.
@@ -5936,7 +3922,7 @@ export namespace protocol {
       /** Properties of an AddEmoteToPackRequest. */
       interface IAddEmoteToPackRequest {
         /** AddEmoteToPackRequest packId */
-        packId?: number | Long | null;
+        packId?: number | null;
 
         /** AddEmoteToPackRequest imageId */
         imageId?: string | null;
@@ -5954,7 +3940,7 @@ export namespace protocol {
         constructor(properties?: protocol.chat.v1.IAddEmoteToPackRequest);
 
         /** AddEmoteToPackRequest packId. */
-        public packId: number | Long;
+        public packId: number;
 
         /** AddEmoteToPackRequest imageId. */
         public imageId: string;
@@ -5963,32 +3949,12 @@ export namespace protocol {
         public name: string;
 
         /**
-         * Creates a new AddEmoteToPackRequest instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns AddEmoteToPackRequest instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IAddEmoteToPackRequest
-        ): protocol.chat.v1.AddEmoteToPackRequest;
-
-        /**
          * Encodes the specified AddEmoteToPackRequest message. Does not implicitly {@link protocol.chat.v1.AddEmoteToPackRequest.verify|verify} messages.
          * @param message AddEmoteToPackRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IAddEmoteToPackRequest,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified AddEmoteToPackRequest message, length delimited. Does not implicitly {@link protocol.chat.v1.AddEmoteToPackRequest.verify|verify} messages.
-         * @param message AddEmoteToPackRequest message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IAddEmoteToPackRequest,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -6005,24 +3971,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.AddEmoteToPackRequest;
-
-        /**
-         * Decodes an AddEmoteToPackRequest message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns AddEmoteToPackRequest
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.AddEmoteToPackRequest;
-
-        /**
-         * Verifies an AddEmoteToPackRequest message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates an AddEmoteToPackRequest message from a plain object. Also converts values to their respective internal types.
@@ -6054,7 +4002,7 @@ export namespace protocol {
       /** Properties of a DeleteEmoteFromPackRequest. */
       interface IDeleteEmoteFromPackRequest {
         /** DeleteEmoteFromPackRequest packId */
-        packId?: number | Long | null;
+        packId?: number | null;
 
         /** DeleteEmoteFromPackRequest imageId */
         imageId?: string | null;
@@ -6069,19 +4017,10 @@ export namespace protocol {
         constructor(properties?: protocol.chat.v1.IDeleteEmoteFromPackRequest);
 
         /** DeleteEmoteFromPackRequest packId. */
-        public packId: number | Long;
+        public packId: number;
 
         /** DeleteEmoteFromPackRequest imageId. */
         public imageId: string;
-
-        /**
-         * Creates a new DeleteEmoteFromPackRequest instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns DeleteEmoteFromPackRequest instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IDeleteEmoteFromPackRequest
-        ): protocol.chat.v1.DeleteEmoteFromPackRequest;
 
         /**
          * Encodes the specified DeleteEmoteFromPackRequest message. Does not implicitly {@link protocol.chat.v1.DeleteEmoteFromPackRequest.verify|verify} messages.
@@ -6090,17 +4029,6 @@ export namespace protocol {
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IDeleteEmoteFromPackRequest,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified DeleteEmoteFromPackRequest message, length delimited. Does not implicitly {@link protocol.chat.v1.DeleteEmoteFromPackRequest.verify|verify} messages.
-         * @param message DeleteEmoteFromPackRequest message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IDeleteEmoteFromPackRequest,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -6117,24 +4045,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.DeleteEmoteFromPackRequest;
-
-        /**
-         * Decodes a DeleteEmoteFromPackRequest message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns DeleteEmoteFromPackRequest
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.DeleteEmoteFromPackRequest;
-
-        /**
-         * Verifies a DeleteEmoteFromPackRequest message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a DeleteEmoteFromPackRequest message from a plain object. Also converts values to their respective internal types.
@@ -6166,7 +4076,7 @@ export namespace protocol {
       /** Properties of a DeleteEmotePackRequest. */
       interface IDeleteEmotePackRequest {
         /** DeleteEmotePackRequest packId */
-        packId?: number | Long | null;
+        packId?: number | null;
       }
 
       /** Represents a DeleteEmotePackRequest. */
@@ -6178,16 +4088,7 @@ export namespace protocol {
         constructor(properties?: protocol.chat.v1.IDeleteEmotePackRequest);
 
         /** DeleteEmotePackRequest packId. */
-        public packId: number | Long;
-
-        /**
-         * Creates a new DeleteEmotePackRequest instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns DeleteEmotePackRequest instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IDeleteEmotePackRequest
-        ): protocol.chat.v1.DeleteEmotePackRequest;
+        public packId: number;
 
         /**
          * Encodes the specified DeleteEmotePackRequest message. Does not implicitly {@link protocol.chat.v1.DeleteEmotePackRequest.verify|verify} messages.
@@ -6196,17 +4097,6 @@ export namespace protocol {
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IDeleteEmotePackRequest,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified DeleteEmotePackRequest message, length delimited. Does not implicitly {@link protocol.chat.v1.DeleteEmotePackRequest.verify|verify} messages.
-         * @param message DeleteEmotePackRequest message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IDeleteEmotePackRequest,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -6223,24 +4113,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.DeleteEmotePackRequest;
-
-        /**
-         * Decodes a DeleteEmotePackRequest message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns DeleteEmotePackRequest
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.DeleteEmotePackRequest;
-
-        /**
-         * Verifies a DeleteEmotePackRequest message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a DeleteEmotePackRequest message from a plain object. Also converts values to their respective internal types.
@@ -6272,7 +4144,7 @@ export namespace protocol {
       /** Properties of a DequipEmotePackRequest. */
       interface IDequipEmotePackRequest {
         /** DequipEmotePackRequest packId */
-        packId?: number | Long | null;
+        packId?: number | null;
       }
 
       /** Represents a DequipEmotePackRequest. */
@@ -6284,16 +4156,7 @@ export namespace protocol {
         constructor(properties?: protocol.chat.v1.IDequipEmotePackRequest);
 
         /** DequipEmotePackRequest packId. */
-        public packId: number | Long;
-
-        /**
-         * Creates a new DequipEmotePackRequest instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns DequipEmotePackRequest instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IDequipEmotePackRequest
-        ): protocol.chat.v1.DequipEmotePackRequest;
+        public packId: number;
 
         /**
          * Encodes the specified DequipEmotePackRequest message. Does not implicitly {@link protocol.chat.v1.DequipEmotePackRequest.verify|verify} messages.
@@ -6302,17 +4165,6 @@ export namespace protocol {
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IDequipEmotePackRequest,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified DequipEmotePackRequest message, length delimited. Does not implicitly {@link protocol.chat.v1.DequipEmotePackRequest.verify|verify} messages.
-         * @param message DequipEmotePackRequest message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IDequipEmotePackRequest,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -6329,24 +4181,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.DequipEmotePackRequest;
-
-        /**
-         * Decodes a DequipEmotePackRequest message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns DequipEmotePackRequest
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.DequipEmotePackRequest;
-
-        /**
-         * Verifies a DequipEmotePackRequest message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a DequipEmotePackRequest message from a plain object. Also converts values to their respective internal types.
@@ -6378,7 +4212,7 @@ export namespace protocol {
       /** Properties of a CreateChannelRequest. */
       interface ICreateChannelRequest {
         /** CreateChannelRequest guildId */
-        guildId?: number | Long | null;
+        guildId?: number | null;
 
         /** CreateChannelRequest channelName */
         channelName?: string | null;
@@ -6387,10 +4221,10 @@ export namespace protocol {
         isCategory?: boolean | null;
 
         /** CreateChannelRequest previousId */
-        previousId?: number | Long | null;
+        previousId?: number | null;
 
         /** CreateChannelRequest nextId */
-        nextId?: number | Long | null;
+        nextId?: number | null;
 
         /** CreateChannelRequest metadata */
         metadata?: protocol.harmonytypes.v1.IMetadata | null;
@@ -6405,7 +4239,7 @@ export namespace protocol {
         constructor(properties?: protocol.chat.v1.ICreateChannelRequest);
 
         /** CreateChannelRequest guildId. */
-        public guildId: number | Long;
+        public guildId: number;
 
         /** CreateChannelRequest channelName. */
         public channelName: string;
@@ -6414,22 +4248,13 @@ export namespace protocol {
         public isCategory: boolean;
 
         /** CreateChannelRequest previousId. */
-        public previousId: number | Long;
+        public previousId: number;
 
         /** CreateChannelRequest nextId. */
-        public nextId: number | Long;
+        public nextId: number;
 
         /** CreateChannelRequest metadata. */
         public metadata?: protocol.harmonytypes.v1.IMetadata | null;
-
-        /**
-         * Creates a new CreateChannelRequest instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns CreateChannelRequest instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.ICreateChannelRequest
-        ): protocol.chat.v1.CreateChannelRequest;
 
         /**
          * Encodes the specified CreateChannelRequest message. Does not implicitly {@link protocol.chat.v1.CreateChannelRequest.verify|verify} messages.
@@ -6438,17 +4263,6 @@ export namespace protocol {
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.ICreateChannelRequest,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified CreateChannelRequest message, length delimited. Does not implicitly {@link protocol.chat.v1.CreateChannelRequest.verify|verify} messages.
-         * @param message CreateChannelRequest message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.ICreateChannelRequest,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -6465,24 +4279,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.CreateChannelRequest;
-
-        /**
-         * Decodes a CreateChannelRequest message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns CreateChannelRequest
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.CreateChannelRequest;
-
-        /**
-         * Verifies a CreateChannelRequest message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a CreateChannelRequest message from a plain object. Also converts values to their respective internal types.
@@ -6514,7 +4310,7 @@ export namespace protocol {
       /** Properties of a CreateChannelResponse. */
       interface ICreateChannelResponse {
         /** CreateChannelResponse channelId */
-        channelId?: number | Long | null;
+        channelId?: number | null;
       }
 
       /** Represents a CreateChannelResponse. */
@@ -6526,16 +4322,7 @@ export namespace protocol {
         constructor(properties?: protocol.chat.v1.ICreateChannelResponse);
 
         /** CreateChannelResponse channelId. */
-        public channelId: number | Long;
-
-        /**
-         * Creates a new CreateChannelResponse instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns CreateChannelResponse instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.ICreateChannelResponse
-        ): protocol.chat.v1.CreateChannelResponse;
+        public channelId: number;
 
         /**
          * Encodes the specified CreateChannelResponse message. Does not implicitly {@link protocol.chat.v1.CreateChannelResponse.verify|verify} messages.
@@ -6544,17 +4331,6 @@ export namespace protocol {
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.ICreateChannelResponse,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified CreateChannelResponse message, length delimited. Does not implicitly {@link protocol.chat.v1.CreateChannelResponse.verify|verify} messages.
-         * @param message CreateChannelResponse message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.ICreateChannelResponse,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -6571,24 +4347,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.CreateChannelResponse;
-
-        /**
-         * Decodes a CreateChannelResponse message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns CreateChannelResponse
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.CreateChannelResponse;
-
-        /**
-         * Verifies a CreateChannelResponse message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a CreateChannelResponse message from a plain object. Also converts values to their respective internal types.
@@ -6620,7 +4378,7 @@ export namespace protocol {
       /** Properties of a GetGuildChannelsRequest. */
       interface IGetGuildChannelsRequest {
         /** GetGuildChannelsRequest guildId */
-        guildId?: number | Long | null;
+        guildId?: number | null;
       }
 
       /** Represents a GetGuildChannelsRequest. */
@@ -6632,16 +4390,7 @@ export namespace protocol {
         constructor(properties?: protocol.chat.v1.IGetGuildChannelsRequest);
 
         /** GetGuildChannelsRequest guildId. */
-        public guildId: number | Long;
-
-        /**
-         * Creates a new GetGuildChannelsRequest instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns GetGuildChannelsRequest instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IGetGuildChannelsRequest
-        ): protocol.chat.v1.GetGuildChannelsRequest;
+        public guildId: number;
 
         /**
          * Encodes the specified GetGuildChannelsRequest message. Does not implicitly {@link protocol.chat.v1.GetGuildChannelsRequest.verify|verify} messages.
@@ -6650,17 +4399,6 @@ export namespace protocol {
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IGetGuildChannelsRequest,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified GetGuildChannelsRequest message, length delimited. Does not implicitly {@link protocol.chat.v1.GetGuildChannelsRequest.verify|verify} messages.
-         * @param message GetGuildChannelsRequest message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IGetGuildChannelsRequest,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -6677,24 +4415,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.GetGuildChannelsRequest;
-
-        /**
-         * Decodes a GetGuildChannelsRequest message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns GetGuildChannelsRequest
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.GetGuildChannelsRequest;
-
-        /**
-         * Verifies a GetGuildChannelsRequest message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a GetGuildChannelsRequest message from a plain object. Also converts values to their respective internal types.
@@ -6741,32 +4461,12 @@ export namespace protocol {
         public channels: protocol.chat.v1.GetGuildChannelsResponse.IChannel[];
 
         /**
-         * Creates a new GetGuildChannelsResponse instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns GetGuildChannelsResponse instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IGetGuildChannelsResponse
-        ): protocol.chat.v1.GetGuildChannelsResponse;
-
-        /**
          * Encodes the specified GetGuildChannelsResponse message. Does not implicitly {@link protocol.chat.v1.GetGuildChannelsResponse.verify|verify} messages.
          * @param message GetGuildChannelsResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IGetGuildChannelsResponse,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified GetGuildChannelsResponse message, length delimited. Does not implicitly {@link protocol.chat.v1.GetGuildChannelsResponse.verify|verify} messages.
-         * @param message GetGuildChannelsResponse message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IGetGuildChannelsResponse,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -6783,24 +4483,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.GetGuildChannelsResponse;
-
-        /**
-         * Decodes a GetGuildChannelsResponse message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns GetGuildChannelsResponse
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.GetGuildChannelsResponse;
-
-        /**
-         * Verifies a GetGuildChannelsResponse message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a GetGuildChannelsResponse message from a plain object. Also converts values to their respective internal types.
@@ -6836,7 +4518,7 @@ export namespace protocol {
           metadata?: protocol.harmonytypes.v1.IMetadata | null;
 
           /** Channel channelId */
-          channelId?: number | Long | null;
+          channelId?: number | null;
 
           /** Channel channelName */
           channelName?: string | null;
@@ -6859,7 +4541,7 @@ export namespace protocol {
           public metadata?: protocol.harmonytypes.v1.IMetadata | null;
 
           /** Channel channelId. */
-          public channelId: number | Long;
+          public channelId: number;
 
           /** Channel channelName. */
           public channelName: string;
@@ -6868,32 +4550,12 @@ export namespace protocol {
           public isCategory: boolean;
 
           /**
-           * Creates a new Channel instance using the specified properties.
-           * @param [properties] Properties to set
-           * @returns Channel instance
-           */
-          public static create(
-            properties?: protocol.chat.v1.GetGuildChannelsResponse.IChannel
-          ): protocol.chat.v1.GetGuildChannelsResponse.Channel;
-
-          /**
            * Encodes the specified Channel message. Does not implicitly {@link protocol.chat.v1.GetGuildChannelsResponse.Channel.verify|verify} messages.
            * @param message Channel message or plain object to encode
            * @param [writer] Writer to encode to
            * @returns Writer
            */
           public static encode(
-            message: protocol.chat.v1.GetGuildChannelsResponse.IChannel,
-            writer?: $protobuf.Writer
-          ): $protobuf.Writer;
-
-          /**
-           * Encodes the specified Channel message, length delimited. Does not implicitly {@link protocol.chat.v1.GetGuildChannelsResponse.Channel.verify|verify} messages.
-           * @param message Channel message or plain object to encode
-           * @param [writer] Writer to encode to
-           * @returns Writer
-           */
-          public static encodeDelimited(
             message: protocol.chat.v1.GetGuildChannelsResponse.IChannel,
             writer?: $protobuf.Writer
           ): $protobuf.Writer;
@@ -6910,24 +4572,6 @@ export namespace protocol {
             reader: $protobuf.Reader | Uint8Array,
             length?: number
           ): protocol.chat.v1.GetGuildChannelsResponse.Channel;
-
-          /**
-           * Decodes a Channel message from the specified reader or buffer, length delimited.
-           * @param reader Reader or buffer to decode from
-           * @returns Channel
-           * @throws {Error} If the payload is not a reader or valid buffer
-           * @throws {$protobuf.util.ProtocolError} If required fields are missing
-           */
-          public static decodeDelimited(
-            reader: $protobuf.Reader | Uint8Array
-          ): protocol.chat.v1.GetGuildChannelsResponse.Channel;
-
-          /**
-           * Verifies a Channel message.
-           * @param message Plain object to verify
-           * @returns `null` if valid, otherwise the reason why it is not
-           */
-          public static verify(message: { [k: string]: any }): string | null;
 
           /**
            * Creates a Channel message from a plain object. Also converts values to their respective internal types.
@@ -6960,10 +4604,10 @@ export namespace protocol {
       /** Properties of an UpdateChannelInformationRequest. */
       interface IUpdateChannelInformationRequest {
         /** UpdateChannelInformationRequest guildId */
-        guildId?: number | Long | null;
+        guildId?: number | null;
 
         /** UpdateChannelInformationRequest channelId */
-        channelId?: number | Long | null;
+        channelId?: number | null;
 
         /** UpdateChannelInformationRequest name */
         name?: string | null;
@@ -6990,10 +4634,10 @@ export namespace protocol {
         );
 
         /** UpdateChannelInformationRequest guildId. */
-        public guildId: number | Long;
+        public guildId: number;
 
         /** UpdateChannelInformationRequest channelId. */
-        public channelId: number | Long;
+        public channelId: number;
 
         /** UpdateChannelInformationRequest name. */
         public name: string;
@@ -7008,32 +4652,12 @@ export namespace protocol {
         public updateMetadata: boolean;
 
         /**
-         * Creates a new UpdateChannelInformationRequest instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns UpdateChannelInformationRequest instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IUpdateChannelInformationRequest
-        ): protocol.chat.v1.UpdateChannelInformationRequest;
-
-        /**
          * Encodes the specified UpdateChannelInformationRequest message. Does not implicitly {@link protocol.chat.v1.UpdateChannelInformationRequest.verify|verify} messages.
          * @param message UpdateChannelInformationRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IUpdateChannelInformationRequest,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified UpdateChannelInformationRequest message, length delimited. Does not implicitly {@link protocol.chat.v1.UpdateChannelInformationRequest.verify|verify} messages.
-         * @param message UpdateChannelInformationRequest message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IUpdateChannelInformationRequest,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -7050,24 +4674,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.UpdateChannelInformationRequest;
-
-        /**
-         * Decodes an UpdateChannelInformationRequest message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns UpdateChannelInformationRequest
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.UpdateChannelInformationRequest;
-
-        /**
-         * Verifies an UpdateChannelInformationRequest message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates an UpdateChannelInformationRequest message from a plain object. Also converts values to their respective internal types.
@@ -7099,16 +4705,16 @@ export namespace protocol {
       /** Properties of an UpdateChannelOrderRequest. */
       interface IUpdateChannelOrderRequest {
         /** UpdateChannelOrderRequest guildId */
-        guildId?: number | Long | null;
+        guildId?: number | null;
 
         /** UpdateChannelOrderRequest channelId */
-        channelId?: number | Long | null;
+        channelId?: number | null;
 
         /** UpdateChannelOrderRequest previousId */
-        previousId?: number | Long | null;
+        previousId?: number | null;
 
         /** UpdateChannelOrderRequest nextId */
-        nextId?: number | Long | null;
+        nextId?: number | null;
       }
 
       /** Represents an UpdateChannelOrderRequest. */
@@ -7120,25 +4726,16 @@ export namespace protocol {
         constructor(properties?: protocol.chat.v1.IUpdateChannelOrderRequest);
 
         /** UpdateChannelOrderRequest guildId. */
-        public guildId: number | Long;
+        public guildId: number;
 
         /** UpdateChannelOrderRequest channelId. */
-        public channelId: number | Long;
+        public channelId: number;
 
         /** UpdateChannelOrderRequest previousId. */
-        public previousId: number | Long;
+        public previousId: number;
 
         /** UpdateChannelOrderRequest nextId. */
-        public nextId: number | Long;
-
-        /**
-         * Creates a new UpdateChannelOrderRequest instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns UpdateChannelOrderRequest instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IUpdateChannelOrderRequest
-        ): protocol.chat.v1.UpdateChannelOrderRequest;
+        public nextId: number;
 
         /**
          * Encodes the specified UpdateChannelOrderRequest message. Does not implicitly {@link protocol.chat.v1.UpdateChannelOrderRequest.verify|verify} messages.
@@ -7147,17 +4744,6 @@ export namespace protocol {
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IUpdateChannelOrderRequest,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified UpdateChannelOrderRequest message, length delimited. Does not implicitly {@link protocol.chat.v1.UpdateChannelOrderRequest.verify|verify} messages.
-         * @param message UpdateChannelOrderRequest message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IUpdateChannelOrderRequest,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -7174,24 +4760,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.UpdateChannelOrderRequest;
-
-        /**
-         * Decodes an UpdateChannelOrderRequest message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns UpdateChannelOrderRequest
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.UpdateChannelOrderRequest;
-
-        /**
-         * Verifies an UpdateChannelOrderRequest message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates an UpdateChannelOrderRequest message from a plain object. Also converts values to their respective internal types.
@@ -7223,10 +4791,10 @@ export namespace protocol {
       /** Properties of a DeleteChannelRequest. */
       interface IDeleteChannelRequest {
         /** DeleteChannelRequest guildId */
-        guildId?: number | Long | null;
+        guildId?: number | null;
 
         /** DeleteChannelRequest channelId */
-        channelId?: number | Long | null;
+        channelId?: number | null;
       }
 
       /** Represents a DeleteChannelRequest. */
@@ -7238,19 +4806,10 @@ export namespace protocol {
         constructor(properties?: protocol.chat.v1.IDeleteChannelRequest);
 
         /** DeleteChannelRequest guildId. */
-        public guildId: number | Long;
+        public guildId: number;
 
         /** DeleteChannelRequest channelId. */
-        public channelId: number | Long;
-
-        /**
-         * Creates a new DeleteChannelRequest instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns DeleteChannelRequest instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IDeleteChannelRequest
-        ): protocol.chat.v1.DeleteChannelRequest;
+        public channelId: number;
 
         /**
          * Encodes the specified DeleteChannelRequest message. Does not implicitly {@link protocol.chat.v1.DeleteChannelRequest.verify|verify} messages.
@@ -7259,17 +4818,6 @@ export namespace protocol {
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IDeleteChannelRequest,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified DeleteChannelRequest message, length delimited. Does not implicitly {@link protocol.chat.v1.DeleteChannelRequest.verify|verify} messages.
-         * @param message DeleteChannelRequest message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IDeleteChannelRequest,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -7286,24 +4834,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.DeleteChannelRequest;
-
-        /**
-         * Decodes a DeleteChannelRequest message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns DeleteChannelRequest
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.DeleteChannelRequest;
-
-        /**
-         * Verifies a DeleteChannelRequest message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a DeleteChannelRequest message from a plain object. Also converts values to their respective internal types.
@@ -7335,10 +4865,10 @@ export namespace protocol {
       /** Properties of a TypingRequest. */
       interface ITypingRequest {
         /** TypingRequest guildId */
-        guildId?: number | Long | null;
+        guildId?: number | null;
 
         /** TypingRequest channelId */
-        channelId?: number | Long | null;
+        channelId?: number | null;
       }
 
       /** Represents a TypingRequest. */
@@ -7350,19 +4880,10 @@ export namespace protocol {
         constructor(properties?: protocol.chat.v1.ITypingRequest);
 
         /** TypingRequest guildId. */
-        public guildId: number | Long;
+        public guildId: number;
 
         /** TypingRequest channelId. */
-        public channelId: number | Long;
-
-        /**
-         * Creates a new TypingRequest instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns TypingRequest instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.ITypingRequest
-        ): protocol.chat.v1.TypingRequest;
+        public channelId: number;
 
         /**
          * Encodes the specified TypingRequest message. Does not implicitly {@link protocol.chat.v1.TypingRequest.verify|verify} messages.
@@ -7371,17 +4892,6 @@ export namespace protocol {
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.ITypingRequest,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified TypingRequest message, length delimited. Does not implicitly {@link protocol.chat.v1.TypingRequest.verify|verify} messages.
-         * @param message TypingRequest message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.ITypingRequest,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -7398,24 +4908,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.TypingRequest;
-
-        /**
-         * Decodes a TypingRequest message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns TypingRequest
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.TypingRequest;
-
-        /**
-         * Verifies a TypingRequest message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a TypingRequest message from a plain object. Also converts values to their respective internal types.
@@ -7447,13 +4939,13 @@ export namespace protocol {
       /** Properties of a GetChannelMessagesRequest. */
       interface IGetChannelMessagesRequest {
         /** GetChannelMessagesRequest guildId */
-        guildId?: number | Long | null;
+        guildId?: number | null;
 
         /** GetChannelMessagesRequest channelId */
-        channelId?: number | Long | null;
+        channelId?: number | null;
 
         /** GetChannelMessagesRequest beforeMessage */
-        beforeMessage?: number | Long | null;
+        beforeMessage?: number | null;
       }
 
       /** Represents a GetChannelMessagesRequest. */
@@ -7465,22 +4957,13 @@ export namespace protocol {
         constructor(properties?: protocol.chat.v1.IGetChannelMessagesRequest);
 
         /** GetChannelMessagesRequest guildId. */
-        public guildId: number | Long;
+        public guildId: number;
 
         /** GetChannelMessagesRequest channelId. */
-        public channelId: number | Long;
+        public channelId: number;
 
         /** GetChannelMessagesRequest beforeMessage. */
-        public beforeMessage: number | Long;
-
-        /**
-         * Creates a new GetChannelMessagesRequest instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns GetChannelMessagesRequest instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IGetChannelMessagesRequest
-        ): protocol.chat.v1.GetChannelMessagesRequest;
+        public beforeMessage: number;
 
         /**
          * Encodes the specified GetChannelMessagesRequest message. Does not implicitly {@link protocol.chat.v1.GetChannelMessagesRequest.verify|verify} messages.
@@ -7489,17 +4972,6 @@ export namespace protocol {
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IGetChannelMessagesRequest,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified GetChannelMessagesRequest message, length delimited. Does not implicitly {@link protocol.chat.v1.GetChannelMessagesRequest.verify|verify} messages.
-         * @param message GetChannelMessagesRequest message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IGetChannelMessagesRequest,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -7516,24 +4988,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.GetChannelMessagesRequest;
-
-        /**
-         * Decodes a GetChannelMessagesRequest message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns GetChannelMessagesRequest
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.GetChannelMessagesRequest;
-
-        /**
-         * Verifies a GetChannelMessagesRequest message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a GetChannelMessagesRequest message from a plain object. Also converts values to their respective internal types.
@@ -7586,32 +5040,12 @@ export namespace protocol {
         public messages: protocol.harmonytypes.v1.IMessage[];
 
         /**
-         * Creates a new GetChannelMessagesResponse instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns GetChannelMessagesResponse instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IGetChannelMessagesResponse
-        ): protocol.chat.v1.GetChannelMessagesResponse;
-
-        /**
          * Encodes the specified GetChannelMessagesResponse message. Does not implicitly {@link protocol.chat.v1.GetChannelMessagesResponse.verify|verify} messages.
          * @param message GetChannelMessagesResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IGetChannelMessagesResponse,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified GetChannelMessagesResponse message, length delimited. Does not implicitly {@link protocol.chat.v1.GetChannelMessagesResponse.verify|verify} messages.
-         * @param message GetChannelMessagesResponse message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IGetChannelMessagesResponse,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -7628,24 +5062,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.GetChannelMessagesResponse;
-
-        /**
-         * Decodes a GetChannelMessagesResponse message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns GetChannelMessagesResponse
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.GetChannelMessagesResponse;
-
-        /**
-         * Verifies a GetChannelMessagesResponse message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a GetChannelMessagesResponse message from a plain object. Also converts values to their respective internal types.
@@ -7677,13 +5093,13 @@ export namespace protocol {
       /** Properties of a GetMessageRequest. */
       interface IGetMessageRequest {
         /** GetMessageRequest guildId */
-        guildId?: number | Long | null;
+        guildId?: number | null;
 
         /** GetMessageRequest channelId */
-        channelId?: number | Long | null;
+        channelId?: number | null;
 
         /** GetMessageRequest messageId */
-        messageId?: number | Long | null;
+        messageId?: number | null;
       }
 
       /** Represents a GetMessageRequest. */
@@ -7695,22 +5111,13 @@ export namespace protocol {
         constructor(properties?: protocol.chat.v1.IGetMessageRequest);
 
         /** GetMessageRequest guildId. */
-        public guildId: number | Long;
+        public guildId: number;
 
         /** GetMessageRequest channelId. */
-        public channelId: number | Long;
+        public channelId: number;
 
         /** GetMessageRequest messageId. */
-        public messageId: number | Long;
-
-        /**
-         * Creates a new GetMessageRequest instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns GetMessageRequest instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IGetMessageRequest
-        ): protocol.chat.v1.GetMessageRequest;
+        public messageId: number;
 
         /**
          * Encodes the specified GetMessageRequest message. Does not implicitly {@link protocol.chat.v1.GetMessageRequest.verify|verify} messages.
@@ -7719,17 +5126,6 @@ export namespace protocol {
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IGetMessageRequest,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified GetMessageRequest message, length delimited. Does not implicitly {@link protocol.chat.v1.GetMessageRequest.verify|verify} messages.
-         * @param message GetMessageRequest message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IGetMessageRequest,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -7746,24 +5142,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.GetMessageRequest;
-
-        /**
-         * Decodes a GetMessageRequest message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns GetMessageRequest
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.GetMessageRequest;
-
-        /**
-         * Verifies a GetMessageRequest message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a GetMessageRequest message from a plain object. Also converts values to their respective internal types.
@@ -7810,32 +5188,12 @@ export namespace protocol {
         public message?: protocol.harmonytypes.v1.IMessage | null;
 
         /**
-         * Creates a new GetMessageResponse instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns GetMessageResponse instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IGetMessageResponse
-        ): protocol.chat.v1.GetMessageResponse;
-
-        /**
          * Encodes the specified GetMessageResponse message. Does not implicitly {@link protocol.chat.v1.GetMessageResponse.verify|verify} messages.
          * @param message GetMessageResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IGetMessageResponse,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified GetMessageResponse message, length delimited. Does not implicitly {@link protocol.chat.v1.GetMessageResponse.verify|verify} messages.
-         * @param message GetMessageResponse message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IGetMessageResponse,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -7852,24 +5210,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.GetMessageResponse;
-
-        /**
-         * Decodes a GetMessageResponse message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns GetMessageResponse
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.GetMessageResponse;
-
-        /**
-         * Verifies a GetMessageResponse message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a GetMessageResponse message from a plain object. Also converts values to their respective internal types.
@@ -7901,13 +5241,13 @@ export namespace protocol {
       /** Properties of an UpdateMessageRequest. */
       interface IUpdateMessageRequest {
         /** UpdateMessageRequest guildId */
-        guildId?: number | Long | null;
+        guildId?: number | null;
 
         /** UpdateMessageRequest channelId */
-        channelId?: number | Long | null;
+        channelId?: number | null;
 
         /** UpdateMessageRequest messageId */
-        messageId?: number | Long | null;
+        messageId?: number | null;
 
         /** UpdateMessageRequest content */
         content?: string | null;
@@ -7955,13 +5295,13 @@ export namespace protocol {
         constructor(properties?: protocol.chat.v1.IUpdateMessageRequest);
 
         /** UpdateMessageRequest guildId. */
-        public guildId: number | Long;
+        public guildId: number;
 
         /** UpdateMessageRequest channelId. */
-        public channelId: number | Long;
+        public channelId: number;
 
         /** UpdateMessageRequest messageId. */
-        public messageId: number | Long;
+        public messageId: number;
 
         /** UpdateMessageRequest content. */
         public content: string;
@@ -8000,32 +5340,12 @@ export namespace protocol {
         public updateMetadata: boolean;
 
         /**
-         * Creates a new UpdateMessageRequest instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns UpdateMessageRequest instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IUpdateMessageRequest
-        ): protocol.chat.v1.UpdateMessageRequest;
-
-        /**
          * Encodes the specified UpdateMessageRequest message. Does not implicitly {@link protocol.chat.v1.UpdateMessageRequest.verify|verify} messages.
          * @param message UpdateMessageRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IUpdateMessageRequest,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified UpdateMessageRequest message, length delimited. Does not implicitly {@link protocol.chat.v1.UpdateMessageRequest.verify|verify} messages.
-         * @param message UpdateMessageRequest message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IUpdateMessageRequest,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -8042,24 +5362,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.UpdateMessageRequest;
-
-        /**
-         * Decodes an UpdateMessageRequest message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns UpdateMessageRequest
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.UpdateMessageRequest;
-
-        /**
-         * Verifies an UpdateMessageRequest message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates an UpdateMessageRequest message from a plain object. Also converts values to their respective internal types.
@@ -8091,13 +5393,13 @@ export namespace protocol {
       /** Properties of a DeleteMessageRequest. */
       interface IDeleteMessageRequest {
         /** DeleteMessageRequest guildId */
-        guildId?: number | Long | null;
+        guildId?: number | null;
 
         /** DeleteMessageRequest channelId */
-        channelId?: number | Long | null;
+        channelId?: number | null;
 
         /** DeleteMessageRequest messageId */
-        messageId?: number | Long | null;
+        messageId?: number | null;
       }
 
       /** Represents a DeleteMessageRequest. */
@@ -8109,22 +5411,13 @@ export namespace protocol {
         constructor(properties?: protocol.chat.v1.IDeleteMessageRequest);
 
         /** DeleteMessageRequest guildId. */
-        public guildId: number | Long;
+        public guildId: number;
 
         /** DeleteMessageRequest channelId. */
-        public channelId: number | Long;
+        public channelId: number;
 
         /** DeleteMessageRequest messageId. */
-        public messageId: number | Long;
-
-        /**
-         * Creates a new DeleteMessageRequest instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns DeleteMessageRequest instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IDeleteMessageRequest
-        ): protocol.chat.v1.DeleteMessageRequest;
+        public messageId: number;
 
         /**
          * Encodes the specified DeleteMessageRequest message. Does not implicitly {@link protocol.chat.v1.DeleteMessageRequest.verify|verify} messages.
@@ -8133,17 +5426,6 @@ export namespace protocol {
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IDeleteMessageRequest,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified DeleteMessageRequest message, length delimited. Does not implicitly {@link protocol.chat.v1.DeleteMessageRequest.verify|verify} messages.
-         * @param message DeleteMessageRequest message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IDeleteMessageRequest,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -8160,24 +5442,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.DeleteMessageRequest;
-
-        /**
-         * Decodes a DeleteMessageRequest message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns DeleteMessageRequest
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.DeleteMessageRequest;
-
-        /**
-         * Verifies a DeleteMessageRequest message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a DeleteMessageRequest message from a plain object. Also converts values to their respective internal types.
@@ -8209,13 +5473,13 @@ export namespace protocol {
       /** Properties of a TriggerActionRequest. */
       interface ITriggerActionRequest {
         /** TriggerActionRequest guildId */
-        guildId?: number | Long | null;
+        guildId?: number | null;
 
         /** TriggerActionRequest channelId */
-        channelId?: number | Long | null;
+        channelId?: number | null;
 
         /** TriggerActionRequest messageId */
-        messageId?: number | Long | null;
+        messageId?: number | null;
 
         /** TriggerActionRequest actionId */
         actionId?: string | null;
@@ -8233,13 +5497,13 @@ export namespace protocol {
         constructor(properties?: protocol.chat.v1.ITriggerActionRequest);
 
         /** TriggerActionRequest guildId. */
-        public guildId: number | Long;
+        public guildId: number;
 
         /** TriggerActionRequest channelId. */
-        public channelId: number | Long;
+        public channelId: number;
 
         /** TriggerActionRequest messageId. */
-        public messageId: number | Long;
+        public messageId: number;
 
         /** TriggerActionRequest actionId. */
         public actionId: string;
@@ -8248,32 +5512,12 @@ export namespace protocol {
         public actionData: string;
 
         /**
-         * Creates a new TriggerActionRequest instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns TriggerActionRequest instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.ITriggerActionRequest
-        ): protocol.chat.v1.TriggerActionRequest;
-
-        /**
          * Encodes the specified TriggerActionRequest message. Does not implicitly {@link protocol.chat.v1.TriggerActionRequest.verify|verify} messages.
          * @param message TriggerActionRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.ITriggerActionRequest,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified TriggerActionRequest message, length delimited. Does not implicitly {@link protocol.chat.v1.TriggerActionRequest.verify|verify} messages.
-         * @param message TriggerActionRequest message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.ITriggerActionRequest,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -8290,24 +5534,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.TriggerActionRequest;
-
-        /**
-         * Decodes a TriggerActionRequest message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns TriggerActionRequest
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.TriggerActionRequest;
-
-        /**
-         * Verifies a TriggerActionRequest message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a TriggerActionRequest message from a plain object. Also converts values to their respective internal types.
@@ -8339,10 +5565,10 @@ export namespace protocol {
       /** Properties of a SendMessageRequest. */
       interface ISendMessageRequest {
         /** SendMessageRequest guildId */
-        guildId?: number | Long | null;
+        guildId?: number | null;
 
         /** SendMessageRequest channelId */
-        channelId?: number | Long | null;
+        channelId?: number | null;
 
         /** SendMessageRequest content */
         content?: string | null;
@@ -8357,13 +5583,13 @@ export namespace protocol {
         attachments?: string[] | null;
 
         /** SendMessageRequest inReplyTo */
-        inReplyTo?: number | Long | null;
+        inReplyTo?: number | null;
 
         /** SendMessageRequest overrides */
         overrides?: protocol.harmonytypes.v1.IOverride | null;
 
         /** SendMessageRequest echoId */
-        echoId?: number | Long | null;
+        echoId?: number | null;
 
         /** SendMessageRequest metadata */
         metadata?: protocol.harmonytypes.v1.IMetadata | null;
@@ -8378,10 +5604,10 @@ export namespace protocol {
         constructor(properties?: protocol.chat.v1.ISendMessageRequest);
 
         /** SendMessageRequest guildId. */
-        public guildId: number | Long;
+        public guildId: number;
 
         /** SendMessageRequest channelId. */
-        public channelId: number | Long;
+        public channelId: number;
 
         /** SendMessageRequest content. */
         public content: string;
@@ -8396,25 +5622,16 @@ export namespace protocol {
         public attachments: string[];
 
         /** SendMessageRequest inReplyTo. */
-        public inReplyTo: number | Long;
+        public inReplyTo: number;
 
         /** SendMessageRequest overrides. */
         public overrides?: protocol.harmonytypes.v1.IOverride | null;
 
         /** SendMessageRequest echoId. */
-        public echoId: number | Long;
+        public echoId: number;
 
         /** SendMessageRequest metadata. */
         public metadata?: protocol.harmonytypes.v1.IMetadata | null;
-
-        /**
-         * Creates a new SendMessageRequest instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns SendMessageRequest instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.ISendMessageRequest
-        ): protocol.chat.v1.SendMessageRequest;
 
         /**
          * Encodes the specified SendMessageRequest message. Does not implicitly {@link protocol.chat.v1.SendMessageRequest.verify|verify} messages.
@@ -8423,17 +5640,6 @@ export namespace protocol {
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.ISendMessageRequest,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified SendMessageRequest message, length delimited. Does not implicitly {@link protocol.chat.v1.SendMessageRequest.verify|verify} messages.
-         * @param message SendMessageRequest message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.ISendMessageRequest,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -8450,24 +5656,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.SendMessageRequest;
-
-        /**
-         * Decodes a SendMessageRequest message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns SendMessageRequest
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.SendMessageRequest;
-
-        /**
-         * Verifies a SendMessageRequest message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a SendMessageRequest message from a plain object. Also converts values to their respective internal types.
@@ -8499,7 +5687,7 @@ export namespace protocol {
       /** Properties of a SendMessageResponse. */
       interface ISendMessageResponse {
         /** SendMessageResponse messageId */
-        messageId?: number | Long | null;
+        messageId?: number | null;
       }
 
       /** Represents a SendMessageResponse. */
@@ -8511,16 +5699,7 @@ export namespace protocol {
         constructor(properties?: protocol.chat.v1.ISendMessageResponse);
 
         /** SendMessageResponse messageId. */
-        public messageId: number | Long;
-
-        /**
-         * Creates a new SendMessageResponse instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns SendMessageResponse instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.ISendMessageResponse
-        ): protocol.chat.v1.SendMessageResponse;
+        public messageId: number;
 
         /**
          * Encodes the specified SendMessageResponse message. Does not implicitly {@link protocol.chat.v1.SendMessageResponse.verify|verify} messages.
@@ -8529,17 +5708,6 @@ export namespace protocol {
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.ISendMessageResponse,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified SendMessageResponse message, length delimited. Does not implicitly {@link protocol.chat.v1.SendMessageResponse.verify|verify} messages.
-         * @param message SendMessageResponse message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.ISendMessageResponse,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -8556,24 +5724,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.SendMessageResponse;
-
-        /**
-         * Decodes a SendMessageResponse message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns SendMessageResponse
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.SendMessageResponse;
-
-        /**
-         * Verifies a SendMessageResponse message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a SendMessageResponse message from a plain object. Also converts values to their respective internal types.
@@ -8638,32 +5788,12 @@ export namespace protocol {
           | "subscribeToHomeserverEvents";
 
         /**
-         * Creates a new StreamEventsRequest instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns StreamEventsRequest instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IStreamEventsRequest
-        ): protocol.chat.v1.StreamEventsRequest;
-
-        /**
          * Encodes the specified StreamEventsRequest message. Does not implicitly {@link protocol.chat.v1.StreamEventsRequest.verify|verify} messages.
          * @param message StreamEventsRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IStreamEventsRequest,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified StreamEventsRequest message, length delimited. Does not implicitly {@link protocol.chat.v1.StreamEventsRequest.verify|verify} messages.
-         * @param message StreamEventsRequest message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IStreamEventsRequest,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -8680,24 +5810,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.StreamEventsRequest;
-
-        /**
-         * Decodes a StreamEventsRequest message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns StreamEventsRequest
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.StreamEventsRequest;
-
-        /**
-         * Verifies a StreamEventsRequest message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a StreamEventsRequest message from a plain object. Also converts values to their respective internal types.
@@ -8730,7 +5842,7 @@ export namespace protocol {
         /** Properties of a SubscribeToGuild. */
         interface ISubscribeToGuild {
           /** SubscribeToGuild guildId */
-          guildId?: number | Long | null;
+          guildId?: number | null;
         }
 
         /** Represents a SubscribeToGuild. */
@@ -8744,16 +5856,7 @@ export namespace protocol {
           );
 
           /** SubscribeToGuild guildId. */
-          public guildId: number | Long;
-
-          /**
-           * Creates a new SubscribeToGuild instance using the specified properties.
-           * @param [properties] Properties to set
-           * @returns SubscribeToGuild instance
-           */
-          public static create(
-            properties?: protocol.chat.v1.StreamEventsRequest.ISubscribeToGuild
-          ): protocol.chat.v1.StreamEventsRequest.SubscribeToGuild;
+          public guildId: number;
 
           /**
            * Encodes the specified SubscribeToGuild message. Does not implicitly {@link protocol.chat.v1.StreamEventsRequest.SubscribeToGuild.verify|verify} messages.
@@ -8762,17 +5865,6 @@ export namespace protocol {
            * @returns Writer
            */
           public static encode(
-            message: protocol.chat.v1.StreamEventsRequest.ISubscribeToGuild,
-            writer?: $protobuf.Writer
-          ): $protobuf.Writer;
-
-          /**
-           * Encodes the specified SubscribeToGuild message, length delimited. Does not implicitly {@link protocol.chat.v1.StreamEventsRequest.SubscribeToGuild.verify|verify} messages.
-           * @param message SubscribeToGuild message or plain object to encode
-           * @param [writer] Writer to encode to
-           * @returns Writer
-           */
-          public static encodeDelimited(
             message: protocol.chat.v1.StreamEventsRequest.ISubscribeToGuild,
             writer?: $protobuf.Writer
           ): $protobuf.Writer;
@@ -8789,24 +5881,6 @@ export namespace protocol {
             reader: $protobuf.Reader | Uint8Array,
             length?: number
           ): protocol.chat.v1.StreamEventsRequest.SubscribeToGuild;
-
-          /**
-           * Decodes a SubscribeToGuild message from the specified reader or buffer, length delimited.
-           * @param reader Reader or buffer to decode from
-           * @returns SubscribeToGuild
-           * @throws {Error} If the payload is not a reader or valid buffer
-           * @throws {$protobuf.util.ProtocolError} If required fields are missing
-           */
-          public static decodeDelimited(
-            reader: $protobuf.Reader | Uint8Array
-          ): protocol.chat.v1.StreamEventsRequest.SubscribeToGuild;
-
-          /**
-           * Verifies a SubscribeToGuild message.
-           * @param message Plain object to verify
-           * @returns `null` if valid, otherwise the reason why it is not
-           */
-          public static verify(message: { [k: string]: any }): string | null;
 
           /**
            * Creates a SubscribeToGuild message from a plain object. Also converts values to their respective internal types.
@@ -8849,32 +5923,12 @@ export namespace protocol {
           );
 
           /**
-           * Creates a new SubscribeToActions instance using the specified properties.
-           * @param [properties] Properties to set
-           * @returns SubscribeToActions instance
-           */
-          public static create(
-            properties?: protocol.chat.v1.StreamEventsRequest.ISubscribeToActions
-          ): protocol.chat.v1.StreamEventsRequest.SubscribeToActions;
-
-          /**
            * Encodes the specified SubscribeToActions message. Does not implicitly {@link protocol.chat.v1.StreamEventsRequest.SubscribeToActions.verify|verify} messages.
            * @param message SubscribeToActions message or plain object to encode
            * @param [writer] Writer to encode to
            * @returns Writer
            */
           public static encode(
-            message: protocol.chat.v1.StreamEventsRequest.ISubscribeToActions,
-            writer?: $protobuf.Writer
-          ): $protobuf.Writer;
-
-          /**
-           * Encodes the specified SubscribeToActions message, length delimited. Does not implicitly {@link protocol.chat.v1.StreamEventsRequest.SubscribeToActions.verify|verify} messages.
-           * @param message SubscribeToActions message or plain object to encode
-           * @param [writer] Writer to encode to
-           * @returns Writer
-           */
-          public static encodeDelimited(
             message: protocol.chat.v1.StreamEventsRequest.ISubscribeToActions,
             writer?: $protobuf.Writer
           ): $protobuf.Writer;
@@ -8891,24 +5945,6 @@ export namespace protocol {
             reader: $protobuf.Reader | Uint8Array,
             length?: number
           ): protocol.chat.v1.StreamEventsRequest.SubscribeToActions;
-
-          /**
-           * Decodes a SubscribeToActions message from the specified reader or buffer, length delimited.
-           * @param reader Reader or buffer to decode from
-           * @returns SubscribeToActions
-           * @throws {Error} If the payload is not a reader or valid buffer
-           * @throws {$protobuf.util.ProtocolError} If required fields are missing
-           */
-          public static decodeDelimited(
-            reader: $protobuf.Reader | Uint8Array
-          ): protocol.chat.v1.StreamEventsRequest.SubscribeToActions;
-
-          /**
-           * Verifies a SubscribeToActions message.
-           * @param message Plain object to verify
-           * @returns `null` if valid, otherwise the reason why it is not
-           */
-          public static verify(message: { [k: string]: any }): string | null;
 
           /**
            * Creates a SubscribeToActions message from a plain object. Also converts values to their respective internal types.
@@ -8952,32 +5988,12 @@ export namespace protocol {
           );
 
           /**
-           * Creates a new SubscribeToHomeserverEvents instance using the specified properties.
-           * @param [properties] Properties to set
-           * @returns SubscribeToHomeserverEvents instance
-           */
-          public static create(
-            properties?: protocol.chat.v1.StreamEventsRequest.ISubscribeToHomeserverEvents
-          ): protocol.chat.v1.StreamEventsRequest.SubscribeToHomeserverEvents;
-
-          /**
            * Encodes the specified SubscribeToHomeserverEvents message. Does not implicitly {@link protocol.chat.v1.StreamEventsRequest.SubscribeToHomeserverEvents.verify|verify} messages.
            * @param message SubscribeToHomeserverEvents message or plain object to encode
            * @param [writer] Writer to encode to
            * @returns Writer
            */
           public static encode(
-            message: protocol.chat.v1.StreamEventsRequest.ISubscribeToHomeserverEvents,
-            writer?: $protobuf.Writer
-          ): $protobuf.Writer;
-
-          /**
-           * Encodes the specified SubscribeToHomeserverEvents message, length delimited. Does not implicitly {@link protocol.chat.v1.StreamEventsRequest.SubscribeToHomeserverEvents.verify|verify} messages.
-           * @param message SubscribeToHomeserverEvents message or plain object to encode
-           * @param [writer] Writer to encode to
-           * @returns Writer
-           */
-          public static encodeDelimited(
             message: protocol.chat.v1.StreamEventsRequest.ISubscribeToHomeserverEvents,
             writer?: $protobuf.Writer
           ): $protobuf.Writer;
@@ -8994,24 +6010,6 @@ export namespace protocol {
             reader: $protobuf.Reader | Uint8Array,
             length?: number
           ): protocol.chat.v1.StreamEventsRequest.SubscribeToHomeserverEvents;
-
-          /**
-           * Decodes a SubscribeToHomeserverEvents message from the specified reader or buffer, length delimited.
-           * @param reader Reader or buffer to decode from
-           * @returns SubscribeToHomeserverEvents
-           * @throws {Error} If the payload is not a reader or valid buffer
-           * @throws {$protobuf.util.ProtocolError} If required fields are missing
-           */
-          public static decodeDelimited(
-            reader: $protobuf.Reader | Uint8Array
-          ): protocol.chat.v1.StreamEventsRequest.SubscribeToHomeserverEvents;
-
-          /**
-           * Verifies a SubscribeToHomeserverEvents message.
-           * @param message Plain object to verify
-           * @returns `null` if valid, otherwise the reason why it is not
-           */
-          public static verify(message: { [k: string]: any }): string | null;
 
           /**
            * Creates a SubscribeToHomeserverEvents message from a plain object. Also converts values to their respective internal types.
@@ -9168,32 +6166,12 @@ export namespace protocol {
           | "typing";
 
         /**
-         * Creates a new Event instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns Event instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IEvent
-        ): protocol.chat.v1.Event;
-
-        /**
          * Encodes the specified Event message. Does not implicitly {@link protocol.chat.v1.Event.verify|verify} messages.
          * @param message Event message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IEvent,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified Event message, length delimited. Does not implicitly {@link protocol.chat.v1.Event.verify|verify} messages.
-         * @param message Event message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IEvent,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -9210,24 +6188,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.Event;
-
-        /**
-         * Decodes an Event message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns Event
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.Event;
-
-        /**
-         * Verifies an Event message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates an Event message from a plain object. Also converts values to their respective internal types.
@@ -9260,7 +6220,7 @@ export namespace protocol {
         /** Properties of a MessageSent. */
         interface IMessageSent {
           /** MessageSent echoId */
-          echoId?: number | Long | null;
+          echoId?: number | null;
 
           /** MessageSent message */
           message?: protocol.harmonytypes.v1.IMessage | null;
@@ -9275,19 +6235,10 @@ export namespace protocol {
           constructor(properties?: protocol.chat.v1.Event.IMessageSent);
 
           /** MessageSent echoId. */
-          public echoId: number | Long;
+          public echoId: number;
 
           /** MessageSent message. */
           public message?: protocol.harmonytypes.v1.IMessage | null;
-
-          /**
-           * Creates a new MessageSent instance using the specified properties.
-           * @param [properties] Properties to set
-           * @returns MessageSent instance
-           */
-          public static create(
-            properties?: protocol.chat.v1.Event.IMessageSent
-          ): protocol.chat.v1.Event.MessageSent;
 
           /**
            * Encodes the specified MessageSent message. Does not implicitly {@link protocol.chat.v1.Event.MessageSent.verify|verify} messages.
@@ -9296,17 +6247,6 @@ export namespace protocol {
            * @returns Writer
            */
           public static encode(
-            message: protocol.chat.v1.Event.IMessageSent,
-            writer?: $protobuf.Writer
-          ): $protobuf.Writer;
-
-          /**
-           * Encodes the specified MessageSent message, length delimited. Does not implicitly {@link protocol.chat.v1.Event.MessageSent.verify|verify} messages.
-           * @param message MessageSent message or plain object to encode
-           * @param [writer] Writer to encode to
-           * @returns Writer
-           */
-          public static encodeDelimited(
             message: protocol.chat.v1.Event.IMessageSent,
             writer?: $protobuf.Writer
           ): $protobuf.Writer;
@@ -9323,24 +6263,6 @@ export namespace protocol {
             reader: $protobuf.Reader | Uint8Array,
             length?: number
           ): protocol.chat.v1.Event.MessageSent;
-
-          /**
-           * Decodes a MessageSent message from the specified reader or buffer, length delimited.
-           * @param reader Reader or buffer to decode from
-           * @returns MessageSent
-           * @throws {Error} If the payload is not a reader or valid buffer
-           * @throws {$protobuf.util.ProtocolError} If required fields are missing
-           */
-          public static decodeDelimited(
-            reader: $protobuf.Reader | Uint8Array
-          ): protocol.chat.v1.Event.MessageSent;
-
-          /**
-           * Verifies a MessageSent message.
-           * @param message Plain object to verify
-           * @returns `null` if valid, otherwise the reason why it is not
-           */
-          public static verify(message: { [k: string]: any }): string | null;
 
           /**
            * Creates a MessageSent message from a plain object. Also converts values to their respective internal types.
@@ -9372,13 +6294,13 @@ export namespace protocol {
         /** Properties of a MessageUpdated. */
         interface IMessageUpdated {
           /** MessageUpdated guildId */
-          guildId?: number | Long | null;
+          guildId?: number | null;
 
           /** MessageUpdated channelId */
-          channelId?: number | Long | null;
+          channelId?: number | null;
 
           /** MessageUpdated messageId */
-          messageId?: number | Long | null;
+          messageId?: number | null;
 
           /** MessageUpdated editedAt */
           editedAt?: google.protobuf.ITimestamp | null;
@@ -9429,13 +6351,13 @@ export namespace protocol {
           constructor(properties?: protocol.chat.v1.Event.IMessageUpdated);
 
           /** MessageUpdated guildId. */
-          public guildId: number | Long;
+          public guildId: number;
 
           /** MessageUpdated channelId. */
-          public channelId: number | Long;
+          public channelId: number;
 
           /** MessageUpdated messageId. */
-          public messageId: number | Long;
+          public messageId: number;
 
           /** MessageUpdated editedAt. */
           public editedAt?: google.protobuf.ITimestamp | null;
@@ -9477,32 +6399,12 @@ export namespace protocol {
           public updateMetadata: boolean;
 
           /**
-           * Creates a new MessageUpdated instance using the specified properties.
-           * @param [properties] Properties to set
-           * @returns MessageUpdated instance
-           */
-          public static create(
-            properties?: protocol.chat.v1.Event.IMessageUpdated
-          ): protocol.chat.v1.Event.MessageUpdated;
-
-          /**
            * Encodes the specified MessageUpdated message. Does not implicitly {@link protocol.chat.v1.Event.MessageUpdated.verify|verify} messages.
            * @param message MessageUpdated message or plain object to encode
            * @param [writer] Writer to encode to
            * @returns Writer
            */
           public static encode(
-            message: protocol.chat.v1.Event.IMessageUpdated,
-            writer?: $protobuf.Writer
-          ): $protobuf.Writer;
-
-          /**
-           * Encodes the specified MessageUpdated message, length delimited. Does not implicitly {@link protocol.chat.v1.Event.MessageUpdated.verify|verify} messages.
-           * @param message MessageUpdated message or plain object to encode
-           * @param [writer] Writer to encode to
-           * @returns Writer
-           */
-          public static encodeDelimited(
             message: protocol.chat.v1.Event.IMessageUpdated,
             writer?: $protobuf.Writer
           ): $protobuf.Writer;
@@ -9519,24 +6421,6 @@ export namespace protocol {
             reader: $protobuf.Reader | Uint8Array,
             length?: number
           ): protocol.chat.v1.Event.MessageUpdated;
-
-          /**
-           * Decodes a MessageUpdated message from the specified reader or buffer, length delimited.
-           * @param reader Reader or buffer to decode from
-           * @returns MessageUpdated
-           * @throws {Error} If the payload is not a reader or valid buffer
-           * @throws {$protobuf.util.ProtocolError} If required fields are missing
-           */
-          public static decodeDelimited(
-            reader: $protobuf.Reader | Uint8Array
-          ): protocol.chat.v1.Event.MessageUpdated;
-
-          /**
-           * Verifies a MessageUpdated message.
-           * @param message Plain object to verify
-           * @returns `null` if valid, otherwise the reason why it is not
-           */
-          public static verify(message: { [k: string]: any }): string | null;
 
           /**
            * Creates a MessageUpdated message from a plain object. Also converts values to their respective internal types.
@@ -9568,13 +6452,13 @@ export namespace protocol {
         /** Properties of a MessageDeleted. */
         interface IMessageDeleted {
           /** MessageDeleted guildId */
-          guildId?: number | Long | null;
+          guildId?: number | null;
 
           /** MessageDeleted channelId */
-          channelId?: number | Long | null;
+          channelId?: number | null;
 
           /** MessageDeleted messageId */
-          messageId?: number | Long | null;
+          messageId?: number | null;
         }
 
         /** Represents a MessageDeleted. */
@@ -9586,22 +6470,13 @@ export namespace protocol {
           constructor(properties?: protocol.chat.v1.Event.IMessageDeleted);
 
           /** MessageDeleted guildId. */
-          public guildId: number | Long;
+          public guildId: number;
 
           /** MessageDeleted channelId. */
-          public channelId: number | Long;
+          public channelId: number;
 
           /** MessageDeleted messageId. */
-          public messageId: number | Long;
-
-          /**
-           * Creates a new MessageDeleted instance using the specified properties.
-           * @param [properties] Properties to set
-           * @returns MessageDeleted instance
-           */
-          public static create(
-            properties?: protocol.chat.v1.Event.IMessageDeleted
-          ): protocol.chat.v1.Event.MessageDeleted;
+          public messageId: number;
 
           /**
            * Encodes the specified MessageDeleted message. Does not implicitly {@link protocol.chat.v1.Event.MessageDeleted.verify|verify} messages.
@@ -9610,17 +6485,6 @@ export namespace protocol {
            * @returns Writer
            */
           public static encode(
-            message: protocol.chat.v1.Event.IMessageDeleted,
-            writer?: $protobuf.Writer
-          ): $protobuf.Writer;
-
-          /**
-           * Encodes the specified MessageDeleted message, length delimited. Does not implicitly {@link protocol.chat.v1.Event.MessageDeleted.verify|verify} messages.
-           * @param message MessageDeleted message or plain object to encode
-           * @param [writer] Writer to encode to
-           * @returns Writer
-           */
-          public static encodeDelimited(
             message: protocol.chat.v1.Event.IMessageDeleted,
             writer?: $protobuf.Writer
           ): $protobuf.Writer;
@@ -9637,24 +6501,6 @@ export namespace protocol {
             reader: $protobuf.Reader | Uint8Array,
             length?: number
           ): protocol.chat.v1.Event.MessageDeleted;
-
-          /**
-           * Decodes a MessageDeleted message from the specified reader or buffer, length delimited.
-           * @param reader Reader or buffer to decode from
-           * @returns MessageDeleted
-           * @throws {Error} If the payload is not a reader or valid buffer
-           * @throws {$protobuf.util.ProtocolError} If required fields are missing
-           */
-          public static decodeDelimited(
-            reader: $protobuf.Reader | Uint8Array
-          ): protocol.chat.v1.Event.MessageDeleted;
-
-          /**
-           * Verifies a MessageDeleted message.
-           * @param message Plain object to verify
-           * @returns `null` if valid, otherwise the reason why it is not
-           */
-          public static verify(message: { [k: string]: any }): string | null;
 
           /**
            * Creates a MessageDeleted message from a plain object. Also converts values to their respective internal types.
@@ -9686,19 +6532,19 @@ export namespace protocol {
         /** Properties of a ChannelCreated. */
         interface IChannelCreated {
           /** ChannelCreated guildId */
-          guildId?: number | Long | null;
+          guildId?: number | null;
 
           /** ChannelCreated channelId */
-          channelId?: number | Long | null;
+          channelId?: number | null;
 
           /** ChannelCreated name */
           name?: string | null;
 
           /** ChannelCreated previousId */
-          previousId?: number | Long | null;
+          previousId?: number | null;
 
           /** ChannelCreated nextId */
-          nextId?: number | Long | null;
+          nextId?: number | null;
 
           /** ChannelCreated isCategory */
           isCategory?: boolean | null;
@@ -9716,19 +6562,19 @@ export namespace protocol {
           constructor(properties?: protocol.chat.v1.Event.IChannelCreated);
 
           /** ChannelCreated guildId. */
-          public guildId: number | Long;
+          public guildId: number;
 
           /** ChannelCreated channelId. */
-          public channelId: number | Long;
+          public channelId: number;
 
           /** ChannelCreated name. */
           public name: string;
 
           /** ChannelCreated previousId. */
-          public previousId: number | Long;
+          public previousId: number;
 
           /** ChannelCreated nextId. */
-          public nextId: number | Long;
+          public nextId: number;
 
           /** ChannelCreated isCategory. */
           public isCategory: boolean;
@@ -9737,32 +6583,12 @@ export namespace protocol {
           public metadata?: protocol.harmonytypes.v1.IMetadata | null;
 
           /**
-           * Creates a new ChannelCreated instance using the specified properties.
-           * @param [properties] Properties to set
-           * @returns ChannelCreated instance
-           */
-          public static create(
-            properties?: protocol.chat.v1.Event.IChannelCreated
-          ): protocol.chat.v1.Event.ChannelCreated;
-
-          /**
            * Encodes the specified ChannelCreated message. Does not implicitly {@link protocol.chat.v1.Event.ChannelCreated.verify|verify} messages.
            * @param message ChannelCreated message or plain object to encode
            * @param [writer] Writer to encode to
            * @returns Writer
            */
           public static encode(
-            message: protocol.chat.v1.Event.IChannelCreated,
-            writer?: $protobuf.Writer
-          ): $protobuf.Writer;
-
-          /**
-           * Encodes the specified ChannelCreated message, length delimited. Does not implicitly {@link protocol.chat.v1.Event.ChannelCreated.verify|verify} messages.
-           * @param message ChannelCreated message or plain object to encode
-           * @param [writer] Writer to encode to
-           * @returns Writer
-           */
-          public static encodeDelimited(
             message: protocol.chat.v1.Event.IChannelCreated,
             writer?: $protobuf.Writer
           ): $protobuf.Writer;
@@ -9779,24 +6605,6 @@ export namespace protocol {
             reader: $protobuf.Reader | Uint8Array,
             length?: number
           ): protocol.chat.v1.Event.ChannelCreated;
-
-          /**
-           * Decodes a ChannelCreated message from the specified reader or buffer, length delimited.
-           * @param reader Reader or buffer to decode from
-           * @returns ChannelCreated
-           * @throws {Error} If the payload is not a reader or valid buffer
-           * @throws {$protobuf.util.ProtocolError} If required fields are missing
-           */
-          public static decodeDelimited(
-            reader: $protobuf.Reader | Uint8Array
-          ): protocol.chat.v1.Event.ChannelCreated;
-
-          /**
-           * Verifies a ChannelCreated message.
-           * @param message Plain object to verify
-           * @returns `null` if valid, otherwise the reason why it is not
-           */
-          public static verify(message: { [k: string]: any }): string | null;
 
           /**
            * Creates a ChannelCreated message from a plain object. Also converts values to their respective internal types.
@@ -9828,10 +6636,10 @@ export namespace protocol {
         /** Properties of a ChannelUpdated. */
         interface IChannelUpdated {
           /** ChannelUpdated guildId */
-          guildId?: number | Long | null;
+          guildId?: number | null;
 
           /** ChannelUpdated channelId */
-          channelId?: number | Long | null;
+          channelId?: number | null;
 
           /** ChannelUpdated name */
           name?: string | null;
@@ -9840,10 +6648,10 @@ export namespace protocol {
           updateName?: boolean | null;
 
           /** ChannelUpdated previousId */
-          previousId?: number | Long | null;
+          previousId?: number | null;
 
           /** ChannelUpdated nextId */
-          nextId?: number | Long | null;
+          nextId?: number | null;
 
           /** ChannelUpdated updateOrder */
           updateOrder?: boolean | null;
@@ -9864,10 +6672,10 @@ export namespace protocol {
           constructor(properties?: protocol.chat.v1.Event.IChannelUpdated);
 
           /** ChannelUpdated guildId. */
-          public guildId: number | Long;
+          public guildId: number;
 
           /** ChannelUpdated channelId. */
-          public channelId: number | Long;
+          public channelId: number;
 
           /** ChannelUpdated name. */
           public name: string;
@@ -9876,10 +6684,10 @@ export namespace protocol {
           public updateName: boolean;
 
           /** ChannelUpdated previousId. */
-          public previousId: number | Long;
+          public previousId: number;
 
           /** ChannelUpdated nextId. */
-          public nextId: number | Long;
+          public nextId: number;
 
           /** ChannelUpdated updateOrder. */
           public updateOrder: boolean;
@@ -9891,32 +6699,12 @@ export namespace protocol {
           public updateMetadata: boolean;
 
           /**
-           * Creates a new ChannelUpdated instance using the specified properties.
-           * @param [properties] Properties to set
-           * @returns ChannelUpdated instance
-           */
-          public static create(
-            properties?: protocol.chat.v1.Event.IChannelUpdated
-          ): protocol.chat.v1.Event.ChannelUpdated;
-
-          /**
            * Encodes the specified ChannelUpdated message. Does not implicitly {@link protocol.chat.v1.Event.ChannelUpdated.verify|verify} messages.
            * @param message ChannelUpdated message or plain object to encode
            * @param [writer] Writer to encode to
            * @returns Writer
            */
           public static encode(
-            message: protocol.chat.v1.Event.IChannelUpdated,
-            writer?: $protobuf.Writer
-          ): $protobuf.Writer;
-
-          /**
-           * Encodes the specified ChannelUpdated message, length delimited. Does not implicitly {@link protocol.chat.v1.Event.ChannelUpdated.verify|verify} messages.
-           * @param message ChannelUpdated message or plain object to encode
-           * @param [writer] Writer to encode to
-           * @returns Writer
-           */
-          public static encodeDelimited(
             message: protocol.chat.v1.Event.IChannelUpdated,
             writer?: $protobuf.Writer
           ): $protobuf.Writer;
@@ -9933,24 +6721,6 @@ export namespace protocol {
             reader: $protobuf.Reader | Uint8Array,
             length?: number
           ): protocol.chat.v1.Event.ChannelUpdated;
-
-          /**
-           * Decodes a ChannelUpdated message from the specified reader or buffer, length delimited.
-           * @param reader Reader or buffer to decode from
-           * @returns ChannelUpdated
-           * @throws {Error} If the payload is not a reader or valid buffer
-           * @throws {$protobuf.util.ProtocolError} If required fields are missing
-           */
-          public static decodeDelimited(
-            reader: $protobuf.Reader | Uint8Array
-          ): protocol.chat.v1.Event.ChannelUpdated;
-
-          /**
-           * Verifies a ChannelUpdated message.
-           * @param message Plain object to verify
-           * @returns `null` if valid, otherwise the reason why it is not
-           */
-          public static verify(message: { [k: string]: any }): string | null;
 
           /**
            * Creates a ChannelUpdated message from a plain object. Also converts values to their respective internal types.
@@ -9982,10 +6752,10 @@ export namespace protocol {
         /** Properties of a ChannelDeleted. */
         interface IChannelDeleted {
           /** ChannelDeleted guildId */
-          guildId?: number | Long | null;
+          guildId?: number | null;
 
           /** ChannelDeleted channelId */
-          channelId?: number | Long | null;
+          channelId?: number | null;
         }
 
         /** Represents a ChannelDeleted. */
@@ -9997,19 +6767,10 @@ export namespace protocol {
           constructor(properties?: protocol.chat.v1.Event.IChannelDeleted);
 
           /** ChannelDeleted guildId. */
-          public guildId: number | Long;
+          public guildId: number;
 
           /** ChannelDeleted channelId. */
-          public channelId: number | Long;
-
-          /**
-           * Creates a new ChannelDeleted instance using the specified properties.
-           * @param [properties] Properties to set
-           * @returns ChannelDeleted instance
-           */
-          public static create(
-            properties?: protocol.chat.v1.Event.IChannelDeleted
-          ): protocol.chat.v1.Event.ChannelDeleted;
+          public channelId: number;
 
           /**
            * Encodes the specified ChannelDeleted message. Does not implicitly {@link protocol.chat.v1.Event.ChannelDeleted.verify|verify} messages.
@@ -10018,17 +6779,6 @@ export namespace protocol {
            * @returns Writer
            */
           public static encode(
-            message: protocol.chat.v1.Event.IChannelDeleted,
-            writer?: $protobuf.Writer
-          ): $protobuf.Writer;
-
-          /**
-           * Encodes the specified ChannelDeleted message, length delimited. Does not implicitly {@link protocol.chat.v1.Event.ChannelDeleted.verify|verify} messages.
-           * @param message ChannelDeleted message or plain object to encode
-           * @param [writer] Writer to encode to
-           * @returns Writer
-           */
-          public static encodeDelimited(
             message: protocol.chat.v1.Event.IChannelDeleted,
             writer?: $protobuf.Writer
           ): $protobuf.Writer;
@@ -10045,24 +6795,6 @@ export namespace protocol {
             reader: $protobuf.Reader | Uint8Array,
             length?: number
           ): protocol.chat.v1.Event.ChannelDeleted;
-
-          /**
-           * Decodes a ChannelDeleted message from the specified reader or buffer, length delimited.
-           * @param reader Reader or buffer to decode from
-           * @returns ChannelDeleted
-           * @throws {Error} If the payload is not a reader or valid buffer
-           * @throws {$protobuf.util.ProtocolError} If required fields are missing
-           */
-          public static decodeDelimited(
-            reader: $protobuf.Reader | Uint8Array
-          ): protocol.chat.v1.Event.ChannelDeleted;
-
-          /**
-           * Verifies a ChannelDeleted message.
-           * @param message Plain object to verify
-           * @returns `null` if valid, otherwise the reason why it is not
-           */
-          public static verify(message: { [k: string]: any }): string | null;
 
           /**
            * Creates a ChannelDeleted message from a plain object. Also converts values to their respective internal types.
@@ -10094,7 +6826,7 @@ export namespace protocol {
         /** Properties of a GuildUpdated. */
         interface IGuildUpdated {
           /** GuildUpdated guildId */
-          guildId?: number | Long | null;
+          guildId?: number | null;
 
           /** GuildUpdated name */
           name?: string | null;
@@ -10124,7 +6856,7 @@ export namespace protocol {
           constructor(properties?: protocol.chat.v1.Event.IGuildUpdated);
 
           /** GuildUpdated guildId. */
-          public guildId: number | Long;
+          public guildId: number;
 
           /** GuildUpdated name. */
           public name: string;
@@ -10145,32 +6877,12 @@ export namespace protocol {
           public updateMetadata: boolean;
 
           /**
-           * Creates a new GuildUpdated instance using the specified properties.
-           * @param [properties] Properties to set
-           * @returns GuildUpdated instance
-           */
-          public static create(
-            properties?: protocol.chat.v1.Event.IGuildUpdated
-          ): protocol.chat.v1.Event.GuildUpdated;
-
-          /**
            * Encodes the specified GuildUpdated message. Does not implicitly {@link protocol.chat.v1.Event.GuildUpdated.verify|verify} messages.
            * @param message GuildUpdated message or plain object to encode
            * @param [writer] Writer to encode to
            * @returns Writer
            */
           public static encode(
-            message: protocol.chat.v1.Event.IGuildUpdated,
-            writer?: $protobuf.Writer
-          ): $protobuf.Writer;
-
-          /**
-           * Encodes the specified GuildUpdated message, length delimited. Does not implicitly {@link protocol.chat.v1.Event.GuildUpdated.verify|verify} messages.
-           * @param message GuildUpdated message or plain object to encode
-           * @param [writer] Writer to encode to
-           * @returns Writer
-           */
-          public static encodeDelimited(
             message: protocol.chat.v1.Event.IGuildUpdated,
             writer?: $protobuf.Writer
           ): $protobuf.Writer;
@@ -10187,24 +6899,6 @@ export namespace protocol {
             reader: $protobuf.Reader | Uint8Array,
             length?: number
           ): protocol.chat.v1.Event.GuildUpdated;
-
-          /**
-           * Decodes a GuildUpdated message from the specified reader or buffer, length delimited.
-           * @param reader Reader or buffer to decode from
-           * @returns GuildUpdated
-           * @throws {Error} If the payload is not a reader or valid buffer
-           * @throws {$protobuf.util.ProtocolError} If required fields are missing
-           */
-          public static decodeDelimited(
-            reader: $protobuf.Reader | Uint8Array
-          ): protocol.chat.v1.Event.GuildUpdated;
-
-          /**
-           * Verifies a GuildUpdated message.
-           * @param message Plain object to verify
-           * @returns `null` if valid, otherwise the reason why it is not
-           */
-          public static verify(message: { [k: string]: any }): string | null;
 
           /**
            * Creates a GuildUpdated message from a plain object. Also converts values to their respective internal types.
@@ -10236,7 +6930,7 @@ export namespace protocol {
         /** Properties of a GuildDeleted. */
         interface IGuildDeleted {
           /** GuildDeleted guildId */
-          guildId?: number | Long | null;
+          guildId?: number | null;
         }
 
         /** Represents a GuildDeleted. */
@@ -10248,16 +6942,7 @@ export namespace protocol {
           constructor(properties?: protocol.chat.v1.Event.IGuildDeleted);
 
           /** GuildDeleted guildId. */
-          public guildId: number | Long;
-
-          /**
-           * Creates a new GuildDeleted instance using the specified properties.
-           * @param [properties] Properties to set
-           * @returns GuildDeleted instance
-           */
-          public static create(
-            properties?: protocol.chat.v1.Event.IGuildDeleted
-          ): protocol.chat.v1.Event.GuildDeleted;
+          public guildId: number;
 
           /**
            * Encodes the specified GuildDeleted message. Does not implicitly {@link protocol.chat.v1.Event.GuildDeleted.verify|verify} messages.
@@ -10266,17 +6951,6 @@ export namespace protocol {
            * @returns Writer
            */
           public static encode(
-            message: protocol.chat.v1.Event.IGuildDeleted,
-            writer?: $protobuf.Writer
-          ): $protobuf.Writer;
-
-          /**
-           * Encodes the specified GuildDeleted message, length delimited. Does not implicitly {@link protocol.chat.v1.Event.GuildDeleted.verify|verify} messages.
-           * @param message GuildDeleted message or plain object to encode
-           * @param [writer] Writer to encode to
-           * @returns Writer
-           */
-          public static encodeDelimited(
             message: protocol.chat.v1.Event.IGuildDeleted,
             writer?: $protobuf.Writer
           ): $protobuf.Writer;
@@ -10293,24 +6967,6 @@ export namespace protocol {
             reader: $protobuf.Reader | Uint8Array,
             length?: number
           ): protocol.chat.v1.Event.GuildDeleted;
-
-          /**
-           * Decodes a GuildDeleted message from the specified reader or buffer, length delimited.
-           * @param reader Reader or buffer to decode from
-           * @returns GuildDeleted
-           * @throws {Error} If the payload is not a reader or valid buffer
-           * @throws {$protobuf.util.ProtocolError} If required fields are missing
-           */
-          public static decodeDelimited(
-            reader: $protobuf.Reader | Uint8Array
-          ): protocol.chat.v1.Event.GuildDeleted;
-
-          /**
-           * Verifies a GuildDeleted message.
-           * @param message Plain object to verify
-           * @returns `null` if valid, otherwise the reason why it is not
-           */
-          public static verify(message: { [k: string]: any }): string | null;
 
           /**
            * Creates a GuildDeleted message from a plain object. Also converts values to their respective internal types.
@@ -10342,10 +6998,10 @@ export namespace protocol {
         /** Properties of a MemberJoined. */
         interface IMemberJoined {
           /** MemberJoined memberId */
-          memberId?: number | Long | null;
+          memberId?: number | null;
 
           /** MemberJoined guildId */
-          guildId?: number | Long | null;
+          guildId?: number | null;
         }
 
         /** Represents a MemberJoined. */
@@ -10357,19 +7013,10 @@ export namespace protocol {
           constructor(properties?: protocol.chat.v1.Event.IMemberJoined);
 
           /** MemberJoined memberId. */
-          public memberId: number | Long;
+          public memberId: number;
 
           /** MemberJoined guildId. */
-          public guildId: number | Long;
-
-          /**
-           * Creates a new MemberJoined instance using the specified properties.
-           * @param [properties] Properties to set
-           * @returns MemberJoined instance
-           */
-          public static create(
-            properties?: protocol.chat.v1.Event.IMemberJoined
-          ): protocol.chat.v1.Event.MemberJoined;
+          public guildId: number;
 
           /**
            * Encodes the specified MemberJoined message. Does not implicitly {@link protocol.chat.v1.Event.MemberJoined.verify|verify} messages.
@@ -10378,17 +7025,6 @@ export namespace protocol {
            * @returns Writer
            */
           public static encode(
-            message: protocol.chat.v1.Event.IMemberJoined,
-            writer?: $protobuf.Writer
-          ): $protobuf.Writer;
-
-          /**
-           * Encodes the specified MemberJoined message, length delimited. Does not implicitly {@link protocol.chat.v1.Event.MemberJoined.verify|verify} messages.
-           * @param message MemberJoined message or plain object to encode
-           * @param [writer] Writer to encode to
-           * @returns Writer
-           */
-          public static encodeDelimited(
             message: protocol.chat.v1.Event.IMemberJoined,
             writer?: $protobuf.Writer
           ): $protobuf.Writer;
@@ -10405,24 +7041,6 @@ export namespace protocol {
             reader: $protobuf.Reader | Uint8Array,
             length?: number
           ): protocol.chat.v1.Event.MemberJoined;
-
-          /**
-           * Decodes a MemberJoined message from the specified reader or buffer, length delimited.
-           * @param reader Reader or buffer to decode from
-           * @returns MemberJoined
-           * @throws {Error} If the payload is not a reader or valid buffer
-           * @throws {$protobuf.util.ProtocolError} If required fields are missing
-           */
-          public static decodeDelimited(
-            reader: $protobuf.Reader | Uint8Array
-          ): protocol.chat.v1.Event.MemberJoined;
-
-          /**
-           * Verifies a MemberJoined message.
-           * @param message Plain object to verify
-           * @returns `null` if valid, otherwise the reason why it is not
-           */
-          public static verify(message: { [k: string]: any }): string | null;
 
           /**
            * Creates a MemberJoined message from a plain object. Also converts values to their respective internal types.
@@ -10454,10 +7072,10 @@ export namespace protocol {
         /** Properties of a MemberLeft. */
         interface IMemberLeft {
           /** MemberLeft memberId */
-          memberId?: number | Long | null;
+          memberId?: number | null;
 
           /** MemberLeft guildId */
-          guildId?: number | Long | null;
+          guildId?: number | null;
         }
 
         /** Represents a MemberLeft. */
@@ -10469,19 +7087,10 @@ export namespace protocol {
           constructor(properties?: protocol.chat.v1.Event.IMemberLeft);
 
           /** MemberLeft memberId. */
-          public memberId: number | Long;
+          public memberId: number;
 
           /** MemberLeft guildId. */
-          public guildId: number | Long;
-
-          /**
-           * Creates a new MemberLeft instance using the specified properties.
-           * @param [properties] Properties to set
-           * @returns MemberLeft instance
-           */
-          public static create(
-            properties?: protocol.chat.v1.Event.IMemberLeft
-          ): protocol.chat.v1.Event.MemberLeft;
+          public guildId: number;
 
           /**
            * Encodes the specified MemberLeft message. Does not implicitly {@link protocol.chat.v1.Event.MemberLeft.verify|verify} messages.
@@ -10490,17 +7099,6 @@ export namespace protocol {
            * @returns Writer
            */
           public static encode(
-            message: protocol.chat.v1.Event.IMemberLeft,
-            writer?: $protobuf.Writer
-          ): $protobuf.Writer;
-
-          /**
-           * Encodes the specified MemberLeft message, length delimited. Does not implicitly {@link protocol.chat.v1.Event.MemberLeft.verify|verify} messages.
-           * @param message MemberLeft message or plain object to encode
-           * @param [writer] Writer to encode to
-           * @returns Writer
-           */
-          public static encodeDelimited(
             message: protocol.chat.v1.Event.IMemberLeft,
             writer?: $protobuf.Writer
           ): $protobuf.Writer;
@@ -10517,24 +7115,6 @@ export namespace protocol {
             reader: $protobuf.Reader | Uint8Array,
             length?: number
           ): protocol.chat.v1.Event.MemberLeft;
-
-          /**
-           * Decodes a MemberLeft message from the specified reader or buffer, length delimited.
-           * @param reader Reader or buffer to decode from
-           * @returns MemberLeft
-           * @throws {Error} If the payload is not a reader or valid buffer
-           * @throws {$protobuf.util.ProtocolError} If required fields are missing
-           */
-          public static decodeDelimited(
-            reader: $protobuf.Reader | Uint8Array
-          ): protocol.chat.v1.Event.MemberLeft;
-
-          /**
-           * Verifies a MemberLeft message.
-           * @param message Plain object to verify
-           * @returns `null` if valid, otherwise the reason why it is not
-           */
-          public static verify(message: { [k: string]: any }): string | null;
 
           /**
            * Creates a MemberLeft message from a plain object. Also converts values to their respective internal types.
@@ -10566,7 +7146,7 @@ export namespace protocol {
         /** Properties of a GuildAddedToList. */
         interface IGuildAddedToList {
           /** GuildAddedToList guildId */
-          guildId?: number | Long | null;
+          guildId?: number | null;
 
           /** GuildAddedToList homeserver */
           homeserver?: string | null;
@@ -10581,19 +7161,10 @@ export namespace protocol {
           constructor(properties?: protocol.chat.v1.Event.IGuildAddedToList);
 
           /** GuildAddedToList guildId. */
-          public guildId: number | Long;
+          public guildId: number;
 
           /** GuildAddedToList homeserver. */
           public homeserver: string;
-
-          /**
-           * Creates a new GuildAddedToList instance using the specified properties.
-           * @param [properties] Properties to set
-           * @returns GuildAddedToList instance
-           */
-          public static create(
-            properties?: protocol.chat.v1.Event.IGuildAddedToList
-          ): protocol.chat.v1.Event.GuildAddedToList;
 
           /**
            * Encodes the specified GuildAddedToList message. Does not implicitly {@link protocol.chat.v1.Event.GuildAddedToList.verify|verify} messages.
@@ -10602,17 +7173,6 @@ export namespace protocol {
            * @returns Writer
            */
           public static encode(
-            message: protocol.chat.v1.Event.IGuildAddedToList,
-            writer?: $protobuf.Writer
-          ): $protobuf.Writer;
-
-          /**
-           * Encodes the specified GuildAddedToList message, length delimited. Does not implicitly {@link protocol.chat.v1.Event.GuildAddedToList.verify|verify} messages.
-           * @param message GuildAddedToList message or plain object to encode
-           * @param [writer] Writer to encode to
-           * @returns Writer
-           */
-          public static encodeDelimited(
             message: protocol.chat.v1.Event.IGuildAddedToList,
             writer?: $protobuf.Writer
           ): $protobuf.Writer;
@@ -10629,24 +7189,6 @@ export namespace protocol {
             reader: $protobuf.Reader | Uint8Array,
             length?: number
           ): protocol.chat.v1.Event.GuildAddedToList;
-
-          /**
-           * Decodes a GuildAddedToList message from the specified reader or buffer, length delimited.
-           * @param reader Reader or buffer to decode from
-           * @returns GuildAddedToList
-           * @throws {Error} If the payload is not a reader or valid buffer
-           * @throws {$protobuf.util.ProtocolError} If required fields are missing
-           */
-          public static decodeDelimited(
-            reader: $protobuf.Reader | Uint8Array
-          ): protocol.chat.v1.Event.GuildAddedToList;
-
-          /**
-           * Verifies a GuildAddedToList message.
-           * @param message Plain object to verify
-           * @returns `null` if valid, otherwise the reason why it is not
-           */
-          public static verify(message: { [k: string]: any }): string | null;
 
           /**
            * Creates a GuildAddedToList message from a plain object. Also converts values to their respective internal types.
@@ -10678,7 +7220,7 @@ export namespace protocol {
         /** Properties of a GuildRemovedFromList. */
         interface IGuildRemovedFromList {
           /** GuildRemovedFromList guildId */
-          guildId?: number | Long | null;
+          guildId?: number | null;
 
           /** GuildRemovedFromList homeserver */
           homeserver?: string | null;
@@ -10695,19 +7237,10 @@ export namespace protocol {
           );
 
           /** GuildRemovedFromList guildId. */
-          public guildId: number | Long;
+          public guildId: number;
 
           /** GuildRemovedFromList homeserver. */
           public homeserver: string;
-
-          /**
-           * Creates a new GuildRemovedFromList instance using the specified properties.
-           * @param [properties] Properties to set
-           * @returns GuildRemovedFromList instance
-           */
-          public static create(
-            properties?: protocol.chat.v1.Event.IGuildRemovedFromList
-          ): protocol.chat.v1.Event.GuildRemovedFromList;
 
           /**
            * Encodes the specified GuildRemovedFromList message. Does not implicitly {@link protocol.chat.v1.Event.GuildRemovedFromList.verify|verify} messages.
@@ -10716,17 +7249,6 @@ export namespace protocol {
            * @returns Writer
            */
           public static encode(
-            message: protocol.chat.v1.Event.IGuildRemovedFromList,
-            writer?: $protobuf.Writer
-          ): $protobuf.Writer;
-
-          /**
-           * Encodes the specified GuildRemovedFromList message, length delimited. Does not implicitly {@link protocol.chat.v1.Event.GuildRemovedFromList.verify|verify} messages.
-           * @param message GuildRemovedFromList message or plain object to encode
-           * @param [writer] Writer to encode to
-           * @returns Writer
-           */
-          public static encodeDelimited(
             message: protocol.chat.v1.Event.IGuildRemovedFromList,
             writer?: $protobuf.Writer
           ): $protobuf.Writer;
@@ -10743,24 +7265,6 @@ export namespace protocol {
             reader: $protobuf.Reader | Uint8Array,
             length?: number
           ): protocol.chat.v1.Event.GuildRemovedFromList;
-
-          /**
-           * Decodes a GuildRemovedFromList message from the specified reader or buffer, length delimited.
-           * @param reader Reader or buffer to decode from
-           * @returns GuildRemovedFromList
-           * @throws {Error} If the payload is not a reader or valid buffer
-           * @throws {$protobuf.util.ProtocolError} If required fields are missing
-           */
-          public static decodeDelimited(
-            reader: $protobuf.Reader | Uint8Array
-          ): protocol.chat.v1.Event.GuildRemovedFromList;
-
-          /**
-           * Verifies a GuildRemovedFromList message.
-           * @param message Plain object to verify
-           * @returns `null` if valid, otherwise the reason why it is not
-           */
-          public static verify(message: { [k: string]: any }): string | null;
 
           /**
            * Creates a GuildRemovedFromList message from a plain object. Also converts values to their respective internal types.
@@ -10792,13 +7296,13 @@ export namespace protocol {
         /** Properties of an ActionPerformed. */
         interface IActionPerformed {
           /** ActionPerformed guildId */
-          guildId?: number | Long | null;
+          guildId?: number | null;
 
           /** ActionPerformed channelId */
-          channelId?: number | Long | null;
+          channelId?: number | null;
 
           /** ActionPerformed messageId */
-          messageId?: number | Long | null;
+          messageId?: number | null;
 
           /** ActionPerformed actionId */
           actionId?: string | null;
@@ -10816,13 +7320,13 @@ export namespace protocol {
           constructor(properties?: protocol.chat.v1.Event.IActionPerformed);
 
           /** ActionPerformed guildId. */
-          public guildId: number | Long;
+          public guildId: number;
 
           /** ActionPerformed channelId. */
-          public channelId: number | Long;
+          public channelId: number;
 
           /** ActionPerformed messageId. */
-          public messageId: number | Long;
+          public messageId: number;
 
           /** ActionPerformed actionId. */
           public actionId: string;
@@ -10831,32 +7335,12 @@ export namespace protocol {
           public actionData: string;
 
           /**
-           * Creates a new ActionPerformed instance using the specified properties.
-           * @param [properties] Properties to set
-           * @returns ActionPerformed instance
-           */
-          public static create(
-            properties?: protocol.chat.v1.Event.IActionPerformed
-          ): protocol.chat.v1.Event.ActionPerformed;
-
-          /**
            * Encodes the specified ActionPerformed message. Does not implicitly {@link protocol.chat.v1.Event.ActionPerformed.verify|verify} messages.
            * @param message ActionPerformed message or plain object to encode
            * @param [writer] Writer to encode to
            * @returns Writer
            */
           public static encode(
-            message: protocol.chat.v1.Event.IActionPerformed,
-            writer?: $protobuf.Writer
-          ): $protobuf.Writer;
-
-          /**
-           * Encodes the specified ActionPerformed message, length delimited. Does not implicitly {@link protocol.chat.v1.Event.ActionPerformed.verify|verify} messages.
-           * @param message ActionPerformed message or plain object to encode
-           * @param [writer] Writer to encode to
-           * @returns Writer
-           */
-          public static encodeDelimited(
             message: protocol.chat.v1.Event.IActionPerformed,
             writer?: $protobuf.Writer
           ): $protobuf.Writer;
@@ -10873,24 +7357,6 @@ export namespace protocol {
             reader: $protobuf.Reader | Uint8Array,
             length?: number
           ): protocol.chat.v1.Event.ActionPerformed;
-
-          /**
-           * Decodes an ActionPerformed message from the specified reader or buffer, length delimited.
-           * @param reader Reader or buffer to decode from
-           * @returns ActionPerformed
-           * @throws {Error} If the payload is not a reader or valid buffer
-           * @throws {$protobuf.util.ProtocolError} If required fields are missing
-           */
-          public static decodeDelimited(
-            reader: $protobuf.Reader | Uint8Array
-          ): protocol.chat.v1.Event.ActionPerformed;
-
-          /**
-           * Verifies an ActionPerformed message.
-           * @param message Plain object to verify
-           * @returns `null` if valid, otherwise the reason why it is not
-           */
-          public static verify(message: { [k: string]: any }): string | null;
 
           /**
            * Creates an ActionPerformed message from a plain object. Also converts values to their respective internal types.
@@ -10922,10 +7388,10 @@ export namespace protocol {
         /** Properties of a RoleMoved. */
         interface IRoleMoved {
           /** RoleMoved guildId */
-          guildId?: number | Long | null;
+          guildId?: number | null;
 
           /** RoleMoved roleId */
-          roleId?: number | Long | null;
+          roleId?: number | null;
         }
 
         /** Represents a RoleMoved. */
@@ -10937,19 +7403,10 @@ export namespace protocol {
           constructor(properties?: protocol.chat.v1.Event.IRoleMoved);
 
           /** RoleMoved guildId. */
-          public guildId: number | Long;
+          public guildId: number;
 
           /** RoleMoved roleId. */
-          public roleId: number | Long;
-
-          /**
-           * Creates a new RoleMoved instance using the specified properties.
-           * @param [properties] Properties to set
-           * @returns RoleMoved instance
-           */
-          public static create(
-            properties?: protocol.chat.v1.Event.IRoleMoved
-          ): protocol.chat.v1.Event.RoleMoved;
+          public roleId: number;
 
           /**
            * Encodes the specified RoleMoved message. Does not implicitly {@link protocol.chat.v1.Event.RoleMoved.verify|verify} messages.
@@ -10958,17 +7415,6 @@ export namespace protocol {
            * @returns Writer
            */
           public static encode(
-            message: protocol.chat.v1.Event.IRoleMoved,
-            writer?: $protobuf.Writer
-          ): $protobuf.Writer;
-
-          /**
-           * Encodes the specified RoleMoved message, length delimited. Does not implicitly {@link protocol.chat.v1.Event.RoleMoved.verify|verify} messages.
-           * @param message RoleMoved message or plain object to encode
-           * @param [writer] Writer to encode to
-           * @returns Writer
-           */
-          public static encodeDelimited(
             message: protocol.chat.v1.Event.IRoleMoved,
             writer?: $protobuf.Writer
           ): $protobuf.Writer;
@@ -10985,24 +7431,6 @@ export namespace protocol {
             reader: $protobuf.Reader | Uint8Array,
             length?: number
           ): protocol.chat.v1.Event.RoleMoved;
-
-          /**
-           * Decodes a RoleMoved message from the specified reader or buffer, length delimited.
-           * @param reader Reader or buffer to decode from
-           * @returns RoleMoved
-           * @throws {Error} If the payload is not a reader or valid buffer
-           * @throws {$protobuf.util.ProtocolError} If required fields are missing
-           */
-          public static decodeDelimited(
-            reader: $protobuf.Reader | Uint8Array
-          ): protocol.chat.v1.Event.RoleMoved;
-
-          /**
-           * Verifies a RoleMoved message.
-           * @param message Plain object to verify
-           * @returns `null` if valid, otherwise the reason why it is not
-           */
-          public static verify(message: { [k: string]: any }): string | null;
 
           /**
            * Creates a RoleMoved message from a plain object. Also converts values to their respective internal types.
@@ -11034,7 +7462,7 @@ export namespace protocol {
         /** Properties of a ProfileUpdated. */
         interface IProfileUpdated {
           /** ProfileUpdated userId */
-          userId?: number | Long | null;
+          userId?: number | null;
 
           /** ProfileUpdated newUsername */
           newUsername?: string | null;
@@ -11070,7 +7498,7 @@ export namespace protocol {
           constructor(properties?: protocol.chat.v1.Event.IProfileUpdated);
 
           /** ProfileUpdated userId. */
-          public userId: number | Long;
+          public userId: number;
 
           /** ProfileUpdated newUsername. */
           public newUsername: string;
@@ -11097,32 +7525,12 @@ export namespace protocol {
           public updateIsBot: boolean;
 
           /**
-           * Creates a new ProfileUpdated instance using the specified properties.
-           * @param [properties] Properties to set
-           * @returns ProfileUpdated instance
-           */
-          public static create(
-            properties?: protocol.chat.v1.Event.IProfileUpdated
-          ): protocol.chat.v1.Event.ProfileUpdated;
-
-          /**
            * Encodes the specified ProfileUpdated message. Does not implicitly {@link protocol.chat.v1.Event.ProfileUpdated.verify|verify} messages.
            * @param message ProfileUpdated message or plain object to encode
            * @param [writer] Writer to encode to
            * @returns Writer
            */
           public static encode(
-            message: protocol.chat.v1.Event.IProfileUpdated,
-            writer?: $protobuf.Writer
-          ): $protobuf.Writer;
-
-          /**
-           * Encodes the specified ProfileUpdated message, length delimited. Does not implicitly {@link protocol.chat.v1.Event.ProfileUpdated.verify|verify} messages.
-           * @param message ProfileUpdated message or plain object to encode
-           * @param [writer] Writer to encode to
-           * @returns Writer
-           */
-          public static encodeDelimited(
             message: protocol.chat.v1.Event.IProfileUpdated,
             writer?: $protobuf.Writer
           ): $protobuf.Writer;
@@ -11139,24 +7547,6 @@ export namespace protocol {
             reader: $protobuf.Reader | Uint8Array,
             length?: number
           ): protocol.chat.v1.Event.ProfileUpdated;
-
-          /**
-           * Decodes a ProfileUpdated message from the specified reader or buffer, length delimited.
-           * @param reader Reader or buffer to decode from
-           * @returns ProfileUpdated
-           * @throws {Error} If the payload is not a reader or valid buffer
-           * @throws {$protobuf.util.ProtocolError} If required fields are missing
-           */
-          public static decodeDelimited(
-            reader: $protobuf.Reader | Uint8Array
-          ): protocol.chat.v1.Event.ProfileUpdated;
-
-          /**
-           * Verifies a ProfileUpdated message.
-           * @param message Plain object to verify
-           * @returns `null` if valid, otherwise the reason why it is not
-           */
-          public static verify(message: { [k: string]: any }): string | null;
 
           /**
            * Creates a ProfileUpdated message from a plain object. Also converts values to their respective internal types.
@@ -11188,13 +7578,13 @@ export namespace protocol {
         /** Properties of a Typing. */
         interface ITyping {
           /** Typing userId */
-          userId?: number | Long | null;
+          userId?: number | null;
 
           /** Typing guildId */
-          guildId?: number | Long | null;
+          guildId?: number | null;
 
           /** Typing channelId */
-          channelId?: number | Long | null;
+          channelId?: number | null;
         }
 
         /** Represents a Typing. */
@@ -11206,22 +7596,13 @@ export namespace protocol {
           constructor(properties?: protocol.chat.v1.Event.ITyping);
 
           /** Typing userId. */
-          public userId: number | Long;
+          public userId: number;
 
           /** Typing guildId. */
-          public guildId: number | Long;
+          public guildId: number;
 
           /** Typing channelId. */
-          public channelId: number | Long;
-
-          /**
-           * Creates a new Typing instance using the specified properties.
-           * @param [properties] Properties to set
-           * @returns Typing instance
-           */
-          public static create(
-            properties?: protocol.chat.v1.Event.ITyping
-          ): protocol.chat.v1.Event.Typing;
+          public channelId: number;
 
           /**
            * Encodes the specified Typing message. Does not implicitly {@link protocol.chat.v1.Event.Typing.verify|verify} messages.
@@ -11230,17 +7611,6 @@ export namespace protocol {
            * @returns Writer
            */
           public static encode(
-            message: protocol.chat.v1.Event.ITyping,
-            writer?: $protobuf.Writer
-          ): $protobuf.Writer;
-
-          /**
-           * Encodes the specified Typing message, length delimited. Does not implicitly {@link protocol.chat.v1.Event.Typing.verify|verify} messages.
-           * @param message Typing message or plain object to encode
-           * @param [writer] Writer to encode to
-           * @returns Writer
-           */
-          public static encodeDelimited(
             message: protocol.chat.v1.Event.ITyping,
             writer?: $protobuf.Writer
           ): $protobuf.Writer;
@@ -11257,24 +7627,6 @@ export namespace protocol {
             reader: $protobuf.Reader | Uint8Array,
             length?: number
           ): protocol.chat.v1.Event.Typing;
-
-          /**
-           * Decodes a Typing message from the specified reader or buffer, length delimited.
-           * @param reader Reader or buffer to decode from
-           * @returns Typing
-           * @throws {Error} If the payload is not a reader or valid buffer
-           * @throws {$protobuf.util.ProtocolError} If required fields are missing
-           */
-          public static decodeDelimited(
-            reader: $protobuf.Reader | Uint8Array
-          ): protocol.chat.v1.Event.Typing;
-
-          /**
-           * Verifies a Typing message.
-           * @param message Plain object to verify
-           * @returns `null` if valid, otherwise the reason why it is not
-           */
-          public static verify(message: { [k: string]: any }): string | null;
 
           /**
            * Creates a Typing message from a plain object. Also converts values to their respective internal types.
@@ -11317,19 +7669,6 @@ export namespace protocol {
           requestDelimited?: boolean,
           responseDelimited?: boolean
         );
-
-        /**
-         * Creates new ChatService service using the specified rpc implementation.
-         * @param rpcImpl RPC implementation
-         * @param [requestDelimited=false] Whether requests are length-delimited
-         * @param [responseDelimited=false] Whether responses are length-delimited
-         * @returns RPC service. Useful where requests and/or responses are streamed.
-         */
-        public static create(
-          rpcImpl: $protobuf.RPCImpl,
-          requestDelimited?: boolean,
-          responseDelimited?: boolean
-        ): ChatService;
 
         /**
          * Calls CreateGuild.
@@ -12700,7 +9039,7 @@ export namespace protocol {
       /** Properties of a GetUserRequest. */
       interface IGetUserRequest {
         /** GetUserRequest userId */
-        userId?: number | Long | null;
+        userId?: number | null;
       }
 
       /** Represents a GetUserRequest. */
@@ -12712,16 +9051,7 @@ export namespace protocol {
         constructor(properties?: protocol.chat.v1.IGetUserRequest);
 
         /** GetUserRequest userId. */
-        public userId: number | Long;
-
-        /**
-         * Creates a new GetUserRequest instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns GetUserRequest instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IGetUserRequest
-        ): protocol.chat.v1.GetUserRequest;
+        public userId: number;
 
         /**
          * Encodes the specified GetUserRequest message. Does not implicitly {@link protocol.chat.v1.GetUserRequest.verify|verify} messages.
@@ -12730,17 +9060,6 @@ export namespace protocol {
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IGetUserRequest,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified GetUserRequest message, length delimited. Does not implicitly {@link protocol.chat.v1.GetUserRequest.verify|verify} messages.
-         * @param message GetUserRequest message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IGetUserRequest,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -12757,24 +9076,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.GetUserRequest;
-
-        /**
-         * Decodes a GetUserRequest message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns GetUserRequest
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.GetUserRequest;
-
-        /**
-         * Verifies a GetUserRequest message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a GetUserRequest message from a plain object. Also converts values to their respective internal types.
@@ -12839,32 +9140,12 @@ export namespace protocol {
         public isBot: boolean;
 
         /**
-         * Creates a new GetUserResponse instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns GetUserResponse instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IGetUserResponse
-        ): protocol.chat.v1.GetUserResponse;
-
-        /**
          * Encodes the specified GetUserResponse message. Does not implicitly {@link protocol.chat.v1.GetUserResponse.verify|verify} messages.
          * @param message GetUserResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IGetUserResponse,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified GetUserResponse message, length delimited. Does not implicitly {@link protocol.chat.v1.GetUserResponse.verify|verify} messages.
-         * @param message GetUserResponse message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IGetUserResponse,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -12881,24 +9162,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.GetUserResponse;
-
-        /**
-         * Decodes a GetUserResponse message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns GetUserResponse
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.GetUserResponse;
-
-        /**
-         * Verifies a GetUserResponse message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a GetUserResponse message from a plain object. Also converts values to their respective internal types.
@@ -12945,32 +9208,12 @@ export namespace protocol {
         public appId: string;
 
         /**
-         * Creates a new GetUserMetadataRequest instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns GetUserMetadataRequest instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IGetUserMetadataRequest
-        ): protocol.chat.v1.GetUserMetadataRequest;
-
-        /**
          * Encodes the specified GetUserMetadataRequest message. Does not implicitly {@link protocol.chat.v1.GetUserMetadataRequest.verify|verify} messages.
          * @param message GetUserMetadataRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IGetUserMetadataRequest,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified GetUserMetadataRequest message, length delimited. Does not implicitly {@link protocol.chat.v1.GetUserMetadataRequest.verify|verify} messages.
-         * @param message GetUserMetadataRequest message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IGetUserMetadataRequest,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -12987,24 +9230,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.GetUserMetadataRequest;
-
-        /**
-         * Decodes a GetUserMetadataRequest message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns GetUserMetadataRequest
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.GetUserMetadataRequest;
-
-        /**
-         * Verifies a GetUserMetadataRequest message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a GetUserMetadataRequest message from a plain object. Also converts values to their respective internal types.
@@ -13051,32 +9276,12 @@ export namespace protocol {
         public metadata: string;
 
         /**
-         * Creates a new GetUserMetadataResponse instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns GetUserMetadataResponse instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IGetUserMetadataResponse
-        ): protocol.chat.v1.GetUserMetadataResponse;
-
-        /**
          * Encodes the specified GetUserMetadataResponse message. Does not implicitly {@link protocol.chat.v1.GetUserMetadataResponse.verify|verify} messages.
          * @param message GetUserMetadataResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IGetUserMetadataResponse,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified GetUserMetadataResponse message, length delimited. Does not implicitly {@link protocol.chat.v1.GetUserMetadataResponse.verify|verify} messages.
-         * @param message GetUserMetadataResponse message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IGetUserMetadataResponse,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -13093,24 +9298,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.GetUserMetadataResponse;
-
-        /**
-         * Decodes a GetUserMetadataResponse message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns GetUserMetadataResponse
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.GetUserMetadataResponse;
-
-        /**
-         * Verifies a GetUserMetadataResponse message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a GetUserMetadataResponse message from a plain object. Also converts values to their respective internal types.
@@ -13199,32 +9386,12 @@ export namespace protocol {
         public updateIsBot: boolean;
 
         /**
-         * Creates a new ProfileUpdateRequest instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns ProfileUpdateRequest instance
-         */
-        public static create(
-          properties?: protocol.chat.v1.IProfileUpdateRequest
-        ): protocol.chat.v1.ProfileUpdateRequest;
-
-        /**
          * Encodes the specified ProfileUpdateRequest message. Does not implicitly {@link protocol.chat.v1.ProfileUpdateRequest.verify|verify} messages.
          * @param message ProfileUpdateRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.chat.v1.IProfileUpdateRequest,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified ProfileUpdateRequest message, length delimited. Does not implicitly {@link protocol.chat.v1.ProfileUpdateRequest.verify|verify} messages.
-         * @param message ProfileUpdateRequest message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.chat.v1.IProfileUpdateRequest,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -13241,24 +9408,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.chat.v1.ProfileUpdateRequest;
-
-        /**
-         * Decodes a ProfileUpdateRequest message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns ProfileUpdateRequest
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.chat.v1.ProfileUpdateRequest;
-
-        /**
-         * Verifies a ProfileUpdateRequest message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a ProfileUpdateRequest message from a plain object. Also converts values to their respective internal types.
@@ -13364,32 +9513,12 @@ export namespace protocol {
           | "bridge";
 
         /**
-         * Creates a new Override instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns Override instance
-         */
-        public static create(
-          properties?: protocol.harmonytypes.v1.IOverride
-        ): protocol.harmonytypes.v1.Override;
-
-        /**
          * Encodes the specified Override message. Does not implicitly {@link protocol.harmonytypes.v1.Override.verify|verify} messages.
          * @param message Override message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.harmonytypes.v1.IOverride,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified Override message, length delimited. Does not implicitly {@link protocol.harmonytypes.v1.Override.verify|verify} messages.
-         * @param message Override message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.harmonytypes.v1.IOverride,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -13406,24 +9535,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.harmonytypes.v1.Override;
-
-        /**
-         * Decodes an Override message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns Override
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.harmonytypes.v1.Override;
-
-        /**
-         * Verifies an Override message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates an Override message from a plain object. Also converts values to their respective internal types.
@@ -13523,32 +9634,12 @@ export namespace protocol {
         public children: protocol.harmonytypes.v1.IAction[];
 
         /**
-         * Creates a new Action instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns Action instance
-         */
-        public static create(
-          properties?: protocol.harmonytypes.v1.IAction
-        ): protocol.harmonytypes.v1.Action;
-
-        /**
          * Encodes the specified Action message. Does not implicitly {@link protocol.harmonytypes.v1.Action.verify|verify} messages.
          * @param message Action message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.harmonytypes.v1.IAction,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified Action message, length delimited. Does not implicitly {@link protocol.harmonytypes.v1.Action.verify|verify} messages.
-         * @param message Action message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.harmonytypes.v1.IAction,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -13565,24 +9656,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.harmonytypes.v1.Action;
-
-        /**
-         * Decodes an Action message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns Action
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.harmonytypes.v1.Action;
-
-        /**
-         * Verifies an Action message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates an Action message from a plain object. Also converts values to their respective internal types.
@@ -13647,32 +9720,12 @@ export namespace protocol {
         public icon: string;
 
         /**
-         * Creates a new EmbedHeading instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns EmbedHeading instance
-         */
-        public static create(
-          properties?: protocol.harmonytypes.v1.IEmbedHeading
-        ): protocol.harmonytypes.v1.EmbedHeading;
-
-        /**
          * Encodes the specified EmbedHeading message. Does not implicitly {@link protocol.harmonytypes.v1.EmbedHeading.verify|verify} messages.
          * @param message EmbedHeading message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.harmonytypes.v1.IEmbedHeading,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified EmbedHeading message, length delimited. Does not implicitly {@link protocol.harmonytypes.v1.EmbedHeading.verify|verify} messages.
-         * @param message EmbedHeading message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.harmonytypes.v1.IEmbedHeading,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -13689,24 +9742,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.harmonytypes.v1.EmbedHeading;
-
-        /**
-         * Decodes an EmbedHeading message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns EmbedHeading
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.harmonytypes.v1.EmbedHeading;
-
-        /**
-         * Verifies an EmbedHeading message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates an EmbedHeading message from a plain object. Also converts values to their respective internal types.
@@ -13783,32 +9818,12 @@ export namespace protocol {
         public actions: protocol.harmonytypes.v1.IAction[];
 
         /**
-         * Creates a new EmbedField instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns EmbedField instance
-         */
-        public static create(
-          properties?: protocol.harmonytypes.v1.IEmbedField
-        ): protocol.harmonytypes.v1.EmbedField;
-
-        /**
          * Encodes the specified EmbedField message. Does not implicitly {@link protocol.harmonytypes.v1.EmbedField.verify|verify} messages.
          * @param message EmbedField message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.harmonytypes.v1.IEmbedField,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified EmbedField message, length delimited. Does not implicitly {@link protocol.harmonytypes.v1.EmbedField.verify|verify} messages.
-         * @param message EmbedField message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.harmonytypes.v1.IEmbedField,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -13825,24 +9840,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.harmonytypes.v1.EmbedField;
-
-        /**
-         * Decodes an EmbedField message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns EmbedField
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.harmonytypes.v1.EmbedField;
-
-        /**
-         * Verifies an EmbedField message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates an EmbedField message from a plain object. Also converts values to their respective internal types.
@@ -13880,7 +9877,7 @@ export namespace protocol {
         body?: string | null;
 
         /** Embed color */
-        color?: number | Long | null;
+        color?: number | null;
 
         /** Embed header */
         header?: protocol.harmonytypes.v1.IEmbedHeading | null;
@@ -13910,7 +9907,7 @@ export namespace protocol {
         public body: string;
 
         /** Embed color. */
-        public color: number | Long;
+        public color: number;
 
         /** Embed header. */
         public header?: protocol.harmonytypes.v1.IEmbedHeading | null;
@@ -13925,32 +9922,12 @@ export namespace protocol {
         public actions: protocol.harmonytypes.v1.IAction[];
 
         /**
-         * Creates a new Embed instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns Embed instance
-         */
-        public static create(
-          properties?: protocol.harmonytypes.v1.IEmbed
-        ): protocol.harmonytypes.v1.Embed;
-
-        /**
          * Encodes the specified Embed message. Does not implicitly {@link protocol.harmonytypes.v1.Embed.verify|verify} messages.
          * @param message Embed message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.harmonytypes.v1.IEmbed,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified Embed message, length delimited. Does not implicitly {@link protocol.harmonytypes.v1.Embed.verify|verify} messages.
-         * @param message Embed message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.harmonytypes.v1.IEmbed,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -13967,24 +9944,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.harmonytypes.v1.Embed;
-
-        /**
-         * Decodes an Embed message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns Embed
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.harmonytypes.v1.Embed;
-
-        /**
-         * Verifies an Embed message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates an Embed message from a plain object. Also converts values to their respective internal types.
@@ -14049,32 +10008,12 @@ export namespace protocol {
         public size: number;
 
         /**
-         * Creates a new Attachment instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns Attachment instance
-         */
-        public static create(
-          properties?: protocol.harmonytypes.v1.IAttachment
-        ): protocol.harmonytypes.v1.Attachment;
-
-        /**
          * Encodes the specified Attachment message. Does not implicitly {@link protocol.harmonytypes.v1.Attachment.verify|verify} messages.
          * @param message Attachment message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.harmonytypes.v1.IAttachment,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified Attachment message, length delimited. Does not implicitly {@link protocol.harmonytypes.v1.Attachment.verify|verify} messages.
-         * @param message Attachment message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.harmonytypes.v1.IAttachment,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -14091,24 +10030,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.harmonytypes.v1.Attachment;
-
-        /**
-         * Decodes an Attachment message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns Attachment
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.harmonytypes.v1.Attachment;
-
-        /**
-         * Verifies an Attachment message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates an Attachment message from a plain object. Also converts values to their respective internal types.
@@ -14161,32 +10082,12 @@ export namespace protocol {
         public extension: { [k: string]: google.protobuf.IAny };
 
         /**
-         * Creates a new Metadata instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns Metadata instance
-         */
-        public static create(
-          properties?: protocol.harmonytypes.v1.IMetadata
-        ): protocol.harmonytypes.v1.Metadata;
-
-        /**
          * Encodes the specified Metadata message. Does not implicitly {@link protocol.harmonytypes.v1.Metadata.verify|verify} messages.
          * @param message Metadata message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.harmonytypes.v1.IMetadata,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified Metadata message, length delimited. Does not implicitly {@link protocol.harmonytypes.v1.Metadata.verify|verify} messages.
-         * @param message Metadata message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.harmonytypes.v1.IMetadata,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -14203,24 +10104,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.harmonytypes.v1.Metadata;
-
-        /**
-         * Decodes a Metadata message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns Metadata
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.harmonytypes.v1.Metadata;
-
-        /**
-         * Verifies a Metadata message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a Metadata message from a plain object. Also converts values to their respective internal types.
@@ -14255,16 +10138,16 @@ export namespace protocol {
         metadata?: protocol.harmonytypes.v1.IMetadata | null;
 
         /** Message guildId */
-        guildId?: number | Long | null;
+        guildId?: number | null;
 
         /** Message channelId */
-        channelId?: number | Long | null;
+        channelId?: number | null;
 
         /** Message messageId */
-        messageId?: number | Long | null;
+        messageId?: number | null;
 
         /** Message authorId */
-        authorId?: number | Long | null;
+        authorId?: number | null;
 
         /** Message createdAt */
         createdAt?: google.protobuf.ITimestamp | null;
@@ -14285,7 +10168,7 @@ export namespace protocol {
         attachments?: protocol.harmonytypes.v1.IAttachment[] | null;
 
         /** Message inReplyTo */
-        inReplyTo?: number | Long | null;
+        inReplyTo?: number | null;
 
         /** Message overrides */
         overrides?: protocol.harmonytypes.v1.IOverride | null;
@@ -14303,16 +10186,16 @@ export namespace protocol {
         public metadata?: protocol.harmonytypes.v1.IMetadata | null;
 
         /** Message guildId. */
-        public guildId: number | Long;
+        public guildId: number;
 
         /** Message channelId. */
-        public channelId: number | Long;
+        public channelId: number;
 
         /** Message messageId. */
-        public messageId: number | Long;
+        public messageId: number;
 
         /** Message authorId. */
-        public authorId: number | Long;
+        public authorId: number;
 
         /** Message createdAt. */
         public createdAt?: google.protobuf.ITimestamp | null;
@@ -14333,19 +10216,10 @@ export namespace protocol {
         public attachments: protocol.harmonytypes.v1.IAttachment[];
 
         /** Message inReplyTo. */
-        public inReplyTo: number | Long;
+        public inReplyTo: number;
 
         /** Message overrides. */
         public overrides?: protocol.harmonytypes.v1.IOverride | null;
-
-        /**
-         * Creates a new Message instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns Message instance
-         */
-        public static create(
-          properties?: protocol.harmonytypes.v1.IMessage
-        ): protocol.harmonytypes.v1.Message;
 
         /**
          * Encodes the specified Message message. Does not implicitly {@link protocol.harmonytypes.v1.Message.verify|verify} messages.
@@ -14354,17 +10228,6 @@ export namespace protocol {
          * @returns Writer
          */
         public static encode(
-          message: protocol.harmonytypes.v1.IMessage,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified Message message, length delimited. Does not implicitly {@link protocol.harmonytypes.v1.Message.verify|verify} messages.
-         * @param message Message message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.harmonytypes.v1.IMessage,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -14381,24 +10244,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.harmonytypes.v1.Message;
-
-        /**
-         * Decodes a Message message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns Message
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.harmonytypes.v1.Message;
-
-        /**
-         * Verifies a Message message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a Message message from a plain object. Also converts values to their respective internal types.
@@ -14437,7 +10282,7 @@ export namespace google {
     /** Properties of a Timestamp. */
     interface ITimestamp {
       /** Timestamp seconds */
-      seconds?: number | Long | null;
+      seconds?: number | null;
 
       /** Timestamp nanos */
       nanos?: number | null;
@@ -14452,19 +10297,10 @@ export namespace google {
       constructor(properties?: google.protobuf.ITimestamp);
 
       /** Timestamp seconds. */
-      public seconds: number | Long;
+      public seconds: number;
 
       /** Timestamp nanos. */
       public nanos: number;
-
-      /**
-       * Creates a new Timestamp instance using the specified properties.
-       * @param [properties] Properties to set
-       * @returns Timestamp instance
-       */
-      public static create(
-        properties?: google.protobuf.ITimestamp
-      ): google.protobuf.Timestamp;
 
       /**
        * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
@@ -14473,17 +10309,6 @@ export namespace google {
        * @returns Writer
        */
       public static encode(
-        message: google.protobuf.ITimestamp,
-        writer?: $protobuf.Writer
-      ): $protobuf.Writer;
-
-      /**
-       * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-       * @param message Timestamp message or plain object to encode
-       * @param [writer] Writer to encode to
-       * @returns Writer
-       */
-      public static encodeDelimited(
         message: google.protobuf.ITimestamp,
         writer?: $protobuf.Writer
       ): $protobuf.Writer;
@@ -14500,24 +10325,6 @@ export namespace google {
         reader: $protobuf.Reader | Uint8Array,
         length?: number
       ): google.protobuf.Timestamp;
-
-      /**
-       * Decodes a Timestamp message from the specified reader or buffer, length delimited.
-       * @param reader Reader or buffer to decode from
-       * @returns Timestamp
-       * @throws {Error} If the payload is not a reader or valid buffer
-       * @throws {$protobuf.util.ProtocolError} If required fields are missing
-       */
-      public static decodeDelimited(
-        reader: $protobuf.Reader | Uint8Array
-      ): google.protobuf.Timestamp;
-
-      /**
-       * Verifies a Timestamp message.
-       * @param message Plain object to verify
-       * @returns `null` if valid, otherwise the reason why it is not
-       */
-      public static verify(message: { [k: string]: any }): string | null;
 
       /**
        * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
@@ -14558,32 +10365,12 @@ export namespace google {
       constructor(properties?: google.protobuf.IEmpty);
 
       /**
-       * Creates a new Empty instance using the specified properties.
-       * @param [properties] Properties to set
-       * @returns Empty instance
-       */
-      public static create(
-        properties?: google.protobuf.IEmpty
-      ): google.protobuf.Empty;
-
-      /**
        * Encodes the specified Empty message. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
        * @param message Empty message or plain object to encode
        * @param [writer] Writer to encode to
        * @returns Writer
        */
       public static encode(
-        message: google.protobuf.IEmpty,
-        writer?: $protobuf.Writer
-      ): $protobuf.Writer;
-
-      /**
-       * Encodes the specified Empty message, length delimited. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
-       * @param message Empty message or plain object to encode
-       * @param [writer] Writer to encode to
-       * @returns Writer
-       */
-      public static encodeDelimited(
         message: google.protobuf.IEmpty,
         writer?: $protobuf.Writer
       ): $protobuf.Writer;
@@ -14600,24 +10387,6 @@ export namespace google {
         reader: $protobuf.Reader | Uint8Array,
         length?: number
       ): google.protobuf.Empty;
-
-      /**
-       * Decodes an Empty message from the specified reader or buffer, length delimited.
-       * @param reader Reader or buffer to decode from
-       * @returns Empty
-       * @throws {Error} If the payload is not a reader or valid buffer
-       * @throws {$protobuf.util.ProtocolError} If required fields are missing
-       */
-      public static decodeDelimited(
-        reader: $protobuf.Reader | Uint8Array
-      ): google.protobuf.Empty;
-
-      /**
-       * Verifies an Empty message.
-       * @param message Plain object to verify
-       * @returns `null` if valid, otherwise the reason why it is not
-       */
-      public static verify(message: { [k: string]: any }): string | null;
 
       /**
        * Creates an Empty message from a plain object. Also converts values to their respective internal types.
@@ -14670,32 +10439,12 @@ export namespace google {
       public value: Uint8Array;
 
       /**
-       * Creates a new Any instance using the specified properties.
-       * @param [properties] Properties to set
-       * @returns Any instance
-       */
-      public static create(
-        properties?: google.protobuf.IAny
-      ): google.protobuf.Any;
-
-      /**
        * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
        * @param message Any message or plain object to encode
        * @param [writer] Writer to encode to
        * @returns Writer
        */
       public static encode(
-        message: google.protobuf.IAny,
-        writer?: $protobuf.Writer
-      ): $protobuf.Writer;
-
-      /**
-       * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
-       * @param message Any message or plain object to encode
-       * @param [writer] Writer to encode to
-       * @returns Writer
-       */
-      public static encodeDelimited(
         message: google.protobuf.IAny,
         writer?: $protobuf.Writer
       ): $protobuf.Writer;
@@ -14712,24 +10461,6 @@ export namespace google {
         reader: $protobuf.Reader | Uint8Array,
         length?: number
       ): google.protobuf.Any;
-
-      /**
-       * Decodes an Any message from the specified reader or buffer, length delimited.
-       * @param reader Reader or buffer to decode from
-       * @returns Any
-       * @throws {Error} If the payload is not a reader or valid buffer
-       * @throws {$protobuf.util.ProtocolError} If required fields are missing
-       */
-      public static decodeDelimited(
-        reader: $protobuf.Reader | Uint8Array
-      ): google.protobuf.Any;
-
-      /**
-       * Verifies an Any message.
-       * @param message Plain object to verify
-       * @returns `null` if valid, otherwise the reason why it is not
-       */
-      public static verify(message: { [k: string]: any }): string | null;
 
       /**
        * Creates an Any message from a plain object. Also converts values to their respective internal types.

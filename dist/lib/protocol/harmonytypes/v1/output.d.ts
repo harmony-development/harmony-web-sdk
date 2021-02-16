@@ -76,32 +76,12 @@ export namespace protocol {
           | "bridge";
 
         /**
-         * Creates a new Override instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns Override instance
-         */
-        public static create(
-          properties?: protocol.harmonytypes.v1.IOverride
-        ): protocol.harmonytypes.v1.Override;
-
-        /**
          * Encodes the specified Override message. Does not implicitly {@link protocol.harmonytypes.v1.Override.verify|verify} messages.
          * @param message Override message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.harmonytypes.v1.IOverride,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified Override message, length delimited. Does not implicitly {@link protocol.harmonytypes.v1.Override.verify|verify} messages.
-         * @param message Override message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.harmonytypes.v1.IOverride,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -118,24 +98,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.harmonytypes.v1.Override;
-
-        /**
-         * Decodes an Override message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns Override
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.harmonytypes.v1.Override;
-
-        /**
-         * Verifies an Override message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates an Override message from a plain object. Also converts values to their respective internal types.
@@ -235,32 +197,12 @@ export namespace protocol {
         public children: protocol.harmonytypes.v1.IAction[];
 
         /**
-         * Creates a new Action instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns Action instance
-         */
-        public static create(
-          properties?: protocol.harmonytypes.v1.IAction
-        ): protocol.harmonytypes.v1.Action;
-
-        /**
          * Encodes the specified Action message. Does not implicitly {@link protocol.harmonytypes.v1.Action.verify|verify} messages.
          * @param message Action message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.harmonytypes.v1.IAction,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified Action message, length delimited. Does not implicitly {@link protocol.harmonytypes.v1.Action.verify|verify} messages.
-         * @param message Action message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.harmonytypes.v1.IAction,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -277,24 +219,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.harmonytypes.v1.Action;
-
-        /**
-         * Decodes an Action message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns Action
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.harmonytypes.v1.Action;
-
-        /**
-         * Verifies an Action message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates an Action message from a plain object. Also converts values to their respective internal types.
@@ -359,32 +283,12 @@ export namespace protocol {
         public icon: string;
 
         /**
-         * Creates a new EmbedHeading instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns EmbedHeading instance
-         */
-        public static create(
-          properties?: protocol.harmonytypes.v1.IEmbedHeading
-        ): protocol.harmonytypes.v1.EmbedHeading;
-
-        /**
          * Encodes the specified EmbedHeading message. Does not implicitly {@link protocol.harmonytypes.v1.EmbedHeading.verify|verify} messages.
          * @param message EmbedHeading message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.harmonytypes.v1.IEmbedHeading,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified EmbedHeading message, length delimited. Does not implicitly {@link protocol.harmonytypes.v1.EmbedHeading.verify|verify} messages.
-         * @param message EmbedHeading message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.harmonytypes.v1.IEmbedHeading,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -401,24 +305,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.harmonytypes.v1.EmbedHeading;
-
-        /**
-         * Decodes an EmbedHeading message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns EmbedHeading
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.harmonytypes.v1.EmbedHeading;
-
-        /**
-         * Verifies an EmbedHeading message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates an EmbedHeading message from a plain object. Also converts values to their respective internal types.
@@ -495,32 +381,12 @@ export namespace protocol {
         public actions: protocol.harmonytypes.v1.IAction[];
 
         /**
-         * Creates a new EmbedField instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns EmbedField instance
-         */
-        public static create(
-          properties?: protocol.harmonytypes.v1.IEmbedField
-        ): protocol.harmonytypes.v1.EmbedField;
-
-        /**
          * Encodes the specified EmbedField message. Does not implicitly {@link protocol.harmonytypes.v1.EmbedField.verify|verify} messages.
          * @param message EmbedField message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.harmonytypes.v1.IEmbedField,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified EmbedField message, length delimited. Does not implicitly {@link protocol.harmonytypes.v1.EmbedField.verify|verify} messages.
-         * @param message EmbedField message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.harmonytypes.v1.IEmbedField,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -537,24 +403,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.harmonytypes.v1.EmbedField;
-
-        /**
-         * Decodes an EmbedField message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns EmbedField
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.harmonytypes.v1.EmbedField;
-
-        /**
-         * Verifies an EmbedField message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates an EmbedField message from a plain object. Also converts values to their respective internal types.
@@ -592,7 +440,7 @@ export namespace protocol {
         body?: string | null;
 
         /** Embed color */
-        color?: number | Long | null;
+        color?: number | null;
 
         /** Embed header */
         header?: protocol.harmonytypes.v1.IEmbedHeading | null;
@@ -622,7 +470,7 @@ export namespace protocol {
         public body: string;
 
         /** Embed color. */
-        public color: number | Long;
+        public color: number;
 
         /** Embed header. */
         public header?: protocol.harmonytypes.v1.IEmbedHeading | null;
@@ -637,32 +485,12 @@ export namespace protocol {
         public actions: protocol.harmonytypes.v1.IAction[];
 
         /**
-         * Creates a new Embed instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns Embed instance
-         */
-        public static create(
-          properties?: protocol.harmonytypes.v1.IEmbed
-        ): protocol.harmonytypes.v1.Embed;
-
-        /**
          * Encodes the specified Embed message. Does not implicitly {@link protocol.harmonytypes.v1.Embed.verify|verify} messages.
          * @param message Embed message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.harmonytypes.v1.IEmbed,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified Embed message, length delimited. Does not implicitly {@link protocol.harmonytypes.v1.Embed.verify|verify} messages.
-         * @param message Embed message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.harmonytypes.v1.IEmbed,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -679,24 +507,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.harmonytypes.v1.Embed;
-
-        /**
-         * Decodes an Embed message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns Embed
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.harmonytypes.v1.Embed;
-
-        /**
-         * Verifies an Embed message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates an Embed message from a plain object. Also converts values to their respective internal types.
@@ -761,32 +571,12 @@ export namespace protocol {
         public size: number;
 
         /**
-         * Creates a new Attachment instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns Attachment instance
-         */
-        public static create(
-          properties?: protocol.harmonytypes.v1.IAttachment
-        ): protocol.harmonytypes.v1.Attachment;
-
-        /**
          * Encodes the specified Attachment message. Does not implicitly {@link protocol.harmonytypes.v1.Attachment.verify|verify} messages.
          * @param message Attachment message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.harmonytypes.v1.IAttachment,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified Attachment message, length delimited. Does not implicitly {@link protocol.harmonytypes.v1.Attachment.verify|verify} messages.
-         * @param message Attachment message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.harmonytypes.v1.IAttachment,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -803,24 +593,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.harmonytypes.v1.Attachment;
-
-        /**
-         * Decodes an Attachment message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns Attachment
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.harmonytypes.v1.Attachment;
-
-        /**
-         * Verifies an Attachment message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates an Attachment message from a plain object. Also converts values to their respective internal types.
@@ -873,32 +645,12 @@ export namespace protocol {
         public extension: { [k: string]: google.protobuf.IAny };
 
         /**
-         * Creates a new Metadata instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns Metadata instance
-         */
-        public static create(
-          properties?: protocol.harmonytypes.v1.IMetadata
-        ): protocol.harmonytypes.v1.Metadata;
-
-        /**
          * Encodes the specified Metadata message. Does not implicitly {@link protocol.harmonytypes.v1.Metadata.verify|verify} messages.
          * @param message Metadata message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
         public static encode(
-          message: protocol.harmonytypes.v1.IMetadata,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified Metadata message, length delimited. Does not implicitly {@link protocol.harmonytypes.v1.Metadata.verify|verify} messages.
-         * @param message Metadata message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.harmonytypes.v1.IMetadata,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -915,24 +667,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.harmonytypes.v1.Metadata;
-
-        /**
-         * Decodes a Metadata message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns Metadata
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.harmonytypes.v1.Metadata;
-
-        /**
-         * Verifies a Metadata message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a Metadata message from a plain object. Also converts values to their respective internal types.
@@ -967,16 +701,16 @@ export namespace protocol {
         metadata?: protocol.harmonytypes.v1.IMetadata | null;
 
         /** Message guildId */
-        guildId?: number | Long | null;
+        guildId?: number | null;
 
         /** Message channelId */
-        channelId?: number | Long | null;
+        channelId?: number | null;
 
         /** Message messageId */
-        messageId?: number | Long | null;
+        messageId?: number | null;
 
         /** Message authorId */
-        authorId?: number | Long | null;
+        authorId?: number | null;
 
         /** Message createdAt */
         createdAt?: google.protobuf.ITimestamp | null;
@@ -997,7 +731,7 @@ export namespace protocol {
         attachments?: protocol.harmonytypes.v1.IAttachment[] | null;
 
         /** Message inReplyTo */
-        inReplyTo?: number | Long | null;
+        inReplyTo?: number | null;
 
         /** Message overrides */
         overrides?: protocol.harmonytypes.v1.IOverride | null;
@@ -1015,16 +749,16 @@ export namespace protocol {
         public metadata?: protocol.harmonytypes.v1.IMetadata | null;
 
         /** Message guildId. */
-        public guildId: number | Long;
+        public guildId: number;
 
         /** Message channelId. */
-        public channelId: number | Long;
+        public channelId: number;
 
         /** Message messageId. */
-        public messageId: number | Long;
+        public messageId: number;
 
         /** Message authorId. */
-        public authorId: number | Long;
+        public authorId: number;
 
         /** Message createdAt. */
         public createdAt?: google.protobuf.ITimestamp | null;
@@ -1045,19 +779,10 @@ export namespace protocol {
         public attachments: protocol.harmonytypes.v1.IAttachment[];
 
         /** Message inReplyTo. */
-        public inReplyTo: number | Long;
+        public inReplyTo: number;
 
         /** Message overrides. */
         public overrides?: protocol.harmonytypes.v1.IOverride | null;
-
-        /**
-         * Creates a new Message instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns Message instance
-         */
-        public static create(
-          properties?: protocol.harmonytypes.v1.IMessage
-        ): protocol.harmonytypes.v1.Message;
 
         /**
          * Encodes the specified Message message. Does not implicitly {@link protocol.harmonytypes.v1.Message.verify|verify} messages.
@@ -1066,17 +791,6 @@ export namespace protocol {
          * @returns Writer
          */
         public static encode(
-          message: protocol.harmonytypes.v1.IMessage,
-          writer?: $protobuf.Writer
-        ): $protobuf.Writer;
-
-        /**
-         * Encodes the specified Message message, length delimited. Does not implicitly {@link protocol.harmonytypes.v1.Message.verify|verify} messages.
-         * @param message Message message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(
           message: protocol.harmonytypes.v1.IMessage,
           writer?: $protobuf.Writer
         ): $protobuf.Writer;
@@ -1093,24 +807,6 @@ export namespace protocol {
           reader: $protobuf.Reader | Uint8Array,
           length?: number
         ): protocol.harmonytypes.v1.Message;
-
-        /**
-         * Decodes a Message message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns Message
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(
-          reader: $protobuf.Reader | Uint8Array
-        ): protocol.harmonytypes.v1.Message;
-
-        /**
-         * Verifies a Message message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): string | null;
 
         /**
          * Creates a Message message from a plain object. Also converts values to their respective internal types.
@@ -1149,7 +845,7 @@ export namespace google {
     /** Properties of a Timestamp. */
     interface ITimestamp {
       /** Timestamp seconds */
-      seconds?: number | Long | null;
+      seconds?: number | null;
 
       /** Timestamp nanos */
       nanos?: number | null;
@@ -1164,19 +860,10 @@ export namespace google {
       constructor(properties?: google.protobuf.ITimestamp);
 
       /** Timestamp seconds. */
-      public seconds: number | Long;
+      public seconds: number;
 
       /** Timestamp nanos. */
       public nanos: number;
-
-      /**
-       * Creates a new Timestamp instance using the specified properties.
-       * @param [properties] Properties to set
-       * @returns Timestamp instance
-       */
-      public static create(
-        properties?: google.protobuf.ITimestamp
-      ): google.protobuf.Timestamp;
 
       /**
        * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
@@ -1185,17 +872,6 @@ export namespace google {
        * @returns Writer
        */
       public static encode(
-        message: google.protobuf.ITimestamp,
-        writer?: $protobuf.Writer
-      ): $protobuf.Writer;
-
-      /**
-       * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-       * @param message Timestamp message or plain object to encode
-       * @param [writer] Writer to encode to
-       * @returns Writer
-       */
-      public static encodeDelimited(
         message: google.protobuf.ITimestamp,
         writer?: $protobuf.Writer
       ): $protobuf.Writer;
@@ -1212,24 +888,6 @@ export namespace google {
         reader: $protobuf.Reader | Uint8Array,
         length?: number
       ): google.protobuf.Timestamp;
-
-      /**
-       * Decodes a Timestamp message from the specified reader or buffer, length delimited.
-       * @param reader Reader or buffer to decode from
-       * @returns Timestamp
-       * @throws {Error} If the payload is not a reader or valid buffer
-       * @throws {$protobuf.util.ProtocolError} If required fields are missing
-       */
-      public static decodeDelimited(
-        reader: $protobuf.Reader | Uint8Array
-      ): google.protobuf.Timestamp;
-
-      /**
-       * Verifies a Timestamp message.
-       * @param message Plain object to verify
-       * @returns `null` if valid, otherwise the reason why it is not
-       */
-      public static verify(message: { [k: string]: any }): string | null;
 
       /**
        * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
@@ -1270,32 +928,12 @@ export namespace google {
       constructor(properties?: google.protobuf.IEmpty);
 
       /**
-       * Creates a new Empty instance using the specified properties.
-       * @param [properties] Properties to set
-       * @returns Empty instance
-       */
-      public static create(
-        properties?: google.protobuf.IEmpty
-      ): google.protobuf.Empty;
-
-      /**
        * Encodes the specified Empty message. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
        * @param message Empty message or plain object to encode
        * @param [writer] Writer to encode to
        * @returns Writer
        */
       public static encode(
-        message: google.protobuf.IEmpty,
-        writer?: $protobuf.Writer
-      ): $protobuf.Writer;
-
-      /**
-       * Encodes the specified Empty message, length delimited. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
-       * @param message Empty message or plain object to encode
-       * @param [writer] Writer to encode to
-       * @returns Writer
-       */
-      public static encodeDelimited(
         message: google.protobuf.IEmpty,
         writer?: $protobuf.Writer
       ): $protobuf.Writer;
@@ -1312,24 +950,6 @@ export namespace google {
         reader: $protobuf.Reader | Uint8Array,
         length?: number
       ): google.protobuf.Empty;
-
-      /**
-       * Decodes an Empty message from the specified reader or buffer, length delimited.
-       * @param reader Reader or buffer to decode from
-       * @returns Empty
-       * @throws {Error} If the payload is not a reader or valid buffer
-       * @throws {$protobuf.util.ProtocolError} If required fields are missing
-       */
-      public static decodeDelimited(
-        reader: $protobuf.Reader | Uint8Array
-      ): google.protobuf.Empty;
-
-      /**
-       * Verifies an Empty message.
-       * @param message Plain object to verify
-       * @returns `null` if valid, otherwise the reason why it is not
-       */
-      public static verify(message: { [k: string]: any }): string | null;
 
       /**
        * Creates an Empty message from a plain object. Also converts values to their respective internal types.
@@ -1382,32 +1002,12 @@ export namespace google {
       public value: Uint8Array;
 
       /**
-       * Creates a new Any instance using the specified properties.
-       * @param [properties] Properties to set
-       * @returns Any instance
-       */
-      public static create(
-        properties?: google.protobuf.IAny
-      ): google.protobuf.Any;
-
-      /**
        * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
        * @param message Any message or plain object to encode
        * @param [writer] Writer to encode to
        * @returns Writer
        */
       public static encode(
-        message: google.protobuf.IAny,
-        writer?: $protobuf.Writer
-      ): $protobuf.Writer;
-
-      /**
-       * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
-       * @param message Any message or plain object to encode
-       * @param [writer] Writer to encode to
-       * @returns Writer
-       */
-      public static encodeDelimited(
         message: google.protobuf.IAny,
         writer?: $protobuf.Writer
       ): $protobuf.Writer;
@@ -1424,24 +1024,6 @@ export namespace google {
         reader: $protobuf.Reader | Uint8Array,
         length?: number
       ): google.protobuf.Any;
-
-      /**
-       * Decodes an Any message from the specified reader or buffer, length delimited.
-       * @param reader Reader or buffer to decode from
-       * @returns Any
-       * @throws {Error} If the payload is not a reader or valid buffer
-       * @throws {$protobuf.util.ProtocolError} If required fields are missing
-       */
-      public static decodeDelimited(
-        reader: $protobuf.Reader | Uint8Array
-      ): google.protobuf.Any;
-
-      /**
-       * Verifies an Any message.
-       * @param message Plain object to verify
-       * @returns `null` if valid, otherwise the reason why it is not
-       */
-      public static verify(message: { [k: string]: any }): string | null;
 
       /**
        * Creates an Any message from a plain object. Also converts values to their respective internal types.

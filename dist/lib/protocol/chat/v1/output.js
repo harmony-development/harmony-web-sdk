@@ -1,29 +1,27 @@
 /*eslint-disable block-scoped-var, id-length, no-control-regex, no-magic-numbers, no-prototype-builtins, no-redeclare, no-shadow, no-var, sort-vars*/
-"use strict";
+import * as $protobuf from "protobufjs/minimal";
 
-var $protobuf = require("protobufjs/minimal");
+const $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.util;
 
-var $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.util;
+const $root = $protobuf.roots["chat/v1"] || ($protobuf.roots["chat/v1"] = {});
 
-var $root = $protobuf.roots["chat/v1"] || ($protobuf.roots["chat/v1"] = {});
+export const protocol = $root.protocol = (() => {
 
-$root.protocol = (function() {
-
-    var protocol = {};
+    const protocol = {};
 
     protocol.chat = (function() {
 
-        var chat = {};
+        const chat = {};
 
         chat.v1 = (function() {
 
-            var v1 = {};
+            const v1 = {};
 
             v1.QueryPermissionsRequest = (function() {
 
                 function QueryPermissionsRequest(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -50,9 +48,9 @@ $root.protocol = (function() {
                 QueryPermissionsRequest.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.QueryPermissionsRequest();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.QueryPermissionsRequest();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.guildId = reader.uint64();
@@ -77,7 +75,7 @@ $root.protocol = (function() {
                 QueryPermissionsRequest.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.QueryPermissionsRequest)
                         return object;
-                    var message = new $root.protocol.chat.v1.QueryPermissionsRequest();
+                    let message = new $root.protocol.chat.v1.QueryPermissionsRequest();
                     if (object.guildId != null)
                         if ($util.Long)
                             (message.guildId = $util.Long.fromValue(object.guildId)).unsigned = true;
@@ -113,21 +111,21 @@ $root.protocol = (function() {
                 QueryPermissionsRequest.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults) {
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.guildId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.guildId = options.longs === String ? "0" : 0;
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.channelId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.channelId = options.longs === String ? "0" : 0;
                         object.checkFor = "";
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.as = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.as = options.longs === String ? "0" : 0;
@@ -163,7 +161,7 @@ $root.protocol = (function() {
 
                 function QueryPermissionsResponse(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -181,9 +179,9 @@ $root.protocol = (function() {
                 QueryPermissionsResponse.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.QueryPermissionsResponse();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.QueryPermissionsResponse();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.ok = reader.bool();
@@ -199,7 +197,7 @@ $root.protocol = (function() {
                 QueryPermissionsResponse.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.QueryPermissionsResponse)
                         return object;
-                    var message = new $root.protocol.chat.v1.QueryPermissionsResponse();
+                    let message = new $root.protocol.chat.v1.QueryPermissionsResponse();
                     if (object.ok != null)
                         message.ok = Boolean(object.ok);
                     return message;
@@ -208,7 +206,7 @@ $root.protocol = (function() {
                 QueryPermissionsResponse.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults)
                         object.ok = false;
                     if (message.ok != null && message.hasOwnProperty("ok"))
@@ -227,7 +225,7 @@ $root.protocol = (function() {
 
                 function Permission(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -248,9 +246,9 @@ $root.protocol = (function() {
                 Permission.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.Permission();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.Permission();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.matches = reader.string();
@@ -269,7 +267,7 @@ $root.protocol = (function() {
                 Permission.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.Permission)
                         return object;
-                    var message = new $root.protocol.chat.v1.Permission();
+                    let message = new $root.protocol.chat.v1.Permission();
                     if (object.matches != null)
                         message.matches = String(object.matches);
                     switch (object.mode) {
@@ -288,7 +286,7 @@ $root.protocol = (function() {
                 Permission.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults) {
                         object.matches = "";
                         object.mode = options.enums === String ? "Allow" : 0;
@@ -305,7 +303,7 @@ $root.protocol = (function() {
                 };
 
                 Permission.Mode = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
+                    const valuesById = {}, values = Object.create(valuesById);
                     values[valuesById[0] = "Allow"] = 0;
                     values[valuesById[1] = "Deny"] = 1;
                     return values;
@@ -319,7 +317,7 @@ $root.protocol = (function() {
                 function PermissionList(properties) {
                     this.permissions = [];
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -330,7 +328,7 @@ $root.protocol = (function() {
                     if (!writer)
                         writer = $Writer.create();
                     if (message.permissions != null && message.permissions.length)
-                        for (var i = 0; i < message.permissions.length; ++i)
+                        for (let i = 0; i < message.permissions.length; ++i)
                             $root.protocol.chat.v1.Permission.encode(message.permissions[i], writer.uint32(10).fork()).ldelim();
                     return writer;
                 };
@@ -338,9 +336,9 @@ $root.protocol = (function() {
                 PermissionList.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.PermissionList();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.PermissionList();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             if (!(message.permissions && message.permissions.length))
@@ -358,12 +356,12 @@ $root.protocol = (function() {
                 PermissionList.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.PermissionList)
                         return object;
-                    var message = new $root.protocol.chat.v1.PermissionList();
+                    let message = new $root.protocol.chat.v1.PermissionList();
                     if (object.permissions) {
                         if (!Array.isArray(object.permissions))
                             throw TypeError(".protocol.chat.v1.PermissionList.permissions: array expected");
                         message.permissions = [];
-                        for (var i = 0; i < object.permissions.length; ++i) {
+                        for (let i = 0; i < object.permissions.length; ++i) {
                             if (typeof object.permissions[i] !== "object")
                                 throw TypeError(".protocol.chat.v1.PermissionList.permissions: object expected");
                             message.permissions[i] = $root.protocol.chat.v1.Permission.fromObject(object.permissions[i]);
@@ -375,12 +373,12 @@ $root.protocol = (function() {
                 PermissionList.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.arrays || options.defaults)
                         object.permissions = [];
                     if (message.permissions && message.permissions.length) {
                         object.permissions = [];
-                        for (var j = 0; j < message.permissions.length; ++j)
+                        for (let j = 0; j < message.permissions.length; ++j)
                             object.permissions[j] = $root.protocol.chat.v1.Permission.toObject(message.permissions[j], options);
                     }
                     return object;
@@ -397,7 +395,7 @@ $root.protocol = (function() {
 
                 function SetPermissionsRequest(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -424,9 +422,9 @@ $root.protocol = (function() {
                 SetPermissionsRequest.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.SetPermissionsRequest();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.SetPermissionsRequest();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.guildId = reader.uint64();
@@ -451,7 +449,7 @@ $root.protocol = (function() {
                 SetPermissionsRequest.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.SetPermissionsRequest)
                         return object;
-                    var message = new $root.protocol.chat.v1.SetPermissionsRequest();
+                    let message = new $root.protocol.chat.v1.SetPermissionsRequest();
                     if (object.guildId != null)
                         if ($util.Long)
                             (message.guildId = $util.Long.fromValue(object.guildId)).unsigned = true;
@@ -490,20 +488,20 @@ $root.protocol = (function() {
                 SetPermissionsRequest.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults) {
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.guildId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.guildId = options.longs === String ? "0" : 0;
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.channelId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.channelId = options.longs === String ? "0" : 0;
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.roleId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.roleId = options.longs === String ? "0" : 0;
@@ -540,7 +538,7 @@ $root.protocol = (function() {
 
                 function GetPermissionsRequest(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -564,9 +562,9 @@ $root.protocol = (function() {
                 GetPermissionsRequest.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetPermissionsRequest();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetPermissionsRequest();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.guildId = reader.uint64();
@@ -588,7 +586,7 @@ $root.protocol = (function() {
                 GetPermissionsRequest.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.GetPermissionsRequest)
                         return object;
-                    var message = new $root.protocol.chat.v1.GetPermissionsRequest();
+                    let message = new $root.protocol.chat.v1.GetPermissionsRequest();
                     if (object.guildId != null)
                         if ($util.Long)
                             (message.guildId = $util.Long.fromValue(object.guildId)).unsigned = true;
@@ -622,20 +620,20 @@ $root.protocol = (function() {
                 GetPermissionsRequest.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults) {
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.guildId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.guildId = options.longs === String ? "0" : 0;
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.channelId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.channelId = options.longs === String ? "0" : 0;
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.roleId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.roleId = options.longs === String ? "0" : 0;
@@ -669,7 +667,7 @@ $root.protocol = (function() {
 
                 function GetPermissionsResponse(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -687,9 +685,9 @@ $root.protocol = (function() {
                 GetPermissionsResponse.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetPermissionsResponse();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetPermissionsResponse();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.perms = $root.protocol.chat.v1.PermissionList.decode(reader, reader.uint32());
@@ -705,7 +703,7 @@ $root.protocol = (function() {
                 GetPermissionsResponse.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.GetPermissionsResponse)
                         return object;
-                    var message = new $root.protocol.chat.v1.GetPermissionsResponse();
+                    let message = new $root.protocol.chat.v1.GetPermissionsResponse();
                     if (object.perms != null) {
                         if (typeof object.perms !== "object")
                             throw TypeError(".protocol.chat.v1.GetPermissionsResponse.perms: object expected");
@@ -717,7 +715,7 @@ $root.protocol = (function() {
                 GetPermissionsResponse.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults)
                         object.perms = null;
                     if (message.perms != null && message.hasOwnProperty("perms"))
@@ -736,7 +734,7 @@ $root.protocol = (function() {
 
                 function Role(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -766,9 +764,9 @@ $root.protocol = (function() {
                 Role.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.Role();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.Role();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.roleId = reader.uint64();
@@ -796,7 +794,7 @@ $root.protocol = (function() {
                 Role.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.Role)
                         return object;
-                    var message = new $root.protocol.chat.v1.Role();
+                    let message = new $root.protocol.chat.v1.Role();
                     if (object.roleId != null)
                         if ($util.Long)
                             (message.roleId = $util.Long.fromValue(object.roleId)).unsigned = true;
@@ -820,10 +818,10 @@ $root.protocol = (function() {
                 Role.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults) {
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.roleId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.roleId = options.longs === String ? "0" : 0;
@@ -859,7 +857,7 @@ $root.protocol = (function() {
 
                 function MoveRoleRequest(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -886,9 +884,9 @@ $root.protocol = (function() {
                 MoveRoleRequest.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.MoveRoleRequest();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.MoveRoleRequest();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.guildId = reader.uint64();
@@ -913,7 +911,7 @@ $root.protocol = (function() {
                 MoveRoleRequest.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.MoveRoleRequest)
                         return object;
-                    var message = new $root.protocol.chat.v1.MoveRoleRequest();
+                    let message = new $root.protocol.chat.v1.MoveRoleRequest();
                     if (object.guildId != null)
                         if ($util.Long)
                             (message.guildId = $util.Long.fromValue(object.guildId)).unsigned = true;
@@ -956,25 +954,25 @@ $root.protocol = (function() {
                 MoveRoleRequest.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults) {
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.guildId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.guildId = options.longs === String ? "0" : 0;
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.roleId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.roleId = options.longs === String ? "0" : 0;
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.beforeId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.beforeId = options.longs === String ? "0" : 0;
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.afterId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.afterId = options.longs === String ? "0" : 0;
@@ -1013,7 +1011,7 @@ $root.protocol = (function() {
 
                 function MoveRoleResponse(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -1027,9 +1025,9 @@ $root.protocol = (function() {
                 MoveRoleResponse.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.MoveRoleResponse();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.MoveRoleResponse();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         default:
                             reader.skipType(tag & 7);
@@ -1060,7 +1058,7 @@ $root.protocol = (function() {
 
                 function GetGuildRolesRequest(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -1078,9 +1076,9 @@ $root.protocol = (function() {
                 GetGuildRolesRequest.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetGuildRolesRequest();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetGuildRolesRequest();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.guildId = reader.uint64();
@@ -1096,7 +1094,7 @@ $root.protocol = (function() {
                 GetGuildRolesRequest.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.GetGuildRolesRequest)
                         return object;
-                    var message = new $root.protocol.chat.v1.GetGuildRolesRequest();
+                    let message = new $root.protocol.chat.v1.GetGuildRolesRequest();
                     if (object.guildId != null)
                         if ($util.Long)
                             (message.guildId = $util.Long.fromValue(object.guildId)).unsigned = true;
@@ -1112,10 +1110,10 @@ $root.protocol = (function() {
                 GetGuildRolesRequest.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults)
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.guildId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.guildId = options.longs === String ? "0" : 0;
@@ -1139,7 +1137,7 @@ $root.protocol = (function() {
                 function GetGuildRolesResponse(properties) {
                     this.roles = [];
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -1150,7 +1148,7 @@ $root.protocol = (function() {
                     if (!writer)
                         writer = $Writer.create();
                     if (message.roles != null && message.roles.length)
-                        for (var i = 0; i < message.roles.length; ++i)
+                        for (let i = 0; i < message.roles.length; ++i)
                             $root.protocol.chat.v1.Role.encode(message.roles[i], writer.uint32(10).fork()).ldelim();
                     return writer;
                 };
@@ -1158,9 +1156,9 @@ $root.protocol = (function() {
                 GetGuildRolesResponse.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetGuildRolesResponse();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetGuildRolesResponse();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             if (!(message.roles && message.roles.length))
@@ -1178,12 +1176,12 @@ $root.protocol = (function() {
                 GetGuildRolesResponse.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.GetGuildRolesResponse)
                         return object;
-                    var message = new $root.protocol.chat.v1.GetGuildRolesResponse();
+                    let message = new $root.protocol.chat.v1.GetGuildRolesResponse();
                     if (object.roles) {
                         if (!Array.isArray(object.roles))
                             throw TypeError(".protocol.chat.v1.GetGuildRolesResponse.roles: array expected");
                         message.roles = [];
-                        for (var i = 0; i < object.roles.length; ++i) {
+                        for (let i = 0; i < object.roles.length; ++i) {
                             if (typeof object.roles[i] !== "object")
                                 throw TypeError(".protocol.chat.v1.GetGuildRolesResponse.roles: object expected");
                             message.roles[i] = $root.protocol.chat.v1.Role.fromObject(object.roles[i]);
@@ -1195,12 +1193,12 @@ $root.protocol = (function() {
                 GetGuildRolesResponse.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.arrays || options.defaults)
                         object.roles = [];
                     if (message.roles && message.roles.length) {
                         object.roles = [];
-                        for (var j = 0; j < message.roles.length; ++j)
+                        for (let j = 0; j < message.roles.length; ++j)
                             object.roles[j] = $root.protocol.chat.v1.Role.toObject(message.roles[j], options);
                     }
                     return object;
@@ -1217,7 +1215,7 @@ $root.protocol = (function() {
 
                 function AddGuildRoleRequest(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -1238,9 +1236,9 @@ $root.protocol = (function() {
                 AddGuildRoleRequest.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.AddGuildRoleRequest();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.AddGuildRoleRequest();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.guildId = reader.uint64();
@@ -1259,7 +1257,7 @@ $root.protocol = (function() {
                 AddGuildRoleRequest.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.AddGuildRoleRequest)
                         return object;
-                    var message = new $root.protocol.chat.v1.AddGuildRoleRequest();
+                    let message = new $root.protocol.chat.v1.AddGuildRoleRequest();
                     if (object.guildId != null)
                         if ($util.Long)
                             (message.guildId = $util.Long.fromValue(object.guildId)).unsigned = true;
@@ -1280,10 +1278,10 @@ $root.protocol = (function() {
                 AddGuildRoleRequest.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults) {
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.guildId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.guildId = options.longs === String ? "0" : 0;
@@ -1310,7 +1308,7 @@ $root.protocol = (function() {
 
                 function AddGuildRoleResponse(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -1328,9 +1326,9 @@ $root.protocol = (function() {
                 AddGuildRoleResponse.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.AddGuildRoleResponse();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.AddGuildRoleResponse();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.roleId = reader.uint64();
@@ -1346,7 +1344,7 @@ $root.protocol = (function() {
                 AddGuildRoleResponse.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.AddGuildRoleResponse)
                         return object;
-                    var message = new $root.protocol.chat.v1.AddGuildRoleResponse();
+                    let message = new $root.protocol.chat.v1.AddGuildRoleResponse();
                     if (object.roleId != null)
                         if ($util.Long)
                             (message.roleId = $util.Long.fromValue(object.roleId)).unsigned = true;
@@ -1362,10 +1360,10 @@ $root.protocol = (function() {
                 AddGuildRoleResponse.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults)
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.roleId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.roleId = options.longs === String ? "0" : 0;
@@ -1388,7 +1386,7 @@ $root.protocol = (function() {
 
                 function DeleteGuildRoleRequest(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -1409,9 +1407,9 @@ $root.protocol = (function() {
                 DeleteGuildRoleRequest.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.DeleteGuildRoleRequest();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.DeleteGuildRoleRequest();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.guildId = reader.uint64();
@@ -1430,7 +1428,7 @@ $root.protocol = (function() {
                 DeleteGuildRoleRequest.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.DeleteGuildRoleRequest)
                         return object;
-                    var message = new $root.protocol.chat.v1.DeleteGuildRoleRequest();
+                    let message = new $root.protocol.chat.v1.DeleteGuildRoleRequest();
                     if (object.guildId != null)
                         if ($util.Long)
                             (message.guildId = $util.Long.fromValue(object.guildId)).unsigned = true;
@@ -1455,15 +1453,15 @@ $root.protocol = (function() {
                 DeleteGuildRoleRequest.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults) {
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.guildId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.guildId = options.longs === String ? "0" : 0;
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.roleId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.roleId = options.longs === String ? "0" : 0;
@@ -1492,7 +1490,7 @@ $root.protocol = (function() {
 
                 function ModifyGuildRoleRequest(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -1525,9 +1523,9 @@ $root.protocol = (function() {
                 ModifyGuildRoleRequest.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.ModifyGuildRoleRequest();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.ModifyGuildRoleRequest();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.guildId = reader.uint64();
@@ -1558,7 +1556,7 @@ $root.protocol = (function() {
                 ModifyGuildRoleRequest.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.ModifyGuildRoleRequest)
                         return object;
-                    var message = new $root.protocol.chat.v1.ModifyGuildRoleRequest();
+                    let message = new $root.protocol.chat.v1.ModifyGuildRoleRequest();
                     if (object.guildId != null)
                         if ($util.Long)
                             (message.guildId = $util.Long.fromValue(object.guildId)).unsigned = true;
@@ -1587,10 +1585,10 @@ $root.protocol = (function() {
                 ModifyGuildRoleRequest.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults) {
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.guildId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.guildId = options.longs === String ? "0" : 0;
@@ -1631,7 +1629,7 @@ $root.protocol = (function() {
                     this.giveRoleIds = [];
                     this.takeRoleIds = [];
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -1650,13 +1648,13 @@ $root.protocol = (function() {
                         writer.uint32(16).uint64(message.userId);
                     if (message.giveRoleIds != null && message.giveRoleIds.length) {
                         writer.uint32(26).fork();
-                        for (var i = 0; i < message.giveRoleIds.length; ++i)
+                        for (let i = 0; i < message.giveRoleIds.length; ++i)
                             writer.uint64(message.giveRoleIds[i]);
                         writer.ldelim();
                     }
                     if (message.takeRoleIds != null && message.takeRoleIds.length) {
                         writer.uint32(34).fork();
-                        for (var i = 0; i < message.takeRoleIds.length; ++i)
+                        for (let i = 0; i < message.takeRoleIds.length; ++i)
                             writer.uint64(message.takeRoleIds[i]);
                         writer.ldelim();
                     }
@@ -1666,9 +1664,9 @@ $root.protocol = (function() {
                 ManageUserRolesRequest.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.ManageUserRolesRequest();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.ManageUserRolesRequest();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.guildId = reader.uint64();
@@ -1680,7 +1678,7 @@ $root.protocol = (function() {
                             if (!(message.giveRoleIds && message.giveRoleIds.length))
                                 message.giveRoleIds = [];
                             if ((tag & 7) === 2) {
-                                var end2 = reader.uint32() + reader.pos;
+                                let end2 = reader.uint32() + reader.pos;
                                 while (reader.pos < end2)
                                     message.giveRoleIds.push(reader.uint64());
                             } else
@@ -1690,7 +1688,7 @@ $root.protocol = (function() {
                             if (!(message.takeRoleIds && message.takeRoleIds.length))
                                 message.takeRoleIds = [];
                             if ((tag & 7) === 2) {
-                                var end2 = reader.uint32() + reader.pos;
+                                let end2 = reader.uint32() + reader.pos;
                                 while (reader.pos < end2)
                                     message.takeRoleIds.push(reader.uint64());
                             } else
@@ -1707,7 +1705,7 @@ $root.protocol = (function() {
                 ManageUserRolesRequest.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.ManageUserRolesRequest)
                         return object;
-                    var message = new $root.protocol.chat.v1.ManageUserRolesRequest();
+                    let message = new $root.protocol.chat.v1.ManageUserRolesRequest();
                     if (object.guildId != null)
                         if ($util.Long)
                             (message.guildId = $util.Long.fromValue(object.guildId)).unsigned = true;
@@ -1730,7 +1728,7 @@ $root.protocol = (function() {
                         if (!Array.isArray(object.giveRoleIds))
                             throw TypeError(".protocol.chat.v1.ManageUserRolesRequest.giveRoleIds: array expected");
                         message.giveRoleIds = [];
-                        for (var i = 0; i < object.giveRoleIds.length; ++i)
+                        for (let i = 0; i < object.giveRoleIds.length; ++i)
                             if ($util.Long)
                                 (message.giveRoleIds[i] = $util.Long.fromValue(object.giveRoleIds[i])).unsigned = true;
                             else if (typeof object.giveRoleIds[i] === "string")
@@ -1744,7 +1742,7 @@ $root.protocol = (function() {
                         if (!Array.isArray(object.takeRoleIds))
                             throw TypeError(".protocol.chat.v1.ManageUserRolesRequest.takeRoleIds: array expected");
                         message.takeRoleIds = [];
-                        for (var i = 0; i < object.takeRoleIds.length; ++i)
+                        for (let i = 0; i < object.takeRoleIds.length; ++i)
                             if ($util.Long)
                                 (message.takeRoleIds[i] = $util.Long.fromValue(object.takeRoleIds[i])).unsigned = true;
                             else if (typeof object.takeRoleIds[i] === "string")
@@ -1760,19 +1758,19 @@ $root.protocol = (function() {
                 ManageUserRolesRequest.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.arrays || options.defaults) {
                         object.giveRoleIds = [];
                         object.takeRoleIds = [];
                     }
                     if (options.defaults) {
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.guildId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.guildId = options.longs === String ? "0" : 0;
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.userId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.userId = options.longs === String ? "0" : 0;
@@ -1789,7 +1787,7 @@ $root.protocol = (function() {
                             object.userId = options.longs === String ? $util.Long.prototype.toString.call(message.userId) : options.longs === Number ? new $util.LongBits(message.userId.low >>> 0, message.userId.high >>> 0).toNumber(true) : message.userId;
                     if (message.giveRoleIds && message.giveRoleIds.length) {
                         object.giveRoleIds = [];
-                        for (var j = 0; j < message.giveRoleIds.length; ++j)
+                        for (let j = 0; j < message.giveRoleIds.length; ++j)
                             if (typeof message.giveRoleIds[j] === "number")
                                 object.giveRoleIds[j] = options.longs === String ? String(message.giveRoleIds[j]) : message.giveRoleIds[j];
                             else
@@ -1797,7 +1795,7 @@ $root.protocol = (function() {
                     }
                     if (message.takeRoleIds && message.takeRoleIds.length) {
                         object.takeRoleIds = [];
-                        for (var j = 0; j < message.takeRoleIds.length; ++j)
+                        for (let j = 0; j < message.takeRoleIds.length; ++j)
                             if (typeof message.takeRoleIds[j] === "number")
                                 object.takeRoleIds[j] = options.longs === String ? String(message.takeRoleIds[j]) : message.takeRoleIds[j];
                             else
@@ -1817,7 +1815,7 @@ $root.protocol = (function() {
 
                 function GetUserRolesRequest(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -1838,9 +1836,9 @@ $root.protocol = (function() {
                 GetUserRolesRequest.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetUserRolesRequest();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetUserRolesRequest();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.guildId = reader.uint64();
@@ -1859,7 +1857,7 @@ $root.protocol = (function() {
                 GetUserRolesRequest.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.GetUserRolesRequest)
                         return object;
-                    var message = new $root.protocol.chat.v1.GetUserRolesRequest();
+                    let message = new $root.protocol.chat.v1.GetUserRolesRequest();
                     if (object.guildId != null)
                         if ($util.Long)
                             (message.guildId = $util.Long.fromValue(object.guildId)).unsigned = true;
@@ -1884,15 +1882,15 @@ $root.protocol = (function() {
                 GetUserRolesRequest.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults) {
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.guildId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.guildId = options.longs === String ? "0" : 0;
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.userId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.userId = options.longs === String ? "0" : 0;
@@ -1922,7 +1920,7 @@ $root.protocol = (function() {
                 function GetUserRolesResponse(properties) {
                     this.roles = [];
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -1934,7 +1932,7 @@ $root.protocol = (function() {
                         writer = $Writer.create();
                     if (message.roles != null && message.roles.length) {
                         writer.uint32(10).fork();
-                        for (var i = 0; i < message.roles.length; ++i)
+                        for (let i = 0; i < message.roles.length; ++i)
                             writer.uint64(message.roles[i]);
                         writer.ldelim();
                     }
@@ -1944,15 +1942,15 @@ $root.protocol = (function() {
                 GetUserRolesResponse.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetUserRolesResponse();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetUserRolesResponse();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             if (!(message.roles && message.roles.length))
                                 message.roles = [];
                             if ((tag & 7) === 2) {
-                                var end2 = reader.uint32() + reader.pos;
+                                let end2 = reader.uint32() + reader.pos;
                                 while (reader.pos < end2)
                                     message.roles.push(reader.uint64());
                             } else
@@ -1969,12 +1967,12 @@ $root.protocol = (function() {
                 GetUserRolesResponse.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.GetUserRolesResponse)
                         return object;
-                    var message = new $root.protocol.chat.v1.GetUserRolesResponse();
+                    let message = new $root.protocol.chat.v1.GetUserRolesResponse();
                     if (object.roles) {
                         if (!Array.isArray(object.roles))
                             throw TypeError(".protocol.chat.v1.GetUserRolesResponse.roles: array expected");
                         message.roles = [];
-                        for (var i = 0; i < object.roles.length; ++i)
+                        for (let i = 0; i < object.roles.length; ++i)
                             if ($util.Long)
                                 (message.roles[i] = $util.Long.fromValue(object.roles[i])).unsigned = true;
                             else if (typeof object.roles[i] === "string")
@@ -1990,12 +1988,12 @@ $root.protocol = (function() {
                 GetUserRolesResponse.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.arrays || options.defaults)
                         object.roles = [];
                     if (message.roles && message.roles.length) {
                         object.roles = [];
-                        for (var j = 0; j < message.roles.length; ++j)
+                        for (let j = 0; j < message.roles.length; ++j)
                             if (typeof message.roles[j] === "number")
                                 object.roles[j] = options.longs === String ? String(message.roles[j]) : message.roles[j];
                             else
@@ -2015,7 +2013,7 @@ $root.protocol = (function() {
 
                 function CreateGuildRequest(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -2039,9 +2037,9 @@ $root.protocol = (function() {
                 CreateGuildRequest.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.CreateGuildRequest();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.CreateGuildRequest();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 3:
                             message.metadata = $root.protocol.harmonytypes.v1.Metadata.decode(reader, reader.uint32());
@@ -2063,7 +2061,7 @@ $root.protocol = (function() {
                 CreateGuildRequest.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.CreateGuildRequest)
                         return object;
-                    var message = new $root.protocol.chat.v1.CreateGuildRequest();
+                    let message = new $root.protocol.chat.v1.CreateGuildRequest();
                     if (object.metadata != null) {
                         if (typeof object.metadata !== "object")
                             throw TypeError(".protocol.chat.v1.CreateGuildRequest.metadata: object expected");
@@ -2079,7 +2077,7 @@ $root.protocol = (function() {
                 CreateGuildRequest.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults) {
                         object.guildName = "";
                         object.pictureUrl = "";
@@ -2105,7 +2103,7 @@ $root.protocol = (function() {
 
                 function CreateGuildResponse(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -2123,9 +2121,9 @@ $root.protocol = (function() {
                 CreateGuildResponse.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.CreateGuildResponse();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.CreateGuildResponse();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.guildId = reader.uint64();
@@ -2141,7 +2139,7 @@ $root.protocol = (function() {
                 CreateGuildResponse.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.CreateGuildResponse)
                         return object;
-                    var message = new $root.protocol.chat.v1.CreateGuildResponse();
+                    let message = new $root.protocol.chat.v1.CreateGuildResponse();
                     if (object.guildId != null)
                         if ($util.Long)
                             (message.guildId = $util.Long.fromValue(object.guildId)).unsigned = true;
@@ -2157,10 +2155,10 @@ $root.protocol = (function() {
                 CreateGuildResponse.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults)
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.guildId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.guildId = options.longs === String ? "0" : 0;
@@ -2183,7 +2181,7 @@ $root.protocol = (function() {
 
                 function CreateInviteRequest(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -2207,9 +2205,9 @@ $root.protocol = (function() {
                 CreateInviteRequest.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.CreateInviteRequest();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.CreateInviteRequest();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.guildId = reader.uint64();
@@ -2231,7 +2229,7 @@ $root.protocol = (function() {
                 CreateInviteRequest.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.CreateInviteRequest)
                         return object;
-                    var message = new $root.protocol.chat.v1.CreateInviteRequest();
+                    let message = new $root.protocol.chat.v1.CreateInviteRequest();
                     if (object.guildId != null)
                         if ($util.Long)
                             (message.guildId = $util.Long.fromValue(object.guildId)).unsigned = true;
@@ -2251,10 +2249,10 @@ $root.protocol = (function() {
                 CreateInviteRequest.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults) {
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.guildId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.guildId = options.longs === String ? "0" : 0;
@@ -2284,7 +2282,7 @@ $root.protocol = (function() {
 
                 function CreateInviteResponse(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -2302,9 +2300,9 @@ $root.protocol = (function() {
                 CreateInviteResponse.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.CreateInviteResponse();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.CreateInviteResponse();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.name = reader.string();
@@ -2320,7 +2318,7 @@ $root.protocol = (function() {
                 CreateInviteResponse.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.CreateInviteResponse)
                         return object;
-                    var message = new $root.protocol.chat.v1.CreateInviteResponse();
+                    let message = new $root.protocol.chat.v1.CreateInviteResponse();
                     if (object.name != null)
                         message.name = String(object.name);
                     return message;
@@ -2329,7 +2327,7 @@ $root.protocol = (function() {
                 CreateInviteResponse.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults)
                         object.name = "";
                     if (message.name != null && message.hasOwnProperty("name"))
@@ -2348,7 +2346,7 @@ $root.protocol = (function() {
 
                 function GetGuildListRequest(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -2362,9 +2360,9 @@ $root.protocol = (function() {
                 GetGuildListRequest.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetGuildListRequest();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetGuildListRequest();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         default:
                             reader.skipType(tag & 7);
@@ -2396,7 +2394,7 @@ $root.protocol = (function() {
                 function GetGuildListResponse(properties) {
                     this.guilds = [];
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -2407,7 +2405,7 @@ $root.protocol = (function() {
                     if (!writer)
                         writer = $Writer.create();
                     if (message.guilds != null && message.guilds.length)
-                        for (var i = 0; i < message.guilds.length; ++i)
+                        for (let i = 0; i < message.guilds.length; ++i)
                             $root.protocol.chat.v1.GetGuildListResponse.GuildListEntry.encode(message.guilds[i], writer.uint32(10).fork()).ldelim();
                     return writer;
                 };
@@ -2415,9 +2413,9 @@ $root.protocol = (function() {
                 GetGuildListResponse.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetGuildListResponse();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetGuildListResponse();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             if (!(message.guilds && message.guilds.length))
@@ -2435,12 +2433,12 @@ $root.protocol = (function() {
                 GetGuildListResponse.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.GetGuildListResponse)
                         return object;
-                    var message = new $root.protocol.chat.v1.GetGuildListResponse();
+                    let message = new $root.protocol.chat.v1.GetGuildListResponse();
                     if (object.guilds) {
                         if (!Array.isArray(object.guilds))
                             throw TypeError(".protocol.chat.v1.GetGuildListResponse.guilds: array expected");
                         message.guilds = [];
-                        for (var i = 0; i < object.guilds.length; ++i) {
+                        for (let i = 0; i < object.guilds.length; ++i) {
                             if (typeof object.guilds[i] !== "object")
                                 throw TypeError(".protocol.chat.v1.GetGuildListResponse.guilds: object expected");
                             message.guilds[i] = $root.protocol.chat.v1.GetGuildListResponse.GuildListEntry.fromObject(object.guilds[i]);
@@ -2452,12 +2450,12 @@ $root.protocol = (function() {
                 GetGuildListResponse.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.arrays || options.defaults)
                         object.guilds = [];
                     if (message.guilds && message.guilds.length) {
                         object.guilds = [];
-                        for (var j = 0; j < message.guilds.length; ++j)
+                        for (let j = 0; j < message.guilds.length; ++j)
                             object.guilds[j] = $root.protocol.chat.v1.GetGuildListResponse.GuildListEntry.toObject(message.guilds[j], options);
                     }
                     return object;
@@ -2471,7 +2469,7 @@ $root.protocol = (function() {
 
                     function GuildListEntry(properties) {
                         if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
                                     this[keys[i]] = properties[keys[i]];
                     }
@@ -2492,9 +2490,9 @@ $root.protocol = (function() {
                     GuildListEntry.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetGuildListResponse.GuildListEntry();
+                        let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetGuildListResponse.GuildListEntry();
                         while (reader.pos < end) {
-                            var tag = reader.uint32();
+                            let tag = reader.uint32();
                             switch (tag >>> 3) {
                             case 1:
                                 message.guildId = reader.uint64();
@@ -2513,7 +2511,7 @@ $root.protocol = (function() {
                     GuildListEntry.fromObject = function fromObject(object) {
                         if (object instanceof $root.protocol.chat.v1.GetGuildListResponse.GuildListEntry)
                             return object;
-                        var message = new $root.protocol.chat.v1.GetGuildListResponse.GuildListEntry();
+                        let message = new $root.protocol.chat.v1.GetGuildListResponse.GuildListEntry();
                         if (object.guildId != null)
                             if ($util.Long)
                                 (message.guildId = $util.Long.fromValue(object.guildId)).unsigned = true;
@@ -2531,10 +2529,10 @@ $root.protocol = (function() {
                     GuildListEntry.toObject = function toObject(message, options) {
                         if (!options)
                             options = {};
-                        var object = {};
+                        let object = {};
                         if (options.defaults) {
                             if ($util.Long) {
-                                var long = new $util.Long(0, 0, true);
+                                let long = new $util.Long(0, 0, true);
                                 object.guildId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                             } else
                                 object.guildId = options.longs === String ? "0" : 0;
@@ -2564,7 +2562,7 @@ $root.protocol = (function() {
 
                 function GetGuildRequest(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -2582,9 +2580,9 @@ $root.protocol = (function() {
                 GetGuildRequest.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetGuildRequest();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetGuildRequest();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.guildId = reader.uint64();
@@ -2600,7 +2598,7 @@ $root.protocol = (function() {
                 GetGuildRequest.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.GetGuildRequest)
                         return object;
-                    var message = new $root.protocol.chat.v1.GetGuildRequest();
+                    let message = new $root.protocol.chat.v1.GetGuildRequest();
                     if (object.guildId != null)
                         if ($util.Long)
                             (message.guildId = $util.Long.fromValue(object.guildId)).unsigned = true;
@@ -2616,10 +2614,10 @@ $root.protocol = (function() {
                 GetGuildRequest.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults)
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.guildId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.guildId = options.longs === String ? "0" : 0;
@@ -2642,7 +2640,7 @@ $root.protocol = (function() {
 
                 function GetGuildResponse(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -2669,9 +2667,9 @@ $root.protocol = (function() {
                 GetGuildResponse.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetGuildResponse();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetGuildResponse();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 4:
                             message.metadata = $root.protocol.harmonytypes.v1.Metadata.decode(reader, reader.uint32());
@@ -2696,7 +2694,7 @@ $root.protocol = (function() {
                 GetGuildResponse.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.GetGuildResponse)
                         return object;
-                    var message = new $root.protocol.chat.v1.GetGuildResponse();
+                    let message = new $root.protocol.chat.v1.GetGuildResponse();
                     if (object.metadata != null) {
                         if (typeof object.metadata !== "object")
                             throw TypeError(".protocol.chat.v1.GetGuildResponse.metadata: object expected");
@@ -2721,11 +2719,11 @@ $root.protocol = (function() {
                 GetGuildResponse.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults) {
                         object.guildName = "";
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.guildOwner = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.guildOwner = options.longs === String ? "0" : 0;
@@ -2757,7 +2755,7 @@ $root.protocol = (function() {
 
                 function GetGuildInvitesRequest(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -2775,9 +2773,9 @@ $root.protocol = (function() {
                 GetGuildInvitesRequest.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetGuildInvitesRequest();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetGuildInvitesRequest();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.guildId = reader.uint64();
@@ -2793,7 +2791,7 @@ $root.protocol = (function() {
                 GetGuildInvitesRequest.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.GetGuildInvitesRequest)
                         return object;
-                    var message = new $root.protocol.chat.v1.GetGuildInvitesRequest();
+                    let message = new $root.protocol.chat.v1.GetGuildInvitesRequest();
                     if (object.guildId != null)
                         if ($util.Long)
                             (message.guildId = $util.Long.fromValue(object.guildId)).unsigned = true;
@@ -2809,10 +2807,10 @@ $root.protocol = (function() {
                 GetGuildInvitesRequest.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults)
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.guildId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.guildId = options.longs === String ? "0" : 0;
@@ -2836,7 +2834,7 @@ $root.protocol = (function() {
                 function GetGuildInvitesResponse(properties) {
                     this.invites = [];
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -2847,7 +2845,7 @@ $root.protocol = (function() {
                     if (!writer)
                         writer = $Writer.create();
                     if (message.invites != null && message.invites.length)
-                        for (var i = 0; i < message.invites.length; ++i)
+                        for (let i = 0; i < message.invites.length; ++i)
                             $root.protocol.chat.v1.GetGuildInvitesResponse.Invite.encode(message.invites[i], writer.uint32(10).fork()).ldelim();
                     return writer;
                 };
@@ -2855,9 +2853,9 @@ $root.protocol = (function() {
                 GetGuildInvitesResponse.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetGuildInvitesResponse();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetGuildInvitesResponse();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             if (!(message.invites && message.invites.length))
@@ -2875,12 +2873,12 @@ $root.protocol = (function() {
                 GetGuildInvitesResponse.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.GetGuildInvitesResponse)
                         return object;
-                    var message = new $root.protocol.chat.v1.GetGuildInvitesResponse();
+                    let message = new $root.protocol.chat.v1.GetGuildInvitesResponse();
                     if (object.invites) {
                         if (!Array.isArray(object.invites))
                             throw TypeError(".protocol.chat.v1.GetGuildInvitesResponse.invites: array expected");
                         message.invites = [];
-                        for (var i = 0; i < object.invites.length; ++i) {
+                        for (let i = 0; i < object.invites.length; ++i) {
                             if (typeof object.invites[i] !== "object")
                                 throw TypeError(".protocol.chat.v1.GetGuildInvitesResponse.invites: object expected");
                             message.invites[i] = $root.protocol.chat.v1.GetGuildInvitesResponse.Invite.fromObject(object.invites[i]);
@@ -2892,12 +2890,12 @@ $root.protocol = (function() {
                 GetGuildInvitesResponse.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.arrays || options.defaults)
                         object.invites = [];
                     if (message.invites && message.invites.length) {
                         object.invites = [];
-                        for (var j = 0; j < message.invites.length; ++j)
+                        for (let j = 0; j < message.invites.length; ++j)
                             object.invites[j] = $root.protocol.chat.v1.GetGuildInvitesResponse.Invite.toObject(message.invites[j], options);
                     }
                     return object;
@@ -2911,7 +2909,7 @@ $root.protocol = (function() {
 
                     function Invite(properties) {
                         if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
                                     this[keys[i]] = properties[keys[i]];
                     }
@@ -2935,9 +2933,9 @@ $root.protocol = (function() {
                     Invite.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetGuildInvitesResponse.Invite();
+                        let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetGuildInvitesResponse.Invite();
                         while (reader.pos < end) {
-                            var tag = reader.uint32();
+                            let tag = reader.uint32();
                             switch (tag >>> 3) {
                             case 1:
                                 message.inviteId = reader.string();
@@ -2959,7 +2957,7 @@ $root.protocol = (function() {
                     Invite.fromObject = function fromObject(object) {
                         if (object instanceof $root.protocol.chat.v1.GetGuildInvitesResponse.Invite)
                             return object;
-                        var message = new $root.protocol.chat.v1.GetGuildInvitesResponse.Invite();
+                        let message = new $root.protocol.chat.v1.GetGuildInvitesResponse.Invite();
                         if (object.inviteId != null)
                             message.inviteId = String(object.inviteId);
                         if (object.possibleUses != null)
@@ -2972,7 +2970,7 @@ $root.protocol = (function() {
                     Invite.toObject = function toObject(message, options) {
                         if (!options)
                             options = {};
-                        var object = {};
+                        let object = {};
                         if (options.defaults) {
                             object.inviteId = "";
                             object.possibleUses = 0;
@@ -3001,7 +2999,7 @@ $root.protocol = (function() {
 
                 function GetGuildMembersRequest(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -3019,9 +3017,9 @@ $root.protocol = (function() {
                 GetGuildMembersRequest.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetGuildMembersRequest();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetGuildMembersRequest();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.guildId = reader.uint64();
@@ -3037,7 +3035,7 @@ $root.protocol = (function() {
                 GetGuildMembersRequest.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.GetGuildMembersRequest)
                         return object;
-                    var message = new $root.protocol.chat.v1.GetGuildMembersRequest();
+                    let message = new $root.protocol.chat.v1.GetGuildMembersRequest();
                     if (object.guildId != null)
                         if ($util.Long)
                             (message.guildId = $util.Long.fromValue(object.guildId)).unsigned = true;
@@ -3053,10 +3051,10 @@ $root.protocol = (function() {
                 GetGuildMembersRequest.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults)
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.guildId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.guildId = options.longs === String ? "0" : 0;
@@ -3080,7 +3078,7 @@ $root.protocol = (function() {
                 function GetGuildMembersResponse(properties) {
                     this.members = [];
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -3092,7 +3090,7 @@ $root.protocol = (function() {
                         writer = $Writer.create();
                     if (message.members != null && message.members.length) {
                         writer.uint32(10).fork();
-                        for (var i = 0; i < message.members.length; ++i)
+                        for (let i = 0; i < message.members.length; ++i)
                             writer.uint64(message.members[i]);
                         writer.ldelim();
                     }
@@ -3102,15 +3100,15 @@ $root.protocol = (function() {
                 GetGuildMembersResponse.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetGuildMembersResponse();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetGuildMembersResponse();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             if (!(message.members && message.members.length))
                                 message.members = [];
                             if ((tag & 7) === 2) {
-                                var end2 = reader.uint32() + reader.pos;
+                                let end2 = reader.uint32() + reader.pos;
                                 while (reader.pos < end2)
                                     message.members.push(reader.uint64());
                             } else
@@ -3127,12 +3125,12 @@ $root.protocol = (function() {
                 GetGuildMembersResponse.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.GetGuildMembersResponse)
                         return object;
-                    var message = new $root.protocol.chat.v1.GetGuildMembersResponse();
+                    let message = new $root.protocol.chat.v1.GetGuildMembersResponse();
                     if (object.members) {
                         if (!Array.isArray(object.members))
                             throw TypeError(".protocol.chat.v1.GetGuildMembersResponse.members: array expected");
                         message.members = [];
-                        for (var i = 0; i < object.members.length; ++i)
+                        for (let i = 0; i < object.members.length; ++i)
                             if ($util.Long)
                                 (message.members[i] = $util.Long.fromValue(object.members[i])).unsigned = true;
                             else if (typeof object.members[i] === "string")
@@ -3148,12 +3146,12 @@ $root.protocol = (function() {
                 GetGuildMembersResponse.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.arrays || options.defaults)
                         object.members = [];
                     if (message.members && message.members.length) {
                         object.members = [];
-                        for (var j = 0; j < message.members.length; ++j)
+                        for (let j = 0; j < message.members.length; ++j)
                             if (typeof message.members[j] === "number")
                                 object.members[j] = options.longs === String ? String(message.members[j]) : message.members[j];
                             else
@@ -3173,7 +3171,7 @@ $root.protocol = (function() {
 
                 function UpdateGuildInformationRequest(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -3209,9 +3207,9 @@ $root.protocol = (function() {
                 UpdateGuildInformationRequest.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.UpdateGuildInformationRequest();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.UpdateGuildInformationRequest();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.guildId = reader.uint64();
@@ -3245,7 +3243,7 @@ $root.protocol = (function() {
                 UpdateGuildInformationRequest.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.UpdateGuildInformationRequest)
                         return object;
-                    var message = new $root.protocol.chat.v1.UpdateGuildInformationRequest();
+                    let message = new $root.protocol.chat.v1.UpdateGuildInformationRequest();
                     if (object.guildId != null)
                         if ($util.Long)
                             (message.guildId = $util.Long.fromValue(object.guildId)).unsigned = true;
@@ -3276,10 +3274,10 @@ $root.protocol = (function() {
                 UpdateGuildInformationRequest.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults) {
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.guildId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.guildId = options.longs === String ? "0" : 0;
@@ -3321,7 +3319,7 @@ $root.protocol = (function() {
 
                 function DeleteGuildRequest(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -3339,9 +3337,9 @@ $root.protocol = (function() {
                 DeleteGuildRequest.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.DeleteGuildRequest();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.DeleteGuildRequest();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.guildId = reader.uint64();
@@ -3357,7 +3355,7 @@ $root.protocol = (function() {
                 DeleteGuildRequest.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.DeleteGuildRequest)
                         return object;
-                    var message = new $root.protocol.chat.v1.DeleteGuildRequest();
+                    let message = new $root.protocol.chat.v1.DeleteGuildRequest();
                     if (object.guildId != null)
                         if ($util.Long)
                             (message.guildId = $util.Long.fromValue(object.guildId)).unsigned = true;
@@ -3373,10 +3371,10 @@ $root.protocol = (function() {
                 DeleteGuildRequest.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults)
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.guildId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.guildId = options.longs === String ? "0" : 0;
@@ -3399,7 +3397,7 @@ $root.protocol = (function() {
 
                 function DeleteInviteRequest(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -3420,9 +3418,9 @@ $root.protocol = (function() {
                 DeleteInviteRequest.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.DeleteInviteRequest();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.DeleteInviteRequest();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.guildId = reader.uint64();
@@ -3441,7 +3439,7 @@ $root.protocol = (function() {
                 DeleteInviteRequest.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.DeleteInviteRequest)
                         return object;
-                    var message = new $root.protocol.chat.v1.DeleteInviteRequest();
+                    let message = new $root.protocol.chat.v1.DeleteInviteRequest();
                     if (object.guildId != null)
                         if ($util.Long)
                             (message.guildId = $util.Long.fromValue(object.guildId)).unsigned = true;
@@ -3459,10 +3457,10 @@ $root.protocol = (function() {
                 DeleteInviteRequest.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults) {
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.guildId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.guildId = options.longs === String ? "0" : 0;
@@ -3489,7 +3487,7 @@ $root.protocol = (function() {
 
                 function JoinGuildRequest(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -3507,9 +3505,9 @@ $root.protocol = (function() {
                 JoinGuildRequest.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.JoinGuildRequest();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.JoinGuildRequest();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.inviteId = reader.string();
@@ -3525,7 +3523,7 @@ $root.protocol = (function() {
                 JoinGuildRequest.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.JoinGuildRequest)
                         return object;
-                    var message = new $root.protocol.chat.v1.JoinGuildRequest();
+                    let message = new $root.protocol.chat.v1.JoinGuildRequest();
                     if (object.inviteId != null)
                         message.inviteId = String(object.inviteId);
                     return message;
@@ -3534,7 +3532,7 @@ $root.protocol = (function() {
                 JoinGuildRequest.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults)
                         object.inviteId = "";
                     if (message.inviteId != null && message.hasOwnProperty("inviteId"))
@@ -3553,7 +3551,7 @@ $root.protocol = (function() {
 
                 function JoinGuildResponse(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -3571,9 +3569,9 @@ $root.protocol = (function() {
                 JoinGuildResponse.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.JoinGuildResponse();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.JoinGuildResponse();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.guildId = reader.uint64();
@@ -3589,7 +3587,7 @@ $root.protocol = (function() {
                 JoinGuildResponse.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.JoinGuildResponse)
                         return object;
-                    var message = new $root.protocol.chat.v1.JoinGuildResponse();
+                    let message = new $root.protocol.chat.v1.JoinGuildResponse();
                     if (object.guildId != null)
                         if ($util.Long)
                             (message.guildId = $util.Long.fromValue(object.guildId)).unsigned = true;
@@ -3605,10 +3603,10 @@ $root.protocol = (function() {
                 JoinGuildResponse.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults)
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.guildId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.guildId = options.longs === String ? "0" : 0;
@@ -3631,7 +3629,7 @@ $root.protocol = (function() {
 
                 function PreviewGuildRequest(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -3649,9 +3647,9 @@ $root.protocol = (function() {
                 PreviewGuildRequest.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.PreviewGuildRequest();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.PreviewGuildRequest();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.inviteId = reader.string();
@@ -3667,7 +3665,7 @@ $root.protocol = (function() {
                 PreviewGuildRequest.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.PreviewGuildRequest)
                         return object;
-                    var message = new $root.protocol.chat.v1.PreviewGuildRequest();
+                    let message = new $root.protocol.chat.v1.PreviewGuildRequest();
                     if (object.inviteId != null)
                         message.inviteId = String(object.inviteId);
                     return message;
@@ -3676,7 +3674,7 @@ $root.protocol = (function() {
                 PreviewGuildRequest.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults)
                         object.inviteId = "";
                     if (message.inviteId != null && message.hasOwnProperty("inviteId"))
@@ -3695,7 +3693,7 @@ $root.protocol = (function() {
 
                 function PreviewGuildResponse(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -3719,9 +3717,9 @@ $root.protocol = (function() {
                 PreviewGuildResponse.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.PreviewGuildResponse();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.PreviewGuildResponse();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.name = reader.string();
@@ -3743,7 +3741,7 @@ $root.protocol = (function() {
                 PreviewGuildResponse.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.PreviewGuildResponse)
                         return object;
-                    var message = new $root.protocol.chat.v1.PreviewGuildResponse();
+                    let message = new $root.protocol.chat.v1.PreviewGuildResponse();
                     if (object.name != null)
                         message.name = String(object.name);
                     if (object.avatar != null)
@@ -3763,12 +3761,12 @@ $root.protocol = (function() {
                 PreviewGuildResponse.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults) {
                         object.name = "";
                         object.avatar = "";
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.memeberCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.memeberCount = options.longs === String ? "0" : 0;
@@ -3796,7 +3794,7 @@ $root.protocol = (function() {
 
                 function LeaveGuildRequest(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -3814,9 +3812,9 @@ $root.protocol = (function() {
                 LeaveGuildRequest.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.LeaveGuildRequest();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.LeaveGuildRequest();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.guildId = reader.uint64();
@@ -3832,7 +3830,7 @@ $root.protocol = (function() {
                 LeaveGuildRequest.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.LeaveGuildRequest)
                         return object;
-                    var message = new $root.protocol.chat.v1.LeaveGuildRequest();
+                    let message = new $root.protocol.chat.v1.LeaveGuildRequest();
                     if (object.guildId != null)
                         if ($util.Long)
                             (message.guildId = $util.Long.fromValue(object.guildId)).unsigned = true;
@@ -3848,10 +3846,10 @@ $root.protocol = (function() {
                 LeaveGuildRequest.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults)
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.guildId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.guildId = options.longs === String ? "0" : 0;
@@ -3874,7 +3872,7 @@ $root.protocol = (function() {
 
                 function AddGuildToGuildListRequest(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -3895,9 +3893,9 @@ $root.protocol = (function() {
                 AddGuildToGuildListRequest.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.AddGuildToGuildListRequest();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.AddGuildToGuildListRequest();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.guildId = reader.uint64();
@@ -3916,7 +3914,7 @@ $root.protocol = (function() {
                 AddGuildToGuildListRequest.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.AddGuildToGuildListRequest)
                         return object;
-                    var message = new $root.protocol.chat.v1.AddGuildToGuildListRequest();
+                    let message = new $root.protocol.chat.v1.AddGuildToGuildListRequest();
                     if (object.guildId != null)
                         if ($util.Long)
                             (message.guildId = $util.Long.fromValue(object.guildId)).unsigned = true;
@@ -3934,10 +3932,10 @@ $root.protocol = (function() {
                 AddGuildToGuildListRequest.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults) {
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.guildId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.guildId = options.longs === String ? "0" : 0;
@@ -3964,7 +3962,7 @@ $root.protocol = (function() {
 
                 function AddGuildToGuildListResponse(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -3978,9 +3976,9 @@ $root.protocol = (function() {
                 AddGuildToGuildListResponse.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.AddGuildToGuildListResponse();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.AddGuildToGuildListResponse();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         default:
                             reader.skipType(tag & 7);
@@ -4011,7 +4009,7 @@ $root.protocol = (function() {
 
                 function RemoveGuildFromGuildListRequest(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -4032,9 +4030,9 @@ $root.protocol = (function() {
                 RemoveGuildFromGuildListRequest.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.RemoveGuildFromGuildListRequest();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.RemoveGuildFromGuildListRequest();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.guildId = reader.uint64();
@@ -4053,7 +4051,7 @@ $root.protocol = (function() {
                 RemoveGuildFromGuildListRequest.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.RemoveGuildFromGuildListRequest)
                         return object;
-                    var message = new $root.protocol.chat.v1.RemoveGuildFromGuildListRequest();
+                    let message = new $root.protocol.chat.v1.RemoveGuildFromGuildListRequest();
                     if (object.guildId != null)
                         if ($util.Long)
                             (message.guildId = $util.Long.fromValue(object.guildId)).unsigned = true;
@@ -4071,10 +4069,10 @@ $root.protocol = (function() {
                 RemoveGuildFromGuildListRequest.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults) {
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.guildId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.guildId = options.longs === String ? "0" : 0;
@@ -4101,7 +4099,7 @@ $root.protocol = (function() {
 
                 function RemoveGuildFromGuildListResponse(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -4115,9 +4113,9 @@ $root.protocol = (function() {
                 RemoveGuildFromGuildListResponse.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.RemoveGuildFromGuildListResponse();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.RemoveGuildFromGuildListResponse();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         default:
                             reader.skipType(tag & 7);
@@ -4148,7 +4146,7 @@ $root.protocol = (function() {
 
                 function CreateEmotePackRequest(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -4166,9 +4164,9 @@ $root.protocol = (function() {
                 CreateEmotePackRequest.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.CreateEmotePackRequest();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.CreateEmotePackRequest();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.packName = reader.string();
@@ -4184,7 +4182,7 @@ $root.protocol = (function() {
                 CreateEmotePackRequest.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.CreateEmotePackRequest)
                         return object;
-                    var message = new $root.protocol.chat.v1.CreateEmotePackRequest();
+                    let message = new $root.protocol.chat.v1.CreateEmotePackRequest();
                     if (object.packName != null)
                         message.packName = String(object.packName);
                     return message;
@@ -4193,7 +4191,7 @@ $root.protocol = (function() {
                 CreateEmotePackRequest.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults)
                         object.packName = "";
                     if (message.packName != null && message.hasOwnProperty("packName"))
@@ -4212,7 +4210,7 @@ $root.protocol = (function() {
 
                 function CreateEmotePackResponse(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -4230,9 +4228,9 @@ $root.protocol = (function() {
                 CreateEmotePackResponse.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.CreateEmotePackResponse();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.CreateEmotePackResponse();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.packId = reader.uint64();
@@ -4248,7 +4246,7 @@ $root.protocol = (function() {
                 CreateEmotePackResponse.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.CreateEmotePackResponse)
                         return object;
-                    var message = new $root.protocol.chat.v1.CreateEmotePackResponse();
+                    let message = new $root.protocol.chat.v1.CreateEmotePackResponse();
                     if (object.packId != null)
                         if ($util.Long)
                             (message.packId = $util.Long.fromValue(object.packId)).unsigned = true;
@@ -4264,10 +4262,10 @@ $root.protocol = (function() {
                 CreateEmotePackResponse.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults)
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.packId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.packId = options.longs === String ? "0" : 0;
@@ -4290,7 +4288,7 @@ $root.protocol = (function() {
 
                 function GetEmotePacksRequest(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -4304,9 +4302,9 @@ $root.protocol = (function() {
                 GetEmotePacksRequest.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetEmotePacksRequest();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetEmotePacksRequest();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         default:
                             reader.skipType(tag & 7);
@@ -4338,7 +4336,7 @@ $root.protocol = (function() {
                 function GetEmotePacksResponse(properties) {
                     this.packs = [];
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -4349,7 +4347,7 @@ $root.protocol = (function() {
                     if (!writer)
                         writer = $Writer.create();
                     if (message.packs != null && message.packs.length)
-                        for (var i = 0; i < message.packs.length; ++i)
+                        for (let i = 0; i < message.packs.length; ++i)
                             $root.protocol.chat.v1.GetEmotePacksResponse.EmotePack.encode(message.packs[i], writer.uint32(10).fork()).ldelim();
                     return writer;
                 };
@@ -4357,9 +4355,9 @@ $root.protocol = (function() {
                 GetEmotePacksResponse.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetEmotePacksResponse();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetEmotePacksResponse();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             if (!(message.packs && message.packs.length))
@@ -4377,12 +4375,12 @@ $root.protocol = (function() {
                 GetEmotePacksResponse.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.GetEmotePacksResponse)
                         return object;
-                    var message = new $root.protocol.chat.v1.GetEmotePacksResponse();
+                    let message = new $root.protocol.chat.v1.GetEmotePacksResponse();
                     if (object.packs) {
                         if (!Array.isArray(object.packs))
                             throw TypeError(".protocol.chat.v1.GetEmotePacksResponse.packs: array expected");
                         message.packs = [];
-                        for (var i = 0; i < object.packs.length; ++i) {
+                        for (let i = 0; i < object.packs.length; ++i) {
                             if (typeof object.packs[i] !== "object")
                                 throw TypeError(".protocol.chat.v1.GetEmotePacksResponse.packs: object expected");
                             message.packs[i] = $root.protocol.chat.v1.GetEmotePacksResponse.EmotePack.fromObject(object.packs[i]);
@@ -4394,12 +4392,12 @@ $root.protocol = (function() {
                 GetEmotePacksResponse.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.arrays || options.defaults)
                         object.packs = [];
                     if (message.packs && message.packs.length) {
                         object.packs = [];
-                        for (var j = 0; j < message.packs.length; ++j)
+                        for (let j = 0; j < message.packs.length; ++j)
                             object.packs[j] = $root.protocol.chat.v1.GetEmotePacksResponse.EmotePack.toObject(message.packs[j], options);
                     }
                     return object;
@@ -4413,7 +4411,7 @@ $root.protocol = (function() {
 
                     function EmotePack(properties) {
                         if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
                                     this[keys[i]] = properties[keys[i]];
                     }
@@ -4437,9 +4435,9 @@ $root.protocol = (function() {
                     EmotePack.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetEmotePacksResponse.EmotePack();
+                        let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetEmotePacksResponse.EmotePack();
                         while (reader.pos < end) {
-                            var tag = reader.uint32();
+                            let tag = reader.uint32();
                             switch (tag >>> 3) {
                             case 1:
                                 message.packId = reader.uint64();
@@ -4461,7 +4459,7 @@ $root.protocol = (function() {
                     EmotePack.fromObject = function fromObject(object) {
                         if (object instanceof $root.protocol.chat.v1.GetEmotePacksResponse.EmotePack)
                             return object;
-                        var message = new $root.protocol.chat.v1.GetEmotePacksResponse.EmotePack();
+                        let message = new $root.protocol.chat.v1.GetEmotePacksResponse.EmotePack();
                         if (object.packId != null)
                             if ($util.Long)
                                 (message.packId = $util.Long.fromValue(object.packId)).unsigned = true;
@@ -4488,15 +4486,15 @@ $root.protocol = (function() {
                     EmotePack.toObject = function toObject(message, options) {
                         if (!options)
                             options = {};
-                        var object = {};
+                        let object = {};
                         if (options.defaults) {
                             if ($util.Long) {
-                                var long = new $util.Long(0, 0, true);
+                                let long = new $util.Long(0, 0, true);
                                 object.packId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                             } else
                                 object.packId = options.longs === String ? "0" : 0;
                             if ($util.Long) {
-                                var long = new $util.Long(0, 0, true);
+                                let long = new $util.Long(0, 0, true);
                                 object.packOwner = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                             } else
                                 object.packOwner = options.longs === String ? "0" : 0;
@@ -4531,7 +4529,7 @@ $root.protocol = (function() {
 
                 function GetEmotePackEmotesRequest(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -4549,9 +4547,9 @@ $root.protocol = (function() {
                 GetEmotePackEmotesRequest.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetEmotePackEmotesRequest();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetEmotePackEmotesRequest();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.packId = reader.uint64();
@@ -4567,7 +4565,7 @@ $root.protocol = (function() {
                 GetEmotePackEmotesRequest.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.GetEmotePackEmotesRequest)
                         return object;
-                    var message = new $root.protocol.chat.v1.GetEmotePackEmotesRequest();
+                    let message = new $root.protocol.chat.v1.GetEmotePackEmotesRequest();
                     if (object.packId != null)
                         if ($util.Long)
                             (message.packId = $util.Long.fromValue(object.packId)).unsigned = true;
@@ -4583,10 +4581,10 @@ $root.protocol = (function() {
                 GetEmotePackEmotesRequest.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults)
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.packId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.packId = options.longs === String ? "0" : 0;
@@ -4610,7 +4608,7 @@ $root.protocol = (function() {
                 function GetEmotePackEmotesResponse(properties) {
                     this.emotes = [];
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -4621,7 +4619,7 @@ $root.protocol = (function() {
                     if (!writer)
                         writer = $Writer.create();
                     if (message.emotes != null && message.emotes.length)
-                        for (var i = 0; i < message.emotes.length; ++i)
+                        for (let i = 0; i < message.emotes.length; ++i)
                             $root.protocol.chat.v1.GetEmotePackEmotesResponse.Emote.encode(message.emotes[i], writer.uint32(10).fork()).ldelim();
                     return writer;
                 };
@@ -4629,9 +4627,9 @@ $root.protocol = (function() {
                 GetEmotePackEmotesResponse.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetEmotePackEmotesResponse();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetEmotePackEmotesResponse();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             if (!(message.emotes && message.emotes.length))
@@ -4649,12 +4647,12 @@ $root.protocol = (function() {
                 GetEmotePackEmotesResponse.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.GetEmotePackEmotesResponse)
                         return object;
-                    var message = new $root.protocol.chat.v1.GetEmotePackEmotesResponse();
+                    let message = new $root.protocol.chat.v1.GetEmotePackEmotesResponse();
                     if (object.emotes) {
                         if (!Array.isArray(object.emotes))
                             throw TypeError(".protocol.chat.v1.GetEmotePackEmotesResponse.emotes: array expected");
                         message.emotes = [];
-                        for (var i = 0; i < object.emotes.length; ++i) {
+                        for (let i = 0; i < object.emotes.length; ++i) {
                             if (typeof object.emotes[i] !== "object")
                                 throw TypeError(".protocol.chat.v1.GetEmotePackEmotesResponse.emotes: object expected");
                             message.emotes[i] = $root.protocol.chat.v1.GetEmotePackEmotesResponse.Emote.fromObject(object.emotes[i]);
@@ -4666,12 +4664,12 @@ $root.protocol = (function() {
                 GetEmotePackEmotesResponse.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.arrays || options.defaults)
                         object.emotes = [];
                     if (message.emotes && message.emotes.length) {
                         object.emotes = [];
-                        for (var j = 0; j < message.emotes.length; ++j)
+                        for (let j = 0; j < message.emotes.length; ++j)
                             object.emotes[j] = $root.protocol.chat.v1.GetEmotePackEmotesResponse.Emote.toObject(message.emotes[j], options);
                     }
                     return object;
@@ -4685,7 +4683,7 @@ $root.protocol = (function() {
 
                     function Emote(properties) {
                         if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
                                     this[keys[i]] = properties[keys[i]];
                     }
@@ -4706,9 +4704,9 @@ $root.protocol = (function() {
                     Emote.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetEmotePackEmotesResponse.Emote();
+                        let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetEmotePackEmotesResponse.Emote();
                         while (reader.pos < end) {
-                            var tag = reader.uint32();
+                            let tag = reader.uint32();
                             switch (tag >>> 3) {
                             case 1:
                                 message.imageId = reader.string();
@@ -4727,7 +4725,7 @@ $root.protocol = (function() {
                     Emote.fromObject = function fromObject(object) {
                         if (object instanceof $root.protocol.chat.v1.GetEmotePackEmotesResponse.Emote)
                             return object;
-                        var message = new $root.protocol.chat.v1.GetEmotePackEmotesResponse.Emote();
+                        let message = new $root.protocol.chat.v1.GetEmotePackEmotesResponse.Emote();
                         if (object.imageId != null)
                             message.imageId = String(object.imageId);
                         if (object.name != null)
@@ -4738,7 +4736,7 @@ $root.protocol = (function() {
                     Emote.toObject = function toObject(message, options) {
                         if (!options)
                             options = {};
-                        var object = {};
+                        let object = {};
                         if (options.defaults) {
                             object.imageId = "";
                             object.name = "";
@@ -4764,7 +4762,7 @@ $root.protocol = (function() {
 
                 function AddEmoteToPackRequest(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -4788,9 +4786,9 @@ $root.protocol = (function() {
                 AddEmoteToPackRequest.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.AddEmoteToPackRequest();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.AddEmoteToPackRequest();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.packId = reader.uint64();
@@ -4812,7 +4810,7 @@ $root.protocol = (function() {
                 AddEmoteToPackRequest.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.AddEmoteToPackRequest)
                         return object;
-                    var message = new $root.protocol.chat.v1.AddEmoteToPackRequest();
+                    let message = new $root.protocol.chat.v1.AddEmoteToPackRequest();
                     if (object.packId != null)
                         if ($util.Long)
                             (message.packId = $util.Long.fromValue(object.packId)).unsigned = true;
@@ -4832,10 +4830,10 @@ $root.protocol = (function() {
                 AddEmoteToPackRequest.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults) {
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.packId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.packId = options.longs === String ? "0" : 0;
@@ -4865,7 +4863,7 @@ $root.protocol = (function() {
 
                 function DeleteEmoteFromPackRequest(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -4886,9 +4884,9 @@ $root.protocol = (function() {
                 DeleteEmoteFromPackRequest.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.DeleteEmoteFromPackRequest();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.DeleteEmoteFromPackRequest();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.packId = reader.uint64();
@@ -4907,7 +4905,7 @@ $root.protocol = (function() {
                 DeleteEmoteFromPackRequest.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.DeleteEmoteFromPackRequest)
                         return object;
-                    var message = new $root.protocol.chat.v1.DeleteEmoteFromPackRequest();
+                    let message = new $root.protocol.chat.v1.DeleteEmoteFromPackRequest();
                     if (object.packId != null)
                         if ($util.Long)
                             (message.packId = $util.Long.fromValue(object.packId)).unsigned = true;
@@ -4925,10 +4923,10 @@ $root.protocol = (function() {
                 DeleteEmoteFromPackRequest.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults) {
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.packId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.packId = options.longs === String ? "0" : 0;
@@ -4955,7 +4953,7 @@ $root.protocol = (function() {
 
                 function DeleteEmotePackRequest(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -4973,9 +4971,9 @@ $root.protocol = (function() {
                 DeleteEmotePackRequest.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.DeleteEmotePackRequest();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.DeleteEmotePackRequest();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.packId = reader.uint64();
@@ -4991,7 +4989,7 @@ $root.protocol = (function() {
                 DeleteEmotePackRequest.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.DeleteEmotePackRequest)
                         return object;
-                    var message = new $root.protocol.chat.v1.DeleteEmotePackRequest();
+                    let message = new $root.protocol.chat.v1.DeleteEmotePackRequest();
                     if (object.packId != null)
                         if ($util.Long)
                             (message.packId = $util.Long.fromValue(object.packId)).unsigned = true;
@@ -5007,10 +5005,10 @@ $root.protocol = (function() {
                 DeleteEmotePackRequest.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults)
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.packId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.packId = options.longs === String ? "0" : 0;
@@ -5033,7 +5031,7 @@ $root.protocol = (function() {
 
                 function DequipEmotePackRequest(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -5051,9 +5049,9 @@ $root.protocol = (function() {
                 DequipEmotePackRequest.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.DequipEmotePackRequest();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.DequipEmotePackRequest();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.packId = reader.uint64();
@@ -5069,7 +5067,7 @@ $root.protocol = (function() {
                 DequipEmotePackRequest.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.DequipEmotePackRequest)
                         return object;
-                    var message = new $root.protocol.chat.v1.DequipEmotePackRequest();
+                    let message = new $root.protocol.chat.v1.DequipEmotePackRequest();
                     if (object.packId != null)
                         if ($util.Long)
                             (message.packId = $util.Long.fromValue(object.packId)).unsigned = true;
@@ -5085,10 +5083,10 @@ $root.protocol = (function() {
                 DequipEmotePackRequest.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults)
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.packId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.packId = options.longs === String ? "0" : 0;
@@ -5111,7 +5109,7 @@ $root.protocol = (function() {
 
                 function CreateChannelRequest(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -5144,9 +5142,9 @@ $root.protocol = (function() {
                 CreateChannelRequest.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.CreateChannelRequest();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.CreateChannelRequest();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.guildId = reader.uint64();
@@ -5177,7 +5175,7 @@ $root.protocol = (function() {
                 CreateChannelRequest.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.CreateChannelRequest)
                         return object;
-                    var message = new $root.protocol.chat.v1.CreateChannelRequest();
+                    let message = new $root.protocol.chat.v1.CreateChannelRequest();
                     if (object.guildId != null)
                         if ($util.Long)
                             (message.guildId = $util.Long.fromValue(object.guildId)).unsigned = true;
@@ -5220,22 +5218,22 @@ $root.protocol = (function() {
                 CreateChannelRequest.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults) {
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.guildId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.guildId = options.longs === String ? "0" : 0;
                         object.channelName = "";
                         object.isCategory = false;
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.nextId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.nextId = options.longs === String ? "0" : 0;
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.previousId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.previousId = options.longs === String ? "0" : 0;
@@ -5276,7 +5274,7 @@ $root.protocol = (function() {
 
                 function CreateChannelResponse(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -5294,9 +5292,9 @@ $root.protocol = (function() {
                 CreateChannelResponse.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.CreateChannelResponse();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.CreateChannelResponse();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.channelId = reader.uint64();
@@ -5312,7 +5310,7 @@ $root.protocol = (function() {
                 CreateChannelResponse.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.CreateChannelResponse)
                         return object;
-                    var message = new $root.protocol.chat.v1.CreateChannelResponse();
+                    let message = new $root.protocol.chat.v1.CreateChannelResponse();
                     if (object.channelId != null)
                         if ($util.Long)
                             (message.channelId = $util.Long.fromValue(object.channelId)).unsigned = true;
@@ -5328,10 +5326,10 @@ $root.protocol = (function() {
                 CreateChannelResponse.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults)
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.channelId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.channelId = options.longs === String ? "0" : 0;
@@ -5354,7 +5352,7 @@ $root.protocol = (function() {
 
                 function GetGuildChannelsRequest(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -5372,9 +5370,9 @@ $root.protocol = (function() {
                 GetGuildChannelsRequest.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetGuildChannelsRequest();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetGuildChannelsRequest();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.guildId = reader.uint64();
@@ -5390,7 +5388,7 @@ $root.protocol = (function() {
                 GetGuildChannelsRequest.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.GetGuildChannelsRequest)
                         return object;
-                    var message = new $root.protocol.chat.v1.GetGuildChannelsRequest();
+                    let message = new $root.protocol.chat.v1.GetGuildChannelsRequest();
                     if (object.guildId != null)
                         if ($util.Long)
                             (message.guildId = $util.Long.fromValue(object.guildId)).unsigned = true;
@@ -5406,10 +5404,10 @@ $root.protocol = (function() {
                 GetGuildChannelsRequest.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults)
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.guildId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.guildId = options.longs === String ? "0" : 0;
@@ -5433,7 +5431,7 @@ $root.protocol = (function() {
                 function GetGuildChannelsResponse(properties) {
                     this.channels = [];
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -5444,7 +5442,7 @@ $root.protocol = (function() {
                     if (!writer)
                         writer = $Writer.create();
                     if (message.channels != null && message.channels.length)
-                        for (var i = 0; i < message.channels.length; ++i)
+                        for (let i = 0; i < message.channels.length; ++i)
                             $root.protocol.chat.v1.GetGuildChannelsResponse.Channel.encode(message.channels[i], writer.uint32(10).fork()).ldelim();
                     return writer;
                 };
@@ -5452,9 +5450,9 @@ $root.protocol = (function() {
                 GetGuildChannelsResponse.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetGuildChannelsResponse();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetGuildChannelsResponse();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             if (!(message.channels && message.channels.length))
@@ -5472,12 +5470,12 @@ $root.protocol = (function() {
                 GetGuildChannelsResponse.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.GetGuildChannelsResponse)
                         return object;
-                    var message = new $root.protocol.chat.v1.GetGuildChannelsResponse();
+                    let message = new $root.protocol.chat.v1.GetGuildChannelsResponse();
                     if (object.channels) {
                         if (!Array.isArray(object.channels))
                             throw TypeError(".protocol.chat.v1.GetGuildChannelsResponse.channels: array expected");
                         message.channels = [];
-                        for (var i = 0; i < object.channels.length; ++i) {
+                        for (let i = 0; i < object.channels.length; ++i) {
                             if (typeof object.channels[i] !== "object")
                                 throw TypeError(".protocol.chat.v1.GetGuildChannelsResponse.channels: object expected");
                             message.channels[i] = $root.protocol.chat.v1.GetGuildChannelsResponse.Channel.fromObject(object.channels[i]);
@@ -5489,12 +5487,12 @@ $root.protocol = (function() {
                 GetGuildChannelsResponse.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.arrays || options.defaults)
                         object.channels = [];
                     if (message.channels && message.channels.length) {
                         object.channels = [];
-                        for (var j = 0; j < message.channels.length; ++j)
+                        for (let j = 0; j < message.channels.length; ++j)
                             object.channels[j] = $root.protocol.chat.v1.GetGuildChannelsResponse.Channel.toObject(message.channels[j], options);
                     }
                     return object;
@@ -5508,7 +5506,7 @@ $root.protocol = (function() {
 
                     function Channel(properties) {
                         if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
                                     this[keys[i]] = properties[keys[i]];
                     }
@@ -5535,9 +5533,9 @@ $root.protocol = (function() {
                     Channel.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetGuildChannelsResponse.Channel();
+                        let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetGuildChannelsResponse.Channel();
                         while (reader.pos < end) {
-                            var tag = reader.uint32();
+                            let tag = reader.uint32();
                             switch (tag >>> 3) {
                             case 4:
                                 message.metadata = $root.protocol.harmonytypes.v1.Metadata.decode(reader, reader.uint32());
@@ -5562,7 +5560,7 @@ $root.protocol = (function() {
                     Channel.fromObject = function fromObject(object) {
                         if (object instanceof $root.protocol.chat.v1.GetGuildChannelsResponse.Channel)
                             return object;
-                        var message = new $root.protocol.chat.v1.GetGuildChannelsResponse.Channel();
+                        let message = new $root.protocol.chat.v1.GetGuildChannelsResponse.Channel();
                         if (object.metadata != null) {
                             if (typeof object.metadata !== "object")
                                 throw TypeError(".protocol.chat.v1.GetGuildChannelsResponse.Channel.metadata: object expected");
@@ -5587,10 +5585,10 @@ $root.protocol = (function() {
                     Channel.toObject = function toObject(message, options) {
                         if (!options)
                             options = {};
-                        var object = {};
+                        let object = {};
                         if (options.defaults) {
                             if ($util.Long) {
-                                var long = new $util.Long(0, 0, true);
+                                let long = new $util.Long(0, 0, true);
                                 object.channelId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                             } else
                                 object.channelId = options.longs === String ? "0" : 0;
@@ -5626,7 +5624,7 @@ $root.protocol = (function() {
 
                 function UpdateChannelInformationRequest(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -5659,9 +5657,9 @@ $root.protocol = (function() {
                 UpdateChannelInformationRequest.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.UpdateChannelInformationRequest();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.UpdateChannelInformationRequest();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.guildId = reader.uint64();
@@ -5692,7 +5690,7 @@ $root.protocol = (function() {
                 UpdateChannelInformationRequest.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.UpdateChannelInformationRequest)
                         return object;
-                    var message = new $root.protocol.chat.v1.UpdateChannelInformationRequest();
+                    let message = new $root.protocol.chat.v1.UpdateChannelInformationRequest();
                     if (object.guildId != null)
                         if ($util.Long)
                             (message.guildId = $util.Long.fromValue(object.guildId)).unsigned = true;
@@ -5728,15 +5726,15 @@ $root.protocol = (function() {
                 UpdateChannelInformationRequest.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults) {
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.guildId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.guildId = options.longs === String ? "0" : 0;
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.channelId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.channelId = options.longs === String ? "0" : 0;
@@ -5777,7 +5775,7 @@ $root.protocol = (function() {
 
                 function UpdateChannelOrderRequest(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -5804,9 +5802,9 @@ $root.protocol = (function() {
                 UpdateChannelOrderRequest.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.UpdateChannelOrderRequest();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.UpdateChannelOrderRequest();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.guildId = reader.uint64();
@@ -5831,7 +5829,7 @@ $root.protocol = (function() {
                 UpdateChannelOrderRequest.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.UpdateChannelOrderRequest)
                         return object;
-                    var message = new $root.protocol.chat.v1.UpdateChannelOrderRequest();
+                    let message = new $root.protocol.chat.v1.UpdateChannelOrderRequest();
                     if (object.guildId != null)
                         if ($util.Long)
                             (message.guildId = $util.Long.fromValue(object.guildId)).unsigned = true;
@@ -5874,25 +5872,25 @@ $root.protocol = (function() {
                 UpdateChannelOrderRequest.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults) {
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.guildId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.guildId = options.longs === String ? "0" : 0;
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.channelId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.channelId = options.longs === String ? "0" : 0;
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.previousId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.previousId = options.longs === String ? "0" : 0;
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.nextId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.nextId = options.longs === String ? "0" : 0;
@@ -5931,7 +5929,7 @@ $root.protocol = (function() {
 
                 function DeleteChannelRequest(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -5952,9 +5950,9 @@ $root.protocol = (function() {
                 DeleteChannelRequest.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.DeleteChannelRequest();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.DeleteChannelRequest();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.guildId = reader.uint64();
@@ -5973,7 +5971,7 @@ $root.protocol = (function() {
                 DeleteChannelRequest.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.DeleteChannelRequest)
                         return object;
-                    var message = new $root.protocol.chat.v1.DeleteChannelRequest();
+                    let message = new $root.protocol.chat.v1.DeleteChannelRequest();
                     if (object.guildId != null)
                         if ($util.Long)
                             (message.guildId = $util.Long.fromValue(object.guildId)).unsigned = true;
@@ -5998,15 +5996,15 @@ $root.protocol = (function() {
                 DeleteChannelRequest.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults) {
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.guildId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.guildId = options.longs === String ? "0" : 0;
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.channelId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.channelId = options.longs === String ? "0" : 0;
@@ -6035,7 +6033,7 @@ $root.protocol = (function() {
 
                 function TypingRequest(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -6056,9 +6054,9 @@ $root.protocol = (function() {
                 TypingRequest.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.TypingRequest();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.TypingRequest();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.guildId = reader.uint64();
@@ -6077,7 +6075,7 @@ $root.protocol = (function() {
                 TypingRequest.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.TypingRequest)
                         return object;
-                    var message = new $root.protocol.chat.v1.TypingRequest();
+                    let message = new $root.protocol.chat.v1.TypingRequest();
                     if (object.guildId != null)
                         if ($util.Long)
                             (message.guildId = $util.Long.fromValue(object.guildId)).unsigned = true;
@@ -6102,15 +6100,15 @@ $root.protocol = (function() {
                 TypingRequest.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults) {
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.guildId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.guildId = options.longs === String ? "0" : 0;
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.channelId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.channelId = options.longs === String ? "0" : 0;
@@ -6139,7 +6137,7 @@ $root.protocol = (function() {
 
                 function GetChannelMessagesRequest(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -6163,9 +6161,9 @@ $root.protocol = (function() {
                 GetChannelMessagesRequest.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetChannelMessagesRequest();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetChannelMessagesRequest();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.guildId = reader.uint64();
@@ -6187,7 +6185,7 @@ $root.protocol = (function() {
                 GetChannelMessagesRequest.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.GetChannelMessagesRequest)
                         return object;
-                    var message = new $root.protocol.chat.v1.GetChannelMessagesRequest();
+                    let message = new $root.protocol.chat.v1.GetChannelMessagesRequest();
                     if (object.guildId != null)
                         if ($util.Long)
                             (message.guildId = $util.Long.fromValue(object.guildId)).unsigned = true;
@@ -6221,20 +6219,20 @@ $root.protocol = (function() {
                 GetChannelMessagesRequest.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults) {
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.guildId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.guildId = options.longs === String ? "0" : 0;
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.channelId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.channelId = options.longs === String ? "0" : 0;
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.beforeMessage = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.beforeMessage = options.longs === String ? "0" : 0;
@@ -6269,7 +6267,7 @@ $root.protocol = (function() {
                 function GetChannelMessagesResponse(properties) {
                     this.messages = [];
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -6283,7 +6281,7 @@ $root.protocol = (function() {
                     if (message.reachedTop != null && Object.hasOwnProperty.call(message, "reachedTop"))
                         writer.uint32(8).bool(message.reachedTop);
                     if (message.messages != null && message.messages.length)
-                        for (var i = 0; i < message.messages.length; ++i)
+                        for (let i = 0; i < message.messages.length; ++i)
                             $root.protocol.harmonytypes.v1.Message.encode(message.messages[i], writer.uint32(18).fork()).ldelim();
                     return writer;
                 };
@@ -6291,9 +6289,9 @@ $root.protocol = (function() {
                 GetChannelMessagesResponse.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetChannelMessagesResponse();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetChannelMessagesResponse();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.reachedTop = reader.bool();
@@ -6314,14 +6312,14 @@ $root.protocol = (function() {
                 GetChannelMessagesResponse.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.GetChannelMessagesResponse)
                         return object;
-                    var message = new $root.protocol.chat.v1.GetChannelMessagesResponse();
+                    let message = new $root.protocol.chat.v1.GetChannelMessagesResponse();
                     if (object.reachedTop != null)
                         message.reachedTop = Boolean(object.reachedTop);
                     if (object.messages) {
                         if (!Array.isArray(object.messages))
                             throw TypeError(".protocol.chat.v1.GetChannelMessagesResponse.messages: array expected");
                         message.messages = [];
-                        for (var i = 0; i < object.messages.length; ++i) {
+                        for (let i = 0; i < object.messages.length; ++i) {
                             if (typeof object.messages[i] !== "object")
                                 throw TypeError(".protocol.chat.v1.GetChannelMessagesResponse.messages: object expected");
                             message.messages[i] = $root.protocol.harmonytypes.v1.Message.fromObject(object.messages[i]);
@@ -6333,7 +6331,7 @@ $root.protocol = (function() {
                 GetChannelMessagesResponse.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.arrays || options.defaults)
                         object.messages = [];
                     if (options.defaults)
@@ -6342,7 +6340,7 @@ $root.protocol = (function() {
                         object.reachedTop = message.reachedTop;
                     if (message.messages && message.messages.length) {
                         object.messages = [];
-                        for (var j = 0; j < message.messages.length; ++j)
+                        for (let j = 0; j < message.messages.length; ++j)
                             object.messages[j] = $root.protocol.harmonytypes.v1.Message.toObject(message.messages[j], options);
                     }
                     return object;
@@ -6359,7 +6357,7 @@ $root.protocol = (function() {
 
                 function GetMessageRequest(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -6383,9 +6381,9 @@ $root.protocol = (function() {
                 GetMessageRequest.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetMessageRequest();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetMessageRequest();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.guildId = reader.uint64();
@@ -6407,7 +6405,7 @@ $root.protocol = (function() {
                 GetMessageRequest.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.GetMessageRequest)
                         return object;
-                    var message = new $root.protocol.chat.v1.GetMessageRequest();
+                    let message = new $root.protocol.chat.v1.GetMessageRequest();
                     if (object.guildId != null)
                         if ($util.Long)
                             (message.guildId = $util.Long.fromValue(object.guildId)).unsigned = true;
@@ -6441,20 +6439,20 @@ $root.protocol = (function() {
                 GetMessageRequest.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults) {
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.guildId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.guildId = options.longs === String ? "0" : 0;
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.channelId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.channelId = options.longs === String ? "0" : 0;
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.messageId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.messageId = options.longs === String ? "0" : 0;
@@ -6488,7 +6486,7 @@ $root.protocol = (function() {
 
                 function GetMessageResponse(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -6506,9 +6504,9 @@ $root.protocol = (function() {
                 GetMessageResponse.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetMessageResponse();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetMessageResponse();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.message = $root.protocol.harmonytypes.v1.Message.decode(reader, reader.uint32());
@@ -6524,7 +6522,7 @@ $root.protocol = (function() {
                 GetMessageResponse.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.GetMessageResponse)
                         return object;
-                    var message = new $root.protocol.chat.v1.GetMessageResponse();
+                    let message = new $root.protocol.chat.v1.GetMessageResponse();
                     if (object.message != null) {
                         if (typeof object.message !== "object")
                             throw TypeError(".protocol.chat.v1.GetMessageResponse.message: object expected");
@@ -6536,7 +6534,7 @@ $root.protocol = (function() {
                 GetMessageResponse.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults)
                         object.message = null;
                     if (message.message != null && message.hasOwnProperty("message"))
@@ -6558,7 +6556,7 @@ $root.protocol = (function() {
                     this.actions = [];
                     this.attachments = [];
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -6593,17 +6591,17 @@ $root.protocol = (function() {
                     if (message.updateContent != null && Object.hasOwnProperty.call(message, "updateContent"))
                         writer.uint32(40).bool(message.updateContent);
                     if (message.embeds != null && message.embeds.length)
-                        for (var i = 0; i < message.embeds.length; ++i)
+                        for (let i = 0; i < message.embeds.length; ++i)
                             $root.protocol.harmonytypes.v1.Embed.encode(message.embeds[i], writer.uint32(50).fork()).ldelim();
                     if (message.updateEmbeds != null && Object.hasOwnProperty.call(message, "updateEmbeds"))
                         writer.uint32(56).bool(message.updateEmbeds);
                     if (message.actions != null && message.actions.length)
-                        for (var i = 0; i < message.actions.length; ++i)
+                        for (let i = 0; i < message.actions.length; ++i)
                             $root.protocol.harmonytypes.v1.Action.encode(message.actions[i], writer.uint32(66).fork()).ldelim();
                     if (message.updateActions != null && Object.hasOwnProperty.call(message, "updateActions"))
                         writer.uint32(72).bool(message.updateActions);
                     if (message.attachments != null && message.attachments.length)
-                        for (var i = 0; i < message.attachments.length; ++i)
+                        for (let i = 0; i < message.attachments.length; ++i)
                             writer.uint32(82).string(message.attachments[i]);
                     if (message.updateAttachments != null && Object.hasOwnProperty.call(message, "updateAttachments"))
                         writer.uint32(88).bool(message.updateAttachments);
@@ -6621,9 +6619,9 @@ $root.protocol = (function() {
                 UpdateMessageRequest.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.UpdateMessageRequest();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.UpdateMessageRequest();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.guildId = reader.uint64();
@@ -6687,7 +6685,7 @@ $root.protocol = (function() {
                 UpdateMessageRequest.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.UpdateMessageRequest)
                         return object;
-                    var message = new $root.protocol.chat.v1.UpdateMessageRequest();
+                    let message = new $root.protocol.chat.v1.UpdateMessageRequest();
                     if (object.guildId != null)
                         if ($util.Long)
                             (message.guildId = $util.Long.fromValue(object.guildId)).unsigned = true;
@@ -6723,7 +6721,7 @@ $root.protocol = (function() {
                         if (!Array.isArray(object.embeds))
                             throw TypeError(".protocol.chat.v1.UpdateMessageRequest.embeds: array expected");
                         message.embeds = [];
-                        for (var i = 0; i < object.embeds.length; ++i) {
+                        for (let i = 0; i < object.embeds.length; ++i) {
                             if (typeof object.embeds[i] !== "object")
                                 throw TypeError(".protocol.chat.v1.UpdateMessageRequest.embeds: object expected");
                             message.embeds[i] = $root.protocol.harmonytypes.v1.Embed.fromObject(object.embeds[i]);
@@ -6735,7 +6733,7 @@ $root.protocol = (function() {
                         if (!Array.isArray(object.actions))
                             throw TypeError(".protocol.chat.v1.UpdateMessageRequest.actions: array expected");
                         message.actions = [];
-                        for (var i = 0; i < object.actions.length; ++i) {
+                        for (let i = 0; i < object.actions.length; ++i) {
                             if (typeof object.actions[i] !== "object")
                                 throw TypeError(".protocol.chat.v1.UpdateMessageRequest.actions: object expected");
                             message.actions[i] = $root.protocol.harmonytypes.v1.Action.fromObject(object.actions[i]);
@@ -6747,7 +6745,7 @@ $root.protocol = (function() {
                         if (!Array.isArray(object.attachments))
                             throw TypeError(".protocol.chat.v1.UpdateMessageRequest.attachments: array expected");
                         message.attachments = [];
-                        for (var i = 0; i < object.attachments.length; ++i)
+                        for (let i = 0; i < object.attachments.length; ++i)
                             message.attachments[i] = String(object.attachments[i]);
                     }
                     if (object.updateAttachments != null)
@@ -6772,7 +6770,7 @@ $root.protocol = (function() {
                 UpdateMessageRequest.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.arrays || options.defaults) {
                         object.embeds = [];
                         object.actions = [];
@@ -6780,17 +6778,17 @@ $root.protocol = (function() {
                     }
                     if (options.defaults) {
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.guildId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.guildId = options.longs === String ? "0" : 0;
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.channelId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.channelId = options.longs === String ? "0" : 0;
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.messageId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.messageId = options.longs === String ? "0" : 0;
@@ -6825,21 +6823,21 @@ $root.protocol = (function() {
                         object.updateContent = message.updateContent;
                     if (message.embeds && message.embeds.length) {
                         object.embeds = [];
-                        for (var j = 0; j < message.embeds.length; ++j)
+                        for (let j = 0; j < message.embeds.length; ++j)
                             object.embeds[j] = $root.protocol.harmonytypes.v1.Embed.toObject(message.embeds[j], options);
                     }
                     if (message.updateEmbeds != null && message.hasOwnProperty("updateEmbeds"))
                         object.updateEmbeds = message.updateEmbeds;
                     if (message.actions && message.actions.length) {
                         object.actions = [];
-                        for (var j = 0; j < message.actions.length; ++j)
+                        for (let j = 0; j < message.actions.length; ++j)
                             object.actions[j] = $root.protocol.harmonytypes.v1.Action.toObject(message.actions[j], options);
                     }
                     if (message.updateActions != null && message.hasOwnProperty("updateActions"))
                         object.updateActions = message.updateActions;
                     if (message.attachments && message.attachments.length) {
                         object.attachments = [];
-                        for (var j = 0; j < message.attachments.length; ++j)
+                        for (let j = 0; j < message.attachments.length; ++j)
                             object.attachments[j] = message.attachments[j];
                     }
                     if (message.updateAttachments != null && message.hasOwnProperty("updateAttachments"))
@@ -6866,7 +6864,7 @@ $root.protocol = (function() {
 
                 function DeleteMessageRequest(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -6890,9 +6888,9 @@ $root.protocol = (function() {
                 DeleteMessageRequest.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.DeleteMessageRequest();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.DeleteMessageRequest();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.guildId = reader.uint64();
@@ -6914,7 +6912,7 @@ $root.protocol = (function() {
                 DeleteMessageRequest.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.DeleteMessageRequest)
                         return object;
-                    var message = new $root.protocol.chat.v1.DeleteMessageRequest();
+                    let message = new $root.protocol.chat.v1.DeleteMessageRequest();
                     if (object.guildId != null)
                         if ($util.Long)
                             (message.guildId = $util.Long.fromValue(object.guildId)).unsigned = true;
@@ -6948,20 +6946,20 @@ $root.protocol = (function() {
                 DeleteMessageRequest.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults) {
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.guildId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.guildId = options.longs === String ? "0" : 0;
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.channelId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.channelId = options.longs === String ? "0" : 0;
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.messageId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.messageId = options.longs === String ? "0" : 0;
@@ -6995,7 +6993,7 @@ $root.protocol = (function() {
 
                 function TriggerActionRequest(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -7025,9 +7023,9 @@ $root.protocol = (function() {
                 TriggerActionRequest.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.TriggerActionRequest();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.TriggerActionRequest();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.guildId = reader.uint64();
@@ -7055,7 +7053,7 @@ $root.protocol = (function() {
                 TriggerActionRequest.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.TriggerActionRequest)
                         return object;
-                    var message = new $root.protocol.chat.v1.TriggerActionRequest();
+                    let message = new $root.protocol.chat.v1.TriggerActionRequest();
                     if (object.guildId != null)
                         if ($util.Long)
                             (message.guildId = $util.Long.fromValue(object.guildId)).unsigned = true;
@@ -7093,20 +7091,20 @@ $root.protocol = (function() {
                 TriggerActionRequest.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults) {
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.guildId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.guildId = options.longs === String ? "0" : 0;
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.channelId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.channelId = options.longs === String ? "0" : 0;
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.messageId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.messageId = options.longs === String ? "0" : 0;
@@ -7149,7 +7147,7 @@ $root.protocol = (function() {
                     this.embeds = [];
                     this.attachments = [];
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -7175,13 +7173,13 @@ $root.protocol = (function() {
                     if (message.content != null && Object.hasOwnProperty.call(message, "content"))
                         writer.uint32(26).string(message.content);
                     if (message.actions != null && message.actions.length)
-                        for (var i = 0; i < message.actions.length; ++i)
+                        for (let i = 0; i < message.actions.length; ++i)
                             $root.protocol.harmonytypes.v1.Action.encode(message.actions[i], writer.uint32(34).fork()).ldelim();
                     if (message.embeds != null && message.embeds.length)
-                        for (var i = 0; i < message.embeds.length; ++i)
+                        for (let i = 0; i < message.embeds.length; ++i)
                             $root.protocol.harmonytypes.v1.Embed.encode(message.embeds[i], writer.uint32(42).fork()).ldelim();
                     if (message.attachments != null && message.attachments.length)
-                        for (var i = 0; i < message.attachments.length; ++i)
+                        for (let i = 0; i < message.attachments.length; ++i)
                             writer.uint32(50).string(message.attachments[i]);
                     if (message.inReplyTo != null && Object.hasOwnProperty.call(message, "inReplyTo"))
                         writer.uint32(56).uint64(message.inReplyTo);
@@ -7197,9 +7195,9 @@ $root.protocol = (function() {
                 SendMessageRequest.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.SendMessageRequest();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.SendMessageRequest();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.guildId = reader.uint64();
@@ -7248,7 +7246,7 @@ $root.protocol = (function() {
                 SendMessageRequest.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.SendMessageRequest)
                         return object;
-                    var message = new $root.protocol.chat.v1.SendMessageRequest();
+                    let message = new $root.protocol.chat.v1.SendMessageRequest();
                     if (object.guildId != null)
                         if ($util.Long)
                             (message.guildId = $util.Long.fromValue(object.guildId)).unsigned = true;
@@ -7273,7 +7271,7 @@ $root.protocol = (function() {
                         if (!Array.isArray(object.actions))
                             throw TypeError(".protocol.chat.v1.SendMessageRequest.actions: array expected");
                         message.actions = [];
-                        for (var i = 0; i < object.actions.length; ++i) {
+                        for (let i = 0; i < object.actions.length; ++i) {
                             if (typeof object.actions[i] !== "object")
                                 throw TypeError(".protocol.chat.v1.SendMessageRequest.actions: object expected");
                             message.actions[i] = $root.protocol.harmonytypes.v1.Action.fromObject(object.actions[i]);
@@ -7283,7 +7281,7 @@ $root.protocol = (function() {
                         if (!Array.isArray(object.embeds))
                             throw TypeError(".protocol.chat.v1.SendMessageRequest.embeds: array expected");
                         message.embeds = [];
-                        for (var i = 0; i < object.embeds.length; ++i) {
+                        for (let i = 0; i < object.embeds.length; ++i) {
                             if (typeof object.embeds[i] !== "object")
                                 throw TypeError(".protocol.chat.v1.SendMessageRequest.embeds: object expected");
                             message.embeds[i] = $root.protocol.harmonytypes.v1.Embed.fromObject(object.embeds[i]);
@@ -7293,7 +7291,7 @@ $root.protocol = (function() {
                         if (!Array.isArray(object.attachments))
                             throw TypeError(".protocol.chat.v1.SendMessageRequest.attachments: array expected");
                         message.attachments = [];
-                        for (var i = 0; i < object.attachments.length; ++i)
+                        for (let i = 0; i < object.attachments.length; ++i)
                             message.attachments[i] = String(object.attachments[i]);
                     }
                     if (object.inReplyTo != null)
@@ -7330,7 +7328,7 @@ $root.protocol = (function() {
                 SendMessageRequest.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.arrays || options.defaults) {
                         object.actions = [];
                         object.embeds = [];
@@ -7338,24 +7336,24 @@ $root.protocol = (function() {
                     }
                     if (options.defaults) {
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.guildId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.guildId = options.longs === String ? "0" : 0;
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.channelId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.channelId = options.longs === String ? "0" : 0;
                         object.content = "";
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.inReplyTo = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.inReplyTo = options.longs === String ? "0" : 0;
                         object.overrides = null;
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.echoId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.echoId = options.longs === String ? "0" : 0;
@@ -7375,17 +7373,17 @@ $root.protocol = (function() {
                         object.content = message.content;
                     if (message.actions && message.actions.length) {
                         object.actions = [];
-                        for (var j = 0; j < message.actions.length; ++j)
+                        for (let j = 0; j < message.actions.length; ++j)
                             object.actions[j] = $root.protocol.harmonytypes.v1.Action.toObject(message.actions[j], options);
                     }
                     if (message.embeds && message.embeds.length) {
                         object.embeds = [];
-                        for (var j = 0; j < message.embeds.length; ++j)
+                        for (let j = 0; j < message.embeds.length; ++j)
                             object.embeds[j] = $root.protocol.harmonytypes.v1.Embed.toObject(message.embeds[j], options);
                     }
                     if (message.attachments && message.attachments.length) {
                         object.attachments = [];
-                        for (var j = 0; j < message.attachments.length; ++j)
+                        for (let j = 0; j < message.attachments.length; ++j)
                             object.attachments[j] = message.attachments[j];
                     }
                     if (message.inReplyTo != null && message.hasOwnProperty("inReplyTo"))
@@ -7416,7 +7414,7 @@ $root.protocol = (function() {
 
                 function SendMessageResponse(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -7434,9 +7432,9 @@ $root.protocol = (function() {
                 SendMessageResponse.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.SendMessageResponse();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.SendMessageResponse();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.messageId = reader.uint64();
@@ -7452,7 +7450,7 @@ $root.protocol = (function() {
                 SendMessageResponse.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.SendMessageResponse)
                         return object;
-                    var message = new $root.protocol.chat.v1.SendMessageResponse();
+                    let message = new $root.protocol.chat.v1.SendMessageResponse();
                     if (object.messageId != null)
                         if ($util.Long)
                             (message.messageId = $util.Long.fromValue(object.messageId)).unsigned = true;
@@ -7468,10 +7466,10 @@ $root.protocol = (function() {
                 SendMessageResponse.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults)
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.messageId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.messageId = options.longs === String ? "0" : 0;
@@ -7494,7 +7492,7 @@ $root.protocol = (function() {
 
                 function StreamEventsRequest(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -7503,7 +7501,7 @@ $root.protocol = (function() {
                 StreamEventsRequest.prototype.subscribeToActions = null;
                 StreamEventsRequest.prototype.subscribeToHomeserverEvents = null;
 
-                var $oneOfFields;
+                let $oneOfFields;
 
                 Object.defineProperty(StreamEventsRequest.prototype, "request", {
                     get: $util.oneOfGetter($oneOfFields = ["subscribeToGuild", "subscribeToActions", "subscribeToHomeserverEvents"]),
@@ -7525,9 +7523,9 @@ $root.protocol = (function() {
                 StreamEventsRequest.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.StreamEventsRequest();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.StreamEventsRequest();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.subscribeToGuild = $root.protocol.chat.v1.StreamEventsRequest.SubscribeToGuild.decode(reader, reader.uint32());
@@ -7549,7 +7547,7 @@ $root.protocol = (function() {
                 StreamEventsRequest.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.StreamEventsRequest)
                         return object;
-                    var message = new $root.protocol.chat.v1.StreamEventsRequest();
+                    let message = new $root.protocol.chat.v1.StreamEventsRequest();
                     if (object.subscribeToGuild != null) {
                         if (typeof object.subscribeToGuild !== "object")
                             throw TypeError(".protocol.chat.v1.StreamEventsRequest.subscribeToGuild: object expected");
@@ -7571,7 +7569,7 @@ $root.protocol = (function() {
                 StreamEventsRequest.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (message.subscribeToGuild != null && message.hasOwnProperty("subscribeToGuild")) {
                         object.subscribeToGuild = $root.protocol.chat.v1.StreamEventsRequest.SubscribeToGuild.toObject(message.subscribeToGuild, options);
                         if (options.oneofs)
@@ -7598,7 +7596,7 @@ $root.protocol = (function() {
 
                     function SubscribeToGuild(properties) {
                         if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
                                     this[keys[i]] = properties[keys[i]];
                     }
@@ -7616,9 +7614,9 @@ $root.protocol = (function() {
                     SubscribeToGuild.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.StreamEventsRequest.SubscribeToGuild();
+                        let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.StreamEventsRequest.SubscribeToGuild();
                         while (reader.pos < end) {
-                            var tag = reader.uint32();
+                            let tag = reader.uint32();
                             switch (tag >>> 3) {
                             case 1:
                                 message.guildId = reader.uint64();
@@ -7634,7 +7632,7 @@ $root.protocol = (function() {
                     SubscribeToGuild.fromObject = function fromObject(object) {
                         if (object instanceof $root.protocol.chat.v1.StreamEventsRequest.SubscribeToGuild)
                             return object;
-                        var message = new $root.protocol.chat.v1.StreamEventsRequest.SubscribeToGuild();
+                        let message = new $root.protocol.chat.v1.StreamEventsRequest.SubscribeToGuild();
                         if (object.guildId != null)
                             if ($util.Long)
                                 (message.guildId = $util.Long.fromValue(object.guildId)).unsigned = true;
@@ -7650,10 +7648,10 @@ $root.protocol = (function() {
                     SubscribeToGuild.toObject = function toObject(message, options) {
                         if (!options)
                             options = {};
-                        var object = {};
+                        let object = {};
                         if (options.defaults)
                             if ($util.Long) {
-                                var long = new $util.Long(0, 0, true);
+                                let long = new $util.Long(0, 0, true);
                                 object.guildId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                             } else
                                 object.guildId = options.longs === String ? "0" : 0;
@@ -7676,7 +7674,7 @@ $root.protocol = (function() {
 
                     function SubscribeToActions(properties) {
                         if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
                                     this[keys[i]] = properties[keys[i]];
                     }
@@ -7690,9 +7688,9 @@ $root.protocol = (function() {
                     SubscribeToActions.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.StreamEventsRequest.SubscribeToActions();
+                        let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.StreamEventsRequest.SubscribeToActions();
                         while (reader.pos < end) {
-                            var tag = reader.uint32();
+                            let tag = reader.uint32();
                             switch (tag >>> 3) {
                             default:
                                 reader.skipType(tag & 7);
@@ -7723,7 +7721,7 @@ $root.protocol = (function() {
 
                     function SubscribeToHomeserverEvents(properties) {
                         if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
                                     this[keys[i]] = properties[keys[i]];
                     }
@@ -7737,9 +7735,9 @@ $root.protocol = (function() {
                     SubscribeToHomeserverEvents.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.StreamEventsRequest.SubscribeToHomeserverEvents();
+                        let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.StreamEventsRequest.SubscribeToHomeserverEvents();
                         while (reader.pos < end) {
-                            var tag = reader.uint32();
+                            let tag = reader.uint32();
                             switch (tag >>> 3) {
                             default:
                                 reader.skipType(tag & 7);
@@ -7773,7 +7771,7 @@ $root.protocol = (function() {
 
                 function Event(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -7795,7 +7793,7 @@ $root.protocol = (function() {
                 Event.prototype.profileUpdated = null;
                 Event.prototype.typing = null;
 
-                var $oneOfFields;
+                let $oneOfFields;
 
                 Object.defineProperty(Event.prototype, "event", {
                     get: $util.oneOfGetter($oneOfFields = ["guildAddedToList", "guildRemovedFromList", "actionPerformed", "sentMessage", "editedMessage", "deletedMessage", "createdChannel", "editedChannel", "deletedChannel", "editedGuild", "deletedGuild", "joinedMember", "leftMember", "roleMoved", "profileUpdated", "typing"]),
@@ -7843,9 +7841,9 @@ $root.protocol = (function() {
                 Event.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.Event();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.Event();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.guildAddedToList = $root.protocol.chat.v1.Event.GuildAddedToList.decode(reader, reader.uint32());
@@ -7906,7 +7904,7 @@ $root.protocol = (function() {
                 Event.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.Event)
                         return object;
-                    var message = new $root.protocol.chat.v1.Event();
+                    let message = new $root.protocol.chat.v1.Event();
                     if (object.guildAddedToList != null) {
                         if (typeof object.guildAddedToList !== "object")
                             throw TypeError(".protocol.chat.v1.Event.guildAddedToList: object expected");
@@ -7993,7 +7991,7 @@ $root.protocol = (function() {
                 Event.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (message.guildAddedToList != null && message.hasOwnProperty("guildAddedToList")) {
                         object.guildAddedToList = $root.protocol.chat.v1.Event.GuildAddedToList.toObject(message.guildAddedToList, options);
                         if (options.oneofs)
@@ -8085,7 +8083,7 @@ $root.protocol = (function() {
 
                     function MessageSent(properties) {
                         if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
                                     this[keys[i]] = properties[keys[i]];
                     }
@@ -8106,9 +8104,9 @@ $root.protocol = (function() {
                     MessageSent.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.Event.MessageSent();
+                        let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.Event.MessageSent();
                         while (reader.pos < end) {
-                            var tag = reader.uint32();
+                            let tag = reader.uint32();
                             switch (tag >>> 3) {
                             case 1:
                                 message.echoId = reader.uint64();
@@ -8127,7 +8125,7 @@ $root.protocol = (function() {
                     MessageSent.fromObject = function fromObject(object) {
                         if (object instanceof $root.protocol.chat.v1.Event.MessageSent)
                             return object;
-                        var message = new $root.protocol.chat.v1.Event.MessageSent();
+                        let message = new $root.protocol.chat.v1.Event.MessageSent();
                         if (object.echoId != null)
                             if ($util.Long)
                                 (message.echoId = $util.Long.fromValue(object.echoId)).unsigned = true;
@@ -8148,10 +8146,10 @@ $root.protocol = (function() {
                     MessageSent.toObject = function toObject(message, options) {
                         if (!options)
                             options = {};
-                        var object = {};
+                        let object = {};
                         if (options.defaults) {
                             if ($util.Long) {
-                                var long = new $util.Long(0, 0, true);
+                                let long = new $util.Long(0, 0, true);
                                 object.echoId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                             } else
                                 object.echoId = options.longs === String ? "0" : 0;
@@ -8181,7 +8179,7 @@ $root.protocol = (function() {
                         this.actions = [];
                         this.attachments = [];
                         if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
                                     this[keys[i]] = properties[keys[i]];
                     }
@@ -8219,17 +8217,17 @@ $root.protocol = (function() {
                         if (message.updateContent != null && Object.hasOwnProperty.call(message, "updateContent"))
                             writer.uint32(48).bool(message.updateContent);
                         if (message.embeds != null && message.embeds.length)
-                            for (var i = 0; i < message.embeds.length; ++i)
+                            for (let i = 0; i < message.embeds.length; ++i)
                                 $root.protocol.harmonytypes.v1.Embed.encode(message.embeds[i], writer.uint32(58).fork()).ldelim();
                         if (message.updateEmbeds != null && Object.hasOwnProperty.call(message, "updateEmbeds"))
                             writer.uint32(64).bool(message.updateEmbeds);
                         if (message.actions != null && message.actions.length)
-                            for (var i = 0; i < message.actions.length; ++i)
+                            for (let i = 0; i < message.actions.length; ++i)
                                 $root.protocol.harmonytypes.v1.Action.encode(message.actions[i], writer.uint32(74).fork()).ldelim();
                         if (message.updateActions != null && Object.hasOwnProperty.call(message, "updateActions"))
                             writer.uint32(80).bool(message.updateActions);
                         if (message.attachments != null && message.attachments.length)
-                            for (var i = 0; i < message.attachments.length; ++i)
+                            for (let i = 0; i < message.attachments.length; ++i)
                                 $root.protocol.harmonytypes.v1.Attachment.encode(message.attachments[i], writer.uint32(90).fork()).ldelim();
                         if (message.updateAttachments != null && Object.hasOwnProperty.call(message, "updateAttachments"))
                             writer.uint32(96).bool(message.updateAttachments);
@@ -8247,9 +8245,9 @@ $root.protocol = (function() {
                     MessageUpdated.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.Event.MessageUpdated();
+                        let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.Event.MessageUpdated();
                         while (reader.pos < end) {
-                            var tag = reader.uint32();
+                            let tag = reader.uint32();
                             switch (tag >>> 3) {
                             case 1:
                                 message.guildId = reader.uint64();
@@ -8316,7 +8314,7 @@ $root.protocol = (function() {
                     MessageUpdated.fromObject = function fromObject(object) {
                         if (object instanceof $root.protocol.chat.v1.Event.MessageUpdated)
                             return object;
-                        var message = new $root.protocol.chat.v1.Event.MessageUpdated();
+                        let message = new $root.protocol.chat.v1.Event.MessageUpdated();
                         if (object.guildId != null)
                             if ($util.Long)
                                 (message.guildId = $util.Long.fromValue(object.guildId)).unsigned = true;
@@ -8357,7 +8355,7 @@ $root.protocol = (function() {
                             if (!Array.isArray(object.embeds))
                                 throw TypeError(".protocol.chat.v1.Event.MessageUpdated.embeds: array expected");
                             message.embeds = [];
-                            for (var i = 0; i < object.embeds.length; ++i) {
+                            for (let i = 0; i < object.embeds.length; ++i) {
                                 if (typeof object.embeds[i] !== "object")
                                     throw TypeError(".protocol.chat.v1.Event.MessageUpdated.embeds: object expected");
                                 message.embeds[i] = $root.protocol.harmonytypes.v1.Embed.fromObject(object.embeds[i]);
@@ -8369,7 +8367,7 @@ $root.protocol = (function() {
                             if (!Array.isArray(object.actions))
                                 throw TypeError(".protocol.chat.v1.Event.MessageUpdated.actions: array expected");
                             message.actions = [];
-                            for (var i = 0; i < object.actions.length; ++i) {
+                            for (let i = 0; i < object.actions.length; ++i) {
                                 if (typeof object.actions[i] !== "object")
                                     throw TypeError(".protocol.chat.v1.Event.MessageUpdated.actions: object expected");
                                 message.actions[i] = $root.protocol.harmonytypes.v1.Action.fromObject(object.actions[i]);
@@ -8381,7 +8379,7 @@ $root.protocol = (function() {
                             if (!Array.isArray(object.attachments))
                                 throw TypeError(".protocol.chat.v1.Event.MessageUpdated.attachments: array expected");
                             message.attachments = [];
-                            for (var i = 0; i < object.attachments.length; ++i) {
+                            for (let i = 0; i < object.attachments.length; ++i) {
                                 if (typeof object.attachments[i] !== "object")
                                     throw TypeError(".protocol.chat.v1.Event.MessageUpdated.attachments: object expected");
                                 message.attachments[i] = $root.protocol.harmonytypes.v1.Attachment.fromObject(object.attachments[i]);
@@ -8409,7 +8407,7 @@ $root.protocol = (function() {
                     MessageUpdated.toObject = function toObject(message, options) {
                         if (!options)
                             options = {};
-                        var object = {};
+                        let object = {};
                         if (options.arrays || options.defaults) {
                             object.embeds = [];
                             object.actions = [];
@@ -8417,17 +8415,17 @@ $root.protocol = (function() {
                         }
                         if (options.defaults) {
                             if ($util.Long) {
-                                var long = new $util.Long(0, 0, true);
+                                let long = new $util.Long(0, 0, true);
                                 object.guildId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                             } else
                                 object.guildId = options.longs === String ? "0" : 0;
                             if ($util.Long) {
-                                var long = new $util.Long(0, 0, true);
+                                let long = new $util.Long(0, 0, true);
                                 object.channelId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                             } else
                                 object.channelId = options.longs === String ? "0" : 0;
                             if ($util.Long) {
-                                var long = new $util.Long(0, 0, true);
+                                let long = new $util.Long(0, 0, true);
                                 object.messageId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                             } else
                                 object.messageId = options.longs === String ? "0" : 0;
@@ -8465,21 +8463,21 @@ $root.protocol = (function() {
                             object.updateContent = message.updateContent;
                         if (message.embeds && message.embeds.length) {
                             object.embeds = [];
-                            for (var j = 0; j < message.embeds.length; ++j)
+                            for (let j = 0; j < message.embeds.length; ++j)
                                 object.embeds[j] = $root.protocol.harmonytypes.v1.Embed.toObject(message.embeds[j], options);
                         }
                         if (message.updateEmbeds != null && message.hasOwnProperty("updateEmbeds"))
                             object.updateEmbeds = message.updateEmbeds;
                         if (message.actions && message.actions.length) {
                             object.actions = [];
-                            for (var j = 0; j < message.actions.length; ++j)
+                            for (let j = 0; j < message.actions.length; ++j)
                                 object.actions[j] = $root.protocol.harmonytypes.v1.Action.toObject(message.actions[j], options);
                         }
                         if (message.updateActions != null && message.hasOwnProperty("updateActions"))
                             object.updateActions = message.updateActions;
                         if (message.attachments && message.attachments.length) {
                             object.attachments = [];
-                            for (var j = 0; j < message.attachments.length; ++j)
+                            for (let j = 0; j < message.attachments.length; ++j)
                                 object.attachments[j] = $root.protocol.harmonytypes.v1.Attachment.toObject(message.attachments[j], options);
                         }
                         if (message.updateAttachments != null && message.hasOwnProperty("updateAttachments"))
@@ -8506,7 +8504,7 @@ $root.protocol = (function() {
 
                     function MessageDeleted(properties) {
                         if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
                                     this[keys[i]] = properties[keys[i]];
                     }
@@ -8530,9 +8528,9 @@ $root.protocol = (function() {
                     MessageDeleted.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.Event.MessageDeleted();
+                        let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.Event.MessageDeleted();
                         while (reader.pos < end) {
-                            var tag = reader.uint32();
+                            let tag = reader.uint32();
                             switch (tag >>> 3) {
                             case 1:
                                 message.guildId = reader.uint64();
@@ -8554,7 +8552,7 @@ $root.protocol = (function() {
                     MessageDeleted.fromObject = function fromObject(object) {
                         if (object instanceof $root.protocol.chat.v1.Event.MessageDeleted)
                             return object;
-                        var message = new $root.protocol.chat.v1.Event.MessageDeleted();
+                        let message = new $root.protocol.chat.v1.Event.MessageDeleted();
                         if (object.guildId != null)
                             if ($util.Long)
                                 (message.guildId = $util.Long.fromValue(object.guildId)).unsigned = true;
@@ -8588,20 +8586,20 @@ $root.protocol = (function() {
                     MessageDeleted.toObject = function toObject(message, options) {
                         if (!options)
                             options = {};
-                        var object = {};
+                        let object = {};
                         if (options.defaults) {
                             if ($util.Long) {
-                                var long = new $util.Long(0, 0, true);
+                                let long = new $util.Long(0, 0, true);
                                 object.guildId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                             } else
                                 object.guildId = options.longs === String ? "0" : 0;
                             if ($util.Long) {
-                                var long = new $util.Long(0, 0, true);
+                                let long = new $util.Long(0, 0, true);
                                 object.channelId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                             } else
                                 object.channelId = options.longs === String ? "0" : 0;
                             if ($util.Long) {
-                                var long = new $util.Long(0, 0, true);
+                                let long = new $util.Long(0, 0, true);
                                 object.messageId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                             } else
                                 object.messageId = options.longs === String ? "0" : 0;
@@ -8635,7 +8633,7 @@ $root.protocol = (function() {
 
                     function ChannelCreated(properties) {
                         if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
                                     this[keys[i]] = properties[keys[i]];
                     }
@@ -8671,9 +8669,9 @@ $root.protocol = (function() {
                     ChannelCreated.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.Event.ChannelCreated();
+                        let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.Event.ChannelCreated();
                         while (reader.pos < end) {
-                            var tag = reader.uint32();
+                            let tag = reader.uint32();
                             switch (tag >>> 3) {
                             case 1:
                                 message.guildId = reader.uint64();
@@ -8707,7 +8705,7 @@ $root.protocol = (function() {
                     ChannelCreated.fromObject = function fromObject(object) {
                         if (object instanceof $root.protocol.chat.v1.Event.ChannelCreated)
                             return object;
-                        var message = new $root.protocol.chat.v1.Event.ChannelCreated();
+                        let message = new $root.protocol.chat.v1.Event.ChannelCreated();
                         if (object.guildId != null)
                             if ($util.Long)
                                 (message.guildId = $util.Long.fromValue(object.guildId)).unsigned = true;
@@ -8759,26 +8757,26 @@ $root.protocol = (function() {
                     ChannelCreated.toObject = function toObject(message, options) {
                         if (!options)
                             options = {};
-                        var object = {};
+                        let object = {};
                         if (options.defaults) {
                             if ($util.Long) {
-                                var long = new $util.Long(0, 0, true);
+                                let long = new $util.Long(0, 0, true);
                                 object.guildId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                             } else
                                 object.guildId = options.longs === String ? "0" : 0;
                             if ($util.Long) {
-                                var long = new $util.Long(0, 0, true);
+                                let long = new $util.Long(0, 0, true);
                                 object.channelId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                             } else
                                 object.channelId = options.longs === String ? "0" : 0;
                             object.name = "";
                             if ($util.Long) {
-                                var long = new $util.Long(0, 0, true);
+                                let long = new $util.Long(0, 0, true);
                                 object.previousId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                             } else
                                 object.previousId = options.longs === String ? "0" : 0;
                             if ($util.Long) {
-                                var long = new $util.Long(0, 0, true);
+                                let long = new $util.Long(0, 0, true);
                                 object.nextId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                             } else
                                 object.nextId = options.longs === String ? "0" : 0;
@@ -8825,7 +8823,7 @@ $root.protocol = (function() {
 
                     function ChannelUpdated(properties) {
                         if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
                                     this[keys[i]] = properties[keys[i]];
                     }
@@ -8867,9 +8865,9 @@ $root.protocol = (function() {
                     ChannelUpdated.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.Event.ChannelUpdated();
+                        let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.Event.ChannelUpdated();
                         while (reader.pos < end) {
-                            var tag = reader.uint32();
+                            let tag = reader.uint32();
                             switch (tag >>> 3) {
                             case 1:
                                 message.guildId = reader.uint64();
@@ -8909,7 +8907,7 @@ $root.protocol = (function() {
                     ChannelUpdated.fromObject = function fromObject(object) {
                         if (object instanceof $root.protocol.chat.v1.Event.ChannelUpdated)
                             return object;
-                        var message = new $root.protocol.chat.v1.Event.ChannelUpdated();
+                        let message = new $root.protocol.chat.v1.Event.ChannelUpdated();
                         if (object.guildId != null)
                             if ($util.Long)
                                 (message.guildId = $util.Long.fromValue(object.guildId)).unsigned = true;
@@ -8965,27 +8963,27 @@ $root.protocol = (function() {
                     ChannelUpdated.toObject = function toObject(message, options) {
                         if (!options)
                             options = {};
-                        var object = {};
+                        let object = {};
                         if (options.defaults) {
                             if ($util.Long) {
-                                var long = new $util.Long(0, 0, true);
+                                let long = new $util.Long(0, 0, true);
                                 object.guildId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                             } else
                                 object.guildId = options.longs === String ? "0" : 0;
                             if ($util.Long) {
-                                var long = new $util.Long(0, 0, true);
+                                let long = new $util.Long(0, 0, true);
                                 object.channelId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                             } else
                                 object.channelId = options.longs === String ? "0" : 0;
                             object.name = "";
                             object.updateName = false;
                             if ($util.Long) {
-                                var long = new $util.Long(0, 0, true);
+                                let long = new $util.Long(0, 0, true);
                                 object.previousId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                             } else
                                 object.previousId = options.longs === String ? "0" : 0;
                             if ($util.Long) {
-                                var long = new $util.Long(0, 0, true);
+                                let long = new $util.Long(0, 0, true);
                                 object.nextId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                             } else
                                 object.nextId = options.longs === String ? "0" : 0;
@@ -9037,7 +9035,7 @@ $root.protocol = (function() {
 
                     function ChannelDeleted(properties) {
                         if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
                                     this[keys[i]] = properties[keys[i]];
                     }
@@ -9058,9 +9056,9 @@ $root.protocol = (function() {
                     ChannelDeleted.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.Event.ChannelDeleted();
+                        let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.Event.ChannelDeleted();
                         while (reader.pos < end) {
-                            var tag = reader.uint32();
+                            let tag = reader.uint32();
                             switch (tag >>> 3) {
                             case 1:
                                 message.guildId = reader.uint64();
@@ -9079,7 +9077,7 @@ $root.protocol = (function() {
                     ChannelDeleted.fromObject = function fromObject(object) {
                         if (object instanceof $root.protocol.chat.v1.Event.ChannelDeleted)
                             return object;
-                        var message = new $root.protocol.chat.v1.Event.ChannelDeleted();
+                        let message = new $root.protocol.chat.v1.Event.ChannelDeleted();
                         if (object.guildId != null)
                             if ($util.Long)
                                 (message.guildId = $util.Long.fromValue(object.guildId)).unsigned = true;
@@ -9104,15 +9102,15 @@ $root.protocol = (function() {
                     ChannelDeleted.toObject = function toObject(message, options) {
                         if (!options)
                             options = {};
-                        var object = {};
+                        let object = {};
                         if (options.defaults) {
                             if ($util.Long) {
-                                var long = new $util.Long(0, 0, true);
+                                let long = new $util.Long(0, 0, true);
                                 object.guildId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                             } else
                                 object.guildId = options.longs === String ? "0" : 0;
                             if ($util.Long) {
-                                var long = new $util.Long(0, 0, true);
+                                let long = new $util.Long(0, 0, true);
                                 object.channelId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                             } else
                                 object.channelId = options.longs === String ? "0" : 0;
@@ -9141,7 +9139,7 @@ $root.protocol = (function() {
 
                     function GuildUpdated(properties) {
                         if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
                                     this[keys[i]] = properties[keys[i]];
                     }
@@ -9177,9 +9175,9 @@ $root.protocol = (function() {
                     GuildUpdated.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.Event.GuildUpdated();
+                        let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.Event.GuildUpdated();
                         while (reader.pos < end) {
-                            var tag = reader.uint32();
+                            let tag = reader.uint32();
                             switch (tag >>> 3) {
                             case 1:
                                 message.guildId = reader.uint64();
@@ -9213,7 +9211,7 @@ $root.protocol = (function() {
                     GuildUpdated.fromObject = function fromObject(object) {
                         if (object instanceof $root.protocol.chat.v1.Event.GuildUpdated)
                             return object;
-                        var message = new $root.protocol.chat.v1.Event.GuildUpdated();
+                        let message = new $root.protocol.chat.v1.Event.GuildUpdated();
                         if (object.guildId != null)
                             if ($util.Long)
                                 (message.guildId = $util.Long.fromValue(object.guildId)).unsigned = true;
@@ -9244,10 +9242,10 @@ $root.protocol = (function() {
                     GuildUpdated.toObject = function toObject(message, options) {
                         if (!options)
                             options = {};
-                        var object = {};
+                        let object = {};
                         if (options.defaults) {
                             if ($util.Long) {
-                                var long = new $util.Long(0, 0, true);
+                                let long = new $util.Long(0, 0, true);
                                 object.guildId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                             } else
                                 object.guildId = options.longs === String ? "0" : 0;
@@ -9289,7 +9287,7 @@ $root.protocol = (function() {
 
                     function GuildDeleted(properties) {
                         if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
                                     this[keys[i]] = properties[keys[i]];
                     }
@@ -9307,9 +9305,9 @@ $root.protocol = (function() {
                     GuildDeleted.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.Event.GuildDeleted();
+                        let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.Event.GuildDeleted();
                         while (reader.pos < end) {
-                            var tag = reader.uint32();
+                            let tag = reader.uint32();
                             switch (tag >>> 3) {
                             case 1:
                                 message.guildId = reader.uint64();
@@ -9325,7 +9323,7 @@ $root.protocol = (function() {
                     GuildDeleted.fromObject = function fromObject(object) {
                         if (object instanceof $root.protocol.chat.v1.Event.GuildDeleted)
                             return object;
-                        var message = new $root.protocol.chat.v1.Event.GuildDeleted();
+                        let message = new $root.protocol.chat.v1.Event.GuildDeleted();
                         if (object.guildId != null)
                             if ($util.Long)
                                 (message.guildId = $util.Long.fromValue(object.guildId)).unsigned = true;
@@ -9341,10 +9339,10 @@ $root.protocol = (function() {
                     GuildDeleted.toObject = function toObject(message, options) {
                         if (!options)
                             options = {};
-                        var object = {};
+                        let object = {};
                         if (options.defaults)
                             if ($util.Long) {
-                                var long = new $util.Long(0, 0, true);
+                                let long = new $util.Long(0, 0, true);
                                 object.guildId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                             } else
                                 object.guildId = options.longs === String ? "0" : 0;
@@ -9367,7 +9365,7 @@ $root.protocol = (function() {
 
                     function MemberJoined(properties) {
                         if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
                                     this[keys[i]] = properties[keys[i]];
                     }
@@ -9388,9 +9386,9 @@ $root.protocol = (function() {
                     MemberJoined.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.Event.MemberJoined();
+                        let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.Event.MemberJoined();
                         while (reader.pos < end) {
-                            var tag = reader.uint32();
+                            let tag = reader.uint32();
                             switch (tag >>> 3) {
                             case 1:
                                 message.memberId = reader.uint64();
@@ -9409,7 +9407,7 @@ $root.protocol = (function() {
                     MemberJoined.fromObject = function fromObject(object) {
                         if (object instanceof $root.protocol.chat.v1.Event.MemberJoined)
                             return object;
-                        var message = new $root.protocol.chat.v1.Event.MemberJoined();
+                        let message = new $root.protocol.chat.v1.Event.MemberJoined();
                         if (object.memberId != null)
                             if ($util.Long)
                                 (message.memberId = $util.Long.fromValue(object.memberId)).unsigned = true;
@@ -9434,15 +9432,15 @@ $root.protocol = (function() {
                     MemberJoined.toObject = function toObject(message, options) {
                         if (!options)
                             options = {};
-                        var object = {};
+                        let object = {};
                         if (options.defaults) {
                             if ($util.Long) {
-                                var long = new $util.Long(0, 0, true);
+                                let long = new $util.Long(0, 0, true);
                                 object.memberId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                             } else
                                 object.memberId = options.longs === String ? "0" : 0;
                             if ($util.Long) {
-                                var long = new $util.Long(0, 0, true);
+                                let long = new $util.Long(0, 0, true);
                                 object.guildId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                             } else
                                 object.guildId = options.longs === String ? "0" : 0;
@@ -9471,7 +9469,7 @@ $root.protocol = (function() {
 
                     function MemberLeft(properties) {
                         if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
                                     this[keys[i]] = properties[keys[i]];
                     }
@@ -9492,9 +9490,9 @@ $root.protocol = (function() {
                     MemberLeft.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.Event.MemberLeft();
+                        let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.Event.MemberLeft();
                         while (reader.pos < end) {
-                            var tag = reader.uint32();
+                            let tag = reader.uint32();
                             switch (tag >>> 3) {
                             case 1:
                                 message.memberId = reader.uint64();
@@ -9513,7 +9511,7 @@ $root.protocol = (function() {
                     MemberLeft.fromObject = function fromObject(object) {
                         if (object instanceof $root.protocol.chat.v1.Event.MemberLeft)
                             return object;
-                        var message = new $root.protocol.chat.v1.Event.MemberLeft();
+                        let message = new $root.protocol.chat.v1.Event.MemberLeft();
                         if (object.memberId != null)
                             if ($util.Long)
                                 (message.memberId = $util.Long.fromValue(object.memberId)).unsigned = true;
@@ -9538,15 +9536,15 @@ $root.protocol = (function() {
                     MemberLeft.toObject = function toObject(message, options) {
                         if (!options)
                             options = {};
-                        var object = {};
+                        let object = {};
                         if (options.defaults) {
                             if ($util.Long) {
-                                var long = new $util.Long(0, 0, true);
+                                let long = new $util.Long(0, 0, true);
                                 object.memberId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                             } else
                                 object.memberId = options.longs === String ? "0" : 0;
                             if ($util.Long) {
-                                var long = new $util.Long(0, 0, true);
+                                let long = new $util.Long(0, 0, true);
                                 object.guildId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                             } else
                                 object.guildId = options.longs === String ? "0" : 0;
@@ -9575,7 +9573,7 @@ $root.protocol = (function() {
 
                     function GuildAddedToList(properties) {
                         if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
                                     this[keys[i]] = properties[keys[i]];
                     }
@@ -9596,9 +9594,9 @@ $root.protocol = (function() {
                     GuildAddedToList.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.Event.GuildAddedToList();
+                        let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.Event.GuildAddedToList();
                         while (reader.pos < end) {
-                            var tag = reader.uint32();
+                            let tag = reader.uint32();
                             switch (tag >>> 3) {
                             case 1:
                                 message.guildId = reader.uint64();
@@ -9617,7 +9615,7 @@ $root.protocol = (function() {
                     GuildAddedToList.fromObject = function fromObject(object) {
                         if (object instanceof $root.protocol.chat.v1.Event.GuildAddedToList)
                             return object;
-                        var message = new $root.protocol.chat.v1.Event.GuildAddedToList();
+                        let message = new $root.protocol.chat.v1.Event.GuildAddedToList();
                         if (object.guildId != null)
                             if ($util.Long)
                                 (message.guildId = $util.Long.fromValue(object.guildId)).unsigned = true;
@@ -9635,10 +9633,10 @@ $root.protocol = (function() {
                     GuildAddedToList.toObject = function toObject(message, options) {
                         if (!options)
                             options = {};
-                        var object = {};
+                        let object = {};
                         if (options.defaults) {
                             if ($util.Long) {
-                                var long = new $util.Long(0, 0, true);
+                                let long = new $util.Long(0, 0, true);
                                 object.guildId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                             } else
                                 object.guildId = options.longs === String ? "0" : 0;
@@ -9665,7 +9663,7 @@ $root.protocol = (function() {
 
                     function GuildRemovedFromList(properties) {
                         if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
                                     this[keys[i]] = properties[keys[i]];
                     }
@@ -9686,9 +9684,9 @@ $root.protocol = (function() {
                     GuildRemovedFromList.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.Event.GuildRemovedFromList();
+                        let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.Event.GuildRemovedFromList();
                         while (reader.pos < end) {
-                            var tag = reader.uint32();
+                            let tag = reader.uint32();
                             switch (tag >>> 3) {
                             case 1:
                                 message.guildId = reader.uint64();
@@ -9707,7 +9705,7 @@ $root.protocol = (function() {
                     GuildRemovedFromList.fromObject = function fromObject(object) {
                         if (object instanceof $root.protocol.chat.v1.Event.GuildRemovedFromList)
                             return object;
-                        var message = new $root.protocol.chat.v1.Event.GuildRemovedFromList();
+                        let message = new $root.protocol.chat.v1.Event.GuildRemovedFromList();
                         if (object.guildId != null)
                             if ($util.Long)
                                 (message.guildId = $util.Long.fromValue(object.guildId)).unsigned = true;
@@ -9725,10 +9723,10 @@ $root.protocol = (function() {
                     GuildRemovedFromList.toObject = function toObject(message, options) {
                         if (!options)
                             options = {};
-                        var object = {};
+                        let object = {};
                         if (options.defaults) {
                             if ($util.Long) {
-                                var long = new $util.Long(0, 0, true);
+                                let long = new $util.Long(0, 0, true);
                                 object.guildId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                             } else
                                 object.guildId = options.longs === String ? "0" : 0;
@@ -9755,7 +9753,7 @@ $root.protocol = (function() {
 
                     function ActionPerformed(properties) {
                         if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
                                     this[keys[i]] = properties[keys[i]];
                     }
@@ -9785,9 +9783,9 @@ $root.protocol = (function() {
                     ActionPerformed.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.Event.ActionPerformed();
+                        let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.Event.ActionPerformed();
                         while (reader.pos < end) {
-                            var tag = reader.uint32();
+                            let tag = reader.uint32();
                             switch (tag >>> 3) {
                             case 1:
                                 message.guildId = reader.uint64();
@@ -9815,7 +9813,7 @@ $root.protocol = (function() {
                     ActionPerformed.fromObject = function fromObject(object) {
                         if (object instanceof $root.protocol.chat.v1.Event.ActionPerformed)
                             return object;
-                        var message = new $root.protocol.chat.v1.Event.ActionPerformed();
+                        let message = new $root.protocol.chat.v1.Event.ActionPerformed();
                         if (object.guildId != null)
                             if ($util.Long)
                                 (message.guildId = $util.Long.fromValue(object.guildId)).unsigned = true;
@@ -9853,20 +9851,20 @@ $root.protocol = (function() {
                     ActionPerformed.toObject = function toObject(message, options) {
                         if (!options)
                             options = {};
-                        var object = {};
+                        let object = {};
                         if (options.defaults) {
                             if ($util.Long) {
-                                var long = new $util.Long(0, 0, true);
+                                let long = new $util.Long(0, 0, true);
                                 object.guildId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                             } else
                                 object.guildId = options.longs === String ? "0" : 0;
                             if ($util.Long) {
-                                var long = new $util.Long(0, 0, true);
+                                let long = new $util.Long(0, 0, true);
                                 object.channelId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                             } else
                                 object.channelId = options.longs === String ? "0" : 0;
                             if ($util.Long) {
-                                var long = new $util.Long(0, 0, true);
+                                let long = new $util.Long(0, 0, true);
                                 object.messageId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                             } else
                                 object.messageId = options.longs === String ? "0" : 0;
@@ -9906,7 +9904,7 @@ $root.protocol = (function() {
 
                     function RoleMoved(properties) {
                         if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
                                     this[keys[i]] = properties[keys[i]];
                     }
@@ -9927,9 +9925,9 @@ $root.protocol = (function() {
                     RoleMoved.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.Event.RoleMoved();
+                        let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.Event.RoleMoved();
                         while (reader.pos < end) {
-                            var tag = reader.uint32();
+                            let tag = reader.uint32();
                             switch (tag >>> 3) {
                             case 1:
                                 message.guildId = reader.uint64();
@@ -9948,7 +9946,7 @@ $root.protocol = (function() {
                     RoleMoved.fromObject = function fromObject(object) {
                         if (object instanceof $root.protocol.chat.v1.Event.RoleMoved)
                             return object;
-                        var message = new $root.protocol.chat.v1.Event.RoleMoved();
+                        let message = new $root.protocol.chat.v1.Event.RoleMoved();
                         if (object.guildId != null)
                             if ($util.Long)
                                 (message.guildId = $util.Long.fromValue(object.guildId)).unsigned = true;
@@ -9973,15 +9971,15 @@ $root.protocol = (function() {
                     RoleMoved.toObject = function toObject(message, options) {
                         if (!options)
                             options = {};
-                        var object = {};
+                        let object = {};
                         if (options.defaults) {
                             if ($util.Long) {
-                                var long = new $util.Long(0, 0, true);
+                                let long = new $util.Long(0, 0, true);
                                 object.guildId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                             } else
                                 object.guildId = options.longs === String ? "0" : 0;
                             if ($util.Long) {
-                                var long = new $util.Long(0, 0, true);
+                                let long = new $util.Long(0, 0, true);
                                 object.roleId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                             } else
                                 object.roleId = options.longs === String ? "0" : 0;
@@ -10010,7 +10008,7 @@ $root.protocol = (function() {
 
                     function ProfileUpdated(properties) {
                         if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
                                     this[keys[i]] = properties[keys[i]];
                     }
@@ -10052,9 +10050,9 @@ $root.protocol = (function() {
                     ProfileUpdated.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.Event.ProfileUpdated();
+                        let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.Event.ProfileUpdated();
                         while (reader.pos < end) {
-                            var tag = reader.uint32();
+                            let tag = reader.uint32();
                             switch (tag >>> 3) {
                             case 1:
                                 message.userId = reader.uint64();
@@ -10094,7 +10092,7 @@ $root.protocol = (function() {
                     ProfileUpdated.fromObject = function fromObject(object) {
                         if (object instanceof $root.protocol.chat.v1.Event.ProfileUpdated)
                             return object;
-                        var message = new $root.protocol.chat.v1.Event.ProfileUpdated();
+                        let message = new $root.protocol.chat.v1.Event.ProfileUpdated();
                         if (object.userId != null)
                             if ($util.Long)
                                 (message.userId = $util.Long.fromValue(object.userId)).unsigned = true;
@@ -10146,10 +10144,10 @@ $root.protocol = (function() {
                     ProfileUpdated.toObject = function toObject(message, options) {
                         if (!options)
                             options = {};
-                        var object = {};
+                        let object = {};
                         if (options.defaults) {
                             if ($util.Long) {
-                                var long = new $util.Long(0, 0, true);
+                                let long = new $util.Long(0, 0, true);
                                 object.userId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                             } else
                                 object.userId = options.longs === String ? "0" : 0;
@@ -10197,7 +10195,7 @@ $root.protocol = (function() {
 
                     function Typing(properties) {
                         if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
                                     this[keys[i]] = properties[keys[i]];
                     }
@@ -10221,9 +10219,9 @@ $root.protocol = (function() {
                     Typing.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.Event.Typing();
+                        let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.Event.Typing();
                         while (reader.pos < end) {
-                            var tag = reader.uint32();
+                            let tag = reader.uint32();
                             switch (tag >>> 3) {
                             case 1:
                                 message.userId = reader.uint64();
@@ -10245,7 +10243,7 @@ $root.protocol = (function() {
                     Typing.fromObject = function fromObject(object) {
                         if (object instanceof $root.protocol.chat.v1.Event.Typing)
                             return object;
-                        var message = new $root.protocol.chat.v1.Event.Typing();
+                        let message = new $root.protocol.chat.v1.Event.Typing();
                         if (object.userId != null)
                             if ($util.Long)
                                 (message.userId = $util.Long.fromValue(object.userId)).unsigned = true;
@@ -10279,20 +10277,20 @@ $root.protocol = (function() {
                     Typing.toObject = function toObject(message, options) {
                         if (!options)
                             options = {};
-                        var object = {};
+                        let object = {};
                         if (options.defaults) {
                             if ($util.Long) {
-                                var long = new $util.Long(0, 0, true);
+                                let long = new $util.Long(0, 0, true);
                                 object.userId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                             } else
                                 object.userId = options.longs === String ? "0" : 0;
                             if ($util.Long) {
-                                var long = new $util.Long(0, 0, true);
+                                let long = new $util.Long(0, 0, true);
                                 object.guildId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                             } else
                                 object.guildId = options.longs === String ? "0" : 0;
                             if ($util.Long) {
-                                var long = new $util.Long(0, 0, true);
+                                let long = new $util.Long(0, 0, true);
                                 object.channelId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                             } else
                                 object.channelId = options.longs === String ? "0" : 0;
@@ -10575,7 +10573,7 @@ $root.protocol = (function() {
 
                 function GetUserRequest(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -10593,9 +10591,9 @@ $root.protocol = (function() {
                 GetUserRequest.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetUserRequest();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetUserRequest();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.userId = reader.uint64();
@@ -10611,7 +10609,7 @@ $root.protocol = (function() {
                 GetUserRequest.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.GetUserRequest)
                         return object;
-                    var message = new $root.protocol.chat.v1.GetUserRequest();
+                    let message = new $root.protocol.chat.v1.GetUserRequest();
                     if (object.userId != null)
                         if ($util.Long)
                             (message.userId = $util.Long.fromValue(object.userId)).unsigned = true;
@@ -10627,10 +10625,10 @@ $root.protocol = (function() {
                 GetUserRequest.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults)
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.userId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.userId = options.longs === String ? "0" : 0;
@@ -10653,7 +10651,7 @@ $root.protocol = (function() {
 
                 function GetUserResponse(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -10680,9 +10678,9 @@ $root.protocol = (function() {
                 GetUserResponse.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetUserResponse();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetUserResponse();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.userName = reader.string();
@@ -10707,7 +10705,7 @@ $root.protocol = (function() {
                 GetUserResponse.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.GetUserResponse)
                         return object;
-                    var message = new $root.protocol.chat.v1.GetUserResponse();
+                    let message = new $root.protocol.chat.v1.GetUserResponse();
                     if (object.userName != null)
                         message.userName = String(object.userName);
                     if (object.userAvatar != null)
@@ -10742,7 +10740,7 @@ $root.protocol = (function() {
                 GetUserResponse.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults) {
                         object.userName = "";
                         object.userAvatar = "";
@@ -10771,7 +10769,7 @@ $root.protocol = (function() {
 
                 function GetUserMetadataRequest(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -10789,9 +10787,9 @@ $root.protocol = (function() {
                 GetUserMetadataRequest.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetUserMetadataRequest();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetUserMetadataRequest();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.appId = reader.string();
@@ -10807,7 +10805,7 @@ $root.protocol = (function() {
                 GetUserMetadataRequest.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.GetUserMetadataRequest)
                         return object;
-                    var message = new $root.protocol.chat.v1.GetUserMetadataRequest();
+                    let message = new $root.protocol.chat.v1.GetUserMetadataRequest();
                     if (object.appId != null)
                         message.appId = String(object.appId);
                     return message;
@@ -10816,7 +10814,7 @@ $root.protocol = (function() {
                 GetUserMetadataRequest.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults)
                         object.appId = "";
                     if (message.appId != null && message.hasOwnProperty("appId"))
@@ -10835,7 +10833,7 @@ $root.protocol = (function() {
 
                 function GetUserMetadataResponse(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -10853,9 +10851,9 @@ $root.protocol = (function() {
                 GetUserMetadataResponse.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetUserMetadataResponse();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.GetUserMetadataResponse();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.metadata = reader.string();
@@ -10871,7 +10869,7 @@ $root.protocol = (function() {
                 GetUserMetadataResponse.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.GetUserMetadataResponse)
                         return object;
-                    var message = new $root.protocol.chat.v1.GetUserMetadataResponse();
+                    let message = new $root.protocol.chat.v1.GetUserMetadataResponse();
                     if (object.metadata != null)
                         message.metadata = String(object.metadata);
                     return message;
@@ -10880,7 +10878,7 @@ $root.protocol = (function() {
                 GetUserMetadataResponse.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults)
                         object.metadata = "";
                     if (message.metadata != null && message.hasOwnProperty("metadata"))
@@ -10899,7 +10897,7 @@ $root.protocol = (function() {
 
                 function ProfileUpdateRequest(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -10938,9 +10936,9 @@ $root.protocol = (function() {
                 ProfileUpdateRequest.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.ProfileUpdateRequest();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.chat.v1.ProfileUpdateRequest();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.newUsername = reader.string();
@@ -10977,7 +10975,7 @@ $root.protocol = (function() {
                 ProfileUpdateRequest.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.chat.v1.ProfileUpdateRequest)
                         return object;
-                    var message = new $root.protocol.chat.v1.ProfileUpdateRequest();
+                    let message = new $root.protocol.chat.v1.ProfileUpdateRequest();
                     if (object.newUsername != null)
                         message.newUsername = String(object.newUsername);
                     if (object.updateUsername != null)
@@ -11020,7 +11018,7 @@ $root.protocol = (function() {
                 ProfileUpdateRequest.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults) {
                         object.newUsername = "";
                         object.updateUsername = false;
@@ -11065,14 +11063,14 @@ $root.protocol = (function() {
 
     protocol.harmonytypes = (function() {
 
-        var harmonytypes = {};
+        const harmonytypes = {};
 
         harmonytypes.v1 = (function() {
 
-            var v1 = {};
+            const v1 = {};
 
             v1.UserStatus = (function() {
-                var valuesById = {}, values = Object.create(valuesById);
+                const valuesById = {}, values = Object.create(valuesById);
                 values[valuesById[0] = "USER_STATUS_ONLINE_UNSPECIFIED"] = 0;
                 values[valuesById[1] = "USER_STATUS_STREAMING"] = 1;
                 values[valuesById[2] = "USER_STATUS_DO_NOT_DISTURB"] = 2;
@@ -11085,7 +11083,7 @@ $root.protocol = (function() {
 
                 function Override(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -11098,7 +11096,7 @@ $root.protocol = (function() {
                 Override.prototype.systemMessage = null;
                 Override.prototype.bridge = null;
 
-                var $oneOfFields;
+                let $oneOfFields;
 
                 Object.defineProperty(Override.prototype, "reason", {
                     get: $util.oneOfGetter($oneOfFields = ["userDefined", "webhook", "systemPlurality", "systemMessage", "bridge"]),
@@ -11128,9 +11126,9 @@ $root.protocol = (function() {
                 Override.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.harmonytypes.v1.Override();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.harmonytypes.v1.Override();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.name = reader.string();
@@ -11164,7 +11162,7 @@ $root.protocol = (function() {
                 Override.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.harmonytypes.v1.Override)
                         return object;
-                    var message = new $root.protocol.harmonytypes.v1.Override();
+                    let message = new $root.protocol.harmonytypes.v1.Override();
                     if (object.name != null)
                         message.name = String(object.name);
                     if (object.avatar != null)
@@ -11197,7 +11195,7 @@ $root.protocol = (function() {
                 Override.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults) {
                         object.name = "";
                         object.avatar = "";
@@ -11242,7 +11240,7 @@ $root.protocol = (function() {
             })();
 
             v1.ActionType = (function() {
-                var valuesById = {}, values = Object.create(valuesById);
+                const valuesById = {}, values = Object.create(valuesById);
                 values[valuesById[0] = "Normal"] = 0;
                 values[valuesById[1] = "Primary"] = 1;
                 values[valuesById[2] = "Destructive"] = 2;
@@ -11250,7 +11248,7 @@ $root.protocol = (function() {
             })();
 
             v1.ActionPresentation = (function() {
-                var valuesById = {}, values = Object.create(valuesById);
+                const valuesById = {}, values = Object.create(valuesById);
                 values[valuesById[0] = "Button"] = 0;
                 values[valuesById[1] = "Dropdown"] = 1;
                 values[valuesById[2] = "Menu"] = 2;
@@ -11260,7 +11258,7 @@ $root.protocol = (function() {
             })();
 
             v1.FieldPresentation = (function() {
-                var valuesById = {}, values = Object.create(valuesById);
+                const valuesById = {}, values = Object.create(valuesById);
                 values[valuesById[0] = "Data"] = 0;
                 values[valuesById[1] = "CaptionedImage"] = 1;
                 values[valuesById[2] = "Row"] = 2;
@@ -11272,7 +11270,7 @@ $root.protocol = (function() {
                 function Action(properties) {
                     this.children = [];
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -11298,7 +11296,7 @@ $root.protocol = (function() {
                     if (message.presentation != null && Object.hasOwnProperty.call(message, "presentation"))
                         writer.uint32(40).int32(message.presentation);
                     if (message.children != null && message.children.length)
-                        for (var i = 0; i < message.children.length; ++i)
+                        for (let i = 0; i < message.children.length; ++i)
                             $root.protocol.harmonytypes.v1.Action.encode(message.children[i], writer.uint32(50).fork()).ldelim();
                     return writer;
                 };
@@ -11306,9 +11304,9 @@ $root.protocol = (function() {
                 Action.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.harmonytypes.v1.Action();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.harmonytypes.v1.Action();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.text = reader.string();
@@ -11341,7 +11339,7 @@ $root.protocol = (function() {
                 Action.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.harmonytypes.v1.Action)
                         return object;
-                    var message = new $root.protocol.harmonytypes.v1.Action();
+                    let message = new $root.protocol.harmonytypes.v1.Action();
                     if (object.text != null)
                         message.text = String(object.text);
                     if (object.url != null)
@@ -11388,7 +11386,7 @@ $root.protocol = (function() {
                         if (!Array.isArray(object.children))
                             throw TypeError(".protocol.harmonytypes.v1.Action.children: array expected");
                         message.children = [];
-                        for (var i = 0; i < object.children.length; ++i) {
+                        for (let i = 0; i < object.children.length; ++i) {
                             if (typeof object.children[i] !== "object")
                                 throw TypeError(".protocol.harmonytypes.v1.Action.children: object expected");
                             message.children[i] = $root.protocol.harmonytypes.v1.Action.fromObject(object.children[i]);
@@ -11400,7 +11398,7 @@ $root.protocol = (function() {
                 Action.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.arrays || options.defaults)
                         object.children = [];
                     if (options.defaults) {
@@ -11422,7 +11420,7 @@ $root.protocol = (function() {
                         object.presentation = options.enums === String ? $root.protocol.harmonytypes.v1.ActionPresentation[message.presentation] : message.presentation;
                     if (message.children && message.children.length) {
                         object.children = [];
-                        for (var j = 0; j < message.children.length; ++j)
+                        for (let j = 0; j < message.children.length; ++j)
                             object.children[j] = $root.protocol.harmonytypes.v1.Action.toObject(message.children[j], options);
                     }
                     return object;
@@ -11439,7 +11437,7 @@ $root.protocol = (function() {
 
                 function EmbedHeading(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -11466,9 +11464,9 @@ $root.protocol = (function() {
                 EmbedHeading.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.harmonytypes.v1.EmbedHeading();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.harmonytypes.v1.EmbedHeading();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.text = reader.string();
@@ -11493,7 +11491,7 @@ $root.protocol = (function() {
                 EmbedHeading.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.harmonytypes.v1.EmbedHeading)
                         return object;
-                    var message = new $root.protocol.harmonytypes.v1.EmbedHeading();
+                    let message = new $root.protocol.harmonytypes.v1.EmbedHeading();
                     if (object.text != null)
                         message.text = String(object.text);
                     if (object.subtext != null)
@@ -11508,7 +11506,7 @@ $root.protocol = (function() {
                 EmbedHeading.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults) {
                         object.text = "";
                         object.subtext = "";
@@ -11538,7 +11536,7 @@ $root.protocol = (function() {
                 function EmbedField(properties) {
                     this.actions = [];
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -11564,7 +11562,7 @@ $root.protocol = (function() {
                     if (message.presentation != null && Object.hasOwnProperty.call(message, "presentation"))
                         writer.uint32(40).int32(message.presentation);
                     if (message.actions != null && message.actions.length)
-                        for (var i = 0; i < message.actions.length; ++i)
+                        for (let i = 0; i < message.actions.length; ++i)
                             $root.protocol.harmonytypes.v1.Action.encode(message.actions[i], writer.uint32(50).fork()).ldelim();
                     return writer;
                 };
@@ -11572,9 +11570,9 @@ $root.protocol = (function() {
                 EmbedField.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.harmonytypes.v1.EmbedField();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.harmonytypes.v1.EmbedField();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.title = reader.string();
@@ -11607,7 +11605,7 @@ $root.protocol = (function() {
                 EmbedField.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.harmonytypes.v1.EmbedField)
                         return object;
-                    var message = new $root.protocol.harmonytypes.v1.EmbedField();
+                    let message = new $root.protocol.harmonytypes.v1.EmbedField();
                     if (object.title != null)
                         message.title = String(object.title);
                     if (object.subtitle != null)
@@ -11634,7 +11632,7 @@ $root.protocol = (function() {
                         if (!Array.isArray(object.actions))
                             throw TypeError(".protocol.harmonytypes.v1.EmbedField.actions: array expected");
                         message.actions = [];
-                        for (var i = 0; i < object.actions.length; ++i) {
+                        for (let i = 0; i < object.actions.length; ++i) {
                             if (typeof object.actions[i] !== "object")
                                 throw TypeError(".protocol.harmonytypes.v1.EmbedField.actions: object expected");
                             message.actions[i] = $root.protocol.harmonytypes.v1.Action.fromObject(object.actions[i]);
@@ -11646,7 +11644,7 @@ $root.protocol = (function() {
                 EmbedField.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.arrays || options.defaults)
                         object.actions = [];
                     if (options.defaults) {
@@ -11668,7 +11666,7 @@ $root.protocol = (function() {
                         object.presentation = options.enums === String ? $root.protocol.harmonytypes.v1.FieldPresentation[message.presentation] : message.presentation;
                     if (message.actions && message.actions.length) {
                         object.actions = [];
-                        for (var j = 0; j < message.actions.length; ++j)
+                        for (let j = 0; j < message.actions.length; ++j)
                             object.actions[j] = $root.protocol.harmonytypes.v1.Action.toObject(message.actions[j], options);
                     }
                     return object;
@@ -11687,7 +11685,7 @@ $root.protocol = (function() {
                     this.fields = [];
                     this.actions = [];
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -11714,10 +11712,10 @@ $root.protocol = (function() {
                     if (message.footer != null && Object.hasOwnProperty.call(message, "footer"))
                         $root.protocol.harmonytypes.v1.EmbedHeading.encode(message.footer, writer.uint32(42).fork()).ldelim();
                     if (message.fields != null && message.fields.length)
-                        for (var i = 0; i < message.fields.length; ++i)
+                        for (let i = 0; i < message.fields.length; ++i)
                             $root.protocol.harmonytypes.v1.EmbedField.encode(message.fields[i], writer.uint32(50).fork()).ldelim();
                     if (message.actions != null && message.actions.length)
-                        for (var i = 0; i < message.actions.length; ++i)
+                        for (let i = 0; i < message.actions.length; ++i)
                             $root.protocol.harmonytypes.v1.Action.encode(message.actions[i], writer.uint32(58).fork()).ldelim();
                     return writer;
                 };
@@ -11725,9 +11723,9 @@ $root.protocol = (function() {
                 Embed.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.harmonytypes.v1.Embed();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.harmonytypes.v1.Embed();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.title = reader.string();
@@ -11765,7 +11763,7 @@ $root.protocol = (function() {
                 Embed.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.harmonytypes.v1.Embed)
                         return object;
-                    var message = new $root.protocol.harmonytypes.v1.Embed();
+                    let message = new $root.protocol.harmonytypes.v1.Embed();
                     if (object.title != null)
                         message.title = String(object.title);
                     if (object.body != null)
@@ -11793,7 +11791,7 @@ $root.protocol = (function() {
                         if (!Array.isArray(object.fields))
                             throw TypeError(".protocol.harmonytypes.v1.Embed.fields: array expected");
                         message.fields = [];
-                        for (var i = 0; i < object.fields.length; ++i) {
+                        for (let i = 0; i < object.fields.length; ++i) {
                             if (typeof object.fields[i] !== "object")
                                 throw TypeError(".protocol.harmonytypes.v1.Embed.fields: object expected");
                             message.fields[i] = $root.protocol.harmonytypes.v1.EmbedField.fromObject(object.fields[i]);
@@ -11803,7 +11801,7 @@ $root.protocol = (function() {
                         if (!Array.isArray(object.actions))
                             throw TypeError(".protocol.harmonytypes.v1.Embed.actions: array expected");
                         message.actions = [];
-                        for (var i = 0; i < object.actions.length; ++i) {
+                        for (let i = 0; i < object.actions.length; ++i) {
                             if (typeof object.actions[i] !== "object")
                                 throw TypeError(".protocol.harmonytypes.v1.Embed.actions: object expected");
                             message.actions[i] = $root.protocol.harmonytypes.v1.Action.fromObject(object.actions[i]);
@@ -11815,7 +11813,7 @@ $root.protocol = (function() {
                 Embed.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.arrays || options.defaults) {
                         object.fields = [];
                         object.actions = [];
@@ -11824,7 +11822,7 @@ $root.protocol = (function() {
                         object.title = "";
                         object.body = "";
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, false);
+                            let long = new $util.Long(0, 0, false);
                             object.color = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.color = options.longs === String ? "0" : 0;
@@ -11846,12 +11844,12 @@ $root.protocol = (function() {
                         object.footer = $root.protocol.harmonytypes.v1.EmbedHeading.toObject(message.footer, options);
                     if (message.fields && message.fields.length) {
                         object.fields = [];
-                        for (var j = 0; j < message.fields.length; ++j)
+                        for (let j = 0; j < message.fields.length; ++j)
                             object.fields[j] = $root.protocol.harmonytypes.v1.EmbedField.toObject(message.fields[j], options);
                     }
                     if (message.actions && message.actions.length) {
                         object.actions = [];
-                        for (var j = 0; j < message.actions.length; ++j)
+                        for (let j = 0; j < message.actions.length; ++j)
                             object.actions[j] = $root.protocol.harmonytypes.v1.Action.toObject(message.actions[j], options);
                     }
                     return object;
@@ -11868,7 +11866,7 @@ $root.protocol = (function() {
 
                 function Attachment(properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -11895,9 +11893,9 @@ $root.protocol = (function() {
                 Attachment.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.harmonytypes.v1.Attachment();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.harmonytypes.v1.Attachment();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.id = reader.string();
@@ -11922,7 +11920,7 @@ $root.protocol = (function() {
                 Attachment.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.harmonytypes.v1.Attachment)
                         return object;
-                    var message = new $root.protocol.harmonytypes.v1.Attachment();
+                    let message = new $root.protocol.harmonytypes.v1.Attachment();
                     if (object.id != null)
                         message.id = String(object.id);
                     if (object.name != null)
@@ -11937,7 +11935,7 @@ $root.protocol = (function() {
                 Attachment.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.defaults) {
                         object.id = "";
                         object.name = "";
@@ -11967,7 +11965,7 @@ $root.protocol = (function() {
                 function Metadata(properties) {
                     this.extension = {};
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -11981,7 +11979,7 @@ $root.protocol = (function() {
                     if (message.kind != null && Object.hasOwnProperty.call(message, "kind"))
                         writer.uint32(10).string(message.kind);
                     if (message.extension != null && Object.hasOwnProperty.call(message, "extension"))
-                        for (var keys = Object.keys(message.extension), i = 0; i < keys.length; ++i) {
+                        for (let keys = Object.keys(message.extension), i = 0; i < keys.length; ++i) {
                             writer.uint32(18).fork().uint32(10).string(keys[i]);
                             $root.google.protobuf.Any.encode(message.extension[keys[i]], writer.uint32(18).fork()).ldelim().ldelim();
                         }
@@ -11991,9 +11989,9 @@ $root.protocol = (function() {
                 Metadata.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.harmonytypes.v1.Metadata(), key, value;
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.harmonytypes.v1.Metadata(), key, value;
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.kind = reader.string();
@@ -12001,11 +11999,11 @@ $root.protocol = (function() {
                         case 2:
                             if (message.extension === $util.emptyObject)
                                 message.extension = {};
-                            var end2 = reader.uint32() + reader.pos;
+                            let end2 = reader.uint32() + reader.pos;
                             key = "";
                             value = null;
                             while (reader.pos < end2) {
-                                var tag2 = reader.uint32();
+                                let tag2 = reader.uint32();
                                 switch (tag2 >>> 3) {
                                 case 1:
                                     key = reader.string();
@@ -12031,14 +12029,14 @@ $root.protocol = (function() {
                 Metadata.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.harmonytypes.v1.Metadata)
                         return object;
-                    var message = new $root.protocol.harmonytypes.v1.Metadata();
+                    let message = new $root.protocol.harmonytypes.v1.Metadata();
                     if (object.kind != null)
                         message.kind = String(object.kind);
                     if (object.extension) {
                         if (typeof object.extension !== "object")
                             throw TypeError(".protocol.harmonytypes.v1.Metadata.extension: object expected");
                         message.extension = {};
-                        for (var keys = Object.keys(object.extension), i = 0; i < keys.length; ++i) {
+                        for (let keys = Object.keys(object.extension), i = 0; i < keys.length; ++i) {
                             if (typeof object.extension[keys[i]] !== "object")
                                 throw TypeError(".protocol.harmonytypes.v1.Metadata.extension: object expected");
                             message.extension[keys[i]] = $root.google.protobuf.Any.fromObject(object.extension[keys[i]]);
@@ -12050,17 +12048,17 @@ $root.protocol = (function() {
                 Metadata.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.objects || options.defaults)
                         object.extension = {};
                     if (options.defaults)
                         object.kind = "";
                     if (message.kind != null && message.hasOwnProperty("kind"))
                         object.kind = message.kind;
-                    var keys2;
+                    let keys2;
                     if (message.extension && (keys2 = Object.keys(message.extension)).length) {
                         object.extension = {};
-                        for (var j = 0; j < keys2.length; ++j)
+                        for (let j = 0; j < keys2.length; ++j)
                             object.extension[keys2[j]] = $root.google.protobuf.Any.toObject(message.extension[keys2[j]], options);
                     }
                     return object;
@@ -12080,7 +12078,7 @@ $root.protocol = (function() {
                     this.actions = [];
                     this.attachments = [];
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
@@ -12117,13 +12115,13 @@ $root.protocol = (function() {
                     if (message.content != null && Object.hasOwnProperty.call(message, "content"))
                         writer.uint32(58).string(message.content);
                     if (message.embeds != null && message.embeds.length)
-                        for (var i = 0; i < message.embeds.length; ++i)
+                        for (let i = 0; i < message.embeds.length; ++i)
                             $root.protocol.harmonytypes.v1.Embed.encode(message.embeds[i], writer.uint32(66).fork()).ldelim();
                     if (message.actions != null && message.actions.length)
-                        for (var i = 0; i < message.actions.length; ++i)
+                        for (let i = 0; i < message.actions.length; ++i)
                             $root.protocol.harmonytypes.v1.Action.encode(message.actions[i], writer.uint32(74).fork()).ldelim();
                     if (message.attachments != null && message.attachments.length)
-                        for (var i = 0; i < message.attachments.length; ++i)
+                        for (let i = 0; i < message.attachments.length; ++i)
                             $root.protocol.harmonytypes.v1.Attachment.encode(message.attachments[i], writer.uint32(82).fork()).ldelim();
                     if (message.inReplyTo != null && Object.hasOwnProperty.call(message, "inReplyTo"))
                         writer.uint32(88).uint64(message.inReplyTo);
@@ -12137,9 +12135,9 @@ $root.protocol = (function() {
                 Message.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.harmonytypes.v1.Message();
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.harmonytypes.v1.Message();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
+                        let tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 13:
                             message.metadata = $root.protocol.harmonytypes.v1.Metadata.decode(reader, reader.uint32());
@@ -12197,7 +12195,7 @@ $root.protocol = (function() {
                 Message.fromObject = function fromObject(object) {
                     if (object instanceof $root.protocol.harmonytypes.v1.Message)
                         return object;
-                    var message = new $root.protocol.harmonytypes.v1.Message();
+                    let message = new $root.protocol.harmonytypes.v1.Message();
                     if (object.metadata != null) {
                         if (typeof object.metadata !== "object")
                             throw TypeError(".protocol.harmonytypes.v1.Message.metadata: object expected");
@@ -12255,7 +12253,7 @@ $root.protocol = (function() {
                         if (!Array.isArray(object.embeds))
                             throw TypeError(".protocol.harmonytypes.v1.Message.embeds: array expected");
                         message.embeds = [];
-                        for (var i = 0; i < object.embeds.length; ++i) {
+                        for (let i = 0; i < object.embeds.length; ++i) {
                             if (typeof object.embeds[i] !== "object")
                                 throw TypeError(".protocol.harmonytypes.v1.Message.embeds: object expected");
                             message.embeds[i] = $root.protocol.harmonytypes.v1.Embed.fromObject(object.embeds[i]);
@@ -12265,7 +12263,7 @@ $root.protocol = (function() {
                         if (!Array.isArray(object.actions))
                             throw TypeError(".protocol.harmonytypes.v1.Message.actions: array expected");
                         message.actions = [];
-                        for (var i = 0; i < object.actions.length; ++i) {
+                        for (let i = 0; i < object.actions.length; ++i) {
                             if (typeof object.actions[i] !== "object")
                                 throw TypeError(".protocol.harmonytypes.v1.Message.actions: object expected");
                             message.actions[i] = $root.protocol.harmonytypes.v1.Action.fromObject(object.actions[i]);
@@ -12275,7 +12273,7 @@ $root.protocol = (function() {
                         if (!Array.isArray(object.attachments))
                             throw TypeError(".protocol.harmonytypes.v1.Message.attachments: array expected");
                         message.attachments = [];
-                        for (var i = 0; i < object.attachments.length; ++i) {
+                        for (let i = 0; i < object.attachments.length; ++i) {
                             if (typeof object.attachments[i] !== "object")
                                 throw TypeError(".protocol.harmonytypes.v1.Message.attachments: object expected");
                             message.attachments[i] = $root.protocol.harmonytypes.v1.Attachment.fromObject(object.attachments[i]);
@@ -12301,7 +12299,7 @@ $root.protocol = (function() {
                 Message.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
-                    var object = {};
+                    let object = {};
                     if (options.arrays || options.defaults) {
                         object.embeds = [];
                         object.actions = [];
@@ -12309,22 +12307,22 @@ $root.protocol = (function() {
                     }
                     if (options.defaults) {
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.guildId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.guildId = options.longs === String ? "0" : 0;
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.channelId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.channelId = options.longs === String ? "0" : 0;
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.messageId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.messageId = options.longs === String ? "0" : 0;
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.authorId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.authorId = options.longs === String ? "0" : 0;
@@ -12332,7 +12330,7 @@ $root.protocol = (function() {
                         object.editedAt = null;
                         object.content = "";
                         if ($util.Long) {
-                            var long = new $util.Long(0, 0, true);
+                            let long = new $util.Long(0, 0, true);
                             object.inReplyTo = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
                             object.inReplyTo = options.longs === String ? "0" : 0;
@@ -12367,17 +12365,17 @@ $root.protocol = (function() {
                         object.content = message.content;
                     if (message.embeds && message.embeds.length) {
                         object.embeds = [];
-                        for (var j = 0; j < message.embeds.length; ++j)
+                        for (let j = 0; j < message.embeds.length; ++j)
                             object.embeds[j] = $root.protocol.harmonytypes.v1.Embed.toObject(message.embeds[j], options);
                     }
                     if (message.actions && message.actions.length) {
                         object.actions = [];
-                        for (var j = 0; j < message.actions.length; ++j)
+                        for (let j = 0; j < message.actions.length; ++j)
                             object.actions[j] = $root.protocol.harmonytypes.v1.Action.toObject(message.actions[j], options);
                     }
                     if (message.attachments && message.attachments.length) {
                         object.attachments = [];
-                        for (var j = 0; j < message.attachments.length; ++j)
+                        for (let j = 0; j < message.attachments.length; ++j)
                             object.attachments[j] = $root.protocol.harmonytypes.v1.Attachment.toObject(message.attachments[j], options);
                     }
                     if (message.inReplyTo != null && message.hasOwnProperty("inReplyTo"))
@@ -12408,19 +12406,19 @@ $root.protocol = (function() {
     return protocol;
 })();
 
-$root.google = (function() {
+export const google = $root.google = (() => {
 
-    var google = {};
+    const google = {};
 
     google.protobuf = (function() {
 
-        var protobuf = {};
+        const protobuf = {};
 
         protobuf.Timestamp = (function() {
 
             function Timestamp(properties) {
                 if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                         if (properties[keys[i]] != null)
                             this[keys[i]] = properties[keys[i]];
             }
@@ -12441,9 +12439,9 @@ $root.google = (function() {
             Timestamp.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
-                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Timestamp();
+                let end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Timestamp();
                 while (reader.pos < end) {
-                    var tag = reader.uint32();
+                    let tag = reader.uint32();
                     switch (tag >>> 3) {
                     case 1:
                         message.seconds = reader.int64();
@@ -12462,7 +12460,7 @@ $root.google = (function() {
             Timestamp.fromObject = function fromObject(object) {
                 if (object instanceof $root.google.protobuf.Timestamp)
                     return object;
-                var message = new $root.google.protobuf.Timestamp();
+                let message = new $root.google.protobuf.Timestamp();
                 if (object.seconds != null)
                     if ($util.Long)
                         (message.seconds = $util.Long.fromValue(object.seconds)).unsigned = false;
@@ -12480,10 +12478,10 @@ $root.google = (function() {
             Timestamp.toObject = function toObject(message, options) {
                 if (!options)
                     options = {};
-                var object = {};
+                let object = {};
                 if (options.defaults) {
                     if ($util.Long) {
-                        var long = new $util.Long(0, 0, false);
+                        let long = new $util.Long(0, 0, false);
                         object.seconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                     } else
                         object.seconds = options.longs === String ? "0" : 0;
@@ -12510,7 +12508,7 @@ $root.google = (function() {
 
             function Empty(properties) {
                 if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                         if (properties[keys[i]] != null)
                             this[keys[i]] = properties[keys[i]];
             }
@@ -12524,9 +12522,9 @@ $root.google = (function() {
             Empty.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
-                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Empty();
+                let end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Empty();
                 while (reader.pos < end) {
-                    var tag = reader.uint32();
+                    let tag = reader.uint32();
                     switch (tag >>> 3) {
                     default:
                         reader.skipType(tag & 7);
@@ -12557,7 +12555,7 @@ $root.google = (function() {
 
             function Any(properties) {
                 if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                         if (properties[keys[i]] != null)
                             this[keys[i]] = properties[keys[i]];
             }
@@ -12578,9 +12576,9 @@ $root.google = (function() {
             Any.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
-                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Any();
+                let end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Any();
                 while (reader.pos < end) {
-                    var tag = reader.uint32();
+                    let tag = reader.uint32();
                     switch (tag >>> 3) {
                     case 1:
                         message.type_url = reader.string();
@@ -12599,7 +12597,7 @@ $root.google = (function() {
             Any.fromObject = function fromObject(object) {
                 if (object instanceof $root.google.protobuf.Any)
                     return object;
-                var message = new $root.google.protobuf.Any();
+                let message = new $root.google.protobuf.Any();
                 if (object.type_url != null)
                     message.type_url = String(object.type_url);
                 if (object.value != null)
@@ -12613,7 +12611,7 @@ $root.google = (function() {
             Any.toObject = function toObject(message, options) {
                 if (!options)
                     options = {};
-                var object = {};
+                let object = {};
                 if (options.defaults) {
                     object.type_url = "";
                     if (options.bytes === String)
@@ -12644,4 +12642,4 @@ $root.google = (function() {
     return google;
 })();
 
-module.exports = $root;
+export { $root as default };
