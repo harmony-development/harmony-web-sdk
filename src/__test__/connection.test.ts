@@ -1,9 +1,34 @@
 import { Connection } from "../connection";
 import "whatwg-fetch";
 
-const conn = new Connection("https://chat.harmonyapp.io");
+const conn = new Connection("https://chat.harmonyapp.io:2289");
 
-test("should BeginAuth", async () => {
-  const resp = await conn.auth.BeginAuth({});
-  expect(resp.authId).toBeTruthy();
+describe("auth", () => {
+  let authID: string | undefined = undefined;
+  let stepstream: WebSocket | undefined = undefined;
+  test("should be able to BeginAuth", async () => {
+    const resp = await conn.auth.BeginAuth({});
+    authID = resp.authId;
+    expect(resp.authId).toBeTruthy();
+  });
+  test("should be able to StreamSteps", async (done) => {
+    expect.assertions(2);
+    stepstream = conn.auth.StreamSteps();
+    stepstream.onopen = () => expect(stepstream?.readyState).toStrictEqual(1);
+    expect(stepstream).toBeInstanceOf(WebSocket);
+    stepstream.onclose = (ev) => {
+      console.log("closed");
+      done.fail(`${ev.code} ${ev.reason}`);
+    };
+  });
+  test("should be able to receive first step", async () => {
+    expect(stepstream?.readyState).toStrictEqual(1);
+    expect.assertions(2);
+    let receivedStep = false;
+    stepstream?.addEventListener("message", (ev) => expect(ev).toBeDefined());
+    const resp = await conn.auth.NextStep({
+      authId: authID,
+    });
+    expect(resp).toBeDefined();
+  });
 });

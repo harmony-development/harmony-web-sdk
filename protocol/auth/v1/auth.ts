@@ -19,10 +19,10 @@ export default class AuthService {
   }
 
   stream(endpoint: string) {
-    return new WebSocket(`${this.host}${endpoint}`, [
-      "access_token",
-      this.session || "",
-    ]);
+    return new WebSocket(
+      `${this.host.replace("https://", "wss://")}${endpoint}`,
+      this.session ? ["access_token", this.session] : undefined
+    );
   }
   async Federate(req: gen.protocol.auth.v1.IFederateRequest) {
     const resp = await this.unary(
