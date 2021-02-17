@@ -11,21 +11,24 @@ describe("auth", () => {
     authID = resp.authId;
     expect(resp.authId).toBeTruthy();
   });
-  test("should be able to StreamSteps", async (done) => {
+  test("should be able to StreamSteps", (done) => {
     expect.assertions(2);
     stepstream = conn.auth.StreamSteps();
-    stepstream.onopen = () => expect(stepstream?.readyState).toStrictEqual(1);
+    stepstream.onopen = () => {
+      expect(stepstream?.readyState).toStrictEqual(1);
+      done();
+    };
     expect(stepstream).toBeInstanceOf(WebSocket);
     stepstream.onclose = (ev) => {
       console.log("closed");
       done.fail(`${ev.code} ${ev.reason}`);
     };
   });
+
   test("should be able to receive first step", async () => {
     expect(stepstream?.readyState).toStrictEqual(1);
     expect.assertions(2);
-    let receivedStep = false;
-    stepstream?.addEventListener("message", (ev) => expect(ev).toBeDefined());
+    stepstream!.onmessage = (ev) => expect(ev).toBeDefined();
     const resp = await conn.auth.NextStep({
       authId: authID,
     });
