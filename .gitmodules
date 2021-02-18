@@ -2,3 +2,6 @@
 	path = protobufs
 	url = https://github.com/harmony-development/protocol
 	
+[submodule "protobufjs"]
+	path = protobufjs
+	url = https://github.com/protobufjs/protobuf.js
