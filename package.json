@@ -1,6 +1,6 @@
 {
   "name": "@harmony-dev/harmony-web-sdk",
-  "version": "5.0.22",
+  "version": "5.0.23",
   "description": "A Node SDK for Harmony, adapted to work for the web",
   "repository": {
     "type": "git",
@@ -18,7 +18,7 @@
   },
   "main": "dist/lib/src/index.js",
   "module": "dist/lib/src/index.js",
-  "typings": "dist/types/src/index.d.ts",
+  "typings": "dist/lib/src/index.d.ts",
   "files": [
     "dist"
   ],
