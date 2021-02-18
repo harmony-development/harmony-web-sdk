@@ -1,6 +1,4 @@
 [submodule "protocol"]
 	path = protobufs
 	url = https://github.com/harmony-development/protocol
-[submodule "protobuf.js"]
-	path = protobuf.js
-	url = https://github.com/protobufjs/protobuf.js
+	
