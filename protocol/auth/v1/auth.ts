@@ -1,4 +1,5 @@
 import gen from "./output";
+import { Stream } from "src/harmonystream";
 export default class AuthService {
   host: string;
   session?: string;
@@ -19,10 +20,10 @@ export default class AuthService {
   }
 
   stream(endpoint: string) {
-    return new WebSocket(
-      `${this.host.replace("https://", "wss://")}${endpoint}`,
-      this.session ? ["access_token", this.session] : undefined
-    );
+    return new WebSocket(`${this.host}${endpoint}`, [
+      "access_token",
+      this.session || "",
+    ]);
   }
   async Federate(req: gen.protocol.auth.v1.IFederateRequest) {
     const resp = await this.unary(
@@ -79,6 +80,16 @@ export default class AuthService {
     );
   }
   StreamSteps() {
-    return this.stream("/protocol.auth.v1.AuthService/StreamSteps");
+    return new Stream<
+      typeof gen.protocol.auth.v1.AuthStep,
+      typeof gen.protocol.auth.v1.StreamStepsRequest,
+      gen.protocol.auth.v1.StreamStepsRequest,
+      gen.protocol.auth.v1.AuthStep
+    >(
+      this.host,
+      "/protocol.auth.v1.AuthService/StreamSteps",
+      gen.protocol.auth.v1.AuthStep,
+      gen.protocol.auth.v1.StreamStepsRequest
+    );
   }
 }

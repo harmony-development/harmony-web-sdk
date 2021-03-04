@@ -1,4 +1,5 @@
 import gen from "./output";
+import { Stream } from "src/harmonystream";
 export default class MediaProxyService {
   host: string;
   session?: string;
@@ -19,10 +20,10 @@ export default class MediaProxyService {
   }
 
   stream(endpoint: string) {
-    return new WebSocket(
-      `${this.host.replace("https://", "wss://")}${endpoint}`,
-      this.session ? ["access_token", this.session] : undefined
-    );
+    return new WebSocket(`${this.host}${endpoint}`, [
+      "access_token",
+      this.session || "",
+    ]);
   }
   async FetchLinkMetadata(
     req: gen.protocol.mediaproxy.v1.IFetchLinkMetadataRequest

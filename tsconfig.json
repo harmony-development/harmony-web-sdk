@@ -3,7 +3,12 @@
     "moduleResolution": "node",
     "target": "es2017",
     "module": "commonjs",
-    "lib": ["es2015", "es2016", "es2017", "dom"],
+    "lib": [
+      "es2015",
+      "es2016",
+      "es2017",
+      "dom"
+    ],
     "strict": true,
     "sourceMap": true,
     "declaration": true,
@@ -13,9 +18,22 @@
     "declarationDir": "dist/lib",
     "allowJs": false,
     "outDir": "dist/lib",
-    "typeRoots": ["node_modules/@types"],
-    "rootDirs": ["./src", "./protocol"],
-    "baseUrl": "./"
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "rootDirs": [
+      "./src",
+      "./protocol"
+    ],
+    "baseUrl": "./",
+    "paths": {
+      "src/*": [
+        "src/*"
+      ]
+    }
   },
-  "include": ["./src", "./protocol"]
+  "include": [
+    "./src",
+    "./protocol"
+  ]
 }

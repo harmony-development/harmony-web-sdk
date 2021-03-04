@@ -3702,7 +3702,7 @@ $root.protocol = (function() {
 
                 PreviewGuildResponse.prototype.name = "";
                 PreviewGuildResponse.prototype.avatar = "";
-                PreviewGuildResponse.prototype.memeberCount = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+                PreviewGuildResponse.prototype.memberCount = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
 
                 PreviewGuildResponse.encode = function encode(message, writer) {
                     if (!writer)
@@ -3711,8 +3711,8 @@ $root.protocol = (function() {
                         writer.uint32(10).string(message.name);
                     if (message.avatar != null && Object.hasOwnProperty.call(message, "avatar"))
                         writer.uint32(18).string(message.avatar);
-                    if (message.memeberCount != null && Object.hasOwnProperty.call(message, "memeberCount"))
-                        writer.uint32(24).uint64(message.memeberCount);
+                    if (message.memberCount != null && Object.hasOwnProperty.call(message, "memberCount"))
+                        writer.uint32(24).uint64(message.memberCount);
                     return writer;
                 };
 
@@ -3730,7 +3730,7 @@ $root.protocol = (function() {
                             message.avatar = reader.string();
                             break;
                         case 3:
-                            message.memeberCount = reader.uint64();
+                            message.memberCount = reader.uint64();
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -3748,15 +3748,15 @@ $root.protocol = (function() {
                         message.name = String(object.name);
                     if (object.avatar != null)
                         message.avatar = String(object.avatar);
-                    if (object.memeberCount != null)
+                    if (object.memberCount != null)
                         if ($util.Long)
-                            (message.memeberCount = $util.Long.fromValue(object.memeberCount)).unsigned = true;
-                        else if (typeof object.memeberCount === "string")
-                            message.memeberCount = parseInt(object.memeberCount, 10);
-                        else if (typeof object.memeberCount === "number")
-                            message.memeberCount = object.memeberCount;
-                        else if (typeof object.memeberCount === "object")
-                            message.memeberCount = new $util.LongBits(object.memeberCount.low >>> 0, object.memeberCount.high >>> 0).toNumber(true);
+                            (message.memberCount = $util.Long.fromValue(object.memberCount)).unsigned = true;
+                        else if (typeof object.memberCount === "string")
+                            message.memberCount = parseInt(object.memberCount, 10);
+                        else if (typeof object.memberCount === "number")
+                            message.memberCount = object.memberCount;
+                        else if (typeof object.memberCount === "object")
+                            message.memberCount = new $util.LongBits(object.memberCount.low >>> 0, object.memberCount.high >>> 0).toNumber(true);
                     return message;
                 };
 
@@ -3769,19 +3769,19 @@ $root.protocol = (function() {
                         object.avatar = "";
                         if ($util.Long) {
                             var long = new $util.Long(0, 0, true);
-                            object.memeberCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                            object.memberCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                         } else
-                            object.memeberCount = options.longs === String ? "0" : 0;
+                            object.memberCount = options.longs === String ? "0" : 0;
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
                     if (message.avatar != null && message.hasOwnProperty("avatar"))
                         object.avatar = message.avatar;
-                    if (message.memeberCount != null && message.hasOwnProperty("memeberCount"))
-                        if (typeof message.memeberCount === "number")
-                            object.memeberCount = options.longs === String ? String(message.memeberCount) : message.memeberCount;
+                    if (message.memberCount != null && message.hasOwnProperty("memberCount"))
+                        if (typeof message.memberCount === "number")
+                            object.memberCount = options.longs === String ? String(message.memberCount) : message.memberCount;
                         else
-                            object.memeberCount = options.longs === String ? $util.Long.prototype.toString.call(message.memeberCount) : options.longs === Number ? new $util.LongBits(message.memeberCount.low >>> 0, message.memeberCount.high >>> 0).toNumber(true) : message.memeberCount;
+                            object.memberCount = options.longs === String ? $util.Long.prototype.toString.call(message.memberCount) : options.longs === Number ? new $util.LongBits(message.memberCount.low >>> 0, message.memberCount.high >>> 0).toNumber(true) : message.memberCount;
                     return object;
                 };
 

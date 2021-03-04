@@ -1,4 +1,5 @@
 import gen from "./output";
+import { Stream } from "src/harmonystream";
 export default class ChatService {
   host: string;
   session?: string;
@@ -19,10 +20,10 @@ export default class ChatService {
   }
 
   stream(endpoint: string) {
-    return new WebSocket(
-      `${this.host.replace("https://", "wss://")}${endpoint}`,
-      this.session ? ["access_token", this.session] : undefined
-    );
+    return new WebSocket(`${this.host}${endpoint}`, [
+      "access_token",
+      this.session || "",
+    ]);
   }
   async CreateGuild(req: gen.protocol.chat.v1.ICreateGuildRequest) {
     const resp = await this.unary(
@@ -410,7 +411,17 @@ export default class ChatService {
     );
   }
   StreamEvents() {
-    return this.stream("/protocol.chat.v1.ChatService/StreamEvents");
+    return new Stream<
+      typeof gen.protocol.chat.v1.Event,
+      typeof gen.protocol.chat.v1.StreamEventsRequest,
+      gen.protocol.chat.v1.StreamEventsRequest,
+      gen.protocol.chat.v1.Event
+    >(
+      this.host,
+      "/protocol.chat.v1.ChatService/StreamEvents",
+      gen.protocol.chat.v1.Event,
+      gen.protocol.chat.v1.StreamEventsRequest
+    );
   }
   async GetUser(req: gen.protocol.chat.v1.IGetUserRequest) {
     const resp = await this.unary(

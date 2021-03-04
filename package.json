@@ -1,6 +1,6 @@
 {
   "name": "@harmony-dev/harmony-web-sdk",
-  "version": "5.0.23",
+  "version": "5.0.24",
   "description": "A Node SDK for Harmony, adapted to work for the web",
   "repository": {
     "type": "git",
@@ -42,6 +42,7 @@
     ]
   },
   "dependencies": {
+    "nanoevents": "^5.1.11",
     "protobufjs": "^6.10.2"
   },
   "devDependencies": {
@@ -50,12 +51,14 @@
     "@commitlint/config-conventional": "^11.0.0",
     "@types/jest": "^26.0.20",
     "@types/node": "^14.14.28",
+    "@types/node-fetch": "^2.5.8",
     "babel-jest": "^26.6.3",
     "commitizen": "^4.2.3",
     "copyfiles": "^2.4.1",
     "cz-conventional-changelog": "^3.3.0",
     "jest": "^26.6.3",
     "lint-staged": "^10.5.4",
+    "node-fetch": "^2.6.1",
     "prettier": "^2.2.1",
     "protobufjs-cli": "file:protobufjs/cli",
     "rimraf": "^3.0.2",

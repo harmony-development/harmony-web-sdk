@@ -2936,8 +2936,8 @@ export namespace protocol {
         /** PreviewGuildResponse avatar */
         avatar?: string | null;
 
-        /** PreviewGuildResponse memeberCount */
-        memeberCount?: number | null;
+        /** PreviewGuildResponse memberCount */
+        memberCount?: number | null;
       }
 
       /** Represents a PreviewGuildResponse. */
@@ -2954,8 +2954,8 @@ export namespace protocol {
         /** PreviewGuildResponse avatar. */
         public avatar: string;
 
-        /** PreviewGuildResponse memeberCount. */
-        public memeberCount: number;
+        /** PreviewGuildResponse memberCount. */
+        public memberCount: number;
 
         /**
          * Encodes the specified PreviewGuildResponse message. Does not implicitly {@link protocol.chat.v1.PreviewGuildResponse.verify|verify} messages.
