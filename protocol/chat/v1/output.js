@@ -12605,7 +12605,7 @@ $root.google = (function() {
                 if (object.value != null)
                     if (typeof object.value === "string")
                         $util.base64.decode(object.value, message.value = $util.newBuffer($util.base64.length(object.value)), 0);
-                    else if (object.value.length)
+                    else if (object.value.length >= 0)
                         message.value = object.value;
                 return message;
             };

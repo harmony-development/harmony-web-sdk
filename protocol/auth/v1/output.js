@@ -878,7 +878,7 @@ $root.protocol = (function() {
                         if (object.bytes != null)
                             if (typeof object.bytes === "string")
                                 $util.base64.decode(object.bytes, message.bytes = $util.newBuffer($util.base64.length(object.bytes)), 0);
-                            else if (object.bytes.length)
+                            else if (object.bytes.length >= 0)
                                 message.bytes = object.bytes;
                         if (object.string != null)
                             message.string = String(object.string);
@@ -2920,7 +2920,7 @@ $root.google = (function() {
                 if (object.value != null)
                     if (typeof object.value === "string")
                         $util.base64.decode(object.value, message.value = $util.newBuffer($util.base64.length(object.value)), 0);
-                    else if (object.value.length)
+                    else if (object.value.length >= 0)
                         message.value = object.value;
                 return message;
             };
