@@ -8,8 +8,8 @@ export default class ChatService {
     this.host = host;
   }
 
-  unary(endpoint: string, body: Uint8Array) {
-    return fetch(`${this.host}${endpoint}`, {
+  async unary(endpoint: string, body: Uint8Array) {
+    const resp = await fetch(`${this.host}${endpoint}`, {
       method: "POST",
       body,
       headers: {
@@ -17,6 +17,8 @@ export default class ChatService {
         Authorization: this.session || "",
       },
     });
+    if (resp.status >= 400 && resp.status < 600) throw resp;
+    return resp;
   }
 
   stream(endpoint: string) {
