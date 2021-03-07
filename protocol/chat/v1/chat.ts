@@ -20,13 +20,6 @@ export default class ChatService {
     if (resp.status >= 400 && resp.status < 600) throw resp;
     return resp;
   }
-
-  stream(endpoint: string) {
-    return new WebSocket(`${this.host}${endpoint}`, [
-      "access_token",
-      this.session || "",
-    ]);
-  }
   async CreateGuild(req: gen.protocol.chat.v1.ICreateGuildRequest) {
     const resp = await this.unary(
       "/protocol.chat.v1.ChatService/CreateGuild",
@@ -416,13 +409,14 @@ export default class ChatService {
     return new Stream<
       typeof gen.protocol.chat.v1.Event,
       typeof gen.protocol.chat.v1.StreamEventsRequest,
-      gen.protocol.chat.v1.StreamEventsRequest,
+      gen.protocol.chat.v1.IStreamEventsRequest,
       gen.protocol.chat.v1.Event
     >(
       this.host,
       "/protocol.chat.v1.ChatService/StreamEvents",
       gen.protocol.chat.v1.Event,
-      gen.protocol.chat.v1.StreamEventsRequest
+      gen.protocol.chat.v1.StreamEventsRequest,
+      this.session
     );
   }
   async GetUser(req: gen.protocol.chat.v1.IGetUserRequest) {

@@ -20,13 +20,6 @@ export default class VoiceService {
     if (resp.status >= 400 && resp.status < 600) throw resp;
     return resp;
   }
-
-  stream(endpoint: string) {
-    return new WebSocket(`${this.host}${endpoint}`, [
-      "access_token",
-      this.session || "",
-    ]);
-  }
   async Connect(req: gen.protocol.voice.v1.IConnectRequest) {
     const resp = await this.unary(
       "/protocol.voice.v1.VoiceService/Connect",
@@ -40,13 +33,14 @@ export default class VoiceService {
     return new Stream<
       typeof gen.protocol.voice.v1.Signal,
       typeof gen.protocol.voice.v1.StreamStateRequest,
-      gen.protocol.voice.v1.StreamStateRequest,
+      gen.protocol.voice.v1.IStreamStateRequest,
       gen.protocol.voice.v1.Signal
     >(
       this.host,
       "/protocol.voice.v1.VoiceService/StreamState",
       gen.protocol.voice.v1.Signal,
-      gen.protocol.voice.v1.StreamStateRequest
+      gen.protocol.voice.v1.StreamStateRequest,
+      this.session
     );
   }
 }

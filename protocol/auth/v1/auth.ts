@@ -20,13 +20,6 @@ export default class AuthService {
     if (resp.status >= 400 && resp.status < 600) throw resp;
     return resp;
   }
-
-  stream(endpoint: string) {
-    return new WebSocket(`${this.host}${endpoint}`, [
-      "access_token",
-      this.session || "",
-    ]);
-  }
   async Federate(req: gen.protocol.auth.v1.IFederateRequest) {
     const resp = await this.unary(
       "/protocol.auth.v1.AuthService/Federate",
@@ -85,13 +78,14 @@ export default class AuthService {
     return new Stream<
       typeof gen.protocol.auth.v1.AuthStep,
       typeof gen.protocol.auth.v1.StreamStepsRequest,
-      gen.protocol.auth.v1.StreamStepsRequest,
+      gen.protocol.auth.v1.IStreamStepsRequest,
       gen.protocol.auth.v1.AuthStep
     >(
       this.host,
       "/protocol.auth.v1.AuthService/StreamSteps",
       gen.protocol.auth.v1.AuthStep,
-      gen.protocol.auth.v1.StreamStepsRequest
+      gen.protocol.auth.v1.StreamStepsRequest,
+      this.session
     );
   }
 }

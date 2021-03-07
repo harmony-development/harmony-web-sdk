@@ -20,13 +20,6 @@ export default class MediaProxyService {
     if (resp.status >= 400 && resp.status < 600) throw resp;
     return resp;
   }
-
-  stream(endpoint: string) {
-    return new WebSocket(`${this.host}${endpoint}`, [
-      "access_token",
-      this.session || "",
-    ]);
-  }
   async FetchLinkMetadata(
     req: gen.protocol.mediaproxy.v1.IFetchLinkMetadataRequest
   ) {
