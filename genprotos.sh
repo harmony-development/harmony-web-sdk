@@ -25,6 +25,7 @@ for dir in $(find ${PROTOCOL_BUILD_TMP} -name '*.proto' -print0 | xargs -0 -n1 d
     --no-verify \
     --no-create \
     --no-delimited \
+    --force-long \
     --root $cleaned \
     $target
   $PBJS_PATH -p $PROTOCOL_BUILD_TMP \
@@ -32,7 +33,7 @@ for dir in $(find ${PROTOCOL_BUILD_TMP} -name '*.proto' -print0 | xargs -0 -n1 d
     -w commonjs \
     --no-verify \
     --no-create \
-    --force-number \
+    --force-long \
     --no-delimited \
     --root $cleaned \
     $target | \
