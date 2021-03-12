@@ -24,7 +24,6 @@ for dir in $(find ${PROTOCOL_BUILD_TMP} -name '*.proto' -print0 | xargs -0 -n1 d
     --no-comments \
     --no-verify \
     --no-create \
-    --force-number \
     --no-delimited \
     --root $cleaned \
     $target

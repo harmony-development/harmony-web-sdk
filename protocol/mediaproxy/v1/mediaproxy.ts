@@ -27,7 +27,7 @@ export default class MediaProxyService {
       "/protocol.mediaproxy.v1.MediaProxyService/FetchLinkMetadata",
       gen.protocol.mediaproxy.v1.FetchLinkMetadataRequest.encode(req).finish()
     );
-    return gen.protocol.mediaproxy.v1.SiteMetadata.decode(
+    return gen.protocol.mediaproxy.v1.FetchLinkMetadataResponse.decode(
       new Uint8Array(await resp.arrayBuffer())
     );
   }

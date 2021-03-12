@@ -419,12 +419,35 @@ export default class ChatService {
       this.session
     );
   }
+  Sync() {
+    return new Stream<
+      typeof gen.protocol.chat.v1.SyncEvent,
+      typeof gen.protocol.chat.v1.SyncRequest,
+      gen.protocol.chat.v1.ISyncRequest,
+      gen.protocol.chat.v1.SyncEvent
+    >(
+      this.host,
+      "/protocol.chat.v1.ChatService/Sync",
+      gen.protocol.chat.v1.SyncEvent,
+      gen.protocol.chat.v1.SyncRequest,
+      this.session
+    );
+  }
   async GetUser(req: gen.protocol.chat.v1.IGetUserRequest) {
     const resp = await this.unary(
       "/protocol.chat.v1.ChatService/GetUser",
       gen.protocol.chat.v1.GetUserRequest.encode(req).finish()
     );
     return gen.protocol.chat.v1.GetUserResponse.decode(
+      new Uint8Array(await resp.arrayBuffer())
+    );
+  }
+  async GetUserBulk(req: gen.protocol.chat.v1.IGetUserBulkRequest) {
+    const resp = await this.unary(
+      "/protocol.chat.v1.ChatService/GetUserBulk",
+      gen.protocol.chat.v1.GetUserBulkRequest.encode(req).finish()
+    );
+    return gen.protocol.chat.v1.GetUserBulkResponse.decode(
       new Uint8Array(await resp.arrayBuffer())
     );
   }
@@ -461,6 +484,33 @@ export default class ChatService {
       gen.protocol.chat.v1.PreviewGuildRequest.encode(req).finish()
     );
     return gen.protocol.chat.v1.PreviewGuildResponse.decode(
+      new Uint8Array(await resp.arrayBuffer())
+    );
+  }
+  async BanUser(req: gen.protocol.chat.v1.IBanUserRequest) {
+    const resp = await this.unary(
+      "/protocol.chat.v1.ChatService/BanUser",
+      gen.protocol.chat.v1.BanUserRequest.encode(req).finish()
+    );
+    return gen.google.protobuf.Empty.decode(
+      new Uint8Array(await resp.arrayBuffer())
+    );
+  }
+  async KickUser(req: gen.protocol.chat.v1.IKickUserRequest) {
+    const resp = await this.unary(
+      "/protocol.chat.v1.ChatService/KickUser",
+      gen.protocol.chat.v1.KickUserRequest.encode(req).finish()
+    );
+    return gen.google.protobuf.Empty.decode(
+      new Uint8Array(await resp.arrayBuffer())
+    );
+  }
+  async UnbanUser(req: gen.protocol.chat.v1.IUnbanUserRequest) {
+    const resp = await this.unary(
+      "/protocol.chat.v1.ChatService/UnbanUser",
+      gen.protocol.chat.v1.UnbanUserRequest.encode(req).finish()
+    );
+    return gen.google.protobuf.Empty.decode(
       new Uint8Array(await resp.arrayBuffer())
     );
   }
