@@ -1,26 +1,29 @@
-import Auth from "../protocol/auth/v1/auth";
-import Chat from "../protocol/chat/v1/chat";
-import MediaProxy from "../protocol/mediaproxy/v1/mediaproxy";
+import { AuthServiceClient } from "../protocol/auth/v1/auth";
+import { ChatServiceClient } from "../protocol/chat/v1/chat";
+import { MediaProxyServiceClient } from "../protocol/mediaproxy/v1/mediaproxy";
+import { HrpcTransport } from "./hrpcTransport";
 
 export class Connection {
   host: string;
-  auth: Auth;
-  chat: Chat;
-  mediaProxy: MediaProxy;
+  auth: AuthServiceClient;
+  chat: ChatServiceClient;
+  mediaProxy: MediaProxyServiceClient;
   private session?: string;
+  private transport: HrpcTransport;
 
   constructor(host: string) {
     this.host = host;
-    this.auth = new Auth(host);
-    this.chat = new Chat(host);
-    this.mediaProxy = new MediaProxy(host);
+    this.transport = new HrpcTransport({
+      baseUrl: host,
+    });
+    this.auth = new AuthServiceClient(this.transport);
+    this.chat = new ChatServiceClient(this.transport);
+    this.mediaProxy = new MediaProxyServiceClient(this.transport);
   }
 
   setSession(session: string) {
     this.session = session;
-    this.auth.session = session;
-    this.chat.session = session;
-    this.mediaProxy.session = session;
+    this.transport.setSession(session);
   }
 
   getSession() {

@@ -17,31 +17,12 @@ for dir in $(find ${PROTOCOL_BUILD_TMP} -name '*.proto' -print0 | xargs -0 -n1 d
   sed -i -E "s/ \[\(validate.rules(.*)\];/;/g" $(find "${dir}" -name '*.proto')
   sed -i -E "/validate.proto/d" $(find "${dir}" -name '*.proto')
   mkdir -p $OUT_DIR/$cleaned
-  $PBJS_PATH -p $PROTOCOL_BUILD_TMP \
-    -t static-module \
-    -w commonjs \
-    -o $OUT_DIR/$cleaned/output.js \
-    --no-comments \
-    --no-verify \
-    --no-create \
-    --no-delimited \
-    --force-long \
-    --root $cleaned \
-    $target
-  $PBJS_PATH -p $PROTOCOL_BUILD_TMP \
-    -t static-module \
-    -w commonjs \
-    --no-verify \
-    --no-create \
-    --force-long \
-    --no-delimited \
-    --root $cleaned \
-    $target | \
-    $PBTS_PATH -o $OUT_DIR/$cleaned/output.d.ts -
-  protoc \
-    --proto_path=${PROTOCOL_BUILD_TMP} \
-		--hrpc_out=. \
-    --hrpc_opt="ts_client" \
+  npx protoc \
+    -I $PROTOCOL_BUILD_TMP \
+    --ts_out protocol \
+    --ts_opt long_type_string \
+    --ts_opt optimize_code_size \
+    --ts_opt generate_dependencies \
     $target
 done
 
