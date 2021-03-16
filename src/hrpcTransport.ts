@@ -13,7 +13,7 @@ import {
   ServerStreamingCall,
   UnaryCall,
 } from "@protobuf-ts/runtime-rpc";
-import { Error as HError } from "./harmonytypes/v1/types";
+import { Error as HError } from "../protocol/harmonytypes/v1/types";
 
 interface HrpcOptions extends RpcOptions {
   baseUrl: string;

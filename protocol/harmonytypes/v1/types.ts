@@ -241,57 +241,129 @@ export interface Metadata {
  */
 export interface Message {
   /**
-   * @generated from protobuf field: protocol.harmonytypes.v1.Metadata metadata = 13;
+   * @generated from protobuf field: protocol.harmonytypes.v1.Metadata metadata = 1;
    */
   metadata?: Metadata;
   /**
-   * @generated from protobuf field: uint64 guild_id = 1 [jstype = JS_STRING];
+   * @generated from protobuf field: protocol.harmonytypes.v1.Override overrides = 2;
+   */
+  overrides?: Override;
+  /**
+   * @generated from protobuf field: uint64 guild_id = 3 [jstype = JS_STRING];
    */
   guildId: string;
   /**
-   * @generated from protobuf field: uint64 channel_id = 2 [jstype = JS_STRING];
+   * @generated from protobuf field: uint64 channel_id = 4 [jstype = JS_STRING];
    */
   channelId: string;
   /**
-   * @generated from protobuf field: uint64 message_id = 3 [jstype = JS_STRING];
+   * @generated from protobuf field: uint64 message_id = 5 [jstype = JS_STRING];
    */
   messageId: string;
   /**
-   * @generated from protobuf field: uint64 author_id = 4 [jstype = JS_STRING];
+   * @generated from protobuf field: uint64 author_id = 6 [jstype = JS_STRING];
    */
   authorId: string;
   /**
-   * @generated from protobuf field: google.protobuf.Timestamp created_at = 5;
+   * @generated from protobuf field: google.protobuf.Timestamp created_at = 7;
    */
   createdAt?: Timestamp;
   /**
-   * @generated from protobuf field: google.protobuf.Timestamp edited_at = 6;
+   * @generated from protobuf field: google.protobuf.Timestamp edited_at = 8;
    */
   editedAt?: Timestamp;
-  /**
-   * @generated from protobuf field: string content = 7;
-   */
-  content: string;
-  /**
-   * @generated from protobuf field: repeated protocol.harmonytypes.v1.Embed embeds = 8;
-   */
-  embeds: Embed[];
   /**
    * @generated from protobuf field: repeated protocol.harmonytypes.v1.Action actions = 9;
    */
   actions: Action[];
   /**
-   * @generated from protobuf field: repeated protocol.harmonytypes.v1.Attachment attachments = 10;
-   */
-  attachments: Attachment[];
-  /**
-   * @generated from protobuf field: uint64 in_reply_to = 11 [jstype = JS_STRING];
+   * @generated from protobuf field: uint64 in_reply_to = 10 [jstype = JS_STRING];
    */
   inReplyTo: string;
   /**
-   * @generated from protobuf field: protocol.harmonytypes.v1.Override overrides = 12;
+   * @generated from protobuf oneof: content
    */
-  overrides?: Override;
+  content:
+    | {
+        oneofKind: "textMessage";
+        /**
+         * @generated from protobuf field: protocol.harmonytypes.v1.Message.TextMessage text_message = 100;
+         */
+        textMessage: Message_TextMessage;
+      }
+    | {
+        oneofKind: "photoMessage";
+        /**
+         * @generated from protobuf field: protocol.harmonytypes.v1.Message.PhotoMessage photo_message = 101;
+         */
+        photoMessage: Message_PhotoMessage;
+      }
+    | {
+        oneofKind: "embedMessage";
+        /**
+         * @generated from protobuf field: protocol.harmonytypes.v1.Message.EmbedMessage embed_message = 102;
+         */
+        embedMessage: Message_EmbedMessage;
+      }
+    | {
+        oneofKind: "filesMessage";
+        /**
+         * @generated from protobuf field: protocol.harmonytypes.v1.Message.FilesMessage files_message = 103;
+         */
+        filesMessage: Message_FilesMessage;
+      }
+    | {
+        oneofKind: undefined;
+      };
+}
+/**
+ * @generated from protobuf message protocol.harmonytypes.v1.Message.TextMessage
+ */
+export interface Message_TextMessage {
+  /**
+   * @generated from protobuf field: string content = 1;
+   */
+  content: string;
+}
+/**
+ * @generated from protobuf message protocol.harmonytypes.v1.Message.PhotoMessage
+ */
+export interface Message_PhotoMessage {
+  /**
+   * @generated from protobuf field: repeated protocol.harmonytypes.v1.Message.PhotoMessage.Photo photos = 1;
+   */
+  photos: Message_PhotoMessage_Photo[];
+}
+/**
+ * @generated from protobuf message protocol.harmonytypes.v1.Message.PhotoMessage.Photo
+ */
+export interface Message_PhotoMessage_Photo {
+  /**
+   * @generated from protobuf field: protocol.harmonytypes.v1.Attachment photo = 1;
+   */
+  photo?: Attachment;
+  /**
+   * @generated from protobuf field: string caption = 2;
+   */
+  caption: string;
+}
+/**
+ * @generated from protobuf message protocol.harmonytypes.v1.Message.EmbedMessage
+ */
+export interface Message_EmbedMessage {
+  /**
+   * @generated from protobuf field: repeated protocol.harmonytypes.v1.Embed embeds = 1;
+   */
+  embeds: Embed[];
+}
+/**
+ * @generated from protobuf message protocol.harmonytypes.v1.Message.FilesMessage
+ */
+export interface Message_FilesMessage {
+  /**
+   * @generated from protobuf field: repeated protocol.harmonytypes.v1.Attachment attachments = 1;
+   */
+  attachments: Attachment[];
 }
 /**
  * @generated from protobuf message protocol.harmonytypes.v1.Error
@@ -617,21 +689,14 @@ export const Metadata = new Metadata$Type();
 class Message$Type extends MessageType<Message> {
   constructor() {
     super("protocol.harmonytypes.v1.Message", [
-      { no: 13, name: "metadata", kind: "message", T: () => Metadata },
-      { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-      { no: 2, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-      { no: 3, name: "message_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-      { no: 4, name: "author_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-      { no: 5, name: "created_at", kind: "message", T: () => Timestamp },
-      { no: 6, name: "edited_at", kind: "message", T: () => Timestamp },
-      { no: 7, name: "content", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-      {
-        no: 8,
-        name: "embeds",
-        kind: "message",
-        repeat: 1 /*RepeatType.PACKED*/,
-        T: () => Embed,
-      },
+      { no: 1, name: "metadata", kind: "message", T: () => Metadata },
+      { no: 2, name: "overrides", kind: "message", T: () => Override },
+      { no: 3, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+      { no: 4, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+      { no: 5, name: "message_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+      { no: 6, name: "author_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+      { no: 7, name: "created_at", kind: "message", T: () => Timestamp },
+      { no: 8, name: "edited_at", kind: "message", T: () => Timestamp },
       {
         no: 9,
         name: "actions",
@@ -641,22 +706,116 @@ class Message$Type extends MessageType<Message> {
       },
       {
         no: 10,
+        name: "in_reply_to",
+        kind: "scalar",
+        T: 4 /*ScalarType.UINT64*/,
+      },
+      {
+        no: 100,
+        name: "text_message",
+        kind: "message",
+        oneof: "content",
+        T: () => Message_TextMessage,
+      },
+      {
+        no: 101,
+        name: "photo_message",
+        kind: "message",
+        oneof: "content",
+        T: () => Message_PhotoMessage,
+      },
+      {
+        no: 102,
+        name: "embed_message",
+        kind: "message",
+        oneof: "content",
+        T: () => Message_EmbedMessage,
+      },
+      {
+        no: 103,
+        name: "files_message",
+        kind: "message",
+        oneof: "content",
+        T: () => Message_FilesMessage,
+      },
+    ]);
+  }
+}
+export const Message = new Message$Type();
+/**
+ * Type for protobuf message protocol.harmonytypes.v1.Message.TextMessage
+ */
+class Message_TextMessage$Type extends MessageType<Message_TextMessage> {
+  constructor() {
+    super("protocol.harmonytypes.v1.Message.TextMessage", [
+      { no: 1, name: "content", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+    ]);
+  }
+}
+export const Message_TextMessage = new Message_TextMessage$Type();
+/**
+ * Type for protobuf message protocol.harmonytypes.v1.Message.PhotoMessage
+ */
+class Message_PhotoMessage$Type extends MessageType<Message_PhotoMessage> {
+  constructor() {
+    super("protocol.harmonytypes.v1.Message.PhotoMessage", [
+      {
+        no: 1,
+        name: "photos",
+        kind: "message",
+        repeat: 1 /*RepeatType.PACKED*/,
+        T: () => Message_PhotoMessage_Photo,
+      },
+    ]);
+  }
+}
+export const Message_PhotoMessage = new Message_PhotoMessage$Type();
+/**
+ * Type for protobuf message protocol.harmonytypes.v1.Message.PhotoMessage.Photo
+ */
+class Message_PhotoMessage_Photo$Type extends MessageType<Message_PhotoMessage_Photo> {
+  constructor() {
+    super("protocol.harmonytypes.v1.Message.PhotoMessage.Photo", [
+      { no: 1, name: "photo", kind: "message", T: () => Attachment },
+      { no: 2, name: "caption", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+    ]);
+  }
+}
+export const Message_PhotoMessage_Photo = new Message_PhotoMessage_Photo$Type();
+/**
+ * Type for protobuf message protocol.harmonytypes.v1.Message.EmbedMessage
+ */
+class Message_EmbedMessage$Type extends MessageType<Message_EmbedMessage> {
+  constructor() {
+    super("protocol.harmonytypes.v1.Message.EmbedMessage", [
+      {
+        no: 1,
+        name: "embeds",
+        kind: "message",
+        repeat: 1 /*RepeatType.PACKED*/,
+        T: () => Embed,
+      },
+    ]);
+  }
+}
+export const Message_EmbedMessage = new Message_EmbedMessage$Type();
+/**
+ * Type for protobuf message protocol.harmonytypes.v1.Message.FilesMessage
+ */
+class Message_FilesMessage$Type extends MessageType<Message_FilesMessage> {
+  constructor() {
+    super("protocol.harmonytypes.v1.Message.FilesMessage", [
+      {
+        no: 1,
         name: "attachments",
         kind: "message",
         repeat: 1 /*RepeatType.PACKED*/,
         T: () => Attachment,
       },
-      {
-        no: 11,
-        name: "in_reply_to",
-        kind: "scalar",
-        T: 4 /*ScalarType.UINT64*/,
-      },
-      { no: 12, name: "overrides", kind: "message", T: () => Override },
     ]);
   }
 }
-export const Message = new Message$Type();
+export const Message_FilesMessage = new Message_FilesMessage$Type();
 /**
  * Type for protobuf message protocol.harmonytypes.v1.Error
  */

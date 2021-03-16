@@ -10,7 +10,7 @@
       "dom"
     ],
     "strict": true,
-    "sourceMap": true,
+    "sourceMap": false,
     "declaration": true,
     "esModuleInterop": true,
     "experimentalDecorators": true,
