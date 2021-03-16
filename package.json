@@ -1,6 +1,6 @@
 {
   "name": "@harmony-dev/harmony-web-sdk",
-  "version": "5.0.32",
+  "version": "5.0.33",
   "description": "A Node SDK for Harmony, adapted to work for the web",
   "repository": {
     "type": "git",
@@ -44,9 +44,7 @@
   "dependencies": {
     "@protobuf-ts/plugin": "^1.0.12",
     "@protobuf-ts/runtime": "^1.0.12",
-    "@protobuf-ts/runtime-rpc": "^1.0.12",
-    "nanoevents": "^5.1.11",
-    "protobufjs": "^6.10.2"
+    "@protobuf-ts/runtime-rpc": "^1.0.12"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.12.16",
