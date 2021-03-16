@@ -1,5 +1,4 @@
 import { Connection } from "../connection";
-import { Stream } from "src/harmonystream";
 import "whatwg-fetch";
 import {
   AuthStep,
