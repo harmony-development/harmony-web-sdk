@@ -72,9 +72,10 @@ export class HrpcTransport implements RpcTransport {
     };
   }
 
-  makeUrl(method: MethodInfo, options: HrpcOptions) {
+  makeUrl(method: MethodInfo, options: HrpcOptions, ws?: boolean) {
     let base = options.baseUrl;
     if (base.endsWith("/")) base = base.substring(0, base.length - 1);
+    if (ws) `wss${base.substr(base.indexOf("://"))}`;
     let methodName = method.name;
     return `${base}/${method.service.typeName}/${methodName}`;
   }
@@ -192,7 +193,7 @@ export class HrpcTransport implements RpcTransport {
     options: RpcOptions
   ): ServerStreamingCall<I, O> {
     let opt = options as HrpcOptions;
-    let url = this.makeUrl(method, opt);
+    let url = this.makeUrl(method, opt, true);
     let inputBytes = method.I.toBinary(input, opt.binaryOptions);
     let defHeader = new Deferred<RpcMetadata>();
     let responseStream = new RpcOutputStreamController<O>();
@@ -229,7 +230,7 @@ export class HrpcTransport implements RpcTransport {
     let defStatus = new Deferred<RpcStatus>();
     let defTrailer = new Deferred<RpcMetadata>();
     let defMessage = new Deferred<O>();
-    const ws = this.streamCall(this.makeUrl(method, opts), method);
+    const ws = this.streamCall(this.makeUrl(method, opts, true), method);
     let requestStream = new HrpcInputStreamWrapper(ws);
     ws.onmessage = (ev) => {
       defMessage.resolve(method.O.fromBinary(ev.data));
@@ -264,7 +265,7 @@ export class HrpcTransport implements RpcTransport {
     let defStatus = new Deferred<RpcStatus>();
     let defTrailer = new Deferred<RpcMetadata>();
     let responseStream = new RpcOutputStreamController<O>();
-    const ws = this.streamCall(this.makeUrl(method, opts), method);
+    const ws = this.streamCall(this.makeUrl(method, opts, true), method);
     ws.onmessage = (ev) => {
       responseStream.notifyMessage(method.O.fromBinary(ev.data));
     };
