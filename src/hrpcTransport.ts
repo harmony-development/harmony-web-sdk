@@ -14,6 +14,7 @@ import {
   UnaryCall,
 } from "@protobuf-ts/runtime-rpc";
 import { Error as HError } from "../protocol/harmonytypes/v1/types";
+import { StreamEventsRequest } from "./chat/v1/streaming";
 
 interface HrpcOptions extends RpcOptions {
   baseUrl: string;
@@ -290,15 +291,29 @@ export class HrpcTransport implements RpcTransport {
 
 class HrpcInputStreamWrapper<T> implements RpcInputStream<T> {
   completed: boolean;
+  protected sendQueue: Uint8Array[];
 
   constructor(private readonly ws: WebSocket) {
     this.completed = false;
+    this.sendQueue = [];
+    const openHandler = () => {
+      this.sendQueue.forEach((msg) => this.ws.send(msg));
+      this.ws.removeEventListener("open", openHandler);
+    };
+    this.ws.addEventListener("open", openHandler);
   }
 
   send(message: T): Promise<void> {
     return new Promise<void>((resolve, reject) => {
-      this.ws.send((message as unknown) as Uint8Array);
-      resolve();
+      if (this.ws.readyState === 0) {
+        this.sendQueue.push((message as unknown) as Uint8Array);
+        resolve();
+      } else if (this.ws.readyState === 1) {
+        this.ws.send((message as unknown) as Uint8Array);
+        resolve();
+      } else {
+        reject("socket is either closing or is closed");
+      }
     });
   }
 
