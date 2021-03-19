@@ -237,6 +237,99 @@ export interface Metadata {
   };
 }
 /**
+ * @generated from protobuf message protocol.harmonytypes.v1.contentText
+ */
+export interface contentText {
+  /**
+   * @generated from protobuf field: string content = 1;
+   */
+  content: string;
+}
+/**
+ * @generated from protobuf message protocol.harmonytypes.v1.Photo
+ */
+export interface Photo {
+  /**
+   * @generated from protobuf field: protocol.harmonytypes.v1.Attachment photo = 1;
+   */
+  photo?: Attachment;
+  /**
+   * @generated from protobuf field: string caption = 2;
+   */
+  caption: string;
+}
+/**
+ * @generated from protobuf message protocol.harmonytypes.v1.contentPhoto
+ */
+export interface contentPhoto {
+  /**
+   * @generated from protobuf field: repeated protocol.harmonytypes.v1.Photo photos = 1;
+   */
+  photos: Photo[];
+}
+/**
+ * @generated from protobuf message protocol.harmonytypes.v1.contentEmbed
+ */
+export interface contentEmbed {
+  /**
+   * @generated from protobuf field: repeated protocol.harmonytypes.v1.Embed embeds = 1;
+   */
+  embeds: Embed[];
+}
+/**
+ * @generated from protobuf message protocol.harmonytypes.v1.contentFiles
+ */
+export interface contentFiles {
+  /**
+   * @generated from protobuf field: repeated protocol.harmonytypes.v1.Attachment attachments = 1;
+   */
+  attachments: Attachment[];
+}
+/**
+ * @generated from protobuf message protocol.harmonytypes.v1.Content
+ */
+export interface Content {
+  /**
+   * @generated from protobuf field: repeated protocol.harmonytypes.v1.Action actions = 1;
+   */
+  actions: Action[];
+  /**
+   * @generated from protobuf oneof: content
+   */
+  content:
+    | {
+        oneofKind: "textMessage";
+        /**
+         * @generated from protobuf field: protocol.harmonytypes.v1.contentText text_message = 2;
+         */
+        textMessage: contentText;
+      }
+    | {
+        oneofKind: "photoMessage";
+        /**
+         * @generated from protobuf field: protocol.harmonytypes.v1.contentPhoto photo_message = 3;
+         */
+        photoMessage: contentPhoto;
+      }
+    | {
+        oneofKind: "embedMessage";
+        /**
+         * @generated from protobuf field: protocol.harmonytypes.v1.contentEmbed embed_message = 4;
+         */
+        embedMessage: contentEmbed;
+      }
+    | {
+        oneofKind: "filesMessage";
+        /**
+         * @generated from protobuf field: protocol.harmonytypes.v1.contentFiles files_message = 5;
+         */
+        filesMessage: contentFiles;
+      }
+    | {
+        oneofKind: undefined;
+      };
+}
+/**
  * @generated from protobuf message protocol.harmonytypes.v1.Message
  */
 export interface Message {
@@ -273,97 +366,13 @@ export interface Message {
    */
   editedAt?: Timestamp;
   /**
-   * @generated from protobuf field: repeated protocol.harmonytypes.v1.Action actions = 9;
-   */
-  actions: Action[];
-  /**
-   * @generated from protobuf field: uint64 in_reply_to = 10 [jstype = JS_STRING];
+   * @generated from protobuf field: uint64 in_reply_to = 9 [jstype = JS_STRING];
    */
   inReplyTo: string;
   /**
-   * @generated from protobuf oneof: content
+   * @generated from protobuf field: protocol.harmonytypes.v1.Content content = 10;
    */
-  content:
-    | {
-        oneofKind: "textMessage";
-        /**
-         * @generated from protobuf field: protocol.harmonytypes.v1.Message.TextMessage text_message = 100;
-         */
-        textMessage: Message_TextMessage;
-      }
-    | {
-        oneofKind: "photoMessage";
-        /**
-         * @generated from protobuf field: protocol.harmonytypes.v1.Message.PhotoMessage photo_message = 101;
-         */
-        photoMessage: Message_PhotoMessage;
-      }
-    | {
-        oneofKind: "embedMessage";
-        /**
-         * @generated from protobuf field: protocol.harmonytypes.v1.Message.EmbedMessage embed_message = 102;
-         */
-        embedMessage: Message_EmbedMessage;
-      }
-    | {
-        oneofKind: "filesMessage";
-        /**
-         * @generated from protobuf field: protocol.harmonytypes.v1.Message.FilesMessage files_message = 103;
-         */
-        filesMessage: Message_FilesMessage;
-      }
-    | {
-        oneofKind: undefined;
-      };
-}
-/**
- * @generated from protobuf message protocol.harmonytypes.v1.Message.TextMessage
- */
-export interface Message_TextMessage {
-  /**
-   * @generated from protobuf field: string content = 1;
-   */
-  content: string;
-}
-/**
- * @generated from protobuf message protocol.harmonytypes.v1.Message.PhotoMessage
- */
-export interface Message_PhotoMessage {
-  /**
-   * @generated from protobuf field: repeated protocol.harmonytypes.v1.Message.PhotoMessage.Photo photos = 1;
-   */
-  photos: Message_PhotoMessage_Photo[];
-}
-/**
- * @generated from protobuf message protocol.harmonytypes.v1.Message.PhotoMessage.Photo
- */
-export interface Message_PhotoMessage_Photo {
-  /**
-   * @generated from protobuf field: protocol.harmonytypes.v1.Attachment photo = 1;
-   */
-  photo?: Attachment;
-  /**
-   * @generated from protobuf field: string caption = 2;
-   */
-  caption: string;
-}
-/**
- * @generated from protobuf message protocol.harmonytypes.v1.Message.EmbedMessage
- */
-export interface Message_EmbedMessage {
-  /**
-   * @generated from protobuf field: repeated protocol.harmonytypes.v1.Embed embeds = 1;
-   */
-  embeds: Embed[];
-}
-/**
- * @generated from protobuf message protocol.harmonytypes.v1.Message.FilesMessage
- */
-export interface Message_FilesMessage {
-  /**
-   * @generated from protobuf field: repeated protocol.harmonytypes.v1.Attachment attachments = 1;
-   */
-  attachments: Attachment[];
+  content?: Content;
 }
 /**
  * @generated from protobuf message protocol.harmonytypes.v1.Error
@@ -684,6 +693,125 @@ class Metadata$Type extends MessageType<Metadata> {
 }
 export const Metadata = new Metadata$Type();
 /**
+ * Type for protobuf message protocol.harmonytypes.v1.contentText
+ */
+class contentText$Type extends MessageType<contentText> {
+  constructor() {
+    super("protocol.harmonytypes.v1.contentText", [
+      { no: 1, name: "content", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+    ]);
+  }
+}
+export const contentText = new contentText$Type();
+/**
+ * Type for protobuf message protocol.harmonytypes.v1.Photo
+ */
+class Photo$Type extends MessageType<Photo> {
+  constructor() {
+    super("protocol.harmonytypes.v1.Photo", [
+      { no: 1, name: "photo", kind: "message", T: () => Attachment },
+      { no: 2, name: "caption", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+    ]);
+  }
+}
+export const Photo = new Photo$Type();
+/**
+ * Type for protobuf message protocol.harmonytypes.v1.contentPhoto
+ */
+class contentPhoto$Type extends MessageType<contentPhoto> {
+  constructor() {
+    super("protocol.harmonytypes.v1.contentPhoto", [
+      {
+        no: 1,
+        name: "photos",
+        kind: "message",
+        repeat: 1 /*RepeatType.PACKED*/,
+        T: () => Photo,
+      },
+    ]);
+  }
+}
+export const contentPhoto = new contentPhoto$Type();
+/**
+ * Type for protobuf message protocol.harmonytypes.v1.contentEmbed
+ */
+class contentEmbed$Type extends MessageType<contentEmbed> {
+  constructor() {
+    super("protocol.harmonytypes.v1.contentEmbed", [
+      {
+        no: 1,
+        name: "embeds",
+        kind: "message",
+        repeat: 1 /*RepeatType.PACKED*/,
+        T: () => Embed,
+      },
+    ]);
+  }
+}
+export const contentEmbed = new contentEmbed$Type();
+/**
+ * Type for protobuf message protocol.harmonytypes.v1.contentFiles
+ */
+class contentFiles$Type extends MessageType<contentFiles> {
+  constructor() {
+    super("protocol.harmonytypes.v1.contentFiles", [
+      {
+        no: 1,
+        name: "attachments",
+        kind: "message",
+        repeat: 1 /*RepeatType.PACKED*/,
+        T: () => Attachment,
+      },
+    ]);
+  }
+}
+export const contentFiles = new contentFiles$Type();
+/**
+ * Type for protobuf message protocol.harmonytypes.v1.Content
+ */
+class Content$Type extends MessageType<Content> {
+  constructor() {
+    super("protocol.harmonytypes.v1.Content", [
+      {
+        no: 1,
+        name: "actions",
+        kind: "message",
+        repeat: 1 /*RepeatType.PACKED*/,
+        T: () => Action,
+      },
+      {
+        no: 2,
+        name: "text_message",
+        kind: "message",
+        oneof: "content",
+        T: () => contentText,
+      },
+      {
+        no: 3,
+        name: "photo_message",
+        kind: "message",
+        oneof: "content",
+        T: () => contentPhoto,
+      },
+      {
+        no: 4,
+        name: "embed_message",
+        kind: "message",
+        oneof: "content",
+        T: () => contentEmbed,
+      },
+      {
+        no: 5,
+        name: "files_message",
+        kind: "message",
+        oneof: "content",
+        T: () => contentFiles,
+      },
+    ]);
+  }
+}
+export const Content = new Content$Type();
+/**
  * Type for protobuf message protocol.harmonytypes.v1.Message
  */
 class Message$Type extends MessageType<Message> {
@@ -699,123 +827,15 @@ class Message$Type extends MessageType<Message> {
       { no: 8, name: "edited_at", kind: "message", T: () => Timestamp },
       {
         no: 9,
-        name: "actions",
-        kind: "message",
-        repeat: 1 /*RepeatType.PACKED*/,
-        T: () => Action,
-      },
-      {
-        no: 10,
         name: "in_reply_to",
         kind: "scalar",
         T: 4 /*ScalarType.UINT64*/,
       },
-      {
-        no: 100,
-        name: "text_message",
-        kind: "message",
-        oneof: "content",
-        T: () => Message_TextMessage,
-      },
-      {
-        no: 101,
-        name: "photo_message",
-        kind: "message",
-        oneof: "content",
-        T: () => Message_PhotoMessage,
-      },
-      {
-        no: 102,
-        name: "embed_message",
-        kind: "message",
-        oneof: "content",
-        T: () => Message_EmbedMessage,
-      },
-      {
-        no: 103,
-        name: "files_message",
-        kind: "message",
-        oneof: "content",
-        T: () => Message_FilesMessage,
-      },
+      { no: 10, name: "content", kind: "message", T: () => Content },
     ]);
   }
 }
 export const Message = new Message$Type();
-/**
- * Type for protobuf message protocol.harmonytypes.v1.Message.TextMessage
- */
-class Message_TextMessage$Type extends MessageType<Message_TextMessage> {
-  constructor() {
-    super("protocol.harmonytypes.v1.Message.TextMessage", [
-      { no: 1, name: "content", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-    ]);
-  }
-}
-export const Message_TextMessage = new Message_TextMessage$Type();
-/**
- * Type for protobuf message protocol.harmonytypes.v1.Message.PhotoMessage
- */
-class Message_PhotoMessage$Type extends MessageType<Message_PhotoMessage> {
-  constructor() {
-    super("protocol.harmonytypes.v1.Message.PhotoMessage", [
-      {
-        no: 1,
-        name: "photos",
-        kind: "message",
-        repeat: 1 /*RepeatType.PACKED*/,
-        T: () => Message_PhotoMessage_Photo,
-      },
-    ]);
-  }
-}
-export const Message_PhotoMessage = new Message_PhotoMessage$Type();
-/**
- * Type for protobuf message protocol.harmonytypes.v1.Message.PhotoMessage.Photo
- */
-class Message_PhotoMessage_Photo$Type extends MessageType<Message_PhotoMessage_Photo> {
-  constructor() {
-    super("protocol.harmonytypes.v1.Message.PhotoMessage.Photo", [
-      { no: 1, name: "photo", kind: "message", T: () => Attachment },
-      { no: 2, name: "caption", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-    ]);
-  }
-}
-export const Message_PhotoMessage_Photo = new Message_PhotoMessage_Photo$Type();
-/**
- * Type for protobuf message protocol.harmonytypes.v1.Message.EmbedMessage
- */
-class Message_EmbedMessage$Type extends MessageType<Message_EmbedMessage> {
-  constructor() {
-    super("protocol.harmonytypes.v1.Message.EmbedMessage", [
-      {
-        no: 1,
-        name: "embeds",
-        kind: "message",
-        repeat: 1 /*RepeatType.PACKED*/,
-        T: () => Embed,
-      },
-    ]);
-  }
-}
-export const Message_EmbedMessage = new Message_EmbedMessage$Type();
-/**
- * Type for protobuf message protocol.harmonytypes.v1.Message.FilesMessage
- */
-class Message_FilesMessage$Type extends MessageType<Message_FilesMessage> {
-  constructor() {
-    super("protocol.harmonytypes.v1.Message.FilesMessage", [
-      {
-        no: 1,
-        name: "attachments",
-        kind: "message",
-        repeat: 1 /*RepeatType.PACKED*/,
-        T: () => Attachment,
-      },
-    ]);
-  }
-}
-export const Message_FilesMessage = new Message_FilesMessage$Type();
 /**
  * Type for protobuf message protocol.harmonytypes.v1.Error
  */

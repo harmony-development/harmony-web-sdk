@@ -202,7 +202,9 @@ export class HrpcTransport implements RpcTransport {
 
     const ws = this.streamCall(url, method);
     ws.onmessage = (ev) => {
-      responseStream.notifyMessage(method.O.fromBinary(ev.data));
+      responseStream.notifyMessage(
+        method.O.fromBinary(new Uint8Array(ev.data))
+      );
     };
     ws.onclose = (ev) => {
       if (ev.wasClean) responseStream.notifyComplete();
