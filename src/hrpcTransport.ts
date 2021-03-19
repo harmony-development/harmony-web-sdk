@@ -234,9 +234,11 @@ export class HrpcTransport implements RpcTransport {
     let defTrailer = new Deferred<RpcMetadata>();
     let defMessage = new Deferred<O>();
     const ws = this.streamCall(this.makeUrl(method, opts, true), method);
-    let requestStream = new HrpcInputStreamWrapper(ws, method.I.toBinary);
+    let requestStream = new HrpcInputStreamWrapper(ws, (v: I) =>
+      method.I.toBinary(v, opts.binaryOptions)
+    );
     ws.onmessage = (ev) => {
-      defMessage.resolve(method.O.fromBinary(ev.data));
+      defMessage.resolve(method.O.fromBinary(new Uint8Array(ev.data)));
       ws.close();
     };
     ws.onclose = (ev) => {
@@ -270,13 +272,17 @@ export class HrpcTransport implements RpcTransport {
     let responseStream = new RpcOutputStreamController<O>();
     const ws = this.streamCall(this.makeUrl(method, opts, true), method);
     ws.onmessage = (ev) => {
-      responseStream.notifyMessage(method.O.fromBinary(ev.data));
+      responseStream.notifyMessage(
+        method.O.fromBinary(new Uint8Array(ev.data))
+      );
     };
     ws.onclose = (ev) => {
       if (ev.wasClean) responseStream.notifyComplete();
       else responseStream.notifyError(new Error(ev.reason));
     };
-    let requestStream = new HrpcInputStreamWrapper<I>(ws, method.I.toBinary);
+    let requestStream = new HrpcInputStreamWrapper<I>(ws, (v: I) =>
+      method.I.toBinary(v, opts.binaryOptions)
+    );
     return new DuplexStreamingCall<I, O>(
       method,
       opts.meta ?? {},
