@@ -1,6 +1,6 @@
 {
   "name": "@harmony-dev/harmony-web-sdk",
-  "version": "5.0.39",
+  "version": "5.0.40",
   "description": "A Node SDK for Harmony, adapted to work for the web",
   "repository": {
     "type": "git",
@@ -27,6 +27,7 @@
     "lint": "tslint  --project tsconfig.json -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
     "prebuild": "rm -rf dist",
     "build": "git submodule update --recursive --remote && ./genprotos.sh && tsc && tsc-alias -p tsconfig.json && copyfiles -u 1 \"protocol/**/*.d.ts\" dist/lib/protocol && copyfiles -u 1 \"protocol/**/*.js\" dist/lib/protocol",
+    "build-no-checkout": "./genprotos.sh && tsc && tsc-alias -p tsconfig.json && copyfiles -u 1 \"protocol/**/*.d.ts\" dist/lib/protocol && copyfiles -u 1 \"protocol/**/*.js\" dist/lib/protocol",
     "commit": "git-cz",
     "prepublish": "npm run build",
     "test": "jest"

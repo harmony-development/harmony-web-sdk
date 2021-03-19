@@ -52,7 +52,7 @@ import { DeleteChannelRequest } from "./channels";
 import { DeleteInviteRequest } from "./guilds";
 import { DeleteGuildRequest } from "./guilds";
 import { AddEmoteToPackRequest } from "./emotes";
-import { UpdateMessageTextRequest } from "./messages";
+import { UpdateMessageRequest } from "./messages";
 import { UpdateChannelOrderRequest } from "./channels";
 import { UpdateChannelInformationRequest } from "./channels";
 import { Empty } from "../../google/protobuf/empty";
@@ -229,12 +229,12 @@ export interface IChatServiceClient {
     options?: RpcOptions
   ): UnaryCall<UpdateChannelOrderRequest, Empty>;
   /**
-   * @generated from protobuf rpc: UpdateMessage(protocol.chat.v1.UpdateMessageTextRequest) returns (google.protobuf.Empty);
+   * @generated from protobuf rpc: UpdateMessage(protocol.chat.v1.UpdateMessageRequest) returns (google.protobuf.Empty);
    */
   updateMessage(
-    input: UpdateMessageTextRequest,
+    input: UpdateMessageRequest,
     options?: RpcOptions
-  ): UnaryCall<UpdateMessageTextRequest, Empty>;
+  ): UnaryCall<UpdateMessageRequest, Empty>;
   /**
    * @generated from protobuf rpc: AddEmoteToPack(protocol.chat.v1.AddEmoteToPackRequest) returns (google.protobuf.Empty);
    */
@@ -686,7 +686,7 @@ export class ChatServiceClient implements IChatServiceClient {
       service: this,
       name: "UpdateMessage",
       localName: "updateMessage",
-      I: UpdateMessageTextRequest,
+      I: UpdateMessageRequest,
       O: Empty,
       options: {
         "protocol.harmonytypes.v1.metadata": {
@@ -1338,13 +1338,13 @@ export class ChatServiceClient implements IChatServiceClient {
     );
   }
   updateMessage(
-    input: UpdateMessageTextRequest,
+    input: UpdateMessageRequest,
     options?: RpcOptions
-  ): UnaryCall<UpdateMessageTextRequest, Empty> {
+  ): UnaryCall<UpdateMessageRequest, Empty> {
     const method = this.methods[18],
       opt = this._transport.mergeOptions(options),
       i = method.I.create(input);
-    return stackIntercept<UpdateMessageTextRequest, Empty>(
+    return stackIntercept<UpdateMessageRequest, Empty>(
       "unary",
       this._transport,
       method,
