@@ -234,7 +234,7 @@ export class HrpcTransport implements RpcTransport {
     let defTrailer = new Deferred<RpcMetadata>();
     let defMessage = new Deferred<O>();
     const ws = this.streamCall(this.makeUrl(method, opts, true), method);
-    let requestStream = new HrpcInputStreamWrapper(ws);
+    let requestStream = new HrpcInputStreamWrapper(ws, method.I.toBinary);
     ws.onmessage = (ev) => {
       defMessage.resolve(method.O.fromBinary(ev.data));
       ws.close();
@@ -276,7 +276,7 @@ export class HrpcTransport implements RpcTransport {
       if (ev.wasClean) responseStream.notifyComplete();
       else responseStream.notifyError(new Error(ev.reason));
     };
-    let requestStream = new HrpcInputStreamWrapper(ws);
+    let requestStream = new HrpcInputStreamWrapper<I>(ws, method.I.toBinary);
     return new DuplexStreamingCall<I, O>(
       method,
       opts.meta ?? {},
@@ -293,7 +293,10 @@ class HrpcInputStreamWrapper<T> implements RpcInputStream<T> {
   completed: boolean;
   protected sendQueue: Uint8Array[];
 
-  constructor(private readonly ws: WebSocket) {
+  constructor(
+    private readonly ws: WebSocket,
+    private readonly serializer: (v: T) => Uint8Array
+  ) {
     this.completed = false;
     this.sendQueue = [];
     const openHandler = () => {
@@ -306,10 +309,10 @@ class HrpcInputStreamWrapper<T> implements RpcInputStream<T> {
   send(message: T): Promise<void> {
     return new Promise<void>((resolve, reject) => {
       if (this.ws.readyState === 0) {
-        this.sendQueue.push((message as unknown) as Uint8Array);
+        this.sendQueue.push(this.serializer(message));
         resolve();
       } else if (this.ws.readyState === 1) {
-        this.ws.send((message as unknown) as Uint8Array);
+        this.ws.send(this.serializer(message));
         resolve();
       } else {
         reject("socket is either closing or is closed");
