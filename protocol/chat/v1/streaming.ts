@@ -4,10 +4,6 @@
 import { MessageType } from "@protobuf-ts/runtime";
 import { UserStatus } from "../../harmonytypes/v1/types";
 import { Metadata } from "../../harmonytypes/v1/types";
-import { Override } from "../../harmonytypes/v1/types";
-import { Attachment } from "../../harmonytypes/v1/types";
-import { Action } from "../../harmonytypes/v1/types";
-import { Embed } from "../../harmonytypes/v1/types";
 import { Timestamp } from "../../google/protobuf/timestamp";
 import { Message } from "../../harmonytypes/v1/types";
 /**
@@ -221,50 +217,6 @@ export interface Event_MessageUpdated {
    * @generated from protobuf field: string content = 5;
    */
   content: string;
-  /**
-   * @generated from protobuf field: bool update_content = 6;
-   */
-  updateContent: boolean;
-  /**
-   * @generated from protobuf field: repeated protocol.harmonytypes.v1.Embed embeds = 7;
-   */
-  embeds: Embed[];
-  /**
-   * @generated from protobuf field: bool update_embeds = 8;
-   */
-  updateEmbeds: boolean;
-  /**
-   * @generated from protobuf field: repeated protocol.harmonytypes.v1.Action actions = 9;
-   */
-  actions: Action[];
-  /**
-   * @generated from protobuf field: bool update_actions = 10;
-   */
-  updateActions: boolean;
-  /**
-   * @generated from protobuf field: repeated protocol.harmonytypes.v1.Attachment attachments = 11;
-   */
-  attachments: Attachment[];
-  /**
-   * @generated from protobuf field: bool update_attachments = 12;
-   */
-  updateAttachments: boolean;
-  /**
-   * @generated from protobuf field: protocol.harmonytypes.v1.Override overrides = 13;
-   */
-  overrides?: Override;
-  /**
-   * @generated from protobuf field: bool update_overrides = 14;
-   */
-  updateOverrides: boolean;
-  /**
-   * @generated from protobuf field: protocol.harmonytypes.v1.Metadata metadata = 15;
-   */
-  metadata?: Metadata;
-  /**
-   * @generated from protobuf field: bool update_metadata = 16;
-   */
-  updateMetadata: boolean;
 }
 /**
  * @generated from protobuf message protocol.chat.v1.Event.MessageDeleted
@@ -789,65 +741,6 @@ class Event_MessageUpdated$Type extends MessageType<Event_MessageUpdated> {
       { no: 3, name: "message_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
       { no: 4, name: "edited_at", kind: "message", T: () => Timestamp },
       { no: 5, name: "content", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-      {
-        no: 6,
-        name: "update_content",
-        kind: "scalar",
-        T: 8 /*ScalarType.BOOL*/,
-      },
-      {
-        no: 7,
-        name: "embeds",
-        kind: "message",
-        repeat: 1 /*RepeatType.PACKED*/,
-        T: () => Embed,
-      },
-      {
-        no: 8,
-        name: "update_embeds",
-        kind: "scalar",
-        T: 8 /*ScalarType.BOOL*/,
-      },
-      {
-        no: 9,
-        name: "actions",
-        kind: "message",
-        repeat: 1 /*RepeatType.PACKED*/,
-        T: () => Action,
-      },
-      {
-        no: 10,
-        name: "update_actions",
-        kind: "scalar",
-        T: 8 /*ScalarType.BOOL*/,
-      },
-      {
-        no: 11,
-        name: "attachments",
-        kind: "message",
-        repeat: 1 /*RepeatType.PACKED*/,
-        T: () => Attachment,
-      },
-      {
-        no: 12,
-        name: "update_attachments",
-        kind: "scalar",
-        T: 8 /*ScalarType.BOOL*/,
-      },
-      { no: 13, name: "overrides", kind: "message", T: () => Override },
-      {
-        no: 14,
-        name: "update_overrides",
-        kind: "scalar",
-        T: 8 /*ScalarType.BOOL*/,
-      },
-      { no: 15, name: "metadata", kind: "message", T: () => Metadata },
-      {
-        no: 16,
-        name: "update_metadata",
-        kind: "scalar",
-        T: 8 /*ScalarType.BOOL*/,
-      },
     ]);
   }
 }

@@ -16,9 +16,6 @@ import { GetUserBulkResponse } from "./profile";
 import { GetUserBulkRequest } from "./profile";
 import { GetUserResponse } from "./profile";
 import { GetUserRequest } from "./profile";
-import { SyncEvent } from "./postbox";
-import { SyncRequest } from "./postbox";
-import { ServerStreamingCall } from "@protobuf-ts/runtime-rpc";
 import { Event } from "./streaming";
 import { StreamEventsRequest } from "./streaming";
 import { DuplexStreamingCall } from "@protobuf-ts/runtime-rpc";
@@ -52,7 +49,7 @@ import { DeleteChannelRequest } from "./channels";
 import { DeleteInviteRequest } from "./guilds";
 import { DeleteGuildRequest } from "./guilds";
 import { AddEmoteToPackRequest } from "./emotes";
-import { UpdateMessageRequest } from "./messages";
+import { UpdateMessageTextRequest } from "./messages";
 import { UpdateChannelOrderRequest } from "./channels";
 import { UpdateChannelInformationRequest } from "./channels";
 import { Empty } from "../../google/protobuf/empty";
@@ -229,12 +226,12 @@ export interface IChatServiceClient {
     options?: RpcOptions
   ): UnaryCall<UpdateChannelOrderRequest, Empty>;
   /**
-   * @generated from protobuf rpc: UpdateMessage(protocol.chat.v1.UpdateMessageRequest) returns (google.protobuf.Empty);
+   * @generated from protobuf rpc: UpdateMessageText(protocol.chat.v1.UpdateMessageTextRequest) returns (google.protobuf.Empty);
    */
-  updateMessage(
-    input: UpdateMessageRequest,
+  updateMessageText(
+    input: UpdateMessageTextRequest,
     options?: RpcOptions
-  ): UnaryCall<UpdateMessageRequest, Empty>;
+  ): UnaryCall<UpdateMessageTextRequest, Empty>;
   /**
    * @generated from protobuf rpc: AddEmoteToPack(protocol.chat.v1.AddEmoteToPackRequest) returns (google.protobuf.Empty);
    */
@@ -398,13 +395,6 @@ export interface IChatServiceClient {
   streamEvents(
     options?: RpcOptions
   ): DuplexStreamingCall<StreamEventsRequest, Event>;
-  /**
-   * @generated from protobuf rpc: Sync(protocol.chat.v1.SyncRequest) returns (stream protocol.chat.v1.SyncEvent);
-   */
-  sync(
-    input: SyncRequest,
-    options?: RpcOptions
-  ): ServerStreamingCall<SyncRequest, SyncEvent>;
   /**
    * @generated from protobuf rpc: GetUser(protocol.chat.v1.GetUserRequest) returns (protocol.chat.v1.GetUserResponse);
    */
@@ -596,6 +586,9 @@ export class ChatServiceClient implements IChatServiceClient {
       localName: "getGuildChannels",
       I: GetGuildChannelsRequest,
       O: GetGuildChannelsResponse,
+      options: {
+        "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true },
+      },
     },
     {
       service: this,
@@ -684,9 +677,9 @@ export class ChatServiceClient implements IChatServiceClient {
     },
     {
       service: this,
-      name: "UpdateMessage",
-      localName: "updateMessage",
-      I: UpdateMessageRequest,
+      name: "UpdateMessageText",
+      localName: "updateMessageText",
+      I: UpdateMessageTextRequest,
       O: Empty,
       options: {
         "protocol.harmonytypes.v1.metadata": {
@@ -965,14 +958,6 @@ export class ChatServiceClient implements IChatServiceClient {
       options: {
         "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true },
       },
-    },
-    {
-      service: this,
-      name: "Sync",
-      localName: "sync",
-      I: SyncRequest,
-      O: SyncEvent,
-      serverStreaming: true,
     },
     {
       service: this,
@@ -1337,14 +1322,14 @@ export class ChatServiceClient implements IChatServiceClient {
       i
     );
   }
-  updateMessage(
-    input: UpdateMessageRequest,
+  updateMessageText(
+    input: UpdateMessageTextRequest,
     options?: RpcOptions
-  ): UnaryCall<UpdateMessageRequest, Empty> {
+  ): UnaryCall<UpdateMessageTextRequest, Empty> {
     const method = this.methods[18],
       opt = this._transport.mergeOptions(options),
       i = method.I.create(input);
-    return stackIntercept<UpdateMessageRequest, Empty>(
+    return stackIntercept<UpdateMessageTextRequest, Empty>(
       "unary",
       this._transport,
       method,
@@ -1694,26 +1679,11 @@ export class ChatServiceClient implements IChatServiceClient {
       opt
     );
   }
-  sync(
-    input: SyncRequest,
-    options?: RpcOptions
-  ): ServerStreamingCall<SyncRequest, SyncEvent> {
-    const method = this.methods[42],
-      opt = this._transport.mergeOptions(options),
-      i = method.I.create(input);
-    return stackIntercept<SyncRequest, SyncEvent>(
-      "serverStreaming",
-      this._transport,
-      method,
-      opt,
-      i
-    );
-  }
   getUser(
     input: GetUserRequest,
     options?: RpcOptions
   ): UnaryCall<GetUserRequest, GetUserResponse> {
-    const method = this.methods[43],
+    const method = this.methods[42],
       opt = this._transport.mergeOptions(options),
       i = method.I.create(input);
     return stackIntercept<GetUserRequest, GetUserResponse>(
@@ -1728,7 +1698,7 @@ export class ChatServiceClient implements IChatServiceClient {
     input: GetUserBulkRequest,
     options?: RpcOptions
   ): UnaryCall<GetUserBulkRequest, GetUserBulkResponse> {
-    const method = this.methods[44],
+    const method = this.methods[43],
       opt = this._transport.mergeOptions(options),
       i = method.I.create(input);
     return stackIntercept<GetUserBulkRequest, GetUserBulkResponse>(
@@ -1743,7 +1713,7 @@ export class ChatServiceClient implements IChatServiceClient {
     input: GetUserMetadataRequest,
     options?: RpcOptions
   ): UnaryCall<GetUserMetadataRequest, GetUserMetadataResponse> {
-    const method = this.methods[45],
+    const method = this.methods[44],
       opt = this._transport.mergeOptions(options),
       i = method.I.create(input);
     return stackIntercept<GetUserMetadataRequest, GetUserMetadataResponse>(
@@ -1758,7 +1728,7 @@ export class ChatServiceClient implements IChatServiceClient {
     input: ProfileUpdateRequest,
     options?: RpcOptions
   ): UnaryCall<ProfileUpdateRequest, Empty> {
-    const method = this.methods[46],
+    const method = this.methods[45],
       opt = this._transport.mergeOptions(options),
       i = method.I.create(input);
     return stackIntercept<ProfileUpdateRequest, Empty>(
@@ -1773,7 +1743,7 @@ export class ChatServiceClient implements IChatServiceClient {
     input: TypingRequest,
     options?: RpcOptions
   ): UnaryCall<TypingRequest, Empty> {
-    const method = this.methods[47],
+    const method = this.methods[46],
       opt = this._transport.mergeOptions(options),
       i = method.I.create(input);
     return stackIntercept<TypingRequest, Empty>(
@@ -1788,7 +1758,7 @@ export class ChatServiceClient implements IChatServiceClient {
     input: PreviewGuildRequest,
     options?: RpcOptions
   ): UnaryCall<PreviewGuildRequest, PreviewGuildResponse> {
-    const method = this.methods[48],
+    const method = this.methods[47],
       opt = this._transport.mergeOptions(options),
       i = method.I.create(input);
     return stackIntercept<PreviewGuildRequest, PreviewGuildResponse>(
@@ -1803,7 +1773,7 @@ export class ChatServiceClient implements IChatServiceClient {
     input: BanUserRequest,
     options?: RpcOptions
   ): UnaryCall<BanUserRequest, Empty> {
-    const method = this.methods[49],
+    const method = this.methods[48],
       opt = this._transport.mergeOptions(options),
       i = method.I.create(input);
     return stackIntercept<BanUserRequest, Empty>(
@@ -1818,7 +1788,7 @@ export class ChatServiceClient implements IChatServiceClient {
     input: KickUserRequest,
     options?: RpcOptions
   ): UnaryCall<KickUserRequest, Empty> {
-    const method = this.methods[50],
+    const method = this.methods[49],
       opt = this._transport.mergeOptions(options),
       i = method.I.create(input);
     return stackIntercept<KickUserRequest, Empty>(
@@ -1833,7 +1803,7 @@ export class ChatServiceClient implements IChatServiceClient {
     input: UnbanUserRequest,
     options?: RpcOptions
   ): UnaryCall<UnbanUserRequest, Empty> {
-    const method = this.methods[51],
+    const method = this.methods[50],
       opt = this._transport.mergeOptions(options),
       i = method.I.create(input);
     return stackIntercept<UnbanUserRequest, Empty>(

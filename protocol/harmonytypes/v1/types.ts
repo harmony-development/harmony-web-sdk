@@ -79,17 +79,53 @@ export interface Override {
         oneofKind: undefined;
       };
 }
+// EMBEDS AND ACTIONS
+
 /**
- * Rules on actions:
- * Actions without a type are assumed to be Button actions or Menu actions when
- * nested. Button actions can only have Menu actions as children. Dropdown
- * actions can only have non-recursive Menu actions as children. Menu actions
- * can only have other Menu actions as children. SmallEntry and LargeActions
- * cannot have children.
- *
  * @generated from protobuf message protocol.harmonytypes.v1.Action
  */
 export interface Action {
+  /**
+   * @generated from protobuf field: protocol.harmonytypes.v1.Action.Type action_type = 1;
+   */
+  actionType: Action_Type;
+  /**
+   * @generated from protobuf field: string id = 2;
+   */
+  id: string;
+  /**
+   * @generated from protobuf oneof: kind
+   */
+  kind:
+    | {
+        oneofKind: "button";
+        /**
+         * @generated from protobuf field: protocol.harmonytypes.v1.Action.Button button = 3;
+         */
+        button: Action_Button;
+      }
+    | {
+        oneofKind: "dropdown";
+        /**
+         * @generated from protobuf field: protocol.harmonytypes.v1.Action.Dropdown dropdown = 4;
+         */
+        dropdown: Action_Dropdown;
+      }
+    | {
+        oneofKind: "input";
+        /**
+         * @generated from protobuf field: protocol.harmonytypes.v1.Action.Input input = 5;
+         */
+        input: Action_Input;
+      }
+    | {
+        oneofKind: undefined;
+      };
+}
+/**
+ * @generated from protobuf message protocol.harmonytypes.v1.Action.Button
+ */
+export interface Action_Button {
   /**
    * @generated from protobuf field: string text = 1;
    */
@@ -98,22 +134,49 @@ export interface Action {
    * @generated from protobuf field: string url = 2;
    */
   url: string;
+}
+/**
+ * @generated from protobuf message protocol.harmonytypes.v1.Action.Dropdown
+ */
+export interface Action_Dropdown {
   /**
-   * @generated from protobuf field: string id = 3;
+   * @generated from protobuf field: string text = 1;
    */
-  id: string;
+  text: string;
   /**
-   * @generated from protobuf field: protocol.harmonytypes.v1.ActionType type = 4;
+   * @generated from protobuf field: repeated string options = 2;
    */
-  type: ActionType;
+  options: string[];
+}
+/**
+ * @generated from protobuf message protocol.harmonytypes.v1.Action.Input
+ */
+export interface Action_Input {
   /**
-   * @generated from protobuf field: protocol.harmonytypes.v1.ActionPresentation presentation = 5;
+   * @generated from protobuf field: string label = 1;
    */
-  presentation: ActionPresentation;
+  label: string;
   /**
-   * @generated from protobuf field: repeated protocol.harmonytypes.v1.Action children = 6;
+   * @generated from protobuf field: bool wide = 2;
    */
-  children: Action[];
+  wide: boolean;
+}
+/**
+ * @generated from protobuf enum protocol.harmonytypes.v1.Action.Type
+ */
+export enum Action_Type {
+  /**
+   * @generated from protobuf enum value: Normal = 0;
+   */
+  Normal = 0,
+  /**
+   * @generated from protobuf enum value: Primary = 1;
+   */
+  Primary = 1,
+  /**
+   * @generated from protobuf enum value: Destructive = 2;
+   */
+  Destructive = 2,
 }
 /**
  * @generated from protobuf message protocol.harmonytypes.v1.EmbedHeading
@@ -157,13 +220,30 @@ export interface EmbedField {
    */
   imageUrl: string;
   /**
-   * @generated from protobuf field: protocol.harmonytypes.v1.FieldPresentation presentation = 5;
+   * @generated from protobuf field: protocol.harmonytypes.v1.EmbedField.Presentation presentation = 5;
    */
-  presentation: FieldPresentation;
+  presentation: EmbedField_Presentation;
   /**
    * @generated from protobuf field: repeated protocol.harmonytypes.v1.Action actions = 6;
    */
   actions: Action[];
+}
+/**
+ * @generated from protobuf enum protocol.harmonytypes.v1.EmbedField.Presentation
+ */
+export enum EmbedField_Presentation {
+  /**
+   * @generated from protobuf enum value: Data = 0;
+   */
+  Data = 0,
+  /**
+   * @generated from protobuf enum value: CaptionedImage = 1;
+   */
+  CaptionedImage = 1,
+  /**
+   * @generated from protobuf enum value: Row = 2;
+   */
+  Row = 2,
 }
 /**
  * @generated from protobuf message protocol.harmonytypes.v1.Embed
@@ -193,10 +273,6 @@ export interface Embed {
    * @generated from protobuf field: repeated protocol.harmonytypes.v1.EmbedField fields = 6;
    */
   fields: EmbedField[];
-  /**
-   * @generated from protobuf field: repeated protocol.harmonytypes.v1.Action actions = 7;
-   */
-  actions: Action[];
 }
 /**
  * TYPES
@@ -220,6 +296,10 @@ export interface Attachment {
    * @generated from protobuf field: int32 size = 4;
    */
   size: number;
+  /**
+   * @generated from protobuf field: string caption = 5;
+   */
+  caption: string;
 }
 /**
  * @generated from protobuf message protocol.harmonytypes.v1.Metadata
@@ -237,61 +317,109 @@ export interface Metadata {
   };
 }
 /**
+ * @generated from protobuf message protocol.harmonytypes.v1.ContentText
+ */
+export interface ContentText {
+  /**
+   * @generated from protobuf field: string content = 1;
+   */
+  content: string;
+}
+/**
+ * @generated from protobuf message protocol.harmonytypes.v1.ContentEmbed
+ */
+export interface ContentEmbed {
+  /**
+   * @generated from protobuf field: protocol.harmonytypes.v1.Embed embeds = 1;
+   */
+  embeds?: Embed;
+}
+/**
+ * @generated from protobuf message protocol.harmonytypes.v1.ContentFiles
+ */
+export interface ContentFiles {
+  /**
+   * @generated from protobuf field: repeated protocol.harmonytypes.v1.Attachment attachments = 1;
+   */
+  attachments: Attachment[];
+}
+/**
+ * @generated from protobuf message protocol.harmonytypes.v1.Content
+ */
+export interface Content {
+  /**
+   * @generated from protobuf oneof: content
+   */
+  content:
+    | {
+        oneofKind: "textMessage";
+        /**
+         * @generated from protobuf field: protocol.harmonytypes.v1.ContentText text_message = 2;
+         */
+        textMessage: ContentText;
+      }
+    | {
+        oneofKind: "embedMessage";
+        /**
+         * @generated from protobuf field: protocol.harmonytypes.v1.ContentEmbed embed_message = 4;
+         */
+        embedMessage: ContentEmbed;
+      }
+    | {
+        oneofKind: "filesMessage";
+        /**
+         * @generated from protobuf field: protocol.harmonytypes.v1.ContentFiles files_message = 5;
+         */
+        filesMessage: ContentFiles;
+      }
+    | {
+        oneofKind: undefined;
+      };
+}
+/**
  * @generated from protobuf message protocol.harmonytypes.v1.Message
  */
 export interface Message {
   /**
-   * @generated from protobuf field: protocol.harmonytypes.v1.Metadata metadata = 13;
+   * @generated from protobuf field: protocol.harmonytypes.v1.Metadata metadata = 1;
    */
   metadata?: Metadata;
   /**
-   * @generated from protobuf field: uint64 guild_id = 1 [jstype = JS_STRING];
+   * @generated from protobuf field: protocol.harmonytypes.v1.Override overrides = 2;
+   */
+  overrides?: Override;
+  /**
+   * @generated from protobuf field: uint64 guild_id = 3 [jstype = JS_STRING];
    */
   guildId: string;
   /**
-   * @generated from protobuf field: uint64 channel_id = 2 [jstype = JS_STRING];
+   * @generated from protobuf field: uint64 channel_id = 4 [jstype = JS_STRING];
    */
   channelId: string;
   /**
-   * @generated from protobuf field: uint64 message_id = 3 [jstype = JS_STRING];
+   * @generated from protobuf field: uint64 message_id = 5 [jstype = JS_STRING];
    */
   messageId: string;
   /**
-   * @generated from protobuf field: uint64 author_id = 4 [jstype = JS_STRING];
+   * @generated from protobuf field: uint64 author_id = 6 [jstype = JS_STRING];
    */
   authorId: string;
   /**
-   * @generated from protobuf field: google.protobuf.Timestamp created_at = 5;
+   * @generated from protobuf field: google.protobuf.Timestamp created_at = 7;
    */
   createdAt?: Timestamp;
   /**
-   * @generated from protobuf field: google.protobuf.Timestamp edited_at = 6;
+   * @generated from protobuf field: google.protobuf.Timestamp edited_at = 8;
    */
   editedAt?: Timestamp;
   /**
-   * @generated from protobuf field: string content = 7;
-   */
-  content: string;
-  /**
-   * @generated from protobuf field: repeated protocol.harmonytypes.v1.Embed embeds = 8;
-   */
-  embeds: Embed[];
-  /**
-   * @generated from protobuf field: repeated protocol.harmonytypes.v1.Action actions = 9;
-   */
-  actions: Action[];
-  /**
-   * @generated from protobuf field: repeated protocol.harmonytypes.v1.Attachment attachments = 10;
-   */
-  attachments: Attachment[];
-  /**
-   * @generated from protobuf field: uint64 in_reply_to = 11 [jstype = JS_STRING];
+   * @generated from protobuf field: uint64 in_reply_to = 9 [jstype = JS_STRING];
    */
   inReplyTo: string;
   /**
-   * @generated from protobuf field: protocol.harmonytypes.v1.Override overrides = 12;
+   * @generated from protobuf field: protocol.harmonytypes.v1.Content content = 10;
    */
-  overrides?: Override;
+  content?: Content;
 }
 /**
  * @generated from protobuf message protocol.harmonytypes.v1.Error
@@ -334,67 +462,6 @@ export enum UserStatus {
    * @generated from protobuf enum value: USER_STATUS_OFFLINE = 4;
    */
   OFFLINE = 4,
-}
-// EMBEDS AND ACTIONS
-
-/**
- * @generated from protobuf enum protocol.harmonytypes.v1.ActionType
- */
-export enum ActionType {
-  /**
-   * @generated from protobuf enum value: Normal = 0;
-   */
-  Normal = 0,
-  /**
-   * @generated from protobuf enum value: Primary = 1;
-   */
-  Primary = 1,
-  /**
-   * @generated from protobuf enum value: Destructive = 2;
-   */
-  Destructive = 2,
-}
-/**
- * @generated from protobuf enum protocol.harmonytypes.v1.ActionPresentation
- */
-export enum ActionPresentation {
-  /**
-   * @generated from protobuf enum value: Button = 0;
-   */
-  Button = 0,
-  /**
-   * @generated from protobuf enum value: Dropdown = 1;
-   */
-  Dropdown = 1,
-  /**
-   * @generated from protobuf enum value: Menu = 2;
-   */
-  Menu = 2,
-  /**
-   * @generated from protobuf enum value: SmallEntry = 3;
-   */
-  SmallEntry = 3,
-  /**
-   * @generated from protobuf enum value: LargeEntry = 4;
-   */
-  LargeEntry = 4,
-}
-/**
- * @generated from protobuf enum protocol.harmonytypes.v1.FieldPresentation
- */
-export enum FieldPresentation {
-  /**
-   * @generated from protobuf enum value: Data = 0;
-   */
-  Data = 0,
-  /**
-   * @generated from protobuf enum value: CaptionedImage = 1;
-   */
-  CaptionedImage = 1,
-  /**
-   * @generated from protobuf enum value: Row = 2;
-   */
-  Row = 2,
 }
 /**
  * Type for protobuf message protocol.harmonytypes.v1.HarmonyMethodMetadata
@@ -477,35 +544,80 @@ export const Override = new Override$Type();
 class Action$Type extends MessageType<Action> {
   constructor() {
     super("protocol.harmonytypes.v1.Action", [
-      { no: 1, name: "text", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-      { no: 2, name: "url", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-      { no: 3, name: "id", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+      {
+        no: 1,
+        name: "action_type",
+        kind: "enum",
+        T: () => ["protocol.harmonytypes.v1.Action.Type", Action_Type],
+      },
+      { no: 2, name: "id", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+      {
+        no: 3,
+        name: "button",
+        kind: "message",
+        oneof: "kind",
+        T: () => Action_Button,
+      },
       {
         no: 4,
-        name: "type",
-        kind: "enum",
-        T: () => ["protocol.harmonytypes.v1.ActionType", ActionType],
+        name: "dropdown",
+        kind: "message",
+        oneof: "kind",
+        T: () => Action_Dropdown,
       },
       {
         no: 5,
-        name: "presentation",
-        kind: "enum",
-        T: () => [
-          "protocol.harmonytypes.v1.ActionPresentation",
-          ActionPresentation,
-        ],
-      },
-      {
-        no: 6,
-        name: "children",
+        name: "input",
         kind: "message",
-        repeat: 1 /*RepeatType.PACKED*/,
-        T: () => Action,
+        oneof: "kind",
+        T: () => Action_Input,
       },
     ]);
   }
 }
 export const Action = new Action$Type();
+/**
+ * Type for protobuf message protocol.harmonytypes.v1.Action.Button
+ */
+class Action_Button$Type extends MessageType<Action_Button> {
+  constructor() {
+    super("protocol.harmonytypes.v1.Action.Button", [
+      { no: 1, name: "text", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+      { no: 2, name: "url", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+    ]);
+  }
+}
+export const Action_Button = new Action_Button$Type();
+/**
+ * Type for protobuf message protocol.harmonytypes.v1.Action.Dropdown
+ */
+class Action_Dropdown$Type extends MessageType<Action_Dropdown> {
+  constructor() {
+    super("protocol.harmonytypes.v1.Action.Dropdown", [
+      { no: 1, name: "text", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+      {
+        no: 2,
+        name: "options",
+        kind: "scalar",
+        repeat: 2 /*RepeatType.UNPACKED*/,
+        T: 9 /*ScalarType.STRING*/,
+      },
+    ]);
+  }
+}
+export const Action_Dropdown = new Action_Dropdown$Type();
+/**
+ * Type for protobuf message protocol.harmonytypes.v1.Action.Input
+ */
+class Action_Input$Type extends MessageType<Action_Input> {
+  constructor() {
+    super("protocol.harmonytypes.v1.Action.Input", [
+      { no: 1, name: "label", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+      { no: 2, name: "wide", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
+    ]);
+  }
+}
+export const Action_Input = new Action_Input$Type();
 /**
  * Type for protobuf message protocol.harmonytypes.v1.EmbedHeading
  */
@@ -535,8 +647,8 @@ class EmbedField$Type extends MessageType<EmbedField> {
         name: "presentation",
         kind: "enum",
         T: () => [
-          "protocol.harmonytypes.v1.FieldPresentation",
-          FieldPresentation,
+          "protocol.harmonytypes.v1.EmbedField.Presentation",
+          EmbedField_Presentation,
         ],
       },
       {
@@ -568,13 +680,6 @@ class Embed$Type extends MessageType<Embed> {
         repeat: 1 /*RepeatType.PACKED*/,
         T: () => EmbedField,
       },
-      {
-        no: 7,
-        name: "actions",
-        kind: "message",
-        repeat: 1 /*RepeatType.PACKED*/,
-        T: () => Action,
-      },
     ]);
   }
 }
@@ -589,6 +694,7 @@ class Attachment$Type extends MessageType<Attachment> {
       { no: 2, name: "name", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
       { no: 3, name: "type", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
       { no: 4, name: "size", kind: "scalar", T: 5 /*ScalarType.INT32*/ },
+      { no: 5, name: "caption", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
     ]);
   }
 }
@@ -612,47 +718,96 @@ class Metadata$Type extends MessageType<Metadata> {
 }
 export const Metadata = new Metadata$Type();
 /**
- * Type for protobuf message protocol.harmonytypes.v1.Message
+ * Type for protobuf message protocol.harmonytypes.v1.ContentText
  */
-class Message$Type extends MessageType<Message> {
+class ContentText$Type extends MessageType<ContentText> {
   constructor() {
-    super("protocol.harmonytypes.v1.Message", [
-      { no: 13, name: "metadata", kind: "message", T: () => Metadata },
-      { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-      { no: 2, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-      { no: 3, name: "message_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-      { no: 4, name: "author_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-      { no: 5, name: "created_at", kind: "message", T: () => Timestamp },
-      { no: 6, name: "edited_at", kind: "message", T: () => Timestamp },
-      { no: 7, name: "content", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+    super("protocol.harmonytypes.v1.ContentText", [
+      { no: 1, name: "content", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+    ]);
+  }
+}
+export const ContentText = new ContentText$Type();
+/**
+ * Type for protobuf message protocol.harmonytypes.v1.ContentEmbed
+ */
+class ContentEmbed$Type extends MessageType<ContentEmbed> {
+  constructor() {
+    super("protocol.harmonytypes.v1.ContentEmbed", [
+      { no: 1, name: "embeds", kind: "message", T: () => Embed },
+    ]);
+  }
+}
+export const ContentEmbed = new ContentEmbed$Type();
+/**
+ * Type for protobuf message protocol.harmonytypes.v1.ContentFiles
+ */
+class ContentFiles$Type extends MessageType<ContentFiles> {
+  constructor() {
+    super("protocol.harmonytypes.v1.ContentFiles", [
       {
-        no: 8,
-        name: "embeds",
-        kind: "message",
-        repeat: 1 /*RepeatType.PACKED*/,
-        T: () => Embed,
-      },
-      {
-        no: 9,
-        name: "actions",
-        kind: "message",
-        repeat: 1 /*RepeatType.PACKED*/,
-        T: () => Action,
-      },
-      {
-        no: 10,
+        no: 1,
         name: "attachments",
         kind: "message",
         repeat: 1 /*RepeatType.PACKED*/,
         T: () => Attachment,
       },
+    ]);
+  }
+}
+export const ContentFiles = new ContentFiles$Type();
+/**
+ * Type for protobuf message protocol.harmonytypes.v1.Content
+ */
+class Content$Type extends MessageType<Content> {
+  constructor() {
+    super("protocol.harmonytypes.v1.Content", [
       {
-        no: 11,
+        no: 2,
+        name: "text_message",
+        kind: "message",
+        oneof: "content",
+        T: () => ContentText,
+      },
+      {
+        no: 4,
+        name: "embed_message",
+        kind: "message",
+        oneof: "content",
+        T: () => ContentEmbed,
+      },
+      {
+        no: 5,
+        name: "files_message",
+        kind: "message",
+        oneof: "content",
+        T: () => ContentFiles,
+      },
+    ]);
+  }
+}
+export const Content = new Content$Type();
+/**
+ * Type for protobuf message protocol.harmonytypes.v1.Message
+ */
+class Message$Type extends MessageType<Message> {
+  constructor() {
+    super("protocol.harmonytypes.v1.Message", [
+      { no: 1, name: "metadata", kind: "message", T: () => Metadata },
+      { no: 2, name: "overrides", kind: "message", T: () => Override },
+      { no: 3, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+      { no: 4, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+      { no: 5, name: "message_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+      { no: 6, name: "author_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+      { no: 7, name: "created_at", kind: "message", T: () => Timestamp },
+      { no: 8, name: "edited_at", kind: "message", T: () => Timestamp },
+      {
+        no: 9,
         name: "in_reply_to",
         kind: "scalar",
         T: 4 /*ScalarType.UINT64*/,
       },
-      { no: 12, name: "overrides", kind: "message", T: () => Override },
+      { no: 10, name: "content", kind: "message", T: () => Content },
     ]);
   }
 }
