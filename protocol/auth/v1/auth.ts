@@ -373,6 +373,10 @@ export interface IAuthServiceClient {
     input: StreamStepsRequest,
     options?: RpcOptions
   ): ServerStreamingCall<StreamStepsRequest, AuthStep>;
+  /**
+   * @generated from protobuf rpc: CheckLoggedIn(google.protobuf.Empty) returns (google.protobuf.Empty);
+   */
+  checkLoggedIn(input: Empty, options?: RpcOptions): UnaryCall<Empty, Empty>;
 }
 /**
  * Type for protobuf message protocol.auth.v1.BeginAuthResponse
@@ -714,6 +718,16 @@ export class AuthServiceClient implements IAuthServiceClient {
       O: AuthStep,
       serverStreaming: true,
     },
+    {
+      service: this,
+      name: "CheckLoggedIn",
+      localName: "checkLoggedIn",
+      I: Empty,
+      O: Empty,
+      options: {
+        "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true },
+      },
+    },
   ];
   constructor(private readonly _transport: RpcTransport) {}
   federate(
@@ -812,6 +826,18 @@ export class AuthServiceClient implements IAuthServiceClient {
       i = method.I.create(input);
     return stackIntercept<StreamStepsRequest, AuthStep>(
       "serverStreaming",
+      this._transport,
+      method,
+      opt,
+      i
+    );
+  }
+  checkLoggedIn(input: Empty, options?: RpcOptions): UnaryCall<Empty, Empty> {
+    const method = this.methods[7],
+      opt = this._transport.mergeOptions(options),
+      i = method.I.create(input);
+    return stackIntercept<Empty, Empty>(
+      "unary",
       this._transport,
       method,
       opt,
