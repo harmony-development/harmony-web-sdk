@@ -182,7 +182,7 @@ export class HrpcTransport implements RpcTransport {
   ): WebSocket {
     const ws = new WebSocket(
       url,
-      this.session ? ["harmony", this.session] : ["harmony"]
+      this.session ? ["websocket", "harmony", this.session] : ["websocket", "harmony"]
     );
     ws.binaryType = "arraybuffer";
     return ws;
