@@ -70,10 +70,6 @@ import { GetGuildInvitesResponse } from "./guilds";
 import { GetGuildInvitesRequest } from "./guilds";
 import { GetGuildResponse } from "./guilds";
 import { GetGuildRequest } from "./guilds";
-import { RemoveGuildFromGuildListResponse } from "./guilds";
-import { RemoveGuildFromGuildListRequest } from "./guilds";
-import { AddGuildToGuildListResponse } from "./guilds";
-import { AddGuildToGuildListRequest } from "./guilds";
 import { GetGuildListResponse } from "./guilds";
 import { GetGuildListRequest } from "./guilds";
 import { CreateEmotePackResponse } from "./emotes";
@@ -126,23 +122,6 @@ export interface IChatServiceClient {
     input: GetGuildListRequest,
     options?: RpcOptions
   ): UnaryCall<GetGuildListRequest, GetGuildListResponse>;
-  /**
-   * @generated from protobuf rpc: AddGuildToGuildList(protocol.chat.v1.AddGuildToGuildListRequest) returns (protocol.chat.v1.AddGuildToGuildListResponse);
-   */
-  addGuildToGuildList(
-    input: AddGuildToGuildListRequest,
-    options?: RpcOptions
-  ): UnaryCall<AddGuildToGuildListRequest, AddGuildToGuildListResponse>;
-  /**
-   * @generated from protobuf rpc: RemoveGuildFromGuildList(protocol.chat.v1.RemoveGuildFromGuildListRequest) returns (protocol.chat.v1.RemoveGuildFromGuildListResponse);
-   */
-  removeGuildFromGuildList(
-    input: RemoveGuildFromGuildListRequest,
-    options?: RpcOptions
-  ): UnaryCall<
-    RemoveGuildFromGuildListRequest,
-    RemoveGuildFromGuildListResponse
-  >;
   /**
    * @generated from protobuf rpc: GetGuild(protocol.chat.v1.GetGuildRequest) returns (protocol.chat.v1.GetGuildResponse);
    */
@@ -519,32 +498,6 @@ export class ChatServiceClient implements IChatServiceClient {
       O: GetGuildListResponse,
       options: {
         "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true },
-      },
-    },
-    {
-      service: this,
-      name: "AddGuildToGuildList",
-      localName: "addGuildToGuildList",
-      I: AddGuildToGuildListRequest,
-      O: AddGuildToGuildListResponse,
-      options: {
-        "protocol.harmonytypes.v1.metadata": {
-          requiresAuthentication: true,
-          requiresLocal: true,
-        },
-      },
-    },
-    {
-      service: this,
-      name: "RemoveGuildFromGuildList",
-      localName: "removeGuildFromGuildList",
-      I: RemoveGuildFromGuildListRequest,
-      O: RemoveGuildFromGuildListResponse,
-      options: {
-        "protocol.harmonytypes.v1.metadata": {
-          requiresAuthentication: true,
-          requiresLocal: true,
-        },
       },
     },
     {
@@ -1136,38 +1089,11 @@ export class ChatServiceClient implements IChatServiceClient {
       i
     );
   }
-  addGuildToGuildList(
-    input: AddGuildToGuildListRequest,
-    options?: RpcOptions
-  ): UnaryCall<AddGuildToGuildListRequest, AddGuildToGuildListResponse> {
-    const method = this.methods[5],
-      opt = this._transport.mergeOptions(options),
-      i = method.I.create(input);
-    return stackIntercept<
-      AddGuildToGuildListRequest,
-      AddGuildToGuildListResponse
-    >("unary", this._transport, method, opt, i);
-  }
-  removeGuildFromGuildList(
-    input: RemoveGuildFromGuildListRequest,
-    options?: RpcOptions
-  ): UnaryCall<
-    RemoveGuildFromGuildListRequest,
-    RemoveGuildFromGuildListResponse
-  > {
-    const method = this.methods[6],
-      opt = this._transport.mergeOptions(options),
-      i = method.I.create(input);
-    return stackIntercept<
-      RemoveGuildFromGuildListRequest,
-      RemoveGuildFromGuildListResponse
-    >("unary", this._transport, method, opt, i);
-  }
   getGuild(
     input: GetGuildRequest,
     options?: RpcOptions
   ): UnaryCall<GetGuildRequest, GetGuildResponse> {
-    const method = this.methods[7],
+    const method = this.methods[5],
       opt = this._transport.mergeOptions(options),
       i = method.I.create(input);
     return stackIntercept<GetGuildRequest, GetGuildResponse>(
@@ -1182,7 +1108,7 @@ export class ChatServiceClient implements IChatServiceClient {
     input: GetGuildInvitesRequest,
     options?: RpcOptions
   ): UnaryCall<GetGuildInvitesRequest, GetGuildInvitesResponse> {
-    const method = this.methods[8],
+    const method = this.methods[6],
       opt = this._transport.mergeOptions(options),
       i = method.I.create(input);
     return stackIntercept<GetGuildInvitesRequest, GetGuildInvitesResponse>(
@@ -1197,7 +1123,7 @@ export class ChatServiceClient implements IChatServiceClient {
     input: GetGuildMembersRequest,
     options?: RpcOptions
   ): UnaryCall<GetGuildMembersRequest, GetGuildMembersResponse> {
-    const method = this.methods[9],
+    const method = this.methods[7],
       opt = this._transport.mergeOptions(options),
       i = method.I.create(input);
     return stackIntercept<GetGuildMembersRequest, GetGuildMembersResponse>(
@@ -1212,7 +1138,7 @@ export class ChatServiceClient implements IChatServiceClient {
     input: GetGuildChannelsRequest,
     options?: RpcOptions
   ): UnaryCall<GetGuildChannelsRequest, GetGuildChannelsResponse> {
-    const method = this.methods[10],
+    const method = this.methods[8],
       opt = this._transport.mergeOptions(options),
       i = method.I.create(input);
     return stackIntercept<GetGuildChannelsRequest, GetGuildChannelsResponse>(
@@ -1227,7 +1153,7 @@ export class ChatServiceClient implements IChatServiceClient {
     input: GetChannelMessagesRequest,
     options?: RpcOptions
   ): UnaryCall<GetChannelMessagesRequest, GetChannelMessagesResponse> {
-    const method = this.methods[11],
+    const method = this.methods[9],
       opt = this._transport.mergeOptions(options),
       i = method.I.create(input);
     return stackIntercept<
@@ -1239,7 +1165,7 @@ export class ChatServiceClient implements IChatServiceClient {
     input: GetMessageRequest,
     options?: RpcOptions
   ): UnaryCall<GetMessageRequest, GetMessageResponse> {
-    const method = this.methods[12],
+    const method = this.methods[10],
       opt = this._transport.mergeOptions(options),
       i = method.I.create(input);
     return stackIntercept<GetMessageRequest, GetMessageResponse>(
@@ -1254,7 +1180,7 @@ export class ChatServiceClient implements IChatServiceClient {
     input: GetEmotePacksRequest,
     options?: RpcOptions
   ): UnaryCall<GetEmotePacksRequest, GetEmotePacksResponse> {
-    const method = this.methods[13],
+    const method = this.methods[11],
       opt = this._transport.mergeOptions(options),
       i = method.I.create(input);
     return stackIntercept<GetEmotePacksRequest, GetEmotePacksResponse>(
@@ -1269,7 +1195,7 @@ export class ChatServiceClient implements IChatServiceClient {
     input: GetEmotePackEmotesRequest,
     options?: RpcOptions
   ): UnaryCall<GetEmotePackEmotesRequest, GetEmotePackEmotesResponse> {
-    const method = this.methods[14],
+    const method = this.methods[12],
       opt = this._transport.mergeOptions(options),
       i = method.I.create(input);
     return stackIntercept<
@@ -1281,7 +1207,7 @@ export class ChatServiceClient implements IChatServiceClient {
     input: UpdateGuildInformationRequest,
     options?: RpcOptions
   ): UnaryCall<UpdateGuildInformationRequest, Empty> {
-    const method = this.methods[15],
+    const method = this.methods[13],
       opt = this._transport.mergeOptions(options),
       i = method.I.create(input);
     return stackIntercept<UpdateGuildInformationRequest, Empty>(
@@ -1296,7 +1222,7 @@ export class ChatServiceClient implements IChatServiceClient {
     input: UpdateChannelInformationRequest,
     options?: RpcOptions
   ): UnaryCall<UpdateChannelInformationRequest, Empty> {
-    const method = this.methods[16],
+    const method = this.methods[14],
       opt = this._transport.mergeOptions(options),
       i = method.I.create(input);
     return stackIntercept<UpdateChannelInformationRequest, Empty>(
@@ -1311,7 +1237,7 @@ export class ChatServiceClient implements IChatServiceClient {
     input: UpdateChannelOrderRequest,
     options?: RpcOptions
   ): UnaryCall<UpdateChannelOrderRequest, Empty> {
-    const method = this.methods[17],
+    const method = this.methods[15],
       opt = this._transport.mergeOptions(options),
       i = method.I.create(input);
     return stackIntercept<UpdateChannelOrderRequest, Empty>(
@@ -1326,7 +1252,7 @@ export class ChatServiceClient implements IChatServiceClient {
     input: UpdateMessageTextRequest,
     options?: RpcOptions
   ): UnaryCall<UpdateMessageTextRequest, Empty> {
-    const method = this.methods[18],
+    const method = this.methods[16],
       opt = this._transport.mergeOptions(options),
       i = method.I.create(input);
     return stackIntercept<UpdateMessageTextRequest, Empty>(
@@ -1341,7 +1267,7 @@ export class ChatServiceClient implements IChatServiceClient {
     input: AddEmoteToPackRequest,
     options?: RpcOptions
   ): UnaryCall<AddEmoteToPackRequest, Empty> {
-    const method = this.methods[19],
+    const method = this.methods[17],
       opt = this._transport.mergeOptions(options),
       i = method.I.create(input);
     return stackIntercept<AddEmoteToPackRequest, Empty>(
@@ -1356,7 +1282,7 @@ export class ChatServiceClient implements IChatServiceClient {
     input: DeleteGuildRequest,
     options?: RpcOptions
   ): UnaryCall<DeleteGuildRequest, Empty> {
-    const method = this.methods[20],
+    const method = this.methods[18],
       opt = this._transport.mergeOptions(options),
       i = method.I.create(input);
     return stackIntercept<DeleteGuildRequest, Empty>(
@@ -1371,7 +1297,7 @@ export class ChatServiceClient implements IChatServiceClient {
     input: DeleteInviteRequest,
     options?: RpcOptions
   ): UnaryCall<DeleteInviteRequest, Empty> {
-    const method = this.methods[21],
+    const method = this.methods[19],
       opt = this._transport.mergeOptions(options),
       i = method.I.create(input);
     return stackIntercept<DeleteInviteRequest, Empty>(
@@ -1386,7 +1312,7 @@ export class ChatServiceClient implements IChatServiceClient {
     input: DeleteChannelRequest,
     options?: RpcOptions
   ): UnaryCall<DeleteChannelRequest, Empty> {
-    const method = this.methods[22],
+    const method = this.methods[20],
       opt = this._transport.mergeOptions(options),
       i = method.I.create(input);
     return stackIntercept<DeleteChannelRequest, Empty>(
@@ -1401,7 +1327,7 @@ export class ChatServiceClient implements IChatServiceClient {
     input: DeleteMessageRequest,
     options?: RpcOptions
   ): UnaryCall<DeleteMessageRequest, Empty> {
-    const method = this.methods[23],
+    const method = this.methods[21],
       opt = this._transport.mergeOptions(options),
       i = method.I.create(input);
     return stackIntercept<DeleteMessageRequest, Empty>(
@@ -1416,7 +1342,7 @@ export class ChatServiceClient implements IChatServiceClient {
     input: DeleteEmoteFromPackRequest,
     options?: RpcOptions
   ): UnaryCall<DeleteEmoteFromPackRequest, Empty> {
-    const method = this.methods[24],
+    const method = this.methods[22],
       opt = this._transport.mergeOptions(options),
       i = method.I.create(input);
     return stackIntercept<DeleteEmoteFromPackRequest, Empty>(
@@ -1431,7 +1357,7 @@ export class ChatServiceClient implements IChatServiceClient {
     input: DeleteEmotePackRequest,
     options?: RpcOptions
   ): UnaryCall<DeleteEmotePackRequest, Empty> {
-    const method = this.methods[25],
+    const method = this.methods[23],
       opt = this._transport.mergeOptions(options),
       i = method.I.create(input);
     return stackIntercept<DeleteEmotePackRequest, Empty>(
@@ -1446,7 +1372,7 @@ export class ChatServiceClient implements IChatServiceClient {
     input: DequipEmotePackRequest,
     options?: RpcOptions
   ): UnaryCall<DequipEmotePackRequest, Empty> {
-    const method = this.methods[26],
+    const method = this.methods[24],
       opt = this._transport.mergeOptions(options),
       i = method.I.create(input);
     return stackIntercept<DequipEmotePackRequest, Empty>(
@@ -1461,7 +1387,7 @@ export class ChatServiceClient implements IChatServiceClient {
     input: JoinGuildRequest,
     options?: RpcOptions
   ): UnaryCall<JoinGuildRequest, JoinGuildResponse> {
-    const method = this.methods[27],
+    const method = this.methods[25],
       opt = this._transport.mergeOptions(options),
       i = method.I.create(input);
     return stackIntercept<JoinGuildRequest, JoinGuildResponse>(
@@ -1476,7 +1402,7 @@ export class ChatServiceClient implements IChatServiceClient {
     input: LeaveGuildRequest,
     options?: RpcOptions
   ): UnaryCall<LeaveGuildRequest, Empty> {
-    const method = this.methods[28],
+    const method = this.methods[26],
       opt = this._transport.mergeOptions(options),
       i = method.I.create(input);
     return stackIntercept<LeaveGuildRequest, Empty>(
@@ -1491,7 +1417,7 @@ export class ChatServiceClient implements IChatServiceClient {
     input: TriggerActionRequest,
     options?: RpcOptions
   ): UnaryCall<TriggerActionRequest, Empty> {
-    const method = this.methods[29],
+    const method = this.methods[27],
       opt = this._transport.mergeOptions(options),
       i = method.I.create(input);
     return stackIntercept<TriggerActionRequest, Empty>(
@@ -1506,7 +1432,7 @@ export class ChatServiceClient implements IChatServiceClient {
     input: SendMessageRequest,
     options?: RpcOptions
   ): UnaryCall<SendMessageRequest, SendMessageResponse> {
-    const method = this.methods[30],
+    const method = this.methods[28],
       opt = this._transport.mergeOptions(options),
       i = method.I.create(input);
     return stackIntercept<SendMessageRequest, SendMessageResponse>(
@@ -1521,7 +1447,7 @@ export class ChatServiceClient implements IChatServiceClient {
     input: QueryPermissionsRequest,
     options?: RpcOptions
   ): UnaryCall<QueryPermissionsRequest, QueryPermissionsResponse> {
-    const method = this.methods[31],
+    const method = this.methods[29],
       opt = this._transport.mergeOptions(options),
       i = method.I.create(input);
     return stackIntercept<QueryPermissionsRequest, QueryPermissionsResponse>(
@@ -1536,7 +1462,7 @@ export class ChatServiceClient implements IChatServiceClient {
     input: SetPermissionsRequest,
     options?: RpcOptions
   ): UnaryCall<SetPermissionsRequest, Empty> {
-    const method = this.methods[32],
+    const method = this.methods[30],
       opt = this._transport.mergeOptions(options),
       i = method.I.create(input);
     return stackIntercept<SetPermissionsRequest, Empty>(
@@ -1551,7 +1477,7 @@ export class ChatServiceClient implements IChatServiceClient {
     input: GetPermissionsRequest,
     options?: RpcOptions
   ): UnaryCall<GetPermissionsRequest, GetPermissionsResponse> {
-    const method = this.methods[33],
+    const method = this.methods[31],
       opt = this._transport.mergeOptions(options),
       i = method.I.create(input);
     return stackIntercept<GetPermissionsRequest, GetPermissionsResponse>(
@@ -1566,7 +1492,7 @@ export class ChatServiceClient implements IChatServiceClient {
     input: MoveRoleRequest,
     options?: RpcOptions
   ): UnaryCall<MoveRoleRequest, MoveRoleResponse> {
-    const method = this.methods[34],
+    const method = this.methods[32],
       opt = this._transport.mergeOptions(options),
       i = method.I.create(input);
     return stackIntercept<MoveRoleRequest, MoveRoleResponse>(
@@ -1581,7 +1507,7 @@ export class ChatServiceClient implements IChatServiceClient {
     input: GetGuildRolesRequest,
     options?: RpcOptions
   ): UnaryCall<GetGuildRolesRequest, GetGuildRolesResponse> {
-    const method = this.methods[35],
+    const method = this.methods[33],
       opt = this._transport.mergeOptions(options),
       i = method.I.create(input);
     return stackIntercept<GetGuildRolesRequest, GetGuildRolesResponse>(
@@ -1596,7 +1522,7 @@ export class ChatServiceClient implements IChatServiceClient {
     input: AddGuildRoleRequest,
     options?: RpcOptions
   ): UnaryCall<AddGuildRoleRequest, AddGuildRoleResponse> {
-    const method = this.methods[36],
+    const method = this.methods[34],
       opt = this._transport.mergeOptions(options),
       i = method.I.create(input);
     return stackIntercept<AddGuildRoleRequest, AddGuildRoleResponse>(
@@ -1611,7 +1537,7 @@ export class ChatServiceClient implements IChatServiceClient {
     input: ModifyGuildRoleRequest,
     options?: RpcOptions
   ): UnaryCall<ModifyGuildRoleRequest, Empty> {
-    const method = this.methods[37],
+    const method = this.methods[35],
       opt = this._transport.mergeOptions(options),
       i = method.I.create(input);
     return stackIntercept<ModifyGuildRoleRequest, Empty>(
@@ -1626,7 +1552,7 @@ export class ChatServiceClient implements IChatServiceClient {
     input: DeleteGuildRoleRequest,
     options?: RpcOptions
   ): UnaryCall<DeleteGuildRoleRequest, Empty> {
-    const method = this.methods[38],
+    const method = this.methods[36],
       opt = this._transport.mergeOptions(options),
       i = method.I.create(input);
     return stackIntercept<DeleteGuildRoleRequest, Empty>(
@@ -1641,7 +1567,7 @@ export class ChatServiceClient implements IChatServiceClient {
     input: ManageUserRolesRequest,
     options?: RpcOptions
   ): UnaryCall<ManageUserRolesRequest, Empty> {
-    const method = this.methods[39],
+    const method = this.methods[37],
       opt = this._transport.mergeOptions(options),
       i = method.I.create(input);
     return stackIntercept<ManageUserRolesRequest, Empty>(
@@ -1656,7 +1582,7 @@ export class ChatServiceClient implements IChatServiceClient {
     input: GetUserRolesRequest,
     options?: RpcOptions
   ): UnaryCall<GetUserRolesRequest, GetUserRolesResponse> {
-    const method = this.methods[40],
+    const method = this.methods[38],
       opt = this._transport.mergeOptions(options),
       i = method.I.create(input);
     return stackIntercept<GetUserRolesRequest, GetUserRolesResponse>(
@@ -1670,7 +1596,7 @@ export class ChatServiceClient implements IChatServiceClient {
   streamEvents(
     options?: RpcOptions
   ): DuplexStreamingCall<StreamEventsRequest, Event> {
-    const method = this.methods[41],
+    const method = this.methods[39],
       opt = this._transport.mergeOptions(options);
     return stackIntercept<StreamEventsRequest, Event>(
       "duplex",
@@ -1683,7 +1609,7 @@ export class ChatServiceClient implements IChatServiceClient {
     input: GetUserRequest,
     options?: RpcOptions
   ): UnaryCall<GetUserRequest, GetUserResponse> {
-    const method = this.methods[42],
+    const method = this.methods[40],
       opt = this._transport.mergeOptions(options),
       i = method.I.create(input);
     return stackIntercept<GetUserRequest, GetUserResponse>(
@@ -1698,7 +1624,7 @@ export class ChatServiceClient implements IChatServiceClient {
     input: GetUserBulkRequest,
     options?: RpcOptions
   ): UnaryCall<GetUserBulkRequest, GetUserBulkResponse> {
-    const method = this.methods[43],
+    const method = this.methods[41],
       opt = this._transport.mergeOptions(options),
       i = method.I.create(input);
     return stackIntercept<GetUserBulkRequest, GetUserBulkResponse>(
@@ -1713,7 +1639,7 @@ export class ChatServiceClient implements IChatServiceClient {
     input: GetUserMetadataRequest,
     options?: RpcOptions
   ): UnaryCall<GetUserMetadataRequest, GetUserMetadataResponse> {
-    const method = this.methods[44],
+    const method = this.methods[42],
       opt = this._transport.mergeOptions(options),
       i = method.I.create(input);
     return stackIntercept<GetUserMetadataRequest, GetUserMetadataResponse>(
@@ -1728,7 +1654,7 @@ export class ChatServiceClient implements IChatServiceClient {
     input: ProfileUpdateRequest,
     options?: RpcOptions
   ): UnaryCall<ProfileUpdateRequest, Empty> {
-    const method = this.methods[45],
+    const method = this.methods[43],
       opt = this._transport.mergeOptions(options),
       i = method.I.create(input);
     return stackIntercept<ProfileUpdateRequest, Empty>(
@@ -1743,7 +1669,7 @@ export class ChatServiceClient implements IChatServiceClient {
     input: TypingRequest,
     options?: RpcOptions
   ): UnaryCall<TypingRequest, Empty> {
-    const method = this.methods[46],
+    const method = this.methods[44],
       opt = this._transport.mergeOptions(options),
       i = method.I.create(input);
     return stackIntercept<TypingRequest, Empty>(
@@ -1758,7 +1684,7 @@ export class ChatServiceClient implements IChatServiceClient {
     input: PreviewGuildRequest,
     options?: RpcOptions
   ): UnaryCall<PreviewGuildRequest, PreviewGuildResponse> {
-    const method = this.methods[47],
+    const method = this.methods[45],
       opt = this._transport.mergeOptions(options),
       i = method.I.create(input);
     return stackIntercept<PreviewGuildRequest, PreviewGuildResponse>(
@@ -1773,7 +1699,7 @@ export class ChatServiceClient implements IChatServiceClient {
     input: BanUserRequest,
     options?: RpcOptions
   ): UnaryCall<BanUserRequest, Empty> {
-    const method = this.methods[48],
+    const method = this.methods[46],
       opt = this._transport.mergeOptions(options),
       i = method.I.create(input);
     return stackIntercept<BanUserRequest, Empty>(
@@ -1788,7 +1714,7 @@ export class ChatServiceClient implements IChatServiceClient {
     input: KickUserRequest,
     options?: RpcOptions
   ): UnaryCall<KickUserRequest, Empty> {
-    const method = this.methods[49],
+    const method = this.methods[47],
       opt = this._transport.mergeOptions(options),
       i = method.I.create(input);
     return stackIntercept<KickUserRequest, Empty>(
@@ -1803,7 +1729,7 @@ export class ChatServiceClient implements IChatServiceClient {
     input: UnbanUserRequest,
     options?: RpcOptions
   ): UnaryCall<UnbanUserRequest, Empty> {
-    const method = this.methods[50],
+    const method = this.methods[48],
       opt = this._transport.mergeOptions(options),
       i = method.I.create(input);
     return stackIntercept<UnbanUserRequest, Empty>(

@@ -272,42 +272,8 @@ export interface LeaveGuildRequest {
    */
   guildId: string;
 }
-/**
- * GUILD LIST
- *
- * @generated from protobuf message protocol.chat.v1.AddGuildToGuildListRequest
- */
-export interface AddGuildToGuildListRequest {
-  /**
-   * @generated from protobuf field: uint64 guild_id = 1;
-   */
-  guildId: string;
-  /**
-   * @generated from protobuf field: string homeserver = 2;
-   */
-  homeserver: string;
-}
-/**
- * @generated from protobuf message protocol.chat.v1.AddGuildToGuildListResponse
- */
-export interface AddGuildToGuildListResponse {}
-/**
- * @generated from protobuf message protocol.chat.v1.RemoveGuildFromGuildListRequest
- */
-export interface RemoveGuildFromGuildListRequest {
-  /**
-   * @generated from protobuf field: uint64 guild_id = 1;
-   */
-  guildId: string;
-  /**
-   * @generated from protobuf field: string homeserver = 2;
-   */
-  homeserver: string;
-}
-/**
- * @generated from protobuf message protocol.chat.v1.RemoveGuildFromGuildListResponse
- */
-export interface RemoveGuildFromGuildListResponse {}
+// GUILD LIST
+
 /**
  * @generated from protobuf message protocol.chat.v1.BanUserRequest
  */
@@ -682,51 +648,6 @@ class LeaveGuildRequest$Type extends MessageType<LeaveGuildRequest> {
   }
 }
 export const LeaveGuildRequest = new LeaveGuildRequest$Type();
-/**
- * Type for protobuf message protocol.chat.v1.AddGuildToGuildListRequest
- */
-class AddGuildToGuildListRequest$Type extends MessageType<AddGuildToGuildListRequest> {
-  constructor() {
-    super("protocol.chat.v1.AddGuildToGuildListRequest", [
-      { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-      { no: 2, name: "homeserver", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-    ]);
-  }
-}
-export const AddGuildToGuildListRequest = new AddGuildToGuildListRequest$Type();
-/**
- * Type for protobuf message protocol.chat.v1.AddGuildToGuildListResponse
- */
-class AddGuildToGuildListResponse$Type extends MessageType<AddGuildToGuildListResponse> {
-  constructor() {
-    super("protocol.chat.v1.AddGuildToGuildListResponse", []);
-  }
-}
-export const AddGuildToGuildListResponse =
-  new AddGuildToGuildListResponse$Type();
-/**
- * Type for protobuf message protocol.chat.v1.RemoveGuildFromGuildListRequest
- */
-class RemoveGuildFromGuildListRequest$Type extends MessageType<RemoveGuildFromGuildListRequest> {
-  constructor() {
-    super("protocol.chat.v1.RemoveGuildFromGuildListRequest", [
-      { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-      { no: 2, name: "homeserver", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-    ]);
-  }
-}
-export const RemoveGuildFromGuildListRequest =
-  new RemoveGuildFromGuildListRequest$Type();
-/**
- * Type for protobuf message protocol.chat.v1.RemoveGuildFromGuildListResponse
- */
-class RemoveGuildFromGuildListResponse$Type extends MessageType<RemoveGuildFromGuildListResponse> {
-  constructor() {
-    super("protocol.chat.v1.RemoveGuildFromGuildListResponse", []);
-  }
-}
-export const RemoveGuildFromGuildListResponse =
-  new RemoveGuildFromGuildListResponse$Type();
 /**
  * Type for protobuf message protocol.chat.v1.BanUserRequest
  */

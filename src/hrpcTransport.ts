@@ -81,6 +81,29 @@ export class HrpcTransport implements RpcTransport {
     return `${base}/${method.service.typeName}/${methodName}`;
   }
 
+  /**
+   * throws an error if the response isn't valid
+   * @param resp
+   */
+  checkResp(resp: Response) {
+    if (!resp.body) {
+      throw new RpcError(
+        "unable to read body",
+        HrpcErrorCode[HrpcErrorCode.dataloss]
+      );
+    }
+    switch (resp.type) {
+      case "error":
+      case "opaque":
+      case "opaqueredirect":
+        // see https://developer.mozilla.org/en-US/docs/Web/API/Response/type
+        throw new RpcError(
+          `fetch response type ${resp.type}`,
+          HrpcErrorCode[HrpcErrorCode.invalid_response]
+        );
+    }
+  }
+
   unary<I extends object, O extends object>(
     method: MethodInfo<I, O>,
     input: I,
@@ -95,63 +118,57 @@ export class HrpcTransport implements RpcTransport {
     let defMessage = new Deferred<O>();
     let defStatus = new Deferred<RpcStatus>();
     let defTrailer = new Deferred<RpcMetadata>();
-
-    (async () => {
-      const resp = await fetch(url, {
+    try {
+      fetch(url, {
         method: "POST",
         headers: makeHeaders(opt.meta, this.session),
         body: requestBody,
         signal: options.abort ?? null,
-      });
-      defHeader.resolve(parseMetadataFromResponseHeaders(resp.headers));
-      if (!resp.body) {
-        throw new RpcError(
-          "unable to read body",
-          HrpcErrorCode[HrpcErrorCode.dataloss]
-        );
-      }
-      switch (resp.type) {
-        case "error":
-        case "opaque":
-        case "opaqueredirect":
-          // see https://developer.mozilla.org/en-US/docs/Web/API/Response/type
+      })
+        .then((resp) => {
+          this.checkResp(resp);
+          defHeader.resolve(parseMetadataFromResponseHeaders(resp.headers));
+          resp
+            .arrayBuffer()
+            .then((arr) => new Uint8Array(arr))
+            .then((raw) => {
+              if (!resp.ok) {
+                try {
+                  const parsed = HError.fromBinary(raw);
+                  throw new RpcError(parsed.humanMessage, parsed.identifier);
+                } catch {
+                  throw new RpcError(
+                    "unable to decode error response",
+                    HrpcErrorCode[HrpcErrorCode.invalid_response]
+                  );
+                }
+              }
+              try {
+                const decoded = method.O.fromBinary(raw, opt.binaryOptions);
+                defMessage.resolve(decoded);
+                defStatus.resolve({ code: "OK", detail: "" });
+                defTrailer.resolve({});
+              } catch {
+                throw new RpcError(
+                  "unable to decode response",
+                  HrpcErrorCode[HrpcErrorCode.invalid_response]
+                );
+              }
+            })
+            .catch(() => {
+              throw new RpcError(
+                "failed to read raw body",
+                HrpcErrorCode[HrpcErrorCode.internal]
+              );
+            }); // arrayBuffer body read failure
+        })
+        .catch(() => {
           throw new RpcError(
-            `fetch response type ${resp.type}`,
-            HrpcErrorCode[HrpcErrorCode.invalid_response]
+            "failed to fetch",
+            HrpcErrorCode[HrpcErrorCode.internal]
           );
-      }
-
-      try {
-        const raw = new Uint8Array(await resp.arrayBuffer());
-        if (!resp.ok) {
-          try {
-            const parsed = HError.fromBinary(raw);
-            throw new RpcError(parsed.humanMessage, parsed.identifier);
-          } catch {
-            throw new RpcError(
-              "unable to decode error response",
-              HrpcErrorCode[HrpcErrorCode.invalid_response]
-            );
-          }
-        }
-        try {
-          const decoded = method.O.fromBinary(raw, opt.binaryOptions);
-          defMessage.resolve(decoded);
-          defStatus.resolve({ code: "OK", detail: "" });
-          defTrailer.resolve({});
-        } catch {
-          throw new RpcError(
-            "unable to decode response",
-            HrpcErrorCode[HrpcErrorCode.invalid_response]
-          );
-        }
-      } catch {
-        throw new RpcError(
-          `failed to read raw body`,
-          HrpcErrorCode[HrpcErrorCode.internal]
-        );
-      }
-    })().catch((reason: any) => {
+        }); // fetch failure
+    } catch (reason: any) {
       let error =
         reason instanceof RpcError
           ? reason
@@ -163,7 +180,7 @@ export class HrpcTransport implements RpcTransport {
       defMessage.rejectPending(error);
       defStatus.rejectPending(error);
       defTrailer.rejectPending(error);
-    });
+    }
 
     return new UnaryCall<I, O>(
       method,
