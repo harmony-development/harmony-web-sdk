@@ -14,7 +14,6 @@ import {
   UnaryCall,
 } from "@protobuf-ts/runtime-rpc";
 import { Error as HError } from "../protocol/harmonytypes/v1/types";
-import { StreamEventsRequest } from "./chat/v1/streaming";
 
 interface HrpcOptions extends RpcOptions {
   baseUrl: string;
@@ -81,17 +80,35 @@ export class HrpcTransport implements RpcTransport {
     return `${base}/${method.service.typeName}/${methodName}`;
   }
 
-  /**
-   * throws an error if the response isn't valid
-   * @param resp
-   */
-  checkResp(resp: Response) {
+  async processFetch<I extends object, O extends object>(
+    fetchPromise: Promise<Response>,
+    defHeader: Deferred<RpcMetadata>,
+    defMessage: Deferred<O>,
+    defStatus: Deferred<RpcStatus>,
+    defTrailer: Deferred<RpcMetadata>,
+    method: MethodInfo<I, O>,
+    opt: HrpcOptions
+  ) {
+    let resp: Response;
+
+    try {
+      resp = await fetchPromise;
+    } catch (e: any) {
+      throw new RpcError(
+        "failed to fetch",
+        HrpcErrorCode[HrpcErrorCode.internal]
+      );
+    }
+
+    defHeader.resolve(parseMetadataFromResponseHeaders(resp.headers));
+
     if (!resp.body) {
       throw new RpcError(
         "unable to read body",
         HrpcErrorCode[HrpcErrorCode.dataloss]
       );
     }
+
     switch (resp.type) {
       case "error":
       case "opaque":
@@ -101,6 +118,40 @@ export class HrpcTransport implements RpcTransport {
           `fetch response type ${resp.type}`,
           HrpcErrorCode[HrpcErrorCode.invalid_response]
         );
+    }
+
+    let raw: Uint8Array;
+    try {
+      raw = new Uint8Array(await resp.arrayBuffer());
+    } catch {
+      throw new RpcError(
+        "failed to read raw body",
+        HrpcErrorCode[HrpcErrorCode.internal]
+      );
+    }
+
+    if (!resp.ok) {
+      try {
+        const parsed = HError.fromBinary(raw);
+        throw new RpcError(parsed.humanMessage, parsed.identifier);
+      } catch {
+        throw new RpcError(
+          "unable to decode error response",
+          HrpcErrorCode[HrpcErrorCode.invalid_response]
+        );
+      }
+    }
+
+    try {
+      const decoded = method.O.fromBinary(raw, opt.binaryOptions);
+      defMessage.resolve(decoded);
+      defStatus.resolve({ code: "OK", detail: "" });
+      defTrailer.resolve({});
+    } catch {
+      throw new RpcError(
+        "unable to decode response",
+        HrpcErrorCode[HrpcErrorCode.invalid_response]
+      );
     }
   }
 
@@ -118,57 +169,21 @@ export class HrpcTransport implements RpcTransport {
     let defMessage = new Deferred<O>();
     let defStatus = new Deferred<RpcStatus>();
     let defTrailer = new Deferred<RpcMetadata>();
-    try {
+
+    this.processFetch(
       fetch(url, {
         method: "POST",
         headers: makeHeaders(opt.meta, this.session),
         body: requestBody,
         signal: options.abort ?? null,
-      })
-        .then((resp) => {
-          this.checkResp(resp);
-          defHeader.resolve(parseMetadataFromResponseHeaders(resp.headers));
-          resp
-            .arrayBuffer()
-            .then((arr) => new Uint8Array(arr))
-            .then((raw) => {
-              if (!resp.ok) {
-                try {
-                  const parsed = HError.fromBinary(raw);
-                  throw new RpcError(parsed.humanMessage, parsed.identifier);
-                } catch {
-                  throw new RpcError(
-                    "unable to decode error response",
-                    HrpcErrorCode[HrpcErrorCode.invalid_response]
-                  );
-                }
-              }
-              try {
-                const decoded = method.O.fromBinary(raw, opt.binaryOptions);
-                defMessage.resolve(decoded);
-                defStatus.resolve({ code: "OK", detail: "" });
-                defTrailer.resolve({});
-              } catch {
-                throw new RpcError(
-                  "unable to decode response",
-                  HrpcErrorCode[HrpcErrorCode.invalid_response]
-                );
-              }
-            })
-            .catch(() => {
-              throw new RpcError(
-                "failed to read raw body",
-                HrpcErrorCode[HrpcErrorCode.internal]
-              );
-            }); // arrayBuffer body read failure
-        })
-        .catch(() => {
-          throw new RpcError(
-            "failed to fetch",
-            HrpcErrorCode[HrpcErrorCode.internal]
-          );
-        }); // fetch failure
-    } catch (reason: any) {
+      }),
+      defHeader,
+      defMessage,
+      defStatus,
+      defTrailer,
+      method,
+      opt
+    ).catch((reason) => {
       let error =
         reason instanceof RpcError
           ? reason
@@ -180,7 +195,7 @@ export class HrpcTransport implements RpcTransport {
       defMessage.rejectPending(error);
       defStatus.rejectPending(error);
       defTrailer.rejectPending(error);
-    }
+    });
 
     return new UnaryCall<I, O>(
       method,
