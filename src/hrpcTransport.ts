@@ -131,15 +131,16 @@ export class HrpcTransport implements RpcTransport {
     }
 
     if (!resp.ok) {
+      let parsed: HError;
       try {
-        const parsed = HError.fromBinary(raw);
-        throw new RpcError(parsed.humanMessage, parsed.identifier);
+        parsed = HError.fromBinary(raw);
       } catch {
         throw new RpcError(
           "unable to decode error response",
           HrpcErrorCode[HrpcErrorCode.invalid_response]
         );
       }
+      throw new RpcError(parsed.humanMessage, parsed.identifier);
     }
 
     try {
