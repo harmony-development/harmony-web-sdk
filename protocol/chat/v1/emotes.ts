@@ -130,6 +130,15 @@ export interface DequipEmotePackRequest {
   packId: string;
 }
 /**
+ * @generated from protobuf message protocol.chat.v1.EquipEmotePackRequest
+ */
+export interface EquipEmotePackRequest {
+  /**
+   * @generated from protobuf field: uint64 pack_id = 1 [jstype = JS_STRING];
+   */
+  packId: string;
+}
+/**
  * Type for protobuf message protocol.chat.v1.CreateEmotePackRequest
  */
 class CreateEmotePackRequest$Type extends MessageType<CreateEmotePackRequest> {
@@ -279,3 +288,14 @@ class DequipEmotePackRequest$Type extends MessageType<DequipEmotePackRequest> {
   }
 }
 export const DequipEmotePackRequest = new DequipEmotePackRequest$Type();
+/**
+ * Type for protobuf message protocol.chat.v1.EquipEmotePackRequest
+ */
+class EquipEmotePackRequest$Type extends MessageType<EquipEmotePackRequest> {
+  constructor() {
+    super("protocol.chat.v1.EquipEmotePackRequest", [
+      { no: 1, name: "pack_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+    ]);
+  }
+}
+export const EquipEmotePackRequest = new EquipEmotePackRequest$Type();

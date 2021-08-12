@@ -33,6 +33,24 @@ export interface QueryPermissionsResponse {
   ok: boolean;
 }
 /**
+ * @generated from protobuf message protocol.chat.v1.BatchQueryPermissionsRequest
+ */
+export interface BatchQueryPermissionsRequest {
+  /**
+   * @generated from protobuf field: repeated protocol.chat.v1.QueryPermissionsRequest requests = 1;
+   */
+  requests: QueryPermissionsRequest[];
+}
+/**
+ * @generated from protobuf message protocol.chat.v1.BatchQueryPermissionsResponse
+ */
+export interface BatchQueryPermissionsResponse {
+  /**
+   * @generated from protobuf field: repeated protocol.chat.v1.QueryPermissionsResponse responses = 1;
+   */
+  responses: QueryPermissionsResponse[];
+}
+/**
  * @generated from protobuf message protocol.chat.v1.Permission
  */
 export interface Permission {
@@ -314,6 +332,42 @@ class QueryPermissionsResponse$Type extends MessageType<QueryPermissionsResponse
   }
 }
 export const QueryPermissionsResponse = new QueryPermissionsResponse$Type();
+/**
+ * Type for protobuf message protocol.chat.v1.BatchQueryPermissionsRequest
+ */
+class BatchQueryPermissionsRequest$Type extends MessageType<BatchQueryPermissionsRequest> {
+  constructor() {
+    super("protocol.chat.v1.BatchQueryPermissionsRequest", [
+      {
+        no: 1,
+        name: "requests",
+        kind: "message",
+        repeat: 1 /*RepeatType.PACKED*/,
+        T: () => QueryPermissionsRequest,
+      },
+    ]);
+  }
+}
+export const BatchQueryPermissionsRequest =
+  new BatchQueryPermissionsRequest$Type();
+/**
+ * Type for protobuf message protocol.chat.v1.BatchQueryPermissionsResponse
+ */
+class BatchQueryPermissionsResponse$Type extends MessageType<BatchQueryPermissionsResponse> {
+  constructor() {
+    super("protocol.chat.v1.BatchQueryPermissionsResponse", [
+      {
+        no: 1,
+        name: "responses",
+        kind: "message",
+        repeat: 1 /*RepeatType.PACKED*/,
+        T: () => QueryPermissionsResponse,
+      },
+    ]);
+  }
+}
+export const BatchQueryPermissionsResponse =
+  new BatchQueryPermissionsResponse$Type();
 /**
  * Type for protobuf message protocol.chat.v1.Permission
  */

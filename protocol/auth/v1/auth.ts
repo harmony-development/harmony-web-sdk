@@ -9,6 +9,7 @@ import { Empty } from "../../google/protobuf/empty";
 import { stackIntercept } from "@protobuf-ts/runtime-rpc";
 import { UnaryCall } from "@protobuf-ts/runtime-rpc";
 import { RpcOptions } from "@protobuf-ts/runtime-rpc";
+import { Token } from "../../harmonytypes/v1/types";
 /**
  * @generated from protobuf message protocol.auth.v1.BeginAuthResponse
  */
@@ -293,39 +294,75 @@ export interface FederateRequest {
  */
 export interface FederateReply {
   /**
-   * @generated from protobuf field: string token = 1;
+   * A `harmonytypes.v1.Token` whose `data` field is a serialized `TokenData` message.
+   * It is signed with the homeserver's private key.
+   *
+   * @generated from protobuf field: protocol.harmonytypes.v1.Token token = 1;
    */
-  token: string;
-  /**
-   * @generated from protobuf field: string nonce = 2;
-   */
-  nonce: string;
+  token?: Token;
 }
 /**
+ * `key` is the bytes of the public key.
+ *
  * @generated from protobuf message protocol.auth.v1.KeyReply
  */
 export interface KeyReply {
   /**
-   * @generated from protobuf field: string key = 1;
+   * @generated from protobuf field: bytes key = 1;
    */
-  key: string;
+  key: Uint8Array;
 }
 /**
  * @generated from protobuf message protocol.auth.v1.LoginFederatedRequest
  */
 export interface LoginFederatedRequest {
   /**
-   * @generated from protobuf field: string auth_token = 1;
+   * A `harmonytypes.v1.Token` whose `data` field is a serialized `TokenData` message.
+   * It is signed with the homeserver's private key.
+   *
+   * @generated from protobuf field: protocol.harmonytypes.v1.Token auth_token = 1;
    */
-  authToken: string;
+  authToken?: Token;
   /**
    * @generated from protobuf field: string domain = 2;
    */
   domain: string;
 }
+/**
+ * Information sent by a client's homeserver, in a `harmonytypes.v1.Token`.
+ * It will be sent to a foreignserver by the client.
+ *
+ * @generated from protobuf message protocol.auth.v1.TokenData
+ */
+export interface TokenData {
+  /**
+   * The client's user ID on the homeserver.
+   *
+   * @generated from protobuf field: uint64 user_id = 1;
+   */
+  userId: string;
+  /**
+   * The foreignserver's server name.
+   *
+   * @generated from protobuf field: string target = 2;
+   */
+  target: string;
+  /**
+   * The username of the client.
+   *
+   * @generated from protobuf field: string username = 3;
+   */
+  username: string;
+  /**
+   * The avatar of the client.
+   *
+   * @generated from protobuf field: string avatar = 4;
+   */
+  avatar: string;
+}
 // # Federation
 //
-// Servers should generate and persist an RSA public and private
+// Servers should generate and persist an Ed25519 public and private
 // key. These will be referred to later on simply as the public
 // and private keys of the server.
 //
@@ -333,21 +370,14 @@ export interface LoginFederatedRequest {
 // The client sends the server name of the foreignserver
 // to its homeserver using the Federate method.
 //
-// The homeserver generates a JWT, signed using SHA-RSA-256 and the homeserver's private key,
-// containing the following fields, described using Golang's JSON semantics:
-// ```
-// UserID   uint64
-// Target   string
-// Username string
-// Avatar   string
-// ```
+// The homeserver generates a `harmonytypes.v1.Token`, where the `data` field
+// contains a serialized `TokenData` message.
+// The private key used to sign is the homeserver's private key.
 //
 // The target should be the foreignserver's server name.
 // The user ID should be the client's user ID on the homeserver.
 // The username and avatar should be the client's username and avatar,
 // so the foreignserver knows what username and avatar to give them.
-//
-// The return should be the stringified form of that JWT.
 //
 // The client will use this token in a LoginFederatedRequest request
 // and send it to the foreignserver as the auth_token field, with the
@@ -671,8 +701,7 @@ export const FederateRequest = new FederateRequest$Type();
 class FederateReply$Type extends MessageType<FederateReply> {
   constructor() {
     super("protocol.auth.v1.FederateReply", [
-      { no: 1, name: "token", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-      { no: 2, name: "nonce", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+      { no: 1, name: "token", kind: "message", T: () => Token },
     ]);
   }
 }
@@ -683,7 +712,7 @@ export const FederateReply = new FederateReply$Type();
 class KeyReply$Type extends MessageType<KeyReply> {
   constructor() {
     super("protocol.auth.v1.KeyReply", [
-      { no: 1, name: "key", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+      { no: 1, name: "key", kind: "scalar", T: 12 /*ScalarType.BYTES*/ },
     ]);
   }
 }
@@ -694,15 +723,29 @@ export const KeyReply = new KeyReply$Type();
 class LoginFederatedRequest$Type extends MessageType<LoginFederatedRequest> {
   constructor() {
     super("protocol.auth.v1.LoginFederatedRequest", [
-      { no: 1, name: "auth_token", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+      { no: 1, name: "auth_token", kind: "message", T: () => Token },
       { no: 2, name: "domain", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
     ]);
   }
 }
 export const LoginFederatedRequest = new LoginFederatedRequest$Type();
+/**
+ * Type for protobuf message protocol.auth.v1.TokenData
+ */
+class TokenData$Type extends MessageType<TokenData> {
+  constructor() {
+    super("protocol.auth.v1.TokenData", [
+      { no: 1, name: "user_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+      { no: 2, name: "target", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+      { no: 3, name: "username", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+      { no: 4, name: "avatar", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+    ]);
+  }
+}
+export const TokenData = new TokenData$Type();
 // # Federation
 //
-// Servers should generate and persist an RSA public and private
+// Servers should generate and persist an Ed25519 public and private
 // key. These will be referred to later on simply as the public
 // and private keys of the server.
 //
@@ -710,21 +753,14 @@ export const LoginFederatedRequest = new LoginFederatedRequest$Type();
 // The client sends the server name of the foreignserver
 // to its homeserver using the Federate method.
 //
-// The homeserver generates a JWT, signed using SHA-RSA-256 and the homeserver's private key,
-// containing the following fields, described using Golang's JSON semantics:
-// ```
-// UserID   uint64
-// Target   string
-// Username string
-// Avatar   string
-// ```
+// The homeserver generates a `harmonytypes.v1.Token`, where the `data` field
+// contains a serialized `TokenData` message.
+// The private key used to sign is the homeserver's private key.
 //
 // The target should be the foreignserver's server name.
 // The user ID should be the client's user ID on the homeserver.
 // The username and avatar should be the client's username and avatar,
 // so the foreignserver knows what username and avatar to give them.
-//
-// The return should be the stringified form of that JWT.
 //
 // The client will use this token in a LoginFederatedRequest request
 // and send it to the foreignserver as the auth_token field, with the

@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-PBJS_PATH=$(readlink -m "./node_modules/.bin/pbjs")
-PBTS_PATH=$(readlink -m "./node_modules/.bin/pbts")
 IN_DIR=$(readlink -m "./protobufs")
 OUT_DIR=$(readlink -m "./protocol")
 PROTOCOL_BUILD_TMP=$(readlink -m "./protocol-build-tmp")

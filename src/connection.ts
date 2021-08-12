@@ -3,6 +3,13 @@ import { ChatServiceClient } from "../protocol/chat/v1/chat";
 import { MediaProxyServiceClient } from "../protocol/mediaproxy/v1/mediaproxy";
 import { HrpcTransport } from "./hrpcTransport";
 
+export interface UploadedFile {
+  name: string;
+  contentType: string;
+  id: string;
+  size: number;
+}
+
 export class Connection {
   host: string;
   auth: AuthServiceClient;
@@ -28,5 +35,27 @@ export class Connection {
 
   getSession() {
     return this.session;
+  }
+
+  async uploadFile(f: File) {
+    const url = new URL(`${this.host}/_harmony/media/upload`);
+    url.searchParams.set("filename", f.name);
+    url.searchParams.set("contentType", f.type || "text/plain");
+    const data = new FormData();
+    data.set("file", f);
+    const headers = new Headers();
+    headers.set("Authorization", this.session || "");
+    const resp = await fetch(url.toString(), {
+      body: data,
+      method: "POST",
+      headers,
+    });
+    const asJSON = await resp.json();
+    return {
+      name: f.name,
+      contentType: f.type,
+      id: asJSON.id,
+      size: f.size,
+    } as UploadedFile;
   }
 }

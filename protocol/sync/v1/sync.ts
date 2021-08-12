@@ -4,11 +4,43 @@
 import { RpcTransport } from "@protobuf-ts/runtime-rpc";
 import { MethodInfo } from "@protobuf-ts/runtime-rpc";
 import { MessageType } from "@protobuf-ts/runtime";
+import { stackIntercept } from "@protobuf-ts/runtime-rpc";
 import { Empty } from "../../google/protobuf/empty";
 import { UnaryCall } from "@protobuf-ts/runtime-rpc";
-import { stackIntercept } from "@protobuf-ts/runtime-rpc";
-import { DuplexStreamingCall } from "@protobuf-ts/runtime-rpc";
 import { RpcOptions } from "@protobuf-ts/runtime-rpc";
+/**
+ * Authentication data that will be sent in a `harmonytypes.v1.Token`.
+ *
+ * @generated from protobuf message protocol.sync.v1.AuthData
+ */
+export interface AuthData {
+  /**
+   * The server name of the server initiating the transaction. For Pull,
+   * this tells the server being connected to which homeservers' events it should send.
+   * For Push, this tells the server being connected to which homeservers' events it is
+   * receiving.
+   *
+   * @generated from protobuf field: string host = 1;
+   */
+  host: string;
+  /**
+   * The UTC UNIX time in seconds of when the request is started. Servers should reject
+   * tokens with a time too far from the current time, at their discretion. A recommended
+   * variance is 1 minute.
+   *
+   * @generated from protobuf field: uint64 time = 2;
+   */
+  time: string;
+}
+/**
+ * @generated from protobuf message protocol.sync.v1.EventQueue
+ */
+export interface EventQueue {
+  /**
+   * @generated from protobuf field: repeated protocol.sync.v1.Event events = 1;
+   */
+  events: Event[];
+}
 /**
  * @generated from protobuf message protocol.sync.v1.Event
  */
@@ -62,41 +94,6 @@ export interface Event_UserAddedToGuild {
   guildId: string;
 }
 /**
- * @generated from protobuf message protocol.sync.v1.PostEventRequest
- */
-export interface PostEventRequest {
-  /**
-   * @generated from protobuf field: protocol.sync.v1.Event event = 1;
-   */
-  event?: Event;
-}
-/**
- * Acknowledgement of an event pulled using Pull.
- *
- * @generated from protobuf message protocol.sync.v1.Ack
- */
-export interface Ack {
-  /**
-   * @generated from protobuf field: uint64 event_id = 1;
-   */
-  eventId: string;
-}
-/**
- * A synchronisation message pulled using Pull.
- *
- * @generated from protobuf message protocol.sync.v1.Syn
- */
-export interface Syn {
-  /**
-   * @generated from protobuf field: uint64 event_id = 1;
-   */
-  eventId: string;
-  /**
-   * @generated from protobuf field: protocol.sync.v1.Event event = 2;
-   */
-  event?: Event;
-}
-/**
  * # Postbox
  *
  * The postbox service forms the core of Harmony's server <-> server communications.
@@ -109,71 +106,70 @@ export interface Syn {
  *
  * ## Authorisation
  *
- * Requests are authorised using a JWT token in the Authorization HTTP header.
- *
- * The JWT token is signed using SHA-RSA-256 with the homeserver's private key,
- *
- * It contains the following fields, described using Go JSON semantics:
- * ```
- * Self string
- * Time uint53
- * ```
- *
- * Self is the server name of the server initiating the transaction. For Pull,
- * this tells the server being connected to which homeservers' events it should send.
- * For Push, this tells the server being connected to which homeservers' events it is
- * receiving.
- *
- * Time is the UTC UNIX time in seconds of when the request is started. Servers should reject
- * JWTs with a time too far from the current time, at their discretion. A recommended
- * variance is 1 minute.
+ * Requests are authorised using a serialized `harmonytypes.v1.Token` in the Authorization HTTP header.
+ * The `data` field of the token will be a serialized `AuthData` message.
+ * The private key used to sign is the homeserver's private key.
  *
  * ## Events
  *
  * In this section, we will use sender and recipient to refer to the servers
  * sending the events and the server receiving the events respectively.
  *
- * When an event that a recipient would be interested in receiving occurs, the
- * sender should check whether or not there is an active Pull by the receiver.
- * If there is one, the server should dispatch the event to its queue as described
- * later in this document.
- * If there is not an active Pull by the receiver, the sender will attempt to Push
- * to the receiver. If the Push RPC fails, the event will be dispatched to the
- * sender's queue for the receiver.
+ * At PostboxService startup, a sender should first Pull all receivers it had
+ * federated from before. If a receiver makes a Push to the sender while a Pull
+ * is going on, the Push should be processed after the Pull is completed.
  *
- * ### The Event Queue
+ * The sender will attempt to Push to the receiver. If the Push RPC fails more
+ * than X times (a recommended retry count is 5), the event will be dispatched
+ * to the sender's queue for the receiver. Unless the receiver pulls these events,
+ * all new events should be dispatched to the queue. No new Push RPC should be made
+ * before the queue is emptied. This ensures that events are always received in the
+ * right order.
  *
- * The event queue is an abstract data structure. It is filled by a sender when
- * a Push fails.
- *
- * It is emptied by Pull requests. When the receiver initiates a Pull, the sender
- * sends up to 100 Syns in sequential order before waiting on Acks. Events sent
- * as a Syn but without an Ack are considered in-flight.
- *
- * An event will be taken out of flight if it is Acked by the receiver.
- *
- * If the Pull is cancelled or errors out before the sender receives an Ack for
- * an event in-flight, it will be returned to the queue to be sent when the receiver
- * performs another Pull.
- *
- * When an event is Acked and removed from flight, an older event from the queue should be
- * sent.
- *
- * In essence, the queue is a LIFO stack. Newer events should be sent and acked before older events.
- *
+ * It is recommended that receivers try pulling periodically, for example, every
+ * 1 minute after the last Push RPC by the sender. This ensures that events are recieved.
  *
  * @generated from protobuf service protocol.sync.v1.PostboxService
  */
 export interface IPostboxServiceClient {
   /**
-   * @generated from protobuf rpc: Pull(stream protocol.sync.v1.Ack) returns (stream protocol.sync.v1.Syn);
+   * @generated from protobuf rpc: Pull(google.protobuf.Empty) returns (protocol.sync.v1.EventQueue);
    */
-  pull(options?: RpcOptions): DuplexStreamingCall<Ack, Syn>;
+  pull(input: Empty, options?: RpcOptions): UnaryCall<Empty, EventQueue>;
   /**
    * @generated from protobuf rpc: Push(protocol.sync.v1.Event) returns (google.protobuf.Empty);
    */
   push(input: Event, options?: RpcOptions): UnaryCall<Event, Empty>;
 }
+/**
+ * Type for protobuf message protocol.sync.v1.AuthData
+ */
+class AuthData$Type extends MessageType<AuthData> {
+  constructor() {
+    super("protocol.sync.v1.AuthData", [
+      { no: 1, name: "host", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+      { no: 2, name: "time", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+    ]);
+  }
+}
+export const AuthData = new AuthData$Type();
+/**
+ * Type for protobuf message protocol.sync.v1.EventQueue
+ */
+class EventQueue$Type extends MessageType<EventQueue> {
+  constructor() {
+    super("protocol.sync.v1.EventQueue", [
+      {
+        no: 1,
+        name: "events",
+        kind: "message",
+        repeat: 1 /*RepeatType.PACKED*/,
+        T: () => Event,
+      },
+    ]);
+  }
+}
+export const EventQueue = new EventQueue$Type();
 /**
  * Type for protobuf message protocol.sync.v1.Event
  */
@@ -223,40 +219,6 @@ class Event_UserAddedToGuild$Type extends MessageType<Event_UserAddedToGuild> {
 }
 export const Event_UserAddedToGuild = new Event_UserAddedToGuild$Type();
 /**
- * Type for protobuf message protocol.sync.v1.PostEventRequest
- */
-class PostEventRequest$Type extends MessageType<PostEventRequest> {
-  constructor() {
-    super("protocol.sync.v1.PostEventRequest", [
-      { no: 1, name: "event", kind: "message", T: () => Event },
-    ]);
-  }
-}
-export const PostEventRequest = new PostEventRequest$Type();
-/**
- * Type for protobuf message protocol.sync.v1.Ack
- */
-class Ack$Type extends MessageType<Ack> {
-  constructor() {
-    super("protocol.sync.v1.Ack", [
-      { no: 1, name: "event_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-    ]);
-  }
-}
-export const Ack = new Ack$Type();
-/**
- * Type for protobuf message protocol.sync.v1.Syn
- */
-class Syn$Type extends MessageType<Syn> {
-  constructor() {
-    super("protocol.sync.v1.Syn", [
-      { no: 1, name: "event_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-      { no: 2, name: "event", kind: "message", T: () => Event },
-    ]);
-  }
-}
-export const Syn = new Syn$Type();
-/**
  * # Postbox
  *
  * The postbox service forms the core of Harmony's server <-> server communications.
@@ -269,80 +231,49 @@ export const Syn = new Syn$Type();
  *
  * ## Authorisation
  *
- * Requests are authorised using a JWT token in the Authorization HTTP header.
- *
- * The JWT token is signed using SHA-RSA-256 with the homeserver's private key,
- *
- * It contains the following fields, described using Go JSON semantics:
- * ```
- * Self string
- * Time uint53
- * ```
- *
- * Self is the server name of the server initiating the transaction. For Pull,
- * this tells the server being connected to which homeservers' events it should send.
- * For Push, this tells the server being connected to which homeservers' events it is
- * receiving.
- *
- * Time is the UTC UNIX time in seconds of when the request is started. Servers should reject
- * JWTs with a time too far from the current time, at their discretion. A recommended
- * variance is 1 minute.
+ * Requests are authorised using a serialized `harmonytypes.v1.Token` in the Authorization HTTP header.
+ * The `data` field of the token will be a serialized `AuthData` message.
+ * The private key used to sign is the homeserver's private key.
  *
  * ## Events
  *
  * In this section, we will use sender and recipient to refer to the servers
  * sending the events and the server receiving the events respectively.
  *
- * When an event that a recipient would be interested in receiving occurs, the
- * sender should check whether or not there is an active Pull by the receiver.
- * If there is one, the server should dispatch the event to its queue as described
- * later in this document.
- * If there is not an active Pull by the receiver, the sender will attempt to Push
- * to the receiver. If the Push RPC fails, the event will be dispatched to the
- * sender's queue for the receiver.
+ * At PostboxService startup, a sender should first Pull all receivers it had
+ * federated from before. If a receiver makes a Push to the sender while a Pull
+ * is going on, the Push should be processed after the Pull is completed.
  *
- * ### The Event Queue
+ * The sender will attempt to Push to the receiver. If the Push RPC fails more
+ * than X times (a recommended retry count is 5), the event will be dispatched
+ * to the sender's queue for the receiver. Unless the receiver pulls these events,
+ * all new events should be dispatched to the queue. No new Push RPC should be made
+ * before the queue is emptied. This ensures that events are always received in the
+ * right order.
  *
- * The event queue is an abstract data structure. It is filled by a sender when
- * a Push fails.
- *
- * It is emptied by Pull requests. When the receiver initiates a Pull, the sender
- * sends up to 100 Syns in sequential order before waiting on Acks. Events sent
- * as a Syn but without an Ack are considered in-flight.
- *
- * An event will be taken out of flight if it is Acked by the receiver.
- *
- * If the Pull is cancelled or errors out before the sender receives an Ack for
- * an event in-flight, it will be returned to the queue to be sent when the receiver
- * performs another Pull.
- *
- * When an event is Acked and removed from flight, an older event from the queue should be
- * sent.
- *
- * In essence, the queue is a LIFO stack. Newer events should be sent and acked before older events.
- *
+ * It is recommended that receivers try pulling periodically, for example, every
+ * 1 minute after the last Push RPC by the sender. This ensures that events are recieved.
  *
  * @generated from protobuf service protocol.sync.v1.PostboxService
  */
 export class PostboxServiceClient implements IPostboxServiceClient {
   readonly typeName = "protocol.sync.v1.PostboxService";
   readonly methods: MethodInfo[] = [
-    {
-      service: this,
-      name: "Pull",
-      localName: "pull",
-      I: Ack,
-      O: Syn,
-      clientStreaming: true,
-      serverStreaming: true,
-    },
+    { service: this, name: "Pull", localName: "pull", I: Empty, O: EventQueue },
     { service: this, name: "Push", localName: "push", I: Event, O: Empty },
   ];
   constructor(private readonly _transport: RpcTransport) {}
-  pull(options?: RpcOptions): DuplexStreamingCall<Ack, Syn> {
+  pull(input: Empty, options?: RpcOptions): UnaryCall<Empty, EventQueue> {
     const method = this.methods[0],
-      opt = this._transport.mergeOptions(options);
-    return stackIntercept<Ack, Syn>("duplex", this._transport, method, opt);
+      opt = this._transport.mergeOptions(options),
+      i = method.I.create(input);
+    return stackIntercept<Empty, EventQueue>(
+      "unary",
+      this._transport,
+      method,
+      opt,
+      i
+    );
   }
   push(input: Event, options?: RpcOptions): UnaryCall<Event, Empty> {
     const method = this.methods[1],

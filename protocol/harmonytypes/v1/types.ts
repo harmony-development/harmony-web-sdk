@@ -439,6 +439,30 @@ export interface Error {
   moreDetails: Uint8Array;
 }
 /**
+ * Token that will be used for authentication.
+ *
+ * @generated from protobuf message protocol.harmonytypes.v1.Token
+ */
+export interface Token {
+  /**
+   * Ed25519 signature of the following serialized protobuf data, signed
+   * with a private key. Which private key used to sign will be described
+   * in the documentation.
+   *
+   * Has to be 64 bytes long, otherwise it will be rejected.
+   *
+   * @generated from protobuf field: bytes sig = 1;
+   */
+  sig: Uint8Array;
+  /**
+   * Serialized protobuf data.
+   * The protobuf type of this serialized data is dependent on the API endpoint used.
+   *
+   * @generated from protobuf field: bytes data = 2;
+   */
+  data: Uint8Array;
+}
+/**
  * @generated from protobuf enum protocol.harmonytypes.v1.UserStatus
  */
 export enum UserStatus {
@@ -835,3 +859,15 @@ class Error$Type extends MessageType<Error> {
   }
 }
 export const Error = new Error$Type();
+/**
+ * Type for protobuf message protocol.harmonytypes.v1.Token
+ */
+class Token$Type extends MessageType<Token> {
+  constructor() {
+    super("protocol.harmonytypes.v1.Token", [
+      { no: 1, name: "sig", kind: "scalar", T: 12 /*ScalarType.BYTES*/ },
+      { no: 2, name: "data", kind: "scalar", T: 12 /*ScalarType.BYTES*/ },
+    ]);
+  }
+}
+export const Token = new Token$Type();

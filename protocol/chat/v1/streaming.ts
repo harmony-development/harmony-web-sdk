@@ -3,6 +3,8 @@
 // tslint:disable
 import { MessageType } from "@protobuf-ts/runtime";
 import { UserStatus } from "../../harmonytypes/v1/types";
+import { PermissionList } from "./permissions";
+import { Role } from "./permissions";
 import { Metadata } from "../../harmonytypes/v1/types";
 import { Timestamp } from "../../google/protobuf/timestamp";
 import { Message } from "../../harmonytypes/v1/types";
@@ -156,25 +158,67 @@ export interface Event {
         leftMember: Event_MemberLeft;
       }
     | {
-        oneofKind: "roleMoved";
-        /**
-         * @generated from protobuf field: protocol.chat.v1.Event.RoleMoved role_moved = 14;
-         */
-        roleMoved: Event_RoleMoved;
-      }
-    | {
         oneofKind: "profileUpdated";
         /**
-         * @generated from protobuf field: protocol.chat.v1.Event.ProfileUpdated profile_updated = 15;
+         * @generated from protobuf field: protocol.chat.v1.Event.ProfileUpdated profile_updated = 14;
          */
         profileUpdated: Event_ProfileUpdated;
       }
     | {
         oneofKind: "typing";
         /**
-         * @generated from protobuf field: protocol.chat.v1.Event.Typing typing = 16;
+         * @generated from protobuf field: protocol.chat.v1.Event.Typing typing = 15;
          */
         typing: Event_Typing;
+      }
+    | {
+        oneofKind: "roleCreated";
+        /**
+         * @generated from protobuf field: protocol.chat.v1.Event.RoleCreated role_created = 16;
+         */
+        roleCreated: Event_RoleCreated;
+      }
+    | {
+        oneofKind: "roleDeleted";
+        /**
+         * @generated from protobuf field: protocol.chat.v1.Event.RoleDeleted role_deleted = 17;
+         */
+        roleDeleted: Event_RoleDeleted;
+      }
+    | {
+        oneofKind: "roleMoved";
+        /**
+         * @generated from protobuf field: protocol.chat.v1.Event.RoleMoved role_moved = 18;
+         */
+        roleMoved: Event_RoleMoved;
+      }
+    | {
+        oneofKind: "roleUpdated";
+        /**
+         * @generated from protobuf field: protocol.chat.v1.Event.RoleUpdated role_updated = 19;
+         */
+        roleUpdated: Event_RoleUpdated;
+      }
+    | {
+        oneofKind: "rolePermsUpdated";
+        /**
+         * @generated from protobuf field: protocol.chat.v1.Event.RolePermissionsUpdated role_perms_updated = 20;
+         */
+        rolePermsUpdated: Event_RolePermissionsUpdated;
+      }
+    | {
+        oneofKind: "userRolesUpdated";
+        /**
+         * @generated from protobuf field: protocol.chat.v1.Event.UserRolesUpdated user_roles_updated = 21;
+         */
+        userRolesUpdated: Event_UserRolesUpdated;
+      }
+    | {
+        oneofKind: "permissionUpdated";
+        /**
+         * @generated from protobuf field: protocol.chat.v1.Event.PermissionUpdated permission_updated = 22;
+         */
+        permissionUpdated: Event_PermissionUpdated;
       }
     | {
         oneofKind: undefined;
@@ -457,6 +501,101 @@ export interface Event_RoleMoved {
    * @generated from protobuf field: uint64 role_id = 2;
    */
   roleId: string;
+  /**
+   * @generated from protobuf field: uint64 previous_id = 3;
+   */
+  previousId: string;
+  /**
+   * @generated from protobuf field: uint64 next_id = 4;
+   */
+  nextId: string;
+}
+/**
+ * @generated from protobuf message protocol.chat.v1.Event.RoleDeleted
+ */
+export interface Event_RoleDeleted {
+  /**
+   * @generated from protobuf field: uint64 guild_id = 1;
+   */
+  guildId: string;
+  /**
+   * @generated from protobuf field: uint64 role_id = 2;
+   */
+  roleId: string;
+}
+/**
+ * @generated from protobuf message protocol.chat.v1.Event.RoleCreated
+ */
+export interface Event_RoleCreated {
+  /**
+   * @generated from protobuf field: uint64 guild_id = 1;
+   */
+  guildId: string;
+  /**
+   * @generated from protobuf field: uint64 role_id = 2;
+   */
+  roleId: string;
+  /**
+   * @generated from protobuf field: protocol.chat.v1.Role role = 3;
+   */
+  role?: Role;
+}
+/**
+ * @generated from protobuf message protocol.chat.v1.Event.RoleUpdated
+ */
+export interface Event_RoleUpdated {
+  /**
+   * @generated from protobuf field: uint64 guild_id = 1;
+   */
+  guildId: string;
+  /**
+   * @generated from protobuf field: uint64 role_id = 3;
+   */
+  roleId: string;
+  /**
+   * @generated from protobuf field: protocol.chat.v1.Role role = 4;
+   */
+  role?: Role;
+}
+/**
+ * This event will only be sent to users with the "guild.manage" permission.
+ *
+ * @generated from protobuf message protocol.chat.v1.Event.RolePermissionsUpdated
+ */
+export interface Event_RolePermissionsUpdated {
+  /**
+   * @generated from protobuf field: uint64 guild_id = 1;
+   */
+  guildId: string;
+  /**
+   * @generated from protobuf field: uint64 channel_id = 2;
+   */
+  channelId: string;
+  /**
+   * @generated from protobuf field: uint64 role_id = 3;
+   */
+  roleId: string;
+  /**
+   * @generated from protobuf field: protocol.chat.v1.PermissionList perms = 4;
+   */
+  perms?: PermissionList;
+}
+/**
+ * @generated from protobuf message protocol.chat.v1.Event.UserRolesUpdated
+ */
+export interface Event_UserRolesUpdated {
+  /**
+   * @generated from protobuf field: uint64 guild_id = 1;
+   */
+  guildId: string;
+  /**
+   * @generated from protobuf field: uint64 user_id = 2;
+   */
+  userId: string;
+  /**
+   * @generated from protobuf field: repeated uint64 role_ids = 3;
+   */
+  roleIds: string[];
 }
 /**
  * @generated from protobuf message protocol.chat.v1.Event.ProfileUpdated
@@ -515,6 +654,30 @@ export interface Event_Typing {
    * @generated from protobuf field: uint64 channel_id = 3;
    */
   channelId: string;
+}
+/**
+ * Servers should calculate which users to send this event to when a permission is set.
+ * It should only be sent if a user is subscribed to the guild the permission pertains to.
+ *
+ * @generated from protobuf message protocol.chat.v1.Event.PermissionUpdated
+ */
+export interface Event_PermissionUpdated {
+  /**
+   * @generated from protobuf field: uint64 guild_id = 1;
+   */
+  guildId: string;
+  /**
+   * @generated from protobuf field: uint64 channel_id = 2;
+   */
+  channelId: string;
+  /**
+   * @generated from protobuf field: string query = 3;
+   */
+  query: string;
+  /**
+   * @generated from protobuf field: bool ok = 4;
+   */
+  ok: boolean;
 }
 /**
  * @generated from protobuf enum protocol.chat.v1.Event.LeaveReason
@@ -698,24 +861,66 @@ class Event$Type extends MessageType<Event> {
       },
       {
         no: 14,
-        name: "role_moved",
-        kind: "message",
-        oneof: "event",
-        T: () => Event_RoleMoved,
-      },
-      {
-        no: 15,
         name: "profile_updated",
         kind: "message",
         oneof: "event",
         T: () => Event_ProfileUpdated,
       },
       {
-        no: 16,
+        no: 15,
         name: "typing",
         kind: "message",
         oneof: "event",
         T: () => Event_Typing,
+      },
+      {
+        no: 16,
+        name: "role_created",
+        kind: "message",
+        oneof: "event",
+        T: () => Event_RoleCreated,
+      },
+      {
+        no: 17,
+        name: "role_deleted",
+        kind: "message",
+        oneof: "event",
+        T: () => Event_RoleDeleted,
+      },
+      {
+        no: 18,
+        name: "role_moved",
+        kind: "message",
+        oneof: "event",
+        T: () => Event_RoleMoved,
+      },
+      {
+        no: 19,
+        name: "role_updated",
+        kind: "message",
+        oneof: "event",
+        T: () => Event_RoleUpdated,
+      },
+      {
+        no: 20,
+        name: "role_perms_updated",
+        kind: "message",
+        oneof: "event",
+        T: () => Event_RolePermissionsUpdated,
+      },
+      {
+        no: 21,
+        name: "user_roles_updated",
+        kind: "message",
+        oneof: "event",
+        T: () => Event_UserRolesUpdated,
+      },
+      {
+        no: 22,
+        name: "permission_updated",
+        kind: "message",
+        oneof: "event",
+        T: () => Event_PermissionUpdated,
       },
     ]);
   }
@@ -944,10 +1149,89 @@ class Event_RoleMoved$Type extends MessageType<Event_RoleMoved> {
     super("protocol.chat.v1.Event.RoleMoved", [
       { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
       { no: 2, name: "role_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+      {
+        no: 3,
+        name: "previous_id",
+        kind: "scalar",
+        T: 4 /*ScalarType.UINT64*/,
+      },
+      { no: 4, name: "next_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
     ]);
   }
 }
 export const Event_RoleMoved = new Event_RoleMoved$Type();
+/**
+ * Type for protobuf message protocol.chat.v1.Event.RoleDeleted
+ */
+class Event_RoleDeleted$Type extends MessageType<Event_RoleDeleted> {
+  constructor() {
+    super("protocol.chat.v1.Event.RoleDeleted", [
+      { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+      { no: 2, name: "role_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+    ]);
+  }
+}
+export const Event_RoleDeleted = new Event_RoleDeleted$Type();
+/**
+ * Type for protobuf message protocol.chat.v1.Event.RoleCreated
+ */
+class Event_RoleCreated$Type extends MessageType<Event_RoleCreated> {
+  constructor() {
+    super("protocol.chat.v1.Event.RoleCreated", [
+      { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+      { no: 2, name: "role_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+      { no: 3, name: "role", kind: "message", T: () => Role },
+    ]);
+  }
+}
+export const Event_RoleCreated = new Event_RoleCreated$Type();
+/**
+ * Type for protobuf message protocol.chat.v1.Event.RoleUpdated
+ */
+class Event_RoleUpdated$Type extends MessageType<Event_RoleUpdated> {
+  constructor() {
+    super("protocol.chat.v1.Event.RoleUpdated", [
+      { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+      { no: 3, name: "role_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+      { no: 4, name: "role", kind: "message", T: () => Role },
+    ]);
+  }
+}
+export const Event_RoleUpdated = new Event_RoleUpdated$Type();
+/**
+ * Type for protobuf message protocol.chat.v1.Event.RolePermissionsUpdated
+ */
+class Event_RolePermissionsUpdated$Type extends MessageType<Event_RolePermissionsUpdated> {
+  constructor() {
+    super("protocol.chat.v1.Event.RolePermissionsUpdated", [
+      { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+      { no: 2, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+      { no: 3, name: "role_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+      { no: 4, name: "perms", kind: "message", T: () => PermissionList },
+    ]);
+  }
+}
+export const Event_RolePermissionsUpdated =
+  new Event_RolePermissionsUpdated$Type();
+/**
+ * Type for protobuf message protocol.chat.v1.Event.UserRolesUpdated
+ */
+class Event_UserRolesUpdated$Type extends MessageType<Event_UserRolesUpdated> {
+  constructor() {
+    super("protocol.chat.v1.Event.UserRolesUpdated", [
+      { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+      { no: 2, name: "user_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+      {
+        no: 3,
+        name: "role_ids",
+        kind: "scalar",
+        repeat: 1 /*RepeatType.PACKED*/,
+        T: 4 /*ScalarType.UINT64*/,
+      },
+    ]);
+  }
+}
+export const Event_UserRolesUpdated = new Event_UserRolesUpdated$Type();
 /**
  * Type for protobuf message protocol.chat.v1.Event.ProfileUpdated
  */
@@ -1014,3 +1298,17 @@ class Event_Typing$Type extends MessageType<Event_Typing> {
   }
 }
 export const Event_Typing = new Event_Typing$Type();
+/**
+ * Type for protobuf message protocol.chat.v1.Event.PermissionUpdated
+ */
+class Event_PermissionUpdated$Type extends MessageType<Event_PermissionUpdated> {
+  constructor() {
+    super("protocol.chat.v1.Event.PermissionUpdated", [
+      { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+      { no: 2, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+      { no: 3, name: "query", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+      { no: 4, name: "ok", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
+    ]);
+  }
+}
+export const Event_PermissionUpdated = new Event_PermissionUpdated$Type();
