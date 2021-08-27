@@ -3,6 +3,7 @@
 // tslint:disable
 import { MessageType } from "@protobuf-ts/runtime";
 import { Metadata } from "../../harmonytypes/v1/types";
+import { ItemPosition } from "../../harmonytypes/v1/types";
 /**
  * Channel Kinds:
  *
@@ -31,15 +32,11 @@ export interface CreateChannelRequest {
      */
     isCategory: boolean;
     /**
-     * @generated from protobuf field: uint64 previous_id = 5;
+     * @generated from protobuf field: protocol.harmonytypes.v1.ItemPosition position = 4;
      */
-    previousId: string;
+    position?: ItemPosition;
     /**
-     * @generated from protobuf field: uint64 next_id = 4;
-     */
-    nextId: string;
-    /**
-     * @generated from protobuf field: protocol.harmonytypes.v1.Metadata metadata = 6;
+     * @generated from protobuf field: protocol.harmonytypes.v1.Metadata metadata = 5;
      */
     metadata?: Metadata;
 }
@@ -104,21 +101,13 @@ export interface UpdateChannelInformationRequest {
      */
     channelId: string;
     /**
-     * @generated from protobuf field: string name = 3;
+     * @generated from protobuf field: optional string new_name = 3;
      */
-    name: string;
+    newName?: string;
     /**
-     * @generated from protobuf field: bool update_name = 4;
+     * @generated from protobuf field: optional protocol.harmonytypes.v1.Metadata new_metadata = 4;
      */
-    updateName: boolean;
-    /**
-     * @generated from protobuf field: protocol.harmonytypes.v1.Metadata metadata = 5;
-     */
-    metadata?: Metadata;
-    /**
-     * @generated from protobuf field: bool update_metadata = 6;
-     */
-    updateMetadata: boolean;
+    newMetadata?: Metadata;
 }
 /**
  * @generated from protobuf message protocol.chat.v1.UpdateChannelOrderRequest
@@ -133,13 +122,9 @@ export interface UpdateChannelOrderRequest {
      */
     channelId: string;
     /**
-     * @generated from protobuf field: uint64 previous_id = 3;
+     * @generated from protobuf field: optional protocol.harmonytypes.v1.ItemPosition new_position = 3;
      */
-    previousId: string;
-    /**
-     * @generated from protobuf field: uint64 next_id = 4;
-     */
-    nextId: string;
+    newPosition?: ItemPosition;
 }
 /**
  * Request specifiying the order of all channels in a guild at once
@@ -195,9 +180,8 @@ class CreateChannelRequest$Type extends MessageType<CreateChannelRequest> {
             { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
             { no: 2, name: "channel_name", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
             { no: 3, name: "is_category", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
-            { no: 5, name: "previous_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-            { no: 4, name: "next_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-            { no: 6, name: "metadata", kind: "message", T: () => Metadata }
+            { no: 4, name: "position", kind: "message", T: () => ItemPosition },
+            { no: 5, name: "metadata", kind: "message", T: () => Metadata }
         ]);
     }
 }
@@ -257,10 +241,8 @@ class UpdateChannelInformationRequest$Type extends MessageType<UpdateChannelInfo
         super("protocol.chat.v1.UpdateChannelInformationRequest", [
             { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
             { no: 2, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-            { no: 3, name: "name", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 4, name: "update_name", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
-            { no: 5, name: "metadata", kind: "message", T: () => Metadata },
-            { no: 6, name: "update_metadata", kind: "scalar", T: 8 /*ScalarType.BOOL*/ }
+            { no: 3, name: "new_name", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
+            { no: 4, name: "new_metadata", kind: "message", T: () => Metadata }
         ]);
     }
 }
@@ -273,8 +255,7 @@ class UpdateChannelOrderRequest$Type extends MessageType<UpdateChannelOrderReque
         super("protocol.chat.v1.UpdateChannelOrderRequest", [
             { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
             { no: 2, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-            { no: 3, name: "previous_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-            { no: 4, name: "next_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ }
+            { no: 3, name: "new_position", kind: "message", T: () => ItemPosition }
         ]);
     }
 }

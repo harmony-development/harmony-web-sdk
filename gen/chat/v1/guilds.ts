@@ -174,29 +174,17 @@ export interface UpdateGuildInformationRequest {
      */
     guildId: string;
     /**
-     * @generated from protobuf field: string new_guild_name = 2;
+     * @generated from protobuf field: optional string new_guild_name = 2;
      */
-    newGuildName: string;
+    newGuildName?: string;
     /**
-     * @generated from protobuf field: bool update_guild_name = 3;
+     * @generated from protobuf field: optional string new_guild_picture = 4;
      */
-    updateGuildName: boolean;
+    newGuildPicture?: string;
     /**
-     * @generated from protobuf field: string new_guild_picture = 4;
+     * @generated from protobuf field: optional protocol.harmonytypes.v1.Metadata new_metadata = 6;
      */
-    newGuildPicture: string;
-    /**
-     * @generated from protobuf field: bool update_guild_picture = 5;
-     */
-    updateGuildPicture: boolean;
-    /**
-     * @generated from protobuf field: protocol.harmonytypes.v1.Metadata metadata = 6;
-     */
-    metadata?: Metadata;
-    /**
-     * @generated from protobuf field: bool update_metadata = 7;
-     */
-    updateMetadata: boolean;
+    newMetadata?: Metadata;
 }
 /**
  * @generated from protobuf message protocol.chat.v1.DeleteGuildRequest
@@ -273,8 +261,6 @@ export interface LeaveGuildRequest {
      */
     guildId: string;
 }
-// GUILD LIST
-
 /**
  * @generated from protobuf message protocol.chat.v1.BanUserRequest
  */
@@ -483,12 +469,9 @@ class UpdateGuildInformationRequest$Type extends MessageType<UpdateGuildInformat
     constructor() {
         super("protocol.chat.v1.UpdateGuildInformationRequest", [
             { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-            { no: 2, name: "new_guild_name", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 3, name: "update_guild_name", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
-            { no: 4, name: "new_guild_picture", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 5, name: "update_guild_picture", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
-            { no: 6, name: "metadata", kind: "message", T: () => Metadata },
-            { no: 7, name: "update_metadata", kind: "scalar", T: 8 /*ScalarType.BOOL*/ }
+            { no: 2, name: "new_guild_name", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
+            { no: 4, name: "new_guild_picture", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
+            { no: 6, name: "new_metadata", kind: "message", T: () => Metadata }
         ]);
     }
 }

@@ -54,9 +54,11 @@ export interface Override {
     } | {
         oneofKind: "systemPlurality";
         /**
+         * plurality, not system as in computer
+         *
          * @generated from protobuf field: google.protobuf.Empty system_plurality = 5;
          */
-        systemPlurality: Empty; // plurality, not system as in computer
+        systemPlurality: Empty;
     } | {
         oneofKind: "systemMessage";
         /**
@@ -440,25 +442,25 @@ export interface Content {
     content: {
         oneofKind: "textMessage";
         /**
-         * @generated from protobuf field: protocol.harmonytypes.v1.ContentText text_message = 2;
+         * @generated from protobuf field: protocol.harmonytypes.v1.ContentText text_message = 1;
          */
         textMessage: ContentText;
     } | {
         oneofKind: "embedMessage";
         /**
-         * @generated from protobuf field: protocol.harmonytypes.v1.ContentEmbed embed_message = 4;
+         * @generated from protobuf field: protocol.harmonytypes.v1.ContentEmbed embed_message = 2;
          */
         embedMessage: ContentEmbed;
     } | {
         oneofKind: "filesMessage";
         /**
-         * @generated from protobuf field: protocol.harmonytypes.v1.ContentFiles files_message = 5;
+         * @generated from protobuf field: protocol.harmonytypes.v1.ContentFiles files_message = 3;
          */
         filesMessage: ContentFiles;
     } | {
         oneofKind: "photosMessage";
         /**
-         * @generated from protobuf field: protocol.harmonytypes.v1.ContentPhotos photos_message = 6;
+         * @generated from protobuf field: protocol.harmonytypes.v1.ContentPhotos photos_message = 4;
          */
         photosMessage: ContentPhotos;
     } | {
@@ -550,6 +552,74 @@ export interface Token {
      * @generated from protobuf field: bytes data = 2;
      */
     data: Uint8Array;
+}
+/**
+ * An object representing an item position between two other items.
+ *
+ * @generated from protobuf message protocol.harmonytypes.v1.ItemPosition
+ */
+export interface ItemPosition {
+    /**
+     * @generated from protobuf oneof: position
+     */
+    position: {
+        oneofKind: "top";
+        /**
+         * @generated from protobuf field: protocol.harmonytypes.v1.ItemPosition.Top top = 1;
+         */
+        top: ItemPosition_Top;
+    } | {
+        oneofKind: "between";
+        /**
+         * @generated from protobuf field: protocol.harmonytypes.v1.ItemPosition.Between between = 2;
+         */
+        between: ItemPosition_Between;
+    } | {
+        oneofKind: "bottom";
+        /**
+         * @generated from protobuf field: protocol.harmonytypes.v1.ItemPosition.Bottom bottom = 3;
+         */
+        bottom: ItemPosition_Bottom;
+    } | {
+        oneofKind: undefined;
+    };
+}
+/**
+ * An object that represents the top of an ordered list.
+ *
+ * @generated from protobuf message protocol.harmonytypes.v1.ItemPosition.Top
+ */
+export interface ItemPosition_Top {
+    /**
+     * @generated from protobuf field: uint64 next_id = 1;
+     */
+    nextId: string;
+}
+/**
+ * An object that represents a place between two items in an ordered list.
+ *
+ * @generated from protobuf message protocol.harmonytypes.v1.ItemPosition.Between
+ */
+export interface ItemPosition_Between {
+    /**
+     * @generated from protobuf field: uint64 previous_id = 1;
+     */
+    previousId: string;
+    /**
+     * @generated from protobuf field: uint64 next_id = 2;
+     */
+    nextId: string;
+}
+/**
+ * An object that represents the bottom of an ordered list.
+ *
+ * @generated from protobuf message protocol.harmonytypes.v1.ItemPosition.Bottom
+ */
+export interface ItemPosition_Bottom {
+    /**
+     * @generated from protobuf field: uint64 previous_id = 1;
+     */
+    previousId: string;
 }
 /**
  * @generated from protobuf enum protocol.harmonytypes.v1.UserStatus
@@ -810,10 +880,10 @@ export const ContentPhotos = new ContentPhotos$Type();
 class Content$Type extends MessageType<Content> {
     constructor() {
         super("protocol.harmonytypes.v1.Content", [
-            { no: 2, name: "text_message", kind: "message", oneof: "content", T: () => ContentText },
-            { no: 4, name: "embed_message", kind: "message", oneof: "content", T: () => ContentEmbed },
-            { no: 5, name: "files_message", kind: "message", oneof: "content", T: () => ContentFiles },
-            { no: 6, name: "photos_message", kind: "message", oneof: "content", T: () => ContentPhotos }
+            { no: 1, name: "text_message", kind: "message", oneof: "content", T: () => ContentText },
+            { no: 2, name: "embed_message", kind: "message", oneof: "content", T: () => ContentEmbed },
+            { no: 3, name: "files_message", kind: "message", oneof: "content", T: () => ContentFiles },
+            { no: 4, name: "photos_message", kind: "message", oneof: "content", T: () => ContentPhotos }
         ]);
     }
 }
@@ -863,3 +933,50 @@ class Token$Type extends MessageType<Token> {
     }
 }
 export const Token = new Token$Type();
+/**
+ * Type for protobuf message protocol.harmonytypes.v1.ItemPosition
+ */
+class ItemPosition$Type extends MessageType<ItemPosition> {
+    constructor() {
+        super("protocol.harmonytypes.v1.ItemPosition", [
+            { no: 1, name: "top", kind: "message", oneof: "position", T: () => ItemPosition_Top },
+            { no: 2, name: "between", kind: "message", oneof: "position", T: () => ItemPosition_Between },
+            { no: 3, name: "bottom", kind: "message", oneof: "position", T: () => ItemPosition_Bottom }
+        ]);
+    }
+}
+export const ItemPosition = new ItemPosition$Type();
+/**
+ * Type for protobuf message protocol.harmonytypes.v1.ItemPosition.Top
+ */
+class ItemPosition_Top$Type extends MessageType<ItemPosition_Top> {
+    constructor() {
+        super("protocol.harmonytypes.v1.ItemPosition.Top", [
+            { no: 1, name: "next_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ }
+        ]);
+    }
+}
+export const ItemPosition_Top = new ItemPosition_Top$Type();
+/**
+ * Type for protobuf message protocol.harmonytypes.v1.ItemPosition.Between
+ */
+class ItemPosition_Between$Type extends MessageType<ItemPosition_Between> {
+    constructor() {
+        super("protocol.harmonytypes.v1.ItemPosition.Between", [
+            { no: 1, name: "previous_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+            { no: 2, name: "next_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ }
+        ]);
+    }
+}
+export const ItemPosition_Between = new ItemPosition_Between$Type();
+/**
+ * Type for protobuf message protocol.harmonytypes.v1.ItemPosition.Bottom
+ */
+class ItemPosition_Bottom$Type extends MessageType<ItemPosition_Bottom> {
+    constructor() {
+        super("protocol.harmonytypes.v1.ItemPosition.Bottom", [
+            { no: 1, name: "previous_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ }
+        ]);
+    }
+}
+export const ItemPosition_Bottom = new ItemPosition_Bottom$Type();

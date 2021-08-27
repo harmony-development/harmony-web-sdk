@@ -21,6 +21,7 @@ export interface GetChannelMessagesRequest {
     /**
      * The ID of the message that will be used as an "anchor" point to figure out
      * where to get the messages.
+     * If not specified, the `direction` will be ignored and the newest messages will be returned.
      *
      * @generated from protobuf field: uint64 message_id = 3;
      */
@@ -49,6 +50,8 @@ export interface GetChannelMessagesRequest {
     count: number;
 }
 /**
+ * The direction relative to the `message_id` message to get messages from.
+ *
  * @generated from protobuf enum protocol.chat.v1.GetChannelMessagesRequest.Direction
  */
 export enum GetChannelMessagesRequest_Direction {

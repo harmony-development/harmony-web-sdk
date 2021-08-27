@@ -8,6 +8,7 @@ import { UserStatus } from "../../harmonytypes/v1/types";
 import { PermissionList } from "./permissions";
 import { Role } from "./permissions";
 import { Metadata } from "../../harmonytypes/v1/types";
+import { ItemPosition } from "../../harmonytypes/v1/types";
 import { Timestamp } from "../../google/protobuf/timestamp";
 import { Message } from "../../harmonytypes/v1/types";
 /**
@@ -369,9 +370,9 @@ export interface Event_MessageUpdated {
     /**
      * New message content.
      *
-     * @generated from protobuf field: string content = 5;
+     * @generated from protobuf field: string new_content = 5;
      */
-    content: string;
+    newContent: string;
 }
 /**
  * Event sent when a message is deleted.
@@ -423,23 +424,21 @@ export interface Event_ChannelCreated {
      */
     name: string;
     /**
-     * @generated from protobuf field: uint64 previous_id = 4;
+     * the position in the channel list.
+     *
+     * @generated from protobuf field: protocol.harmonytypes.v1.ItemPosition position = 4;
      */
-    previousId: string;
-    /**
-     * @generated from protobuf field: uint64 next_id = 5;
-     */
-    nextId: string;
+    position?: ItemPosition;
     /**
      * Is this channel a category or not.
      *
-     * @generated from protobuf field: bool is_category = 6;
+     * @generated from protobuf field: bool is_category = 5;
      */
     isCategory: boolean;
     /**
      * Metadata for this channel.
      *
-     * @generated from protobuf field: protocol.harmonytypes.v1.Metadata metadata = 7;
+     * @generated from protobuf field: protocol.harmonytypes.v1.Metadata metadata = 6;
      */
     metadata?: Metadata;
 }
@@ -462,33 +461,17 @@ export interface Event_ChannelUpdated {
      */
     channelId: string;
     /**
-     * @generated from protobuf field: string name = 3;
+     * @generated from protobuf field: optional string new_name = 3;
      */
-    name: string;
+    newName?: string;
     /**
-     * @generated from protobuf field: bool update_name = 4;
+     * @generated from protobuf field: optional protocol.harmonytypes.v1.ItemPosition new_position = 4;
      */
-    updateName: boolean;
+    newPosition?: ItemPosition;
     /**
-     * @generated from protobuf field: uint64 previous_id = 5;
+     * @generated from protobuf field: optional protocol.harmonytypes.v1.Metadata new_metadata = 5;
      */
-    previousId: string;
-    /**
-     * @generated from protobuf field: uint64 next_id = 6;
-     */
-    nextId: string;
-    /**
-     * @generated from protobuf field: bool update_order = 7;
-     */
-    updateOrder: boolean;
-    /**
-     * @generated from protobuf field: protocol.harmonytypes.v1.Metadata metadata = 8;
-     */
-    metadata?: Metadata;
-    /**
-     * @generated from protobuf field: bool update_metadata = 9;
-     */
-    updateMetadata: boolean;
+    newMetadata?: Metadata;
 }
 /**
  * Event sent when all channels have been reordered
@@ -541,29 +524,17 @@ export interface Event_GuildUpdated {
      */
     guildId: string;
     /**
-     * @generated from protobuf field: string name = 2;
+     * @generated from protobuf field: optional string new_name = 2;
      */
-    name: string;
+    newName?: string;
     /**
-     * @generated from protobuf field: bool update_name = 3;
+     * @generated from protobuf field: optional string new_picture = 3;
      */
-    updateName: boolean;
+    newPicture?: string;
     /**
-     * @generated from protobuf field: string picture = 4;
+     * @generated from protobuf field: optional protocol.harmonytypes.v1.Metadata new_metadata = 4;
      */
-    picture: string;
-    /**
-     * @generated from protobuf field: bool update_picture = 5;
-     */
-    updatePicture: boolean;
-    /**
-     * @generated from protobuf field: protocol.harmonytypes.v1.Metadata metadata = 6;
-     */
-    metadata?: Metadata;
-    /**
-     * @generated from protobuf field: bool update_metadata = 7;
-     */
-    updateMetadata: boolean;
+    newMetadata?: Metadata;
 }
 /**
  * Event sent when a guild is deleted.
@@ -714,13 +685,9 @@ export interface Event_RoleMoved {
      */
     roleId: string;
     /**
-     * @generated from protobuf field: uint64 previous_id = 3;
+     * @generated from protobuf field: protocol.harmonytypes.v1.ItemPosition new_position = 3;
      */
-    previousId: string;
-    /**
-     * @generated from protobuf field: uint64 next_id = 4;
-     */
-    nextId: string;
+    newPosition?: ItemPosition;
 }
 /**
  * Event sent when a role is deleted.
@@ -781,15 +748,15 @@ export interface Event_RoleUpdated {
     /**
      * Role ID of the role that was changed.
      *
-     * @generated from protobuf field: uint64 role_id = 3;
+     * @generated from protobuf field: uint64 role_id = 2;
      */
     roleId: string;
     /**
      * The actual new role.
      *
-     * @generated from protobuf field: protocol.chat.v1.Role role = 4;
+     * @generated from protobuf field: protocol.chat.v1.Role new_role = 3;
      */
-    role?: Role;
+    newRole?: Role;
 }
 /**
  * Event sent when a role's permissions are changed.
@@ -820,9 +787,9 @@ export interface Event_RolePermissionsUpdated {
     /**
      * The new permissions.
      *
-     * @generated from protobuf field: protocol.chat.v1.PermissionList perms = 4;
+     * @generated from protobuf field: protocol.chat.v1.PermissionList new_perms = 4;
      */
-    perms?: PermissionList;
+    newPerms?: PermissionList;
 }
 /**
  * Event sent when a user's roles are changed.
@@ -845,9 +812,9 @@ export interface Event_UserRolesUpdated {
     /**
      * The new role IDs.
      *
-     * @generated from protobuf field: repeated uint64 role_ids = 3;
+     * @generated from protobuf field: repeated uint64 new_role_ids = 3;
      */
-    roleIds: string[];
+    newRoleIds: string[];
 }
 /**
  * Event sent when a user's profile is updated.
@@ -867,43 +834,27 @@ export interface Event_ProfileUpdated {
     /**
      * New username for this user.
      *
-     * @generated from protobuf field: string new_username = 2;
+     * @generated from protobuf field: optional string new_username = 2;
      */
-    newUsername: string;
-    /**
-     * @generated from protobuf field: bool update_username = 3;
-     */
-    updateUsername: boolean;
+    newUsername?: string;
     /**
      * New avatar for this user.
      *
-     * @generated from protobuf field: string new_avatar = 4;
+     * @generated from protobuf field: optional string new_avatar = 3;
      */
-    newAvatar: string;
-    /**
-     * @generated from protobuf field: bool update_avatar = 5;
-     */
-    updateAvatar: boolean;
+    newAvatar?: string;
     /**
      * New status for this user.
      *
-     * @generated from protobuf field: protocol.harmonytypes.v1.UserStatus new_status = 6;
+     * @generated from protobuf field: optional protocol.harmonytypes.v1.UserStatus new_status = 4;
      */
-    newStatus: UserStatus;
-    /**
-     * @generated from protobuf field: bool update_status = 7;
-     */
-    updateStatus: boolean;
+    newStatus?: UserStatus;
     /**
      * New is bot or not for this user.
      *
-     * @generated from protobuf field: bool is_bot = 8;
+     * @generated from protobuf field: optional bool new_is_bot = 5;
      */
-    isBot: boolean;
-    /**
-     * @generated from protobuf field: bool update_is_bot = 9;
-     */
-    updateIsBot: boolean;
+    newIsBot?: boolean;
 }
 /**
  * Event sent when a user sends a typing notification in a guild channel.
@@ -981,15 +932,9 @@ export interface Event_EmotePackUpdated {
     /**
      * New pack name of the pack.
      *
-     * @generated from protobuf field: string pack_name = 2;
+     * @generated from protobuf field: optional string new_pack_name = 2;
      */
-    packName: string;
-    /**
-     * Whether to update the pack name or not.
-     *
-     * @generated from protobuf field: bool update_pack_name = 3;
-     */
-    updatePackName: boolean;
+    newPackName?: string;
 }
 /**
  * Event sent when an emote pack is deleted.
@@ -1233,7 +1178,7 @@ class Event_MessageUpdated$Type extends MessageType<Event_MessageUpdated> {
             { no: 2, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
             { no: 3, name: "message_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
             { no: 4, name: "edited_at", kind: "message", T: () => Timestamp },
-            { no: 5, name: "content", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
+            { no: 5, name: "new_content", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
         ]);
     }
 }
@@ -1260,10 +1205,9 @@ class Event_ChannelCreated$Type extends MessageType<Event_ChannelCreated> {
             { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
             { no: 2, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
             { no: 3, name: "name", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 4, name: "previous_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-            { no: 5, name: "next_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-            { no: 6, name: "is_category", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
-            { no: 7, name: "metadata", kind: "message", T: () => Metadata }
+            { no: 4, name: "position", kind: "message", T: () => ItemPosition },
+            { no: 5, name: "is_category", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
+            { no: 6, name: "metadata", kind: "message", T: () => Metadata }
         ]);
     }
 }
@@ -1276,13 +1220,9 @@ class Event_ChannelUpdated$Type extends MessageType<Event_ChannelUpdated> {
         super("protocol.chat.v1.Event.ChannelUpdated", [
             { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
             { no: 2, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-            { no: 3, name: "name", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 4, name: "update_name", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
-            { no: 5, name: "previous_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-            { no: 6, name: "next_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-            { no: 7, name: "update_order", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
-            { no: 8, name: "metadata", kind: "message", T: () => Metadata },
-            { no: 9, name: "update_metadata", kind: "scalar", T: 8 /*ScalarType.BOOL*/ }
+            { no: 3, name: "new_name", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
+            { no: 4, name: "new_position", kind: "message", T: () => ItemPosition },
+            { no: 5, name: "new_metadata", kind: "message", T: () => Metadata }
         ]);
     }
 }
@@ -1318,12 +1258,9 @@ class Event_GuildUpdated$Type extends MessageType<Event_GuildUpdated> {
     constructor() {
         super("protocol.chat.v1.Event.GuildUpdated", [
             { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-            { no: 2, name: "name", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 3, name: "update_name", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
-            { no: 4, name: "picture", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 5, name: "update_picture", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
-            { no: 6, name: "metadata", kind: "message", T: () => Metadata },
-            { no: 7, name: "update_metadata", kind: "scalar", T: 8 /*ScalarType.BOOL*/ }
+            { no: 2, name: "new_name", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
+            { no: 3, name: "new_picture", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
+            { no: 4, name: "new_metadata", kind: "message", T: () => Metadata }
         ]);
     }
 }
@@ -1411,8 +1348,7 @@ class Event_RoleMoved$Type extends MessageType<Event_RoleMoved> {
         super("protocol.chat.v1.Event.RoleMoved", [
             { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
             { no: 2, name: "role_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-            { no: 3, name: "previous_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-            { no: 4, name: "next_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ }
+            { no: 3, name: "new_position", kind: "message", T: () => ItemPosition }
         ]);
     }
 }
@@ -1449,8 +1385,8 @@ class Event_RoleUpdated$Type extends MessageType<Event_RoleUpdated> {
     constructor() {
         super("protocol.chat.v1.Event.RoleUpdated", [
             { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-            { no: 3, name: "role_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-            { no: 4, name: "role", kind: "message", T: () => Role }
+            { no: 2, name: "role_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+            { no: 3, name: "new_role", kind: "message", T: () => Role }
         ]);
     }
 }
@@ -1464,7 +1400,7 @@ class Event_RolePermissionsUpdated$Type extends MessageType<Event_RolePermission
             { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
             { no: 2, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
             { no: 3, name: "role_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-            { no: 4, name: "perms", kind: "message", T: () => PermissionList }
+            { no: 4, name: "new_perms", kind: "message", T: () => PermissionList }
         ]);
     }
 }
@@ -1477,7 +1413,7 @@ class Event_UserRolesUpdated$Type extends MessageType<Event_UserRolesUpdated> {
         super("protocol.chat.v1.Event.UserRolesUpdated", [
             { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
             { no: 2, name: "user_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-            { no: 3, name: "role_ids", kind: "scalar", repeat: 1 /*RepeatType.PACKED*/, T: 4 /*ScalarType.UINT64*/ }
+            { no: 3, name: "new_role_ids", kind: "scalar", repeat: 1 /*RepeatType.PACKED*/, T: 4 /*ScalarType.UINT64*/ }
         ]);
     }
 }
@@ -1489,14 +1425,10 @@ class Event_ProfileUpdated$Type extends MessageType<Event_ProfileUpdated> {
     constructor() {
         super("protocol.chat.v1.Event.ProfileUpdated", [
             { no: 1, name: "user_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-            { no: 2, name: "new_username", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 3, name: "update_username", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
-            { no: 4, name: "new_avatar", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 5, name: "update_avatar", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
-            { no: 6, name: "new_status", kind: "enum", T: () => ["protocol.harmonytypes.v1.UserStatus", UserStatus, "USER_STATUS_"] },
-            { no: 7, name: "update_status", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
-            { no: 8, name: "is_bot", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
-            { no: 9, name: "update_is_bot", kind: "scalar", T: 8 /*ScalarType.BOOL*/ }
+            { no: 2, name: "new_username", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
+            { no: 3, name: "new_avatar", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
+            { no: 4, name: "new_status", kind: "enum", opt: true, T: () => ["protocol.harmonytypes.v1.UserStatus", UserStatus, "USER_STATUS_"] },
+            { no: 5, name: "new_is_bot", kind: "scalar", opt: true, T: 8 /*ScalarType.BOOL*/ }
         ]);
     }
 }
@@ -1535,8 +1467,7 @@ class Event_EmotePackUpdated$Type extends MessageType<Event_EmotePackUpdated> {
     constructor() {
         super("protocol.chat.v1.Event.EmotePackUpdated", [
             { no: 1, name: "pack_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-            { no: 2, name: "pack_name", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 3, name: "update_pack_name", kind: "scalar", T: 8 /*ScalarType.BOOL*/ }
+            { no: 2, name: "new_pack_name", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ }
         ]);
     }
 }

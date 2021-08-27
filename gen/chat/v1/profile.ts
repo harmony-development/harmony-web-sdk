@@ -74,37 +74,21 @@ export interface GetUserMetadataResponse {
  */
 export interface ProfileUpdateRequest {
     /**
-     * @generated from protobuf field: string new_username = 1;
+     * @generated from protobuf field: optional string new_username = 1;
      */
-    newUsername: string;
+    newUsername?: string;
     /**
-     * @generated from protobuf field: bool update_username = 2;
+     * @generated from protobuf field: optional string new_avatar = 2;
      */
-    updateUsername: boolean;
+    newAvatar?: string;
     /**
-     * @generated from protobuf field: string new_avatar = 3;
+     * @generated from protobuf field: optional protocol.harmonytypes.v1.UserStatus new_status = 3;
      */
-    newAvatar: string;
+    newStatus?: UserStatus;
     /**
-     * @generated from protobuf field: bool update_avatar = 4;
+     * @generated from protobuf field: optional bool new_is_bot = 4;
      */
-    updateAvatar: boolean;
-    /**
-     * @generated from protobuf field: protocol.harmonytypes.v1.UserStatus new_status = 5;
-     */
-    newStatus: UserStatus;
-    /**
-     * @generated from protobuf field: bool update_status = 6;
-     */
-    updateStatus: boolean;
-    /**
-     * @generated from protobuf field: bool is_bot = 7;
-     */
-    isBot: boolean;
-    /**
-     * @generated from protobuf field: bool update_is_bot = 8;
-     */
-    updateIsBot: boolean;
+    newIsBot?: boolean;
 }
 /**
  * Type for protobuf message protocol.chat.v1.GetUserRequest
@@ -181,14 +165,10 @@ export const GetUserMetadataResponse = new GetUserMetadataResponse$Type();
 class ProfileUpdateRequest$Type extends MessageType<ProfileUpdateRequest> {
     constructor() {
         super("protocol.chat.v1.ProfileUpdateRequest", [
-            { no: 1, name: "new_username", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 2, name: "update_username", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
-            { no: 3, name: "new_avatar", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 4, name: "update_avatar", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
-            { no: 5, name: "new_status", kind: "enum", T: () => ["protocol.harmonytypes.v1.UserStatus", UserStatus, "USER_STATUS_"] },
-            { no: 6, name: "update_status", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
-            { no: 7, name: "is_bot", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
-            { no: 8, name: "update_is_bot", kind: "scalar", T: 8 /*ScalarType.BOOL*/ }
+            { no: 1, name: "new_username", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
+            { no: 2, name: "new_avatar", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
+            { no: 3, name: "new_status", kind: "enum", opt: true, T: () => ["protocol.harmonytypes.v1.UserStatus", UserStatus, "USER_STATUS_"] },
+            { no: 4, name: "new_is_bot", kind: "scalar", opt: true, T: 8 /*ScalarType.BOOL*/ }
         ]);
     }
 }

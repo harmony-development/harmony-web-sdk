@@ -2,6 +2,7 @@
 // @generated from protobuf file "chat/v1/permissions.proto" (package "protocol.chat.v1", syntax proto3)
 // tslint:disable
 import { MessageType } from "@protobuf-ts/runtime";
+import { ItemPosition } from "../../harmonytypes/v1/types";
 /**
  * @generated from protobuf message protocol.chat.v1.QueryPermissionsRequest
  */
@@ -170,13 +171,9 @@ export interface MoveRoleRequest {
      */
     roleId: string;
     /**
-     * @generated from protobuf field: uint64 before_id = 3;
+     * @generated from protobuf field: protocol.harmonytypes.v1.ItemPosition new_position = 3;
      */
-    beforeId: string;
-    /**
-     * @generated from protobuf field: uint64 after_id = 4;
-     */
-    afterId: string;
+    newPosition?: ItemPosition;
 }
 /**
  * @generated from protobuf message protocol.chat.v1.MoveRoleResponse
@@ -245,25 +242,21 @@ export interface ModifyGuildRoleRequest {
      */
     guildId: string;
     /**
-     * @generated from protobuf field: protocol.chat.v1.Role role = 2;
+     * @generated from protobuf field: optional string new_name = 2;
      */
-    role?: Role;
+    newName?: string;
     /**
-     * @generated from protobuf field: bool modify_name = 3;
+     * @generated from protobuf field: optional int32 new_color = 3;
      */
-    modifyName: boolean;
+    newColor?: number;
     /**
-     * @generated from protobuf field: bool modify_color = 4;
+     * @generated from protobuf field: optional bool new_hoist = 4;
      */
-    modifyColor: boolean;
+    newHoist?: boolean;
     /**
-     * @generated from protobuf field: bool modify_hoist = 5;
+     * @generated from protobuf field: optional bool new_pingable = 5;
      */
-    modifyHoist: boolean;
-    /**
-     * @generated from protobuf field: bool modify_pingable = 6;
-     */
-    modifyPingable: boolean;
+    newPingable?: boolean;
 }
 /**
  * @generated from protobuf message protocol.chat.v1.ManageUserRolesRequest
@@ -439,8 +432,7 @@ class MoveRoleRequest$Type extends MessageType<MoveRoleRequest> {
         super("protocol.chat.v1.MoveRoleRequest", [
             { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
             { no: 2, name: "role_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-            { no: 3, name: "before_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-            { no: 4, name: "after_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ }
+            { no: 3, name: "new_position", kind: "message", T: () => ItemPosition }
         ]);
     }
 }
@@ -518,11 +510,10 @@ class ModifyGuildRoleRequest$Type extends MessageType<ModifyGuildRoleRequest> {
     constructor() {
         super("protocol.chat.v1.ModifyGuildRoleRequest", [
             { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-            { no: 2, name: "role", kind: "message", T: () => Role },
-            { no: 3, name: "modify_name", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
-            { no: 4, name: "modify_color", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
-            { no: 5, name: "modify_hoist", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
-            { no: 6, name: "modify_pingable", kind: "scalar", T: 8 /*ScalarType.BOOL*/ }
+            { no: 2, name: "new_name", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
+            { no: 3, name: "new_color", kind: "scalar", opt: true, T: 5 /*ScalarType.INT32*/ },
+            { no: 4, name: "new_hoist", kind: "scalar", opt: true, T: 8 /*ScalarType.BOOL*/ },
+            { no: 5, name: "new_pingable", kind: "scalar", opt: true, T: 8 /*ScalarType.BOOL*/ }
         ]);
     }
 }
