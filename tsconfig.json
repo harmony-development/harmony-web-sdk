@@ -3,38 +3,22 @@
     "moduleResolution": "node",
     "target": "es2017",
     "module": "commonjs",
-    "lib": [
-      "es2015",
-      "es2016",
-      "es2017",
-      "dom"
-    ],
+    "lib": ["es2015", "es2016", "es2017", "dom"],
     "strict": true,
     "sourceMap": false,
     "declaration": true,
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "declarationDir": "dist/lib",
+    "declarationDir": "dist",
     "allowJs": false,
-    "outDir": "dist/lib",
-    "typeRoots": [
-      "node_modules/@types"
-    ],
-    "rootDirs": [
-      "./src",
-      "./protocol"
-    ],
+    "outDir": "dist",
+    "typeRoots": ["node_modules/@types"],
+    "rootDirs": ["./src", "./gen"],
     "baseUrl": "./",
     "paths": {
-      "src/*": [
-        "src/*"
-      ]
+      "src/*": ["src/*"]
     }
   },
-  "include": [
-    "./src",
-    "./protocol", 
-    "test/connection.test.ts" 
-  ]
+  "include": ["./src", "./gen", "test/connection.test.ts"]
 }

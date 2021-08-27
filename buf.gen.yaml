@@ -1,0 +1,6 @@
+version: v1
+plugins:
+  - name: ts
+    out: gen
+    opt: long_type_string,optimize_code_size,generate_dependencies,optimize_code_size
+    path: ./node_modules/@protobuf-ts/plugin/bin/protoc-gen-ts
