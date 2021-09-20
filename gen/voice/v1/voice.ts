@@ -8,8 +8,10 @@ import { ServerStreamingCall } from "@protobuf-ts/runtime-rpc";
 import { stackIntercept } from "@protobuf-ts/runtime-rpc";
 import { UnaryCall } from "@protobuf-ts/runtime-rpc";
 import { RpcOptions } from "@protobuf-ts/runtime-rpc";
-import { Empty } from "../../google/protobuf/empty";
+import { Empty } from "../../harmonytypes/v1/types";
 /**
+ * A signal object.
+ *
  * @generated from protobuf message protocol.voice.v1.Signal
  */
 export interface Signal {
@@ -19,13 +21,17 @@ export interface Signal {
     event: {
         oneofKind: "iceCandidate";
         /**
+         * WebRTC ICE candidate event.
+         *
          * @generated from protobuf field: string ice_candidate = 1;
          */
         iceCandidate: string;
     } | {
         oneofKind: "renegotiationNeeded";
         /**
-         * @generated from protobuf field: google.protobuf.Empty renegotiation_needed = 2;
+         * Event sent when a renegotiation is needed in the WebRTC connection.
+         *
+         * @generated from protobuf field: protocol.harmonytypes.v1.Empty renegotiation_needed = 2;
          */
         renegotiationNeeded: Empty;
     } | {
@@ -33,48 +39,93 @@ export interface Signal {
     };
 }
 /**
+ * Used in `Connect` endpoint.
+ *
  * @generated from protobuf message protocol.voice.v1.ConnectRequest
  */
 export interface ConnectRequest {
     /**
-     * @generated from protobuf field: uint64 channel_id = 1;
+     * Guild ID of the guild where the channel is.
+     *
+     * @generated from protobuf field: uint64 guild_id = 1;
+     */
+    guildId: string;
+    /**
+     * Channel ID of the voice channel to connect.
+     *
+     * @generated from protobuf field: uint64 channel_id = 2;
      */
     channelId: string;
     /**
-     * @generated from protobuf field: string offer = 2;
+     * WebRTC Connection offer.
+     *
+     * @generated from protobuf field: string offer = 3;
      */
     offer: string;
 }
 /**
+ * Used in `Connect` endpoint.
+ *
  * @generated from protobuf message protocol.voice.v1.ConnectResponse
  */
 export interface ConnectResponse {
     /**
+     * WebRTC Connection answer.
+     *
      * @generated from protobuf field: string answer = 1;
      */
     answer: string;
 }
 /**
+ * Used in `StreamState` endpoint.
+ *
  * @generated from protobuf message protocol.voice.v1.StreamStateRequest
  */
 export interface StreamStateRequest {
     /**
-     * @generated from protobuf field: uint64 channel_id = 1;
+     * Guild ID of the guild where the channel is.
+     *
+     * @generated from protobuf field: uint64 guild_id = 1;
+     */
+    guildId: string;
+    /**
+     * Channel ID of the voice channel to stream states for.
+     *
+     * @generated from protobuf field: uint64 channel_id = 2;
      */
     channelId: string;
 }
 /**
+ * Used in `StreamState` endpoint.
+ *
+ * @generated from protobuf message protocol.voice.v1.StreamStateResponse
+ */
+export interface StreamStateResponse {
+    /**
+     * The signal event.
+     *
+     * @generated from protobuf field: protocol.voice.v1.Signal signal = 1;
+     */
+    signal?: Signal;
+}
+/**
+ * Harmony service for facilitating voice operations using WebRTC.
+ *
  * @generated from protobuf service protocol.voice.v1.VoiceService
  */
 export interface IVoiceServiceClient {
     /**
+     * Endpoint to connect to a voice channel.
+     *
      * @generated from protobuf rpc: Connect(protocol.voice.v1.ConnectRequest) returns (protocol.voice.v1.ConnectResponse);
      */
     connect(input: ConnectRequest, options?: RpcOptions): UnaryCall<ConnectRequest, ConnectResponse>;
     /**
-     * @generated from protobuf rpc: StreamState(protocol.voice.v1.StreamStateRequest) returns (stream protocol.voice.v1.Signal);
+     * Endpoint to stream states of a voice connection.
+     *
+     * @generated from protobuf rpc: StreamState(protocol.voice.v1.StreamStateRequest) returns (stream protocol.voice.v1.StreamStateResponse);
      */
-    streamState(input: StreamStateRequest, options?: RpcOptions): ServerStreamingCall<StreamStateRequest, Signal>;
+    streamState(input: StreamStateRequest, options?: RpcOptions): ServerStreamingCall<StreamStateRequest, StreamStateResponse>;
 }
 /**
  * Type for protobuf message protocol.voice.v1.Signal
@@ -94,8 +145,9 @@ export const Signal = new Signal$Type();
 class ConnectRequest$Type extends MessageType<ConnectRequest> {
     constructor() {
         super("protocol.voice.v1.ConnectRequest", [
-            { no: 1, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-            { no: 2, name: "offer", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
+            { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+            { no: 2, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+            { no: 3, name: "offer", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
         ]);
     }
 }
@@ -117,19 +169,33 @@ export const ConnectResponse = new ConnectResponse$Type();
 class StreamStateRequest$Type extends MessageType<StreamStateRequest> {
     constructor() {
         super("protocol.voice.v1.StreamStateRequest", [
-            { no: 1, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ }
+            { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+            { no: 2, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ }
         ]);
     }
 }
 export const StreamStateRequest = new StreamStateRequest$Type();
 /**
+ * Type for protobuf message protocol.voice.v1.StreamStateResponse
+ */
+class StreamStateResponse$Type extends MessageType<StreamStateResponse> {
+    constructor() {
+        super("protocol.voice.v1.StreamStateResponse", [
+            { no: 1, name: "signal", kind: "message", T: () => Signal }
+        ]);
+    }
+}
+export const StreamStateResponse = new StreamStateResponse$Type();
+/**
+ * Harmony service for facilitating voice operations using WebRTC.
+ *
  * @generated from protobuf service protocol.voice.v1.VoiceService
  */
 export class VoiceServiceClient implements IVoiceServiceClient {
     readonly typeName = "protocol.voice.v1.VoiceService";
     readonly methods: MethodInfo[] = [
-        { service: this, name: "Connect", localName: "connect", I: ConnectRequest, O: ConnectResponse },
-        { service: this, name: "StreamState", localName: "streamState", I: StreamStateRequest, O: Signal, serverStreaming: true }
+        { service: this, name: "Connect", localName: "connect", I: ConnectRequest, O: ConnectResponse, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } } },
+        { service: this, name: "StreamState", localName: "streamState", I: StreamStateRequest, O: StreamStateResponse, serverStreaming: true, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } } }
     ];
     constructor(private readonly _transport: RpcTransport) {
     }
@@ -137,8 +203,8 @@ export class VoiceServiceClient implements IVoiceServiceClient {
         const method = this.methods[0], opt = this._transport.mergeOptions(options), i = method.I.create(input);
         return stackIntercept<ConnectRequest, ConnectResponse>("unary", this._transport, method, opt, i);
     }
-    streamState(input: StreamStateRequest, options?: RpcOptions): ServerStreamingCall<StreamStateRequest, Signal> {
+    streamState(input: StreamStateRequest, options?: RpcOptions): ServerStreamingCall<StreamStateRequest, StreamStateResponse> {
         const method = this.methods[1], opt = this._transport.mergeOptions(options), i = method.I.create(input);
-        return stackIntercept<StreamStateRequest, Signal>("serverStreaming", this._transport, method, opt, i);
+        return stackIntercept<StreamStateRequest, StreamStateResponse>("serverStreaming", this._transport, method, opt, i);
     }
 }

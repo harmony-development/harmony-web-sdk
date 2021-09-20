@@ -4,350 +4,455 @@
 import { MessageType } from "@protobuf-ts/runtime";
 import { ItemPosition } from "../../harmonytypes/v1/types";
 /**
- * @generated from protobuf message protocol.chat.v1.QueryPermissionsRequest
- */
-export interface QueryPermissionsRequest {
-    /**
-     * @generated from protobuf field: uint64 guild_id = 1;
-     */
-    guildId: string;
-    /**
-     * @generated from protobuf field: uint64 channel_id = 2;
-     */
-    channelId: string;
-    /**
-     * @generated from protobuf field: string check_for = 3;
-     */
-    checkFor: string;
-    /**
-     * @generated from protobuf field: uint64 as = 4;
-     */
-    as: string;
-}
-/**
- * @generated from protobuf message protocol.chat.v1.QueryPermissionsResponse
- */
-export interface QueryPermissionsResponse {
-    /**
-     * @generated from protobuf field: bool ok = 1;
-     */
-    ok: boolean;
-}
-/**
- * @generated from protobuf message protocol.chat.v1.BatchQueryPermissionsRequest
- */
-export interface BatchQueryPermissionsRequest {
-    /**
-     * @generated from protobuf field: repeated protocol.chat.v1.QueryPermissionsRequest requests = 1;
-     */
-    requests: QueryPermissionsRequest[];
-}
-/**
- * @generated from protobuf message protocol.chat.v1.BatchQueryPermissionsResponse
- */
-export interface BatchQueryPermissionsResponse {
-    /**
-     * @generated from protobuf field: repeated protocol.chat.v1.QueryPermissionsResponse responses = 1;
-     */
-    responses: QueryPermissionsResponse[];
-}
-/**
+ * Object representing a single permission node.
+ *
  * @generated from protobuf message protocol.chat.v1.Permission
  */
 export interface Permission {
     /**
+     * the permission matcher. (example: roles.manage)
+     *
      * @generated from protobuf field: string matches = 1;
      */
     matches: string;
     /**
-     * @generated from protobuf field: protocol.chat.v1.Permission.Mode mode = 2;
+     * whether the permission is allowed or not.
+     *
+     * @generated from protobuf field: bool ok = 2;
      */
-    mode: Permission_Mode;
+    ok: boolean;
 }
 /**
- * @generated from protobuf enum protocol.chat.v1.Permission.Mode
- */
-export enum Permission_Mode {
-    /**
-     * @generated from protobuf enum value: Allow = 0;
-     */
-    Allow = 0,
-    /**
-     * @generated from protobuf enum value: Deny = 1;
-     */
-    Deny = 1
-}
-/**
- * @generated from protobuf message protocol.chat.v1.PermissionList
- */
-export interface PermissionList {
-    /**
-     * @generated from protobuf field: repeated protocol.chat.v1.Permission permissions = 1;
-     */
-    permissions: Permission[];
-}
-/**
- * @generated from protobuf message protocol.chat.v1.SetPermissionsRequest
- */
-export interface SetPermissionsRequest {
-    /**
-     * @generated from protobuf field: uint64 guild_id = 1;
-     */
-    guildId: string;
-    /**
-     * @generated from protobuf field: uint64 channel_id = 2;
-     */
-    channelId: string;
-    /**
-     * @generated from protobuf field: uint64 role_id = 3;
-     */
-    roleId: string;
-    /**
-     * @generated from protobuf field: protocol.chat.v1.PermissionList perms = 4;
-     */
-    perms?: PermissionList;
-}
-/**
- * @generated from protobuf message protocol.chat.v1.GetPermissionsRequest
- */
-export interface GetPermissionsRequest {
-    /**
-     * @generated from protobuf field: uint64 guild_id = 1;
-     */
-    guildId: string;
-    /**
-     * @generated from protobuf field: uint64 channel_id = 2;
-     */
-    channelId: string;
-    /**
-     * @generated from protobuf field: uint64 role_id = 3;
-     */
-    roleId: string;
-}
-/**
- * @generated from protobuf message protocol.chat.v1.GetPermissionsResponse
- */
-export interface GetPermissionsResponse {
-    /**
-     * @generated from protobuf field: protocol.chat.v1.PermissionList perms = 1;
-     */
-    perms?: PermissionList;
-}
-/**
+ * Object representing a role without the ID.
+ *
  * @generated from protobuf message protocol.chat.v1.Role
  */
 export interface Role {
     /**
-     * @generated from protobuf field: uint64 role_id = 1;
-     */
-    roleId: string;
-    /**
-     * @generated from protobuf field: string name = 2;
+     * the role name.
+     *
+     * @generated from protobuf field: string name = 1;
      */
     name: string;
     /**
-     * @generated from protobuf field: int32 color = 3;
+     * the role color.
+     *
+     * @generated from protobuf field: int32 color = 2;
      */
     color: number;
     /**
-     * @generated from protobuf field: bool hoist = 4;
+     * whether the role is hoisted or not.
+     *
+     * @generated from protobuf field: bool hoist = 3;
      */
     hoist: boolean;
     /**
-     * @generated from protobuf field: bool pingable = 5;
+     * whether the role is mentionable or not.
+     *
+     * @generated from protobuf field: bool pingable = 4;
      */
     pingable: boolean;
 }
 /**
- * @generated from protobuf message protocol.chat.v1.MoveRoleRequest
+ * Object representing a role with it's ID.
+ *
+ * @generated from protobuf message protocol.chat.v1.RoleWithId
  */
-export interface MoveRoleRequest {
+export interface RoleWithId {
     /**
-     * @generated from protobuf field: uint64 guild_id = 1;
-     */
-    guildId: string;
-    /**
-     * @generated from protobuf field: uint64 role_id = 2;
+     * ID of the role.
+     *
+     * @generated from protobuf field: uint64 role_id = 1;
      */
     roleId: string;
     /**
-     * @generated from protobuf field: protocol.harmonytypes.v1.ItemPosition new_position = 3;
-     */
-    newPosition?: ItemPosition;
-}
-/**
- * @generated from protobuf message protocol.chat.v1.MoveRoleResponse
- */
-export interface MoveRoleResponse {
-}
-/**
- * @generated from protobuf message protocol.chat.v1.GetGuildRolesRequest
- */
-export interface GetGuildRolesRequest {
-    /**
-     * @generated from protobuf field: uint64 guild_id = 1;
-     */
-    guildId: string;
-}
-/**
- * @generated from protobuf message protocol.chat.v1.GetGuildRolesResponse
- */
-export interface GetGuildRolesResponse {
-    /**
-     * @generated from protobuf field: repeated protocol.chat.v1.Role roles = 1;
-     */
-    roles: Role[];
-}
-/**
- * @generated from protobuf message protocol.chat.v1.AddGuildRoleRequest
- */
-export interface AddGuildRoleRequest {
-    /**
-     * @generated from protobuf field: uint64 guild_id = 1;
-     */
-    guildId: string;
-    /**
+     * The role data.
+     *
      * @generated from protobuf field: protocol.chat.v1.Role role = 2;
      */
     role?: Role;
 }
 /**
+ * Used in the `QueryHasPermission` endpoint.
+ *
+ * @generated from protobuf message protocol.chat.v1.QueryHasPermissionRequest
+ */
+export interface QueryHasPermissionRequest {
+    /**
+     * the guild ID to query permissions for
+     *
+     * @generated from protobuf field: uint64 guild_id = 1;
+     */
+    guildId: string;
+    /**
+     * the channel ID to query permissions for. If not set, it will query
+     * permissions for the guild.
+     *
+     * @generated from protobuf field: optional uint64 channel_id = 2;
+     */
+    channelId?: string;
+    /**
+     * the user ID to query permissions for (if not provided, the current user is
+     * assumed).
+     *
+     * @generated from protobuf field: optional uint64 as = 4;
+     */
+    as?: string;
+    /**
+     * the permission node to check for.
+     *
+     * @generated from protobuf field: string check_for = 3;
+     */
+    checkFor: string;
+}
+/**
+ * Used in the `QueryHasPermission` endpoint.
+ *
+ * @generated from protobuf message protocol.chat.v1.QueryHasPermissionResponse
+ */
+export interface QueryHasPermissionResponse {
+    /**
+     * the permissions for the given node.
+     *
+     * @generated from protobuf field: bool ok = 1;
+     */
+    ok: boolean;
+}
+/**
+ * Used in the `SetPermissions` endpoint.
+ *
+ * @generated from protobuf message protocol.chat.v1.SetPermissionsRequest
+ */
+export interface SetPermissionsRequest {
+    /**
+     * the guild ID to set permissions for.
+     *
+     * @generated from protobuf field: uint64 guild_id = 1;
+     */
+    guildId: string;
+    /**
+     * the channel ID to set permissions for. Only set if the role is for a
+     * channel.
+     *
+     * @generated from protobuf field: optional uint64 channel_id = 2;
+     */
+    channelId?: string;
+    /**
+     * the role ID to set permissions for.
+     *
+     * @generated from protobuf field: uint64 role_id = 3;
+     */
+    roleId: string;
+    /**
+     * the permission list to give.
+     *
+     * There is no "perms_to_take" because not given permissions are by
+     * default not allowed.
+     *
+     * @generated from protobuf field: repeated protocol.chat.v1.Permission perms_to_give = 4;
+     */
+    permsToGive: Permission[];
+}
+/**
+ * Used in the `SetPermissions` endpoint.
+ *
+ * @generated from protobuf message protocol.chat.v1.SetPermissionsResponse
+ */
+export interface SetPermissionsResponse {
+}
+/**
+ * Used in the `GetPermissions` endpoint.
+ *
+ * @generated from protobuf message protocol.chat.v1.GetPermissionsRequest
+ */
+export interface GetPermissionsRequest {
+    /**
+     * the guild ID to get permissions for.
+     *
+     * @generated from protobuf field: uint64 guild_id = 1;
+     */
+    guildId: string;
+    /**
+     * the channel ID to get permissions for. Only applicable for roles in a
+     * channel.
+     *
+     * @generated from protobuf field: optional uint64 channel_id = 2;
+     */
+    channelId?: string;
+    /**
+     * the role ID to get permissions for.
+     *
+     * @generated from protobuf field: uint64 role_id = 3;
+     */
+    roleId: string;
+}
+/**
+ * Used in the `GetPermissions` endpoint.
+ *
+ * @generated from protobuf message protocol.chat.v1.GetPermissionsResponse
+ */
+export interface GetPermissionsResponse {
+    /**
+     * the permissions list for the given role.
+     *
+     * @generated from protobuf field: repeated protocol.chat.v1.Permission perms = 1;
+     */
+    perms: Permission[];
+}
+/**
+ * Used in the `MoveRole` endpoint.
+ *
+ * @generated from protobuf message protocol.chat.v1.MoveRoleRequest
+ */
+export interface MoveRoleRequest {
+    /**
+     * the guild ID to move the role in.
+     *
+     * @generated from protobuf field: uint64 guild_id = 1;
+     */
+    guildId: string;
+    /**
+     * the role ID to move.
+     *
+     * @generated from protobuf field: uint64 role_id = 2;
+     */
+    roleId: string;
+    /**
+     * the new position of the role.
+     *
+     * @generated from protobuf field: protocol.harmonytypes.v1.ItemPosition new_position = 3;
+     */
+    newPosition?: ItemPosition;
+}
+/**
+ * Used in the `MoveRole` endpoint.
+ *
+ * @generated from protobuf message protocol.chat.v1.MoveRoleResponse
+ */
+export interface MoveRoleResponse {
+}
+/**
+ * Used in the `GetGuildRoles` endpoint.
+ *
+ * @generated from protobuf message protocol.chat.v1.GetGuildRolesRequest
+ */
+export interface GetGuildRolesRequest {
+    /**
+     * the guild ID to get roles for.
+     *
+     * @generated from protobuf field: uint64 guild_id = 1;
+     */
+    guildId: string;
+}
+/**
+ * Used in the `GetGuildRoles` endpoint.
+ *
+ * @generated from protobuf message protocol.chat.v1.GetGuildRolesResponse
+ */
+export interface GetGuildRolesResponse {
+    /**
+     * the list of roles in the guild.
+     *
+     * @generated from protobuf field: repeated protocol.chat.v1.RoleWithId roles = 1;
+     */
+    roles: RoleWithId[];
+}
+/**
+ * Used in the `AddGuildRole` endpoint.
+ *
+ * @generated from protobuf message protocol.chat.v1.AddGuildRoleRequest
+ */
+export interface AddGuildRoleRequest {
+    /**
+     * the guild ID to add the role to.
+     *
+     * @generated from protobuf field: uint64 guild_id = 1;
+     */
+    guildId: string;
+    /**
+     * the role name.
+     *
+     * @generated from protobuf field: string name = 2;
+     */
+    name: string;
+    /**
+     * the role color.
+     *
+     * @generated from protobuf field: int32 color = 3;
+     */
+    color: number;
+    /**
+     * whether the role is hoisted or not.
+     *
+     * @generated from protobuf field: bool hoist = 4;
+     */
+    hoist: boolean;
+    /**
+     * whether the role is mentionable or not.
+     *
+     * @generated from protobuf field: bool pingable = 5;
+     */
+    pingable: boolean;
+}
+/**
+ * Used in the `AddGuildRole` endpoint.
+ *
  * @generated from protobuf message protocol.chat.v1.AddGuildRoleResponse
  */
 export interface AddGuildRoleResponse {
     /**
+     * the ID of the newly created role.
+     *
      * @generated from protobuf field: uint64 role_id = 1;
      */
     roleId: string;
 }
 /**
+ * Used in the `DeleteGuildRole` endpoint.
+ *
  * @generated from protobuf message protocol.chat.v1.DeleteGuildRoleRequest
  */
 export interface DeleteGuildRoleRequest {
     /**
+     * the guild ID to delete the role from.
+     *
      * @generated from protobuf field: uint64 guild_id = 1;
      */
     guildId: string;
     /**
+     * the role ID to delete.
+     *
      * @generated from protobuf field: uint64 role_id = 2;
      */
     roleId: string;
 }
 /**
+ * Used in the `DeleteGuildRole` endpoint.
+ *
+ * @generated from protobuf message protocol.chat.v1.DeleteGuildRoleResponse
+ */
+export interface DeleteGuildRoleResponse {
+}
+/**
+ * Used in the `ModifyGuildRole` endpoint.
+ *
  * @generated from protobuf message protocol.chat.v1.ModifyGuildRoleRequest
  */
 export interface ModifyGuildRoleRequest {
     /**
+     * the ID of the guild where the role is located
+     *
      * @generated from protobuf field: uint64 guild_id = 1;
      */
     guildId: string;
     /**
-     * @generated from protobuf field: optional string new_name = 2;
+     * the ID of the role to modify
+     *
+     * @generated from protobuf field: uint64 role_id = 2;
+     */
+    roleId: string;
+    /**
+     * the new name of the role
+     *
+     * @generated from protobuf field: optional string new_name = 3;
      */
     newName?: string;
     /**
-     * @generated from protobuf field: optional int32 new_color = 3;
+     * the new color of the role
+     *
+     * @generated from protobuf field: optional int32 new_color = 4;
      */
     newColor?: number;
     /**
-     * @generated from protobuf field: optional bool new_hoist = 4;
+     * the new hoist status of the role
+     *
+     * @generated from protobuf field: optional bool new_hoist = 5;
      */
     newHoist?: boolean;
     /**
-     * @generated from protobuf field: optional bool new_pingable = 5;
+     * the new pingable status of the role
+     *
+     * @generated from protobuf field: optional bool new_pingable = 6;
      */
     newPingable?: boolean;
 }
 /**
+ * Used in the `ModifyGuildRole` endpoint.
+ *
+ * @generated from protobuf message protocol.chat.v1.ModifyGuildRoleResponse
+ */
+export interface ModifyGuildRoleResponse {
+}
+/**
+ * Used in the `ManageUserRoles` endpoint.
+ *
  * @generated from protobuf message protocol.chat.v1.ManageUserRolesRequest
  */
 export interface ManageUserRolesRequest {
     /**
+     * the ID of the guild where the user is being managed
+     *
      * @generated from protobuf field: uint64 guild_id = 1;
      */
     guildId: string;
     /**
+     * the ID of the user to modify
+     *
      * @generated from protobuf field: uint64 user_id = 2;
      */
     userId: string;
     /**
+     * the IDs of the roles to add
+     *
      * @generated from protobuf field: repeated uint64 give_role_ids = 3;
      */
     giveRoleIds: string[];
     /**
+     * the IDs of the roles to remove
+     *
      * @generated from protobuf field: repeated uint64 take_role_ids = 4;
      */
     takeRoleIds: string[];
 }
 /**
+ * Used in the `ManageUserRoles` endpoint.
+ *
+ * @generated from protobuf message protocol.chat.v1.ManageUserRolesResponse
+ */
+export interface ManageUserRolesResponse {
+}
+/**
+ * Used in the `GetUserRoles` endpoint.
+ *
  * @generated from protobuf message protocol.chat.v1.GetUserRolesRequest
  */
 export interface GetUserRolesRequest {
     /**
+     * the ID of the guild where the user is located
+     *
      * @generated from protobuf field: uint64 guild_id = 1;
      */
     guildId: string;
     /**
+     * the ID of the user to get roles for
+     *
      * @generated from protobuf field: uint64 user_id = 2;
      */
     userId: string;
 }
 /**
+ * Used in the `GetUserRoles` endpoint.
+ *
  * @generated from protobuf message protocol.chat.v1.GetUserRolesResponse
  */
 export interface GetUserRolesResponse {
     /**
+     * a list of IDs of the roles the user has
+     *
      * @generated from protobuf field: repeated uint64 roles = 1;
      */
     roles: string[];
 }
-/**
- * Type for protobuf message protocol.chat.v1.QueryPermissionsRequest
- */
-class QueryPermissionsRequest$Type extends MessageType<QueryPermissionsRequest> {
-    constructor() {
-        super("protocol.chat.v1.QueryPermissionsRequest", [
-            { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-            { no: 2, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-            { no: 3, name: "check_for", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 4, name: "as", kind: "scalar", T: 4 /*ScalarType.UINT64*/ }
-        ]);
-    }
-}
-export const QueryPermissionsRequest = new QueryPermissionsRequest$Type();
-/**
- * Type for protobuf message protocol.chat.v1.QueryPermissionsResponse
- */
-class QueryPermissionsResponse$Type extends MessageType<QueryPermissionsResponse> {
-    constructor() {
-        super("protocol.chat.v1.QueryPermissionsResponse", [
-            { no: 1, name: "ok", kind: "scalar", T: 8 /*ScalarType.BOOL*/ }
-        ]);
-    }
-}
-export const QueryPermissionsResponse = new QueryPermissionsResponse$Type();
-/**
- * Type for protobuf message protocol.chat.v1.BatchQueryPermissionsRequest
- */
-class BatchQueryPermissionsRequest$Type extends MessageType<BatchQueryPermissionsRequest> {
-    constructor() {
-        super("protocol.chat.v1.BatchQueryPermissionsRequest", [
-            { no: 1, name: "requests", kind: "message", repeat: 1 /*RepeatType.PACKED*/, T: () => QueryPermissionsRequest }
-        ]);
-    }
-}
-export const BatchQueryPermissionsRequest = new BatchQueryPermissionsRequest$Type();
-/**
- * Type for protobuf message protocol.chat.v1.BatchQueryPermissionsResponse
- */
-class BatchQueryPermissionsResponse$Type extends MessageType<BatchQueryPermissionsResponse> {
-    constructor() {
-        super("protocol.chat.v1.BatchQueryPermissionsResponse", [
-            { no: 1, name: "responses", kind: "message", repeat: 1 /*RepeatType.PACKED*/, T: () => QueryPermissionsResponse }
-        ]);
-    }
-}
-export const BatchQueryPermissionsResponse = new BatchQueryPermissionsResponse$Type();
 /**
  * Type for protobuf message protocol.chat.v1.Permission
  */
@@ -355,22 +460,62 @@ class Permission$Type extends MessageType<Permission> {
     constructor() {
         super("protocol.chat.v1.Permission", [
             { no: 1, name: "matches", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 2, name: "mode", kind: "enum", T: () => ["protocol.chat.v1.Permission.Mode", Permission_Mode] }
+            { no: 2, name: "ok", kind: "scalar", T: 8 /*ScalarType.BOOL*/ }
         ]);
     }
 }
 export const Permission = new Permission$Type();
 /**
- * Type for protobuf message protocol.chat.v1.PermissionList
+ * Type for protobuf message protocol.chat.v1.Role
  */
-class PermissionList$Type extends MessageType<PermissionList> {
+class Role$Type extends MessageType<Role> {
     constructor() {
-        super("protocol.chat.v1.PermissionList", [
-            { no: 1, name: "permissions", kind: "message", repeat: 1 /*RepeatType.PACKED*/, T: () => Permission }
+        super("protocol.chat.v1.Role", [
+            { no: 1, name: "name", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 2, name: "color", kind: "scalar", T: 5 /*ScalarType.INT32*/ },
+            { no: 3, name: "hoist", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
+            { no: 4, name: "pingable", kind: "scalar", T: 8 /*ScalarType.BOOL*/ }
         ]);
     }
 }
-export const PermissionList = new PermissionList$Type();
+export const Role = new Role$Type();
+/**
+ * Type for protobuf message protocol.chat.v1.RoleWithId
+ */
+class RoleWithId$Type extends MessageType<RoleWithId> {
+    constructor() {
+        super("protocol.chat.v1.RoleWithId", [
+            { no: 1, name: "role_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+            { no: 2, name: "role", kind: "message", T: () => Role }
+        ]);
+    }
+}
+export const RoleWithId = new RoleWithId$Type();
+/**
+ * Type for protobuf message protocol.chat.v1.QueryHasPermissionRequest
+ */
+class QueryHasPermissionRequest$Type extends MessageType<QueryHasPermissionRequest> {
+    constructor() {
+        super("protocol.chat.v1.QueryHasPermissionRequest", [
+            { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+            { no: 2, name: "channel_id", kind: "scalar", opt: true, T: 4 /*ScalarType.UINT64*/ },
+            { no: 4, name: "as", kind: "scalar", opt: true, T: 4 /*ScalarType.UINT64*/ },
+            { no: 3, name: "check_for", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
+        ]);
+    }
+}
+export const QueryHasPermissionRequest = new QueryHasPermissionRequest$Type();
+/**
+ * Type for protobuf message protocol.chat.v1.QueryHasPermissionResponse
+ */
+class QueryHasPermissionResponse$Type extends MessageType<QueryHasPermissionResponse> {
+    constructor() {
+        super("protocol.chat.v1.QueryHasPermissionResponse", [
+            { no: 1, name: "ok", kind: "scalar", T: 8 /*ScalarType.BOOL*/ }
+        ]);
+    }
+}
+export const QueryHasPermissionResponse = new QueryHasPermissionResponse$Type();
 /**
  * Type for protobuf message protocol.chat.v1.SetPermissionsRequest
  */
@@ -378,13 +523,22 @@ class SetPermissionsRequest$Type extends MessageType<SetPermissionsRequest> {
     constructor() {
         super("protocol.chat.v1.SetPermissionsRequest", [
             { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-            { no: 2, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+            { no: 2, name: "channel_id", kind: "scalar", opt: true, T: 4 /*ScalarType.UINT64*/ },
             { no: 3, name: "role_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-            { no: 4, name: "perms", kind: "message", T: () => PermissionList }
+            { no: 4, name: "perms_to_give", kind: "message", repeat: 1 /*RepeatType.PACKED*/, T: () => Permission }
         ]);
     }
 }
 export const SetPermissionsRequest = new SetPermissionsRequest$Type();
+/**
+ * Type for protobuf message protocol.chat.v1.SetPermissionsResponse
+ */
+class SetPermissionsResponse$Type extends MessageType<SetPermissionsResponse> {
+    constructor() {
+        super("protocol.chat.v1.SetPermissionsResponse", []);
+    }
+}
+export const SetPermissionsResponse = new SetPermissionsResponse$Type();
 /**
  * Type for protobuf message protocol.chat.v1.GetPermissionsRequest
  */
@@ -392,7 +546,7 @@ class GetPermissionsRequest$Type extends MessageType<GetPermissionsRequest> {
     constructor() {
         super("protocol.chat.v1.GetPermissionsRequest", [
             { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-            { no: 2, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+            { no: 2, name: "channel_id", kind: "scalar", opt: true, T: 4 /*ScalarType.UINT64*/ },
             { no: 3, name: "role_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ }
         ]);
     }
@@ -404,26 +558,11 @@ export const GetPermissionsRequest = new GetPermissionsRequest$Type();
 class GetPermissionsResponse$Type extends MessageType<GetPermissionsResponse> {
     constructor() {
         super("protocol.chat.v1.GetPermissionsResponse", [
-            { no: 1, name: "perms", kind: "message", T: () => PermissionList }
+            { no: 1, name: "perms", kind: "message", repeat: 1 /*RepeatType.PACKED*/, T: () => Permission }
         ]);
     }
 }
 export const GetPermissionsResponse = new GetPermissionsResponse$Type();
-/**
- * Type for protobuf message protocol.chat.v1.Role
- */
-class Role$Type extends MessageType<Role> {
-    constructor() {
-        super("protocol.chat.v1.Role", [
-            { no: 1, name: "role_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-            { no: 2, name: "name", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 3, name: "color", kind: "scalar", T: 5 /*ScalarType.INT32*/ },
-            { no: 4, name: "hoist", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
-            { no: 5, name: "pingable", kind: "scalar", T: 8 /*ScalarType.BOOL*/ }
-        ]);
-    }
-}
-export const Role = new Role$Type();
 /**
  * Type for protobuf message protocol.chat.v1.MoveRoleRequest
  */
@@ -463,7 +602,7 @@ export const GetGuildRolesRequest = new GetGuildRolesRequest$Type();
 class GetGuildRolesResponse$Type extends MessageType<GetGuildRolesResponse> {
     constructor() {
         super("protocol.chat.v1.GetGuildRolesResponse", [
-            { no: 1, name: "roles", kind: "message", repeat: 1 /*RepeatType.PACKED*/, T: () => Role }
+            { no: 1, name: "roles", kind: "message", repeat: 1 /*RepeatType.PACKED*/, T: () => RoleWithId }
         ]);
     }
 }
@@ -475,7 +614,10 @@ class AddGuildRoleRequest$Type extends MessageType<AddGuildRoleRequest> {
     constructor() {
         super("protocol.chat.v1.AddGuildRoleRequest", [
             { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-            { no: 2, name: "role", kind: "message", T: () => Role }
+            { no: 2, name: "name", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 3, name: "color", kind: "scalar", T: 5 /*ScalarType.INT32*/ },
+            { no: 4, name: "hoist", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
+            { no: 5, name: "pingable", kind: "scalar", T: 8 /*ScalarType.BOOL*/ }
         ]);
     }
 }
@@ -504,20 +646,39 @@ class DeleteGuildRoleRequest$Type extends MessageType<DeleteGuildRoleRequest> {
 }
 export const DeleteGuildRoleRequest = new DeleteGuildRoleRequest$Type();
 /**
+ * Type for protobuf message protocol.chat.v1.DeleteGuildRoleResponse
+ */
+class DeleteGuildRoleResponse$Type extends MessageType<DeleteGuildRoleResponse> {
+    constructor() {
+        super("protocol.chat.v1.DeleteGuildRoleResponse", []);
+    }
+}
+export const DeleteGuildRoleResponse = new DeleteGuildRoleResponse$Type();
+/**
  * Type for protobuf message protocol.chat.v1.ModifyGuildRoleRequest
  */
 class ModifyGuildRoleRequest$Type extends MessageType<ModifyGuildRoleRequest> {
     constructor() {
         super("protocol.chat.v1.ModifyGuildRoleRequest", [
             { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-            { no: 2, name: "new_name", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
-            { no: 3, name: "new_color", kind: "scalar", opt: true, T: 5 /*ScalarType.INT32*/ },
-            { no: 4, name: "new_hoist", kind: "scalar", opt: true, T: 8 /*ScalarType.BOOL*/ },
-            { no: 5, name: "new_pingable", kind: "scalar", opt: true, T: 8 /*ScalarType.BOOL*/ }
+            { no: 2, name: "role_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+            { no: 3, name: "new_name", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
+            { no: 4, name: "new_color", kind: "scalar", opt: true, T: 5 /*ScalarType.INT32*/ },
+            { no: 5, name: "new_hoist", kind: "scalar", opt: true, T: 8 /*ScalarType.BOOL*/ },
+            { no: 6, name: "new_pingable", kind: "scalar", opt: true, T: 8 /*ScalarType.BOOL*/ }
         ]);
     }
 }
 export const ModifyGuildRoleRequest = new ModifyGuildRoleRequest$Type();
+/**
+ * Type for protobuf message protocol.chat.v1.ModifyGuildRoleResponse
+ */
+class ModifyGuildRoleResponse$Type extends MessageType<ModifyGuildRoleResponse> {
+    constructor() {
+        super("protocol.chat.v1.ModifyGuildRoleResponse", []);
+    }
+}
+export const ModifyGuildRoleResponse = new ModifyGuildRoleResponse$Type();
 /**
  * Type for protobuf message protocol.chat.v1.ManageUserRolesRequest
  */
@@ -532,6 +693,15 @@ class ManageUserRolesRequest$Type extends MessageType<ManageUserRolesRequest> {
     }
 }
 export const ManageUserRolesRequest = new ManageUserRolesRequest$Type();
+/**
+ * Type for protobuf message protocol.chat.v1.ManageUserRolesResponse
+ */
+class ManageUserRolesResponse$Type extends MessageType<ManageUserRolesResponse> {
+    constructor() {
+        super("protocol.chat.v1.ManageUserRolesResponse", []);
+    }
+}
+export const ManageUserRolesResponse = new ManageUserRolesResponse$Type();
 /**
  * Type for protobuf message protocol.chat.v1.GetUserRolesRequest
  */

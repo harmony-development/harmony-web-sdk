@@ -8,57 +8,83 @@ import { stackIntercept } from "@protobuf-ts/runtime-rpc";
 import { UnaryCall } from "@protobuf-ts/runtime-rpc";
 import { RpcOptions } from "@protobuf-ts/runtime-rpc";
 /**
+ * Object representing the metadata of a website.
+ *
  * @generated from protobuf message protocol.mediaproxy.v1.SiteMetadata
  */
 export interface SiteMetadata {
     /**
+     * Title of the website.
+     *
      * @generated from protobuf field: string site_title = 1;
      */
     siteTitle: string;
     /**
+     * Page title of the website page.
+     *
      * @generated from protobuf field: string page_title = 2;
      */
     pageTitle: string;
     /**
+     * Kind of the website.
+     *
      * @generated from protobuf field: string kind = 3;
      */
     kind: string;
     /**
+     * Description of the website page.
+     *
      * @generated from protobuf field: string description = 4;
      */
     description: string;
     /**
+     * URL of the website.
+     *
      * @generated from protobuf field: string url = 5;
      */
     url: string;
     /**
+     * A thumbnail image of the website.
+     *
      * @generated from protobuf field: string image = 6;
      */
     image: string;
 }
 /**
+ * Object represeting the metadata of a media.
+ *
  * @generated from protobuf message protocol.mediaproxy.v1.MediaMetadata
  */
 export interface MediaMetadata {
     /**
+     * Mimetype of the media.
+     *
      * @generated from protobuf field: string mimetype = 1;
      */
     mimetype: string;
     /**
+     * Filename of the media.
+     *
      * @generated from protobuf field: string filename = 2;
      */
     filename: string;
 }
 /**
+ * Used in the `FetchLinkMetadata` endpoint.
+ *
  * @generated from protobuf message protocol.mediaproxy.v1.FetchLinkMetadataRequest
  */
 export interface FetchLinkMetadataRequest {
     /**
+     * URL to fetch metadata from.
+     *
      * @generated from protobuf field: string url = 1;
      */
     url: string;
 }
 /**
+ * Used in the `FetchLinkMetadata` endpoint.
+ *
  * @generated from protobuf message protocol.mediaproxy.v1.FetchLinkMetadataResponse
  */
 export interface FetchLinkMetadataResponse {
@@ -68,12 +94,16 @@ export interface FetchLinkMetadataResponse {
     data: {
         oneofKind: "isSite";
         /**
+         * Site metadata for the URL.
+         *
          * @generated from protobuf field: protocol.mediaproxy.v1.SiteMetadata is_site = 1;
          */
         isSite: SiteMetadata;
     } | {
         oneofKind: "isMedia";
         /**
+         * Media metadata for the URL.
+         *
          * @generated from protobuf field: protocol.mediaproxy.v1.MediaMetadata is_media = 2;
          */
         isMedia: MediaMetadata;
@@ -82,56 +112,93 @@ export interface FetchLinkMetadataResponse {
     };
 }
 /**
+ * Used in the `InstantView` endpoint.
+ *
  * @generated from protobuf message protocol.mediaproxy.v1.InstantViewRequest
  */
 export interface InstantViewRequest {
     /**
+     * URL to get instant view for.
+     *
      * @generated from protobuf field: string url = 1;
      */
     url: string;
 }
 /**
+ * Used in the `InstantView` endpoint.
+ *
  * @generated from protobuf message protocol.mediaproxy.v1.InstantViewResponse
  */
 export interface InstantViewResponse {
     /**
+     * Site metadata for the URL.
+     *
      * @generated from protobuf field: protocol.mediaproxy.v1.SiteMetadata metadata = 1;
      */
     metadata?: SiteMetadata;
     /**
+     * Instant view content.
+     *
      * @generated from protobuf field: string content = 2;
      */
     content: string;
     /**
+     * Whether the instant view is valid.
+     *
      * @generated from protobuf field: bool is_valid = 3;
      */
     isValid: boolean;
 }
 /**
+ * Used in the `CanInstantView` endpoint.
+ *
+ * @generated from protobuf message protocol.mediaproxy.v1.CanInstantViewRequest
+ */
+export interface CanInstantViewRequest {
+    /**
+     * URL to query if server can instant view the website.
+     *
+     * @generated from protobuf field: string url = 1;
+     */
+    url: string;
+}
+/**
+ * Used in the `CanInstantView` endpoint.
+ *
  * @generated from protobuf message protocol.mediaproxy.v1.CanInstantViewResponse
  */
 export interface CanInstantViewResponse {
     /**
+     * Whether the server generate an instant view for the URL queried.
+     *
      * @generated from protobuf field: bool can_instant_view = 1;
      */
     canInstantView: boolean;
 }
 /**
+ * Harmony service for fetching metadata and generating instant view for URLs.
+ *
  * @generated from protobuf service protocol.mediaproxy.v1.MediaProxyService
  */
 export interface IMediaProxyServiceClient {
     /**
+     * Endpoint to fetch metadata for a URL.
+     *
      * @generated from protobuf rpc: FetchLinkMetadata(protocol.mediaproxy.v1.FetchLinkMetadataRequest) returns (protocol.mediaproxy.v1.FetchLinkMetadataResponse);
      */
     fetchLinkMetadata(input: FetchLinkMetadataRequest, options?: RpcOptions): UnaryCall<FetchLinkMetadataRequest, FetchLinkMetadataResponse>;
     /**
+     * Endpoint to instant view a website URL.
+     *
      * @generated from protobuf rpc: InstantView(protocol.mediaproxy.v1.InstantViewRequest) returns (protocol.mediaproxy.v1.InstantViewResponse);
      */
     instantView(input: InstantViewRequest, options?: RpcOptions): UnaryCall<InstantViewRequest, InstantViewResponse>;
     /**
-     * @generated from protobuf rpc: CanInstantView(protocol.mediaproxy.v1.InstantViewRequest) returns (protocol.mediaproxy.v1.CanInstantViewResponse);
+     * Endpoint to query if the server can generate an instant view for a website URL.
+     *
+     * @generated from protobuf rpc: CanInstantView(protocol.mediaproxy.v1.CanInstantViewRequest) returns (protocol.mediaproxy.v1.CanInstantViewResponse);
      */
-    canInstantView(input: InstantViewRequest, options?: RpcOptions): UnaryCall<InstantViewRequest, CanInstantViewResponse>;
+    canInstantView(input: CanInstantViewRequest, options?: RpcOptions): UnaryCall<CanInstantViewRequest, CanInstantViewResponse>;
 }
 /**
  * Type for protobuf message protocol.mediaproxy.v1.SiteMetadata
@@ -209,6 +276,17 @@ class InstantViewResponse$Type extends MessageType<InstantViewResponse> {
 }
 export const InstantViewResponse = new InstantViewResponse$Type();
 /**
+ * Type for protobuf message protocol.mediaproxy.v1.CanInstantViewRequest
+ */
+class CanInstantViewRequest$Type extends MessageType<CanInstantViewRequest> {
+    constructor() {
+        super("protocol.mediaproxy.v1.CanInstantViewRequest", [
+            { no: 1, name: "url", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
+        ]);
+    }
+}
+export const CanInstantViewRequest = new CanInstantViewRequest$Type();
+/**
  * Type for protobuf message protocol.mediaproxy.v1.CanInstantViewResponse
  */
 class CanInstantViewResponse$Type extends MessageType<CanInstantViewResponse> {
@@ -220,6 +298,8 @@ class CanInstantViewResponse$Type extends MessageType<CanInstantViewResponse> {
 }
 export const CanInstantViewResponse = new CanInstantViewResponse$Type();
 /**
+ * Harmony service for fetching metadata and generating instant view for URLs.
+ *
  * @generated from protobuf service protocol.mediaproxy.v1.MediaProxyService
  */
 export class MediaProxyServiceClient implements IMediaProxyServiceClient {
@@ -227,7 +307,7 @@ export class MediaProxyServiceClient implements IMediaProxyServiceClient {
     readonly methods: MethodInfo[] = [
         { service: this, name: "FetchLinkMetadata", localName: "fetchLinkMetadata", I: FetchLinkMetadataRequest, O: FetchLinkMetadataResponse, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } } },
         { service: this, name: "InstantView", localName: "instantView", I: InstantViewRequest, O: InstantViewResponse, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } } },
-        { service: this, name: "CanInstantView", localName: "canInstantView", I: InstantViewRequest, O: CanInstantViewResponse, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } } }
+        { service: this, name: "CanInstantView", localName: "canInstantView", I: CanInstantViewRequest, O: CanInstantViewResponse, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } } }
     ];
     constructor(private readonly _transport: RpcTransport) {
     }
@@ -239,8 +319,8 @@ export class MediaProxyServiceClient implements IMediaProxyServiceClient {
         const method = this.methods[1], opt = this._transport.mergeOptions(options), i = method.I.create(input);
         return stackIntercept<InstantViewRequest, InstantViewResponse>("unary", this._transport, method, opt, i);
     }
-    canInstantView(input: InstantViewRequest, options?: RpcOptions): UnaryCall<InstantViewRequest, CanInstantViewResponse> {
+    canInstantView(input: CanInstantViewRequest, options?: RpcOptions): UnaryCall<CanInstantViewRequest, CanInstantViewResponse> {
         const method = this.methods[2], opt = this._transport.mergeOptions(options), i = method.I.create(input);
-        return stackIntercept<InstantViewRequest, CanInstantViewResponse>("unary", this._transport, method, opt, i);
+        return stackIntercept<CanInstantViewRequest, CanInstantViewResponse>("unary", this._transport, method, opt, i);
     }
 }

@@ -5,11 +5,17 @@ import { RpcTransport } from "@protobuf-ts/runtime-rpc";
 import { MethodInfo } from "@protobuf-ts/runtime-rpc";
 import { MessageType } from "@protobuf-ts/runtime";
 import { ServerStreamingCall } from "@protobuf-ts/runtime-rpc";
-import { Empty } from "../../google/protobuf/empty";
 import { stackIntercept } from "@protobuf-ts/runtime-rpc";
 import { UnaryCall } from "@protobuf-ts/runtime-rpc";
 import { RpcOptions } from "@protobuf-ts/runtime-rpc";
 import { Token } from "../../harmonytypes/v1/types";
+/**
+ * Used in `BeginAuth` endpoint.
+ *
+ * @generated from protobuf message protocol.auth.v1.BeginAuthRequest
+ */
+export interface BeginAuthRequest {
+}
 /**
  * BeginAuthResponse
  * The return type of BeginAuth, containing the
@@ -305,6 +311,19 @@ export interface NextStepRequest_Form {
     fields: NextStepRequest_FormFields[];
 }
 /**
+ * Used in `NextStep` endpoint.
+ *
+ * @generated from protobuf message protocol.auth.v1.NextStepResponse
+ */
+export interface NextStepResponse {
+    /**
+     * step: the next step in the authentication process
+     *
+     * @generated from protobuf field: protocol.auth.v1.AuthStep step = 1;
+     */
+    step?: AuthStep;
+}
+/**
  * StepBackRequest
  * A request to go back 1 step
  *
@@ -318,6 +337,19 @@ export interface StepBackRequest {
      * @generated from protobuf field: string auth_id = 1;
      */
     authId: string;
+}
+/**
+ * Used in `StepBack` endpoint.
+ *
+ * @generated from protobuf message protocol.auth.v1.StepBackResponse
+ */
+export interface StepBackResponse {
+    /**
+     * step: the previous step in the authentication process
+     *
+     * @generated from protobuf field: protocol.auth.v1.AuthStep step = 1;
+     */
+    step?: AuthStep;
 }
 /**
  * StreamStepsRequest
@@ -336,27 +368,39 @@ export interface StreamStepsRequest {
     authId: string;
 }
 /**
+ * Used in `StreamSteps` endpoint.
+ *
+ * @generated from protobuf message protocol.auth.v1.StreamStepsResponse
+ */
+export interface StreamStepsResponse {
+    /**
+     * step: the next step in the authentication process
+     *
+     * @generated from protobuf field: protocol.auth.v1.AuthStep step = 1;
+     */
+    step?: AuthStep;
+}
+/**
  * The request to federate with a foreign server.
  *
  * @generated from protobuf message protocol.auth.v1.FederateRequest
  */
 export interface FederateRequest {
     /**
-     * target: the foreign server you want to
-     * federate with
+     * The server ID foreign server you want to federate with
      *
-     * @generated from protobuf field: string target = 1;
+     * @generated from protobuf field: string server_id = 1;
      */
-    target: string;
+    serverId: string;
 }
 /**
  * The reply to a successful federation request,
  * containing the token you need to present to the
  * foreign server.
  *
- * @generated from protobuf message protocol.auth.v1.FederateReply
+ * @generated from protobuf message protocol.auth.v1.FederateResponse
  */
-export interface FederateReply {
+export interface FederateResponse {
     /**
      * A `harmonytypes.v1.Token` whose `data` field is a serialized `TokenData` message.
      * It is signed with the homeserver's private key.
@@ -366,11 +410,18 @@ export interface FederateReply {
     token?: Token;
 }
 /**
+ * Used in `Key` endpoint.
+ *
+ * @generated from protobuf message protocol.auth.v1.KeyRequest
+ */
+export interface KeyRequest {
+}
+/**
  * Contains a key's bytes.
  *
- * @generated from protobuf message protocol.auth.v1.KeyReply
+ * @generated from protobuf message protocol.auth.v1.KeyResponse
  */
-export interface KeyReply {
+export interface KeyResponse {
     /**
      * key: the bytes of the public key.
      *
@@ -393,11 +444,24 @@ export interface LoginFederatedRequest {
      */
     authToken?: Token;
     /**
-     * domain: the homeserver that the auth token is from
+     * The server ID of the homeserver that the auth token is from
      *
-     * @generated from protobuf field: string domain = 2;
+     * @generated from protobuf field: string server_id = 2;
      */
-    domain: string;
+    serverId: string;
+}
+/**
+ * Used in `LoginFederated` endpoint.
+ *
+ * @generated from protobuf message protocol.auth.v1.LoginFederatedResponse
+ */
+export interface LoginFederatedResponse {
+    /**
+     * The user's session.
+     *
+     * @generated from protobuf field: protocol.auth.v1.Session session = 1;
+     */
+    session?: Session;
 }
 /**
  * Information sent by a client's homeserver, in a `harmonytypes.v1.Token`.
@@ -413,11 +477,11 @@ export interface TokenData {
      */
     userId: string;
     /**
-     * The foreignserver's server name.
+     * The foreignserver's server ID.
      *
-     * @generated from protobuf field: string target = 2;
+     * @generated from protobuf field: string server_id = 2;
      */
-    target: string;
+    serverId: string;
     /**
      * The username of the client.
      *
@@ -430,6 +494,20 @@ export interface TokenData {
      * @generated from protobuf field: string avatar = 4;
      */
     avatar: string;
+}
+/**
+ * Used in `CheckLoggedIn` endpoint.
+ *
+ * @generated from protobuf message protocol.auth.v1.CheckLoggedInRequest
+ */
+export interface CheckLoggedInRequest {
+}
+/**
+ * Used in `CheckLoggedIn` endpoint.
+ *
+ * @generated from protobuf message protocol.auth.v1.CheckLoggedInResponse
+ */
+export interface CheckLoggedInResponse {
 }
 // # Federation
 // 
@@ -466,56 +544,65 @@ export interface IAuthServiceClient {
      * Federate with a foreignserver, obtaining a token
      * you can use to call LoginFederated on it
      *
-     * @generated from protobuf rpc: Federate(protocol.auth.v1.FederateRequest) returns (protocol.auth.v1.FederateReply);
+     * @generated from protobuf rpc: Federate(protocol.auth.v1.FederateRequest) returns (protocol.auth.v1.FederateResponse);
      */
-    federate(input: FederateRequest, options?: RpcOptions): UnaryCall<FederateRequest, FederateReply>;
+    federate(input: FederateRequest, options?: RpcOptions): UnaryCall<FederateRequest, FederateResponse>;
     /**
      * Present a token to a foreignserver from a Federate call
      * on your homeserver in order to login
      *
-     * @generated from protobuf rpc: LoginFederated(protocol.auth.v1.LoginFederatedRequest) returns (protocol.auth.v1.Session);
+     * @generated from protobuf rpc: LoginFederated(protocol.auth.v1.LoginFederatedRequest) returns (protocol.auth.v1.LoginFederatedResponse);
      */
-    loginFederated(input: LoginFederatedRequest, options?: RpcOptions): UnaryCall<LoginFederatedRequest, Session>;
+    loginFederated(input: LoginFederatedRequest, options?: RpcOptions): UnaryCall<LoginFederatedRequest, LoginFederatedResponse>;
     /**
      * Returns the public key of this server
      *
-     * @generated from protobuf rpc: Key(google.protobuf.Empty) returns (protocol.auth.v1.KeyReply);
+     * @generated from protobuf rpc: Key(protocol.auth.v1.KeyRequest) returns (protocol.auth.v1.KeyResponse);
      */
-    key(input: Empty, options?: RpcOptions): UnaryCall<Empty, KeyReply>;
+    key(input: KeyRequest, options?: RpcOptions): UnaryCall<KeyRequest, KeyResponse>;
     /**
      * Begins an authentication session
      *
-     * @generated from protobuf rpc: BeginAuth(google.protobuf.Empty) returns (protocol.auth.v1.BeginAuthResponse);
+     * @generated from protobuf rpc: BeginAuth(protocol.auth.v1.BeginAuthRequest) returns (protocol.auth.v1.BeginAuthResponse);
      */
-    beginAuth(input: Empty, options?: RpcOptions): UnaryCall<Empty, BeginAuthResponse>;
+    beginAuth(input: BeginAuthRequest, options?: RpcOptions): UnaryCall<BeginAuthRequest, BeginAuthResponse>;
     /**
      * Goes to the next step of the authentication session,
      * possibly presenting user input
      *
-     * @generated from protobuf rpc: NextStep(protocol.auth.v1.NextStepRequest) returns (protocol.auth.v1.AuthStep);
+     * @generated from protobuf rpc: NextStep(protocol.auth.v1.NextStepRequest) returns (protocol.auth.v1.NextStepResponse);
      */
-    nextStep(input: NextStepRequest, options?: RpcOptions): UnaryCall<NextStepRequest, AuthStep>;
+    nextStep(input: NextStepRequest, options?: RpcOptions): UnaryCall<NextStepRequest, NextStepResponse>;
     /**
      * Goes to the previous step of the authentication session
      * if possible
      *
-     * @generated from protobuf rpc: StepBack(protocol.auth.v1.StepBackRequest) returns (protocol.auth.v1.AuthStep);
+     * @generated from protobuf rpc: StepBack(protocol.auth.v1.StepBackRequest) returns (protocol.auth.v1.StepBackResponse);
      */
-    stepBack(input: StepBackRequest, options?: RpcOptions): UnaryCall<StepBackRequest, AuthStep>;
+    stepBack(input: StepBackRequest, options?: RpcOptions): UnaryCall<StepBackRequest, StepBackResponse>;
     /**
      * Consume the steps of an authentication session
      * as a stream
      *
-     * @generated from protobuf rpc: StreamSteps(protocol.auth.v1.StreamStepsRequest) returns (stream protocol.auth.v1.AuthStep);
+     * @generated from protobuf rpc: StreamSteps(protocol.auth.v1.StreamStepsRequest) returns (stream protocol.auth.v1.StreamStepsResponse);
      */
-    streamSteps(input: StreamStepsRequest, options?: RpcOptions): ServerStreamingCall<StreamStepsRequest, AuthStep>;
+    streamSteps(input: StreamStepsRequest, options?: RpcOptions): ServerStreamingCall<StreamStepsRequest, StreamStepsResponse>;
     /**
      * Check whether or not you're logged in and the session is valid
      *
-     * @generated from protobuf rpc: CheckLoggedIn(google.protobuf.Empty) returns (google.protobuf.Empty);
+     * @generated from protobuf rpc: CheckLoggedIn(protocol.auth.v1.CheckLoggedInRequest) returns (protocol.auth.v1.CheckLoggedInResponse);
      */
-    checkLoggedIn(input: Empty, options?: RpcOptions): UnaryCall<Empty, Empty>;
+    checkLoggedIn(input: CheckLoggedInRequest, options?: RpcOptions): UnaryCall<CheckLoggedInRequest, CheckLoggedInResponse>;
 }
+/**
+ * Type for protobuf message protocol.auth.v1.BeginAuthRequest
+ */
+class BeginAuthRequest$Type extends MessageType<BeginAuthRequest> {
+    constructor() {
+        super("protocol.auth.v1.BeginAuthRequest", []);
+    }
+}
+export const BeginAuthRequest = new BeginAuthRequest$Type();
 /**
  * Type for protobuf message protocol.auth.v1.BeginAuthResponse
  */
@@ -652,6 +739,17 @@ class NextStepRequest_Form$Type extends MessageType<NextStepRequest_Form> {
 }
 export const NextStepRequest_Form = new NextStepRequest_Form$Type();
 /**
+ * Type for protobuf message protocol.auth.v1.NextStepResponse
+ */
+class NextStepResponse$Type extends MessageType<NextStepResponse> {
+    constructor() {
+        super("protocol.auth.v1.NextStepResponse", [
+            { no: 1, name: "step", kind: "message", T: () => AuthStep }
+        ]);
+    }
+}
+export const NextStepResponse = new NextStepResponse$Type();
+/**
  * Type for protobuf message protocol.auth.v1.StepBackRequest
  */
 class StepBackRequest$Type extends MessageType<StepBackRequest> {
@@ -662,6 +760,17 @@ class StepBackRequest$Type extends MessageType<StepBackRequest> {
     }
 }
 export const StepBackRequest = new StepBackRequest$Type();
+/**
+ * Type for protobuf message protocol.auth.v1.StepBackResponse
+ */
+class StepBackResponse$Type extends MessageType<StepBackResponse> {
+    constructor() {
+        super("protocol.auth.v1.StepBackResponse", [
+            { no: 1, name: "step", kind: "message", T: () => AuthStep }
+        ]);
+    }
+}
+export const StepBackResponse = new StepBackResponse$Type();
 /**
  * Type for protobuf message protocol.auth.v1.StreamStepsRequest
  */
@@ -674,38 +783,58 @@ class StreamStepsRequest$Type extends MessageType<StreamStepsRequest> {
 }
 export const StreamStepsRequest = new StreamStepsRequest$Type();
 /**
+ * Type for protobuf message protocol.auth.v1.StreamStepsResponse
+ */
+class StreamStepsResponse$Type extends MessageType<StreamStepsResponse> {
+    constructor() {
+        super("protocol.auth.v1.StreamStepsResponse", [
+            { no: 1, name: "step", kind: "message", T: () => AuthStep }
+        ]);
+    }
+}
+export const StreamStepsResponse = new StreamStepsResponse$Type();
+/**
  * Type for protobuf message protocol.auth.v1.FederateRequest
  */
 class FederateRequest$Type extends MessageType<FederateRequest> {
     constructor() {
         super("protocol.auth.v1.FederateRequest", [
-            { no: 1, name: "target", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
+            { no: 1, name: "server_id", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
         ]);
     }
 }
 export const FederateRequest = new FederateRequest$Type();
 /**
- * Type for protobuf message protocol.auth.v1.FederateReply
+ * Type for protobuf message protocol.auth.v1.FederateResponse
  */
-class FederateReply$Type extends MessageType<FederateReply> {
+class FederateResponse$Type extends MessageType<FederateResponse> {
     constructor() {
-        super("protocol.auth.v1.FederateReply", [
+        super("protocol.auth.v1.FederateResponse", [
             { no: 1, name: "token", kind: "message", T: () => Token }
         ]);
     }
 }
-export const FederateReply = new FederateReply$Type();
+export const FederateResponse = new FederateResponse$Type();
 /**
- * Type for protobuf message protocol.auth.v1.KeyReply
+ * Type for protobuf message protocol.auth.v1.KeyRequest
  */
-class KeyReply$Type extends MessageType<KeyReply> {
+class KeyRequest$Type extends MessageType<KeyRequest> {
     constructor() {
-        super("protocol.auth.v1.KeyReply", [
+        super("protocol.auth.v1.KeyRequest", []);
+    }
+}
+export const KeyRequest = new KeyRequest$Type();
+/**
+ * Type for protobuf message protocol.auth.v1.KeyResponse
+ */
+class KeyResponse$Type extends MessageType<KeyResponse> {
+    constructor() {
+        super("protocol.auth.v1.KeyResponse", [
             { no: 1, name: "key", kind: "scalar", T: 12 /*ScalarType.BYTES*/ }
         ]);
     }
 }
-export const KeyReply = new KeyReply$Type();
+export const KeyResponse = new KeyResponse$Type();
 /**
  * Type for protobuf message protocol.auth.v1.LoginFederatedRequest
  */
@@ -713,11 +842,22 @@ class LoginFederatedRequest$Type extends MessageType<LoginFederatedRequest> {
     constructor() {
         super("protocol.auth.v1.LoginFederatedRequest", [
             { no: 1, name: "auth_token", kind: "message", T: () => Token },
-            { no: 2, name: "domain", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
+            { no: 2, name: "server_id", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
         ]);
     }
 }
 export const LoginFederatedRequest = new LoginFederatedRequest$Type();
+/**
+ * Type for protobuf message protocol.auth.v1.LoginFederatedResponse
+ */
+class LoginFederatedResponse$Type extends MessageType<LoginFederatedResponse> {
+    constructor() {
+        super("protocol.auth.v1.LoginFederatedResponse", [
+            { no: 1, name: "session", kind: "message", T: () => Session }
+        ]);
+    }
+}
+export const LoginFederatedResponse = new LoginFederatedResponse$Type();
 /**
  * Type for protobuf message protocol.auth.v1.TokenData
  */
@@ -725,13 +865,31 @@ class TokenData$Type extends MessageType<TokenData> {
     constructor() {
         super("protocol.auth.v1.TokenData", [
             { no: 1, name: "user_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-            { no: 2, name: "target", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 2, name: "server_id", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
             { no: 3, name: "username", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
             { no: 4, name: "avatar", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
         ]);
     }
 }
 export const TokenData = new TokenData$Type();
+/**
+ * Type for protobuf message protocol.auth.v1.CheckLoggedInRequest
+ */
+class CheckLoggedInRequest$Type extends MessageType<CheckLoggedInRequest> {
+    constructor() {
+        super("protocol.auth.v1.CheckLoggedInRequest", []);
+    }
+}
+export const CheckLoggedInRequest = new CheckLoggedInRequest$Type();
+/**
+ * Type for protobuf message protocol.auth.v1.CheckLoggedInResponse
+ */
+class CheckLoggedInResponse$Type extends MessageType<CheckLoggedInResponse> {
+    constructor() {
+        super("protocol.auth.v1.CheckLoggedInResponse", []);
+    }
+}
+export const CheckLoggedInResponse = new CheckLoggedInResponse$Type();
 // # Federation
 // 
 // Servers should generate and persist an Ed25519 public and private
@@ -765,47 +923,47 @@ export const TokenData = new TokenData$Type();
 export class AuthServiceClient implements IAuthServiceClient {
     readonly typeName = "protocol.auth.v1.AuthService";
     readonly methods: MethodInfo[] = [
-        { service: this, name: "Federate", localName: "federate", I: FederateRequest, O: FederateReply },
-        { service: this, name: "LoginFederated", localName: "loginFederated", I: LoginFederatedRequest, O: Session },
-        { service: this, name: "Key", localName: "key", I: Empty, O: KeyReply },
-        { service: this, name: "BeginAuth", localName: "beginAuth", I: Empty, O: BeginAuthResponse },
-        { service: this, name: "NextStep", localName: "nextStep", I: NextStepRequest, O: AuthStep },
-        { service: this, name: "StepBack", localName: "stepBack", I: StepBackRequest, O: AuthStep },
-        { service: this, name: "StreamSteps", localName: "streamSteps", I: StreamStepsRequest, O: AuthStep, serverStreaming: true },
-        { service: this, name: "CheckLoggedIn", localName: "checkLoggedIn", I: Empty, O: Empty, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } } }
+        { service: this, name: "Federate", localName: "federate", I: FederateRequest, O: FederateResponse },
+        { service: this, name: "LoginFederated", localName: "loginFederated", I: LoginFederatedRequest, O: LoginFederatedResponse },
+        { service: this, name: "Key", localName: "key", I: KeyRequest, O: KeyResponse },
+        { service: this, name: "BeginAuth", localName: "beginAuth", I: BeginAuthRequest, O: BeginAuthResponse },
+        { service: this, name: "NextStep", localName: "nextStep", I: NextStepRequest, O: NextStepResponse },
+        { service: this, name: "StepBack", localName: "stepBack", I: StepBackRequest, O: StepBackResponse },
+        { service: this, name: "StreamSteps", localName: "streamSteps", I: StreamStepsRequest, O: StreamStepsResponse, serverStreaming: true },
+        { service: this, name: "CheckLoggedIn", localName: "checkLoggedIn", I: CheckLoggedInRequest, O: CheckLoggedInResponse, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } } }
     ];
     constructor(private readonly _transport: RpcTransport) {
     }
-    federate(input: FederateRequest, options?: RpcOptions): UnaryCall<FederateRequest, FederateReply> {
+    federate(input: FederateRequest, options?: RpcOptions): UnaryCall<FederateRequest, FederateResponse> {
         const method = this.methods[0], opt = this._transport.mergeOptions(options), i = method.I.create(input);
-        return stackIntercept<FederateRequest, FederateReply>("unary", this._transport, method, opt, i);
+        return stackIntercept<FederateRequest, FederateResponse>("unary", this._transport, method, opt, i);
     }
-    loginFederated(input: LoginFederatedRequest, options?: RpcOptions): UnaryCall<LoginFederatedRequest, Session> {
+    loginFederated(input: LoginFederatedRequest, options?: RpcOptions): UnaryCall<LoginFederatedRequest, LoginFederatedResponse> {
         const method = this.methods[1], opt = this._transport.mergeOptions(options), i = method.I.create(input);
-        return stackIntercept<LoginFederatedRequest, Session>("unary", this._transport, method, opt, i);
+        return stackIntercept<LoginFederatedRequest, LoginFederatedResponse>("unary", this._transport, method, opt, i);
     }
-    key(input: Empty, options?: RpcOptions): UnaryCall<Empty, KeyReply> {
+    key(input: KeyRequest, options?: RpcOptions): UnaryCall<KeyRequest, KeyResponse> {
         const method = this.methods[2], opt = this._transport.mergeOptions(options), i = method.I.create(input);
-        return stackIntercept<Empty, KeyReply>("unary", this._transport, method, opt, i);
+        return stackIntercept<KeyRequest, KeyResponse>("unary", this._transport, method, opt, i);
     }
-    beginAuth(input: Empty, options?: RpcOptions): UnaryCall<Empty, BeginAuthResponse> {
+    beginAuth(input: BeginAuthRequest, options?: RpcOptions): UnaryCall<BeginAuthRequest, BeginAuthResponse> {
         const method = this.methods[3], opt = this._transport.mergeOptions(options), i = method.I.create(input);
-        return stackIntercept<Empty, BeginAuthResponse>("unary", this._transport, method, opt, i);
+        return stackIntercept<BeginAuthRequest, BeginAuthResponse>("unary", this._transport, method, opt, i);
     }
-    nextStep(input: NextStepRequest, options?: RpcOptions): UnaryCall<NextStepRequest, AuthStep> {
+    nextStep(input: NextStepRequest, options?: RpcOptions): UnaryCall<NextStepRequest, NextStepResponse> {
         const method = this.methods[4], opt = this._transport.mergeOptions(options), i = method.I.create(input);
-        return stackIntercept<NextStepRequest, AuthStep>("unary", this._transport, method, opt, i);
+        return stackIntercept<NextStepRequest, NextStepResponse>("unary", this._transport, method, opt, i);
     }
-    stepBack(input: StepBackRequest, options?: RpcOptions): UnaryCall<StepBackRequest, AuthStep> {
+    stepBack(input: StepBackRequest, options?: RpcOptions): UnaryCall<StepBackRequest, StepBackResponse> {
         const method = this.methods[5], opt = this._transport.mergeOptions(options), i = method.I.create(input);
-        return stackIntercept<StepBackRequest, AuthStep>("unary", this._transport, method, opt, i);
+        return stackIntercept<StepBackRequest, StepBackResponse>("unary", this._transport, method, opt, i);
     }
-    streamSteps(input: StreamStepsRequest, options?: RpcOptions): ServerStreamingCall<StreamStepsRequest, AuthStep> {
+    streamSteps(input: StreamStepsRequest, options?: RpcOptions): ServerStreamingCall<StreamStepsRequest, StreamStepsResponse> {
         const method = this.methods[6], opt = this._transport.mergeOptions(options), i = method.I.create(input);
-        return stackIntercept<StreamStepsRequest, AuthStep>("serverStreaming", this._transport, method, opt, i);
+        return stackIntercept<StreamStepsRequest, StreamStepsResponse>("serverStreaming", this._transport, method, opt, i);
     }
-    checkLoggedIn(input: Empty, options?: RpcOptions): UnaryCall<Empty, Empty> {
+    checkLoggedIn(input: CheckLoggedInRequest, options?: RpcOptions): UnaryCall<CheckLoggedInRequest, CheckLoggedInResponse> {
         const method = this.methods[7], opt = this._transport.mergeOptions(options), i = method.I.create(input);
-        return stackIntercept<Empty, Empty>("unary", this._transport, method, opt, i);
+        return stackIntercept<CheckLoggedInRequest, CheckLoggedInResponse>("unary", this._transport, method, opt, i);
     }
 }

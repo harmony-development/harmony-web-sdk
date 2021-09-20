@@ -3,30 +3,38 @@
 // tslint:disable
 import { RpcTransport } from "@protobuf-ts/runtime-rpc";
 import { MethodInfo } from "@protobuf-ts/runtime-rpc";
+import { RemoveReactionResponse } from "./messages";
+import { RemoveReactionRequest } from "./messages";
+import { AddReactionResponse } from "./messages";
+import { AddReactionRequest } from "./messages";
+import { StreamEventsResponse } from "./stream";
+import { StreamEventsRequest } from "./stream";
+import { DuplexStreamingCall } from "@protobuf-ts/runtime-rpc";
+import { UnpinMessageResponse } from "./messages";
 import { UnpinMessageRequest } from "./messages";
+import { PinMessageResponse } from "./messages";
 import { PinMessageRequest } from "./messages";
 import { GetPinnedMessagesResponse } from "./messages";
 import { GetPinnedMessagesRequest } from "./messages";
+import { UnbanUserResponse } from "./guilds";
 import { UnbanUserRequest } from "./guilds";
+import { KickUserResponse } from "./guilds";
 import { KickUserRequest } from "./guilds";
+import { BanUserResponse } from "./guilds";
 import { BanUserRequest } from "./guilds";
+import { GetBannedUsersResponse } from "./guilds";
+import { GetBannedUsersRequest } from "./guilds";
 import { PreviewGuildResponse } from "./guilds";
 import { PreviewGuildRequest } from "./guilds";
+import { TypingResponse } from "./channels";
 import { TypingRequest } from "./channels";
-import { ProfileUpdateRequest } from "./profile";
-import { GetUserMetadataResponse } from "./profile";
-import { GetUserMetadataRequest } from "./profile";
-import { GetUserBulkResponse } from "./profile";
-import { GetUserBulkRequest } from "./profile";
-import { GetUserResponse } from "./profile";
-import { GetUserRequest } from "./profile";
-import { Event } from "./streaming";
-import { StreamEventsRequest } from "./streaming";
-import { DuplexStreamingCall } from "@protobuf-ts/runtime-rpc";
 import { GetUserRolesResponse } from "./permissions";
 import { GetUserRolesRequest } from "./permissions";
+import { ManageUserRolesResponse } from "./permissions";
 import { ManageUserRolesRequest } from "./permissions";
+import { DeleteGuildRoleResponse } from "./permissions";
 import { DeleteGuildRoleRequest } from "./permissions";
+import { ModifyGuildRoleResponse } from "./permissions";
 import { ModifyGuildRoleRequest } from "./permissions";
 import { AddGuildRoleResponse } from "./permissions";
 import { AddGuildRoleRequest } from "./permissions";
@@ -36,36 +44,36 @@ import { MoveRoleResponse } from "./permissions";
 import { MoveRoleRequest } from "./permissions";
 import { GetPermissionsResponse } from "./permissions";
 import { GetPermissionsRequest } from "./permissions";
+import { SetPermissionsResponse } from "./permissions";
 import { SetPermissionsRequest } from "./permissions";
-import { BatchQueryPermissionsResponse } from "./permissions";
-import { BatchQueryPermissionsRequest } from "./permissions";
-import { QueryPermissionsResponse } from "./permissions";
-import { QueryPermissionsRequest } from "./permissions";
+import { QueryHasPermissionResponse } from "./permissions";
+import { QueryHasPermissionRequest } from "./permissions";
 import { SendMessageResponse } from "./messages";
 import { SendMessageRequest } from "./messages";
+import { TriggerActionResponse } from "./messages";
 import { TriggerActionRequest } from "./messages";
+import { LeaveGuildResponse } from "./guilds";
 import { LeaveGuildRequest } from "./guilds";
 import { JoinGuildResponse } from "./guilds";
 import { JoinGuildRequest } from "./guilds";
-import { EquipEmotePackRequest } from "./emotes";
-import { DequipEmotePackRequest } from "./emotes";
-import { DeleteEmotePackRequest } from "./emotes";
-import { DeleteEmoteFromPackRequest } from "./emotes";
+import { DeleteMessageResponse } from "./messages";
 import { DeleteMessageRequest } from "./messages";
+import { DeleteChannelResponse } from "./channels";
 import { DeleteChannelRequest } from "./channels";
+import { DeleteInviteResponse } from "./guilds";
 import { DeleteInviteRequest } from "./guilds";
+import { DeleteGuildResponse } from "./guilds";
 import { DeleteGuildRequest } from "./guilds";
-import { AddEmoteToPackRequest } from "./emotes";
+import { UpdateMessageTextResponse } from "./messages";
 import { UpdateMessageTextRequest } from "./messages";
+import { UpdateAllChannelOrderResponse } from "./channels";
 import { UpdateAllChannelOrderRequest } from "./channels";
+import { UpdateChannelOrderResponse } from "./channels";
 import { UpdateChannelOrderRequest } from "./channels";
+import { UpdateChannelInformationResponse } from "./channels";
 import { UpdateChannelInformationRequest } from "./channels";
-import { Empty } from "../../google/protobuf/empty";
+import { UpdateGuildInformationResponse } from "./guilds";
 import { UpdateGuildInformationRequest } from "./guilds";
-import { GetEmotePackEmotesResponse } from "./emotes";
-import { GetEmotePackEmotesRequest } from "./emotes";
-import { GetEmotePacksResponse } from "./emotes";
-import { GetEmotePacksRequest } from "./emotes";
 import { GetMessageResponse } from "./messages";
 import { GetMessageRequest } from "./messages";
 import { GetChannelMessagesResponse } from "./messages";
@@ -80,8 +88,6 @@ import { GetGuildResponse } from "./guilds";
 import { GetGuildRequest } from "./guilds";
 import { GetGuildListResponse } from "./guilds";
 import { GetGuildListRequest } from "./guilds";
-import { CreateEmotePackResponse } from "./emotes";
-import { CreateEmotePackRequest } from "./emotes";
 import { CreateChannelResponse } from "./channels";
 import { CreateChannelRequest } from "./channels";
 import { CreateInviteResponse } from "./guilds";
@@ -115,12 +121,6 @@ export interface IChatServiceClient {
      * @generated from protobuf rpc: CreateChannel(protocol.chat.v1.CreateChannelRequest) returns (protocol.chat.v1.CreateChannelResponse);
      */
     createChannel(input: CreateChannelRequest, options?: RpcOptions): UnaryCall<CreateChannelRequest, CreateChannelResponse>;
-    /**
-     * Endpoint to create an emote pack.
-     *
-     * @generated from protobuf rpc: CreateEmotePack(protocol.chat.v1.CreateEmotePackRequest) returns (protocol.chat.v1.CreateEmotePackResponse);
-     */
-    createEmotePack(input: CreateEmotePackRequest, options?: RpcOptions): UnaryCall<CreateEmotePackRequest, CreateEmotePackResponse>;
     /**
      * Endpoint to get your guild list.
      *
@@ -169,105 +169,63 @@ export interface IChatServiceClient {
      */
     getMessage(input: GetMessageRequest, options?: RpcOptions): UnaryCall<GetMessageRequest, GetMessageResponse>;
     /**
-     * Endpoint to get the emote packs you have equipped.
-     *
-     * @generated from protobuf rpc: GetEmotePacks(protocol.chat.v1.GetEmotePacksRequest) returns (protocol.chat.v1.GetEmotePacksResponse);
-     */
-    getEmotePacks(input: GetEmotePacksRequest, options?: RpcOptions): UnaryCall<GetEmotePacksRequest, GetEmotePacksResponse>;
-    /**
-     * Endpoint to get the emotes in an emote pack.
-     *
-     * @generated from protobuf rpc: GetEmotePackEmotes(protocol.chat.v1.GetEmotePackEmotesRequest) returns (protocol.chat.v1.GetEmotePackEmotesResponse);
-     */
-    getEmotePackEmotes(input: GetEmotePackEmotesRequest, options?: RpcOptions): UnaryCall<GetEmotePackEmotesRequest, GetEmotePackEmotesResponse>;
-    /**
      * Endpoint to update a guild's information.
      *
-     * @generated from protobuf rpc: UpdateGuildInformation(protocol.chat.v1.UpdateGuildInformationRequest) returns (google.protobuf.Empty);
+     * @generated from protobuf rpc: UpdateGuildInformation(protocol.chat.v1.UpdateGuildInformationRequest) returns (protocol.chat.v1.UpdateGuildInformationResponse);
      */
-    updateGuildInformation(input: UpdateGuildInformationRequest, options?: RpcOptions): UnaryCall<UpdateGuildInformationRequest, Empty>;
+    updateGuildInformation(input: UpdateGuildInformationRequest, options?: RpcOptions): UnaryCall<UpdateGuildInformationRequest, UpdateGuildInformationResponse>;
     /**
      * Endpoint to update a channel's information.
      *
-     * @generated from protobuf rpc: UpdateChannelInformation(protocol.chat.v1.UpdateChannelInformationRequest) returns (google.protobuf.Empty);
+     * @generated from protobuf rpc: UpdateChannelInformation(protocol.chat.v1.UpdateChannelInformationRequest) returns (protocol.chat.v1.UpdateChannelInformationResponse);
      */
-    updateChannelInformation(input: UpdateChannelInformationRequest, options?: RpcOptions): UnaryCall<UpdateChannelInformationRequest, Empty>;
+    updateChannelInformation(input: UpdateChannelInformationRequest, options?: RpcOptions): UnaryCall<UpdateChannelInformationRequest, UpdateChannelInformationResponse>;
     /**
      * Endpoint to change the position of a channel in the channel list.
      *
-     * @generated from protobuf rpc: UpdateChannelOrder(protocol.chat.v1.UpdateChannelOrderRequest) returns (google.protobuf.Empty);
+     * @generated from protobuf rpc: UpdateChannelOrder(protocol.chat.v1.UpdateChannelOrderRequest) returns (protocol.chat.v1.UpdateChannelOrderResponse);
      */
-    updateChannelOrder(input: UpdateChannelOrderRequest, options?: RpcOptions): UnaryCall<UpdateChannelOrderRequest, Empty>;
+    updateChannelOrder(input: UpdateChannelOrderRequest, options?: RpcOptions): UnaryCall<UpdateChannelOrderRequest, UpdateChannelOrderResponse>;
     /**
      * Endpoint to change the position of all channels in the guild;
      * must specifcy all channels or fails
      *
-     * @generated from protobuf rpc: UpdateAllChannelOrder(protocol.chat.v1.UpdateAllChannelOrderRequest) returns (google.protobuf.Empty);
+     * @generated from protobuf rpc: UpdateAllChannelOrder(protocol.chat.v1.UpdateAllChannelOrderRequest) returns (protocol.chat.v1.UpdateAllChannelOrderResponse);
      */
-    updateAllChannelOrder(input: UpdateAllChannelOrderRequest, options?: RpcOptions): UnaryCall<UpdateAllChannelOrderRequest, Empty>;
+    updateAllChannelOrder(input: UpdateAllChannelOrderRequest, options?: RpcOptions): UnaryCall<UpdateAllChannelOrderRequest, UpdateAllChannelOrderResponse>;
     /**
      * Endpoint to change the text of a message.
      *
-     * @generated from protobuf rpc: UpdateMessageText(protocol.chat.v1.UpdateMessageTextRequest) returns (google.protobuf.Empty);
+     * @generated from protobuf rpc: UpdateMessageText(protocol.chat.v1.UpdateMessageTextRequest) returns (protocol.chat.v1.UpdateMessageTextResponse);
      */
-    updateMessageText(input: UpdateMessageTextRequest, options?: RpcOptions): UnaryCall<UpdateMessageTextRequest, Empty>;
-    /**
-     * Endpoint to add an emote to an emote pack that you own.
-     *
-     * @generated from protobuf rpc: AddEmoteToPack(protocol.chat.v1.AddEmoteToPackRequest) returns (google.protobuf.Empty);
-     */
-    addEmoteToPack(input: AddEmoteToPackRequest, options?: RpcOptions): UnaryCall<AddEmoteToPackRequest, Empty>;
+    updateMessageText(input: UpdateMessageTextRequest, options?: RpcOptions): UnaryCall<UpdateMessageTextRequest, UpdateMessageTextResponse>;
     /**
      * Endpoint to delete a guild.
      *
-     * @generated from protobuf rpc: DeleteGuild(protocol.chat.v1.DeleteGuildRequest) returns (google.protobuf.Empty);
+     * @generated from protobuf rpc: DeleteGuild(protocol.chat.v1.DeleteGuildRequest) returns (protocol.chat.v1.DeleteGuildResponse);
      */
-    deleteGuild(input: DeleteGuildRequest, options?: RpcOptions): UnaryCall<DeleteGuildRequest, Empty>;
+    deleteGuild(input: DeleteGuildRequest, options?: RpcOptions): UnaryCall<DeleteGuildRequest, DeleteGuildResponse>;
     /**
      * Endpoint to delete an invite.
      *
-     * @generated from protobuf rpc: DeleteInvite(protocol.chat.v1.DeleteInviteRequest) returns (google.protobuf.Empty);
+     * @generated from protobuf rpc: DeleteInvite(protocol.chat.v1.DeleteInviteRequest) returns (protocol.chat.v1.DeleteInviteResponse);
      */
-    deleteInvite(input: DeleteInviteRequest, options?: RpcOptions): UnaryCall<DeleteInviteRequest, Empty>;
+    deleteInvite(input: DeleteInviteRequest, options?: RpcOptions): UnaryCall<DeleteInviteRequest, DeleteInviteResponse>;
     /**
      * Endpoint to delete a channel.
      *
-     * @generated from protobuf rpc: DeleteChannel(protocol.chat.v1.DeleteChannelRequest) returns (google.protobuf.Empty);
+     * @generated from protobuf rpc: DeleteChannel(protocol.chat.v1.DeleteChannelRequest) returns (protocol.chat.v1.DeleteChannelResponse);
      */
-    deleteChannel(input: DeleteChannelRequest, options?: RpcOptions): UnaryCall<DeleteChannelRequest, Empty>;
+    deleteChannel(input: DeleteChannelRequest, options?: RpcOptions): UnaryCall<DeleteChannelRequest, DeleteChannelResponse>;
     /**
      * Endpoint to delete a message.
      *
      * This requires the "messages.manage.delete" permission if you are not the
      * message author.
      *
-     * @generated from protobuf rpc: DeleteMessage(protocol.chat.v1.DeleteMessageRequest) returns (google.protobuf.Empty);
+     * @generated from protobuf rpc: DeleteMessage(protocol.chat.v1.DeleteMessageRequest) returns (protocol.chat.v1.DeleteMessageResponse);
      */
-    deleteMessage(input: DeleteMessageRequest, options?: RpcOptions): UnaryCall<DeleteMessageRequest, Empty>;
-    /**
-     * Endpoint to delete an emote from an emote pack.
-     *
-     * @generated from protobuf rpc: DeleteEmoteFromPack(protocol.chat.v1.DeleteEmoteFromPackRequest) returns (google.protobuf.Empty);
-     */
-    deleteEmoteFromPack(input: DeleteEmoteFromPackRequest, options?: RpcOptions): UnaryCall<DeleteEmoteFromPackRequest, Empty>;
-    /**
-     * Endpoint to delete an emote pack that you own.
-     *
-     * @generated from protobuf rpc: DeleteEmotePack(protocol.chat.v1.DeleteEmotePackRequest) returns (google.protobuf.Empty);
-     */
-    deleteEmotePack(input: DeleteEmotePackRequest, options?: RpcOptions): UnaryCall<DeleteEmotePackRequest, Empty>;
-    /**
-     * Endpoint to dequip an emote pack that you have equipped.
-     *
-     * @generated from protobuf rpc: DequipEmotePack(protocol.chat.v1.DequipEmotePackRequest) returns (google.protobuf.Empty);
-     */
-    dequipEmotePack(input: DequipEmotePackRequest, options?: RpcOptions): UnaryCall<DequipEmotePackRequest, Empty>;
-    /**
-     * Endpoint to equip an emote pack.
-     *
-     * @generated from protobuf rpc: EquipEmotePack(protocol.chat.v1.EquipEmotePackRequest) returns (google.protobuf.Empty);
-     */
-    equipEmotePack(input: EquipEmotePackRequest, options?: RpcOptions): UnaryCall<EquipEmotePackRequest, Empty>;
+    deleteMessage(input: DeleteMessageRequest, options?: RpcOptions): UnaryCall<DeleteMessageRequest, DeleteMessageResponse>;
     /**
      * Endpoint to join a guild.
      *
@@ -277,15 +235,15 @@ export interface IChatServiceClient {
     /**
      * Endpoint to leave a guild.
      *
-     * @generated from protobuf rpc: LeaveGuild(protocol.chat.v1.LeaveGuildRequest) returns (google.protobuf.Empty);
+     * @generated from protobuf rpc: LeaveGuild(protocol.chat.v1.LeaveGuildRequest) returns (protocol.chat.v1.LeaveGuildResponse);
      */
-    leaveGuild(input: LeaveGuildRequest, options?: RpcOptions): UnaryCall<LeaveGuildRequest, Empty>;
+    leaveGuild(input: LeaveGuildRequest, options?: RpcOptions): UnaryCall<LeaveGuildRequest, LeaveGuildResponse>;
     /**
      * Endpont to trigger an action.
      *
-     * @generated from protobuf rpc: TriggerAction(protocol.chat.v1.TriggerActionRequest) returns (google.protobuf.Empty);
+     * @generated from protobuf rpc: TriggerAction(protocol.chat.v1.TriggerActionRequest) returns (protocol.chat.v1.TriggerActionResponse);
      */
-    triggerAction(input: TriggerActionRequest, options?: RpcOptions): UnaryCall<TriggerActionRequest, Empty>;
+    triggerAction(input: TriggerActionRequest, options?: RpcOptions): UnaryCall<TriggerActionRequest, TriggerActionResponse>;
     /**
      * Endpoint to send a message.
      *
@@ -295,21 +253,15 @@ export interface IChatServiceClient {
     /**
      * Endpoint to query if a user has a permission.
      *
-     * @generated from protobuf rpc: QueryHasPermission(protocol.chat.v1.QueryPermissionsRequest) returns (protocol.chat.v1.QueryPermissionsResponse);
+     * @generated from protobuf rpc: QueryHasPermission(protocol.chat.v1.QueryHasPermissionRequest) returns (protocol.chat.v1.QueryHasPermissionResponse);
      */
-    queryHasPermission(input: QueryPermissionsRequest, options?: RpcOptions): UnaryCall<QueryPermissionsRequest, QueryPermissionsResponse>;
-    /**
-     * Endpoint to batch query if a user has a permission.
-     *
-     * @generated from protobuf rpc: BatchQueryHasPermission(protocol.chat.v1.BatchQueryPermissionsRequest) returns (protocol.chat.v1.BatchQueryPermissionsResponse);
-     */
-    batchQueryHasPermission(input: BatchQueryPermissionsRequest, options?: RpcOptions): UnaryCall<BatchQueryPermissionsRequest, BatchQueryPermissionsResponse>;
+    queryHasPermission(input: QueryHasPermissionRequest, options?: RpcOptions): UnaryCall<QueryHasPermissionRequest, QueryHasPermissionResponse>;
     /**
      * Endpoint to set permissions for a role in a guild.
      *
-     * @generated from protobuf rpc: SetPermissions(protocol.chat.v1.SetPermissionsRequest) returns (google.protobuf.Empty);
+     * @generated from protobuf rpc: SetPermissions(protocol.chat.v1.SetPermissionsRequest) returns (protocol.chat.v1.SetPermissionsResponse);
      */
-    setPermissions(input: SetPermissionsRequest, options?: RpcOptions): UnaryCall<SetPermissionsRequest, Empty>;
+    setPermissions(input: SetPermissionsRequest, options?: RpcOptions): UnaryCall<SetPermissionsRequest, SetPermissionsResponse>;
     /**
      * Endpoint to get permissions for a role in a guild.
      *
@@ -337,21 +289,21 @@ export interface IChatServiceClient {
     /**
      * Endpoint to a modify a role from a guild.
      *
-     * @generated from protobuf rpc: ModifyGuildRole(protocol.chat.v1.ModifyGuildRoleRequest) returns (google.protobuf.Empty);
+     * @generated from protobuf rpc: ModifyGuildRole(protocol.chat.v1.ModifyGuildRoleRequest) returns (protocol.chat.v1.ModifyGuildRoleResponse);
      */
-    modifyGuildRole(input: ModifyGuildRoleRequest, options?: RpcOptions): UnaryCall<ModifyGuildRoleRequest, Empty>;
+    modifyGuildRole(input: ModifyGuildRoleRequest, options?: RpcOptions): UnaryCall<ModifyGuildRoleRequest, ModifyGuildRoleResponse>;
     /**
      * Endpoint to delete a role from a guild.
      *
-     * @generated from protobuf rpc: DeleteGuildRole(protocol.chat.v1.DeleteGuildRoleRequest) returns (google.protobuf.Empty);
+     * @generated from protobuf rpc: DeleteGuildRole(protocol.chat.v1.DeleteGuildRoleRequest) returns (protocol.chat.v1.DeleteGuildRoleResponse);
      */
-    deleteGuildRole(input: DeleteGuildRoleRequest, options?: RpcOptions): UnaryCall<DeleteGuildRoleRequest, Empty>;
+    deleteGuildRole(input: DeleteGuildRoleRequest, options?: RpcOptions): UnaryCall<DeleteGuildRoleRequest, DeleteGuildRoleResponse>;
     /**
      * Endpoint to manage the roles of a guild member.
      *
-     * @generated from protobuf rpc: ManageUserRoles(protocol.chat.v1.ManageUserRolesRequest) returns (google.protobuf.Empty);
+     * @generated from protobuf rpc: ManageUserRoles(protocol.chat.v1.ManageUserRolesRequest) returns (protocol.chat.v1.ManageUserRolesResponse);
      */
-    manageUserRoles(input: ManageUserRolesRequest, options?: RpcOptions): UnaryCall<ManageUserRolesRequest, Empty>;
+    manageUserRoles(input: ManageUserRolesRequest, options?: RpcOptions): UnaryCall<ManageUserRolesRequest, ManageUserRolesResponse>;
     /**
      * Endpoint to get the roles a guild member has.
      *
@@ -359,65 +311,42 @@ export interface IChatServiceClient {
      */
     getUserRoles(input: GetUserRolesRequest, options?: RpcOptions): UnaryCall<GetUserRolesRequest, GetUserRolesResponse>;
     /**
-     * Endpoint to stream events from the homeserver.
-     *
-     * @generated from protobuf rpc: StreamEvents(stream protocol.chat.v1.StreamEventsRequest) returns (stream protocol.chat.v1.Event);
-     */
-    streamEvents(options?: RpcOptions): DuplexStreamingCall<StreamEventsRequest, Event>;
-    /**
-     * Endpoint to get the profile information of a user.
-     *
-     * @generated from protobuf rpc: GetUser(protocol.chat.v1.GetUserRequest) returns (protocol.chat.v1.GetUserResponse);
-     */
-    getUser(input: GetUserRequest, options?: RpcOptions): UnaryCall<GetUserRequest, GetUserResponse>;
-    /**
-     * Endpoint to batch get the profile information of some users.
-     *
-     * @generated from protobuf rpc: GetUserBulk(protocol.chat.v1.GetUserBulkRequest) returns (protocol.chat.v1.GetUserBulkResponse);
-     */
-    getUserBulk(input: GetUserBulkRequest, options?: RpcOptions): UnaryCall<GetUserBulkRequest, GetUserBulkResponse>;
-    /**
-     * Endpoint to get metadata you have.
-     *
-     * @generated from protobuf rpc: GetUserMetadata(protocol.chat.v1.GetUserMetadataRequest) returns (protocol.chat.v1.GetUserMetadataResponse);
-     */
-    getUserMetadata(input: GetUserMetadataRequest, options?: RpcOptions): UnaryCall<GetUserMetadataRequest, GetUserMetadataResponse>;
-    /**
-     * Endpoint to update your profile information.
-     *
-     * @generated from protobuf rpc: ProfileUpdate(protocol.chat.v1.ProfileUpdateRequest) returns (google.protobuf.Empty);
-     */
-    profileUpdate(input: ProfileUpdateRequest, options?: RpcOptions): UnaryCall<ProfileUpdateRequest, Empty>;
-    /**
      * Endpoint to send a typing notification in a guild channel.
      *
-     * @generated from protobuf rpc: Typing(protocol.chat.v1.TypingRequest) returns (google.protobuf.Empty);
+     * @generated from protobuf rpc: Typing(protocol.chat.v1.TypingRequest) returns (protocol.chat.v1.TypingResponse);
      */
-    typing(input: TypingRequest, options?: RpcOptions): UnaryCall<TypingRequest, Empty>;
+    typing(input: TypingRequest, options?: RpcOptions): UnaryCall<TypingRequest, TypingResponse>;
     /**
-     * Endpoint to "preview" a guild, which returns some information about a guild.
+     * Endpoint to "preview" a guild, which returns some information about a
+     * guild.
      *
      * @generated from protobuf rpc: PreviewGuild(protocol.chat.v1.PreviewGuildRequest) returns (protocol.chat.v1.PreviewGuildResponse);
      */
     previewGuild(input: PreviewGuildRequest, options?: RpcOptions): UnaryCall<PreviewGuildRequest, PreviewGuildResponse>;
     /**
+     * Endpoint to get banned users in a guild.
+     *
+     * @generated from protobuf rpc: GetBannedUsers(protocol.chat.v1.GetBannedUsersRequest) returns (protocol.chat.v1.GetBannedUsersResponse);
+     */
+    getBannedUsers(input: GetBannedUsersRequest, options?: RpcOptions): UnaryCall<GetBannedUsersRequest, GetBannedUsersResponse>;
+    /**
      * Endpoint to ban a user from a guild.
      *
-     * @generated from protobuf rpc: BanUser(protocol.chat.v1.BanUserRequest) returns (google.protobuf.Empty);
+     * @generated from protobuf rpc: BanUser(protocol.chat.v1.BanUserRequest) returns (protocol.chat.v1.BanUserResponse);
      */
-    banUser(input: BanUserRequest, options?: RpcOptions): UnaryCall<BanUserRequest, Empty>;
+    banUser(input: BanUserRequest, options?: RpcOptions): UnaryCall<BanUserRequest, BanUserResponse>;
     /**
      * Endpoint to kick a user from a guild.
      *
-     * @generated from protobuf rpc: KickUser(protocol.chat.v1.KickUserRequest) returns (google.protobuf.Empty);
+     * @generated from protobuf rpc: KickUser(protocol.chat.v1.KickUserRequest) returns (protocol.chat.v1.KickUserResponse);
      */
-    kickUser(input: KickUserRequest, options?: RpcOptions): UnaryCall<KickUserRequest, Empty>;
+    kickUser(input: KickUserRequest, options?: RpcOptions): UnaryCall<KickUserRequest, KickUserResponse>;
     /**
      * Endpoint to unban a user from a guild.
      *
-     * @generated from protobuf rpc: UnbanUser(protocol.chat.v1.UnbanUserRequest) returns (google.protobuf.Empty);
+     * @generated from protobuf rpc: UnbanUser(protocol.chat.v1.UnbanUserRequest) returns (protocol.chat.v1.UnbanUserResponse);
      */
-    unbanUser(input: UnbanUserRequest, options?: RpcOptions): UnaryCall<UnbanUserRequest, Empty>;
+    unbanUser(input: UnbanUserRequest, options?: RpcOptions): UnaryCall<UnbanUserRequest, UnbanUserResponse>;
     /**
      * Endpoint to get all pinned messages in a guild channel.
      *
@@ -427,15 +356,33 @@ export interface IChatServiceClient {
     /**
      * Endpoint to pin a message in a guild channel.
      *
-     * @generated from protobuf rpc: PinMessage(protocol.chat.v1.PinMessageRequest) returns (google.protobuf.Empty);
+     * @generated from protobuf rpc: PinMessage(protocol.chat.v1.PinMessageRequest) returns (protocol.chat.v1.PinMessageResponse);
      */
-    pinMessage(input: PinMessageRequest, options?: RpcOptions): UnaryCall<PinMessageRequest, Empty>;
+    pinMessage(input: PinMessageRequest, options?: RpcOptions): UnaryCall<PinMessageRequest, PinMessageResponse>;
     /**
      * Endpoint to unpin a message in a guild channel.
      *
-     * @generated from protobuf rpc: UnpinMessage(protocol.chat.v1.UnpinMessageRequest) returns (google.protobuf.Empty);
+     * @generated from protobuf rpc: UnpinMessage(protocol.chat.v1.UnpinMessageRequest) returns (protocol.chat.v1.UnpinMessageResponse);
      */
-    unpinMessage(input: UnpinMessageRequest, options?: RpcOptions): UnaryCall<UnpinMessageRequest, Empty>;
+    unpinMessage(input: UnpinMessageRequest, options?: RpcOptions): UnaryCall<UnpinMessageRequest, UnpinMessageResponse>;
+    /**
+     * Endpoint to stream events from the homeserver.
+     *
+     * @generated from protobuf rpc: StreamEvents(stream protocol.chat.v1.StreamEventsRequest) returns (stream protocol.chat.v1.StreamEventsResponse);
+     */
+    streamEvents(options?: RpcOptions): DuplexStreamingCall<StreamEventsRequest, StreamEventsResponse>;
+    /**
+     * Endpoint to add a reaction to a message.
+     *
+     * @generated from protobuf rpc: AddReaction(protocol.chat.v1.AddReactionRequest) returns (protocol.chat.v1.AddReactionResponse);
+     */
+    addReaction(input: AddReactionRequest, options?: RpcOptions): UnaryCall<AddReactionRequest, AddReactionResponse>;
+    /**
+     * Endpoint to remove a reaction from a message.
+     *
+     * @generated from protobuf rpc: RemoveReaction(protocol.chat.v1.RemoveReactionRequest) returns (protocol.chat.v1.RemoveReactionResponse);
+     */
+    removeReaction(input: RemoveReactionRequest, options?: RpcOptions): UnaryCall<RemoveReactionRequest, RemoveReactionResponse>;
 }
 /**
  * The core of Harmony's chat operations.
@@ -448,7 +395,6 @@ export class ChatServiceClient implements IChatServiceClient {
         { service: this, name: "CreateGuild", localName: "createGuild", I: CreateGuildRequest, O: CreateGuildResponse, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } } },
         { service: this, name: "CreateInvite", localName: "createInvite", I: CreateInviteRequest, O: CreateInviteResponse, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "invites.manage.create" } } },
         { service: this, name: "CreateChannel", localName: "createChannel", I: CreateChannelRequest, O: CreateChannelResponse, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "channels.manage.create" } } },
-        { service: this, name: "CreateEmotePack", localName: "createEmotePack", I: CreateEmotePackRequest, O: CreateEmotePackResponse, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } } },
         { service: this, name: "GetGuildList", localName: "getGuildList", I: GetGuildListRequest, O: GetGuildListResponse, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } } },
         { service: this, name: "GetGuild", localName: "getGuild", I: GetGuildRequest, O: GetGuildResponse, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } } },
         { service: this, name: "GetGuildInvites", localName: "getGuildInvites", I: GetGuildInvitesRequest, O: GetGuildInvitesResponse, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "invites.view" } } },
@@ -456,50 +402,41 @@ export class ChatServiceClient implements IChatServiceClient {
         { service: this, name: "GetGuildChannels", localName: "getGuildChannels", I: GetGuildChannelsRequest, O: GetGuildChannelsResponse, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } } },
         { service: this, name: "GetChannelMessages", localName: "getChannelMessages", I: GetChannelMessagesRequest, O: GetChannelMessagesResponse, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "messages.view" } } },
         { service: this, name: "GetMessage", localName: "getMessage", I: GetMessageRequest, O: GetMessageResponse, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "messages.view" } } },
-        { service: this, name: "GetEmotePacks", localName: "getEmotePacks", I: GetEmotePacksRequest, O: GetEmotePacksResponse, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } } },
-        { service: this, name: "GetEmotePackEmotes", localName: "getEmotePackEmotes", I: GetEmotePackEmotesRequest, O: GetEmotePackEmotesResponse, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } } },
-        { service: this, name: "UpdateGuildInformation", localName: "updateGuildInformation", I: UpdateGuildInformationRequest, O: Empty, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "guild.manage.change-information" } } },
-        { service: this, name: "UpdateChannelInformation", localName: "updateChannelInformation", I: UpdateChannelInformationRequest, O: Empty, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "channels.manage.change-information" } } },
-        { service: this, name: "UpdateChannelOrder", localName: "updateChannelOrder", I: UpdateChannelOrderRequest, O: Empty, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "channels.manage.move" } } },
-        { service: this, name: "UpdateAllChannelOrder", localName: "updateAllChannelOrder", I: UpdateAllChannelOrderRequest, O: Empty, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "channels.manage.move" } } },
-        { service: this, name: "UpdateMessageText", localName: "updateMessageText", I: UpdateMessageTextRequest, O: Empty, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "messages.send" } } },
-        { service: this, name: "AddEmoteToPack", localName: "addEmoteToPack", I: AddEmoteToPackRequest, O: Empty, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } } },
-        { service: this, name: "DeleteGuild", localName: "deleteGuild", I: DeleteGuildRequest, O: Empty, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "guild.manage.delete" } } },
-        { service: this, name: "DeleteInvite", localName: "deleteInvite", I: DeleteInviteRequest, O: Empty, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "invites.manage.delete" } } },
-        { service: this, name: "DeleteChannel", localName: "deleteChannel", I: DeleteChannelRequest, O: Empty, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "channels.manage.delete" } } },
-        { service: this, name: "DeleteMessage", localName: "deleteMessage", I: DeleteMessageRequest, O: Empty, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } } },
-        { service: this, name: "DeleteEmoteFromPack", localName: "deleteEmoteFromPack", I: DeleteEmoteFromPackRequest, O: Empty, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } } },
-        { service: this, name: "DeleteEmotePack", localName: "deleteEmotePack", I: DeleteEmotePackRequest, O: Empty, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } } },
-        { service: this, name: "DequipEmotePack", localName: "dequipEmotePack", I: DequipEmotePackRequest, O: Empty, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } } },
-        { service: this, name: "EquipEmotePack", localName: "equipEmotePack", I: EquipEmotePackRequest, O: Empty, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } } },
+        { service: this, name: "UpdateGuildInformation", localName: "updateGuildInformation", I: UpdateGuildInformationRequest, O: UpdateGuildInformationResponse, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "guild.manage.change-information" } } },
+        { service: this, name: "UpdateChannelInformation", localName: "updateChannelInformation", I: UpdateChannelInformationRequest, O: UpdateChannelInformationResponse, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "channels.manage.change-information" } } },
+        { service: this, name: "UpdateChannelOrder", localName: "updateChannelOrder", I: UpdateChannelOrderRequest, O: UpdateChannelOrderResponse, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "channels.manage.move" } } },
+        { service: this, name: "UpdateAllChannelOrder", localName: "updateAllChannelOrder", I: UpdateAllChannelOrderRequest, O: UpdateAllChannelOrderResponse, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "channels.manage.move" } } },
+        { service: this, name: "UpdateMessageText", localName: "updateMessageText", I: UpdateMessageTextRequest, O: UpdateMessageTextResponse, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "messages.send" } } },
+        { service: this, name: "DeleteGuild", localName: "deleteGuild", I: DeleteGuildRequest, O: DeleteGuildResponse, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "guild.manage.delete" } } },
+        { service: this, name: "DeleteInvite", localName: "deleteInvite", I: DeleteInviteRequest, O: DeleteInviteResponse, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "invites.manage.delete" } } },
+        { service: this, name: "DeleteChannel", localName: "deleteChannel", I: DeleteChannelRequest, O: DeleteChannelResponse, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "channels.manage.delete" } } },
+        { service: this, name: "DeleteMessage", localName: "deleteMessage", I: DeleteMessageRequest, O: DeleteMessageResponse, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } } },
         { service: this, name: "JoinGuild", localName: "joinGuild", I: JoinGuildRequest, O: JoinGuildResponse, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } } },
-        { service: this, name: "LeaveGuild", localName: "leaveGuild", I: LeaveGuildRequest, O: Empty, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } } },
-        { service: this, name: "TriggerAction", localName: "triggerAction", I: TriggerActionRequest, O: Empty, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "actions.trigger" } } },
+        { service: this, name: "LeaveGuild", localName: "leaveGuild", I: LeaveGuildRequest, O: LeaveGuildResponse, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } } },
+        { service: this, name: "TriggerAction", localName: "triggerAction", I: TriggerActionRequest, O: TriggerActionResponse, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "actions.trigger" } } },
         { service: this, name: "SendMessage", localName: "sendMessage", I: SendMessageRequest, O: SendMessageResponse, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "messages.send" } } },
-        { service: this, name: "QueryHasPermission", localName: "queryHasPermission", I: QueryPermissionsRequest, O: QueryPermissionsResponse, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } } },
-        { service: this, name: "BatchQueryHasPermission", localName: "batchQueryHasPermission", I: BatchQueryPermissionsRequest, O: BatchQueryPermissionsResponse, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } } },
-        { service: this, name: "SetPermissions", localName: "setPermissions", I: SetPermissionsRequest, O: Empty, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "permissions.manage.set" } } },
+        { service: this, name: "QueryHasPermission", localName: "queryHasPermission", I: QueryHasPermissionRequest, O: QueryHasPermissionResponse, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } } },
+        { service: this, name: "SetPermissions", localName: "setPermissions", I: SetPermissionsRequest, O: SetPermissionsResponse, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "permissions.manage.set" } } },
         { service: this, name: "GetPermissions", localName: "getPermissions", I: GetPermissionsRequest, O: GetPermissionsResponse, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "permissions.manage.get" } } },
         { service: this, name: "MoveRole", localName: "moveRole", I: MoveRoleRequest, O: MoveRoleResponse, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "roles.manage" } } },
         { service: this, name: "GetGuildRoles", localName: "getGuildRoles", I: GetGuildRolesRequest, O: GetGuildRolesResponse, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "roles.get" } } },
         { service: this, name: "AddGuildRole", localName: "addGuildRole", I: AddGuildRoleRequest, O: AddGuildRoleResponse, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "roles.manage" } } },
-        { service: this, name: "ModifyGuildRole", localName: "modifyGuildRole", I: ModifyGuildRoleRequest, O: Empty, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "roles.manage" } } },
-        { service: this, name: "DeleteGuildRole", localName: "deleteGuildRole", I: DeleteGuildRoleRequest, O: Empty, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "roles.manage" } } },
-        { service: this, name: "ManageUserRoles", localName: "manageUserRoles", I: ManageUserRolesRequest, O: Empty, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "roles.user.manage" } } },
+        { service: this, name: "ModifyGuildRole", localName: "modifyGuildRole", I: ModifyGuildRoleRequest, O: ModifyGuildRoleResponse, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "roles.manage" } } },
+        { service: this, name: "DeleteGuildRole", localName: "deleteGuildRole", I: DeleteGuildRoleRequest, O: DeleteGuildRoleResponse, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "roles.manage" } } },
+        { service: this, name: "ManageUserRoles", localName: "manageUserRoles", I: ManageUserRolesRequest, O: ManageUserRolesResponse, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "roles.user.manage" } } },
         { service: this, name: "GetUserRoles", localName: "getUserRoles", I: GetUserRolesRequest, O: GetUserRolesResponse, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } } },
-        { service: this, name: "StreamEvents", localName: "streamEvents", I: StreamEventsRequest, O: Event, clientStreaming: true, serverStreaming: true, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } } },
-        { service: this, name: "GetUser", localName: "getUser", I: GetUserRequest, O: GetUserResponse, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } } },
-        { service: this, name: "GetUserBulk", localName: "getUserBulk", I: GetUserBulkRequest, O: GetUserBulkResponse, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } } },
-        { service: this, name: "GetUserMetadata", localName: "getUserMetadata", I: GetUserMetadataRequest, O: GetUserMetadataResponse, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } } },
-        { service: this, name: "ProfileUpdate", localName: "profileUpdate", I: ProfileUpdateRequest, O: Empty, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } } },
-        { service: this, name: "Typing", localName: "typing", I: TypingRequest, O: Empty, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "messages.send" } } },
+        { service: this, name: "Typing", localName: "typing", I: TypingRequest, O: TypingResponse, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "messages.send" } } },
         { service: this, name: "PreviewGuild", localName: "previewGuild", I: PreviewGuildRequest, O: PreviewGuildResponse, options: { "protocol.harmonytypes.v1.metadata": {} } },
-        { service: this, name: "BanUser", localName: "banUser", I: BanUserRequest, O: Empty, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "user.manage.ban" } } },
-        { service: this, name: "KickUser", localName: "kickUser", I: KickUserRequest, O: Empty, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "user.manage.kick" } } },
-        { service: this, name: "UnbanUser", localName: "unbanUser", I: UnbanUserRequest, O: Empty, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "user.manage.unban" } } },
+        { service: this, name: "GetBannedUsers", localName: "getBannedUsers", I: GetBannedUsersRequest, O: GetBannedUsersResponse, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "guild.manage.change-information" } } },
+        { service: this, name: "BanUser", localName: "banUser", I: BanUserRequest, O: BanUserResponse, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "user.manage.ban" } } },
+        { service: this, name: "KickUser", localName: "kickUser", I: KickUserRequest, O: KickUserResponse, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "user.manage.kick" } } },
+        { service: this, name: "UnbanUser", localName: "unbanUser", I: UnbanUserRequest, O: UnbanUserResponse, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "user.manage.unban" } } },
         { service: this, name: "GetPinnedMessages", localName: "getPinnedMessages", I: GetPinnedMessagesRequest, O: GetPinnedMessagesResponse, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "messages.view" } } },
-        { service: this, name: "PinMessage", localName: "pinMessage", I: PinMessageRequest, O: Empty, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "messages.pins.add" } } },
-        { service: this, name: "UnpinMessage", localName: "unpinMessage", I: UnpinMessageRequest, O: Empty, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "messages.pins.remove" } } }
+        { service: this, name: "PinMessage", localName: "pinMessage", I: PinMessageRequest, O: PinMessageResponse, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "messages.pins.add" } } },
+        { service: this, name: "UnpinMessage", localName: "unpinMessage", I: UnpinMessageRequest, O: UnpinMessageResponse, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "messages.pins.remove" } } },
+        { service: this, name: "StreamEvents", localName: "streamEvents", I: StreamEventsRequest, O: StreamEventsResponse, clientStreaming: true, serverStreaming: true, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } } },
+        { service: this, name: "AddReaction", localName: "addReaction", I: AddReactionRequest, O: AddReactionResponse, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "messages.reactions.add" } } },
+        { service: this, name: "RemoveReaction", localName: "removeReaction", I: RemoveReactionRequest, O: RemoveReactionResponse, options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "messages.reactions.remove" } } }
     ];
     constructor(private readonly _transport: RpcTransport) {
     }
@@ -515,212 +452,172 @@ export class ChatServiceClient implements IChatServiceClient {
         const method = this.methods[2], opt = this._transport.mergeOptions(options), i = method.I.create(input);
         return stackIntercept<CreateChannelRequest, CreateChannelResponse>("unary", this._transport, method, opt, i);
     }
-    createEmotePack(input: CreateEmotePackRequest, options?: RpcOptions): UnaryCall<CreateEmotePackRequest, CreateEmotePackResponse> {
-        const method = this.methods[3], opt = this._transport.mergeOptions(options), i = method.I.create(input);
-        return stackIntercept<CreateEmotePackRequest, CreateEmotePackResponse>("unary", this._transport, method, opt, i);
-    }
     getGuildList(input: GetGuildListRequest, options?: RpcOptions): UnaryCall<GetGuildListRequest, GetGuildListResponse> {
-        const method = this.methods[4], opt = this._transport.mergeOptions(options), i = method.I.create(input);
+        const method = this.methods[3], opt = this._transport.mergeOptions(options), i = method.I.create(input);
         return stackIntercept<GetGuildListRequest, GetGuildListResponse>("unary", this._transport, method, opt, i);
     }
     getGuild(input: GetGuildRequest, options?: RpcOptions): UnaryCall<GetGuildRequest, GetGuildResponse> {
-        const method = this.methods[5], opt = this._transport.mergeOptions(options), i = method.I.create(input);
+        const method = this.methods[4], opt = this._transport.mergeOptions(options), i = method.I.create(input);
         return stackIntercept<GetGuildRequest, GetGuildResponse>("unary", this._transport, method, opt, i);
     }
     getGuildInvites(input: GetGuildInvitesRequest, options?: RpcOptions): UnaryCall<GetGuildInvitesRequest, GetGuildInvitesResponse> {
-        const method = this.methods[6], opt = this._transport.mergeOptions(options), i = method.I.create(input);
+        const method = this.methods[5], opt = this._transport.mergeOptions(options), i = method.I.create(input);
         return stackIntercept<GetGuildInvitesRequest, GetGuildInvitesResponse>("unary", this._transport, method, opt, i);
     }
     getGuildMembers(input: GetGuildMembersRequest, options?: RpcOptions): UnaryCall<GetGuildMembersRequest, GetGuildMembersResponse> {
-        const method = this.methods[7], opt = this._transport.mergeOptions(options), i = method.I.create(input);
+        const method = this.methods[6], opt = this._transport.mergeOptions(options), i = method.I.create(input);
         return stackIntercept<GetGuildMembersRequest, GetGuildMembersResponse>("unary", this._transport, method, opt, i);
     }
     getGuildChannels(input: GetGuildChannelsRequest, options?: RpcOptions): UnaryCall<GetGuildChannelsRequest, GetGuildChannelsResponse> {
-        const method = this.methods[8], opt = this._transport.mergeOptions(options), i = method.I.create(input);
+        const method = this.methods[7], opt = this._transport.mergeOptions(options), i = method.I.create(input);
         return stackIntercept<GetGuildChannelsRequest, GetGuildChannelsResponse>("unary", this._transport, method, opt, i);
     }
     getChannelMessages(input: GetChannelMessagesRequest, options?: RpcOptions): UnaryCall<GetChannelMessagesRequest, GetChannelMessagesResponse> {
-        const method = this.methods[9], opt = this._transport.mergeOptions(options), i = method.I.create(input);
+        const method = this.methods[8], opt = this._transport.mergeOptions(options), i = method.I.create(input);
         return stackIntercept<GetChannelMessagesRequest, GetChannelMessagesResponse>("unary", this._transport, method, opt, i);
     }
     getMessage(input: GetMessageRequest, options?: RpcOptions): UnaryCall<GetMessageRequest, GetMessageResponse> {
-        const method = this.methods[10], opt = this._transport.mergeOptions(options), i = method.I.create(input);
+        const method = this.methods[9], opt = this._transport.mergeOptions(options), i = method.I.create(input);
         return stackIntercept<GetMessageRequest, GetMessageResponse>("unary", this._transport, method, opt, i);
     }
-    getEmotePacks(input: GetEmotePacksRequest, options?: RpcOptions): UnaryCall<GetEmotePacksRequest, GetEmotePacksResponse> {
+    updateGuildInformation(input: UpdateGuildInformationRequest, options?: RpcOptions): UnaryCall<UpdateGuildInformationRequest, UpdateGuildInformationResponse> {
+        const method = this.methods[10], opt = this._transport.mergeOptions(options), i = method.I.create(input);
+        return stackIntercept<UpdateGuildInformationRequest, UpdateGuildInformationResponse>("unary", this._transport, method, opt, i);
+    }
+    updateChannelInformation(input: UpdateChannelInformationRequest, options?: RpcOptions): UnaryCall<UpdateChannelInformationRequest, UpdateChannelInformationResponse> {
         const method = this.methods[11], opt = this._transport.mergeOptions(options), i = method.I.create(input);
-        return stackIntercept<GetEmotePacksRequest, GetEmotePacksResponse>("unary", this._transport, method, opt, i);
+        return stackIntercept<UpdateChannelInformationRequest, UpdateChannelInformationResponse>("unary", this._transport, method, opt, i);
     }
-    getEmotePackEmotes(input: GetEmotePackEmotesRequest, options?: RpcOptions): UnaryCall<GetEmotePackEmotesRequest, GetEmotePackEmotesResponse> {
+    updateChannelOrder(input: UpdateChannelOrderRequest, options?: RpcOptions): UnaryCall<UpdateChannelOrderRequest, UpdateChannelOrderResponse> {
         const method = this.methods[12], opt = this._transport.mergeOptions(options), i = method.I.create(input);
-        return stackIntercept<GetEmotePackEmotesRequest, GetEmotePackEmotesResponse>("unary", this._transport, method, opt, i);
+        return stackIntercept<UpdateChannelOrderRequest, UpdateChannelOrderResponse>("unary", this._transport, method, opt, i);
     }
-    updateGuildInformation(input: UpdateGuildInformationRequest, options?: RpcOptions): UnaryCall<UpdateGuildInformationRequest, Empty> {
+    updateAllChannelOrder(input: UpdateAllChannelOrderRequest, options?: RpcOptions): UnaryCall<UpdateAllChannelOrderRequest, UpdateAllChannelOrderResponse> {
         const method = this.methods[13], opt = this._transport.mergeOptions(options), i = method.I.create(input);
-        return stackIntercept<UpdateGuildInformationRequest, Empty>("unary", this._transport, method, opt, i);
+        return stackIntercept<UpdateAllChannelOrderRequest, UpdateAllChannelOrderResponse>("unary", this._transport, method, opt, i);
     }
-    updateChannelInformation(input: UpdateChannelInformationRequest, options?: RpcOptions): UnaryCall<UpdateChannelInformationRequest, Empty> {
+    updateMessageText(input: UpdateMessageTextRequest, options?: RpcOptions): UnaryCall<UpdateMessageTextRequest, UpdateMessageTextResponse> {
         const method = this.methods[14], opt = this._transport.mergeOptions(options), i = method.I.create(input);
-        return stackIntercept<UpdateChannelInformationRequest, Empty>("unary", this._transport, method, opt, i);
+        return stackIntercept<UpdateMessageTextRequest, UpdateMessageTextResponse>("unary", this._transport, method, opt, i);
     }
-    updateChannelOrder(input: UpdateChannelOrderRequest, options?: RpcOptions): UnaryCall<UpdateChannelOrderRequest, Empty> {
+    deleteGuild(input: DeleteGuildRequest, options?: RpcOptions): UnaryCall<DeleteGuildRequest, DeleteGuildResponse> {
         const method = this.methods[15], opt = this._transport.mergeOptions(options), i = method.I.create(input);
-        return stackIntercept<UpdateChannelOrderRequest, Empty>("unary", this._transport, method, opt, i);
+        return stackIntercept<DeleteGuildRequest, DeleteGuildResponse>("unary", this._transport, method, opt, i);
     }
-    updateAllChannelOrder(input: UpdateAllChannelOrderRequest, options?: RpcOptions): UnaryCall<UpdateAllChannelOrderRequest, Empty> {
+    deleteInvite(input: DeleteInviteRequest, options?: RpcOptions): UnaryCall<DeleteInviteRequest, DeleteInviteResponse> {
         const method = this.methods[16], opt = this._transport.mergeOptions(options), i = method.I.create(input);
-        return stackIntercept<UpdateAllChannelOrderRequest, Empty>("unary", this._transport, method, opt, i);
+        return stackIntercept<DeleteInviteRequest, DeleteInviteResponse>("unary", this._transport, method, opt, i);
     }
-    updateMessageText(input: UpdateMessageTextRequest, options?: RpcOptions): UnaryCall<UpdateMessageTextRequest, Empty> {
+    deleteChannel(input: DeleteChannelRequest, options?: RpcOptions): UnaryCall<DeleteChannelRequest, DeleteChannelResponse> {
         const method = this.methods[17], opt = this._transport.mergeOptions(options), i = method.I.create(input);
-        return stackIntercept<UpdateMessageTextRequest, Empty>("unary", this._transport, method, opt, i);
+        return stackIntercept<DeleteChannelRequest, DeleteChannelResponse>("unary", this._transport, method, opt, i);
     }
-    addEmoteToPack(input: AddEmoteToPackRequest, options?: RpcOptions): UnaryCall<AddEmoteToPackRequest, Empty> {
+    deleteMessage(input: DeleteMessageRequest, options?: RpcOptions): UnaryCall<DeleteMessageRequest, DeleteMessageResponse> {
         const method = this.methods[18], opt = this._transport.mergeOptions(options), i = method.I.create(input);
-        return stackIntercept<AddEmoteToPackRequest, Empty>("unary", this._transport, method, opt, i);
-    }
-    deleteGuild(input: DeleteGuildRequest, options?: RpcOptions): UnaryCall<DeleteGuildRequest, Empty> {
-        const method = this.methods[19], opt = this._transport.mergeOptions(options), i = method.I.create(input);
-        return stackIntercept<DeleteGuildRequest, Empty>("unary", this._transport, method, opt, i);
-    }
-    deleteInvite(input: DeleteInviteRequest, options?: RpcOptions): UnaryCall<DeleteInviteRequest, Empty> {
-        const method = this.methods[20], opt = this._transport.mergeOptions(options), i = method.I.create(input);
-        return stackIntercept<DeleteInviteRequest, Empty>("unary", this._transport, method, opt, i);
-    }
-    deleteChannel(input: DeleteChannelRequest, options?: RpcOptions): UnaryCall<DeleteChannelRequest, Empty> {
-        const method = this.methods[21], opt = this._transport.mergeOptions(options), i = method.I.create(input);
-        return stackIntercept<DeleteChannelRequest, Empty>("unary", this._transport, method, opt, i);
-    }
-    deleteMessage(input: DeleteMessageRequest, options?: RpcOptions): UnaryCall<DeleteMessageRequest, Empty> {
-        const method = this.methods[22], opt = this._transport.mergeOptions(options), i = method.I.create(input);
-        return stackIntercept<DeleteMessageRequest, Empty>("unary", this._transport, method, opt, i);
-    }
-    deleteEmoteFromPack(input: DeleteEmoteFromPackRequest, options?: RpcOptions): UnaryCall<DeleteEmoteFromPackRequest, Empty> {
-        const method = this.methods[23], opt = this._transport.mergeOptions(options), i = method.I.create(input);
-        return stackIntercept<DeleteEmoteFromPackRequest, Empty>("unary", this._transport, method, opt, i);
-    }
-    deleteEmotePack(input: DeleteEmotePackRequest, options?: RpcOptions): UnaryCall<DeleteEmotePackRequest, Empty> {
-        const method = this.methods[24], opt = this._transport.mergeOptions(options), i = method.I.create(input);
-        return stackIntercept<DeleteEmotePackRequest, Empty>("unary", this._transport, method, opt, i);
-    }
-    dequipEmotePack(input: DequipEmotePackRequest, options?: RpcOptions): UnaryCall<DequipEmotePackRequest, Empty> {
-        const method = this.methods[25], opt = this._transport.mergeOptions(options), i = method.I.create(input);
-        return stackIntercept<DequipEmotePackRequest, Empty>("unary", this._transport, method, opt, i);
-    }
-    equipEmotePack(input: EquipEmotePackRequest, options?: RpcOptions): UnaryCall<EquipEmotePackRequest, Empty> {
-        const method = this.methods[26], opt = this._transport.mergeOptions(options), i = method.I.create(input);
-        return stackIntercept<EquipEmotePackRequest, Empty>("unary", this._transport, method, opt, i);
+        return stackIntercept<DeleteMessageRequest, DeleteMessageResponse>("unary", this._transport, method, opt, i);
     }
     joinGuild(input: JoinGuildRequest, options?: RpcOptions): UnaryCall<JoinGuildRequest, JoinGuildResponse> {
-        const method = this.methods[27], opt = this._transport.mergeOptions(options), i = method.I.create(input);
+        const method = this.methods[19], opt = this._transport.mergeOptions(options), i = method.I.create(input);
         return stackIntercept<JoinGuildRequest, JoinGuildResponse>("unary", this._transport, method, opt, i);
     }
-    leaveGuild(input: LeaveGuildRequest, options?: RpcOptions): UnaryCall<LeaveGuildRequest, Empty> {
-        const method = this.methods[28], opt = this._transport.mergeOptions(options), i = method.I.create(input);
-        return stackIntercept<LeaveGuildRequest, Empty>("unary", this._transport, method, opt, i);
+    leaveGuild(input: LeaveGuildRequest, options?: RpcOptions): UnaryCall<LeaveGuildRequest, LeaveGuildResponse> {
+        const method = this.methods[20], opt = this._transport.mergeOptions(options), i = method.I.create(input);
+        return stackIntercept<LeaveGuildRequest, LeaveGuildResponse>("unary", this._transport, method, opt, i);
     }
-    triggerAction(input: TriggerActionRequest, options?: RpcOptions): UnaryCall<TriggerActionRequest, Empty> {
-        const method = this.methods[29], opt = this._transport.mergeOptions(options), i = method.I.create(input);
-        return stackIntercept<TriggerActionRequest, Empty>("unary", this._transport, method, opt, i);
+    triggerAction(input: TriggerActionRequest, options?: RpcOptions): UnaryCall<TriggerActionRequest, TriggerActionResponse> {
+        const method = this.methods[21], opt = this._transport.mergeOptions(options), i = method.I.create(input);
+        return stackIntercept<TriggerActionRequest, TriggerActionResponse>("unary", this._transport, method, opt, i);
     }
     sendMessage(input: SendMessageRequest, options?: RpcOptions): UnaryCall<SendMessageRequest, SendMessageResponse> {
-        const method = this.methods[30], opt = this._transport.mergeOptions(options), i = method.I.create(input);
+        const method = this.methods[22], opt = this._transport.mergeOptions(options), i = method.I.create(input);
         return stackIntercept<SendMessageRequest, SendMessageResponse>("unary", this._transport, method, opt, i);
     }
-    queryHasPermission(input: QueryPermissionsRequest, options?: RpcOptions): UnaryCall<QueryPermissionsRequest, QueryPermissionsResponse> {
-        const method = this.methods[31], opt = this._transport.mergeOptions(options), i = method.I.create(input);
-        return stackIntercept<QueryPermissionsRequest, QueryPermissionsResponse>("unary", this._transport, method, opt, i);
+    queryHasPermission(input: QueryHasPermissionRequest, options?: RpcOptions): UnaryCall<QueryHasPermissionRequest, QueryHasPermissionResponse> {
+        const method = this.methods[23], opt = this._transport.mergeOptions(options), i = method.I.create(input);
+        return stackIntercept<QueryHasPermissionRequest, QueryHasPermissionResponse>("unary", this._transport, method, opt, i);
     }
-    batchQueryHasPermission(input: BatchQueryPermissionsRequest, options?: RpcOptions): UnaryCall<BatchQueryPermissionsRequest, BatchQueryPermissionsResponse> {
-        const method = this.methods[32], opt = this._transport.mergeOptions(options), i = method.I.create(input);
-        return stackIntercept<BatchQueryPermissionsRequest, BatchQueryPermissionsResponse>("unary", this._transport, method, opt, i);
-    }
-    setPermissions(input: SetPermissionsRequest, options?: RpcOptions): UnaryCall<SetPermissionsRequest, Empty> {
-        const method = this.methods[33], opt = this._transport.mergeOptions(options), i = method.I.create(input);
-        return stackIntercept<SetPermissionsRequest, Empty>("unary", this._transport, method, opt, i);
+    setPermissions(input: SetPermissionsRequest, options?: RpcOptions): UnaryCall<SetPermissionsRequest, SetPermissionsResponse> {
+        const method = this.methods[24], opt = this._transport.mergeOptions(options), i = method.I.create(input);
+        return stackIntercept<SetPermissionsRequest, SetPermissionsResponse>("unary", this._transport, method, opt, i);
     }
     getPermissions(input: GetPermissionsRequest, options?: RpcOptions): UnaryCall<GetPermissionsRequest, GetPermissionsResponse> {
-        const method = this.methods[34], opt = this._transport.mergeOptions(options), i = method.I.create(input);
+        const method = this.methods[25], opt = this._transport.mergeOptions(options), i = method.I.create(input);
         return stackIntercept<GetPermissionsRequest, GetPermissionsResponse>("unary", this._transport, method, opt, i);
     }
     moveRole(input: MoveRoleRequest, options?: RpcOptions): UnaryCall<MoveRoleRequest, MoveRoleResponse> {
-        const method = this.methods[35], opt = this._transport.mergeOptions(options), i = method.I.create(input);
+        const method = this.methods[26], opt = this._transport.mergeOptions(options), i = method.I.create(input);
         return stackIntercept<MoveRoleRequest, MoveRoleResponse>("unary", this._transport, method, opt, i);
     }
     getGuildRoles(input: GetGuildRolesRequest, options?: RpcOptions): UnaryCall<GetGuildRolesRequest, GetGuildRolesResponse> {
-        const method = this.methods[36], opt = this._transport.mergeOptions(options), i = method.I.create(input);
+        const method = this.methods[27], opt = this._transport.mergeOptions(options), i = method.I.create(input);
         return stackIntercept<GetGuildRolesRequest, GetGuildRolesResponse>("unary", this._transport, method, opt, i);
     }
     addGuildRole(input: AddGuildRoleRequest, options?: RpcOptions): UnaryCall<AddGuildRoleRequest, AddGuildRoleResponse> {
-        const method = this.methods[37], opt = this._transport.mergeOptions(options), i = method.I.create(input);
+        const method = this.methods[28], opt = this._transport.mergeOptions(options), i = method.I.create(input);
         return stackIntercept<AddGuildRoleRequest, AddGuildRoleResponse>("unary", this._transport, method, opt, i);
     }
-    modifyGuildRole(input: ModifyGuildRoleRequest, options?: RpcOptions): UnaryCall<ModifyGuildRoleRequest, Empty> {
-        const method = this.methods[38], opt = this._transport.mergeOptions(options), i = method.I.create(input);
-        return stackIntercept<ModifyGuildRoleRequest, Empty>("unary", this._transport, method, opt, i);
+    modifyGuildRole(input: ModifyGuildRoleRequest, options?: RpcOptions): UnaryCall<ModifyGuildRoleRequest, ModifyGuildRoleResponse> {
+        const method = this.methods[29], opt = this._transport.mergeOptions(options), i = method.I.create(input);
+        return stackIntercept<ModifyGuildRoleRequest, ModifyGuildRoleResponse>("unary", this._transport, method, opt, i);
     }
-    deleteGuildRole(input: DeleteGuildRoleRequest, options?: RpcOptions): UnaryCall<DeleteGuildRoleRequest, Empty> {
-        const method = this.methods[39], opt = this._transport.mergeOptions(options), i = method.I.create(input);
-        return stackIntercept<DeleteGuildRoleRequest, Empty>("unary", this._transport, method, opt, i);
+    deleteGuildRole(input: DeleteGuildRoleRequest, options?: RpcOptions): UnaryCall<DeleteGuildRoleRequest, DeleteGuildRoleResponse> {
+        const method = this.methods[30], opt = this._transport.mergeOptions(options), i = method.I.create(input);
+        return stackIntercept<DeleteGuildRoleRequest, DeleteGuildRoleResponse>("unary", this._transport, method, opt, i);
     }
-    manageUserRoles(input: ManageUserRolesRequest, options?: RpcOptions): UnaryCall<ManageUserRolesRequest, Empty> {
-        const method = this.methods[40], opt = this._transport.mergeOptions(options), i = method.I.create(input);
-        return stackIntercept<ManageUserRolesRequest, Empty>("unary", this._transport, method, opt, i);
+    manageUserRoles(input: ManageUserRolesRequest, options?: RpcOptions): UnaryCall<ManageUserRolesRequest, ManageUserRolesResponse> {
+        const method = this.methods[31], opt = this._transport.mergeOptions(options), i = method.I.create(input);
+        return stackIntercept<ManageUserRolesRequest, ManageUserRolesResponse>("unary", this._transport, method, opt, i);
     }
     getUserRoles(input: GetUserRolesRequest, options?: RpcOptions): UnaryCall<GetUserRolesRequest, GetUserRolesResponse> {
-        const method = this.methods[41], opt = this._transport.mergeOptions(options), i = method.I.create(input);
+        const method = this.methods[32], opt = this._transport.mergeOptions(options), i = method.I.create(input);
         return stackIntercept<GetUserRolesRequest, GetUserRolesResponse>("unary", this._transport, method, opt, i);
     }
-    streamEvents(options?: RpcOptions): DuplexStreamingCall<StreamEventsRequest, Event> {
-        const method = this.methods[42], opt = this._transport.mergeOptions(options);
-        return stackIntercept<StreamEventsRequest, Event>("duplex", this._transport, method, opt);
-    }
-    getUser(input: GetUserRequest, options?: RpcOptions): UnaryCall<GetUserRequest, GetUserResponse> {
-        const method = this.methods[43], opt = this._transport.mergeOptions(options), i = method.I.create(input);
-        return stackIntercept<GetUserRequest, GetUserResponse>("unary", this._transport, method, opt, i);
-    }
-    getUserBulk(input: GetUserBulkRequest, options?: RpcOptions): UnaryCall<GetUserBulkRequest, GetUserBulkResponse> {
-        const method = this.methods[44], opt = this._transport.mergeOptions(options), i = method.I.create(input);
-        return stackIntercept<GetUserBulkRequest, GetUserBulkResponse>("unary", this._transport, method, opt, i);
-    }
-    getUserMetadata(input: GetUserMetadataRequest, options?: RpcOptions): UnaryCall<GetUserMetadataRequest, GetUserMetadataResponse> {
-        const method = this.methods[45], opt = this._transport.mergeOptions(options), i = method.I.create(input);
-        return stackIntercept<GetUserMetadataRequest, GetUserMetadataResponse>("unary", this._transport, method, opt, i);
-    }
-    profileUpdate(input: ProfileUpdateRequest, options?: RpcOptions): UnaryCall<ProfileUpdateRequest, Empty> {
-        const method = this.methods[46], opt = this._transport.mergeOptions(options), i = method.I.create(input);
-        return stackIntercept<ProfileUpdateRequest, Empty>("unary", this._transport, method, opt, i);
-    }
-    typing(input: TypingRequest, options?: RpcOptions): UnaryCall<TypingRequest, Empty> {
-        const method = this.methods[47], opt = this._transport.mergeOptions(options), i = method.I.create(input);
-        return stackIntercept<TypingRequest, Empty>("unary", this._transport, method, opt, i);
+    typing(input: TypingRequest, options?: RpcOptions): UnaryCall<TypingRequest, TypingResponse> {
+        const method = this.methods[33], opt = this._transport.mergeOptions(options), i = method.I.create(input);
+        return stackIntercept<TypingRequest, TypingResponse>("unary", this._transport, method, opt, i);
     }
     previewGuild(input: PreviewGuildRequest, options?: RpcOptions): UnaryCall<PreviewGuildRequest, PreviewGuildResponse> {
-        const method = this.methods[48], opt = this._transport.mergeOptions(options), i = method.I.create(input);
+        const method = this.methods[34], opt = this._transport.mergeOptions(options), i = method.I.create(input);
         return stackIntercept<PreviewGuildRequest, PreviewGuildResponse>("unary", this._transport, method, opt, i);
     }
-    banUser(input: BanUserRequest, options?: RpcOptions): UnaryCall<BanUserRequest, Empty> {
-        const method = this.methods[49], opt = this._transport.mergeOptions(options), i = method.I.create(input);
-        return stackIntercept<BanUserRequest, Empty>("unary", this._transport, method, opt, i);
+    getBannedUsers(input: GetBannedUsersRequest, options?: RpcOptions): UnaryCall<GetBannedUsersRequest, GetBannedUsersResponse> {
+        const method = this.methods[35], opt = this._transport.mergeOptions(options), i = method.I.create(input);
+        return stackIntercept<GetBannedUsersRequest, GetBannedUsersResponse>("unary", this._transport, method, opt, i);
     }
-    kickUser(input: KickUserRequest, options?: RpcOptions): UnaryCall<KickUserRequest, Empty> {
-        const method = this.methods[50], opt = this._transport.mergeOptions(options), i = method.I.create(input);
-        return stackIntercept<KickUserRequest, Empty>("unary", this._transport, method, opt, i);
+    banUser(input: BanUserRequest, options?: RpcOptions): UnaryCall<BanUserRequest, BanUserResponse> {
+        const method = this.methods[36], opt = this._transport.mergeOptions(options), i = method.I.create(input);
+        return stackIntercept<BanUserRequest, BanUserResponse>("unary", this._transport, method, opt, i);
     }
-    unbanUser(input: UnbanUserRequest, options?: RpcOptions): UnaryCall<UnbanUserRequest, Empty> {
-        const method = this.methods[51], opt = this._transport.mergeOptions(options), i = method.I.create(input);
-        return stackIntercept<UnbanUserRequest, Empty>("unary", this._transport, method, opt, i);
+    kickUser(input: KickUserRequest, options?: RpcOptions): UnaryCall<KickUserRequest, KickUserResponse> {
+        const method = this.methods[37], opt = this._transport.mergeOptions(options), i = method.I.create(input);
+        return stackIntercept<KickUserRequest, KickUserResponse>("unary", this._transport, method, opt, i);
+    }
+    unbanUser(input: UnbanUserRequest, options?: RpcOptions): UnaryCall<UnbanUserRequest, UnbanUserResponse> {
+        const method = this.methods[38], opt = this._transport.mergeOptions(options), i = method.I.create(input);
+        return stackIntercept<UnbanUserRequest, UnbanUserResponse>("unary", this._transport, method, opt, i);
     }
     getPinnedMessages(input: GetPinnedMessagesRequest, options?: RpcOptions): UnaryCall<GetPinnedMessagesRequest, GetPinnedMessagesResponse> {
-        const method = this.methods[52], opt = this._transport.mergeOptions(options), i = method.I.create(input);
+        const method = this.methods[39], opt = this._transport.mergeOptions(options), i = method.I.create(input);
         return stackIntercept<GetPinnedMessagesRequest, GetPinnedMessagesResponse>("unary", this._transport, method, opt, i);
     }
-    pinMessage(input: PinMessageRequest, options?: RpcOptions): UnaryCall<PinMessageRequest, Empty> {
-        const method = this.methods[53], opt = this._transport.mergeOptions(options), i = method.I.create(input);
-        return stackIntercept<PinMessageRequest, Empty>("unary", this._transport, method, opt, i);
+    pinMessage(input: PinMessageRequest, options?: RpcOptions): UnaryCall<PinMessageRequest, PinMessageResponse> {
+        const method = this.methods[40], opt = this._transport.mergeOptions(options), i = method.I.create(input);
+        return stackIntercept<PinMessageRequest, PinMessageResponse>("unary", this._transport, method, opt, i);
     }
-    unpinMessage(input: UnpinMessageRequest, options?: RpcOptions): UnaryCall<UnpinMessageRequest, Empty> {
-        const method = this.methods[54], opt = this._transport.mergeOptions(options), i = method.I.create(input);
-        return stackIntercept<UnpinMessageRequest, Empty>("unary", this._transport, method, opt, i);
+    unpinMessage(input: UnpinMessageRequest, options?: RpcOptions): UnaryCall<UnpinMessageRequest, UnpinMessageResponse> {
+        const method = this.methods[41], opt = this._transport.mergeOptions(options), i = method.I.create(input);
+        return stackIntercept<UnpinMessageRequest, UnpinMessageResponse>("unary", this._transport, method, opt, i);
+    }
+    streamEvents(options?: RpcOptions): DuplexStreamingCall<StreamEventsRequest, StreamEventsResponse> {
+        const method = this.methods[42], opt = this._transport.mergeOptions(options);
+        return stackIntercept<StreamEventsRequest, StreamEventsResponse>("duplex", this._transport, method, opt);
+    }
+    addReaction(input: AddReactionRequest, options?: RpcOptions): UnaryCall<AddReactionRequest, AddReactionResponse> {
+        const method = this.methods[43], opt = this._transport.mergeOptions(options), i = method.I.create(input);
+        return stackIntercept<AddReactionRequest, AddReactionResponse>("unary", this._transport, method, opt, i);
+    }
+    removeReaction(input: RemoveReactionRequest, options?: RpcOptions): UnaryCall<RemoveReactionRequest, RemoveReactionResponse> {
+        const method = this.methods[44], opt = this._transport.mergeOptions(options), i = method.I.create(input);
+        return stackIntercept<RemoveReactionRequest, RemoveReactionResponse>("unary", this._transport, method, opt, i);
     }
 }

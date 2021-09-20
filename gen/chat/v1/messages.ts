@@ -2,26 +2,691 @@
 // @generated from protobuf file "chat/v1/messages.proto" (package "protocol.chat.v1", syntax proto3)
 // tslint:disable
 import { MessageType } from "@protobuf-ts/runtime";
-import { Override } from "../../harmonytypes/v1/types";
 import { Metadata } from "../../harmonytypes/v1/types";
-import { Content } from "../../harmonytypes/v1/types";
-import { Message } from "../../harmonytypes/v1/types";
+import { Emote } from "../../emote/v1/types";
+import { FormattedText } from "../../harmonytypes/v1/types";
+import { Empty } from "../../harmonytypes/v1/types";
 /**
+ * Overrides provide a way to override the name and avatar of a message.
+ *
+ * @generated from protobuf message protocol.chat.v1.Override
+ */
+export interface Override {
+    /**
+     * the overridden username.
+     *
+     * @generated from protobuf field: optional string username = 1;
+     */
+    username?: string;
+    /**
+     * the overridden avatar.
+     *
+     * @generated from protobuf field: optional string avatar = 2;
+     */
+    avatar?: string;
+    /**
+     * @generated from protobuf oneof: reason
+     */
+    reason: {
+        oneofKind: "userDefined";
+        /**
+         * a custom reason in case the builtin ones don't fit
+         *
+         * @generated from protobuf field: string user_defined = 3;
+         */
+        userDefined: string;
+    } | {
+        oneofKind: "webhook";
+        /**
+         * the override occured because of a webhook
+         *
+         * @generated from protobuf field: protocol.harmonytypes.v1.Empty webhook = 4;
+         */
+        webhook: Empty;
+    } | {
+        oneofKind: "systemPlurality";
+        /**
+         * plurality, not system as in computer
+         *
+         * @generated from protobuf field: protocol.harmonytypes.v1.Empty system_plurality = 5;
+         */
+        systemPlurality: Empty;
+    } | {
+        oneofKind: "systemMessage";
+        /**
+         * the override occured because it was made by the server
+         *
+         * @generated from protobuf field: protocol.harmonytypes.v1.Empty system_message = 6;
+         */
+        systemMessage: Empty;
+    } | {
+        oneofKind: "bridge";
+        /**
+         * the override occured because of bridging
+         *
+         * @generated from protobuf field: protocol.harmonytypes.v1.Empty bridge = 7;
+         */
+        bridge: Empty;
+    } | {
+        oneofKind: undefined;
+    };
+}
+/**
+ * Actions are interactive elements that can exist within an embed.
+ *
+ * @generated from protobuf message protocol.chat.v1.Action
+ */
+export interface Action {
+    /**
+     * Type of the action.
+     *
+     * @generated from protobuf field: protocol.chat.v1.Action.Type action_type = 1;
+     */
+    actionType: Action_Type;
+    /**
+     * ID of the action.
+     *
+     * @generated from protobuf field: string id = 2;
+     */
+    id: string;
+    /**
+     * @generated from protobuf oneof: kind
+     */
+    kind: {
+        oneofKind: "button";
+        /**
+         * Button action.
+         *
+         * @generated from protobuf field: protocol.chat.v1.Action.Button button = 3;
+         */
+        button: Action_Button;
+    } | {
+        oneofKind: "dropdown";
+        /**
+         * Dropdown action.
+         *
+         * @generated from protobuf field: protocol.chat.v1.Action.Dropdown dropdown = 4;
+         */
+        dropdown: Action_Dropdown;
+    } | {
+        oneofKind: "input";
+        /**
+         * Input action.
+         *
+         * @generated from protobuf field: protocol.chat.v1.Action.Input input = 5;
+         */
+        input: Action_Input;
+    } | {
+        oneofKind: undefined;
+    };
+}
+/**
+ * A button that users can click on to trigger an action.
+ *
+ * @generated from protobuf message protocol.chat.v1.Action.Button
+ */
+export interface Action_Button {
+    /**
+     * The text to show on the button.
+     *
+     * @generated from protobuf field: string text = 1;
+     */
+    text: string;
+    /**
+     * The url the button should link to.
+     *
+     * @generated from protobuf field: optional string url = 2;
+     */
+    url?: string;
+}
+/**
+ * A dropdown menu that users can click on to trigger an action.
+ *
+ * @generated from protobuf message protocol.chat.v1.Action.Dropdown
+ */
+export interface Action_Dropdown {
+    /**
+     * The text describing the dropdown.
+     *
+     * @generated from protobuf field: string text = 1;
+     */
+    text: string;
+    /**
+     * The options in the dropdown.
+     *
+     * @generated from protobuf field: repeated string options = 2;
+     */
+    options: string[];
+}
+/**
+ * A text input that users can type in to trigger an action.
+ *
+ * @generated from protobuf message protocol.chat.v1.Action.Input
+ */
+export interface Action_Input {
+    /**
+     * The label describing the input.
+     *
+     * @generated from protobuf field: string label = 1;
+     */
+    label: string;
+    /**
+     * Whether to display this input wide.
+     *
+     * @generated from protobuf field: bool wide = 2;
+     */
+    wide: boolean;
+}
+/**
+ * The action type. This is primarily used to change the look of the action to
+ * the user (example: Destructive actions will have a red background).
+ *
+ * @generated from protobuf enum protocol.chat.v1.Action.Type
+ */
+export enum Action_Type {
+    /**
+     * a normal action.
+     *
+     * @generated from protobuf enum value: TYPE_NORMAL_UNSPECIFIED = 0;
+     */
+    NORMAL_UNSPECIFIED = 0,
+    /**
+     * a primary action.
+     *
+     * @generated from protobuf enum value: TYPE_PRIMARY = 1;
+     */
+    PRIMARY = 1,
+    /**
+     * A destructive / dangerous action.
+     *
+     * @generated from protobuf enum value: TYPE_DESTRUCTIVE = 2;
+     */
+    DESTRUCTIVE = 2
+}
+/**
+ * Object representing a message embed.
+ *
+ * @generated from protobuf message protocol.chat.v1.Embed
+ */
+export interface Embed {
+    /**
+     * Title of this embed.
+     *
+     * @generated from protobuf field: string title = 1;
+     */
+    title: string;
+    /**
+     * Body text of this embed.
+     *
+     * @generated from protobuf field: optional protocol.harmonytypes.v1.FormattedText body = 2;
+     */
+    body?: FormattedText;
+    /**
+     * Color of this embed.
+     *
+     * @generated from protobuf field: optional int32 color = 3;
+     */
+    color?: number;
+    /**
+     * Embed heading for the header.
+     *
+     * @generated from protobuf field: optional protocol.chat.v1.Embed.EmbedHeading header = 4;
+     */
+    header?: Embed_EmbedHeading;
+    /**
+     * Embed heading for the footer.
+     *
+     * @generated from protobuf field: optional protocol.chat.v1.Embed.EmbedHeading footer = 5;
+     */
+    footer?: Embed_EmbedHeading;
+    /**
+     * Fields of this embed.
+     *
+     * @generated from protobuf field: repeated protocol.chat.v1.Embed.EmbedField fields = 6;
+     */
+    fields: Embed_EmbedField[];
+}
+/**
+ * Object representing an embed heading.
+ *
+ * @generated from protobuf message protocol.chat.v1.Embed.EmbedHeading
+ */
+export interface Embed_EmbedHeading {
+    /**
+     * Text of the heading.
+     *
+     * @generated from protobuf field: string text = 1;
+     */
+    text: string;
+    /**
+     * Subtext of the heading.
+     *
+     * @generated from protobuf field: optional string subtext = 2;
+     */
+    subtext?: string;
+    /**
+     * URL of the heading.
+     *
+     * @generated from protobuf field: optional string url = 3;
+     */
+    url?: string;
+    /**
+     * Icon of the heading.
+     *
+     * @generated from protobuf field: optional string icon = 4;
+     */
+    icon?: string;
+}
+/**
+ * Object representing an embed field.
+ *
+ * @generated from protobuf message protocol.chat.v1.Embed.EmbedField
+ */
+export interface Embed_EmbedField {
+    /**
+     * Title of this field.
+     *
+     * @generated from protobuf field: string title = 1;
+     */
+    title: string;
+    /**
+     * Subtitle of this field.
+     *
+     * @generated from protobuf field: optional string subtitle = 2;
+     */
+    subtitle?: string;
+    /**
+     * Body text of this field (eg. a description).
+     *
+     * @generated from protobuf field: optional protocol.harmonytypes.v1.FormattedText body = 3;
+     */
+    body?: FormattedText;
+    /**
+     * Image URL of this field.
+     *
+     * @generated from protobuf field: optional string image_url = 4;
+     */
+    imageUrl?: string;
+    /**
+     * How to present this field.
+     *
+     * @generated from protobuf field: protocol.chat.v1.Embed.EmbedField.Presentation presentation = 5;
+     */
+    presentation: Embed_EmbedField_Presentation;
+    /**
+     * Actions of this field.
+     *
+     * @generated from protobuf field: repeated protocol.chat.v1.Action actions = 6;
+     */
+    actions: Action[];
+}
+/**
+ * Type representing how to present an embed field.
+ *
+ * @generated from protobuf enum protocol.chat.v1.Embed.EmbedField.Presentation
+ */
+export enum Embed_EmbedField_Presentation {
+    /**
+     * Show the field as data.
+     *
+     * @generated from protobuf enum value: PRESENTATION_DATA_UNSPECIFIED = 0;
+     */
+    DATA_UNSPECIFIED = 0,
+    /**
+     * Show the field as a captioned image.
+     *
+     * @generated from protobuf enum value: PRESENTATION_CAPTIONED_IMAGE = 1;
+     */
+    CAPTIONED_IMAGE = 1,
+    /**
+     * Show the field as a row.
+     *
+     * @generated from protobuf enum value: PRESENTATION_ROW = 2;
+     */
+    ROW = 2
+}
+/**
+ *
+ * Minithumbnail is an extremely low-quality JPEG thumbnail.
+ *
+ * The resolution is usually no larger than 64x64.
+ *
+ * @generated from protobuf message protocol.chat.v1.Minithumbnail
+ */
+export interface Minithumbnail {
+    /**
+     * The width of the minithumbnail
+     *
+     * @generated from protobuf field: uint32 width = 1;
+     */
+    width: number;
+    /**
+     * The height of the minithumbnail
+     *
+     * @generated from protobuf field: uint32 height = 2;
+     */
+    height: number;
+    /**
+     * The JPEG data of the minithumbnail
+     *
+     * @generated from protobuf field: bytes data = 3;
+     */
+    data: Uint8Array;
+}
+/**
+ *
+ * Photo contains data about a photo.
+ *
+ * Photo are always JPEG, and are
+ * constrained to the following rules:
+ *
+ * - width+height <= 10_000
+ * - width <= height*20
+ * - height <= width*20
+ *
+ * Photos are preferably no more than 10MB
+ * in size, and servers may compress as necessary.
+ *
+ * @generated from protobuf message protocol.chat.v1.Photo
+ */
+export interface Photo {
+    /**
+     * The HMC URL of the photo.
+     *
+     * @generated from protobuf field: string hmc = 1;
+     */
+    hmc: string;
+    /**
+     * The filename of the photo.
+     *
+     * @generated from protobuf field: string name = 2;
+     */
+    name: string;
+    /**
+     * The size of the photo.
+     *
+     * @generated from protobuf field: uint32 file_size = 3;
+     */
+    fileSize: number;
+    /**
+     * The height of the photo, in pixels.
+     *
+     * @generated from protobuf field: uint32 height = 4;
+     */
+    height: number;
+    /**
+     * The width of the photo, in pixels.
+     *
+     * @generated from protobuf field: uint32 width = 5;
+     */
+    width: number;
+    /**
+     * The photo's caption.
+     *
+     * @generated from protobuf field: protocol.harmonytypes.v1.FormattedText caption = 6;
+     */
+    caption?: FormattedText;
+    /**
+     * A thumbnail representing the photo.
+     *
+     * @generated from protobuf field: protocol.chat.v1.Minithumbnail minithumbnail = 7;
+     */
+    minithumbnail?: Minithumbnail;
+}
+/**
+ * Object representing a generic message attachment.
+ *
+ * @generated from protobuf message protocol.chat.v1.Attachment
+ */
+export interface Attachment {
+    /**
+     * File ID of this attachment.
+     *
+     * @generated from protobuf field: string id = 1;
+     */
+    id: string;
+    /**
+     * Filename of this attachment.
+     *
+     * @generated from protobuf field: string name = 2;
+     */
+    name: string;
+    /**
+     * Mimetype of this attachment.
+     *
+     * @generated from protobuf field: string mimetype = 3;
+     */
+    mimetype: string;
+    /**
+     * Size of this attachment.
+     *
+     * @generated from protobuf field: uint32 size = 4;
+     */
+    size: number;
+    /**
+     * Caption of this attachment.
+     *
+     * @generated from protobuf field: optional protocol.harmonytypes.v1.FormattedText caption = 5;
+     */
+    caption?: FormattedText;
+}
+/**
+ * Object representing a message's content.
+ *
+ * @generated from protobuf message protocol.chat.v1.Content
+ */
+export interface Content {
+    /**
+     * @generated from protobuf oneof: content
+     */
+    content: {
+        oneofKind: "textMessage";
+        /**
+         * Text content.
+         *
+         * @generated from protobuf field: protocol.chat.v1.Content.TextContent text_message = 1;
+         */
+        textMessage: Content_TextContent;
+    } | {
+        oneofKind: "embedMessage";
+        /**
+         * Embed content.
+         *
+         * @generated from protobuf field: protocol.chat.v1.Content.EmbedContent embed_message = 2;
+         */
+        embedMessage: Content_EmbedContent;
+    } | {
+        oneofKind: "attachmentMessage";
+        /**
+         * Attachment content.
+         *
+         * @generated from protobuf field: protocol.chat.v1.Content.AttachmentContent attachment_message = 3;
+         */
+        attachmentMessage: Content_AttachmentContent;
+    } | {
+        oneofKind: "photoMessage";
+        /**
+         * Photo content.
+         *
+         * @generated from protobuf field: protocol.chat.v1.Content.PhotoContent photo_message = 4;
+         */
+        photoMessage: Content_PhotoContent;
+    } | {
+        oneofKind: undefined;
+    };
+}
+/**
+ * Object representing text content.
+ *
+ * @generated from protobuf message protocol.chat.v1.Content.TextContent
+ */
+export interface Content_TextContent {
+    /**
+     * Text content.
+     *
+     * @generated from protobuf field: protocol.harmonytypes.v1.FormattedText content = 1;
+     */
+    content?: FormattedText;
+}
+/**
+ * Object representing embed content.
+ *
+ * @generated from protobuf message protocol.chat.v1.Content.EmbedContent
+ */
+export interface Content_EmbedContent {
+    /**
+     * Embed content.
+     *
+     * @generated from protobuf field: protocol.chat.v1.Embed embed = 1;
+     */
+    embed?: Embed;
+}
+/**
+ * Object representing attachment content.
+ *
+ * @generated from protobuf message protocol.chat.v1.Content.AttachmentContent
+ */
+export interface Content_AttachmentContent {
+    /**
+     * A list of attachments.
+     *
+     * @generated from protobuf field: repeated protocol.chat.v1.Attachment files = 1;
+     */
+    files: Attachment[];
+}
+/**
+ * Object representing photo content.
+ *
+ * @generated from protobuf message protocol.chat.v1.Content.PhotoContent
+ */
+export interface Content_PhotoContent {
+    /**
+     * A list of photos.
+     *
+     * @generated from protobuf field: repeated protocol.chat.v1.Photo photos = 1;
+     */
+    photos: Photo[];
+}
+/**
+ * Object representing a reaction.
+ *
+ * @generated from protobuf message protocol.chat.v1.Reaction
+ */
+export interface Reaction {
+    /**
+     * Emote data for this reaction.
+     *
+     * Emote's image ID is used as an identifier for unique reactions.
+     * Emotes with the same names should be "deduplicated" by a client, by suffixing
+     * their names with `~1`, `~2` and so on.
+     *
+     * @generated from protobuf field: protocol.emote.v1.Emote emote = 1;
+     */
+    emote?: Emote;
+    /**
+     * How many reactions this reaction has.
+     *
+     * @generated from protobuf field: uint32 count = 2;
+     */
+    count: number;
+}
+/**
+ * Object representing a message without the ID part.
+ *
+ * @generated from protobuf message protocol.chat.v1.Message
+ */
+export interface Message {
+    /**
+     * Metadata of this message.
+     *
+     * @generated from protobuf field: optional protocol.harmonytypes.v1.Metadata metadata = 1;
+     */
+    metadata?: Metadata;
+    /**
+     * Overrides of this message.
+     *
+     * @generated from protobuf field: protocol.chat.v1.Override overrides = 2;
+     */
+    overrides?: Override;
+    /**
+     * User ID of the user who sent this message.
+     *
+     * @generated from protobuf field: uint64 author_id = 3;
+     */
+    authorId: string;
+    /**
+     * When this message was created, in miliseconds since unix epoch
+     *
+     * @generated from protobuf field: uint64 created_at = 4;
+     */
+    createdAt: string;
+    /**
+     * The most recent time this message was edited, in milliseconds since unix epoch
+     *
+     * @generated from protobuf field: optional uint64 edited_at = 5;
+     */
+    editedAt?: string;
+    /**
+     * The message this message is a reply to.
+     *
+     * @generated from protobuf field: optional uint64 in_reply_to = 6;
+     */
+    inReplyTo?: string;
+    /**
+     * The content of the message.
+     *
+     * @generated from protobuf field: protocol.chat.v1.Content content = 7;
+     */
+    content?: Content;
+    /**
+     * The reactions of the message.
+     *
+     * @generated from protobuf field: repeated protocol.chat.v1.Reaction reactions = 8;
+     */
+    reactions: Reaction[];
+}
+/**
+ * Object representing a message with it's ID.
+ *
+ * @generated from protobuf message protocol.chat.v1.MessageWithId
+ */
+export interface MessageWithId {
+    /**
+     * ID of the message.
+     *
+     * @generated from protobuf field: uint64 message_id = 1;
+     */
+    messageId: string;
+    /**
+     * The message data.
+     *
+     * @generated from protobuf field: protocol.chat.v1.Message message = 2;
+     */
+    message?: Message;
+}
+/**
+ * Used in the `GetChannelMessages` endpoint.
+ *
  * @generated from protobuf message protocol.chat.v1.GetChannelMessagesRequest
  */
 export interface GetChannelMessagesRequest {
     /**
+     * Guild ID of the guild that has the channel.
+     *
      * @generated from protobuf field: uint64 guild_id = 1;
      */
     guildId: string;
     /**
+     * Channel ID of the channel to get messages from.
+     *
      * @generated from protobuf field: uint64 channel_id = 2;
      */
     channelId: string;
     /**
      * The ID of the message that will be used as an "anchor" point to figure out
      * where to get the messages.
-     * If not specified, the `direction` will be ignored and the newest messages will be returned.
+     * If not specified, the `direction` will be ignored and the newest messages
+     * will be returned.
      *
      * @generated from protobuf field: uint64 message_id = 3;
      */
@@ -29,25 +694,31 @@ export interface GetChannelMessagesRequest {
     /**
      * On which direction to get the messages.
      *
-     * - By default, it is "before", which means you will get messages before the `message_id` message.
-     * - If it is "around", you will get the messages around the `message_id` message.
-     * This will include the `message_id` message itself, as the middle item of the list returned.
-     * - If it is "after", you will get the messages after the `message_id` message.
+     * - By default, it is "before", which means you will get messages before the
+     * `message_id` message.
+     * - If it is "around", you will get the messages around the `message_id`
+     * message. This will include the `message_id` message itself, as the middle
+     * item of the list returned.
+     * - If it is "after", you will get the messages after the `message_id`
+     * message.
      *
-     * @generated from protobuf field: protocol.chat.v1.GetChannelMessagesRequest.Direction direction = 4;
+     * @generated from protobuf field: optional protocol.chat.v1.GetChannelMessagesRequest.Direction direction = 4;
      */
-    direction: GetChannelMessagesRequest_Direction;
+    direction?: GetChannelMessagesRequest_Direction;
     /**
      * How many messages to get.
      *
-     * - If `0`, a recommended message count to return is 25. If the direction is "around", the recommended value is 12.
-     * - If the direction to get the messages is "around", this count will not be the *total* count
-     * of messages to return, but instead the count of messages to return *for each direction*, before and after.
-     * - Servers should enforce their own maximum limit, and clamp this value to the limit.
+     * - If `0`, a recommended message count to return is 25. If the direction is
+     * "around", the recommended value is 12.
+     * - If the direction to get the messages is "around", this count will not be
+     * the *total* count of messages to return, but instead the count of messages
+     * to return *for each direction*, before and after.
+     * - Servers should enforce their own maximum limit, and clamp this value to
+     * the limit.
      *
-     * @generated from protobuf field: uint32 count = 5;
+     * @generated from protobuf field: optional uint32 count = 5;
      */
-    count: number;
+    count?: number;
 }
 /**
  * The direction relative to the `message_id` message to get messages from.
@@ -56,165 +727,263 @@ export interface GetChannelMessagesRequest {
  */
 export enum GetChannelMessagesRequest_Direction {
     /**
-     * @generated from protobuf enum value: before = 0;
+     * Get messages before the anchor.
+     *
+     * @generated from protobuf enum value: DIRECTION_BEFORE_UNSPECIFIED = 0;
      */
-    before = 0,
+    BEFORE_UNSPECIFIED = 0,
     /**
-     * @generated from protobuf enum value: around = 1;
+     * Get messages around the anchor, including the anchor.
+     *
+     * @generated from protobuf enum value: DIRECTION_AROUND = 1;
      */
-    around = 1,
+    AROUND = 1,
     /**
-     * @generated from protobuf enum value: after = 2;
+     * Get messages after the anchor.
+     *
+     * @generated from protobuf enum value: DIRECTION_AFTER = 2;
      */
-    after = 2
+    AFTER = 2
 }
 /**
+ * Used in the `GetChannelMessages` endpoint.
+ *
  * @generated from protobuf message protocol.chat.v1.GetChannelMessagesResponse
  */
 export interface GetChannelMessagesResponse {
     /**
+     * Has reached the top (first message) of the message history.
+     *
      * @generated from protobuf field: bool reached_top = 1;
      */
     reachedTop: boolean;
     /**
-     * @generated from protobuf field: repeated protocol.harmonytypes.v1.Message messages = 2;
+     * Has reached the bottom (last message) of the message history.
+     *
+     * @generated from protobuf field: bool reached_bottom = 2;
      */
-    messages: Message[];
+    reachedBottom: boolean;
+    /**
+     * The messages requested.
+     *
+     * @generated from protobuf field: repeated protocol.chat.v1.MessageWithId messages = 3;
+     */
+    messages: MessageWithId[];
 }
 /**
+ * Used in the `GetMessage` endpoint.
+ *
  * @generated from protobuf message protocol.chat.v1.GetMessageRequest
  */
 export interface GetMessageRequest {
     /**
+     * Guild ID of the guild where the channel is.
+     *
      * @generated from protobuf field: uint64 guild_id = 1;
      */
     guildId: string;
     /**
+     * Channel ID of the channel where the message is.
+     *
      * @generated from protobuf field: uint64 channel_id = 2;
      */
     channelId: string;
     /**
+     * Message ID of the message you want to get.
+     *
      * @generated from protobuf field: uint64 message_id = 3;
      */
     messageId: string;
 }
 /**
+ * Used in the `GetMessage` endpoint.
+ *
  * @generated from protobuf message protocol.chat.v1.GetMessageResponse
  */
 export interface GetMessageResponse {
     /**
-     * @generated from protobuf field: protocol.harmonytypes.v1.Message message = 1;
+     * The message requested.
+     *
+     * @generated from protobuf field: protocol.chat.v1.Message message = 1;
      */
     message?: Message;
 }
 /**
+ * Used in the `DeleteMessage` endpoint.
+ *
  * @generated from protobuf message protocol.chat.v1.DeleteMessageRequest
  */
 export interface DeleteMessageRequest {
     /**
+     * Guild ID of the guild where the channel is.
+     *
      * @generated from protobuf field: uint64 guild_id = 1;
      */
     guildId: string;
     /**
+     * Channel ID of the channel where the message is.
+     *
      * @generated from protobuf field: uint64 channel_id = 2;
      */
     channelId: string;
     /**
+     * Message ID of the message you want to delete.
+     *
      * @generated from protobuf field: uint64 message_id = 3;
      */
     messageId: string;
 }
-// TRIGGERS
-
 /**
+ * Used in the `DeleteMessage` endpoint.
+ *
+ * @generated from protobuf message protocol.chat.v1.DeleteMessageResponse
+ */
+export interface DeleteMessageResponse {
+}
+/**
+ * Used in the `TriggerAction` endpoint.
+ *
  * @generated from protobuf message protocol.chat.v1.TriggerActionRequest
  */
 export interface TriggerActionRequest {
     /**
+     * Guild ID of the guild where the channel is.
+     *
      * @generated from protobuf field: uint64 guild_id = 1;
      */
     guildId: string;
     /**
+     * Channel ID of the channel where the message is.
+     *
      * @generated from protobuf field: uint64 channel_id = 2;
      */
     channelId: string;
     /**
+     * Message ID of the message you want to trigger an action in.
+     *
      * @generated from protobuf field: uint64 message_id = 3;
      */
     messageId: string;
     /**
+     * Action ID of the action you want to trigger.
+     *
      * @generated from protobuf field: string action_id = 4;
      */
     actionId: string;
     /**
+     * Action data to be passed to the action.
+     *
      * @generated from protobuf field: string action_data = 5;
      */
     actionData: string;
 }
 /**
- * SendMessage
+ * Used in the `TriggerAction` endpoint.
+ *
+ * @generated from protobuf message protocol.chat.v1.TriggerActionResponse
+ */
+export interface TriggerActionResponse {
+}
+/**
+ * Used in the `SendMessage` endpoint.
  *
  * @generated from protobuf message protocol.chat.v1.SendMessageRequest
  */
 export interface SendMessageRequest {
     /**
+     * Guild ID of the guild where the channel is.
+     *
      * @generated from protobuf field: uint64 guild_id = 1;
      */
     guildId: string;
     /**
+     * Channel ID of the channel you want to send a message in.
+     *
      * @generated from protobuf field: uint64 channel_id = 2;
      */
     channelId: string;
     /**
-     * @generated from protobuf field: protocol.harmonytypes.v1.Content content = 3;
+     * Content of the new message.
+     *
+     * @generated from protobuf field: protocol.chat.v1.Content content = 3;
      */
     content?: Content;
     /**
-     * @generated from protobuf field: uint64 echo_id = 4;
+     * Echo ID of the new message. This can be used by clients to
+     * determine whether a message is sent.
+     *
+     * @generated from protobuf field: optional uint64 echo_id = 4;
      */
-    echoId: string;
+    echoId?: string;
     /**
-     * @generated from protobuf field: protocol.harmonytypes.v1.Metadata metadata = 5;
-     */
-    metadata?: Metadata;
-    /**
-     * @generated from protobuf field: protocol.harmonytypes.v1.Override overrides = 6;
+     * The overrides of this new message.
+     *
+     * @generated from protobuf field: optional protocol.chat.v1.Override overrides = 6;
      */
     overrides?: Override;
     /**
-     * @generated from protobuf field: uint64 in_reply_to = 7;
+     * The message this new message is a reply to.
+     *
+     * @generated from protobuf field: optional uint64 in_reply_to = 7;
      */
-    inReplyTo: string;
+    inReplyTo?: string;
+    /**
+     * The metadata of this new message.
+     *
+     * @generated from protobuf field: optional protocol.harmonytypes.v1.Metadata metadata = 5;
+     */
+    metadata?: Metadata;
 }
 /**
+ * Used in the `SendMessage` endpoint.
+ *
  * @generated from protobuf message protocol.chat.v1.SendMessageResponse
  */
 export interface SendMessageResponse {
     /**
+     * Message ID of the message sent.
+     *
      * @generated from protobuf field: uint64 message_id = 1;
      */
     messageId: string;
 }
 /**
+ * Used in the `UpdateMessageText` endpoint.
+ *
  * @generated from protobuf message protocol.chat.v1.UpdateMessageTextRequest
  */
 export interface UpdateMessageTextRequest {
     /**
+     * Guild ID of the guild where the channel is.
+     *
      * @generated from protobuf field: uint64 guild_id = 1;
      */
     guildId: string;
     /**
+     * Channel ID of the channel where the message is.
+     *
      * @generated from protobuf field: uint64 channel_id = 2;
      */
     channelId: string;
     /**
+     * Message ID of the message you want to edit the text of.
+     *
      * @generated from protobuf field: uint64 message_id = 3;
      */
     messageId: string;
     /**
-     * @generated from protobuf field: string new_content = 4;
+     * New content for this message.
+     *
+     * @generated from protobuf field: protocol.harmonytypes.v1.FormattedText new_content = 4;
      */
-    newContent: string;
+    newContent?: FormattedText;
+}
+/**
+ * Used in the `UpdateMessageText` endpoint.
+ *
+ * @generated from protobuf message protocol.chat.v1.UpdateMessageTextResponse
+ */
+export interface UpdateMessageTextResponse {
 }
 /**
  * Used in the `PinMessage` endpoint.
@@ -244,6 +1013,13 @@ export interface PinMessageRequest {
 /**
  * Used in the `UnpinMessage` endpoint.
  *
+ * @generated from protobuf message protocol.chat.v1.PinMessageResponse
+ */
+export interface PinMessageResponse {
+}
+/**
+ * Used in the `UnpinMessage` endpoint.
+ *
  * @generated from protobuf message protocol.chat.v1.UnpinMessageRequest
  */
 export interface UnpinMessageRequest {
@@ -265,6 +1041,13 @@ export interface UnpinMessageRequest {
      * @generated from protobuf field: uint64 message_id = 3;
      */
     messageId: string;
+}
+/**
+ * Used in the `UnpinMessage` endpoint.
+ *
+ * @generated from protobuf message protocol.chat.v1.UnpinMessageResponse
+ */
+export interface UnpinMessageResponse {
 }
 /**
  * Used in the `GetPinnedMessages` endpoint.
@@ -299,6 +1082,341 @@ export interface GetPinnedMessagesResponse {
     pinnedMessageIds: string[];
 }
 /**
+ * Used in `AddReaction` endpoint.
+ *
+ * @generated from protobuf message protocol.chat.v1.AddReactionRequest
+ */
+export interface AddReactionRequest {
+    /**
+     * Guild ID of the guild where the channel is.
+     *
+     * @generated from protobuf field: uint64 guild_id = 1;
+     */
+    guildId: string;
+    /**
+     * Channel ID of the channel where the message is.
+     *
+     * @generated from protobuf field: uint64 channel_id = 2;
+     */
+    channelId: string;
+    /**
+     * Message ID of the message we want to add a reaction to.
+     *
+     * @generated from protobuf field: uint64 message_id = 3;
+     */
+    messageId: string;
+    /**
+     * The emote we want to react with.
+     *
+     * @generated from protobuf field: protocol.emote.v1.Emote emote = 4;
+     */
+    emote?: Emote;
+}
+/**
+ * Used in `AddReaction` endpoint.
+ *
+ * @generated from protobuf message protocol.chat.v1.AddReactionResponse
+ */
+export interface AddReactionResponse {
+}
+/**
+ * Used in `RemoveReaction` endpoint.
+ *
+ * @generated from protobuf message protocol.chat.v1.RemoveReactionRequest
+ */
+export interface RemoveReactionRequest {
+    /**
+     * Guild ID of the guild where the channel is.
+     *
+     * @generated from protobuf field: uint64 guild_id = 1;
+     */
+    guildId: string;
+    /**
+     * Channel ID of the channel where the message is.
+     *
+     * @generated from protobuf field: uint64 channel_id = 2;
+     */
+    channelId: string;
+    /**
+     * Message ID of the message we want to remove a reaction.
+     *
+     * @generated from protobuf field: uint64 message_id = 3;
+     */
+    messageId: string;
+    /**
+     * The emote we want to remove the react of.
+     *
+     * @generated from protobuf field: protocol.emote.v1.Emote emote = 4;
+     */
+    emote?: Emote;
+}
+/**
+ * Used in `RemoveReaction` endpoint.
+ *
+ * @generated from protobuf message protocol.chat.v1.RemoveReactionResponse
+ */
+export interface RemoveReactionResponse {
+}
+/**
+ * Type for protobuf message protocol.chat.v1.Override
+ */
+class Override$Type extends MessageType<Override> {
+    constructor() {
+        super("protocol.chat.v1.Override", [
+            { no: 1, name: "username", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
+            { no: 2, name: "avatar", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
+            { no: 3, name: "user_defined", kind: "scalar", oneof: "reason", T: 9 /*ScalarType.STRING*/ },
+            { no: 4, name: "webhook", kind: "message", oneof: "reason", T: () => Empty },
+            { no: 5, name: "system_plurality", kind: "message", oneof: "reason", T: () => Empty },
+            { no: 6, name: "system_message", kind: "message", oneof: "reason", T: () => Empty },
+            { no: 7, name: "bridge", kind: "message", oneof: "reason", T: () => Empty }
+        ]);
+    }
+}
+export const Override = new Override$Type();
+/**
+ * Type for protobuf message protocol.chat.v1.Action
+ */
+class Action$Type extends MessageType<Action> {
+    constructor() {
+        super("protocol.chat.v1.Action", [
+            { no: 1, name: "action_type", kind: "enum", T: () => ["protocol.chat.v1.Action.Type", Action_Type, "TYPE_"] },
+            { no: 2, name: "id", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 3, name: "button", kind: "message", oneof: "kind", T: () => Action_Button },
+            { no: 4, name: "dropdown", kind: "message", oneof: "kind", T: () => Action_Dropdown },
+            { no: 5, name: "input", kind: "message", oneof: "kind", T: () => Action_Input }
+        ]);
+    }
+}
+export const Action = new Action$Type();
+/**
+ * Type for protobuf message protocol.chat.v1.Action.Button
+ */
+class Action_Button$Type extends MessageType<Action_Button> {
+    constructor() {
+        super("protocol.chat.v1.Action.Button", [
+            { no: 1, name: "text", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 2, name: "url", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ }
+        ]);
+    }
+}
+export const Action_Button = new Action_Button$Type();
+/**
+ * Type for protobuf message protocol.chat.v1.Action.Dropdown
+ */
+class Action_Dropdown$Type extends MessageType<Action_Dropdown> {
+    constructor() {
+        super("protocol.chat.v1.Action.Dropdown", [
+            { no: 1, name: "text", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 2, name: "options", kind: "scalar", repeat: 2 /*RepeatType.UNPACKED*/, T: 9 /*ScalarType.STRING*/ }
+        ]);
+    }
+}
+export const Action_Dropdown = new Action_Dropdown$Type();
+/**
+ * Type for protobuf message protocol.chat.v1.Action.Input
+ */
+class Action_Input$Type extends MessageType<Action_Input> {
+    constructor() {
+        super("protocol.chat.v1.Action.Input", [
+            { no: 1, name: "label", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 2, name: "wide", kind: "scalar", T: 8 /*ScalarType.BOOL*/ }
+        ]);
+    }
+}
+export const Action_Input = new Action_Input$Type();
+/**
+ * Type for protobuf message protocol.chat.v1.Embed
+ */
+class Embed$Type extends MessageType<Embed> {
+    constructor() {
+        super("protocol.chat.v1.Embed", [
+            { no: 1, name: "title", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 2, name: "body", kind: "message", T: () => FormattedText },
+            { no: 3, name: "color", kind: "scalar", opt: true, T: 5 /*ScalarType.INT32*/ },
+            { no: 4, name: "header", kind: "message", T: () => Embed_EmbedHeading },
+            { no: 5, name: "footer", kind: "message", T: () => Embed_EmbedHeading },
+            { no: 6, name: "fields", kind: "message", repeat: 1 /*RepeatType.PACKED*/, T: () => Embed_EmbedField }
+        ]);
+    }
+}
+export const Embed = new Embed$Type();
+/**
+ * Type for protobuf message protocol.chat.v1.Embed.EmbedHeading
+ */
+class Embed_EmbedHeading$Type extends MessageType<Embed_EmbedHeading> {
+    constructor() {
+        super("protocol.chat.v1.Embed.EmbedHeading", [
+            { no: 1, name: "text", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 2, name: "subtext", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
+            { no: 3, name: "url", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
+            { no: 4, name: "icon", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ }
+        ]);
+    }
+}
+export const Embed_EmbedHeading = new Embed_EmbedHeading$Type();
+/**
+ * Type for protobuf message protocol.chat.v1.Embed.EmbedField
+ */
+class Embed_EmbedField$Type extends MessageType<Embed_EmbedField> {
+    constructor() {
+        super("protocol.chat.v1.Embed.EmbedField", [
+            { no: 1, name: "title", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 2, name: "subtitle", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
+            { no: 3, name: "body", kind: "message", T: () => FormattedText },
+            { no: 4, name: "image_url", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
+            { no: 5, name: "presentation", kind: "enum", T: () => ["protocol.chat.v1.Embed.EmbedField.Presentation", Embed_EmbedField_Presentation, "PRESENTATION_"] },
+            { no: 6, name: "actions", kind: "message", repeat: 1 /*RepeatType.PACKED*/, T: () => Action }
+        ]);
+    }
+}
+export const Embed_EmbedField = new Embed_EmbedField$Type();
+/**
+ * Type for protobuf message protocol.chat.v1.Minithumbnail
+ */
+class Minithumbnail$Type extends MessageType<Minithumbnail> {
+    constructor() {
+        super("protocol.chat.v1.Minithumbnail", [
+            { no: 1, name: "width", kind: "scalar", T: 13 /*ScalarType.UINT32*/ },
+            { no: 2, name: "height", kind: "scalar", T: 13 /*ScalarType.UINT32*/ },
+            { no: 3, name: "data", kind: "scalar", T: 12 /*ScalarType.BYTES*/ }
+        ]);
+    }
+}
+export const Minithumbnail = new Minithumbnail$Type();
+/**
+ * Type for protobuf message protocol.chat.v1.Photo
+ */
+class Photo$Type extends MessageType<Photo> {
+    constructor() {
+        super("protocol.chat.v1.Photo", [
+            { no: 1, name: "hmc", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 2, name: "name", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 3, name: "file_size", kind: "scalar", T: 13 /*ScalarType.UINT32*/ },
+            { no: 4, name: "height", kind: "scalar", T: 13 /*ScalarType.UINT32*/ },
+            { no: 5, name: "width", kind: "scalar", T: 13 /*ScalarType.UINT32*/ },
+            { no: 6, name: "caption", kind: "message", T: () => FormattedText },
+            { no: 7, name: "minithumbnail", kind: "message", T: () => Minithumbnail }
+        ]);
+    }
+}
+export const Photo = new Photo$Type();
+/**
+ * Type for protobuf message protocol.chat.v1.Attachment
+ */
+class Attachment$Type extends MessageType<Attachment> {
+    constructor() {
+        super("protocol.chat.v1.Attachment", [
+            { no: 1, name: "id", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 2, name: "name", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 3, name: "mimetype", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 4, name: "size", kind: "scalar", T: 13 /*ScalarType.UINT32*/ },
+            { no: 5, name: "caption", kind: "message", T: () => FormattedText }
+        ]);
+    }
+}
+export const Attachment = new Attachment$Type();
+/**
+ * Type for protobuf message protocol.chat.v1.Content
+ */
+class Content$Type extends MessageType<Content> {
+    constructor() {
+        super("protocol.chat.v1.Content", [
+            { no: 1, name: "text_message", kind: "message", oneof: "content", T: () => Content_TextContent },
+            { no: 2, name: "embed_message", kind: "message", oneof: "content", T: () => Content_EmbedContent },
+            { no: 3, name: "attachment_message", kind: "message", oneof: "content", T: () => Content_AttachmentContent },
+            { no: 4, name: "photo_message", kind: "message", oneof: "content", T: () => Content_PhotoContent }
+        ]);
+    }
+}
+export const Content = new Content$Type();
+/**
+ * Type for protobuf message protocol.chat.v1.Content.TextContent
+ */
+class Content_TextContent$Type extends MessageType<Content_TextContent> {
+    constructor() {
+        super("protocol.chat.v1.Content.TextContent", [
+            { no: 1, name: "content", kind: "message", T: () => FormattedText }
+        ]);
+    }
+}
+export const Content_TextContent = new Content_TextContent$Type();
+/**
+ * Type for protobuf message protocol.chat.v1.Content.EmbedContent
+ */
+class Content_EmbedContent$Type extends MessageType<Content_EmbedContent> {
+    constructor() {
+        super("protocol.chat.v1.Content.EmbedContent", [
+            { no: 1, name: "embed", kind: "message", T: () => Embed }
+        ]);
+    }
+}
+export const Content_EmbedContent = new Content_EmbedContent$Type();
+/**
+ * Type for protobuf message protocol.chat.v1.Content.AttachmentContent
+ */
+class Content_AttachmentContent$Type extends MessageType<Content_AttachmentContent> {
+    constructor() {
+        super("protocol.chat.v1.Content.AttachmentContent", [
+            { no: 1, name: "files", kind: "message", repeat: 1 /*RepeatType.PACKED*/, T: () => Attachment }
+        ]);
+    }
+}
+export const Content_AttachmentContent = new Content_AttachmentContent$Type();
+/**
+ * Type for protobuf message protocol.chat.v1.Content.PhotoContent
+ */
+class Content_PhotoContent$Type extends MessageType<Content_PhotoContent> {
+    constructor() {
+        super("protocol.chat.v1.Content.PhotoContent", [
+            { no: 1, name: "photos", kind: "message", repeat: 1 /*RepeatType.PACKED*/, T: () => Photo }
+        ]);
+    }
+}
+export const Content_PhotoContent = new Content_PhotoContent$Type();
+/**
+ * Type for protobuf message protocol.chat.v1.Reaction
+ */
+class Reaction$Type extends MessageType<Reaction> {
+    constructor() {
+        super("protocol.chat.v1.Reaction", [
+            { no: 1, name: "emote", kind: "message", T: () => Emote },
+            { no: 2, name: "count", kind: "scalar", T: 13 /*ScalarType.UINT32*/ }
+        ]);
+    }
+}
+export const Reaction = new Reaction$Type();
+/**
+ * Type for protobuf message protocol.chat.v1.Message
+ */
+class Message$Type extends MessageType<Message> {
+    constructor() {
+        super("protocol.chat.v1.Message", [
+            { no: 1, name: "metadata", kind: "message", T: () => Metadata },
+            { no: 2, name: "overrides", kind: "message", T: () => Override },
+            { no: 3, name: "author_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+            { no: 4, name: "created_at", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+            { no: 5, name: "edited_at", kind: "scalar", opt: true, T: 4 /*ScalarType.UINT64*/ },
+            { no: 6, name: "in_reply_to", kind: "scalar", opt: true, T: 4 /*ScalarType.UINT64*/ },
+            { no: 7, name: "content", kind: "message", T: () => Content },
+            { no: 8, name: "reactions", kind: "message", repeat: 1 /*RepeatType.PACKED*/, T: () => Reaction }
+        ]);
+    }
+}
+export const Message = new Message$Type();
+/**
+ * Type for protobuf message protocol.chat.v1.MessageWithId
+ */
+class MessageWithId$Type extends MessageType<MessageWithId> {
+    constructor() {
+        super("protocol.chat.v1.MessageWithId", [
+            { no: 1, name: "message_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+            { no: 2, name: "message", kind: "message", T: () => Message }
+        ]);
+    }
+}
+export const MessageWithId = new MessageWithId$Type();
+/**
  * Type for protobuf message protocol.chat.v1.GetChannelMessagesRequest
  */
 class GetChannelMessagesRequest$Type extends MessageType<GetChannelMessagesRequest> {
@@ -307,8 +1425,8 @@ class GetChannelMessagesRequest$Type extends MessageType<GetChannelMessagesReque
             { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
             { no: 2, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
             { no: 3, name: "message_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-            { no: 4, name: "direction", kind: "enum", T: () => ["protocol.chat.v1.GetChannelMessagesRequest.Direction", GetChannelMessagesRequest_Direction] },
-            { no: 5, name: "count", kind: "scalar", T: 13 /*ScalarType.UINT32*/ }
+            { no: 4, name: "direction", kind: "enum", opt: true, T: () => ["protocol.chat.v1.GetChannelMessagesRequest.Direction", GetChannelMessagesRequest_Direction, "DIRECTION_"] },
+            { no: 5, name: "count", kind: "scalar", opt: true, T: 13 /*ScalarType.UINT32*/ }
         ]);
     }
 }
@@ -320,7 +1438,8 @@ class GetChannelMessagesResponse$Type extends MessageType<GetChannelMessagesResp
     constructor() {
         super("protocol.chat.v1.GetChannelMessagesResponse", [
             { no: 1, name: "reached_top", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
-            { no: 2, name: "messages", kind: "message", repeat: 1 /*RepeatType.PACKED*/, T: () => Message }
+            { no: 2, name: "reached_bottom", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
+            { no: 3, name: "messages", kind: "message", repeat: 1 /*RepeatType.PACKED*/, T: () => MessageWithId }
         ]);
     }
 }
@@ -363,6 +1482,15 @@ class DeleteMessageRequest$Type extends MessageType<DeleteMessageRequest> {
 }
 export const DeleteMessageRequest = new DeleteMessageRequest$Type();
 /**
+ * Type for protobuf message protocol.chat.v1.DeleteMessageResponse
+ */
+class DeleteMessageResponse$Type extends MessageType<DeleteMessageResponse> {
+    constructor() {
+        super("protocol.chat.v1.DeleteMessageResponse", []);
+    }
+}
+export const DeleteMessageResponse = new DeleteMessageResponse$Type();
+/**
  * Type for protobuf message protocol.chat.v1.TriggerActionRequest
  */
 class TriggerActionRequest$Type extends MessageType<TriggerActionRequest> {
@@ -378,6 +1506,15 @@ class TriggerActionRequest$Type extends MessageType<TriggerActionRequest> {
 }
 export const TriggerActionRequest = new TriggerActionRequest$Type();
 /**
+ * Type for protobuf message protocol.chat.v1.TriggerActionResponse
+ */
+class TriggerActionResponse$Type extends MessageType<TriggerActionResponse> {
+    constructor() {
+        super("protocol.chat.v1.TriggerActionResponse", []);
+    }
+}
+export const TriggerActionResponse = new TriggerActionResponse$Type();
+/**
  * Type for protobuf message protocol.chat.v1.SendMessageRequest
  */
 class SendMessageRequest$Type extends MessageType<SendMessageRequest> {
@@ -386,10 +1523,10 @@ class SendMessageRequest$Type extends MessageType<SendMessageRequest> {
             { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
             { no: 2, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
             { no: 3, name: "content", kind: "message", T: () => Content },
-            { no: 4, name: "echo_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-            { no: 5, name: "metadata", kind: "message", T: () => Metadata },
+            { no: 4, name: "echo_id", kind: "scalar", opt: true, T: 4 /*ScalarType.UINT64*/ },
             { no: 6, name: "overrides", kind: "message", T: () => Override },
-            { no: 7, name: "in_reply_to", kind: "scalar", T: 4 /*ScalarType.UINT64*/ }
+            { no: 7, name: "in_reply_to", kind: "scalar", opt: true, T: 4 /*ScalarType.UINT64*/ },
+            { no: 5, name: "metadata", kind: "message", T: () => Metadata }
         ]);
     }
 }
@@ -414,11 +1551,20 @@ class UpdateMessageTextRequest$Type extends MessageType<UpdateMessageTextRequest
             { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
             { no: 2, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
             { no: 3, name: "message_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-            { no: 4, name: "new_content", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
+            { no: 4, name: "new_content", kind: "message", T: () => FormattedText }
         ]);
     }
 }
 export const UpdateMessageTextRequest = new UpdateMessageTextRequest$Type();
+/**
+ * Type for protobuf message protocol.chat.v1.UpdateMessageTextResponse
+ */
+class UpdateMessageTextResponse$Type extends MessageType<UpdateMessageTextResponse> {
+    constructor() {
+        super("protocol.chat.v1.UpdateMessageTextResponse", []);
+    }
+}
+export const UpdateMessageTextResponse = new UpdateMessageTextResponse$Type();
 /**
  * Type for protobuf message protocol.chat.v1.PinMessageRequest
  */
@@ -433,6 +1579,15 @@ class PinMessageRequest$Type extends MessageType<PinMessageRequest> {
 }
 export const PinMessageRequest = new PinMessageRequest$Type();
 /**
+ * Type for protobuf message protocol.chat.v1.PinMessageResponse
+ */
+class PinMessageResponse$Type extends MessageType<PinMessageResponse> {
+    constructor() {
+        super("protocol.chat.v1.PinMessageResponse", []);
+    }
+}
+export const PinMessageResponse = new PinMessageResponse$Type();
+/**
  * Type for protobuf message protocol.chat.v1.UnpinMessageRequest
  */
 class UnpinMessageRequest$Type extends MessageType<UnpinMessageRequest> {
@@ -445,6 +1600,15 @@ class UnpinMessageRequest$Type extends MessageType<UnpinMessageRequest> {
     }
 }
 export const UnpinMessageRequest = new UnpinMessageRequest$Type();
+/**
+ * Type for protobuf message protocol.chat.v1.UnpinMessageResponse
+ */
+class UnpinMessageResponse$Type extends MessageType<UnpinMessageResponse> {
+    constructor() {
+        super("protocol.chat.v1.UnpinMessageResponse", []);
+    }
+}
+export const UnpinMessageResponse = new UnpinMessageResponse$Type();
 /**
  * Type for protobuf message protocol.chat.v1.GetPinnedMessagesRequest
  */
@@ -468,3 +1632,49 @@ class GetPinnedMessagesResponse$Type extends MessageType<GetPinnedMessagesRespon
     }
 }
 export const GetPinnedMessagesResponse = new GetPinnedMessagesResponse$Type();
+/**
+ * Type for protobuf message protocol.chat.v1.AddReactionRequest
+ */
+class AddReactionRequest$Type extends MessageType<AddReactionRequest> {
+    constructor() {
+        super("protocol.chat.v1.AddReactionRequest", [
+            { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+            { no: 2, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+            { no: 3, name: "message_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+            { no: 4, name: "emote", kind: "message", T: () => Emote }
+        ]);
+    }
+}
+export const AddReactionRequest = new AddReactionRequest$Type();
+/**
+ * Type for protobuf message protocol.chat.v1.AddReactionResponse
+ */
+class AddReactionResponse$Type extends MessageType<AddReactionResponse> {
+    constructor() {
+        super("protocol.chat.v1.AddReactionResponse", []);
+    }
+}
+export const AddReactionResponse = new AddReactionResponse$Type();
+/**
+ * Type for protobuf message protocol.chat.v1.RemoveReactionRequest
+ */
+class RemoveReactionRequest$Type extends MessageType<RemoveReactionRequest> {
+    constructor() {
+        super("protocol.chat.v1.RemoveReactionRequest", [
+            { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+            { no: 2, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+            { no: 3, name: "message_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+            { no: 4, name: "emote", kind: "message", T: () => Emote }
+        ]);
+    }
+}
+export const RemoveReactionRequest = new RemoveReactionRequest$Type();
+/**
+ * Type for protobuf message protocol.chat.v1.RemoveReactionResponse
+ */
+class RemoveReactionResponse$Type extends MessageType<RemoveReactionResponse> {
+    constructor() {
+        super("protocol.chat.v1.RemoveReactionResponse", []);
+    }
+}
+export const RemoveReactionResponse = new RemoveReactionResponse$Type();

@@ -4,311 +4,625 @@
 import { MessageType } from "@protobuf-ts/runtime";
 import { Metadata } from "../../harmonytypes/v1/types";
 /**
+ * Object representing a guild without the ID part.
+ *
+ * @generated from protobuf message protocol.chat.v1.Guild
+ */
+export interface Guild {
+    /**
+     * The name of the guild.
+     *
+     * @generated from protobuf field: string name = 1;
+     */
+    name: string;
+    /**
+     * The picture HMC of the guild.
+     *
+     * @generated from protobuf field: string picture = 2;
+     */
+    picture: string;
+    /**
+     * User ID of the owner of the guild.
+     *
+     * @generated from protobuf field: uint64 owner_id = 3;
+     */
+    ownerId: string;
+    /**
+     * Metadata of the guild.
+     *
+     * @generated from protobuf field: optional protocol.harmonytypes.v1.Metadata metadata = 4;
+     */
+    metadata?: Metadata;
+}
+/**
+ * Object representing an invite without the ID part.
+ *
+ * @generated from protobuf message protocol.chat.v1.Invite
+ */
+export interface Invite {
+    /**
+     * Possible uses of this invite. A use of `0` means infinite uses.
+     *
+     * @generated from protobuf field: uint32 possible_uses = 1;
+     */
+    possibleUses: number;
+    /**
+     * Total use count of this invite.
+     *
+     * @generated from protobuf field: uint32 use_count = 2;
+     */
+    useCount: number;
+}
+/**
+ * Invite with ID.
+ *
+ * @generated from protobuf message protocol.chat.v1.InviteWithId
+ */
+export interface InviteWithId {
+    /**
+     * ID of the invite.
+     *
+     * @generated from protobuf field: string invite_id = 1;
+     */
+    inviteId: string;
+    /**
+     * The invite data.
+     *
+     * @generated from protobuf field: protocol.chat.v1.Invite invite = 2;
+     */
+    invite?: Invite;
+}
+/**
+ * Object representing a guild list entry.
+ *
+ * @generated from protobuf message protocol.chat.v1.GuildListEntry
+ */
+export interface GuildListEntry {
+    /**
+     * Guild ID of this guild entry.
+     *
+     * @generated from protobuf field: uint64 guild_id = 1;
+     */
+    guildId: string;
+    /**
+     * Server ID of the homeserver of this guild.
+     *
+     * @generated from protobuf field: string server_id = 2;
+     */
+    serverId: string;
+}
+/**
+ * Request type used in `CreateGuild` RPC.
+ *
  * @generated from protobuf message protocol.chat.v1.CreateGuildRequest
  */
 export interface CreateGuildRequest {
     /**
-     * @generated from protobuf field: protocol.harmonytypes.v1.Metadata metadata = 3;
+     * The name of the guild.
+     *
+     * @generated from protobuf field: string name = 1;
+     */
+    name: string;
+    /**
+     * The picture HMC of the guild.
+     *
+     * @generated from protobuf field: string picture = 2;
+     */
+    picture: string;
+    /**
+     * Metadata of the guild.
+     *
+     * @generated from protobuf field: optional protocol.harmonytypes.v1.Metadata metadata = 3;
      */
     metadata?: Metadata;
-    /**
-     * @generated from protobuf field: string guild_name = 1;
-     */
-    guildName: string;
-    /**
-     * @generated from protobuf field: string picture_url = 2;
-     */
-    pictureUrl: string;
 }
 /**
+ * Used in the `CreateGuild` endpoint.
+ *
  * @generated from protobuf message protocol.chat.v1.CreateGuildResponse
  */
 export interface CreateGuildResponse {
     /**
+     * Guild ID of the guild that was created.
+     *
      * @generated from protobuf field: uint64 guild_id = 1;
      */
     guildId: string;
 }
 /**
+ * Used in the `CreateInvite` endpoint.
+ *
  * @generated from protobuf message protocol.chat.v1.CreateInviteRequest
  */
 export interface CreateInviteRequest {
     /**
+     * Guild ID of the guild to create an invite in.
+     *
      * @generated from protobuf field: uint64 guild_id = 1;
      */
     guildId: string;
     /**
+     * The name of the invite.
+     *
      * @generated from protobuf field: string name = 2;
      */
     name: string;
     /**
-     * @generated from protobuf field: int32 possible_uses = 3;
+     * The possible uses of the invite.
+     *
+     * A possible use of `0` means that the invite can be used infinitely many times.
+     *
+     * @generated from protobuf field: uint32 possible_uses = 3;
      */
     possibleUses: number;
 }
 /**
+ * Used in the `CreateInvite` endpoint.
+ *
  * @generated from protobuf message protocol.chat.v1.CreateInviteResponse
  */
 export interface CreateInviteResponse {
     /**
-     * @generated from protobuf field: string name = 1;
+     * The invite ID of the invite that was created.
+     *
+     * @generated from protobuf field: string invite_id = 1;
      */
-    name: string;
+    inviteId: string;
 }
 /**
+ * Used in the `GetGuildList` endpoint.
+ *
  * @generated from protobuf message protocol.chat.v1.GetGuildListRequest
  */
 export interface GetGuildListRequest {
 }
 /**
+ * Used in the `GetGuildList` endpoint.
+ *
  * @generated from protobuf message protocol.chat.v1.GetGuildListResponse
  */
 export interface GetGuildListResponse {
     /**
-     * @generated from protobuf field: repeated protocol.chat.v1.GetGuildListResponse.GuildListEntry guilds = 1;
+     * Guild list returned by the server.
+     *
+     * @generated from protobuf field: repeated protocol.chat.v1.GuildListEntry guilds = 1;
      */
-    guilds: GetGuildListResponse_GuildListEntry[];
+    guilds: GuildListEntry[];
 }
 /**
- * @generated from protobuf message protocol.chat.v1.GetGuildListResponse.GuildListEntry
- */
-export interface GetGuildListResponse_GuildListEntry {
-    /**
-     * @generated from protobuf field: uint64 guild_id = 1;
-     */
-    guildId: string;
-    /**
-     * @generated from protobuf field: string host = 2;
-     */
-    host: string;
-}
-/**
+ * Used in the `GetGuild` endpoint.
+ *
  * @generated from protobuf message protocol.chat.v1.GetGuildRequest
  */
 export interface GetGuildRequest {
     /**
+     * Guild ID of the guild to get information about.
+     *
      * @generated from protobuf field: uint64 guild_id = 1;
      */
     guildId: string;
 }
 /**
+ * Used in the `GetGuild` endpoint.
+ *
  * @generated from protobuf message protocol.chat.v1.GetGuildResponse
  */
 export interface GetGuildResponse {
     /**
-     * @generated from protobuf field: protocol.harmonytypes.v1.Metadata metadata = 4;
+     * The information of the guild requested.
+     *
+     * @generated from protobuf field: protocol.chat.v1.Guild guild = 1;
      */
-    metadata?: Metadata;
-    /**
-     * @generated from protobuf field: string guild_name = 1;
-     */
-    guildName: string;
-    /**
-     * @generated from protobuf field: uint64 guild_owner = 2;
-     */
-    guildOwner: string;
-    /**
-     * @generated from protobuf field: string guild_picture = 3;
-     */
-    guildPicture: string;
+    guild?: Guild;
 }
 /**
+ * Used in the `GetGuildInvites` endpoint.
+ *
  * @generated from protobuf message protocol.chat.v1.GetGuildInvitesRequest
  */
 export interface GetGuildInvitesRequest {
     /**
+     * Guild ID of the guild you want to get invites of.
+     *
      * @generated from protobuf field: uint64 guild_id = 1;
      */
     guildId: string;
 }
 /**
+ * Used in the `GetGuildInvites` endpoint.
+ *
  * @generated from protobuf message protocol.chat.v1.GetGuildInvitesResponse
  */
 export interface GetGuildInvitesResponse {
     /**
-     * @generated from protobuf field: repeated protocol.chat.v1.GetGuildInvitesResponse.Invite invites = 1;
+     * The invites of the guild, with IDs.
+     *
+     * @generated from protobuf field: repeated protocol.chat.v1.InviteWithId invites = 1;
      */
-    invites: GetGuildInvitesResponse_Invite[];
+    invites: InviteWithId[];
 }
 /**
- * @generated from protobuf message protocol.chat.v1.GetGuildInvitesResponse.Invite
- */
-export interface GetGuildInvitesResponse_Invite {
-    /**
-     * @generated from protobuf field: string invite_id = 1;
-     */
-    inviteId: string;
-    /**
-     * @generated from protobuf field: int32 possible_uses = 2;
-     */
-    possibleUses: number;
-    /**
-     * @generated from protobuf field: int32 use_count = 3;
-     */
-    useCount: number;
-}
-/**
+ * Used in the `GetGuildMembers` endpoint.
+ *
  * @generated from protobuf message protocol.chat.v1.GetGuildMembersRequest
  */
 export interface GetGuildMembersRequest {
     /**
+     * Guild ID of the guild you want to get members of.
+     *
      * @generated from protobuf field: uint64 guild_id = 1;
      */
     guildId: string;
 }
 /**
+ * Used in the `GetGuildMembers` endpoint.
+ *
  * @generated from protobuf message protocol.chat.v1.GetGuildMembersResponse
  */
 export interface GetGuildMembersResponse {
     /**
+     * User IDs of all the guild members.
+     *
      * @generated from protobuf field: repeated uint64 members = 1;
      */
     members: string[];
 }
 /**
+ * Used in the `UpdateGuildInformation` endpoint.
+ *
  * @generated from protobuf message protocol.chat.v1.UpdateGuildInformationRequest
  */
 export interface UpdateGuildInformationRequest {
     /**
+     * Guild ID of the guild you want to update the information of.
+     *
      * @generated from protobuf field: uint64 guild_id = 1;
      */
     guildId: string;
     /**
+     * New name for the guild.
+     *
      * @generated from protobuf field: optional string new_guild_name = 2;
      */
     newGuildName?: string;
     /**
-     * @generated from protobuf field: optional string new_guild_picture = 4;
+     * New picture for the guild.
+     *
+     * @generated from protobuf field: optional string new_guild_picture = 3;
      */
     newGuildPicture?: string;
     /**
-     * @generated from protobuf field: optional protocol.harmonytypes.v1.Metadata new_metadata = 6;
+     * New metadata for the guild.
+     *
+     * @generated from protobuf field: optional protocol.harmonytypes.v1.Metadata new_metadata = 4;
      */
     newMetadata?: Metadata;
 }
 /**
+ * Used in the `UpdateGuildInformation` endpoint.
+ *
+ * @generated from protobuf message protocol.chat.v1.UpdateGuildInformationResponse
+ */
+export interface UpdateGuildInformationResponse {
+}
+/**
+ * Used in the `DeleteGuild` endpoint.
+ *
  * @generated from protobuf message protocol.chat.v1.DeleteGuildRequest
  */
 export interface DeleteGuildRequest {
     /**
+     * Guild ID of the guild you want to delete.
+     *
      * @generated from protobuf field: uint64 guild_id = 1;
      */
     guildId: string;
 }
 /**
+ * Used in the `DeleteGuild` endpoint.
+ *
+ * @generated from protobuf message protocol.chat.v1.DeleteGuildResponse
+ */
+export interface DeleteGuildResponse {
+}
+/**
+ * Used in the `DeleteInvite` endpoint.
+ *
  * @generated from protobuf message protocol.chat.v1.DeleteInviteRequest
  */
 export interface DeleteInviteRequest {
     /**
+     * Guild ID of the guild where the invite is located.
+     *
      * @generated from protobuf field: uint64 guild_id = 1;
      */
     guildId: string;
     /**
+     * Invite ID of the invite you want to delete.
+     *
      * @generated from protobuf field: string invite_id = 2;
      */
     inviteId: string;
 }
 /**
+ * Used in the `DeleteInvite` endpoint.
+ *
+ * @generated from protobuf message protocol.chat.v1.DeleteInviteResponse
+ */
+export interface DeleteInviteResponse {
+}
+/**
+ * Used in the `JoinGuild` endpoint.
+ *
  * @generated from protobuf message protocol.chat.v1.JoinGuildRequest
  */
 export interface JoinGuildRequest {
     /**
+     * Invite ID of the guild you want to join.
+     *
      * @generated from protobuf field: string invite_id = 1;
      */
     inviteId: string;
 }
 /**
+ * Used in the `JoinGuild` endpoint.
+ *
  * @generated from protobuf message protocol.chat.v1.JoinGuildResponse
  */
 export interface JoinGuildResponse {
     /**
+     * Guild ID of the guild you joined.
+     *
      * @generated from protobuf field: uint64 guild_id = 1;
      */
     guildId: string;
 }
 /**
+ * Used in the `PreviewGuild` endpoint.
+ *
  * @generated from protobuf message protocol.chat.v1.PreviewGuildRequest
  */
 export interface PreviewGuildRequest {
     /**
+     * Invite ID of the guild you want to get information from.
+     *
      * @generated from protobuf field: string invite_id = 1;
      */
     inviteId: string;
 }
 /**
+ * Used in the `PreviewGuild` endpoint.
+ *
  * @generated from protobuf message protocol.chat.v1.PreviewGuildResponse
  */
 export interface PreviewGuildResponse {
     /**
+     * Name of the guild requested.
+     *
      * @generated from protobuf field: string name = 1;
      */
     name: string;
     /**
-     * @generated from protobuf field: string avatar = 2;
+     * Picture of the guild requested.
+     *
+     * @generated from protobuf field: string picture = 2;
      */
-    avatar: string;
+    picture: string;
     /**
+     * Member count of the guild requested.
+     *
      * @generated from protobuf field: uint64 member_count = 3;
      */
     memberCount: string;
 }
 /**
+ * Used in the `LeaveGuild` endpoint.
+ *
  * @generated from protobuf message protocol.chat.v1.LeaveGuildRequest
  */
 export interface LeaveGuildRequest {
     /**
+     * Guild ID of the guild you want to leave.
+     *
      * @generated from protobuf field: uint64 guild_id = 1;
      */
     guildId: string;
 }
 /**
+ * Used in the `LeaveGuild` endpoint.
+ *
+ * @generated from protobuf message protocol.chat.v1.LeaveGuildResponse
+ */
+export interface LeaveGuildResponse {
+}
+/**
+ * Used in `BanUser` endpoint.
+ *
  * @generated from protobuf message protocol.chat.v1.BanUserRequest
  */
 export interface BanUserRequest {
     /**
+     * The guild ID of the guild to ban the user from.
+     *
      * @generated from protobuf field: uint64 guild_id = 1;
      */
     guildId: string;
     /**
+     * The ID of the user to ban.
+     *
      * @generated from protobuf field: uint64 user_id = 2;
      */
     userId: string;
 }
 /**
+ * Used in `BanUser` endpoint.
+ *
+ * @generated from protobuf message protocol.chat.v1.BanUserResponse
+ */
+export interface BanUserResponse {
+}
+/**
+ * Used in `KickUser` endpoint.
+ *
  * @generated from protobuf message protocol.chat.v1.KickUserRequest
  */
 export interface KickUserRequest {
     /**
+     * The guild ID of the guild to kick the user from.
+     *
      * @generated from protobuf field: uint64 guild_id = 1;
      */
     guildId: string;
     /**
+     * The user ID of the user to kick.
+     *
      * @generated from protobuf field: uint64 user_id = 2;
      */
     userId: string;
 }
 /**
+ * Used in `KickUser` endpoint.
+ *
+ * @generated from protobuf message protocol.chat.v1.KickUserResponse
+ */
+export interface KickUserResponse {
+}
+/**
+ * Used in `UnbanUser` endpoint.
+ *
  * @generated from protobuf message protocol.chat.v1.UnbanUserRequest
  */
 export interface UnbanUserRequest {
     /**
+     * The guild ID of the guild to unban the user from.
+     *
      * @generated from protobuf field: uint64 guild_id = 1;
      */
     guildId: string;
     /**
+     * The user ID of the user to unban.
+     *
      * @generated from protobuf field: uint64 user_id = 2;
      */
     userId: string;
 }
+/**
+ * Used in `UnbanUser` endpoint.
+ *
+ * @generated from protobuf message protocol.chat.v1.UnbanUserResponse
+ */
+export interface UnbanUserResponse {
+}
+/**
+ * Used in `GetBannedUsers` endpoint.
+ *
+ * @generated from protobuf message protocol.chat.v1.GetBannedUsersRequest
+ */
+export interface GetBannedUsersRequest {
+    /**
+     * Guild ID to get banned users for.
+     *
+     * @generated from protobuf field: uint64 guild_id = 1;
+     */
+    guildId: string;
+}
+/**
+ * Used in `GetBannedUsers` endpoint.
+ *
+ * @generated from protobuf message protocol.chat.v1.GetBannedUsersResponse
+ */
+export interface GetBannedUsersResponse {
+    /**
+     * The user IDs of banned users.
+     *
+     * @generated from protobuf field: repeated uint64 banned_users = 1;
+     */
+    bannedUsers: string[];
+}
+/**
+ * A reason for why a user has left a guild.
+ *
+ * @generated from protobuf enum protocol.chat.v1.LeaveReason
+ */
+export enum LeaveReason {
+    /**
+     * The user left the guild willingly.
+     *
+     * @generated from protobuf enum value: LEAVE_REASON_WILLINGLY_UNSPECIFIED = 0;
+     */
+    WILLINGLY_UNSPECIFIED = 0,
+    /**
+     * The user was banned from the guild.
+     *
+     * @generated from protobuf enum value: LEAVE_REASON_BANNED = 1;
+     */
+    BANNED = 1,
+    /**
+     * The user was kicked from the guild.
+     *
+     * @generated from protobuf enum value: LEAVE_REASON_KICKED = 2;
+     */
+    KICKED = 2
+}
+/**
+ * Type for protobuf message protocol.chat.v1.Guild
+ */
+class Guild$Type extends MessageType<Guild> {
+    constructor() {
+        super("protocol.chat.v1.Guild", [
+            { no: 1, name: "name", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 2, name: "picture", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 3, name: "owner_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+            { no: 4, name: "metadata", kind: "message", T: () => Metadata }
+        ]);
+    }
+}
+export const Guild = new Guild$Type();
+/**
+ * Type for protobuf message protocol.chat.v1.Invite
+ */
+class Invite$Type extends MessageType<Invite> {
+    constructor() {
+        super("protocol.chat.v1.Invite", [
+            { no: 1, name: "possible_uses", kind: "scalar", T: 13 /*ScalarType.UINT32*/ },
+            { no: 2, name: "use_count", kind: "scalar", T: 13 /*ScalarType.UINT32*/ }
+        ]);
+    }
+}
+export const Invite = new Invite$Type();
+/**
+ * Type for protobuf message protocol.chat.v1.InviteWithId
+ */
+class InviteWithId$Type extends MessageType<InviteWithId> {
+    constructor() {
+        super("protocol.chat.v1.InviteWithId", [
+            { no: 1, name: "invite_id", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 2, name: "invite", kind: "message", T: () => Invite }
+        ]);
+    }
+}
+export const InviteWithId = new InviteWithId$Type();
+/**
+ * Type for protobuf message protocol.chat.v1.GuildListEntry
+ */
+class GuildListEntry$Type extends MessageType<GuildListEntry> {
+    constructor() {
+        super("protocol.chat.v1.GuildListEntry", [
+            { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+            { no: 2, name: "server_id", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
+        ]);
+    }
+}
+export const GuildListEntry = new GuildListEntry$Type();
 /**
  * Type for protobuf message protocol.chat.v1.CreateGuildRequest
  */
 class CreateGuildRequest$Type extends MessageType<CreateGuildRequest> {
     constructor() {
         super("protocol.chat.v1.CreateGuildRequest", [
-            { no: 3, name: "metadata", kind: "message", T: () => Metadata },
-            { no: 1, name: "guild_name", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 2, name: "picture_url", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
+            { no: 1, name: "name", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 2, name: "picture", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 3, name: "metadata", kind: "message", T: () => Metadata }
         ]);
     }
 }
@@ -332,7 +646,7 @@ class CreateInviteRequest$Type extends MessageType<CreateInviteRequest> {
         super("protocol.chat.v1.CreateInviteRequest", [
             { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
             { no: 2, name: "name", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 3, name: "possible_uses", kind: "scalar", T: 5 /*ScalarType.INT32*/ }
+            { no: 3, name: "possible_uses", kind: "scalar", T: 13 /*ScalarType.UINT32*/ }
         ]);
     }
 }
@@ -343,7 +657,7 @@ export const CreateInviteRequest = new CreateInviteRequest$Type();
 class CreateInviteResponse$Type extends MessageType<CreateInviteResponse> {
     constructor() {
         super("protocol.chat.v1.CreateInviteResponse", [
-            { no: 1, name: "name", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
+            { no: 1, name: "invite_id", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
         ]);
     }
 }
@@ -363,23 +677,11 @@ export const GetGuildListRequest = new GetGuildListRequest$Type();
 class GetGuildListResponse$Type extends MessageType<GetGuildListResponse> {
     constructor() {
         super("protocol.chat.v1.GetGuildListResponse", [
-            { no: 1, name: "guilds", kind: "message", repeat: 1 /*RepeatType.PACKED*/, T: () => GetGuildListResponse_GuildListEntry }
+            { no: 1, name: "guilds", kind: "message", repeat: 1 /*RepeatType.PACKED*/, T: () => GuildListEntry }
         ]);
     }
 }
 export const GetGuildListResponse = new GetGuildListResponse$Type();
-/**
- * Type for protobuf message protocol.chat.v1.GetGuildListResponse.GuildListEntry
- */
-class GetGuildListResponse_GuildListEntry$Type extends MessageType<GetGuildListResponse_GuildListEntry> {
-    constructor() {
-        super("protocol.chat.v1.GetGuildListResponse.GuildListEntry", [
-            { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-            { no: 2, name: "host", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
-        ]);
-    }
-}
-export const GetGuildListResponse_GuildListEntry = new GetGuildListResponse_GuildListEntry$Type();
 /**
  * Type for protobuf message protocol.chat.v1.GetGuildRequest
  */
@@ -397,10 +699,7 @@ export const GetGuildRequest = new GetGuildRequest$Type();
 class GetGuildResponse$Type extends MessageType<GetGuildResponse> {
     constructor() {
         super("protocol.chat.v1.GetGuildResponse", [
-            { no: 4, name: "metadata", kind: "message", T: () => Metadata },
-            { no: 1, name: "guild_name", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 2, name: "guild_owner", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-            { no: 3, name: "guild_picture", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
+            { no: 1, name: "guild", kind: "message", T: () => Guild }
         ]);
     }
 }
@@ -422,24 +721,11 @@ export const GetGuildInvitesRequest = new GetGuildInvitesRequest$Type();
 class GetGuildInvitesResponse$Type extends MessageType<GetGuildInvitesResponse> {
     constructor() {
         super("protocol.chat.v1.GetGuildInvitesResponse", [
-            { no: 1, name: "invites", kind: "message", repeat: 1 /*RepeatType.PACKED*/, T: () => GetGuildInvitesResponse_Invite }
+            { no: 1, name: "invites", kind: "message", repeat: 1 /*RepeatType.PACKED*/, T: () => InviteWithId }
         ]);
     }
 }
 export const GetGuildInvitesResponse = new GetGuildInvitesResponse$Type();
-/**
- * Type for protobuf message protocol.chat.v1.GetGuildInvitesResponse.Invite
- */
-class GetGuildInvitesResponse_Invite$Type extends MessageType<GetGuildInvitesResponse_Invite> {
-    constructor() {
-        super("protocol.chat.v1.GetGuildInvitesResponse.Invite", [
-            { no: 1, name: "invite_id", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 2, name: "possible_uses", kind: "scalar", T: 5 /*ScalarType.INT32*/ },
-            { no: 3, name: "use_count", kind: "scalar", T: 5 /*ScalarType.INT32*/ }
-        ]);
-    }
-}
-export const GetGuildInvitesResponse_Invite = new GetGuildInvitesResponse_Invite$Type();
 /**
  * Type for protobuf message protocol.chat.v1.GetGuildMembersRequest
  */
@@ -470,12 +756,21 @@ class UpdateGuildInformationRequest$Type extends MessageType<UpdateGuildInformat
         super("protocol.chat.v1.UpdateGuildInformationRequest", [
             { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
             { no: 2, name: "new_guild_name", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
-            { no: 4, name: "new_guild_picture", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
-            { no: 6, name: "new_metadata", kind: "message", T: () => Metadata }
+            { no: 3, name: "new_guild_picture", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
+            { no: 4, name: "new_metadata", kind: "message", T: () => Metadata }
         ]);
     }
 }
 export const UpdateGuildInformationRequest = new UpdateGuildInformationRequest$Type();
+/**
+ * Type for protobuf message protocol.chat.v1.UpdateGuildInformationResponse
+ */
+class UpdateGuildInformationResponse$Type extends MessageType<UpdateGuildInformationResponse> {
+    constructor() {
+        super("protocol.chat.v1.UpdateGuildInformationResponse", []);
+    }
+}
+export const UpdateGuildInformationResponse = new UpdateGuildInformationResponse$Type();
 /**
  * Type for protobuf message protocol.chat.v1.DeleteGuildRequest
  */
@@ -488,6 +783,15 @@ class DeleteGuildRequest$Type extends MessageType<DeleteGuildRequest> {
 }
 export const DeleteGuildRequest = new DeleteGuildRequest$Type();
 /**
+ * Type for protobuf message protocol.chat.v1.DeleteGuildResponse
+ */
+class DeleteGuildResponse$Type extends MessageType<DeleteGuildResponse> {
+    constructor() {
+        super("protocol.chat.v1.DeleteGuildResponse", []);
+    }
+}
+export const DeleteGuildResponse = new DeleteGuildResponse$Type();
+/**
  * Type for protobuf message protocol.chat.v1.DeleteInviteRequest
  */
 class DeleteInviteRequest$Type extends MessageType<DeleteInviteRequest> {
@@ -499,6 +803,15 @@ class DeleteInviteRequest$Type extends MessageType<DeleteInviteRequest> {
     }
 }
 export const DeleteInviteRequest = new DeleteInviteRequest$Type();
+/**
+ * Type for protobuf message protocol.chat.v1.DeleteInviteResponse
+ */
+class DeleteInviteResponse$Type extends MessageType<DeleteInviteResponse> {
+    constructor() {
+        super("protocol.chat.v1.DeleteInviteResponse", []);
+    }
+}
+export const DeleteInviteResponse = new DeleteInviteResponse$Type();
 /**
  * Type for protobuf message protocol.chat.v1.JoinGuildRequest
  */
@@ -539,7 +852,7 @@ class PreviewGuildResponse$Type extends MessageType<PreviewGuildResponse> {
     constructor() {
         super("protocol.chat.v1.PreviewGuildResponse", [
             { no: 1, name: "name", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 2, name: "avatar", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 2, name: "picture", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
             { no: 3, name: "member_count", kind: "scalar", T: 4 /*ScalarType.UINT64*/ }
         ]);
     }
@@ -557,6 +870,15 @@ class LeaveGuildRequest$Type extends MessageType<LeaveGuildRequest> {
 }
 export const LeaveGuildRequest = new LeaveGuildRequest$Type();
 /**
+ * Type for protobuf message protocol.chat.v1.LeaveGuildResponse
+ */
+class LeaveGuildResponse$Type extends MessageType<LeaveGuildResponse> {
+    constructor() {
+        super("protocol.chat.v1.LeaveGuildResponse", []);
+    }
+}
+export const LeaveGuildResponse = new LeaveGuildResponse$Type();
+/**
  * Type for protobuf message protocol.chat.v1.BanUserRequest
  */
 class BanUserRequest$Type extends MessageType<BanUserRequest> {
@@ -568,6 +890,15 @@ class BanUserRequest$Type extends MessageType<BanUserRequest> {
     }
 }
 export const BanUserRequest = new BanUserRequest$Type();
+/**
+ * Type for protobuf message protocol.chat.v1.BanUserResponse
+ */
+class BanUserResponse$Type extends MessageType<BanUserResponse> {
+    constructor() {
+        super("protocol.chat.v1.BanUserResponse", []);
+    }
+}
+export const BanUserResponse = new BanUserResponse$Type();
 /**
  * Type for protobuf message protocol.chat.v1.KickUserRequest
  */
@@ -581,6 +912,15 @@ class KickUserRequest$Type extends MessageType<KickUserRequest> {
 }
 export const KickUserRequest = new KickUserRequest$Type();
 /**
+ * Type for protobuf message protocol.chat.v1.KickUserResponse
+ */
+class KickUserResponse$Type extends MessageType<KickUserResponse> {
+    constructor() {
+        super("protocol.chat.v1.KickUserResponse", []);
+    }
+}
+export const KickUserResponse = new KickUserResponse$Type();
+/**
  * Type for protobuf message protocol.chat.v1.UnbanUserRequest
  */
 class UnbanUserRequest$Type extends MessageType<UnbanUserRequest> {
@@ -592,3 +932,34 @@ class UnbanUserRequest$Type extends MessageType<UnbanUserRequest> {
     }
 }
 export const UnbanUserRequest = new UnbanUserRequest$Type();
+/**
+ * Type for protobuf message protocol.chat.v1.UnbanUserResponse
+ */
+class UnbanUserResponse$Type extends MessageType<UnbanUserResponse> {
+    constructor() {
+        super("protocol.chat.v1.UnbanUserResponse", []);
+    }
+}
+export const UnbanUserResponse = new UnbanUserResponse$Type();
+/**
+ * Type for protobuf message protocol.chat.v1.GetBannedUsersRequest
+ */
+class GetBannedUsersRequest$Type extends MessageType<GetBannedUsersRequest> {
+    constructor() {
+        super("protocol.chat.v1.GetBannedUsersRequest", [
+            { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ }
+        ]);
+    }
+}
+export const GetBannedUsersRequest = new GetBannedUsersRequest$Type();
+/**
+ * Type for protobuf message protocol.chat.v1.GetBannedUsersResponse
+ */
+class GetBannedUsersResponse$Type extends MessageType<GetBannedUsersResponse> {
+    constructor() {
+        super("protocol.chat.v1.GetBannedUsersResponse", [
+            { no: 1, name: "banned_users", kind: "scalar", repeat: 1 /*RepeatType.PACKED*/, T: 4 /*ScalarType.UINT64*/ }
+        ]);
+    }
+}
+export const GetBannedUsersResponse = new GetBannedUsersResponse$Type();

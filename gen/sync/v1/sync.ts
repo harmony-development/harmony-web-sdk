@@ -5,7 +5,6 @@ import { RpcTransport } from "@protobuf-ts/runtime-rpc";
 import { MethodInfo } from "@protobuf-ts/runtime-rpc";
 import { MessageType } from "@protobuf-ts/runtime";
 import { stackIntercept } from "@protobuf-ts/runtime-rpc";
-import { Empty } from "../../google/protobuf/empty";
 import { UnaryCall } from "@protobuf-ts/runtime-rpc";
 import { RpcOptions } from "@protobuf-ts/runtime-rpc";
 /**
@@ -15,14 +14,14 @@ import { RpcOptions } from "@protobuf-ts/runtime-rpc";
  */
 export interface AuthData {
     /**
-     * The server name of the server initiating the transaction. For Pull,
+     * The server ID of the server initiating the transaction. For Pull,
      * this tells the server being connected to which homeservers' events it should send.
      * For Push, this tells the server being connected to which homeservers' events it is
      * receiving.
      *
-     * @generated from protobuf field: string host = 1;
+     * @generated from protobuf field: string server_id = 1;
      */
-    host: string;
+    serverId: string;
     /**
      * The UTC UNIX time in seconds of when the request is started. Servers should reject
      * tokens with a time too far from the current time, at their discretion. A recommended
@@ -33,15 +32,8 @@ export interface AuthData {
     time: string;
 }
 /**
- * @generated from protobuf message protocol.sync.v1.EventQueue
- */
-export interface EventQueue {
-    /**
-     * @generated from protobuf field: repeated protocol.sync.v1.Event events = 1;
-     */
-    events: Event[];
-}
-/**
+ * Object representing a postbox event.
+ *
  * @generated from protobuf message protocol.sync.v1.Event
  */
 export interface Event {
@@ -51,12 +43,16 @@ export interface Event {
     kind: {
         oneofKind: "userRemovedFromGuild";
         /**
+         * User removed from a guild.
+         *
          * @generated from protobuf field: protocol.sync.v1.Event.UserRemovedFromGuild user_removed_from_guild = 1;
          */
         userRemovedFromGuild: Event_UserRemovedFromGuild;
     } | {
         oneofKind: "userAddedToGuild";
         /**
+         * User added to a guild.
+         *
          * @generated from protobuf field: protocol.sync.v1.Event.UserAddedToGuild user_added_to_guild = 2;
          */
         userAddedToGuild: Event_UserAddedToGuild;
@@ -65,30 +61,102 @@ export interface Event {
     };
 }
 /**
+ * Event sent when a user is removed from a guild.
+ *
  * @generated from protobuf message protocol.sync.v1.Event.UserRemovedFromGuild
  */
 export interface Event_UserRemovedFromGuild {
     /**
+     * User ID of the user that was removed.
+     *
      * @generated from protobuf field: uint64 user_id = 1;
      */
     userId: string;
     /**
+     * Guild ID of the guild where the user was.
+     *
      * @generated from protobuf field: uint64 guild_id = 2;
      */
     guildId: string;
 }
 /**
+ * Event sent when a user is added to a guild.
+ *
  * @generated from protobuf message protocol.sync.v1.Event.UserAddedToGuild
  */
 export interface Event_UserAddedToGuild {
     /**
+     * User ID of the user that was added.
+     *
      * @generated from protobuf field: uint64 user_id = 1;
      */
     userId: string;
     /**
+     * Guild ID of the guild where the user will be.
+     *
      * @generated from protobuf field: uint64 guild_id = 2;
      */
     guildId: string;
+}
+/**
+ * Used in `Pull` endpoint.
+ *
+ * @generated from protobuf message protocol.sync.v1.PullRequest
+ */
+export interface PullRequest {
+}
+/**
+ * Used in `Pull` endpoint.
+ *
+ * @generated from protobuf message protocol.sync.v1.PullResponse
+ */
+export interface PullResponse {
+    /**
+     * The events that were not processed yet.
+     *
+     * @generated from protobuf field: repeated protocol.sync.v1.Event event_queue = 1;
+     */
+    eventQueue: Event[];
+}
+/**
+ * Used in `Push` endpoint.
+ *
+ * @generated from protobuf message protocol.sync.v1.PushRequest
+ */
+export interface PushRequest {
+    /**
+     * The event to push to the server.
+     *
+     * @generated from protobuf field: protocol.sync.v1.Event event = 1;
+     */
+    event?: Event;
+}
+/**
+ * Used in `Push` endpoint.
+ *
+ * @generated from protobuf message protocol.sync.v1.PushResponse
+ */
+export interface PushResponse {
+}
+/**
+ * Used in `NotifyNewId` endpoint.
+ *
+ * @generated from protobuf message protocol.sync.v1.NotifyNewIdRequest
+ */
+export interface NotifyNewIdRequest {
+    /**
+     * The new server ID of the server.
+     *
+     * @generated from protobuf field: string new_server_id = 1;
+     */
+    newServerId: string;
+}
+/**
+ * Used in `NotifyNewId` endpoint.
+ *
+ * @generated from protobuf message protocol.sync.v1.NotifyNewIdResponse
+ */
+export interface NotifyNewIdResponse {
 }
 /**
  * # Postbox
@@ -100,6 +168,13 @@ export interface Event_UserAddedToGuild {
  *
  * The semantics of events are documented in the event types. The postbox service
  * is solely reliable for reliable pushing and pulling.
+ *
+ * ## Server Identification
+ *
+ * Servers are identified using their domain, and the port which they serve. This is
+ * called the "server ID", and must be formatted as `domain:port`. The port is NOT
+ * optional. Converting this ID to a URL for communicating can simply be done via
+ * prefixing the ID with a protocol, eg. `https://`.
  *
  * ## Authorisation
  *
@@ -130,13 +205,24 @@ export interface Event_UserAddedToGuild {
  */
 export interface IPostboxServiceClient {
     /**
-     * @generated from protobuf rpc: Pull(google.protobuf.Empty) returns (protocol.sync.v1.EventQueue);
+     * Endpoint to pull events.
+     *
+     * @generated from protobuf rpc: Pull(protocol.sync.v1.PullRequest) returns (protocol.sync.v1.PullResponse);
      */
-    pull(input: Empty, options?: RpcOptions): UnaryCall<Empty, EventQueue>;
+    pull(input: PullRequest, options?: RpcOptions): UnaryCall<PullRequest, PullResponse>;
     /**
-     * @generated from protobuf rpc: Push(protocol.sync.v1.Event) returns (google.protobuf.Empty);
+     * Endpoint to push events.
+     *
+     * @generated from protobuf rpc: Push(protocol.sync.v1.PushRequest) returns (protocol.sync.v1.PushResponse);
      */
-    push(input: Event, options?: RpcOptions): UnaryCall<Event, Empty>;
+    push(input: PushRequest, options?: RpcOptions): UnaryCall<PushRequest, PushResponse>;
+    /**
+     * Endpoint to notify a server of a server ID change. It is called by the server
+     * that had it's server ID changed for all servers it has federated with.
+     *
+     * @generated from protobuf rpc: NotifyNewId(protocol.sync.v1.NotifyNewIdRequest) returns (protocol.sync.v1.NotifyNewIdResponse);
+     */
+    notifyNewId(input: NotifyNewIdRequest, options?: RpcOptions): UnaryCall<NotifyNewIdRequest, NotifyNewIdResponse>;
 }
 /**
  * Type for protobuf message protocol.sync.v1.AuthData
@@ -144,23 +230,12 @@ export interface IPostboxServiceClient {
 class AuthData$Type extends MessageType<AuthData> {
     constructor() {
         super("protocol.sync.v1.AuthData", [
-            { no: 1, name: "host", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 1, name: "server_id", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
             { no: 2, name: "time", kind: "scalar", T: 4 /*ScalarType.UINT64*/ }
         ]);
     }
 }
 export const AuthData = new AuthData$Type();
-/**
- * Type for protobuf message protocol.sync.v1.EventQueue
- */
-class EventQueue$Type extends MessageType<EventQueue> {
-    constructor() {
-        super("protocol.sync.v1.EventQueue", [
-            { no: 1, name: "events", kind: "message", repeat: 1 /*RepeatType.PACKED*/, T: () => Event }
-        ]);
-    }
-}
-export const EventQueue = new EventQueue$Type();
 /**
  * Type for protobuf message protocol.sync.v1.Event
  */
@@ -198,6 +273,66 @@ class Event_UserAddedToGuild$Type extends MessageType<Event_UserAddedToGuild> {
 }
 export const Event_UserAddedToGuild = new Event_UserAddedToGuild$Type();
 /**
+ * Type for protobuf message protocol.sync.v1.PullRequest
+ */
+class PullRequest$Type extends MessageType<PullRequest> {
+    constructor() {
+        super("protocol.sync.v1.PullRequest", []);
+    }
+}
+export const PullRequest = new PullRequest$Type();
+/**
+ * Type for protobuf message protocol.sync.v1.PullResponse
+ */
+class PullResponse$Type extends MessageType<PullResponse> {
+    constructor() {
+        super("protocol.sync.v1.PullResponse", [
+            { no: 1, name: "event_queue", kind: "message", repeat: 1 /*RepeatType.PACKED*/, T: () => Event }
+        ]);
+    }
+}
+export const PullResponse = new PullResponse$Type();
+/**
+ * Type for protobuf message protocol.sync.v1.PushRequest
+ */
+class PushRequest$Type extends MessageType<PushRequest> {
+    constructor() {
+        super("protocol.sync.v1.PushRequest", [
+            { no: 1, name: "event", kind: "message", T: () => Event }
+        ]);
+    }
+}
+export const PushRequest = new PushRequest$Type();
+/**
+ * Type for protobuf message protocol.sync.v1.PushResponse
+ */
+class PushResponse$Type extends MessageType<PushResponse> {
+    constructor() {
+        super("protocol.sync.v1.PushResponse", []);
+    }
+}
+export const PushResponse = new PushResponse$Type();
+/**
+ * Type for protobuf message protocol.sync.v1.NotifyNewIdRequest
+ */
+class NotifyNewIdRequest$Type extends MessageType<NotifyNewIdRequest> {
+    constructor() {
+        super("protocol.sync.v1.NotifyNewIdRequest", [
+            { no: 1, name: "new_server_id", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
+        ]);
+    }
+}
+export const NotifyNewIdRequest = new NotifyNewIdRequest$Type();
+/**
+ * Type for protobuf message protocol.sync.v1.NotifyNewIdResponse
+ */
+class NotifyNewIdResponse$Type extends MessageType<NotifyNewIdResponse> {
+    constructor() {
+        super("protocol.sync.v1.NotifyNewIdResponse", []);
+    }
+}
+export const NotifyNewIdResponse = new NotifyNewIdResponse$Type();
+/**
  * # Postbox
  *
  * The postbox service forms the core of Harmony's server <-> server communications.
@@ -207,6 +342,13 @@ export const Event_UserAddedToGuild = new Event_UserAddedToGuild$Type();
  *
  * The semantics of events are documented in the event types. The postbox service
  * is solely reliable for reliable pushing and pulling.
+ *
+ * ## Server Identification
+ *
+ * Servers are identified using their domain, and the port which they serve. This is
+ * called the "server ID", and must be formatted as `domain:port`. The port is NOT
+ * optional. Converting this ID to a URL for communicating can simply be done via
+ * prefixing the ID with a protocol, eg. `https://`.
  *
  * ## Authorisation
  *
@@ -238,17 +380,22 @@ export const Event_UserAddedToGuild = new Event_UserAddedToGuild$Type();
 export class PostboxServiceClient implements IPostboxServiceClient {
     readonly typeName = "protocol.sync.v1.PostboxService";
     readonly methods: MethodInfo[] = [
-        { service: this, name: "Pull", localName: "pull", I: Empty, O: EventQueue },
-        { service: this, name: "Push", localName: "push", I: Event, O: Empty }
+        { service: this, name: "Pull", localName: "pull", I: PullRequest, O: PullResponse },
+        { service: this, name: "Push", localName: "push", I: PushRequest, O: PushResponse },
+        { service: this, name: "NotifyNewId", localName: "notifyNewId", I: NotifyNewIdRequest, O: NotifyNewIdResponse }
     ];
     constructor(private readonly _transport: RpcTransport) {
     }
-    pull(input: Empty, options?: RpcOptions): UnaryCall<Empty, EventQueue> {
+    pull(input: PullRequest, options?: RpcOptions): UnaryCall<PullRequest, PullResponse> {
         const method = this.methods[0], opt = this._transport.mergeOptions(options), i = method.I.create(input);
-        return stackIntercept<Empty, EventQueue>("unary", this._transport, method, opt, i);
+        return stackIntercept<PullRequest, PullResponse>("unary", this._transport, method, opt, i);
     }
-    push(input: Event, options?: RpcOptions): UnaryCall<Event, Empty> {
+    push(input: PushRequest, options?: RpcOptions): UnaryCall<PushRequest, PushResponse> {
         const method = this.methods[1], opt = this._transport.mergeOptions(options), i = method.I.create(input);
-        return stackIntercept<Event, Empty>("unary", this._transport, method, opt, i);
+        return stackIntercept<PushRequest, PushResponse>("unary", this._transport, method, opt, i);
+    }
+    notifyNewId(input: NotifyNewIdRequest, options?: RpcOptions): UnaryCall<NotifyNewIdRequest, NotifyNewIdResponse> {
+        const method = this.methods[2], opt = this._transport.mergeOptions(options), i = method.I.create(input);
+        return stackIntercept<NotifyNewIdRequest, NotifyNewIdResponse>("unary", this._transport, method, opt, i);
     }
 }
