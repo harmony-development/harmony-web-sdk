@@ -14,11 +14,11 @@
     "allowJs": false,
     "outDir": "dist",
     "typeRoots": ["node_modules/@types"],
-    "rootDirs": ["./src", "./gen"],
+    "rootDirs": ["./src"],
     "baseUrl": "./",
     "paths": {
       "src/*": ["src/*"]
     }
   },
-  "include": ["./src", "./gen", "test/connection.test.ts"]
+  "include": ["./src", "./gen"]
 }

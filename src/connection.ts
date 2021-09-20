@@ -1,7 +1,7 @@
-import { AuthServiceClient } from "./auth/v1/auth.client";
-import { ChatServiceClient } from "./chat/v1/chat.client";
+import { AuthServiceClient } from "../gen/auth/v1/auth.client";
+import { ChatServiceClient } from "../gen/chat/v1/chat.client";
 import { HrpcTransport } from "./hrpcTransport";
-import { MediaProxyServiceClient } from "./mediaproxy/v1/mediaproxy.client";
+import { MediaProxyServiceClient } from "../gen/mediaproxy/v1/mediaproxy.client";
 
 export interface UploadedFile {
   name: string;
