@@ -4,10 +4,10 @@ specifiers:
   '@babel/preset-env': ^7.15.6
   '@commitlint/cli': ^13.1.0
   '@commitlint/config-conventional': ^13.1.0
-  '@protobuf-ts/plugin': ^2.0.6
-  '@protobuf-ts/protoc': ^2.0.6
-  '@protobuf-ts/runtime': ^2.0.6
-  '@protobuf-ts/runtime-rpc': ^2.0.6
+  '@protobuf-ts/plugin': ^1
+  '@protobuf-ts/protoc': ^1
+  '@protobuf-ts/runtime': ^1
+  '@protobuf-ts/runtime-rpc': ^1
   '@types/chai': ^4.2.21
   '@types/jest': ^27.0.1
   '@types/node': ^16.9.4
@@ -30,15 +30,15 @@ specifiers:
   whatwg-fetch: ^3.6.2
 
 dependencies:
-  '@protobuf-ts/runtime': 2.0.6
-  '@protobuf-ts/runtime-rpc': 2.0.6
+  '@protobuf-ts/runtime': 1.0.13
+  '@protobuf-ts/runtime-rpc': 1.0.13
 
 devDependencies:
   '@babel/preset-env': 7.15.6
   '@commitlint/cli': 13.1.0
   '@commitlint/config-conventional': 13.1.0
-  '@protobuf-ts/plugin': 2.0.6
-  '@protobuf-ts/protoc': 2.0.6
+  '@protobuf-ts/plugin': 1.0.13
+  '@protobuf-ts/protoc': 1.0.13
   '@types/chai': 4.2.21
   '@types/jest': 27.0.1
   '@types/node': 16.9.4
@@ -1361,36 +1361,36 @@ packages:
       fastq: 1.13.0
     dev: true
 
-  /@protobuf-ts/plugin-framework/2.0.6:
-    resolution: {integrity: sha512-dd9F9HN9/OpfXT4uJAx7ceQJzjiX0BUqqiOHJ3I5Jokbp7wVKjoY0SKvbdZ7g24Zal1oPzol06SO/8A7TXluSw==}
+  /@protobuf-ts/plugin-framework/1.0.13:
+    resolution: {integrity: sha512-Wvopo8tKh+lfqZK2A7kEygYhvsTMcbzm7r78mBylMBYBNY31ojwW00koF2Tgb0RZ0yGGUik/pWb6P2DWEiRB1g==}
     dependencies:
-      '@protobuf-ts/runtime': 2.0.6
+      '@protobuf-ts/runtime': 1.0.13
       typescript: 3.9.10
     dev: true
 
-  /@protobuf-ts/plugin/2.0.6:
-    resolution: {integrity: sha512-ZCVuIwZoh+CQAIkM43YPn4EDlNYwPsZBrQ6smsALwe//yqvNnUDF3xUr5Wfte6C6XJNMGVBRIs3EftHoQzDiag==}
+  /@protobuf-ts/plugin/1.0.13:
+    resolution: {integrity: sha512-1jUJ+EYa57YVJhmgroA6y5CJ+vFvbOI9rdOKXx/Q5ngbT6QnKvZHCD3lImjtfGIO92VqcxJVZj2uch3qykSIlA==}
     hasBin: true
     dependencies:
-      '@protobuf-ts/plugin-framework': 2.0.6
-      '@protobuf-ts/protoc': 2.0.6
-      '@protobuf-ts/runtime': 2.0.6
-      '@protobuf-ts/runtime-rpc': 2.0.6
+      '@protobuf-ts/plugin-framework': 1.0.13
+      '@protobuf-ts/protoc': 1.0.13
+      '@protobuf-ts/runtime': 1.0.13
       typescript: 3.9.10
     dev: true
 
-  /@protobuf-ts/protoc/2.0.6:
-    resolution: {integrity: sha512-nboi2OOhlF4a7UZUXG+ZWrYTnjzF3UUdNdTaoUl9PkFSMR7BLKG8SyyQwx3URN5XQXpBfQ4WReRfTnZqD7m7Rg==}
+  /@protobuf-ts/protoc/1.0.13:
+    resolution: {integrity: sha512-lkHJ1va6473+mP3OJvVs0ioXeiuNpyDXfDPbfqgRCgqRQwqHhAmtj5OnlHrPopIKVX+Y9oW8bc2xityOt4HVLg==}
     hasBin: true
     dev: true
 
-  /@protobuf-ts/runtime-rpc/2.0.6:
-    resolution: {integrity: sha512-is7PUKt7rA9xRZwpRd120M3PlSW+TVVAwgCy6AmlZOQp7CWN8qa7ng520sDSQYlYZWRIsUoJLiwF6PykQy2Tyg==}
+  /@protobuf-ts/runtime-rpc/1.0.13:
+    resolution: {integrity: sha512-ct/fCm3UJk/sg3yKpvCd6ylbRVkj+LiV+xD95BWTw0w4t/29VYwT8MhZqlJbN0qSfkkH4/jWTrwv9yePDEjPWg==}
     dependencies:
-      '@protobuf-ts/runtime': 2.0.6
+      '@protobuf-ts/runtime': 1.0.13
+    dev: false
 
-  /@protobuf-ts/runtime/2.0.6:
-    resolution: {integrity: sha512-9yeRqxexKxctDHt6uYwFiuigw3mg8OC36WmViemYlQ9sj/ENg4OGOduzYIdHoJUlr1RSmPL5leN36QdGubCnJg==}
+  /@protobuf-ts/runtime/1.0.13:
+    resolution: {integrity: sha512-uvYYBUtG4eCYMxo+mzxN8SHvpL/l7PbHEmOpXEnDCwBj/wJ+Ezj8+TlEFjjRWpnFidka+SMdDOXPWSyJv2iNAw==}
 
   /@tsconfig/node10/1.0.8:
     resolution: {integrity: sha512-6XFfSQmMgq0CFLY1MslA/CPUfhIL919M1rMsa5lP2P097N2Wd1sSX0tx1u4olM16fLNhtHZpRhedZJphNJqmZg==}

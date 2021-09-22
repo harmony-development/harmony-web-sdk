@@ -1,6 +1,6 @@
 {
   "name": "@harmony-dev/harmony-web-sdk",
-  "version": "5.0.67",
+  "version": "5.0.68",
   "description": "A Node SDK for Harmony, adapted to work for the web",
   "repository": {
     "type": "git",
@@ -22,6 +22,7 @@
   "files": [
     "dist"
   ],
+  "sideEffects": false,
   "homepage": "https://github.com/harmony-development/harmony-web-sdk#readme",
   "scripts": {
     "build": "tsc",
@@ -42,15 +43,15 @@
     ]
   },
   "dependencies": {
-    "@protobuf-ts/runtime": "^2.0.6",
-    "@protobuf-ts/runtime-rpc": "^2.0.6"
+    "@protobuf-ts/runtime": "^1",
+    "@protobuf-ts/runtime-rpc": "^1"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.15.6",
     "@commitlint/cli": "^13.1.0",
     "@commitlint/config-conventional": "^13.1.0",
-    "@protobuf-ts/plugin": "^2.0.6",
-    "@protobuf-ts/protoc": "^2.0.6",
+    "@protobuf-ts/plugin": "^1",
+    "@protobuf-ts/protoc": "^1",
     "@types/chai": "^4.2.21",
     "@types/jest": "^27.0.1",
     "@types/node": "^16.9.4",
