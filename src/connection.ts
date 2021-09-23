@@ -2,6 +2,11 @@ import { AuthServiceClient } from "../gen/auth/v1/auth";
 import { ChatServiceClient } from "../gen/chat/v1/chat";
 import { HrpcTransport } from "./hrpcTransport";
 import { MediaProxyServiceClient } from "../gen/mediaproxy/v1/mediaproxy";
+import { IMessageType, MessageType } from "@protobuf-ts/runtime";
+import { MethodInfo, RpcOptions, UnaryCall } from "@protobuf-ts/runtime-rpc";
+import { BatchSameRequest, BatchServiceClient } from "gen/batch/v1/batch";
+import { ProfileServiceClient } from "../gen/profile/v1/profile";
+import { EmoteServiceClient } from "../gen/emote/v1/emote";
 
 export interface UploadedFile {
   name: string;
@@ -14,7 +19,11 @@ export class Connection {
   host: string;
   auth: AuthServiceClient;
   chat: ChatServiceClient;
+  batch: BatchServiceClient;
+  profile: ProfileServiceClient;
+  emote: EmoteServiceClient;
   mediaProxy: MediaProxyServiceClient;
+
   private session?: string;
   private transport: HrpcTransport;
 
@@ -25,6 +34,9 @@ export class Connection {
     });
     this.auth = new AuthServiceClient(this.transport);
     this.chat = new ChatServiceClient(this.transport);
+    this.profile = new ProfileServiceClient(this.transport);
+    this.emote = new EmoteServiceClient(this.transport);
+    this.batch = new BatchServiceClient(this.transport);
     this.mediaProxy = new MediaProxyServiceClient(this.transport);
   }
 
@@ -36,6 +48,18 @@ export class Connection {
   getSession() {
     return this.session;
   }
+
+  // async batchSame<I extends object, O extends object>(
+  //   method: MethodInfo<I, O>,
+  //   requests: I[]
+  // ): Promise<O[]> {
+  //   const req = BatchSameRequest.create({
+  //     endpoint: `/${method.service.typeName}/${method.name}`,
+  //     requests: requests.map((r) => method.I.toBinary(r)),
+  //   });
+  //   const { responses } = await this.batch.batchSame(req).response;
+  //   return responses.map((raw) => method.O.fromBinary(raw));
+  // }
 
   async uploadFile(f: File) {
     const url = new URL(`${this.host}/_harmony/media/upload`);

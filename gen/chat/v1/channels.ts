@@ -17,11 +17,14 @@ export interface Channel {
      */
     channelName: string;
     /**
-     * Whether this channel is a category or not.
+     * The kind of channel this is.
+     * Data does not get inherently stored in the Channel type
+     * Instead, clients who understand a certain ChannelKind should
+     * fetch them from a separate RPC.
      *
-     * @generated from protobuf field: bool is_category = 2;
+     * @generated from protobuf field: protocol.chat.v1.ChannelKind kind = 2;
      */
-    isCategory: boolean;
+    kind: ChannelKind;
     /**
      * The metadata of this channel.
      *
@@ -285,13 +288,32 @@ export interface TypingRequest {
 export interface TypingResponse {
 }
 /**
+ * What kind the channel is.
+ *
+ * @generated from protobuf enum protocol.chat.v1.ChannelKind
+ */
+export enum ChannelKind {
+    /**
+     * A text channel. Allows you to simply send messages to a group of people.
+     *
+     * @generated from protobuf enum value: CHANNEL_KIND_TEXT_UNSPECIFIED = 0;
+     */
+    TEXT_UNSPECIFIED = 0,
+    /**
+     * A voice channel. Allows you to talk to other people with voice.
+     *
+     * @generated from protobuf enum value: CHANNEL_KIND_VOICE_MEDIA = 1;
+     */
+    VOICE_MEDIA = 1
+}
+/**
  * Type for protobuf message protocol.chat.v1.Channel
  */
 class Channel$Type extends MessageType<Channel> {
     constructor() {
         super("protocol.chat.v1.Channel", [
             { no: 1, name: "channel_name", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 2, name: "is_category", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
+            { no: 2, name: "kind", kind: "enum", T: () => ["protocol.chat.v1.ChannelKind", ChannelKind, "CHANNEL_KIND_"] },
             { no: 3, name: "metadata", kind: "message", T: () => Metadata }
         ]);
     }

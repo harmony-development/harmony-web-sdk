@@ -1,6 +1,6 @@
 {
   "name": "@harmony-dev/harmony-web-sdk",
-  "version": "5.0.68",
+  "version": "0.0.1-alpha.1",
   "description": "A Node SDK for Harmony, adapted to work for the web",
   "repository": {
     "type": "git",
@@ -25,7 +25,8 @@
   "sideEffects": false,
   "homepage": "https://github.com/harmony-development/harmony-web-sdk#readme",
   "scripts": {
-    "build": "tsc",
+    "build:fast": "rimraf dist && etsc",
+    "build": "rimraf dist && tsc",
     "regen": "buf generate git://github.com/harmony-development/protocol.git#branch=main",
     "lint": "tslint  --project tsconfig.json -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
     "commit": "git-cz",
@@ -60,6 +61,7 @@
     "commitizen": "^4.2.4",
     "copyfiles": "^2.4.1",
     "cz-conventional-changelog": "^3.3.0",
+    "esbuild-node-tsc": "^1.6.1",
     "lint-staged": "^11.1.2",
     "node-fetch": "^3.0.0",
     "prettier": "^2.4.1",
