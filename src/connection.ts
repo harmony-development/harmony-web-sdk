@@ -1,12 +1,10 @@
-import { AuthServiceClient } from "../gen/auth/v1/auth";
-import { ChatServiceClient } from "../gen/chat/v1/chat";
+import { AuthServiceClient } from "../gen/auth/v1/auth.client";
+import { ChatServiceClient } from "../gen/chat/v1/chat.client";
 import { HrpcTransport } from "./hrpcTransport";
-import { MediaProxyServiceClient } from "../gen/mediaproxy/v1/mediaproxy";
-import { IMessageType, MessageType } from "@protobuf-ts/runtime";
-import { MethodInfo, RpcOptions, UnaryCall } from "@protobuf-ts/runtime-rpc";
-import { BatchSameRequest, BatchServiceClient } from "gen/batch/v1/batch";
-import { ProfileServiceClient } from "../gen/profile/v1/profile";
-import { EmoteServiceClient } from "../gen/emote/v1/emote";
+import { MediaProxyServiceClient } from "../gen/mediaproxy/v1/mediaproxy.client";
+import { BatchServiceClient } from "../gen/batch/v1/batch.client";
+import { EmoteServiceClient } from "../gen/emote/v1/emote.client";
+import { ProfileServiceClient } from "../gen/profile/v1/profile.client";
 
 export interface UploadedFile {
   name: string;
