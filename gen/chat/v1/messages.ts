@@ -671,9 +671,9 @@ export interface Content_EmbedContent {
     /**
      * Embed content.
      *
-     * @generated from protobuf field: protocol.chat.v1.Embed embed = 1;
+     * @generated from protobuf field: repeated protocol.chat.v1.Embed embeds = 1;
      */
-    embed?: Embed;
+    embeds: Embed[];
 }
 /**
  * Object representing attachment content.
@@ -1243,9 +1243,9 @@ export interface GetChannelMessagesRequest {
      * If not specified, the `direction` will be ignored and the newest messages
      * will be returned.
      *
-     * @generated from protobuf field: uint64 message_id = 3;
+     * @generated from protobuf field: optional uint64 message_id = 3;
      */
-    messageId: string;
+    messageId?: string;
     /**
      * On which direction to get the messages.
      *
@@ -1975,7 +1975,7 @@ export const Content_TextContent = new Content_TextContent$Type();
 class Content_EmbedContent$Type extends MessageType<Content_EmbedContent> {
     constructor() {
         super("protocol.chat.v1.Content.EmbedContent", [
-            { no: 1, name: "embed", kind: "message", T: () => Embed }
+            { no: 1, name: "embeds", kind: "message", repeat: 1 /*RepeatType.PACKED*/, T: () => Embed }
         ]);
     }
 }
@@ -2294,7 +2294,7 @@ class GetChannelMessagesRequest$Type extends MessageType<GetChannelMessagesReque
         super("protocol.chat.v1.GetChannelMessagesRequest", [
             { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
             { no: 2, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-            { no: 3, name: "message_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+            { no: 3, name: "message_id", kind: "scalar", opt: true, T: 4 /*ScalarType.UINT64*/ },
             { no: 4, name: "direction", kind: "enum", opt: true, T: () => ["protocol.chat.v1.GetChannelMessagesRequest.Direction", GetChannelMessagesRequest_Direction, "DIRECTION_"] },
             { no: 5, name: "count", kind: "scalar", opt: true, T: 13 /*ScalarType.UINT32*/ }
         ]);
