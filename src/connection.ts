@@ -4,7 +4,7 @@ import { MediaProxyServiceClient } from "../gen/mediaproxy/v1/mediaproxy.client"
 import { BatchServiceClient } from "../gen/batch/v1/batch.client";
 import { EmoteServiceClient } from "../gen/emote/v1/emote.client";
 import { ProfileServiceClient } from "../gen/profile/v1/profile.client";
-import { HrpcTransport } from "@harmony-dev/transport-hrpc";
+import { HrpcOptions, HrpcTransport } from "@harmony-dev/transport-hrpc";
 
 export interface UploadedFile {
   name: string;
@@ -25,9 +25,10 @@ export class Connection {
   private session?: string;
   private transport: HrpcTransport;
 
-  constructor(host: string) {
+  constructor(host: string, options?: HrpcOptions) {
     this.host = host;
     this.transport = new HrpcTransport({
+      ...options,
       baseUrl: host,
     });
     this.auth = new AuthServiceClient(this.transport);
