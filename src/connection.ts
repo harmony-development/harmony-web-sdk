@@ -25,7 +25,7 @@ export class Connection {
   private session?: string;
   private transport: HrpcTransport;
 
-  constructor(host: string, options?: HrpcOptions) {
+  constructor(host: string, options?: Partial<HrpcOptions>) {
     this.host = host;
     this.transport = new HrpcTransport({
       ...options,
