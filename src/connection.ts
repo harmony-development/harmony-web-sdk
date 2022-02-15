@@ -1,8 +1,6 @@
 import type { HrpcOptions } from '@harmony-dev/transport-hrpc'
 import { HrpcTransport } from '@harmony-dev/transport-hrpc'
-import type { IMessageType } from '@protobuf-ts/runtime'
 import { AuthServiceClient } from '../gen/auth/v1/auth.client'
-import { BatchSameRequest } from '../gen/batch/v1/batch'
 import { BatchServiceClient } from '../gen/batch/v1/batch.client'
 import { ChatServiceClient } from '../gen/chat/v1/chat.client'
 import { EmoteServiceClient } from '../gen/emote/v1/emote.client'
@@ -49,20 +47,6 @@ export class Connection {
 
 	getSession() {
 		return this.session
-	}
-
-	async batchSame<I extends object, O extends object>(
-		path: string,
-		requests: I[],
-		input: IMessageType<I>,
-		output: IMessageType<O>,
-	): Promise<O[]> {
-		const req = BatchSameRequest.create({
-			endpoint: path,
-			requests: requests.map(r => input.toBinary(r)),
-		})
-		const { responses } = await this.batch.batchSame(req).response
-		return responses.map(raw => output.fromBinary(raw))
 	}
 
 	async uploadFile(f: File) {
