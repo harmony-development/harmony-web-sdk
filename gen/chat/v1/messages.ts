@@ -518,13 +518,13 @@ export interface Attachment {
      * @generated from protobuf oneof: info
      */
     info: {
-        oneofKind: "photo";
+        oneofKind: "image";
         /**
-         * Photo info.
+         * Image info.
          *
-         * @generated from protobuf field: protocol.harmonytypes.v1.ImageInfo photo = 5;
+         * @generated from protobuf field: protocol.harmonytypes.v1.ImageInfo image = 5;
          */
-        photo: ImageInfo;
+        image: ImageInfo;
     } | {
         oneofKind: undefined;
     };
@@ -1367,13 +1367,13 @@ export interface SendMessageRequest {
     metadata?: Metadata;
 }
 /**
- * Information a user can add to a photo attachment.
+ * Information a user can add to a image attachment.
  *
- * @generated from protobuf message protocol.chat.v1.SendMessageRequest.PhotoInfo
+ * @generated from protobuf message protocol.chat.v1.SendMessageRequest.ImageInfo
  */
-export interface SendMessageRequest_PhotoInfo {
+export interface SendMessageRequest_ImageInfo {
     /**
-     * The photo's caption.
+     * The image's caption.
      *
      * @generated from protobuf field: optional string caption = 1;
      */
@@ -1410,13 +1410,13 @@ export interface SendMessageRequest_Attachment {
      * @generated from protobuf oneof: info
      */
     info: {
-        oneofKind: "photo";
+        oneofKind: "image";
         /**
-         * Photo info.
+         * Image info.
          *
-         * @generated from protobuf field: protocol.chat.v1.SendMessageRequest.PhotoInfo photo = 3;
+         * @generated from protobuf field: protocol.chat.v1.SendMessageRequest.ImageInfo image = 3;
          */
-        photo: SendMessageRequest_PhotoInfo;
+        image: SendMessageRequest_ImageInfo;
     } | {
         oneofKind: undefined;
     };
@@ -1921,7 +1921,7 @@ class Attachment$Type extends MessageType<Attachment> {
             { no: 2, name: "name", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
             { no: 3, name: "mimetype", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
             { no: 4, name: "size", kind: "scalar", T: 13 /*ScalarType.UINT32*/ },
-            { no: 5, name: "photo", kind: "message", oneof: "info", T: () => ImageInfo }
+            { no: 5, name: "image", kind: "message", oneof: "info", T: () => ImageInfo }
         ]);
     }
 }
@@ -2351,25 +2351,25 @@ class SendMessageRequest$Type extends MessageType<SendMessageRequest> {
  */
 export const SendMessageRequest = new SendMessageRequest$Type();
 // @generated message type with reflection information, may provide speed optimized methods
-class SendMessageRequest_PhotoInfo$Type extends MessageType<SendMessageRequest_PhotoInfo> {
+class SendMessageRequest_ImageInfo$Type extends MessageType<SendMessageRequest_ImageInfo> {
     constructor() {
-        super("protocol.chat.v1.SendMessageRequest.PhotoInfo", [
+        super("protocol.chat.v1.SendMessageRequest.ImageInfo", [
             { no: 1, name: "caption", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
             { no: 2, name: "use_original", kind: "scalar", T: 8 /*ScalarType.BOOL*/ }
         ]);
     }
 }
 /**
- * @generated MessageType for protobuf message protocol.chat.v1.SendMessageRequest.PhotoInfo
+ * @generated MessageType for protobuf message protocol.chat.v1.SendMessageRequest.ImageInfo
  */
-export const SendMessageRequest_PhotoInfo = new SendMessageRequest_PhotoInfo$Type();
+export const SendMessageRequest_ImageInfo = new SendMessageRequest_ImageInfo$Type();
 // @generated message type with reflection information, may provide speed optimized methods
 class SendMessageRequest_Attachment$Type extends MessageType<SendMessageRequest_Attachment> {
     constructor() {
         super("protocol.chat.v1.SendMessageRequest.Attachment", [
             { no: 1, name: "id", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
             { no: 2, name: "name", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 3, name: "photo", kind: "message", oneof: "info", T: () => SendMessageRequest_PhotoInfo }
+            { no: 3, name: "image", kind: "message", oneof: "info", T: () => SendMessageRequest_ImageInfo }
         ]);
     }
 }

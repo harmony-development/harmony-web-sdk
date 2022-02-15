@@ -81,9 +81,15 @@ export interface MediaMetadata {
     /**
      * Filename of the media.
      *
-     * @generated from protobuf field: string filename = 2;
+     * @generated from protobuf field: string name = 2;
      */
-    filename: string;
+    name: string;
+    /**
+     * File ID of the media.
+     *
+     * @generated from protobuf field: string id = 3;
+     */
+    id: string;
     /**
      * Sıze of the media.
      *
@@ -91,7 +97,7 @@ export interface MediaMetadata {
      * (for HTTP requests).
      * If this is not included, then it means the size could not be determined.
      *
-     * @generated from protobuf field: optional uint32 size = 3;
+     * @generated from protobuf field: optional uint32 size = 4;
      */
     size?: number;
     /**
@@ -102,7 +108,7 @@ export interface MediaMetadata {
         /**
          * Information for an image media.
          *
-         * @generated from protobuf field: protocol.harmonytypes.v1.ImageInfo image = 4;
+         * @generated from protobuf field: protocol.harmonytypes.v1.ImageInfo image = 5;
          */
         image: ImageInfo;
     } | {
@@ -294,9 +300,10 @@ class MediaMetadata$Type extends MessageType<MediaMetadata> {
     constructor() {
         super("protocol.mediaproxy.v1.MediaMetadata", [
             { no: 1, name: "mimetype", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 2, name: "filename", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 3, name: "size", kind: "scalar", opt: true, T: 13 /*ScalarType.UINT32*/ },
-            { no: 4, name: "image", kind: "message", oneof: "info", T: () => ImageInfo }
+            { no: 2, name: "name", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 3, name: "id", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 4, name: "size", kind: "scalar", opt: true, T: 13 /*ScalarType.UINT32*/ },
+            { no: 5, name: "image", kind: "message", oneof: "info", T: () => ImageInfo }
         ]);
     }
 }
