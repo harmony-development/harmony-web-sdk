@@ -3,7 +3,6 @@
 // tslint:disable
 import { ServiceType } from "@protobuf-ts/runtime-rpc";
 import { MessageType } from "@protobuf-ts/runtime";
-import { ImageInfo } from "../../harmonytypes/v1/types";
 /**
  * Object representing the metadata of a website.
  *
@@ -48,7 +47,7 @@ export interface SiteMetadata {
     thumbnail: SiteMetadata_ThumbnailImage[];
 }
 /**
- * Information for a thumbnail image.
+ * Information pertaining to a thumbnail image.
  *
  * @generated from protobuf message protocol.mediaproxy.v1.SiteMetadata.ThumbnailImage
  */
@@ -60,11 +59,17 @@ export interface SiteMetadata_ThumbnailImage {
      */
     url: string;
     /**
-     * Image information.
+     * Width of the image, in pixels.
      *
-     * @generated from protobuf field: protocol.harmonytypes.v1.ImageInfo info = 2;
+     * @generated from protobuf field: uint32 width = 2;
      */
-    info?: ImageInfo;
+    width: number;
+    /**
+     * Height of the image, in pixels.
+     *
+     * @generated from protobuf field: uint32 height = 3;
+     */
+    height: number;
 }
 /**
  * Object represeting the metadata of a media.
@@ -108,12 +113,31 @@ export interface MediaMetadata {
         /**
          * Information for an image media.
          *
-         * @generated from protobuf field: protocol.harmonytypes.v1.ImageInfo image = 5;
+         * @generated from protobuf field: protocol.mediaproxy.v1.MediaMetadata.ImageInfo image = 5;
          */
-        image: ImageInfo;
+        image: MediaMetadata_ImageInfo;
     } | {
         oneofKind: undefined;
     };
+}
+/**
+ * Information pertaining to an image.
+ *
+ * @generated from protobuf message protocol.mediaproxy.v1.MediaMetadata.ImageInfo
+ */
+export interface MediaMetadata_ImageInfo {
+    /**
+     * Width of the image, in pixels.
+     *
+     * @generated from protobuf field: uint32 width = 1;
+     */
+    width: number;
+    /**
+     * Height of the image, in pixels.
+     *
+     * @generated from protobuf field: uint32 height = 2;
+     */
+    height: number;
 }
 /**
  * Used in the `FetchLinkMetadata` endpoint.
@@ -287,7 +311,8 @@ class SiteMetadata_ThumbnailImage$Type extends MessageType<SiteMetadata_Thumbnai
     constructor() {
         super("protocol.mediaproxy.v1.SiteMetadata.ThumbnailImage", [
             { no: 1, name: "url", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 2, name: "info", kind: "message", T: () => ImageInfo }
+            { no: 2, name: "width", kind: "scalar", T: 13 /*ScalarType.UINT32*/ },
+            { no: 3, name: "height", kind: "scalar", T: 13 /*ScalarType.UINT32*/ }
         ]);
     }
 }
@@ -303,7 +328,7 @@ class MediaMetadata$Type extends MessageType<MediaMetadata> {
             { no: 2, name: "name", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
             { no: 3, name: "id", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
             { no: 4, name: "size", kind: "scalar", opt: true, T: 13 /*ScalarType.UINT32*/ },
-            { no: 5, name: "image", kind: "message", oneof: "info", T: () => ImageInfo }
+            { no: 5, name: "image", kind: "message", oneof: "info", T: () => MediaMetadata_ImageInfo }
         ]);
     }
 }
@@ -311,6 +336,19 @@ class MediaMetadata$Type extends MessageType<MediaMetadata> {
  * @generated MessageType for protobuf message protocol.mediaproxy.v1.MediaMetadata
  */
 export const MediaMetadata = new MediaMetadata$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class MediaMetadata_ImageInfo$Type extends MessageType<MediaMetadata_ImageInfo> {
+    constructor() {
+        super("protocol.mediaproxy.v1.MediaMetadata.ImageInfo", [
+            { no: 1, name: "width", kind: "scalar", T: 13 /*ScalarType.UINT32*/ },
+            { no: 2, name: "height", kind: "scalar", T: 13 /*ScalarType.UINT32*/ }
+        ]);
+    }
+}
+/**
+ * @generated MessageType for protobuf message protocol.mediaproxy.v1.MediaMetadata.ImageInfo
+ */
+export const MediaMetadata_ImageInfo = new MediaMetadata_ImageInfo$Type();
 // @generated message type with reflection information, may provide speed optimized methods
 class FetchLinkMetadataRequest$Type extends MessageType<FetchLinkMetadataRequest> {
     constructor() {

@@ -146,10 +146,7 @@ export interface SetPermissionsRequest {
      */
     roleId: string;
     /**
-     * The permission list to give.
-     *
-     * There is no "perms_to_take" because not given permissions are by
-     * default not allowed.
+     * The list of permissions to set.
      *
      * @generated from protobuf field: repeated protocol.chat.v1.Permission perms_to_give = 4;
      */
@@ -175,8 +172,8 @@ export interface GetPermissionsRequest {
      */
     guildId: string;
     /**
-     * The channel ID(s) to get permissions for. Only applicable for roles in a
-     * channel.
+     * The channel ID(s) to get permissions for.
+     * Only applicable for roles in a channel.
      *
      * @generated from protobuf field: repeated uint64 channel_ids = 2;
      */
@@ -195,15 +192,19 @@ export interface GetPermissionsRequest {
  */
 export interface GetPermissionsResponse {
     /**
-     * The guild / channel id -> permissions list map for the given role.
+     * The permissions for the guild.
      *
-     * This will always contain the guild's permissions. On top of that,
-     * if any channels were specified in the request, those channels'
-     * permissions will also be added here.
-     *
-     * @generated from protobuf field: map<uint64, protocol.chat.v1.GetPermissionsResponse.Permissions> perms = 1;
+     * @generated from protobuf field: protocol.chat.v1.GetPermissionsResponse.Permissions guild_perms = 1;
      */
-    perms: {
+    guildPerms?: GetPermissionsResponse_Permissions;
+    /**
+     * The channel id -> permissions list map for the given role.
+     *
+     * This will contain permissions for any requested channels.
+     *
+     * @generated from protobuf field: map<uint64, protocol.chat.v1.GetPermissionsResponse.Permissions> channel_perms = 2;
+     */
+    channelPerms: {
         [key: string]: GetPermissionsResponse_Permissions;
     };
 }
@@ -600,7 +601,8 @@ export const GetPermissionsRequest = new GetPermissionsRequest$Type();
 class GetPermissionsResponse$Type extends MessageType<GetPermissionsResponse> {
     constructor() {
         super("protocol.chat.v1.GetPermissionsResponse", [
-            { no: 1, name: "perms", kind: "map", K: 4 /*ScalarType.UINT64*/, V: { kind: "message", T: () => GetPermissionsResponse_Permissions } }
+            { no: 1, name: "guild_perms", kind: "message", T: () => GetPermissionsResponse_Permissions },
+            { no: 2, name: "channel_perms", kind: "map", K: 4 /*ScalarType.UINT64*/, V: { kind: "message", T: () => GetPermissionsResponse_Permissions } }
         ]);
     }
 }

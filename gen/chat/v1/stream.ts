@@ -4,20 +4,19 @@
 import { MessageType } from "@protobuf-ts/runtime";
 import { Reaction } from "./messages";
 import { Permission } from "./permissions";
-import { ActionPayload } from "./messages";
 import { LeaveReason } from "./guilds";
 import { Metadata } from "../../harmonytypes/v1/types";
 import { ChannelKind } from "./channels";
 import { ItemPosition } from "../../harmonytypes/v1/types";
-import { FormattedText } from "./messages";
+import { Content } from "./messages";
 import { Message } from "./messages";
 import { StreamEvent as StreamEvent$2 } from "../../profile/v1/stream";
 import { StreamEvent as StreamEvent$ } from "../../emote/v1/stream";
 /**
  * Request type for use in the `StreamEvents` endpoint.
  * By default, this endpoint will subscribe to all events.
- * Any guilds joined in the future will be added to the subscription as well.
- * Use the UnsubscribeFromAll event for unsubscribing from all current subscriptions and disable the automatic guild subscriptions
+ * Any guilds / private channels joined in the future will be added to the subscription as well.
+ * Use the UnsubscribeFromAll event for unsubscribing from all current subscriptions and disable the automatic guild subscriptions.
  *
  * @generated from protobuf message protocol.chat.v1.StreamEventsRequest
  */
@@ -28,25 +27,33 @@ export interface StreamEventsRequest {
     request: {
         oneofKind: "subscribeToGuild";
         /**
-         * Subscribe to the guild event source.
+         * Subscribe to guild events.
          *
          * @generated from protobuf field: protocol.chat.v1.StreamEventsRequest.SubscribeToGuild subscribe_to_guild = 1;
          */
         subscribeToGuild: StreamEventsRequest_SubscribeToGuild;
     } | {
+        oneofKind: "subscribeToPrivateChannel";
+        /**
+         * Subscribe to private channel events.
+         *
+         * @generated from protobuf field: protocol.chat.v1.StreamEventsRequest.SubscribeToPrivateChannel subscribe_to_private_channel = 2;
+         */
+        subscribeToPrivateChannel: StreamEventsRequest_SubscribeToPrivateChannel;
+    } | {
         oneofKind: "subscribeToActions";
         /**
-         * Subscribe to the action event source.
+         * Subscribe to action events.
          *
-         * @generated from protobuf field: protocol.chat.v1.StreamEventsRequest.SubscribeToActions subscribe_to_actions = 2;
+         * @generated from protobuf field: protocol.chat.v1.StreamEventsRequest.SubscribeToActions subscribe_to_actions = 3;
          */
         subscribeToActions: StreamEventsRequest_SubscribeToActions;
     } | {
         oneofKind: "subscribeToHomeserverEvents";
         /**
-         * Subscribe to the homeserver event source.
+         * Subscribe to homeserver events.
          *
-         * @generated from protobuf field: protocol.chat.v1.StreamEventsRequest.SubscribeToHomeserverEvents subscribe_to_homeserver_events = 3;
+         * @generated from protobuf field: protocol.chat.v1.StreamEventsRequest.SubscribeToHomeserverEvents subscribe_to_homeserver_events = 4;
          */
         subscribeToHomeserverEvents: StreamEventsRequest_SubscribeToHomeserverEvents;
     } | {
@@ -54,7 +61,7 @@ export interface StreamEventsRequest {
         /**
          * Unsubscribe from all events.
          *
-         * @generated from protobuf field: protocol.chat.v1.StreamEventsRequest.UnsubscribeFromAll unsubscribe_from_all = 4;
+         * @generated from protobuf field: protocol.chat.v1.StreamEventsRequest.UnsubscribeFromAll unsubscribe_from_all = 5;
          */
         unsubscribeFromAll: StreamEventsRequest_UnsubscribeFromAll;
     } | {
@@ -62,34 +69,47 @@ export interface StreamEventsRequest {
     };
 }
 /**
- * Event source for guilds' events.
+ * Message to use for subscribing to a guild.
  *
  * @generated from protobuf message protocol.chat.v1.StreamEventsRequest.SubscribeToGuild
  */
 export interface StreamEventsRequest_SubscribeToGuild {
     /**
-     * the guild id to subscribe to
+     * The guild ID to subscribe to.
      *
      * @generated from protobuf field: uint64 guild_id = 1;
      */
     guildId: string;
 }
 /**
- * Event source for actions' events.
+ * Message to use for subscribing to a private channel.
+ *
+ * @generated from protobuf message protocol.chat.v1.StreamEventsRequest.SubscribeToPrivateChannel
+ */
+export interface StreamEventsRequest_SubscribeToPrivateChannel {
+    /**
+     * The channel ID to subscribe to.
+     *
+     * @generated from protobuf field: uint64 channel_id = 1;
+     */
+    channelId: string;
+}
+/**
+ * Message to use for subscribing to actions.
  *
  * @generated from protobuf message protocol.chat.v1.StreamEventsRequest.SubscribeToActions
  */
 export interface StreamEventsRequest_SubscribeToActions {
 }
 /**
- * Event source for homeserver events.
+ * Message to use for subscribing to homeserver events.
  *
  * @generated from protobuf message protocol.chat.v1.StreamEventsRequest.SubscribeToHomeserverEvents
  */
 export interface StreamEventsRequest_SubscribeToHomeserverEvents {
 }
 /**
- * Event to unsubscribe from all events.
+ * Message to use for unsubscribing from all events.
  *
  * @generated from protobuf message protocol.chat.v1.StreamEventsRequest.UnsubscribeFromAll
  */
@@ -342,19 +362,11 @@ export interface StreamEvent {
          */
         messageUnpinned: StreamEvent_MessageUnpinned;
     } | {
-        oneofKind: "reactionUpdated";
-        /**
-         * Send the reaction updated event.
-         *
-         * @generated from protobuf field: protocol.chat.v1.StreamEvent.ReactionUpdated reaction_updated = 26;
-         */
-        reactionUpdated: StreamEvent_ReactionUpdated;
-    } | {
         oneofKind: "ownerAdded";
         /**
          * Send the owner added event.
          *
-         * @generated from protobuf field: protocol.chat.v1.StreamEvent.OwnerAdded owner_added = 27;
+         * @generated from protobuf field: protocol.chat.v1.StreamEvent.OwnerAdded owner_added = 26;
          */
         ownerAdded: StreamEvent_OwnerAdded;
     } | {
@@ -362,7 +374,7 @@ export interface StreamEvent {
         /**
          * Send the owner removed event.
          *
-         * @generated from protobuf field: protocol.chat.v1.StreamEvent.OwnerRemoved owner_removed = 28;
+         * @generated from protobuf field: protocol.chat.v1.StreamEvent.OwnerRemoved owner_removed = 27;
          */
         ownerRemoved: StreamEvent_OwnerRemoved;
     } | {
@@ -370,7 +382,7 @@ export interface StreamEvent {
         /**
          * Send the guild invite received event.
          *
-         * @generated from protobuf field: protocol.chat.v1.StreamEvent.InviteReceived invite_received = 29;
+         * @generated from protobuf field: protocol.chat.v1.StreamEvent.InviteReceived invite_received = 28;
          */
         inviteReceived: StreamEvent_InviteReceived;
     } | {
@@ -378,7 +390,7 @@ export interface StreamEvent {
         /**
          * Send the guild invite rejected event.
          *
-         * @generated from protobuf field: protocol.chat.v1.StreamEvent.InviteRejected invite_rejected = 30;
+         * @generated from protobuf field: protocol.chat.v1.StreamEvent.InviteRejected invite_rejected = 29;
          */
         inviteRejected: StreamEvent_InviteRejected;
     } | {
@@ -386,7 +398,7 @@ export interface StreamEvent {
         /**
          * Send the invite created event.
          *
-         * @generated from protobuf field: protocol.chat.v1.StreamEvent.InviteCreated invite_created = 31;
+         * @generated from protobuf field: protocol.chat.v1.StreamEvent.InviteCreated invite_created = 30;
          */
         inviteCreated: StreamEvent_InviteCreated;
     } | {
@@ -394,7 +406,7 @@ export interface StreamEvent {
         /**
          * Send the invite deleted event.
          *
-         * @generated from protobuf field: protocol.chat.v1.StreamEvent.InviteDeleted invite_deleted = 32;
+         * @generated from protobuf field: protocol.chat.v1.StreamEvent.InviteDeleted invite_deleted = 31;
          */
         inviteDeleted: StreamEvent_InviteDeleted;
     } | {
@@ -402,9 +414,73 @@ export interface StreamEvent {
         /**
          * Send the invite used event.
          *
-         * @generated from protobuf field: protocol.chat.v1.StreamEvent.InviteUsed invite_used = 33;
+         * @generated from protobuf field: protocol.chat.v1.StreamEvent.InviteUsed invite_used = 32;
          */
         inviteUsed: StreamEvent_InviteUsed;
+    } | {
+        oneofKind: "newReactionAdded";
+        /**
+         * Send the new reaction added event.
+         *
+         * @generated from protobuf field: protocol.chat.v1.StreamEvent.NewReactionAdded new_reaction_added = 33;
+         */
+        newReactionAdded: StreamEvent_NewReactionAdded;
+    } | {
+        oneofKind: "reactionAdded";
+        /**
+         * Send the reaction added event.
+         *
+         * @generated from protobuf field: protocol.chat.v1.StreamEvent.ReactionAdded reaction_added = 34;
+         */
+        reactionAdded: StreamEvent_ReactionAdded;
+    } | {
+        oneofKind: "reactionRemoved";
+        /**
+         * Send the reaction removed event.
+         *
+         * @generated from protobuf field: protocol.chat.v1.StreamEvent.ReactionRemoved reaction_removed = 35;
+         */
+        reactionRemoved: StreamEvent_ReactionRemoved;
+    } | {
+        oneofKind: "privateChannelDeleted";
+        /**
+         * Send the private channel deleted event.
+         *
+         * @generated from protobuf field: protocol.chat.v1.StreamEvent.PrivateChannelDeleted private_channel_deleted = 36;
+         */
+        privateChannelDeleted: StreamEvent_PrivateChannelDeleted;
+    } | {
+        oneofKind: "privateChannelAddedToList";
+        /**
+         * Send the private channel added to list event.
+         *
+         * @generated from protobuf field: protocol.chat.v1.StreamEvent.PrivateChannelAddedToList private_channel_added_to_list = 37;
+         */
+        privateChannelAddedToList: StreamEvent_PrivateChannelAddedToList;
+    } | {
+        oneofKind: "privateChannelRemovedFromList";
+        /**
+         * Send the private channel removed from list event.
+         *
+         * @generated from protobuf field: protocol.chat.v1.StreamEvent.PrivateChannelRemovedFromList private_channel_removed_from_list = 38;
+         */
+        privateChannelRemovedFromList: StreamEvent_PrivateChannelRemovedFromList;
+    } | {
+        oneofKind: "userJoinedPrivateChannel";
+        /**
+         * Send the user joined private channel event.
+         *
+         * @generated from protobuf field: protocol.chat.v1.StreamEvent.UserJoinedPrivateChannel user_joined_private_channel = 39;
+         */
+        userJoinedPrivateChannel: StreamEvent_UserJoinedPrivateChannel;
+    } | {
+        oneofKind: "userLeftPrivateChannel";
+        /**
+         * Send the user left private channel event.
+         *
+         * @generated from protobuf field: protocol.chat.v1.StreamEvent.UserLeftPrivateChannel user_left_private_channel = 40;
+         */
+        userLeftPrivateChannel: StreamEvent_UserLeftPrivateChannel;
     } | {
         oneofKind: undefined;
     };
@@ -426,10 +502,11 @@ export interface StreamEvent_MessageSent {
     echoId?: string;
     /**
      * Guild ID of the guild where this event happened.
+     * Null if the event happened in a private channel.
      *
-     * @generated from protobuf field: uint64 guild_id = 2;
+     * @generated from protobuf field: optional uint64 guild_id = 2;
      */
-    guildId: string;
+    guildId?: string;
     /**
      * Channel ID of the channel where this event happened.
      *
@@ -450,7 +527,7 @@ export interface StreamEvent_MessageSent {
     message?: Message;
 }
 /**
- * Event sent when a message's text content is updated.
+ * Event sent when a message's content is updated.
  *
  * This event will only be sent to users that have "messages.view" permission
  * for the channel the message was updated in.
@@ -460,10 +537,11 @@ export interface StreamEvent_MessageSent {
 export interface StreamEvent_MessageUpdated {
     /**
      * Guild ID of the guild where this event happened.
+     * Null if the event happened in a private channel.
      *
-     * @generated from protobuf field: uint64 guild_id = 1;
+     * @generated from protobuf field: optional uint64 guild_id = 1;
      */
-    guildId: string;
+    guildId?: string;
     /**
      * Channel ID of the channel where this event happened.
      *
@@ -477,7 +555,7 @@ export interface StreamEvent_MessageUpdated {
      */
     messageId: string;
     /**
-     * When this message was edited, in milliseconds since unix epoch
+     * When this message was edited, in seconds since unix epoch.
      *
      * @generated from protobuf field: uint64 edited_at = 4;
      */
@@ -485,9 +563,9 @@ export interface StreamEvent_MessageUpdated {
     /**
      * New message content.
      *
-     * @generated from protobuf field: protocol.chat.v1.FormattedText new_content = 5;
+     * @generated from protobuf field: protocol.chat.v1.Content new_content = 5;
      */
-    newContent?: FormattedText;
+    newContent?: Content;
 }
 /**
  * Event sent when a message is deleted.
@@ -501,9 +579,9 @@ export interface StreamEvent_MessageDeleted {
     /**
      * Guild ID of the guild where this event happened.
      *
-     * @generated from protobuf field: uint64 guild_id = 1;
+     * @generated from protobuf field: optional uint64 guild_id = 1;
      */
-    guildId: string;
+    guildId?: string;
     /**
      * Channel ID of the channel where this event happened.
      *
@@ -767,11 +845,11 @@ export interface StreamEvent_GuildAddedToList {
      */
     guildId: string;
     /**
-     * The homeserver this guild is on.
+     * The server ID of the homeserver this guild is on.
      *
-     * @generated from protobuf field: string homeserver = 2;
+     * @generated from protobuf field: optional string server_id = 2;
      */
-    homeserver: string;
+    serverId?: string;
 }
 /**
  * Event sent when you leave a guild.
@@ -786,11 +864,11 @@ export interface StreamEvent_GuildRemovedFromList {
      */
     guildId: string;
     /**
-     * The homeserver this guild is on.
+     * The server ID homeserver this guild is on.
      *
-     * @generated from protobuf field: string homeserver = 2;
+     * @generated from protobuf field: optional string server_id = 2;
      */
-    homeserver: string;
+    serverId?: string;
 }
 /**
  * Event sent when an action is performed.
@@ -801,9 +879,9 @@ export interface StreamEvent_ActionPerformed {
     /**
      * Guild ID of the guild where this event happened.
      *
-     * @generated from protobuf field: uint64 guild_id = 1;
+     * @generated from protobuf field: optional uint64 guild_id = 1;
      */
-    guildId: string;
+    guildId?: string;
     /**
      * Channel ID of the channel where this event happened.
      *
@@ -823,11 +901,17 @@ export interface StreamEvent_ActionPerformed {
      */
     userId: string;
     /**
+     * The custom info set by the bot
+     *
+     * @generated from protobuf field: optional bytes info = 5;
+     */
+    info?: Uint8Array;
+    /**
      * The action data payload
      *
-     * @generated from protobuf field: protocol.chat.v1.ActionPayload payload = 5;
+     * @generated from protobuf field: optional bytes payload = 6;
      */
-    payload?: ActionPayload;
+    payload?: Uint8Array;
 }
 /**
  * Event sent when a role's position in the role list is changed.
@@ -1045,9 +1129,9 @@ export interface StreamEvent_Typing {
     /**
      * Guild ID of the guild where this event happened.
      *
-     * @generated from protobuf field: uint64 guild_id = 2;
+     * @generated from protobuf field: optional uint64 guild_id = 2;
      */
-    guildId: string;
+    guildId?: string;
     /**
      * Channel ID of the channel where this event happened.
      *
@@ -1101,9 +1185,9 @@ export interface StreamEvent_MessagePinned {
     /**
      * Guild ID of the guild where this event occured.
      *
-     * @generated from protobuf field: uint64 guild_id = 1;
+     * @generated from protobuf field: optional uint64 guild_id = 1;
      */
-    guildId: string;
+    guildId?: string;
     /**
      * Channel ID of the channel where this event occured.
      *
@@ -1129,9 +1213,9 @@ export interface StreamEvent_MessageUnpinned {
     /**
      * Guild ID of the guild where this event occured.
      *
-     * @generated from protobuf field: uint64 guild_id = 1;
+     * @generated from protobuf field: optional uint64 guild_id = 1;
      */
-    guildId: string;
+    guildId?: string;
     /**
      * Channel ID of the channel where this event occured.
      *
@@ -1146,20 +1230,21 @@ export interface StreamEvent_MessageUnpinned {
     messageId: string;
 }
 /**
- * Sent when a message's reaction is changed.
+ * Sent when a new reaction is added to a message. This is only sent if
+ * such a reaction wasn't on the message, otherwise see `ReactionAdded`.
  *
  * Should only be sent to users who have the "message.view" permission for
- * the guild channel where the reaction was updated.
+ * the guild channel where the reaction was added.
  *
- * @generated from protobuf message protocol.chat.v1.StreamEvent.ReactionUpdated
+ * @generated from protobuf message protocol.chat.v1.StreamEvent.NewReactionAdded
  */
-export interface StreamEvent_ReactionUpdated {
+export interface StreamEvent_NewReactionAdded {
     /**
      * Guild ID of the guild where this event occured.
      *
-     * @generated from protobuf field: uint64 guild_id = 1;
+     * @generated from protobuf field: optional uint64 guild_id = 1;
      */
-    guildId: string;
+    guildId?: string;
     /**
      * Channel ID of the channel where this event occured.
      *
@@ -1167,17 +1252,86 @@ export interface StreamEvent_ReactionUpdated {
      */
     channelId: string;
     /**
-     * Message ID of the message that had a reaction updated.
+     * Message ID of the message that had a reaction added.
      *
      * @generated from protobuf field: uint64 message_id = 3;
      */
     messageId: string;
     /**
-     * The reaction.
+     * The reaction that was added.
      *
      * @generated from protobuf field: protocol.chat.v1.Reaction reaction = 4;
      */
     reaction?: Reaction;
+}
+/**
+ * Sent when an existing reaction is added to a message. This is only sent
+ * such a reaction was on the message, otherwise see `NewReactionAdded`.
+ *
+ * Should only be sent to users who have the "message.view" permission for
+ * the guild channel where the reaction was added.
+ *
+ * @generated from protobuf message protocol.chat.v1.StreamEvent.ReactionAdded
+ */
+export interface StreamEvent_ReactionAdded {
+    /**
+     * Guild ID of the guild where this event occured.
+     *
+     * @generated from protobuf field: optional uint64 guild_id = 1;
+     */
+    guildId?: string;
+    /**
+     * Channel ID of the channel where this event occured.
+     *
+     * @generated from protobuf field: uint64 channel_id = 2;
+     */
+    channelId: string;
+    /**
+     * Message ID of the message that had a reaction added.
+     *
+     * @generated from protobuf field: uint64 message_id = 3;
+     */
+    messageId: string;
+    /**
+     * The data of the reaction that was added.
+     *
+     * @generated from protobuf field: string reaction_data = 4;
+     */
+    reactionData: string;
+}
+/**
+ * Sent when an existing reaction is removed from a message.
+ *
+ * Should only be sent to users who have the "message.view" permission for
+ * the guild channel where the reaction was removed.
+ *
+ * @generated from protobuf message protocol.chat.v1.StreamEvent.ReactionRemoved
+ */
+export interface StreamEvent_ReactionRemoved {
+    /**
+     * Guild ID of the guild where this event occured.
+     *
+     * @generated from protobuf field: optional uint64 guild_id = 1;
+     */
+    guildId?: string;
+    /**
+     * Channel ID of the channel where this event occured.
+     *
+     * @generated from protobuf field: uint64 channel_id = 2;
+     */
+    channelId: string;
+    /**
+     * Message ID of the message that had a reaction removed.
+     *
+     * @generated from protobuf field: uint64 message_id = 3;
+     */
+    messageId: string;
+    /**
+     * The data of the reaction that was removed.
+     *
+     * @generated from protobuf field: string reaction_data = 4;
+     */
+    reactionData: string;
 }
 /**
  * Sent when there's a new owner.
@@ -1218,54 +1372,88 @@ export interface StreamEvent_OwnerRemoved {
     userId: string;
 }
 /**
- * Sent when a guild invite is received.
+ * Sent when an invite is received.
  *
  * @generated from protobuf message protocol.chat.v1.StreamEvent.InviteReceived
  */
 export interface StreamEvent_InviteReceived {
     /**
-     * ID of the invite received.
+     * The user ID of the inviter.
      *
-     * @generated from protobuf field: string invite_id = 1;
+     * @generated from protobuf field: uint64 inviter_id = 1;
      */
-    inviteId: string;
+    inviterId: string;
     /**
-     * Server ID of the server the inviter is on.
+     * The server ID of the server the inviter is on.
      *
      * @generated from protobuf field: optional string server_id = 2;
      */
     serverId?: string;
     /**
-     * User ID of the inviter.
-     *
-     * @generated from protobuf field: uint64 inviter_id = 3;
+     * @generated from protobuf oneof: location
      */
-    inviterId: string;
+    location: {
+        oneofKind: "guildInviteId";
+        /**
+         * The unique identifier of a user's invite to another
+         * user to join a given guild.
+         *
+         * @generated from protobuf field: string guild_invite_id = 3;
+         */
+        guildInviteId: string;
+    } | {
+        oneofKind: "channelId";
+        /**
+         * The channel ID of the private channel that the user was invited to.
+         *
+         * @generated from protobuf field: uint64 channel_id = 4;
+         */
+        channelId: string;
+    } | {
+        oneofKind: undefined;
+    };
 }
 /**
- * Sent when a guild invite is rejected by the invitee.
+ * Sent when an invite is rejected by the invitee.
  *
  * @generated from protobuf message protocol.chat.v1.StreamEvent.InviteRejected
  */
 export interface StreamEvent_InviteRejected {
     /**
-     * Guild ID of the guild that this occured for.
+     * The user ID of the invitee.
      *
-     * @generated from protobuf field: uint64 guild_id = 1;
+     * @generated from protobuf field: uint64 invitee_id = 1;
      */
-    guildId: string;
+    inviteeId: string;
     /**
-     * ID of the invite rejected.
+     * The server ID of the server the invitee is on.
      *
-     * @generated from protobuf field: string invite_id = 2;
+     * @generated from protobuf field: optional string server_id = 2;
      */
-    inviteId: string;
+    serverId?: string;
     /**
-     * User ID of the invitee.
-     *
-     * @generated from protobuf field: uint64 user_id = 3;
+     * @generated from protobuf oneof: location
      */
-    userId: string;
+    location: {
+        oneofKind: "guildInviteId";
+        /**
+         * The unique identifier of a user's invite to another
+         * user to join a given guild.
+         *
+         * @generated from protobuf field: string guild_invite_id = 3;
+         */
+        guildInviteId: string;
+    } | {
+        oneofKind: "channelId";
+        /**
+         * The channel ID of the private channel that the user was invited to.
+         *
+         * @generated from protobuf field: uint64 channel_id = 4;
+         */
+        channelId: string;
+    } | {
+        oneofKind: undefined;
+    };
 }
 /**
  * Sent when an invite is created in a guild.
@@ -1345,14 +1533,104 @@ export interface StreamEvent_InviteUsed {
      */
     userId: string;
 }
+/**
+ * Sent when a private channel is deleted.
+ *
+ * @generated from protobuf message protocol.chat.v1.StreamEvent.PrivateChannelDeleted
+ */
+export interface StreamEvent_PrivateChannelDeleted {
+    /**
+     * The channel ID of the private channel that was deleted.
+     *
+     * @generated from protobuf field: uint64 channel_id = 1;
+     */
+    channelId: string;
+}
+/**
+ * Sent when a private channel is added to an user's private channel list.
+ *
+ * @generated from protobuf message protocol.chat.v1.StreamEvent.PrivateChannelAddedToList
+ */
+export interface StreamEvent_PrivateChannelAddedToList {
+    /**
+     * The channel ID of the private channel that was added.
+     *
+     * @generated from protobuf field: uint64 channel_id = 1;
+     */
+    channelId: string;
+    /**
+     * The server ID of the homeserver of this private channel.
+     *
+     * @generated from protobuf field: optional string server_id = 2;
+     */
+    serverId?: string;
+}
+/**
+ * Sent when a private channel is removed from an user's private channel list.
+ *
+ * @generated from protobuf message protocol.chat.v1.StreamEvent.PrivateChannelRemovedFromList
+ */
+export interface StreamEvent_PrivateChannelRemovedFromList {
+    /**
+     * The channel ID of the private channel that was removed.
+     *
+     * @generated from protobuf field: uint64 channel_id = 1;
+     */
+    channelId: string;
+    /**
+     * The server ID of the homeserver of this private channel.
+     *
+     * @generated from protobuf field: optional string server_id = 2;
+     */
+    serverId?: string;
+}
+/**
+ * Sent when a user joins a private channel.
+ *
+ * @generated from protobuf message protocol.chat.v1.StreamEvent.UserJoinedPrivateChannel
+ */
+export interface StreamEvent_UserJoinedPrivateChannel {
+    /**
+     * The channel ID of the private channel.
+     *
+     * @generated from protobuf field: uint64 channel_id = 1;
+     */
+    channelId: string;
+    /**
+     * The user ID of the user who joined the private channel.
+     *
+     * @generated from protobuf field: uint64 user_id = 2;
+     */
+    userId: string;
+}
+/**
+ * Sent when a user leaves a private channel.
+ *
+ * @generated from protobuf message protocol.chat.v1.StreamEvent.UserLeftPrivateChannel
+ */
+export interface StreamEvent_UserLeftPrivateChannel {
+    /**
+     * The channel ID of the private channel.
+     *
+     * @generated from protobuf field: uint64 channel_id = 1;
+     */
+    channelId: string;
+    /**
+     * The user ID of the user who left the private channel.
+     *
+     * @generated from protobuf field: uint64 user_id = 2;
+     */
+    userId: string;
+}
 // @generated message type with reflection information, may provide speed optimized methods
 class StreamEventsRequest$Type extends MessageType<StreamEventsRequest> {
     constructor() {
         super("protocol.chat.v1.StreamEventsRequest", [
             { no: 1, name: "subscribe_to_guild", kind: "message", oneof: "request", T: () => StreamEventsRequest_SubscribeToGuild },
-            { no: 2, name: "subscribe_to_actions", kind: "message", oneof: "request", T: () => StreamEventsRequest_SubscribeToActions },
-            { no: 3, name: "subscribe_to_homeserver_events", kind: "message", oneof: "request", T: () => StreamEventsRequest_SubscribeToHomeserverEvents },
-            { no: 4, name: "unsubscribe_from_all", kind: "message", oneof: "request", T: () => StreamEventsRequest_UnsubscribeFromAll }
+            { no: 2, name: "subscribe_to_private_channel", kind: "message", oneof: "request", T: () => StreamEventsRequest_SubscribeToPrivateChannel },
+            { no: 3, name: "subscribe_to_actions", kind: "message", oneof: "request", T: () => StreamEventsRequest_SubscribeToActions },
+            { no: 4, name: "subscribe_to_homeserver_events", kind: "message", oneof: "request", T: () => StreamEventsRequest_SubscribeToHomeserverEvents },
+            { no: 5, name: "unsubscribe_from_all", kind: "message", oneof: "request", T: () => StreamEventsRequest_UnsubscribeFromAll }
         ]);
     }
 }
@@ -1372,6 +1650,18 @@ class StreamEventsRequest_SubscribeToGuild$Type extends MessageType<StreamEvents
  * @generated MessageType for protobuf message protocol.chat.v1.StreamEventsRequest.SubscribeToGuild
  */
 export const StreamEventsRequest_SubscribeToGuild = new StreamEventsRequest_SubscribeToGuild$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class StreamEventsRequest_SubscribeToPrivateChannel$Type extends MessageType<StreamEventsRequest_SubscribeToPrivateChannel> {
+    constructor() {
+        super("protocol.chat.v1.StreamEventsRequest.SubscribeToPrivateChannel", [
+            { no: 1, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ }
+        ]);
+    }
+}
+/**
+ * @generated MessageType for protobuf message protocol.chat.v1.StreamEventsRequest.SubscribeToPrivateChannel
+ */
+export const StreamEventsRequest_SubscribeToPrivateChannel = new StreamEventsRequest_SubscribeToPrivateChannel$Type();
 // @generated message type with reflection information, may provide speed optimized methods
 class StreamEventsRequest_SubscribeToActions$Type extends MessageType<StreamEventsRequest_SubscribeToActions> {
     constructor() {
@@ -1445,14 +1735,21 @@ class StreamEvent$Type extends MessageType<StreamEvent> {
             { no: 23, name: "edited_channel_position", kind: "message", oneof: "event", T: () => StreamEvent_ChannelPositionUpdated },
             { no: 24, name: "message_pinned", kind: "message", oneof: "event", T: () => StreamEvent_MessagePinned },
             { no: 25, name: "message_unpinned", kind: "message", oneof: "event", T: () => StreamEvent_MessageUnpinned },
-            { no: 26, name: "reaction_updated", kind: "message", oneof: "event", T: () => StreamEvent_ReactionUpdated },
-            { no: 27, name: "owner_added", kind: "message", oneof: "event", T: () => StreamEvent_OwnerAdded },
-            { no: 28, name: "owner_removed", kind: "message", oneof: "event", T: () => StreamEvent_OwnerRemoved },
-            { no: 29, name: "invite_received", kind: "message", oneof: "event", T: () => StreamEvent_InviteReceived },
-            { no: 30, name: "invite_rejected", kind: "message", oneof: "event", T: () => StreamEvent_InviteRejected },
-            { no: 31, name: "invite_created", kind: "message", oneof: "event", T: () => StreamEvent_InviteCreated },
-            { no: 32, name: "invite_deleted", kind: "message", oneof: "event", T: () => StreamEvent_InviteDeleted },
-            { no: 33, name: "invite_used", kind: "message", oneof: "event", T: () => StreamEvent_InviteUsed }
+            { no: 26, name: "owner_added", kind: "message", oneof: "event", T: () => StreamEvent_OwnerAdded },
+            { no: 27, name: "owner_removed", kind: "message", oneof: "event", T: () => StreamEvent_OwnerRemoved },
+            { no: 28, name: "invite_received", kind: "message", oneof: "event", T: () => StreamEvent_InviteReceived },
+            { no: 29, name: "invite_rejected", kind: "message", oneof: "event", T: () => StreamEvent_InviteRejected },
+            { no: 30, name: "invite_created", kind: "message", oneof: "event", T: () => StreamEvent_InviteCreated },
+            { no: 31, name: "invite_deleted", kind: "message", oneof: "event", T: () => StreamEvent_InviteDeleted },
+            { no: 32, name: "invite_used", kind: "message", oneof: "event", T: () => StreamEvent_InviteUsed },
+            { no: 33, name: "new_reaction_added", kind: "message", oneof: "event", T: () => StreamEvent_NewReactionAdded },
+            { no: 34, name: "reaction_added", kind: "message", oneof: "event", T: () => StreamEvent_ReactionAdded },
+            { no: 35, name: "reaction_removed", kind: "message", oneof: "event", T: () => StreamEvent_ReactionRemoved },
+            { no: 36, name: "private_channel_deleted", kind: "message", oneof: "event", T: () => StreamEvent_PrivateChannelDeleted },
+            { no: 37, name: "private_channel_added_to_list", kind: "message", oneof: "event", T: () => StreamEvent_PrivateChannelAddedToList },
+            { no: 38, name: "private_channel_removed_from_list", kind: "message", oneof: "event", T: () => StreamEvent_PrivateChannelRemovedFromList },
+            { no: 39, name: "user_joined_private_channel", kind: "message", oneof: "event", T: () => StreamEvent_UserJoinedPrivateChannel },
+            { no: 40, name: "user_left_private_channel", kind: "message", oneof: "event", T: () => StreamEvent_UserLeftPrivateChannel }
         ]);
     }
 }
@@ -1465,7 +1762,7 @@ class StreamEvent_MessageSent$Type extends MessageType<StreamEvent_MessageSent> 
     constructor() {
         super("protocol.chat.v1.StreamEvent.MessageSent", [
             { no: 1, name: "echo_id", kind: "scalar", opt: true, T: 4 /*ScalarType.UINT64*/ },
-            { no: 2, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+            { no: 2, name: "guild_id", kind: "scalar", opt: true, T: 4 /*ScalarType.UINT64*/ },
             { no: 3, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
             { no: 4, name: "message_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
             { no: 5, name: "message", kind: "message", T: () => Message }
@@ -1480,11 +1777,11 @@ export const StreamEvent_MessageSent = new StreamEvent_MessageSent$Type();
 class StreamEvent_MessageUpdated$Type extends MessageType<StreamEvent_MessageUpdated> {
     constructor() {
         super("protocol.chat.v1.StreamEvent.MessageUpdated", [
-            { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+            { no: 1, name: "guild_id", kind: "scalar", opt: true, T: 4 /*ScalarType.UINT64*/ },
             { no: 2, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
             { no: 3, name: "message_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
             { no: 4, name: "edited_at", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-            { no: 5, name: "new_content", kind: "message", T: () => FormattedText }
+            { no: 5, name: "new_content", kind: "message", T: () => Content }
         ]);
     }
 }
@@ -1496,7 +1793,7 @@ export const StreamEvent_MessageUpdated = new StreamEvent_MessageUpdated$Type();
 class StreamEvent_MessageDeleted$Type extends MessageType<StreamEvent_MessageDeleted> {
     constructor() {
         super("protocol.chat.v1.StreamEvent.MessageDeleted", [
-            { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+            { no: 1, name: "guild_id", kind: "scalar", opt: true, T: 4 /*ScalarType.UINT64*/ },
             { no: 2, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
             { no: 3, name: "message_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ }
         ]);
@@ -1637,7 +1934,7 @@ class StreamEvent_GuildAddedToList$Type extends MessageType<StreamEvent_GuildAdd
     constructor() {
         super("protocol.chat.v1.StreamEvent.GuildAddedToList", [
             { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-            { no: 2, name: "homeserver", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
+            { no: 2, name: "server_id", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ }
         ]);
     }
 }
@@ -1650,7 +1947,7 @@ class StreamEvent_GuildRemovedFromList$Type extends MessageType<StreamEvent_Guil
     constructor() {
         super("protocol.chat.v1.StreamEvent.GuildRemovedFromList", [
             { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-            { no: 2, name: "homeserver", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
+            { no: 2, name: "server_id", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ }
         ]);
     }
 }
@@ -1662,11 +1959,12 @@ export const StreamEvent_GuildRemovedFromList = new StreamEvent_GuildRemovedFrom
 class StreamEvent_ActionPerformed$Type extends MessageType<StreamEvent_ActionPerformed> {
     constructor() {
         super("protocol.chat.v1.StreamEvent.ActionPerformed", [
-            { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+            { no: 1, name: "guild_id", kind: "scalar", opt: true, T: 4 /*ScalarType.UINT64*/ },
             { no: 2, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
             { no: 3, name: "message_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
             { no: 4, name: "user_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-            { no: 5, name: "payload", kind: "message", T: () => ActionPayload }
+            { no: 5, name: "info", kind: "scalar", opt: true, T: 12 /*ScalarType.BYTES*/ },
+            { no: 6, name: "payload", kind: "scalar", opt: true, T: 12 /*ScalarType.BYTES*/ }
         ]);
     }
 }
@@ -1769,7 +2067,7 @@ class StreamEvent_Typing$Type extends MessageType<StreamEvent_Typing> {
     constructor() {
         super("protocol.chat.v1.StreamEvent.Typing", [
             { no: 1, name: "user_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-            { no: 2, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+            { no: 2, name: "guild_id", kind: "scalar", opt: true, T: 4 /*ScalarType.UINT64*/ },
             { no: 3, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ }
         ]);
     }
@@ -1797,7 +2095,7 @@ export const StreamEvent_PermissionUpdated = new StreamEvent_PermissionUpdated$T
 class StreamEvent_MessagePinned$Type extends MessageType<StreamEvent_MessagePinned> {
     constructor() {
         super("protocol.chat.v1.StreamEvent.MessagePinned", [
-            { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+            { no: 1, name: "guild_id", kind: "scalar", opt: true, T: 4 /*ScalarType.UINT64*/ },
             { no: 2, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
             { no: 3, name: "message_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ }
         ]);
@@ -1811,7 +2109,7 @@ export const StreamEvent_MessagePinned = new StreamEvent_MessagePinned$Type();
 class StreamEvent_MessageUnpinned$Type extends MessageType<StreamEvent_MessageUnpinned> {
     constructor() {
         super("protocol.chat.v1.StreamEvent.MessageUnpinned", [
-            { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+            { no: 1, name: "guild_id", kind: "scalar", opt: true, T: 4 /*ScalarType.UINT64*/ },
             { no: 2, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
             { no: 3, name: "message_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ }
         ]);
@@ -1822,10 +2120,10 @@ class StreamEvent_MessageUnpinned$Type extends MessageType<StreamEvent_MessageUn
  */
 export const StreamEvent_MessageUnpinned = new StreamEvent_MessageUnpinned$Type();
 // @generated message type with reflection information, may provide speed optimized methods
-class StreamEvent_ReactionUpdated$Type extends MessageType<StreamEvent_ReactionUpdated> {
+class StreamEvent_NewReactionAdded$Type extends MessageType<StreamEvent_NewReactionAdded> {
     constructor() {
-        super("protocol.chat.v1.StreamEvent.ReactionUpdated", [
-            { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+        super("protocol.chat.v1.StreamEvent.NewReactionAdded", [
+            { no: 1, name: "guild_id", kind: "scalar", opt: true, T: 4 /*ScalarType.UINT64*/ },
             { no: 2, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
             { no: 3, name: "message_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
             { no: 4, name: "reaction", kind: "message", T: () => Reaction }
@@ -1833,9 +2131,39 @@ class StreamEvent_ReactionUpdated$Type extends MessageType<StreamEvent_ReactionU
     }
 }
 /**
- * @generated MessageType for protobuf message protocol.chat.v1.StreamEvent.ReactionUpdated
+ * @generated MessageType for protobuf message protocol.chat.v1.StreamEvent.NewReactionAdded
  */
-export const StreamEvent_ReactionUpdated = new StreamEvent_ReactionUpdated$Type();
+export const StreamEvent_NewReactionAdded = new StreamEvent_NewReactionAdded$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class StreamEvent_ReactionAdded$Type extends MessageType<StreamEvent_ReactionAdded> {
+    constructor() {
+        super("protocol.chat.v1.StreamEvent.ReactionAdded", [
+            { no: 1, name: "guild_id", kind: "scalar", opt: true, T: 4 /*ScalarType.UINT64*/ },
+            { no: 2, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+            { no: 3, name: "message_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+            { no: 4, name: "reaction_data", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
+        ]);
+    }
+}
+/**
+ * @generated MessageType for protobuf message protocol.chat.v1.StreamEvent.ReactionAdded
+ */
+export const StreamEvent_ReactionAdded = new StreamEvent_ReactionAdded$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class StreamEvent_ReactionRemoved$Type extends MessageType<StreamEvent_ReactionRemoved> {
+    constructor() {
+        super("protocol.chat.v1.StreamEvent.ReactionRemoved", [
+            { no: 1, name: "guild_id", kind: "scalar", opt: true, T: 4 /*ScalarType.UINT64*/ },
+            { no: 2, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+            { no: 3, name: "message_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+            { no: 4, name: "reaction_data", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
+        ]);
+    }
+}
+/**
+ * @generated MessageType for protobuf message protocol.chat.v1.StreamEvent.ReactionRemoved
+ */
+export const StreamEvent_ReactionRemoved = new StreamEvent_ReactionRemoved$Type();
 // @generated message type with reflection information, may provide speed optimized methods
 class StreamEvent_OwnerAdded$Type extends MessageType<StreamEvent_OwnerAdded> {
     constructor() {
@@ -1866,9 +2194,10 @@ export const StreamEvent_OwnerRemoved = new StreamEvent_OwnerRemoved$Type();
 class StreamEvent_InviteReceived$Type extends MessageType<StreamEvent_InviteReceived> {
     constructor() {
         super("protocol.chat.v1.StreamEvent.InviteReceived", [
-            { no: 1, name: "invite_id", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 1, name: "inviter_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
             { no: 2, name: "server_id", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
-            { no: 3, name: "inviter_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ }
+            { no: 3, name: "guild_invite_id", kind: "scalar", oneof: "location", T: 9 /*ScalarType.STRING*/ },
+            { no: 4, name: "channel_id", kind: "scalar", oneof: "location", T: 4 /*ScalarType.UINT64*/ }
         ]);
     }
 }
@@ -1880,9 +2209,10 @@ export const StreamEvent_InviteReceived = new StreamEvent_InviteReceived$Type();
 class StreamEvent_InviteRejected$Type extends MessageType<StreamEvent_InviteRejected> {
     constructor() {
         super("protocol.chat.v1.StreamEvent.InviteRejected", [
-            { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-            { no: 2, name: "invite_id", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 3, name: "user_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ }
+            { no: 1, name: "invitee_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+            { no: 2, name: "server_id", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
+            { no: 3, name: "guild_invite_id", kind: "scalar", oneof: "location", T: 9 /*ScalarType.STRING*/ },
+            { no: 4, name: "channel_id", kind: "scalar", oneof: "location", T: 4 /*ScalarType.UINT64*/ }
         ]);
     }
 }
@@ -1931,3 +2261,67 @@ class StreamEvent_InviteUsed$Type extends MessageType<StreamEvent_InviteUsed> {
  * @generated MessageType for protobuf message protocol.chat.v1.StreamEvent.InviteUsed
  */
 export const StreamEvent_InviteUsed = new StreamEvent_InviteUsed$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class StreamEvent_PrivateChannelDeleted$Type extends MessageType<StreamEvent_PrivateChannelDeleted> {
+    constructor() {
+        super("protocol.chat.v1.StreamEvent.PrivateChannelDeleted", [
+            { no: 1, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ }
+        ]);
+    }
+}
+/**
+ * @generated MessageType for protobuf message protocol.chat.v1.StreamEvent.PrivateChannelDeleted
+ */
+export const StreamEvent_PrivateChannelDeleted = new StreamEvent_PrivateChannelDeleted$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class StreamEvent_PrivateChannelAddedToList$Type extends MessageType<StreamEvent_PrivateChannelAddedToList> {
+    constructor() {
+        super("protocol.chat.v1.StreamEvent.PrivateChannelAddedToList", [
+            { no: 1, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+            { no: 2, name: "server_id", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ }
+        ]);
+    }
+}
+/**
+ * @generated MessageType for protobuf message protocol.chat.v1.StreamEvent.PrivateChannelAddedToList
+ */
+export const StreamEvent_PrivateChannelAddedToList = new StreamEvent_PrivateChannelAddedToList$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class StreamEvent_PrivateChannelRemovedFromList$Type extends MessageType<StreamEvent_PrivateChannelRemovedFromList> {
+    constructor() {
+        super("protocol.chat.v1.StreamEvent.PrivateChannelRemovedFromList", [
+            { no: 1, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+            { no: 2, name: "server_id", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ }
+        ]);
+    }
+}
+/**
+ * @generated MessageType for protobuf message protocol.chat.v1.StreamEvent.PrivateChannelRemovedFromList
+ */
+export const StreamEvent_PrivateChannelRemovedFromList = new StreamEvent_PrivateChannelRemovedFromList$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class StreamEvent_UserJoinedPrivateChannel$Type extends MessageType<StreamEvent_UserJoinedPrivateChannel> {
+    constructor() {
+        super("protocol.chat.v1.StreamEvent.UserJoinedPrivateChannel", [
+            { no: 1, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+            { no: 2, name: "user_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ }
+        ]);
+    }
+}
+/**
+ * @generated MessageType for protobuf message protocol.chat.v1.StreamEvent.UserJoinedPrivateChannel
+ */
+export const StreamEvent_UserJoinedPrivateChannel = new StreamEvent_UserJoinedPrivateChannel$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class StreamEvent_UserLeftPrivateChannel$Type extends MessageType<StreamEvent_UserLeftPrivateChannel> {
+    constructor() {
+        super("protocol.chat.v1.StreamEvent.UserLeftPrivateChannel", [
+            { no: 1, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+            { no: 2, name: "user_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ }
+        ]);
+    }
+}
+/**
+ * @generated MessageType for protobuf message protocol.chat.v1.StreamEvent.UserLeftPrivateChannel
+ */
+export const StreamEvent_UserLeftPrivateChannel = new StreamEvent_UserLeftPrivateChannel$Type();

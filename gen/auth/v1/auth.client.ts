@@ -52,6 +52,10 @@ import type { RpcOptions } from "@protobuf-ts/runtime-rpc";
 /**
  * The service containing authorization/entication methods.
  *
+ * It is important to note that bots are exempt from AuthService
+ * - a persistent authorization token is generated on bot creation.
+ * This is handled in BotsService.
+ *
  * @generated from protobuf service protocol.auth.v1.AuthService
  */
 export interface IAuthServiceClient {
@@ -134,6 +138,10 @@ export interface IAuthServiceClient {
 
 /**
  * The service containing authorization/entication methods.
+ *
+ * It is important to note that bots are exempt from AuthService
+ * - a persistent authorization token is generated on bot creation.
+ * This is handled in BotsService.
  *
  * @generated from protobuf service protocol.auth.v1.AuthService
  */

@@ -77,8 +77,7 @@ export interface ProfileOverride {
     };
 }
 /**
- * The message used for the 'h.overrides' app ID
- * of appdata.
+ * The message used for the 'h.overrides' app ID of appdata.
  *
  * @generated from protobuf message protocol.profile.v1.AppDataOverrides
  */
@@ -89,6 +88,21 @@ export interface AppDataOverrides {
      * @generated from protobuf field: repeated protocol.profile.v1.ProfileOverride overrides = 1;
      */
     overrides: ProfileOverride[];
+}
+/**
+ * The message used for the 'h.user_notes' app ID of appdata.
+ *
+ * @generated from protobuf message protocol.profile.v1.AppDataUserNotes
+ */
+export interface AppDataUserNotes {
+    /**
+     * The user ID -> note map.
+     *
+     * @generated from protobuf field: map<uint64, string> notes = 1;
+     */
+    notes: {
+        [key: string]: string;
+    };
 }
 // @generated message type with reflection information, may provide speed optimized methods
 class OverrideTag$Type extends MessageType<OverrideTag> {
@@ -131,3 +145,15 @@ class AppDataOverrides$Type extends MessageType<AppDataOverrides> {
  * @generated MessageType for protobuf message protocol.profile.v1.AppDataOverrides
  */
 export const AppDataOverrides = new AppDataOverrides$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class AppDataUserNotes$Type extends MessageType<AppDataUserNotes> {
+    constructor() {
+        super("protocol.profile.v1.AppDataUserNotes", [
+            { no: 1, name: "notes", kind: "map", K: 4 /*ScalarType.UINT64*/, V: { kind: "scalar", T: 9 /*ScalarType.STRING*/ } }
+        ]);
+    }
+}
+/**
+ * @generated MessageType for protobuf message protocol.profile.v1.AppDataUserNotes
+ */
+export const AppDataUserNotes = new AppDataUserNotes$Type();

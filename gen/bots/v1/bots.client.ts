@@ -10,6 +10,8 @@ import type { PoliciesResponse } from "./bots";
 import type { PoliciesRequest } from "./bots";
 import type { DeleteBotResponse } from "./bots";
 import type { DeleteBotRequest } from "./bots";
+import type { RefreshTokenResponse } from "./bots";
+import type { RefreshTokenRequest } from "./bots";
 import type { EditBotResponse } from "./bots";
 import type { EditBotRequest } from "./bots";
 import type { CreateBotResponse } from "./bots";
@@ -52,7 +54,15 @@ export interface IBotsServiceClient {
      */
     editBot(input: EditBotRequest, options?: RpcOptions): UnaryCall<EditBotRequest, EditBotResponse>;
     /**
-     * Deletes a bot account that you own.
+     * Refreshes the authentication token for a bot that you own
+     *
+     * This invalidates the current authentication token and returns a new one.
+     *
+     * @generated from protobuf rpc: RefreshToken(protocol.bots.v1.RefreshTokenRequest) returns (protocol.bots.v1.RefreshTokenResponse);
+     */
+    refreshToken(input: RefreshTokenRequest, options?: RpcOptions): UnaryCall<RefreshTokenRequest, RefreshTokenResponse>;
+    /**
+     * Deletes a bot account that you own
      *
      * @generated from protobuf rpc: DeleteBot(protocol.bots.v1.DeleteBotRequest) returns (protocol.bots.v1.DeleteBotResponse);
      */
@@ -123,12 +133,23 @@ export class BotsServiceClient implements IBotsServiceClient, ServiceInfo {
         return stackIntercept<EditBotRequest, EditBotResponse>("unary", this._transport, method, opt, input);
     }
     /**
-     * Deletes a bot account that you own.
+     * Refreshes the authentication token for a bot that you own
+     *
+     * This invalidates the current authentication token and returns a new one.
+     *
+     * @generated from protobuf rpc: RefreshToken(protocol.bots.v1.RefreshTokenRequest) returns (protocol.bots.v1.RefreshTokenResponse);
+     */
+    refreshToken(input: RefreshTokenRequest, options?: RpcOptions): UnaryCall<RefreshTokenRequest, RefreshTokenResponse> {
+        const method = this.methods[4], opt = this._transport.mergeOptions(options);
+        return stackIntercept<RefreshTokenRequest, RefreshTokenResponse>("unary", this._transport, method, opt, input);
+    }
+    /**
+     * Deletes a bot account that you own
      *
      * @generated from protobuf rpc: DeleteBot(protocol.bots.v1.DeleteBotRequest) returns (protocol.bots.v1.DeleteBotResponse);
      */
     deleteBot(input: DeleteBotRequest, options?: RpcOptions): UnaryCall<DeleteBotRequest, DeleteBotResponse> {
-        const method = this.methods[4], opt = this._transport.mergeOptions(options);
+        const method = this.methods[5], opt = this._transport.mergeOptions(options);
         return stackIntercept<DeleteBotRequest, DeleteBotResponse>("unary", this._transport, method, opt, input);
     }
     /**
@@ -139,7 +160,7 @@ export class BotsServiceClient implements IBotsServiceClient, ServiceInfo {
      * @generated from protobuf rpc: Policies(protocol.bots.v1.PoliciesRequest) returns (protocol.bots.v1.PoliciesResponse);
      */
     policies(input: PoliciesRequest, options?: RpcOptions): UnaryCall<PoliciesRequest, PoliciesResponse> {
-        const method = this.methods[5], opt = this._transport.mergeOptions(options);
+        const method = this.methods[6], opt = this._transport.mergeOptions(options);
         return stackIntercept<PoliciesRequest, PoliciesResponse>("unary", this._transport, method, opt, input);
     }
     /**
@@ -151,7 +172,7 @@ export class BotsServiceClient implements IBotsServiceClient, ServiceInfo {
      * @generated from protobuf rpc: AddBot(protocol.bots.v1.AddBotRequest) returns (protocol.bots.v1.AddBotResponse);
      */
     addBot(input: AddBotRequest, options?: RpcOptions): UnaryCall<AddBotRequest, AddBotResponse> {
-        const method = this.methods[6], opt = this._transport.mergeOptions(options);
+        const method = this.methods[7], opt = this._transport.mergeOptions(options);
         return stackIntercept<AddBotRequest, AddBotResponse>("unary", this._transport, method, opt, input);
     }
 }

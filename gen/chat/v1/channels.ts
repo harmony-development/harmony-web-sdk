@@ -262,32 +262,6 @@ export interface DeleteChannelRequest {
 export interface DeleteChannelResponse {
 }
 /**
- * Used in `Typing` endpoint.
- *
- * @generated from protobuf message protocol.chat.v1.TypingRequest
- */
-export interface TypingRequest {
-    /**
-     * The guild id of the channel the user is typing in.
-     *
-     * @generated from protobuf field: uint64 guild_id = 1;
-     */
-    guildId: string;
-    /**
-     * The channel id of the channel the user is typing in.
-     *
-     * @generated from protobuf field: uint64 channel_id = 2;
-     */
-    channelId: string;
-}
-/**
- * Used in `Typing` endpoint.
- *
- * @generated from protobuf message protocol.chat.v1.TypingResponse
- */
-export interface TypingResponse {
-}
-/**
  * What kind the channel is.
  *
  * @generated from protobuf enum protocol.chat.v1.ChannelKind
@@ -487,26 +461,3 @@ class DeleteChannelResponse$Type extends MessageType<DeleteChannelResponse> {
  * @generated MessageType for protobuf message protocol.chat.v1.DeleteChannelResponse
  */
 export const DeleteChannelResponse = new DeleteChannelResponse$Type();
-// @generated message type with reflection information, may provide speed optimized methods
-class TypingRequest$Type extends MessageType<TypingRequest> {
-    constructor() {
-        super("protocol.chat.v1.TypingRequest", [
-            { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-            { no: 2, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ }
-        ]);
-    }
-}
-/**
- * @generated MessageType for protobuf message protocol.chat.v1.TypingRequest
- */
-export const TypingRequest = new TypingRequest$Type();
-// @generated message type with reflection information, may provide speed optimized methods
-class TypingResponse$Type extends MessageType<TypingResponse> {
-    constructor() {
-        super("protocol.chat.v1.TypingResponse", []);
-    }
-}
-/**
- * @generated MessageType for protobuf message protocol.chat.v1.TypingResponse
- */
-export const TypingResponse = new TypingResponse$Type();

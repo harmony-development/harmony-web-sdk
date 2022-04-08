@@ -4,7 +4,6 @@
 import { MessageType } from "@protobuf-ts/runtime";
 import { Metadata } from "../../harmonytypes/v1/types";
 import { Emote } from "../../emote/v1/types";
-import { ImageInfo } from "../../harmonytypes/v1/types";
 import { Empty } from "../../harmonytypes/v1/types";
 /**
  * Overrides provide a way to override the name and avatar of a message.
@@ -76,89 +75,11 @@ export interface Overrides {
     };
 }
 /**
- * The payload sent to the bot when an action is triggered.
+ * Actions are interactive elements that can exist within a message.
+ * They can be only sent by bots; servers should ignore actions created by users.
  *
- * @generated from protobuf message protocol.chat.v1.ActionPayload
- */
-export interface ActionPayload {
-    /**
-     * @generated from protobuf oneof: payload
-     */
-    payload: {
-        oneofKind: "button";
-        /**
-         * Payload for a button.
-         *
-         * @generated from protobuf field: protocol.chat.v1.ActionPayload.Button button = 1;
-         */
-        button: ActionPayload_Button;
-    } | {
-        oneofKind: "dropdown";
-        /**
-         * Payload for a dropdown.
-         *
-         * @generated from protobuf field: protocol.chat.v1.ActionPayload.Dropdown dropdown = 2;
-         */
-        dropdown: ActionPayload_Dropdown;
-    } | {
-        oneofKind: "input";
-        /**
-         * Payload for a text input.
-         *
-         * @generated from protobuf field: protocol.chat.v1.ActionPayload.Input input = 3;
-         */
-        input: ActionPayload_Input;
-    } | {
-        oneofKind: undefined;
-    };
-}
-/**
- * The payload data for a button action.
- *
- * @generated from protobuf message protocol.chat.v1.ActionPayload.Button
- */
-export interface ActionPayload_Button {
-    /**
-     * The data from the Button action.
-     *
-     * @generated from protobuf field: bytes data = 1;
-     */
-    data: Uint8Array;
-}
-/**
- * The payload for a dropdown action.
- *
- * @generated from protobuf message protocol.chat.v1.ActionPayload.Dropdown
- */
-export interface ActionPayload_Dropdown {
-    /**
-     * The user choice from the dropdown.
-     *
-     * @generated from protobuf field: bytes choice = 1;
-     */
-    choice: Uint8Array;
-}
-/**
- * The payload for a text input action.
- *
- * @generated from protobuf message protocol.chat.v1.ActionPayload.Input
- */
-export interface ActionPayload_Input {
-    /**
-     * The user input.
-     *
-     * @generated from protobuf field: string input = 1;
-     */
-    input: string;
-    /**
-     * The bot-provided data.
-     *
-     * @generated from protobuf field: bytes data = 2;
-     */
-    data: Uint8Array;
-}
-/**
- * Actions are interactive elements that can exist within an embed.
+ * Servers MUST verify that the action data sent by an user is valid for that action
+ * before sending it to the bot.
  *
  * @generated from protobuf message protocol.chat.v1.Action
  */
@@ -170,6 +91,13 @@ export interface Action {
      */
     actionType: Action_Type;
     /**
+     * Contextual info allowing the bot to discern what the action is for.
+     * The info of an action cannot be the same with the info of another action in the same message.
+     *
+     * @generated from protobuf field: bytes info = 2;
+     */
+    info: Uint8Array;
+    /**
      * @generated from protobuf oneof: kind
      */
     kind: {
@@ -177,7 +105,7 @@ export interface Action {
         /**
          * Button action.
          *
-         * @generated from protobuf field: protocol.chat.v1.Action.Button button = 2;
+         * @generated from protobuf field: protocol.chat.v1.Action.Button button = 3;
          */
         button: Action_Button;
     } | {
@@ -185,7 +113,7 @@ export interface Action {
         /**
          * Dropdown action.
          *
-         * @generated from protobuf field: protocol.chat.v1.Action.Dropdown dropdown = 3;
+         * @generated from protobuf field: protocol.chat.v1.Action.Dropdown dropdown = 4;
          */
         dropdown: Action_Dropdown;
     } | {
@@ -193,7 +121,7 @@ export interface Action {
         /**
          * Input action.
          *
-         * @generated from protobuf field: protocol.chat.v1.Action.Input input = 4;
+         * @generated from protobuf field: protocol.chat.v1.Action.Input input = 5;
          */
         input: Action_Input;
     } | {
@@ -213,18 +141,12 @@ export interface Action_Button {
      */
     text: string;
     /**
-     * Action data, which should be used in the call to perform the action.
-     *
-     * @generated from protobuf field: bytes data = 2;
-     */
-    data: Uint8Array;
-    /**
      * An external URL that the button links to.
      *
      * This makes it so that tapping this button will open said URL instead
      * of triggering the action.
      *
-     * @generated from protobuf field: optional string url = 3;
+     * @generated from protobuf field: optional string url = 2;
      */
     url?: string;
 }
@@ -285,11 +207,11 @@ export interface Action_Input {
      */
     multiline: boolean;
     /**
-     * Contextual data allowing the bot to discern what the user input is for.
+     * The default text that should be pre-filled in the text field.
      *
-     * @generated from protobuf field: bytes data = 3;
+     * @generated from protobuf field: optional string default = 3;
      */
-    data: Uint8Array;
+    default?: string;
 }
 /**
  * The action type. This is primarily used to change the look of the action to
@@ -326,9 +248,9 @@ export interface Embed {
     /**
      * Embed heading for the header.
      *
-     * @generated from protobuf field: optional protocol.chat.v1.Embed.EmbedHeading header = 1;
+     * @generated from protobuf field: optional protocol.chat.v1.Embed.Heading header = 1;
      */
-    header?: Embed_EmbedHeading;
+    header?: Embed_Heading;
     /**
      * Title of this embed.
      *
@@ -344,28 +266,40 @@ export interface Embed {
     /**
      * Fields of this embed.
      *
-     * @generated from protobuf field: repeated protocol.chat.v1.Embed.EmbedField fields = 4;
+     * @generated from protobuf field: repeated protocol.chat.v1.Embed.Field fields = 4;
      */
-    fields: Embed_EmbedField[];
+    fields: Embed_Field[];
+    /**
+     * An image to display on this embed.
+     *
+     * @generated from protobuf field: optional protocol.chat.v1.Embed.Image image = 5;
+     */
+    image?: Embed_Image;
+    /**
+     * Actions to show on this field.
+     *
+     * @generated from protobuf field: repeated protocol.chat.v1.Action actions = 6;
+     */
+    actions: Action[];
     /**
      * Embed heading for the footer.
      *
-     * @generated from protobuf field: optional protocol.chat.v1.Embed.EmbedHeading footer = 5;
+     * @generated from protobuf field: optional protocol.chat.v1.Embed.Heading footer = 7;
      */
-    footer?: Embed_EmbedHeading;
+    footer?: Embed_Heading;
     /**
      * Color of this embed.
      *
-     * @generated from protobuf field: optional int32 color = 6;
+     * @generated from protobuf field: optional int32 color = 8;
      */
     color?: number;
 }
 /**
  * Object representing an embed heading.
  *
- * @generated from protobuf message protocol.chat.v1.Embed.EmbedHeading
+ * @generated from protobuf message protocol.chat.v1.Embed.Heading
  */
-export interface Embed_EmbedHeading {
+export interface Embed_Heading {
     /**
      * Text of the heading.
      *
@@ -373,79 +307,53 @@ export interface Embed_EmbedHeading {
      */
     text: string;
     /**
-     * Subtext of the heading.
-     *
-     * @generated from protobuf field: optional string subtext = 2;
-     */
-    subtext?: string;
-    /**
      * URL of the heading.
      *
      * If this is provided, clients should make it so that
      * interacting with the heading opens this URL, for example
      * clicking on it.
      *
-     * @generated from protobuf field: optional string url = 3;
+     * @generated from protobuf field: optional string url = 2;
      */
     url?: string;
     /**
-     * Icon of the heading.
+     * Icon of the heading. This must be a file ID that points
+     * to an image.
      *
-     * @generated from protobuf field: optional string icon = 4;
+     * @generated from protobuf field: optional string icon = 3;
      */
     icon?: string;
 }
 /**
- * Object representing an embed field.
+ * A field for the embed. Fields usually contain
+ * small information and are not meant to be used
+ * for huge chunks of text.
  *
- * @generated from protobuf message protocol.chat.v1.Embed.EmbedField
+ * @generated from protobuf message protocol.chat.v1.Embed.Field
  */
-export interface Embed_EmbedField {
+export interface Embed_Field {
     /**
-     * How to present this field.
+     * Title of this field (what is it?).
      *
-     * @generated from protobuf field: protocol.chat.v1.Embed.EmbedField.Presentation presentation = 1;
-     */
-    presentation: Embed_EmbedField_Presentation;
-    /**
-     * Title of this field.
-     *
-     * @generated from protobuf field: string title = 2;
+     * @generated from protobuf field: string title = 1;
      */
     title: string;
     /**
-     * Subtitle of this field.
+     * Body of this field.
      *
-     * @generated from protobuf field: optional string subtitle = 3;
+     * @generated from protobuf field: string body = 2;
      */
-    subtitle?: string;
-    /**
-     * Body text of this field (eg. a description).
-     *
-     * @generated from protobuf field: optional protocol.chat.v1.FormattedText body = 4;
-     */
-    body?: FormattedText;
-    /**
-     * An image to display on this field.
-     *
-     * @generated from protobuf field: optional protocol.chat.v1.Embed.EmbedField.Image image = 5;
-     */
-    image?: Embed_EmbedField_Image;
-    /**
-     * Actions to show on this field.
-     *
-     * @generated from protobuf field: repeated protocol.chat.v1.Action actions = 6;
-     */
-    actions: Action[];
+    body: string;
 }
 /**
  * Data for displaying an image in embed.
  *
- * Servers should fill in the `width` and `height` fields.
+ * Servers should fill in the `width` and `height` fields, if
+ * the provided `id` is not external.
  *
- * @generated from protobuf message protocol.chat.v1.Embed.EmbedField.Image
+ * @generated from protobuf message protocol.chat.v1.Embed.Image
  */
-export interface Embed_EmbedField_Image {
+export interface Embed_Image {
     /**
      * File ID or external image URL of an image.
      *
@@ -453,36 +361,44 @@ export interface Embed_EmbedField_Image {
      */
     id: string;
     /**
-     * Image information.
+     * The width of the image, in pixels.
      *
-     * @generated from protobuf field: protocol.harmonytypes.v1.ImageInfo info = 2;
+     * @generated from protobuf field: uint32 width = 2;
      */
-    info?: ImageInfo;
+    width: number;
+    /**
+     * The height of the image, in pixels.
+     *
+     * @generated from protobuf field: uint32 height = 3;
+     */
+    height: number;
 }
 /**
- * Type representing how to present an embed field.
+ * An extremely low-quality WebP thumbnail.
  *
- * @generated from protobuf enum protocol.chat.v1.Embed.EmbedField.Presentation
+ * The resolution is usually no larger than 64x64.
+ *
+ * @generated from protobuf message protocol.chat.v1.Minithumbnail
  */
-export enum Embed_EmbedField_Presentation {
+export interface Minithumbnail {
     /**
-     * Show the field as data.
+     * The width of the minithumbnail, in pixels.
      *
-     * @generated from protobuf enum value: PRESENTATION_DATA_UNSPECIFIED = 0;
+     * @generated from protobuf field: uint32 width = 1;
      */
-    DATA_UNSPECIFIED = 0,
+    width: number;
     /**
-     * Show the field as a captioned image.
+     * The height of the minithumbnail, in pixels.
      *
-     * @generated from protobuf enum value: PRESENTATION_CAPTIONED_IMAGE = 1;
+     * @generated from protobuf field: uint32 height = 2;
      */
-    CAPTIONED_IMAGE = 1,
+    height: number;
     /**
-     * Show the field as a row.
+     * The data of the minithumbnail.
      *
-     * @generated from protobuf enum value: PRESENTATION_ROW = 2;
+     * @generated from protobuf field: bytes data = 3;
      */
-    ROW = 2
+    data: Uint8Array;
 }
 /**
  * Object representing a generic message attachment.
@@ -522,12 +438,43 @@ export interface Attachment {
         /**
          * Image info.
          *
-         * @generated from protobuf field: protocol.harmonytypes.v1.ImageInfo image = 5;
+         * @generated from protobuf field: protocol.chat.v1.Attachment.ImageInfo image = 5;
          */
-        image: ImageInfo;
+        image: Attachment_ImageInfo;
     } | {
         oneofKind: undefined;
     };
+}
+/**
+ * Contains data about an image.
+ *
+ * @generated from protobuf message protocol.chat.v1.Attachment.ImageInfo
+ */
+export interface Attachment_ImageInfo {
+    /**
+     * The width of the image, in pixels.
+     *
+     * @generated from protobuf field: uint32 width = 1;
+     */
+    width: number;
+    /**
+     * The height of the image, in pixels.
+     *
+     * @generated from protobuf field: uint32 height = 2;
+     */
+    height: number;
+    /**
+     * A thumbnail for the image.
+     *
+     * @generated from protobuf field: protocol.chat.v1.Minithumbnail minithumbnail = 3;
+     */
+    minithumbnail?: Minithumbnail;
+    /**
+     * The image's caption.
+     *
+     * @generated from protobuf field: optional string caption = 4;
+     */
+    caption?: string;
 }
 /**
  * Object representing a message's content other than text.
@@ -654,19 +601,29 @@ export interface Content_RoomUpgradedToGuild {
  */
 export interface Reaction {
     /**
-     * Emote data for this reaction.
+     * The kind of the reaction.
      *
-     * - Emote's image ID is used as an identifier for unique reactions.
-     * - Emotes with the same names should be "deduplicated" by a client,
-     * by suffixing their names with `~1`, `~2` and so on.
-     *
-     * @generated from protobuf field: protocol.emote.v1.Emote emote = 1;
+     * @generated from protobuf field: protocol.chat.v1.ReactionKind kind = 1;
      */
-    emote?: Emote;
+    kind: ReactionKind;
+    /**
+     * The reaction's data. This is interpreted using the `kind`.
+     *
+     * This is used as a unique identifier for reactions.
+     *
+     * @generated from protobuf field: string data = 2;
+     */
+    data: string;
+    /**
+     * The name of the reaction.
+     *
+     * @generated from protobuf field: string name = 3;
+     */
+    name: string;
     /**
      * How many times this reaction has been used.
      *
-     * @generated from protobuf field: uint32 count = 2;
+     * @generated from protobuf field: uint32 count = 4;
      */
     count: number;
 }
@@ -796,14 +753,6 @@ export interface Format {
          */
         color: Format_Color;
     } | {
-        oneofKind: "localization";
-        /**
-         * A text format for localization.
-         *
-         * @generated from protobuf field: protocol.chat.v1.Format.Localization localization = 16;
-         */
-        localization: Format_Localization;
-    } | {
         oneofKind: undefined;
     };
 }
@@ -931,11 +880,17 @@ export interface Format_GuildMention {
  */
 export interface Format_Emoji {
     /**
-     * The emote data of the emoji.
+     * The emote data of the emote.
      *
      * @generated from protobuf field: protocol.emote.v1.Emote emote = 1;
      */
     emote?: Emote;
+    /**
+     * The (optional) pack ID of this emote.
+     *
+     * @generated from protobuf field: optional uint64 pack_id = 2;
+     */
+    packId?: string;
 }
 /**
  * Colour modification.
@@ -992,20 +947,6 @@ export enum Format_Color_Kind {
      * @generated from protobuf enum value: KIND_WARNING = 5;
      */
     WARNING = 5
-}
-/**
- * Replace a part of the text with the text matching the i18n code.
- * If i18n code was not found, keep the original text.
- *
- * @generated from protobuf message protocol.chat.v1.Format.Localization
- */
-export interface Format_Localization {
-    /**
-     * i18n code for the text.
-     *
-     * @generated from protobuf field: string i18n_code = 1 [json_name = "i18nCode"];
-     */
-    i18NCode: string;
 }
 /**
  * Formatted text.
@@ -1080,6 +1021,12 @@ export interface Message {
      * @generated from protobuf field: repeated protocol.chat.v1.Reaction reactions = 8;
      */
     reactions: Reaction[];
+    /**
+     * Bot actions to show on this message.
+     *
+     * @generated from protobuf field: repeated protocol.chat.v1.Action actions = 9;
+     */
+    actions: Action[];
 }
 /**
  * Object representing a message with it's ID.
@@ -1109,9 +1056,9 @@ export interface GetChannelMessagesRequest {
     /**
      * Guild ID of the guild that has the channel.
      *
-     * @generated from protobuf field: uint64 guild_id = 1;
+     * @generated from protobuf field: optional uint64 guild_id = 1;
      */
-    guildId: string;
+    guildId?: string;
     /**
      * Channel ID of the channel to get messages from.
      *
@@ -1215,9 +1162,9 @@ export interface GetMessageRequest {
     /**
      * Guild ID of the guild where the channel is.
      *
-     * @generated from protobuf field: uint64 guild_id = 1;
+     * @generated from protobuf field: optional uint64 guild_id = 1;
      */
-    guildId: string;
+    guildId?: string;
     /**
      * Channel ID of the channel where the message is.
      *
@@ -1253,9 +1200,9 @@ export interface DeleteMessageRequest {
     /**
      * Guild ID of the guild where the channel is.
      *
-     * @generated from protobuf field: uint64 guild_id = 1;
+     * @generated from protobuf field: optional uint64 guild_id = 1;
      */
-    guildId: string;
+    guildId?: string;
     /**
      * Channel ID of the channel where the message is.
      *
@@ -1285,9 +1232,9 @@ export interface TriggerActionRequest {
     /**
      * Guild ID of the guild where the channel is.
      *
-     * @generated from protobuf field: uint64 guild_id = 1;
+     * @generated from protobuf field: optional uint64 guild_id = 1;
      */
-    guildId: string;
+    guildId?: string;
     /**
      * Channel ID of the channel where the message is.
      *
@@ -1301,11 +1248,18 @@ export interface TriggerActionRequest {
      */
     messageId: string;
     /**
-     * Payload of action data.
+     * Data that alllows the bot to discern which action the user is trying to trigger.
+     * A server MUST verify that this info refers to a valid action for the target message.
      *
-     * @generated from protobuf field: protocol.chat.v1.ActionPayload payload = 4;
+     * @generated from protobuf field: bytes info = 4;
      */
-    payload?: ActionPayload;
+    info: Uint8Array;
+    /**
+     * Payload of action data. Ignored if this is a button action.
+     *
+     * @generated from protobuf field: optional bytes payload = 5;
+     */
+    payload?: Uint8Array;
 }
 /**
  * Used in the `TriggerAction` endpoint.
@@ -1323,9 +1277,9 @@ export interface SendMessageRequest {
     /**
      * Guild ID of the guild where the channel is.
      *
-     * @generated from protobuf field: uint64 guild_id = 1;
+     * @generated from protobuf field: optional uint64 guild_id = 1;
      */
-    guildId: string;
+    guildId?: string;
     /**
      * Channel ID of the channel you want to send a message in.
      *
@@ -1340,9 +1294,8 @@ export interface SendMessageRequest {
     content?: SendMessageRequest_Content;
     /**
      * Echo ID of the new message. This can be used by clients to
-     * determine whether a message has been broadcasted properly
-     * to other clients. Note that this does not mean the broadcast
-     * reached other clients.
+     * determine whether a message has been broadcasted to other clients.
+     * Note that this does not mean the broadcast reached other clients.
      *
      * @generated from protobuf field: optional uint64 echo_id = 4;
      */
@@ -1360,33 +1313,17 @@ export interface SendMessageRequest {
      */
     inReplyTo?: string;
     /**
+     * Actions to send on this message. Ignored if the message is not sent by a bot.
+     *
+     * @generated from protobuf field: repeated protocol.chat.v1.Action actions = 8;
+     */
+    actions: Action[];
+    /**
      * The metadata of this new message.
      *
      * @generated from protobuf field: optional protocol.harmonytypes.v1.Metadata metadata = 5;
      */
     metadata?: Metadata;
-}
-/**
- * Information a user can add to a image attachment.
- *
- * @generated from protobuf message protocol.chat.v1.SendMessageRequest.ImageInfo
- */
-export interface SendMessageRequest_ImageInfo {
-    /**
-     * The image's caption.
-     *
-     * @generated from protobuf field: optional string caption = 1;
-     */
-    caption?: string;
-    /**
-     * Whether to use the original image, instead of compressing the image.
-     *
-     * Compression can be forced by servers, so this option may not work on
-     * every homeserver.
-     *
-     * @generated from protobuf field: bool use_original = 2;
-     */
-    useOriginal: boolean;
 }
 /**
  * Attachment info that can be sent by a user.
@@ -1395,7 +1332,7 @@ export interface SendMessageRequest_ImageInfo {
  */
 export interface SendMessageRequest_Attachment {
     /**
-     * The file ID of the attachment.
+     * The local file ID of the attachment.
      *
      * @generated from protobuf field: string id = 1;
      */
@@ -1414,12 +1351,34 @@ export interface SendMessageRequest_Attachment {
         /**
          * Image info.
          *
-         * @generated from protobuf field: protocol.chat.v1.SendMessageRequest.ImageInfo image = 3;
+         * @generated from protobuf field: protocol.chat.v1.SendMessageRequest.Attachment.ImageInfo image = 3;
          */
-        image: SendMessageRequest_ImageInfo;
+        image: SendMessageRequest_Attachment_ImageInfo;
     } | {
         oneofKind: undefined;
     };
+}
+/**
+ * Information a user can add to a image attachment.
+ *
+ * @generated from protobuf message protocol.chat.v1.SendMessageRequest.Attachment.ImageInfo
+ */
+export interface SendMessageRequest_Attachment_ImageInfo {
+    /**
+     * The image's caption.
+     *
+     * @generated from protobuf field: optional string caption = 1;
+     */
+    caption?: string;
+    /**
+     * Whether to use the original image, instead of compressing the image.
+     *
+     * Compression can be forced by servers, so this option may not work on
+     * every homeserver.
+     *
+     * @generated from protobuf field: bool use_original = 2;
+     */
+    useOriginal: boolean;
 }
 /**
  * Content that can be sent by a user.
@@ -1430,7 +1389,8 @@ export interface SendMessageRequest_Content {
     /**
      * Text content of the message to be sent.
      *
-     * If this is empty, then `extra` must be specified.
+     * If this is empty, then either `attachments`
+     * or `embeds` must be specified.
      *
      * @generated from protobuf field: string text = 1;
      */
@@ -1442,51 +1402,21 @@ export interface SendMessageRequest_Content {
      */
     textFormats: Format[];
     /**
-     * @generated from protobuf oneof: extra
-     */
-    extra: {
-        oneofKind: "attachments";
-        /**
-         * Attachment content.
-         *
-         * @generated from protobuf field: protocol.chat.v1.SendMessageRequest.Content.Attachments attachments = 3;
-         */
-        attachments: SendMessageRequest_Content_Attachments;
-    } | {
-        oneofKind: "embeds";
-        /**
-         * Embed content.
-         *
-         * @generated from protobuf field: protocol.chat.v1.SendMessageRequest.Content.Embeds embeds = 4;
-         */
-        embeds: SendMessageRequest_Content_Embeds;
-    } | {
-        oneofKind: undefined;
-    };
-}
-/**
- * Attachment content.
- *
- * @generated from protobuf message protocol.chat.v1.SendMessageRequest.Content.Attachments
- */
-export interface SendMessageRequest_Content_Attachments {
-    /**
-     * Attachments.
+     * Attachments to be sent.
      *
-     * @generated from protobuf field: repeated protocol.chat.v1.SendMessageRequest.Attachment attachments = 1;
+     * If this is empty, then either `embeds` or `text`
+     * must be specified.
+     *
+     * @generated from protobuf field: repeated protocol.chat.v1.SendMessageRequest.Attachment attachments = 3;
      */
     attachments: SendMessageRequest_Attachment[];
-}
-/**
- * Embed content.
- *
- * @generated from protobuf message protocol.chat.v1.SendMessageRequest.Content.Embeds
- */
-export interface SendMessageRequest_Content_Embeds {
     /**
-     * Embeds.
+     * Embeds to be sent.
      *
-     * @generated from protobuf field: repeated protocol.chat.v1.Embed embeds = 1;
+     * If this is empty, then either `attachemnts`
+     * or `text` must be specified.
+     *
+     * @generated from protobuf field: repeated protocol.chat.v1.Embed embeds = 4;
      */
     embeds: Embed[];
 }
@@ -1504,17 +1434,17 @@ export interface SendMessageResponse {
     messageId: string;
 }
 /**
- * Used in the `UpdateMessageText` endpoint.
+ * Used in the `UpdateMessageContent` endpoint.
  *
- * @generated from protobuf message protocol.chat.v1.UpdateMessageTextRequest
+ * @generated from protobuf message protocol.chat.v1.UpdateMessageContentRequest
  */
-export interface UpdateMessageTextRequest {
+export interface UpdateMessageContentRequest {
     /**
      * Guild ID of the guild where the channel is.
      *
-     * @generated from protobuf field: uint64 guild_id = 1;
+     * @generated from protobuf field: optional uint64 guild_id = 1;
      */
-    guildId: string;
+    guildId?: string;
     /**
      * Channel ID of the channel where the message is.
      *
@@ -1522,7 +1452,7 @@ export interface UpdateMessageTextRequest {
      */
     channelId: string;
     /**
-     * Message ID of the message you want to edit the text of.
+     * Message ID of the message you want to change the content of.
      *
      * @generated from protobuf field: uint64 message_id = 3;
      */
@@ -1530,16 +1460,16 @@ export interface UpdateMessageTextRequest {
     /**
      * New content for this message.
      *
-     * @generated from protobuf field: protocol.chat.v1.FormattedText new_content = 4;
+     * @generated from protobuf field: protocol.chat.v1.SendMessageRequest.Content new_content = 4;
      */
-    newContent?: FormattedText;
+    newContent?: SendMessageRequest_Content;
 }
 /**
- * Used in the `UpdateMessageText` endpoint.
+ * Used in the `UpdateMessageContent` endpoint.
  *
- * @generated from protobuf message protocol.chat.v1.UpdateMessageTextResponse
+ * @generated from protobuf message protocol.chat.v1.UpdateMessageContentResponse
  */
-export interface UpdateMessageTextResponse {
+export interface UpdateMessageContentResponse {
 }
 /**
  * Used in the `PinMessage` endpoint.
@@ -1550,9 +1480,9 @@ export interface PinMessageRequest {
     /**
      * Guild ID of the guild where the channel is.
      *
-     * @generated from protobuf field: uint64 guild_id = 1;
+     * @generated from protobuf field: optional uint64 guild_id = 1;
      */
-    guildId: string;
+    guildId?: string;
     /**
      * Channel ID of the channel where the message is.
      *
@@ -1582,9 +1512,9 @@ export interface UnpinMessageRequest {
     /**
      * Guild ID of the guild where the channel is.
      *
-     * @generated from protobuf field: uint64 guild_id = 1;
+     * @generated from protobuf field: optional uint64 guild_id = 1;
      */
-    guildId: string;
+    guildId?: string;
     /**
      * Channel ID of the channel where the message is.
      *
@@ -1614,9 +1544,9 @@ export interface GetPinnedMessagesRequest {
     /**
      * Guild ID of the guild where the channel is.
      *
-     * @generated from protobuf field: uint64 guild_id = 1;
+     * @generated from protobuf field: optional uint64 guild_id = 1;
      */
-    guildId: string;
+    guildId?: string;
     /**
      * Channel ID of the channel we want to get pins of.
      *
@@ -1646,9 +1576,9 @@ export interface AddReactionRequest {
     /**
      * Guild ID of the guild where the channel is.
      *
-     * @generated from protobuf field: uint64 guild_id = 1;
+     * @generated from protobuf field: optional uint64 guild_id = 1;
      */
-    guildId: string;
+    guildId?: string;
     /**
      * Channel ID of the channel where the message is.
      *
@@ -1662,11 +1592,23 @@ export interface AddReactionRequest {
      */
     messageId: string;
     /**
-     * The emote we want to react with.
+     * The kind of the reaction we want to react with.
      *
-     * @generated from protobuf field: protocol.emote.v1.Emote emote = 4;
+     * @generated from protobuf field: protocol.chat.v1.ReactionKind reaction_kind = 4;
      */
-    emote?: Emote;
+    reactionKind: ReactionKind;
+    /**
+     * The data of the reaction we want to react with.
+     *
+     * @generated from protobuf field: string reaction_data = 5;
+     */
+    reactionData: string;
+    /**
+     * The name of the reaction we want to react with.
+     *
+     * @generated from protobuf field: string reaction_name = 6;
+     */
+    reactionName: string;
 }
 /**
  * Used in `AddReaction` endpoint.
@@ -1684,9 +1626,9 @@ export interface RemoveReactionRequest {
     /**
      * Guild ID of the guild where the channel is.
      *
-     * @generated from protobuf field: uint64 guild_id = 1;
+     * @generated from protobuf field: optional uint64 guild_id = 1;
      */
-    guildId: string;
+    guildId?: string;
     /**
      * Channel ID of the channel where the message is.
      *
@@ -1700,11 +1642,11 @@ export interface RemoveReactionRequest {
      */
     messageId: string;
     /**
-     * The emote we want to remove the react of.
+     * The data of the reaction we want to remove.
      *
-     * @generated from protobuf field: protocol.emote.v1.Emote emote = 4;
+     * @generated from protobuf field: string reaction_data = 4;
      */
-    emote?: Emote;
+    reactionData: string;
 }
 /**
  * Used in `RemoveReaction` endpoint.
@@ -1712,6 +1654,58 @@ export interface RemoveReactionRequest {
  * @generated from protobuf message protocol.chat.v1.RemoveReactionResponse
  */
 export interface RemoveReactionResponse {
+}
+/**
+ * Used in `Typing` endpoint.
+ *
+ * @generated from protobuf message protocol.chat.v1.TypingRequest
+ */
+export interface TypingRequest {
+    /**
+     * The guild id of the channel the user is typing in.
+     *
+     * @generated from protobuf field: optional uint64 guild_id = 1;
+     */
+    guildId?: string;
+    /**
+     * The channel id of the channel the user is typing in.
+     *
+     * @generated from protobuf field: uint64 channel_id = 2;
+     */
+    channelId: string;
+}
+/**
+ * Used in `Typing` endpoint.
+ *
+ * @generated from protobuf message protocol.chat.v1.TypingResponse
+ */
+export interface TypingResponse {
+}
+/**
+ * The kind of this reaction.
+ *
+ * @generated from protobuf enum protocol.chat.v1.ReactionKind
+ */
+export enum ReactionKind {
+    /**
+     * A reaction that uses an image.
+     *
+     * The `data` field of the reaction should be interpreted
+     * as a file ID that points to an image.
+     *
+     * @generated from protobuf enum value: REACTION_KIND_IMAGE_UNSPECIFIED = 0;
+     */
+    IMAGE_UNSPECIFIED = 0,
+    /**
+     * A reaction that uses text. For example, this
+     * can be used to send unicode emojis.
+     *
+     * The `data` field of the reaction should be interpreted
+     * as text to display.
+     *
+     * @generated from protobuf enum value: REACTION_KIND_TEXT = 1;
+     */
+    TEXT = 1
 }
 // @generated message type with reflection information, may provide speed optimized methods
 class Overrides$Type extends MessageType<Overrides> {
@@ -1732,64 +1726,14 @@ class Overrides$Type extends MessageType<Overrides> {
  */
 export const Overrides = new Overrides$Type();
 // @generated message type with reflection information, may provide speed optimized methods
-class ActionPayload$Type extends MessageType<ActionPayload> {
-    constructor() {
-        super("protocol.chat.v1.ActionPayload", [
-            { no: 1, name: "button", kind: "message", oneof: "payload", T: () => ActionPayload_Button },
-            { no: 2, name: "dropdown", kind: "message", oneof: "payload", T: () => ActionPayload_Dropdown },
-            { no: 3, name: "input", kind: "message", oneof: "payload", T: () => ActionPayload_Input }
-        ]);
-    }
-}
-/**
- * @generated MessageType for protobuf message protocol.chat.v1.ActionPayload
- */
-export const ActionPayload = new ActionPayload$Type();
-// @generated message type with reflection information, may provide speed optimized methods
-class ActionPayload_Button$Type extends MessageType<ActionPayload_Button> {
-    constructor() {
-        super("protocol.chat.v1.ActionPayload.Button", [
-            { no: 1, name: "data", kind: "scalar", T: 12 /*ScalarType.BYTES*/ }
-        ]);
-    }
-}
-/**
- * @generated MessageType for protobuf message protocol.chat.v1.ActionPayload.Button
- */
-export const ActionPayload_Button = new ActionPayload_Button$Type();
-// @generated message type with reflection information, may provide speed optimized methods
-class ActionPayload_Dropdown$Type extends MessageType<ActionPayload_Dropdown> {
-    constructor() {
-        super("protocol.chat.v1.ActionPayload.Dropdown", [
-            { no: 1, name: "choice", kind: "scalar", T: 12 /*ScalarType.BYTES*/ }
-        ]);
-    }
-}
-/**
- * @generated MessageType for protobuf message protocol.chat.v1.ActionPayload.Dropdown
- */
-export const ActionPayload_Dropdown = new ActionPayload_Dropdown$Type();
-// @generated message type with reflection information, may provide speed optimized methods
-class ActionPayload_Input$Type extends MessageType<ActionPayload_Input> {
-    constructor() {
-        super("protocol.chat.v1.ActionPayload.Input", [
-            { no: 1, name: "input", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 2, name: "data", kind: "scalar", T: 12 /*ScalarType.BYTES*/ }
-        ]);
-    }
-}
-/**
- * @generated MessageType for protobuf message protocol.chat.v1.ActionPayload.Input
- */
-export const ActionPayload_Input = new ActionPayload_Input$Type();
-// @generated message type with reflection information, may provide speed optimized methods
 class Action$Type extends MessageType<Action> {
     constructor() {
         super("protocol.chat.v1.Action", [
             { no: 1, name: "action_type", kind: "enum", T: () => ["protocol.chat.v1.Action.Type", Action_Type, "TYPE_"] },
-            { no: 2, name: "button", kind: "message", oneof: "kind", T: () => Action_Button },
-            { no: 3, name: "dropdown", kind: "message", oneof: "kind", T: () => Action_Dropdown },
-            { no: 4, name: "input", kind: "message", oneof: "kind", T: () => Action_Input }
+            { no: 2, name: "info", kind: "scalar", T: 12 /*ScalarType.BYTES*/ },
+            { no: 3, name: "button", kind: "message", oneof: "kind", T: () => Action_Button },
+            { no: 4, name: "dropdown", kind: "message", oneof: "kind", T: () => Action_Dropdown },
+            { no: 5, name: "input", kind: "message", oneof: "kind", T: () => Action_Input }
         ]);
     }
 }
@@ -1802,8 +1746,7 @@ class Action_Button$Type extends MessageType<Action_Button> {
     constructor() {
         super("protocol.chat.v1.Action.Button", [
             { no: 1, name: "text", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 2, name: "data", kind: "scalar", T: 12 /*ScalarType.BYTES*/ },
-            { no: 3, name: "url", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ }
+            { no: 2, name: "url", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ }
         ]);
     }
 }
@@ -1843,7 +1786,7 @@ class Action_Input$Type extends MessageType<Action_Input> {
         super("protocol.chat.v1.Action.Input", [
             { no: 1, name: "label", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
             { no: 2, name: "multiline", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
-            { no: 3, name: "data", kind: "scalar", T: 12 /*ScalarType.BYTES*/ }
+            { no: 3, name: "default", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ }
         ]);
     }
 }
@@ -1855,12 +1798,14 @@ export const Action_Input = new Action_Input$Type();
 class Embed$Type extends MessageType<Embed> {
     constructor() {
         super("protocol.chat.v1.Embed", [
-            { no: 1, name: "header", kind: "message", T: () => Embed_EmbedHeading },
+            { no: 1, name: "header", kind: "message", T: () => Embed_Heading },
             { no: 2, name: "title", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
             { no: 3, name: "body", kind: "message", T: () => FormattedText },
-            { no: 4, name: "fields", kind: "message", repeat: 1 /*RepeatType.PACKED*/, T: () => Embed_EmbedField },
-            { no: 5, name: "footer", kind: "message", T: () => Embed_EmbedHeading },
-            { no: 6, name: "color", kind: "scalar", opt: true, T: 5 /*ScalarType.INT32*/ }
+            { no: 4, name: "fields", kind: "message", repeat: 1 /*RepeatType.PACKED*/, T: () => Embed_Field },
+            { no: 5, name: "image", kind: "message", T: () => Embed_Image },
+            { no: 6, name: "actions", kind: "message", repeat: 1 /*RepeatType.PACKED*/, T: () => Action },
+            { no: 7, name: "footer", kind: "message", T: () => Embed_Heading },
+            { no: 8, name: "color", kind: "scalar", opt: true, T: 5 /*ScalarType.INT32*/ }
         ]);
     }
 }
@@ -1869,50 +1814,60 @@ class Embed$Type extends MessageType<Embed> {
  */
 export const Embed = new Embed$Type();
 // @generated message type with reflection information, may provide speed optimized methods
-class Embed_EmbedHeading$Type extends MessageType<Embed_EmbedHeading> {
+class Embed_Heading$Type extends MessageType<Embed_Heading> {
     constructor() {
-        super("protocol.chat.v1.Embed.EmbedHeading", [
+        super("protocol.chat.v1.Embed.Heading", [
             { no: 1, name: "text", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 2, name: "subtext", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
-            { no: 3, name: "url", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
-            { no: 4, name: "icon", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ }
+            { no: 2, name: "url", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
+            { no: 3, name: "icon", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ }
         ]);
     }
 }
 /**
- * @generated MessageType for protobuf message protocol.chat.v1.Embed.EmbedHeading
+ * @generated MessageType for protobuf message protocol.chat.v1.Embed.Heading
  */
-export const Embed_EmbedHeading = new Embed_EmbedHeading$Type();
+export const Embed_Heading = new Embed_Heading$Type();
 // @generated message type with reflection information, may provide speed optimized methods
-class Embed_EmbedField$Type extends MessageType<Embed_EmbedField> {
+class Embed_Field$Type extends MessageType<Embed_Field> {
     constructor() {
-        super("protocol.chat.v1.Embed.EmbedField", [
-            { no: 1, name: "presentation", kind: "enum", T: () => ["protocol.chat.v1.Embed.EmbedField.Presentation", Embed_EmbedField_Presentation, "PRESENTATION_"] },
-            { no: 2, name: "title", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 3, name: "subtitle", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
-            { no: 4, name: "body", kind: "message", T: () => FormattedText },
-            { no: 5, name: "image", kind: "message", T: () => Embed_EmbedField_Image },
-            { no: 6, name: "actions", kind: "message", repeat: 1 /*RepeatType.PACKED*/, T: () => Action }
+        super("protocol.chat.v1.Embed.Field", [
+            { no: 1, name: "title", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 2, name: "body", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
         ]);
     }
 }
 /**
- * @generated MessageType for protobuf message protocol.chat.v1.Embed.EmbedField
+ * @generated MessageType for protobuf message protocol.chat.v1.Embed.Field
  */
-export const Embed_EmbedField = new Embed_EmbedField$Type();
+export const Embed_Field = new Embed_Field$Type();
 // @generated message type with reflection information, may provide speed optimized methods
-class Embed_EmbedField_Image$Type extends MessageType<Embed_EmbedField_Image> {
+class Embed_Image$Type extends MessageType<Embed_Image> {
     constructor() {
-        super("protocol.chat.v1.Embed.EmbedField.Image", [
+        super("protocol.chat.v1.Embed.Image", [
             { no: 1, name: "id", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 2, name: "info", kind: "message", T: () => ImageInfo }
+            { no: 2, name: "width", kind: "scalar", T: 13 /*ScalarType.UINT32*/ },
+            { no: 3, name: "height", kind: "scalar", T: 13 /*ScalarType.UINT32*/ }
         ]);
     }
 }
 /**
- * @generated MessageType for protobuf message protocol.chat.v1.Embed.EmbedField.Image
+ * @generated MessageType for protobuf message protocol.chat.v1.Embed.Image
  */
-export const Embed_EmbedField_Image = new Embed_EmbedField_Image$Type();
+export const Embed_Image = new Embed_Image$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class Minithumbnail$Type extends MessageType<Minithumbnail> {
+    constructor() {
+        super("protocol.chat.v1.Minithumbnail", [
+            { no: 1, name: "width", kind: "scalar", T: 13 /*ScalarType.UINT32*/ },
+            { no: 2, name: "height", kind: "scalar", T: 13 /*ScalarType.UINT32*/ },
+            { no: 3, name: "data", kind: "scalar", T: 12 /*ScalarType.BYTES*/ }
+        ]);
+    }
+}
+/**
+ * @generated MessageType for protobuf message protocol.chat.v1.Minithumbnail
+ */
+export const Minithumbnail = new Minithumbnail$Type();
 // @generated message type with reflection information, may provide speed optimized methods
 class Attachment$Type extends MessageType<Attachment> {
     constructor() {
@@ -1921,7 +1876,7 @@ class Attachment$Type extends MessageType<Attachment> {
             { no: 2, name: "name", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
             { no: 3, name: "mimetype", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
             { no: 4, name: "size", kind: "scalar", T: 13 /*ScalarType.UINT32*/ },
-            { no: 5, name: "image", kind: "message", oneof: "info", T: () => ImageInfo }
+            { no: 5, name: "image", kind: "message", oneof: "info", T: () => Attachment_ImageInfo }
         ]);
     }
 }
@@ -1929,6 +1884,21 @@ class Attachment$Type extends MessageType<Attachment> {
  * @generated MessageType for protobuf message protocol.chat.v1.Attachment
  */
 export const Attachment = new Attachment$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class Attachment_ImageInfo$Type extends MessageType<Attachment_ImageInfo> {
+    constructor() {
+        super("protocol.chat.v1.Attachment.ImageInfo", [
+            { no: 1, name: "width", kind: "scalar", T: 13 /*ScalarType.UINT32*/ },
+            { no: 2, name: "height", kind: "scalar", T: 13 /*ScalarType.UINT32*/ },
+            { no: 3, name: "minithumbnail", kind: "message", T: () => Minithumbnail },
+            { no: 4, name: "caption", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ }
+        ]);
+    }
+}
+/**
+ * @generated MessageType for protobuf message protocol.chat.v1.Attachment.ImageInfo
+ */
+export const Attachment_ImageInfo = new Attachment_ImageInfo$Type();
 // @generated message type with reflection information, may provide speed optimized methods
 class Content$Type extends MessageType<Content> {
     constructor() {
@@ -1989,8 +1959,10 @@ export const Content_RoomUpgradedToGuild = new Content_RoomUpgradedToGuild$Type(
 class Reaction$Type extends MessageType<Reaction> {
     constructor() {
         super("protocol.chat.v1.Reaction", [
-            { no: 1, name: "emote", kind: "message", T: () => Emote },
-            { no: 2, name: "count", kind: "scalar", T: 13 /*ScalarType.UINT32*/ }
+            { no: 1, name: "kind", kind: "enum", T: () => ["protocol.chat.v1.ReactionKind", ReactionKind, "REACTION_KIND_"] },
+            { no: 2, name: "data", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 3, name: "name", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 4, name: "count", kind: "scalar", T: 13 /*ScalarType.UINT32*/ }
         ]);
     }
 }
@@ -2016,8 +1988,7 @@ class Format$Type extends MessageType<Format> {
             { no: 12, name: "channel_mention", kind: "message", oneof: "format", T: () => Format_ChannelMention },
             { no: 13, name: "guild_mention", kind: "message", oneof: "format", T: () => Format_GuildMention },
             { no: 14, name: "emoji", kind: "message", oneof: "format", T: () => Format_Emoji },
-            { no: 15, name: "color", kind: "message", oneof: "format", T: () => Format_Color },
-            { no: 16, name: "localization", kind: "message", oneof: "format", T: () => Format_Localization }
+            { no: 15, name: "color", kind: "message", oneof: "format", T: () => Format_Color }
         ]);
     }
 }
@@ -2150,7 +2121,8 @@ export const Format_GuildMention = new Format_GuildMention$Type();
 class Format_Emoji$Type extends MessageType<Format_Emoji> {
     constructor() {
         super("protocol.chat.v1.Format.Emoji", [
-            { no: 1, name: "emote", kind: "message", T: () => Emote }
+            { no: 1, name: "emote", kind: "message", T: () => Emote },
+            { no: 2, name: "pack_id", kind: "scalar", opt: true, T: 4 /*ScalarType.UINT64*/ }
         ]);
     }
 }
@@ -2170,18 +2142,6 @@ class Format_Color$Type extends MessageType<Format_Color> {
  * @generated MessageType for protobuf message protocol.chat.v1.Format.Color
  */
 export const Format_Color = new Format_Color$Type();
-// @generated message type with reflection information, may provide speed optimized methods
-class Format_Localization$Type extends MessageType<Format_Localization> {
-    constructor() {
-        super("protocol.chat.v1.Format.Localization", [
-            { no: 1, name: "i18n_code", kind: "scalar", jsonName: "i18nCode", T: 9 /*ScalarType.STRING*/ }
-        ]);
-    }
-}
-/**
- * @generated MessageType for protobuf message protocol.chat.v1.Format.Localization
- */
-export const Format_Localization = new Format_Localization$Type();
 // @generated message type with reflection information, may provide speed optimized methods
 class FormattedText$Type extends MessageType<FormattedText> {
     constructor() {
@@ -2206,7 +2166,8 @@ class Message$Type extends MessageType<Message> {
             { no: 5, name: "edited_at", kind: "scalar", opt: true, T: 4 /*ScalarType.UINT64*/ },
             { no: 6, name: "in_reply_to", kind: "scalar", opt: true, T: 4 /*ScalarType.UINT64*/ },
             { no: 7, name: "content", kind: "message", T: () => Content },
-            { no: 8, name: "reactions", kind: "message", repeat: 1 /*RepeatType.PACKED*/, T: () => Reaction }
+            { no: 8, name: "reactions", kind: "message", repeat: 1 /*RepeatType.PACKED*/, T: () => Reaction },
+            { no: 9, name: "actions", kind: "message", repeat: 1 /*RepeatType.PACKED*/, T: () => Action }
         ]);
     }
 }
@@ -2231,7 +2192,7 @@ export const MessageWithId = new MessageWithId$Type();
 class GetChannelMessagesRequest$Type extends MessageType<GetChannelMessagesRequest> {
     constructor() {
         super("protocol.chat.v1.GetChannelMessagesRequest", [
-            { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+            { no: 1, name: "guild_id", kind: "scalar", opt: true, T: 4 /*ScalarType.UINT64*/ },
             { no: 2, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
             { no: 3, name: "message_id", kind: "scalar", opt: true, T: 4 /*ScalarType.UINT64*/ },
             { no: 4, name: "direction", kind: "enum", opt: true, T: () => ["protocol.chat.v1.GetChannelMessagesRequest.Direction", GetChannelMessagesRequest_Direction, "DIRECTION_"] },
@@ -2261,7 +2222,7 @@ export const GetChannelMessagesResponse = new GetChannelMessagesResponse$Type();
 class GetMessageRequest$Type extends MessageType<GetMessageRequest> {
     constructor() {
         super("protocol.chat.v1.GetMessageRequest", [
-            { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+            { no: 1, name: "guild_id", kind: "scalar", opt: true, T: 4 /*ScalarType.UINT64*/ },
             { no: 2, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
             { no: 3, name: "message_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ }
         ]);
@@ -2287,7 +2248,7 @@ export const GetMessageResponse = new GetMessageResponse$Type();
 class DeleteMessageRequest$Type extends MessageType<DeleteMessageRequest> {
     constructor() {
         super("protocol.chat.v1.DeleteMessageRequest", [
-            { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+            { no: 1, name: "guild_id", kind: "scalar", opt: true, T: 4 /*ScalarType.UINT64*/ },
             { no: 2, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
             { no: 3, name: "message_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ }
         ]);
@@ -2311,10 +2272,11 @@ export const DeleteMessageResponse = new DeleteMessageResponse$Type();
 class TriggerActionRequest$Type extends MessageType<TriggerActionRequest> {
     constructor() {
         super("protocol.chat.v1.TriggerActionRequest", [
-            { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+            { no: 1, name: "guild_id", kind: "scalar", opt: true, T: 4 /*ScalarType.UINT64*/ },
             { no: 2, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
             { no: 3, name: "message_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-            { no: 4, name: "payload", kind: "message", T: () => ActionPayload }
+            { no: 4, name: "info", kind: "scalar", T: 12 /*ScalarType.BYTES*/ },
+            { no: 5, name: "payload", kind: "scalar", opt: true, T: 12 /*ScalarType.BYTES*/ }
         ]);
     }
 }
@@ -2336,12 +2298,13 @@ export const TriggerActionResponse = new TriggerActionResponse$Type();
 class SendMessageRequest$Type extends MessageType<SendMessageRequest> {
     constructor() {
         super("protocol.chat.v1.SendMessageRequest", [
-            { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+            { no: 1, name: "guild_id", kind: "scalar", opt: true, T: 4 /*ScalarType.UINT64*/ },
             { no: 2, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
             { no: 3, name: "content", kind: "message", T: () => SendMessageRequest_Content },
             { no: 4, name: "echo_id", kind: "scalar", opt: true, T: 4 /*ScalarType.UINT64*/ },
             { no: 6, name: "overrides", kind: "message", T: () => Overrides },
             { no: 7, name: "in_reply_to", kind: "scalar", opt: true, T: 4 /*ScalarType.UINT64*/ },
+            { no: 8, name: "actions", kind: "message", repeat: 1 /*RepeatType.PACKED*/, T: () => Action },
             { no: 5, name: "metadata", kind: "message", T: () => Metadata }
         ]);
     }
@@ -2351,25 +2314,12 @@ class SendMessageRequest$Type extends MessageType<SendMessageRequest> {
  */
 export const SendMessageRequest = new SendMessageRequest$Type();
 // @generated message type with reflection information, may provide speed optimized methods
-class SendMessageRequest_ImageInfo$Type extends MessageType<SendMessageRequest_ImageInfo> {
-    constructor() {
-        super("protocol.chat.v1.SendMessageRequest.ImageInfo", [
-            { no: 1, name: "caption", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
-            { no: 2, name: "use_original", kind: "scalar", T: 8 /*ScalarType.BOOL*/ }
-        ]);
-    }
-}
-/**
- * @generated MessageType for protobuf message protocol.chat.v1.SendMessageRequest.ImageInfo
- */
-export const SendMessageRequest_ImageInfo = new SendMessageRequest_ImageInfo$Type();
-// @generated message type with reflection information, may provide speed optimized methods
 class SendMessageRequest_Attachment$Type extends MessageType<SendMessageRequest_Attachment> {
     constructor() {
         super("protocol.chat.v1.SendMessageRequest.Attachment", [
             { no: 1, name: "id", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
             { no: 2, name: "name", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 3, name: "image", kind: "message", oneof: "info", T: () => SendMessageRequest_ImageInfo }
+            { no: 3, name: "image", kind: "message", oneof: "info", T: () => SendMessageRequest_Attachment_ImageInfo }
         ]);
     }
 }
@@ -2378,13 +2328,26 @@ class SendMessageRequest_Attachment$Type extends MessageType<SendMessageRequest_
  */
 export const SendMessageRequest_Attachment = new SendMessageRequest_Attachment$Type();
 // @generated message type with reflection information, may provide speed optimized methods
+class SendMessageRequest_Attachment_ImageInfo$Type extends MessageType<SendMessageRequest_Attachment_ImageInfo> {
+    constructor() {
+        super("protocol.chat.v1.SendMessageRequest.Attachment.ImageInfo", [
+            { no: 1, name: "caption", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
+            { no: 2, name: "use_original", kind: "scalar", T: 8 /*ScalarType.BOOL*/ }
+        ]);
+    }
+}
+/**
+ * @generated MessageType for protobuf message protocol.chat.v1.SendMessageRequest.Attachment.ImageInfo
+ */
+export const SendMessageRequest_Attachment_ImageInfo = new SendMessageRequest_Attachment_ImageInfo$Type();
+// @generated message type with reflection information, may provide speed optimized methods
 class SendMessageRequest_Content$Type extends MessageType<SendMessageRequest_Content> {
     constructor() {
         super("protocol.chat.v1.SendMessageRequest.Content", [
             { no: 1, name: "text", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
             { no: 2, name: "text_formats", kind: "message", repeat: 1 /*RepeatType.PACKED*/, T: () => Format },
-            { no: 3, name: "attachments", kind: "message", oneof: "extra", T: () => SendMessageRequest_Content_Attachments },
-            { no: 4, name: "embeds", kind: "message", oneof: "extra", T: () => SendMessageRequest_Content_Embeds }
+            { no: 3, name: "attachments", kind: "message", repeat: 1 /*RepeatType.PACKED*/, T: () => SendMessageRequest_Attachment },
+            { no: 4, name: "embeds", kind: "message", repeat: 1 /*RepeatType.PACKED*/, T: () => Embed }
         ]);
     }
 }
@@ -2392,30 +2355,6 @@ class SendMessageRequest_Content$Type extends MessageType<SendMessageRequest_Con
  * @generated MessageType for protobuf message protocol.chat.v1.SendMessageRequest.Content
  */
 export const SendMessageRequest_Content = new SendMessageRequest_Content$Type();
-// @generated message type with reflection information, may provide speed optimized methods
-class SendMessageRequest_Content_Attachments$Type extends MessageType<SendMessageRequest_Content_Attachments> {
-    constructor() {
-        super("protocol.chat.v1.SendMessageRequest.Content.Attachments", [
-            { no: 1, name: "attachments", kind: "message", repeat: 1 /*RepeatType.PACKED*/, T: () => SendMessageRequest_Attachment }
-        ]);
-    }
-}
-/**
- * @generated MessageType for protobuf message protocol.chat.v1.SendMessageRequest.Content.Attachments
- */
-export const SendMessageRequest_Content_Attachments = new SendMessageRequest_Content_Attachments$Type();
-// @generated message type with reflection information, may provide speed optimized methods
-class SendMessageRequest_Content_Embeds$Type extends MessageType<SendMessageRequest_Content_Embeds> {
-    constructor() {
-        super("protocol.chat.v1.SendMessageRequest.Content.Embeds", [
-            { no: 1, name: "embeds", kind: "message", repeat: 1 /*RepeatType.PACKED*/, T: () => Embed }
-        ]);
-    }
-}
-/**
- * @generated MessageType for protobuf message protocol.chat.v1.SendMessageRequest.Content.Embeds
- */
-export const SendMessageRequest_Content_Embeds = new SendMessageRequest_Content_Embeds$Type();
 // @generated message type with reflection information, may provide speed optimized methods
 class SendMessageResponse$Type extends MessageType<SendMessageResponse> {
     constructor() {
@@ -2429,35 +2368,35 @@ class SendMessageResponse$Type extends MessageType<SendMessageResponse> {
  */
 export const SendMessageResponse = new SendMessageResponse$Type();
 // @generated message type with reflection information, may provide speed optimized methods
-class UpdateMessageTextRequest$Type extends MessageType<UpdateMessageTextRequest> {
+class UpdateMessageContentRequest$Type extends MessageType<UpdateMessageContentRequest> {
     constructor() {
-        super("protocol.chat.v1.UpdateMessageTextRequest", [
-            { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+        super("protocol.chat.v1.UpdateMessageContentRequest", [
+            { no: 1, name: "guild_id", kind: "scalar", opt: true, T: 4 /*ScalarType.UINT64*/ },
             { no: 2, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
             { no: 3, name: "message_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-            { no: 4, name: "new_content", kind: "message", T: () => FormattedText }
+            { no: 4, name: "new_content", kind: "message", T: () => SendMessageRequest_Content }
         ]);
     }
 }
 /**
- * @generated MessageType for protobuf message protocol.chat.v1.UpdateMessageTextRequest
+ * @generated MessageType for protobuf message protocol.chat.v1.UpdateMessageContentRequest
  */
-export const UpdateMessageTextRequest = new UpdateMessageTextRequest$Type();
+export const UpdateMessageContentRequest = new UpdateMessageContentRequest$Type();
 // @generated message type with reflection information, may provide speed optimized methods
-class UpdateMessageTextResponse$Type extends MessageType<UpdateMessageTextResponse> {
+class UpdateMessageContentResponse$Type extends MessageType<UpdateMessageContentResponse> {
     constructor() {
-        super("protocol.chat.v1.UpdateMessageTextResponse", []);
+        super("protocol.chat.v1.UpdateMessageContentResponse", []);
     }
 }
 /**
- * @generated MessageType for protobuf message protocol.chat.v1.UpdateMessageTextResponse
+ * @generated MessageType for protobuf message protocol.chat.v1.UpdateMessageContentResponse
  */
-export const UpdateMessageTextResponse = new UpdateMessageTextResponse$Type();
+export const UpdateMessageContentResponse = new UpdateMessageContentResponse$Type();
 // @generated message type with reflection information, may provide speed optimized methods
 class PinMessageRequest$Type extends MessageType<PinMessageRequest> {
     constructor() {
         super("protocol.chat.v1.PinMessageRequest", [
-            { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+            { no: 1, name: "guild_id", kind: "scalar", opt: true, T: 4 /*ScalarType.UINT64*/ },
             { no: 2, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
             { no: 3, name: "message_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ }
         ]);
@@ -2481,7 +2420,7 @@ export const PinMessageResponse = new PinMessageResponse$Type();
 class UnpinMessageRequest$Type extends MessageType<UnpinMessageRequest> {
     constructor() {
         super("protocol.chat.v1.UnpinMessageRequest", [
-            { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+            { no: 1, name: "guild_id", kind: "scalar", opt: true, T: 4 /*ScalarType.UINT64*/ },
             { no: 2, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
             { no: 3, name: "message_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ }
         ]);
@@ -2505,7 +2444,7 @@ export const UnpinMessageResponse = new UnpinMessageResponse$Type();
 class GetPinnedMessagesRequest$Type extends MessageType<GetPinnedMessagesRequest> {
     constructor() {
         super("protocol.chat.v1.GetPinnedMessagesRequest", [
-            { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+            { no: 1, name: "guild_id", kind: "scalar", opt: true, T: 4 /*ScalarType.UINT64*/ },
             { no: 2, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ }
         ]);
     }
@@ -2530,10 +2469,12 @@ export const GetPinnedMessagesResponse = new GetPinnedMessagesResponse$Type();
 class AddReactionRequest$Type extends MessageType<AddReactionRequest> {
     constructor() {
         super("protocol.chat.v1.AddReactionRequest", [
-            { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+            { no: 1, name: "guild_id", kind: "scalar", opt: true, T: 4 /*ScalarType.UINT64*/ },
             { no: 2, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
             { no: 3, name: "message_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-            { no: 4, name: "emote", kind: "message", T: () => Emote }
+            { no: 4, name: "reaction_kind", kind: "enum", T: () => ["protocol.chat.v1.ReactionKind", ReactionKind, "REACTION_KIND_"] },
+            { no: 5, name: "reaction_data", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 6, name: "reaction_name", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
         ]);
     }
 }
@@ -2555,10 +2496,10 @@ export const AddReactionResponse = new AddReactionResponse$Type();
 class RemoveReactionRequest$Type extends MessageType<RemoveReactionRequest> {
     constructor() {
         super("protocol.chat.v1.RemoveReactionRequest", [
-            { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+            { no: 1, name: "guild_id", kind: "scalar", opt: true, T: 4 /*ScalarType.UINT64*/ },
             { no: 2, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
             { no: 3, name: "message_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-            { no: 4, name: "emote", kind: "message", T: () => Emote }
+            { no: 4, name: "reaction_data", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
         ]);
     }
 }
@@ -2576,3 +2517,26 @@ class RemoveReactionResponse$Type extends MessageType<RemoveReactionResponse> {
  * @generated MessageType for protobuf message protocol.chat.v1.RemoveReactionResponse
  */
 export const RemoveReactionResponse = new RemoveReactionResponse$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class TypingRequest$Type extends MessageType<TypingRequest> {
+    constructor() {
+        super("protocol.chat.v1.TypingRequest", [
+            { no: 1, name: "guild_id", kind: "scalar", opt: true, T: 4 /*ScalarType.UINT64*/ },
+            { no: 2, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ }
+        ]);
+    }
+}
+/**
+ * @generated MessageType for protobuf message protocol.chat.v1.TypingRequest
+ */
+export const TypingRequest = new TypingRequest$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class TypingResponse$Type extends MessageType<TypingResponse> {
+    constructor() {
+        super("protocol.chat.v1.TypingResponse", []);
+    }
+}
+/**
+ * @generated MessageType for protobuf message protocol.chat.v1.TypingResponse
+ */
+export const TypingResponse = new TypingResponse$Type();

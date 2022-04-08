@@ -91,6 +91,12 @@ export interface CreateBotResponse {
      * @generated from protobuf field: uint64 bot_id = 1;
      */
     botId: string;
+    /**
+     * The authentication token of the bot, used instead of a session token from AuthService
+     *
+     * @generated from protobuf field: string token = 2;
+     */
+    token: string;
 }
 /**
  * Request type for EditBot.
@@ -132,7 +138,33 @@ export interface EditBotRequest {
 export interface EditBotResponse {
 }
 /**
- * Request type for DeleteBot.
+ * Request type for RefreshToken
+ *
+ * @generated from protobuf message protocol.bots.v1.RefreshTokenRequest
+ */
+export interface RefreshTokenRequest {
+    /**
+     * The ID of the bot to refresh the token of
+     *
+     * @generated from protobuf field: uint64 bot_id = 1;
+     */
+    botId: string;
+}
+/**
+ * Response type for RefreshToken
+ *
+ * @generated from protobuf message protocol.bots.v1.RefreshTokenResponse
+ */
+export interface RefreshTokenResponse {
+    /**
+     * The new authentication token for the bot
+     *
+     * @generated from protobuf field: string new_token = 1;
+     */
+    newToken: string;
+}
+/**
+ * Request type for DeleteBot
  *
  * @generated from protobuf message protocol.bots.v1.DeleteBotRequest
  */
@@ -204,17 +236,33 @@ export interface PoliciesResponse {
  */
 export interface AddBotRequest {
     /**
-     * The guild to add the bot to.
-     *
-     * @generated from protobuf field: uint64 guild_id = 1;
-     */
-    guildId: string;
-    /**
      * The bot's invite code.
      *
-     * @generated from protobuf field: string invite_code = 2;
+     * @generated from protobuf field: string invite_code = 1;
      */
     inviteCode: string;
+    /**
+     * @generated from protobuf oneof: location
+     */
+    location: {
+        oneofKind: "guildId";
+        /**
+         * The guild to add the bot to.
+         *
+         * @generated from protobuf field: uint64 guild_id = 2;
+         */
+        guildId: string;
+    } | {
+        oneofKind: "channelId";
+        /**
+         * The private channel to add the bot to.
+         *
+         * @generated from protobuf field: uint64 channel_id = 3;
+         */
+        channelId: string;
+    } | {
+        oneofKind: undefined;
+    };
 }
 /**
  * Response type for AddBot.
@@ -278,7 +326,8 @@ export const CreateBotRequest = new CreateBotRequest$Type();
 class CreateBotResponse$Type extends MessageType<CreateBotResponse> {
     constructor() {
         super("protocol.bots.v1.CreateBotResponse", [
-            { no: 1, name: "bot_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ }
+            { no: 1, name: "bot_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+            { no: 2, name: "token", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
         ]);
     }
 }
@@ -311,6 +360,30 @@ class EditBotResponse$Type extends MessageType<EditBotResponse> {
  * @generated MessageType for protobuf message protocol.bots.v1.EditBotResponse
  */
 export const EditBotResponse = new EditBotResponse$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class RefreshTokenRequest$Type extends MessageType<RefreshTokenRequest> {
+    constructor() {
+        super("protocol.bots.v1.RefreshTokenRequest", [
+            { no: 1, name: "bot_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ }
+        ]);
+    }
+}
+/**
+ * @generated MessageType for protobuf message protocol.bots.v1.RefreshTokenRequest
+ */
+export const RefreshTokenRequest = new RefreshTokenRequest$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class RefreshTokenResponse$Type extends MessageType<RefreshTokenResponse> {
+    constructor() {
+        super("protocol.bots.v1.RefreshTokenResponse", [
+            { no: 1, name: "new_token", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
+        ]);
+    }
+}
+/**
+ * @generated MessageType for protobuf message protocol.bots.v1.RefreshTokenResponse
+ */
+export const RefreshTokenResponse = new RefreshTokenResponse$Type();
 // @generated message type with reflection information, may provide speed optimized methods
 class DeleteBotRequest$Type extends MessageType<DeleteBotRequest> {
     constructor() {
@@ -383,8 +456,9 @@ export const PoliciesResponse = new PoliciesResponse$Type();
 class AddBotRequest$Type extends MessageType<AddBotRequest> {
     constructor() {
         super("protocol.bots.v1.AddBotRequest", [
-            { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-            { no: 2, name: "invite_code", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
+            { no: 1, name: "invite_code", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 2, name: "guild_id", kind: "scalar", oneof: "location", T: 4 /*ScalarType.UINT64*/ },
+            { no: 3, name: "channel_id", kind: "scalar", oneof: "location", T: 4 /*ScalarType.UINT64*/ }
         ]);
     }
 }
@@ -410,6 +484,7 @@ export const BotsService = new ServiceType("protocol.bots.v1.BotsService", [
     { name: "GetBot", options: {}, I: GetBotRequest, O: GetBotResponse },
     { name: "CreateBot", options: {}, I: CreateBotRequest, O: CreateBotResponse },
     { name: "EditBot", options: {}, I: EditBotRequest, O: EditBotResponse },
+    { name: "RefreshToken", options: {}, I: RefreshTokenRequest, O: RefreshTokenResponse },
     { name: "DeleteBot", options: {}, I: DeleteBotRequest, O: DeleteBotResponse },
     { name: "Policies", options: {}, I: PoliciesRequest, O: PoliciesResponse },
     { name: "AddBot", options: {}, I: AddBotRequest, O: AddBotResponse }

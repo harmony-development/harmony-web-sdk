@@ -31,8 +31,8 @@ import type { GetBannedUsersResponse } from "./guilds";
 import type { GetBannedUsersRequest } from "./guilds";
 import type { PreviewGuildResponse } from "./guilds";
 import type { PreviewGuildRequest } from "./guilds";
-import type { TypingResponse } from "./channels";
-import type { TypingRequest } from "./channels";
+import type { TypingResponse } from "./messages";
+import type { TypingRequest } from "./messages";
 import type { GetUserRolesResponse } from "./permissions";
 import type { GetUserRolesRequest } from "./permissions";
 import type { ManageUserRolesResponse } from "./permissions";
@@ -69,8 +69,8 @@ import type { DeleteInviteResponse } from "./guilds";
 import type { DeleteInviteRequest } from "./guilds";
 import type { DeleteGuildResponse } from "./guilds";
 import type { DeleteGuildRequest } from "./guilds";
-import type { UpdateMessageTextResponse } from "./messages";
-import type { UpdateMessageTextRequest } from "./messages";
+import type { UpdateMessageContentResponse } from "./messages";
+import type { UpdateMessageContentRequest } from "./messages";
 import type { UpdateAllChannelOrderResponse } from "./channels";
 import type { UpdateAllChannelOrderRequest } from "./channels";
 import type { UpdateChannelOrderResponse } from "./channels";
@@ -99,18 +99,24 @@ import type { GetPendingInvitesResponse } from "./guilds";
 import type { GetPendingInvitesRequest } from "./guilds";
 import type { InviteUserToGuildResponse } from "./guilds";
 import type { InviteUserToGuildRequest } from "./guilds";
+import type { GetPrivateChannelListResponse } from "./private_channel";
+import type { GetPrivateChannelListRequest } from "./private_channel";
 import type { GetGuildListResponse } from "./guilds";
 import type { GetGuildListRequest } from "./guilds";
 import type { CreateChannelResponse } from "./channels";
 import type { CreateChannelRequest } from "./channels";
 import type { CreateInviteResponse } from "./guilds";
 import type { CreateInviteRequest } from "./guilds";
-import type { UpgradeRoomToGuildResponse } from "./guilds";
-import type { UpgradeRoomToGuildRequest } from "./guilds";
-import type { CreateDirectMessageResponse } from "./guilds";
-import type { CreateDirectMessageRequest } from "./guilds";
-import type { CreateRoomResponse } from "./guilds";
-import type { CreateRoomRequest } from "./guilds";
+import type { LeavePrivateChannelResponse } from "./private_channel";
+import type { LeavePrivateChannelRequest } from "./private_channel";
+import type { JoinPrivateChannelResponse } from "./private_channel";
+import type { JoinPrivateChannelRequest } from "./private_channel";
+import type { DeletePrivateChannelResponse } from "./private_channel";
+import type { DeletePrivateChannelRequest } from "./private_channel";
+import type { UpdatePrivateChannelMembersResponse } from "./private_channel";
+import type { UpdatePrivateChannelMembersRequest } from "./private_channel";
+import type { CreatePrivateChannelResponse } from "./private_channel";
+import type { CreatePrivateChannelRequest } from "./private_channel";
 import { stackIntercept } from "@protobuf-ts/runtime-rpc";
 import type { CreateGuildResponse } from "./guilds";
 import type { CreateGuildRequest } from "./guilds";
@@ -129,33 +135,56 @@ export interface IChatServiceClient {
      */
     createGuild(input: CreateGuildRequest, options?: RpcOptions): UnaryCall<CreateGuildRequest, CreateGuildResponse>;
     /**
-     * Endpoint to create a "room" guild.
+     * Endpoint to create a private channel.
      *
-     * @generated from protobuf rpc: CreateRoom(protocol.chat.v1.CreateRoomRequest) returns (protocol.chat.v1.CreateRoomResponse);
-     */
-    createRoom(input: CreateRoomRequest, options?: RpcOptions): UnaryCall<CreateRoomRequest, CreateRoomResponse>;
-    /**
-     * Endpoint to create a "direct message" guild.
+     * If creating a direct message channel (`is_dm` is `true`), and you were in
+     * a DM channel with the user specified in `members` before, this method will
+     * join you to that same DM channel.
      *
-     * - The inviter and the invitee that join the created guild will both be owners.
-     * - The guild should be created on the server that inviter is on.
-     * - The server should send a guild invite to the invitee (specified in the request),
-     * using the `UserInvited` postbox event if the invitee is on another server,
-     * otherwise see the below item.
-     * - The server should process this as follows: adding the invite to their pending
+     *
+     * - The server should send an invite to the invitee(s) (specified in the request),
+     * using the `UserInvited` postbox event if the invitee(s) are on another server.
+     * - The receiving server should process this as follows: adding the invite to their pending
      * invite list and sending an `InviteReceived` event over their event stream if
-     * the invitee is on this server.
-     * - The invitee may or may not use the invite. Only the invitee may use the invite.
+     * the invitee(s) are on this server.
+     * - The invitee(s) may or may not use the invite. Only the invitee(s) may use the invite.
      *
-     * @generated from protobuf rpc: CreateDirectMessage(protocol.chat.v1.CreateDirectMessageRequest) returns (protocol.chat.v1.CreateDirectMessageResponse);
+     * @generated from protobuf rpc: CreatePrivateChannel(protocol.chat.v1.CreatePrivateChannelRequest) returns (protocol.chat.v1.CreatePrivateChannelResponse);
      */
-    createDirectMessage(input: CreateDirectMessageRequest, options?: RpcOptions): UnaryCall<CreateDirectMessageRequest, CreateDirectMessageResponse>;
+    createPrivateChannel(input: CreatePrivateChannelRequest, options?: RpcOptions): UnaryCall<CreatePrivateChannelRequest, CreatePrivateChannelResponse>;
     /**
-     * Endpoint to upgrade a "room" guild to a "normal" guild.
+     * Endpoint to modify the member list of a private channel.
      *
-     * @generated from protobuf rpc: UpgradeRoomToGuild(protocol.chat.v1.UpgradeRoomToGuildRequest) returns (protocol.chat.v1.UpgradeRoomToGuildResponse);
+     * - This is only possible if the channel's `is_dm` property is set to `false`.
+     * - The server should send an invite to the added members (if any).
+     * This should follow the same invite sending logic in `CreatePrivateChannel`.
+     *
+     * @generated from protobuf rpc: UpdatePrivateChannelMembers(protocol.chat.v1.UpdatePrivateChannelMembersRequest) returns (protocol.chat.v1.UpdatePrivateChannelMembersResponse);
      */
-    upgradeRoomToGuild(input: UpgradeRoomToGuildRequest, options?: RpcOptions): UnaryCall<UpgradeRoomToGuildRequest, UpgradeRoomToGuildResponse>;
+    updatePrivateChannelMembers(input: UpdatePrivateChannelMembersRequest, options?: RpcOptions): UnaryCall<UpdatePrivateChannelMembersRequest, UpdatePrivateChannelMembersResponse>;
+    /**
+     * Endpoint to delete a private channel.
+     *
+     * Only the user who created the private channel can delete it.
+     *
+     * @generated from protobuf rpc: DeletePrivateChannel(protocol.chat.v1.DeletePrivateChannelRequest) returns (protocol.chat.v1.DeletePrivateChannelResponse);
+     */
+    deletePrivateChannel(input: DeletePrivateChannelRequest, options?: RpcOptions): UnaryCall<DeletePrivateChannelRequest, DeletePrivateChannelResponse>;
+    /**
+     * Endpoint to join a private channel.
+     *
+     * - If the invite used is in a user's "pending invites" list, it should be
+     * removed from there.
+     *
+     * @generated from protobuf rpc: JoinPrivateChannel(protocol.chat.v1.JoinPrivateChannelRequest) returns (protocol.chat.v1.JoinPrivateChannelResponse);
+     */
+    joinPrivateChannel(input: JoinPrivateChannelRequest, options?: RpcOptions): UnaryCall<JoinPrivateChannelRequest, JoinPrivateChannelResponse>;
+    /**
+     * Endpoint to leave a private channel.
+     *
+     * @generated from protobuf rpc: LeavePrivateChannel(protocol.chat.v1.LeavePrivateChannelRequest) returns (protocol.chat.v1.LeavePrivateChannelResponse);
+     */
+    leavePrivateChannel(input: LeavePrivateChannelRequest, options?: RpcOptions): UnaryCall<LeavePrivateChannelRequest, LeavePrivateChannelResponse>;
     /**
      * Endpoint to create an invite.
      *
@@ -174,6 +203,12 @@ export interface IChatServiceClient {
      * @generated from protobuf rpc: GetGuildList(protocol.chat.v1.GetGuildListRequest) returns (protocol.chat.v1.GetGuildListResponse);
      */
     getGuildList(input: GetGuildListRequest, options?: RpcOptions): UnaryCall<GetGuildListRequest, GetGuildListResponse>;
+    /**
+     * Endpoint to get your private channel list.
+     *
+     * @generated from protobuf rpc: GetPrivateChannelList(protocol.chat.v1.GetPrivateChannelListRequest) returns (protocol.chat.v1.GetPrivateChannelListResponse);
+     */
+    getPrivateChannelList(input: GetPrivateChannelListRequest, options?: RpcOptions): UnaryCall<GetPrivateChannelListRequest, GetPrivateChannelListResponse>;
     /**
      * Endpoint to invite a user to a guild.
      *
@@ -195,8 +230,10 @@ export interface IChatServiceClient {
      * server.
      *
      * The "notification" is sending a `InviteRejected` stream event to the
-     * inviter. If the guild's kind is `DirectMessage`, the server should also
-     * set the `rejected` field of the guild's kind to `true`.
+     * inviter.
+     *
+     * The server should increase the invite's used count by one to let the
+     * inviter know that their invite was rejected.
      *
      * @generated from protobuf rpc: RejectPendingInvite(protocol.chat.v1.RejectPendingInviteRequest) returns (protocol.chat.v1.RejectPendingInviteResponse);
      */
@@ -275,11 +312,11 @@ export interface IChatServiceClient {
      */
     updateAllChannelOrder(input: UpdateAllChannelOrderRequest, options?: RpcOptions): UnaryCall<UpdateAllChannelOrderRequest, UpdateAllChannelOrderResponse>;
     /**
-     * Endpoint to change the text of a message.
+     * Endpoint to change the content of a message.
      *
-     * @generated from protobuf rpc: UpdateMessageText(protocol.chat.v1.UpdateMessageTextRequest) returns (protocol.chat.v1.UpdateMessageTextResponse);
+     * @generated from protobuf rpc: UpdateMessageContent(protocol.chat.v1.UpdateMessageContentRequest) returns (protocol.chat.v1.UpdateMessageContentResponse);
      */
-    updateMessageText(input: UpdateMessageTextRequest, options?: RpcOptions): UnaryCall<UpdateMessageTextRequest, UpdateMessageTextResponse>;
+    updateMessageContent(input: UpdateMessageContentRequest, options?: RpcOptions): UnaryCall<UpdateMessageContentRequest, UpdateMessageContentResponse>;
     /**
      * Endpoint to delete a guild.
      * Can only be invoked if there's one owner.
@@ -484,8 +521,11 @@ export interface IChatServiceClient {
     /**
      * Endpoint to remove a reaction from a message.
      *
-     * Servers should only remove a reaction if the user making the request
-     * added the reaction before.
+     * Servers should only remove a reaction if the user making the
+     * request added the reaction before.
+     *
+     * Servers should delete the reaction from the message if it's
+     * reaction count reaches zero.
      *
      * @generated from protobuf rpc: RemoveReaction(protocol.chat.v1.RemoveReactionRequest) returns (protocol.chat.v1.RemoveReactionResponse);
      */
@@ -528,41 +568,70 @@ export class ChatServiceClient implements IChatServiceClient, ServiceInfo {
         return stackIntercept<CreateGuildRequest, CreateGuildResponse>("unary", this._transport, method, opt, input);
     }
     /**
-     * Endpoint to create a "room" guild.
+     * Endpoint to create a private channel.
      *
-     * @generated from protobuf rpc: CreateRoom(protocol.chat.v1.CreateRoomRequest) returns (protocol.chat.v1.CreateRoomResponse);
-     */
-    createRoom(input: CreateRoomRequest, options?: RpcOptions): UnaryCall<CreateRoomRequest, CreateRoomResponse> {
-        const method = this.methods[1], opt = this._transport.mergeOptions(options);
-        return stackIntercept<CreateRoomRequest, CreateRoomResponse>("unary", this._transport, method, opt, input);
-    }
-    /**
-     * Endpoint to create a "direct message" guild.
+     * If creating a direct message channel (`is_dm` is `true`), and you were in
+     * a DM channel with the user specified in `members` before, this method will
+     * join you to that same DM channel.
      *
-     * - The inviter and the invitee that join the created guild will both be owners.
-     * - The guild should be created on the server that inviter is on.
-     * - The server should send a guild invite to the invitee (specified in the request),
-     * using the `UserInvited` postbox event if the invitee is on another server,
-     * otherwise see the below item.
-     * - The server should process this as follows: adding the invite to their pending
+     *
+     * - The server should send an invite to the invitee(s) (specified in the request),
+     * using the `UserInvited` postbox event if the invitee(s) are on another server.
+     * - The receiving server should process this as follows: adding the invite to their pending
      * invite list and sending an `InviteReceived` event over their event stream if
-     * the invitee is on this server.
-     * - The invitee may or may not use the invite. Only the invitee may use the invite.
+     * the invitee(s) are on this server.
+     * - The invitee(s) may or may not use the invite. Only the invitee(s) may use the invite.
      *
-     * @generated from protobuf rpc: CreateDirectMessage(protocol.chat.v1.CreateDirectMessageRequest) returns (protocol.chat.v1.CreateDirectMessageResponse);
+     * @generated from protobuf rpc: CreatePrivateChannel(protocol.chat.v1.CreatePrivateChannelRequest) returns (protocol.chat.v1.CreatePrivateChannelResponse);
      */
-    createDirectMessage(input: CreateDirectMessageRequest, options?: RpcOptions): UnaryCall<CreateDirectMessageRequest, CreateDirectMessageResponse> {
-        const method = this.methods[2], opt = this._transport.mergeOptions(options);
-        return stackIntercept<CreateDirectMessageRequest, CreateDirectMessageResponse>("unary", this._transport, method, opt, input);
+    createPrivateChannel(input: CreatePrivateChannelRequest, options?: RpcOptions): UnaryCall<CreatePrivateChannelRequest, CreatePrivateChannelResponse> {
+        const method = this.methods[1], opt = this._transport.mergeOptions(options);
+        return stackIntercept<CreatePrivateChannelRequest, CreatePrivateChannelResponse>("unary", this._transport, method, opt, input);
     }
     /**
-     * Endpoint to upgrade a "room" guild to a "normal" guild.
+     * Endpoint to modify the member list of a private channel.
      *
-     * @generated from protobuf rpc: UpgradeRoomToGuild(protocol.chat.v1.UpgradeRoomToGuildRequest) returns (protocol.chat.v1.UpgradeRoomToGuildResponse);
+     * - This is only possible if the channel's `is_dm` property is set to `false`.
+     * - The server should send an invite to the added members (if any).
+     * This should follow the same invite sending logic in `CreatePrivateChannel`.
+     *
+     * @generated from protobuf rpc: UpdatePrivateChannelMembers(protocol.chat.v1.UpdatePrivateChannelMembersRequest) returns (protocol.chat.v1.UpdatePrivateChannelMembersResponse);
      */
-    upgradeRoomToGuild(input: UpgradeRoomToGuildRequest, options?: RpcOptions): UnaryCall<UpgradeRoomToGuildRequest, UpgradeRoomToGuildResponse> {
+    updatePrivateChannelMembers(input: UpdatePrivateChannelMembersRequest, options?: RpcOptions): UnaryCall<UpdatePrivateChannelMembersRequest, UpdatePrivateChannelMembersResponse> {
+        const method = this.methods[2], opt = this._transport.mergeOptions(options);
+        return stackIntercept<UpdatePrivateChannelMembersRequest, UpdatePrivateChannelMembersResponse>("unary", this._transport, method, opt, input);
+    }
+    /**
+     * Endpoint to delete a private channel.
+     *
+     * Only the user who created the private channel can delete it.
+     *
+     * @generated from protobuf rpc: DeletePrivateChannel(protocol.chat.v1.DeletePrivateChannelRequest) returns (protocol.chat.v1.DeletePrivateChannelResponse);
+     */
+    deletePrivateChannel(input: DeletePrivateChannelRequest, options?: RpcOptions): UnaryCall<DeletePrivateChannelRequest, DeletePrivateChannelResponse> {
         const method = this.methods[3], opt = this._transport.mergeOptions(options);
-        return stackIntercept<UpgradeRoomToGuildRequest, UpgradeRoomToGuildResponse>("unary", this._transport, method, opt, input);
+        return stackIntercept<DeletePrivateChannelRequest, DeletePrivateChannelResponse>("unary", this._transport, method, opt, input);
+    }
+    /**
+     * Endpoint to join a private channel.
+     *
+     * - If the invite used is in a user's "pending invites" list, it should be
+     * removed from there.
+     *
+     * @generated from protobuf rpc: JoinPrivateChannel(protocol.chat.v1.JoinPrivateChannelRequest) returns (protocol.chat.v1.JoinPrivateChannelResponse);
+     */
+    joinPrivateChannel(input: JoinPrivateChannelRequest, options?: RpcOptions): UnaryCall<JoinPrivateChannelRequest, JoinPrivateChannelResponse> {
+        const method = this.methods[4], opt = this._transport.mergeOptions(options);
+        return stackIntercept<JoinPrivateChannelRequest, JoinPrivateChannelResponse>("unary", this._transport, method, opt, input);
+    }
+    /**
+     * Endpoint to leave a private channel.
+     *
+     * @generated from protobuf rpc: LeavePrivateChannel(protocol.chat.v1.LeavePrivateChannelRequest) returns (protocol.chat.v1.LeavePrivateChannelResponse);
+     */
+    leavePrivateChannel(input: LeavePrivateChannelRequest, options?: RpcOptions): UnaryCall<LeavePrivateChannelRequest, LeavePrivateChannelResponse> {
+        const method = this.methods[5], opt = this._transport.mergeOptions(options);
+        return stackIntercept<LeavePrivateChannelRequest, LeavePrivateChannelResponse>("unary", this._transport, method, opt, input);
     }
     /**
      * Endpoint to create an invite.
@@ -570,7 +639,7 @@ export class ChatServiceClient implements IChatServiceClient, ServiceInfo {
      * @generated from protobuf rpc: CreateInvite(protocol.chat.v1.CreateInviteRequest) returns (protocol.chat.v1.CreateInviteResponse);
      */
     createInvite(input: CreateInviteRequest, options?: RpcOptions): UnaryCall<CreateInviteRequest, CreateInviteResponse> {
-        const method = this.methods[4], opt = this._transport.mergeOptions(options);
+        const method = this.methods[6], opt = this._transport.mergeOptions(options);
         return stackIntercept<CreateInviteRequest, CreateInviteResponse>("unary", this._transport, method, opt, input);
     }
     /**
@@ -579,7 +648,7 @@ export class ChatServiceClient implements IChatServiceClient, ServiceInfo {
      * @generated from protobuf rpc: CreateChannel(protocol.chat.v1.CreateChannelRequest) returns (protocol.chat.v1.CreateChannelResponse);
      */
     createChannel(input: CreateChannelRequest, options?: RpcOptions): UnaryCall<CreateChannelRequest, CreateChannelResponse> {
-        const method = this.methods[5], opt = this._transport.mergeOptions(options);
+        const method = this.methods[7], opt = this._transport.mergeOptions(options);
         return stackIntercept<CreateChannelRequest, CreateChannelResponse>("unary", this._transport, method, opt, input);
     }
     /**
@@ -588,8 +657,17 @@ export class ChatServiceClient implements IChatServiceClient, ServiceInfo {
      * @generated from protobuf rpc: GetGuildList(protocol.chat.v1.GetGuildListRequest) returns (protocol.chat.v1.GetGuildListResponse);
      */
     getGuildList(input: GetGuildListRequest, options?: RpcOptions): UnaryCall<GetGuildListRequest, GetGuildListResponse> {
-        const method = this.methods[6], opt = this._transport.mergeOptions(options);
+        const method = this.methods[8], opt = this._transport.mergeOptions(options);
         return stackIntercept<GetGuildListRequest, GetGuildListResponse>("unary", this._transport, method, opt, input);
+    }
+    /**
+     * Endpoint to get your private channel list.
+     *
+     * @generated from protobuf rpc: GetPrivateChannelList(protocol.chat.v1.GetPrivateChannelListRequest) returns (protocol.chat.v1.GetPrivateChannelListResponse);
+     */
+    getPrivateChannelList(input: GetPrivateChannelListRequest, options?: RpcOptions): UnaryCall<GetPrivateChannelListRequest, GetPrivateChannelListResponse> {
+        const method = this.methods[9], opt = this._transport.mergeOptions(options);
+        return stackIntercept<GetPrivateChannelListRequest, GetPrivateChannelListResponse>("unary", this._transport, method, opt, input);
     }
     /**
      * Endpoint to invite a user to a guild.
@@ -597,7 +675,7 @@ export class ChatServiceClient implements IChatServiceClient, ServiceInfo {
      * @generated from protobuf rpc: InviteUserToGuild(protocol.chat.v1.InviteUserToGuildRequest) returns (protocol.chat.v1.InviteUserToGuildResponse);
      */
     inviteUserToGuild(input: InviteUserToGuildRequest, options?: RpcOptions): UnaryCall<InviteUserToGuildRequest, InviteUserToGuildResponse> {
-        const method = this.methods[7], opt = this._transport.mergeOptions(options);
+        const method = this.methods[10], opt = this._transport.mergeOptions(options);
         return stackIntercept<InviteUserToGuildRequest, InviteUserToGuildResponse>("unary", this._transport, method, opt, input);
     }
     /**
@@ -606,7 +684,7 @@ export class ChatServiceClient implements IChatServiceClient, ServiceInfo {
      * @generated from protobuf rpc: GetPendingInvites(protocol.chat.v1.GetPendingInvitesRequest) returns (protocol.chat.v1.GetPendingInvitesResponse);
      */
     getPendingInvites(input: GetPendingInvitesRequest, options?: RpcOptions): UnaryCall<GetPendingInvitesRequest, GetPendingInvitesResponse> {
-        const method = this.methods[8], opt = this._transport.mergeOptions(options);
+        const method = this.methods[11], opt = this._transport.mergeOptions(options);
         return stackIntercept<GetPendingInvitesRequest, GetPendingInvitesResponse>("unary", this._transport, method, opt, input);
     }
     /**
@@ -618,13 +696,15 @@ export class ChatServiceClient implements IChatServiceClient, ServiceInfo {
      * server.
      *
      * The "notification" is sending a `InviteRejected` stream event to the
-     * inviter. If the guild's kind is `DirectMessage`, the server should also
-     * set the `rejected` field of the guild's kind to `true`.
+     * inviter.
+     *
+     * The server should increase the invite's used count by one to let the
+     * inviter know that their invite was rejected.
      *
      * @generated from protobuf rpc: RejectPendingInvite(protocol.chat.v1.RejectPendingInviteRequest) returns (protocol.chat.v1.RejectPendingInviteResponse);
      */
     rejectPendingInvite(input: RejectPendingInviteRequest, options?: RpcOptions): UnaryCall<RejectPendingInviteRequest, RejectPendingInviteResponse> {
-        const method = this.methods[9], opt = this._transport.mergeOptions(options);
+        const method = this.methods[12], opt = this._transport.mergeOptions(options);
         return stackIntercept<RejectPendingInviteRequest, RejectPendingInviteResponse>("unary", this._transport, method, opt, input);
     }
     /**
@@ -634,7 +714,7 @@ export class ChatServiceClient implements IChatServiceClient, ServiceInfo {
      * @generated from protobuf rpc: IgnorePendingInvite(protocol.chat.v1.IgnorePendingInviteRequest) returns (protocol.chat.v1.IgnorePendingInviteResponse);
      */
     ignorePendingInvite(input: IgnorePendingInviteRequest, options?: RpcOptions): UnaryCall<IgnorePendingInviteRequest, IgnorePendingInviteResponse> {
-        const method = this.methods[10], opt = this._transport.mergeOptions(options);
+        const method = this.methods[13], opt = this._transport.mergeOptions(options);
         return stackIntercept<IgnorePendingInviteRequest, IgnorePendingInviteResponse>("unary", this._transport, method, opt, input);
     }
     /**
@@ -643,7 +723,7 @@ export class ChatServiceClient implements IChatServiceClient, ServiceInfo {
      * @generated from protobuf rpc: GetGuild(protocol.chat.v1.GetGuildRequest) returns (protocol.chat.v1.GetGuildResponse);
      */
     getGuild(input: GetGuildRequest, options?: RpcOptions): UnaryCall<GetGuildRequest, GetGuildResponse> {
-        const method = this.methods[11], opt = this._transport.mergeOptions(options);
+        const method = this.methods[14], opt = this._transport.mergeOptions(options);
         return stackIntercept<GetGuildRequest, GetGuildResponse>("unary", this._transport, method, opt, input);
     }
     /**
@@ -654,7 +734,7 @@ export class ChatServiceClient implements IChatServiceClient, ServiceInfo {
      * @generated from protobuf rpc: GetGuildInvites(protocol.chat.v1.GetGuildInvitesRequest) returns (protocol.chat.v1.GetGuildInvitesResponse);
      */
     getGuildInvites(input: GetGuildInvitesRequest, options?: RpcOptions): UnaryCall<GetGuildInvitesRequest, GetGuildInvitesResponse> {
-        const method = this.methods[12], opt = this._transport.mergeOptions(options);
+        const method = this.methods[15], opt = this._transport.mergeOptions(options);
         return stackIntercept<GetGuildInvitesRequest, GetGuildInvitesResponse>("unary", this._transport, method, opt, input);
     }
     /**
@@ -663,7 +743,7 @@ export class ChatServiceClient implements IChatServiceClient, ServiceInfo {
      * @generated from protobuf rpc: GetGuildMembers(protocol.chat.v1.GetGuildMembersRequest) returns (protocol.chat.v1.GetGuildMembersResponse);
      */
     getGuildMembers(input: GetGuildMembersRequest, options?: RpcOptions): UnaryCall<GetGuildMembersRequest, GetGuildMembersResponse> {
-        const method = this.methods[13], opt = this._transport.mergeOptions(options);
+        const method = this.methods[16], opt = this._transport.mergeOptions(options);
         return stackIntercept<GetGuildMembersRequest, GetGuildMembersResponse>("unary", this._transport, method, opt, input);
     }
     /**
@@ -675,7 +755,7 @@ export class ChatServiceClient implements IChatServiceClient, ServiceInfo {
      * @generated from protobuf rpc: GetGuildChannels(protocol.chat.v1.GetGuildChannelsRequest) returns (protocol.chat.v1.GetGuildChannelsResponse);
      */
     getGuildChannels(input: GetGuildChannelsRequest, options?: RpcOptions): UnaryCall<GetGuildChannelsRequest, GetGuildChannelsResponse> {
-        const method = this.methods[14], opt = this._transport.mergeOptions(options);
+        const method = this.methods[17], opt = this._transport.mergeOptions(options);
         return stackIntercept<GetGuildChannelsRequest, GetGuildChannelsResponse>("unary", this._transport, method, opt, input);
     }
     /**
@@ -684,7 +764,7 @@ export class ChatServiceClient implements IChatServiceClient, ServiceInfo {
      * @generated from protobuf rpc: GetChannelMessages(protocol.chat.v1.GetChannelMessagesRequest) returns (protocol.chat.v1.GetChannelMessagesResponse);
      */
     getChannelMessages(input: GetChannelMessagesRequest, options?: RpcOptions): UnaryCall<GetChannelMessagesRequest, GetChannelMessagesResponse> {
-        const method = this.methods[15], opt = this._transport.mergeOptions(options);
+        const method = this.methods[18], opt = this._transport.mergeOptions(options);
         return stackIntercept<GetChannelMessagesRequest, GetChannelMessagesResponse>("unary", this._transport, method, opt, input);
     }
     /**
@@ -693,7 +773,7 @@ export class ChatServiceClient implements IChatServiceClient, ServiceInfo {
      * @generated from protobuf rpc: GetMessage(protocol.chat.v1.GetMessageRequest) returns (protocol.chat.v1.GetMessageResponse);
      */
     getMessage(input: GetMessageRequest, options?: RpcOptions): UnaryCall<GetMessageRequest, GetMessageResponse> {
-        const method = this.methods[16], opt = this._transport.mergeOptions(options);
+        const method = this.methods[19], opt = this._transport.mergeOptions(options);
         return stackIntercept<GetMessageRequest, GetMessageResponse>("unary", this._transport, method, opt, input);
     }
     /**
@@ -702,7 +782,7 @@ export class ChatServiceClient implements IChatServiceClient, ServiceInfo {
      * @generated from protobuf rpc: UpdateGuildInformation(protocol.chat.v1.UpdateGuildInformationRequest) returns (protocol.chat.v1.UpdateGuildInformationResponse);
      */
     updateGuildInformation(input: UpdateGuildInformationRequest, options?: RpcOptions): UnaryCall<UpdateGuildInformationRequest, UpdateGuildInformationResponse> {
-        const method = this.methods[17], opt = this._transport.mergeOptions(options);
+        const method = this.methods[20], opt = this._transport.mergeOptions(options);
         return stackIntercept<UpdateGuildInformationRequest, UpdateGuildInformationResponse>("unary", this._transport, method, opt, input);
     }
     /**
@@ -711,7 +791,7 @@ export class ChatServiceClient implements IChatServiceClient, ServiceInfo {
      * @generated from protobuf rpc: UpdateChannelInformation(protocol.chat.v1.UpdateChannelInformationRequest) returns (protocol.chat.v1.UpdateChannelInformationResponse);
      */
     updateChannelInformation(input: UpdateChannelInformationRequest, options?: RpcOptions): UnaryCall<UpdateChannelInformationRequest, UpdateChannelInformationResponse> {
-        const method = this.methods[18], opt = this._transport.mergeOptions(options);
+        const method = this.methods[21], opt = this._transport.mergeOptions(options);
         return stackIntercept<UpdateChannelInformationRequest, UpdateChannelInformationResponse>("unary", this._transport, method, opt, input);
     }
     /**
@@ -720,7 +800,7 @@ export class ChatServiceClient implements IChatServiceClient, ServiceInfo {
      * @generated from protobuf rpc: UpdateChannelOrder(protocol.chat.v1.UpdateChannelOrderRequest) returns (protocol.chat.v1.UpdateChannelOrderResponse);
      */
     updateChannelOrder(input: UpdateChannelOrderRequest, options?: RpcOptions): UnaryCall<UpdateChannelOrderRequest, UpdateChannelOrderResponse> {
-        const method = this.methods[19], opt = this._transport.mergeOptions(options);
+        const method = this.methods[22], opt = this._transport.mergeOptions(options);
         return stackIntercept<UpdateChannelOrderRequest, UpdateChannelOrderResponse>("unary", this._transport, method, opt, input);
     }
     /**
@@ -730,17 +810,17 @@ export class ChatServiceClient implements IChatServiceClient, ServiceInfo {
      * @generated from protobuf rpc: UpdateAllChannelOrder(protocol.chat.v1.UpdateAllChannelOrderRequest) returns (protocol.chat.v1.UpdateAllChannelOrderResponse);
      */
     updateAllChannelOrder(input: UpdateAllChannelOrderRequest, options?: RpcOptions): UnaryCall<UpdateAllChannelOrderRequest, UpdateAllChannelOrderResponse> {
-        const method = this.methods[20], opt = this._transport.mergeOptions(options);
+        const method = this.methods[23], opt = this._transport.mergeOptions(options);
         return stackIntercept<UpdateAllChannelOrderRequest, UpdateAllChannelOrderResponse>("unary", this._transport, method, opt, input);
     }
     /**
-     * Endpoint to change the text of a message.
+     * Endpoint to change the content of a message.
      *
-     * @generated from protobuf rpc: UpdateMessageText(protocol.chat.v1.UpdateMessageTextRequest) returns (protocol.chat.v1.UpdateMessageTextResponse);
+     * @generated from protobuf rpc: UpdateMessageContent(protocol.chat.v1.UpdateMessageContentRequest) returns (protocol.chat.v1.UpdateMessageContentResponse);
      */
-    updateMessageText(input: UpdateMessageTextRequest, options?: RpcOptions): UnaryCall<UpdateMessageTextRequest, UpdateMessageTextResponse> {
-        const method = this.methods[21], opt = this._transport.mergeOptions(options);
-        return stackIntercept<UpdateMessageTextRequest, UpdateMessageTextResponse>("unary", this._transport, method, opt, input);
+    updateMessageContent(input: UpdateMessageContentRequest, options?: RpcOptions): UnaryCall<UpdateMessageContentRequest, UpdateMessageContentResponse> {
+        const method = this.methods[24], opt = this._transport.mergeOptions(options);
+        return stackIntercept<UpdateMessageContentRequest, UpdateMessageContentResponse>("unary", this._transport, method, opt, input);
     }
     /**
      * Endpoint to delete a guild.
@@ -749,7 +829,7 @@ export class ChatServiceClient implements IChatServiceClient, ServiceInfo {
      * @generated from protobuf rpc: DeleteGuild(protocol.chat.v1.DeleteGuildRequest) returns (protocol.chat.v1.DeleteGuildResponse);
      */
     deleteGuild(input: DeleteGuildRequest, options?: RpcOptions): UnaryCall<DeleteGuildRequest, DeleteGuildResponse> {
-        const method = this.methods[22], opt = this._transport.mergeOptions(options);
+        const method = this.methods[25], opt = this._transport.mergeOptions(options);
         return stackIntercept<DeleteGuildRequest, DeleteGuildResponse>("unary", this._transport, method, opt, input);
     }
     /**
@@ -758,7 +838,7 @@ export class ChatServiceClient implements IChatServiceClient, ServiceInfo {
      * @generated from protobuf rpc: DeleteInvite(protocol.chat.v1.DeleteInviteRequest) returns (protocol.chat.v1.DeleteInviteResponse);
      */
     deleteInvite(input: DeleteInviteRequest, options?: RpcOptions): UnaryCall<DeleteInviteRequest, DeleteInviteResponse> {
-        const method = this.methods[23], opt = this._transport.mergeOptions(options);
+        const method = this.methods[26], opt = this._transport.mergeOptions(options);
         return stackIntercept<DeleteInviteRequest, DeleteInviteResponse>("unary", this._transport, method, opt, input);
     }
     /**
@@ -767,7 +847,7 @@ export class ChatServiceClient implements IChatServiceClient, ServiceInfo {
      * @generated from protobuf rpc: DeleteChannel(protocol.chat.v1.DeleteChannelRequest) returns (protocol.chat.v1.DeleteChannelResponse);
      */
     deleteChannel(input: DeleteChannelRequest, options?: RpcOptions): UnaryCall<DeleteChannelRequest, DeleteChannelResponse> {
-        const method = this.methods[24], opt = this._transport.mergeOptions(options);
+        const method = this.methods[27], opt = this._transport.mergeOptions(options);
         return stackIntercept<DeleteChannelRequest, DeleteChannelResponse>("unary", this._transport, method, opt, input);
     }
     /**
@@ -779,7 +859,7 @@ export class ChatServiceClient implements IChatServiceClient, ServiceInfo {
      * @generated from protobuf rpc: DeleteMessage(protocol.chat.v1.DeleteMessageRequest) returns (protocol.chat.v1.DeleteMessageResponse);
      */
     deleteMessage(input: DeleteMessageRequest, options?: RpcOptions): UnaryCall<DeleteMessageRequest, DeleteMessageResponse> {
-        const method = this.methods[25], opt = this._transport.mergeOptions(options);
+        const method = this.methods[28], opt = this._transport.mergeOptions(options);
         return stackIntercept<DeleteMessageRequest, DeleteMessageResponse>("unary", this._transport, method, opt, input);
     }
     /**
@@ -794,7 +874,7 @@ export class ChatServiceClient implements IChatServiceClient, ServiceInfo {
      * @generated from protobuf rpc: JoinGuild(protocol.chat.v1.JoinGuildRequest) returns (protocol.chat.v1.JoinGuildResponse);
      */
     joinGuild(input: JoinGuildRequest, options?: RpcOptions): UnaryCall<JoinGuildRequest, JoinGuildResponse> {
-        const method = this.methods[26], opt = this._transport.mergeOptions(options);
+        const method = this.methods[29], opt = this._transport.mergeOptions(options);
         return stackIntercept<JoinGuildRequest, JoinGuildResponse>("unary", this._transport, method, opt, input);
     }
     /**
@@ -808,7 +888,7 @@ export class ChatServiceClient implements IChatServiceClient, ServiceInfo {
      * @generated from protobuf rpc: LeaveGuild(protocol.chat.v1.LeaveGuildRequest) returns (protocol.chat.v1.LeaveGuildResponse);
      */
     leaveGuild(input: LeaveGuildRequest, options?: RpcOptions): UnaryCall<LeaveGuildRequest, LeaveGuildResponse> {
-        const method = this.methods[27], opt = this._transport.mergeOptions(options);
+        const method = this.methods[30], opt = this._transport.mergeOptions(options);
         return stackIntercept<LeaveGuildRequest, LeaveGuildResponse>("unary", this._transport, method, opt, input);
     }
     /**
@@ -817,7 +897,7 @@ export class ChatServiceClient implements IChatServiceClient, ServiceInfo {
      * @generated from protobuf rpc: TriggerAction(protocol.chat.v1.TriggerActionRequest) returns (protocol.chat.v1.TriggerActionResponse);
      */
     triggerAction(input: TriggerActionRequest, options?: RpcOptions): UnaryCall<TriggerActionRequest, TriggerActionResponse> {
-        const method = this.methods[28], opt = this._transport.mergeOptions(options);
+        const method = this.methods[31], opt = this._transport.mergeOptions(options);
         return stackIntercept<TriggerActionRequest, TriggerActionResponse>("unary", this._transport, method, opt, input);
     }
     /**
@@ -826,7 +906,7 @@ export class ChatServiceClient implements IChatServiceClient, ServiceInfo {
      * @generated from protobuf rpc: SendMessage(protocol.chat.v1.SendMessageRequest) returns (protocol.chat.v1.SendMessageResponse);
      */
     sendMessage(input: SendMessageRequest, options?: RpcOptions): UnaryCall<SendMessageRequest, SendMessageResponse> {
-        const method = this.methods[29], opt = this._transport.mergeOptions(options);
+        const method = this.methods[32], opt = this._transport.mergeOptions(options);
         return stackIntercept<SendMessageRequest, SendMessageResponse>("unary", this._transport, method, opt, input);
     }
     /**
@@ -835,7 +915,7 @@ export class ChatServiceClient implements IChatServiceClient, ServiceInfo {
      * @generated from protobuf rpc: HasPermission(protocol.chat.v1.HasPermissionRequest) returns (protocol.chat.v1.HasPermissionResponse);
      */
     hasPermission(input: HasPermissionRequest, options?: RpcOptions): UnaryCall<HasPermissionRequest, HasPermissionResponse> {
-        const method = this.methods[30], opt = this._transport.mergeOptions(options);
+        const method = this.methods[33], opt = this._transport.mergeOptions(options);
         return stackIntercept<HasPermissionRequest, HasPermissionResponse>("unary", this._transport, method, opt, input);
     }
     /**
@@ -844,7 +924,7 @@ export class ChatServiceClient implements IChatServiceClient, ServiceInfo {
      * @generated from protobuf rpc: SetPermissions(protocol.chat.v1.SetPermissionsRequest) returns (protocol.chat.v1.SetPermissionsResponse);
      */
     setPermissions(input: SetPermissionsRequest, options?: RpcOptions): UnaryCall<SetPermissionsRequest, SetPermissionsResponse> {
-        const method = this.methods[31], opt = this._transport.mergeOptions(options);
+        const method = this.methods[34], opt = this._transport.mergeOptions(options);
         return stackIntercept<SetPermissionsRequest, SetPermissionsResponse>("unary", this._transport, method, opt, input);
     }
     /**
@@ -853,7 +933,7 @@ export class ChatServiceClient implements IChatServiceClient, ServiceInfo {
      * @generated from protobuf rpc: GetPermissions(protocol.chat.v1.GetPermissionsRequest) returns (protocol.chat.v1.GetPermissionsResponse);
      */
     getPermissions(input: GetPermissionsRequest, options?: RpcOptions): UnaryCall<GetPermissionsRequest, GetPermissionsResponse> {
-        const method = this.methods[32], opt = this._transport.mergeOptions(options);
+        const method = this.methods[35], opt = this._transport.mergeOptions(options);
         return stackIntercept<GetPermissionsRequest, GetPermissionsResponse>("unary", this._transport, method, opt, input);
     }
     /**
@@ -862,7 +942,7 @@ export class ChatServiceClient implements IChatServiceClient, ServiceInfo {
      * @generated from protobuf rpc: MoveRole(protocol.chat.v1.MoveRoleRequest) returns (protocol.chat.v1.MoveRoleResponse);
      */
     moveRole(input: MoveRoleRequest, options?: RpcOptions): UnaryCall<MoveRoleRequest, MoveRoleResponse> {
-        const method = this.methods[33], opt = this._transport.mergeOptions(options);
+        const method = this.methods[36], opt = this._transport.mergeOptions(options);
         return stackIntercept<MoveRoleRequest, MoveRoleResponse>("unary", this._transport, method, opt, input);
     }
     /**
@@ -871,7 +951,7 @@ export class ChatServiceClient implements IChatServiceClient, ServiceInfo {
      * @generated from protobuf rpc: GetGuildRoles(protocol.chat.v1.GetGuildRolesRequest) returns (protocol.chat.v1.GetGuildRolesResponse);
      */
     getGuildRoles(input: GetGuildRolesRequest, options?: RpcOptions): UnaryCall<GetGuildRolesRequest, GetGuildRolesResponse> {
-        const method = this.methods[34], opt = this._transport.mergeOptions(options);
+        const method = this.methods[37], opt = this._transport.mergeOptions(options);
         return stackIntercept<GetGuildRolesRequest, GetGuildRolesResponse>("unary", this._transport, method, opt, input);
     }
     /**
@@ -880,7 +960,7 @@ export class ChatServiceClient implements IChatServiceClient, ServiceInfo {
      * @generated from protobuf rpc: AddGuildRole(protocol.chat.v1.AddGuildRoleRequest) returns (protocol.chat.v1.AddGuildRoleResponse);
      */
     addGuildRole(input: AddGuildRoleRequest, options?: RpcOptions): UnaryCall<AddGuildRoleRequest, AddGuildRoleResponse> {
-        const method = this.methods[35], opt = this._transport.mergeOptions(options);
+        const method = this.methods[38], opt = this._transport.mergeOptions(options);
         return stackIntercept<AddGuildRoleRequest, AddGuildRoleResponse>("unary", this._transport, method, opt, input);
     }
     /**
@@ -889,7 +969,7 @@ export class ChatServiceClient implements IChatServiceClient, ServiceInfo {
      * @generated from protobuf rpc: ModifyGuildRole(protocol.chat.v1.ModifyGuildRoleRequest) returns (protocol.chat.v1.ModifyGuildRoleResponse);
      */
     modifyGuildRole(input: ModifyGuildRoleRequest, options?: RpcOptions): UnaryCall<ModifyGuildRoleRequest, ModifyGuildRoleResponse> {
-        const method = this.methods[36], opt = this._transport.mergeOptions(options);
+        const method = this.methods[39], opt = this._transport.mergeOptions(options);
         return stackIntercept<ModifyGuildRoleRequest, ModifyGuildRoleResponse>("unary", this._transport, method, opt, input);
     }
     /**
@@ -898,7 +978,7 @@ export class ChatServiceClient implements IChatServiceClient, ServiceInfo {
      * @generated from protobuf rpc: DeleteGuildRole(protocol.chat.v1.DeleteGuildRoleRequest) returns (protocol.chat.v1.DeleteGuildRoleResponse);
      */
     deleteGuildRole(input: DeleteGuildRoleRequest, options?: RpcOptions): UnaryCall<DeleteGuildRoleRequest, DeleteGuildRoleResponse> {
-        const method = this.methods[37], opt = this._transport.mergeOptions(options);
+        const method = this.methods[40], opt = this._transport.mergeOptions(options);
         return stackIntercept<DeleteGuildRoleRequest, DeleteGuildRoleResponse>("unary", this._transport, method, opt, input);
     }
     /**
@@ -907,7 +987,7 @@ export class ChatServiceClient implements IChatServiceClient, ServiceInfo {
      * @generated from protobuf rpc: ManageUserRoles(protocol.chat.v1.ManageUserRolesRequest) returns (protocol.chat.v1.ManageUserRolesResponse);
      */
     manageUserRoles(input: ManageUserRolesRequest, options?: RpcOptions): UnaryCall<ManageUserRolesRequest, ManageUserRolesResponse> {
-        const method = this.methods[38], opt = this._transport.mergeOptions(options);
+        const method = this.methods[41], opt = this._transport.mergeOptions(options);
         return stackIntercept<ManageUserRolesRequest, ManageUserRolesResponse>("unary", this._transport, method, opt, input);
     }
     /**
@@ -916,7 +996,7 @@ export class ChatServiceClient implements IChatServiceClient, ServiceInfo {
      * @generated from protobuf rpc: GetUserRoles(protocol.chat.v1.GetUserRolesRequest) returns (protocol.chat.v1.GetUserRolesResponse);
      */
     getUserRoles(input: GetUserRolesRequest, options?: RpcOptions): UnaryCall<GetUserRolesRequest, GetUserRolesResponse> {
-        const method = this.methods[39], opt = this._transport.mergeOptions(options);
+        const method = this.methods[42], opt = this._transport.mergeOptions(options);
         return stackIntercept<GetUserRolesRequest, GetUserRolesResponse>("unary", this._transport, method, opt, input);
     }
     /**
@@ -925,7 +1005,7 @@ export class ChatServiceClient implements IChatServiceClient, ServiceInfo {
      * @generated from protobuf rpc: Typing(protocol.chat.v1.TypingRequest) returns (protocol.chat.v1.TypingResponse);
      */
     typing(input: TypingRequest, options?: RpcOptions): UnaryCall<TypingRequest, TypingResponse> {
-        const method = this.methods[40], opt = this._transport.mergeOptions(options);
+        const method = this.methods[43], opt = this._transport.mergeOptions(options);
         return stackIntercept<TypingRequest, TypingResponse>("unary", this._transport, method, opt, input);
     }
     /**
@@ -938,7 +1018,7 @@ export class ChatServiceClient implements IChatServiceClient, ServiceInfo {
      * @generated from protobuf rpc: PreviewGuild(protocol.chat.v1.PreviewGuildRequest) returns (protocol.chat.v1.PreviewGuildResponse);
      */
     previewGuild(input: PreviewGuildRequest, options?: RpcOptions): UnaryCall<PreviewGuildRequest, PreviewGuildResponse> {
-        const method = this.methods[41], opt = this._transport.mergeOptions(options);
+        const method = this.methods[44], opt = this._transport.mergeOptions(options);
         return stackIntercept<PreviewGuildRequest, PreviewGuildResponse>("unary", this._transport, method, opt, input);
     }
     /**
@@ -947,7 +1027,7 @@ export class ChatServiceClient implements IChatServiceClient, ServiceInfo {
      * @generated from protobuf rpc: GetBannedUsers(protocol.chat.v1.GetBannedUsersRequest) returns (protocol.chat.v1.GetBannedUsersResponse);
      */
     getBannedUsers(input: GetBannedUsersRequest, options?: RpcOptions): UnaryCall<GetBannedUsersRequest, GetBannedUsersResponse> {
-        const method = this.methods[42], opt = this._transport.mergeOptions(options);
+        const method = this.methods[45], opt = this._transport.mergeOptions(options);
         return stackIntercept<GetBannedUsersRequest, GetBannedUsersResponse>("unary", this._transport, method, opt, input);
     }
     /**
@@ -956,7 +1036,7 @@ export class ChatServiceClient implements IChatServiceClient, ServiceInfo {
      * @generated from protobuf rpc: BanUser(protocol.chat.v1.BanUserRequest) returns (protocol.chat.v1.BanUserResponse);
      */
     banUser(input: BanUserRequest, options?: RpcOptions): UnaryCall<BanUserRequest, BanUserResponse> {
-        const method = this.methods[43], opt = this._transport.mergeOptions(options);
+        const method = this.methods[46], opt = this._transport.mergeOptions(options);
         return stackIntercept<BanUserRequest, BanUserResponse>("unary", this._transport, method, opt, input);
     }
     /**
@@ -965,7 +1045,7 @@ export class ChatServiceClient implements IChatServiceClient, ServiceInfo {
      * @generated from protobuf rpc: KickUser(protocol.chat.v1.KickUserRequest) returns (protocol.chat.v1.KickUserResponse);
      */
     kickUser(input: KickUserRequest, options?: RpcOptions): UnaryCall<KickUserRequest, KickUserResponse> {
-        const method = this.methods[44], opt = this._transport.mergeOptions(options);
+        const method = this.methods[47], opt = this._transport.mergeOptions(options);
         return stackIntercept<KickUserRequest, KickUserResponse>("unary", this._transport, method, opt, input);
     }
     /**
@@ -974,7 +1054,7 @@ export class ChatServiceClient implements IChatServiceClient, ServiceInfo {
      * @generated from protobuf rpc: UnbanUser(protocol.chat.v1.UnbanUserRequest) returns (protocol.chat.v1.UnbanUserResponse);
      */
     unbanUser(input: UnbanUserRequest, options?: RpcOptions): UnaryCall<UnbanUserRequest, UnbanUserResponse> {
-        const method = this.methods[45], opt = this._transport.mergeOptions(options);
+        const method = this.methods[48], opt = this._transport.mergeOptions(options);
         return stackIntercept<UnbanUserRequest, UnbanUserResponse>("unary", this._transport, method, opt, input);
     }
     /**
@@ -983,7 +1063,7 @@ export class ChatServiceClient implements IChatServiceClient, ServiceInfo {
      * @generated from protobuf rpc: GetPinnedMessages(protocol.chat.v1.GetPinnedMessagesRequest) returns (protocol.chat.v1.GetPinnedMessagesResponse);
      */
     getPinnedMessages(input: GetPinnedMessagesRequest, options?: RpcOptions): UnaryCall<GetPinnedMessagesRequest, GetPinnedMessagesResponse> {
-        const method = this.methods[46], opt = this._transport.mergeOptions(options);
+        const method = this.methods[49], opt = this._transport.mergeOptions(options);
         return stackIntercept<GetPinnedMessagesRequest, GetPinnedMessagesResponse>("unary", this._transport, method, opt, input);
     }
     /**
@@ -992,7 +1072,7 @@ export class ChatServiceClient implements IChatServiceClient, ServiceInfo {
      * @generated from protobuf rpc: PinMessage(protocol.chat.v1.PinMessageRequest) returns (protocol.chat.v1.PinMessageResponse);
      */
     pinMessage(input: PinMessageRequest, options?: RpcOptions): UnaryCall<PinMessageRequest, PinMessageResponse> {
-        const method = this.methods[47], opt = this._transport.mergeOptions(options);
+        const method = this.methods[50], opt = this._transport.mergeOptions(options);
         return stackIntercept<PinMessageRequest, PinMessageResponse>("unary", this._transport, method, opt, input);
     }
     /**
@@ -1001,7 +1081,7 @@ export class ChatServiceClient implements IChatServiceClient, ServiceInfo {
      * @generated from protobuf rpc: UnpinMessage(protocol.chat.v1.UnpinMessageRequest) returns (protocol.chat.v1.UnpinMessageResponse);
      */
     unpinMessage(input: UnpinMessageRequest, options?: RpcOptions): UnaryCall<UnpinMessageRequest, UnpinMessageResponse> {
-        const method = this.methods[48], opt = this._transport.mergeOptions(options);
+        const method = this.methods[51], opt = this._transport.mergeOptions(options);
         return stackIntercept<UnpinMessageRequest, UnpinMessageResponse>("unary", this._transport, method, opt, input);
     }
     /**
@@ -1016,7 +1096,7 @@ export class ChatServiceClient implements IChatServiceClient, ServiceInfo {
      * @generated from protobuf rpc: StreamEvents(stream protocol.chat.v1.StreamEventsRequest) returns (stream protocol.chat.v1.StreamEventsResponse);
      */
     streamEvents(options?: RpcOptions): DuplexStreamingCall<StreamEventsRequest, StreamEventsResponse> {
-        const method = this.methods[49], opt = this._transport.mergeOptions(options);
+        const method = this.methods[52], opt = this._transport.mergeOptions(options);
         return stackIntercept<StreamEventsRequest, StreamEventsResponse>("duplex", this._transport, method, opt);
     }
     /**
@@ -1027,19 +1107,22 @@ export class ChatServiceClient implements IChatServiceClient, ServiceInfo {
      * @generated from protobuf rpc: AddReaction(protocol.chat.v1.AddReactionRequest) returns (protocol.chat.v1.AddReactionResponse);
      */
     addReaction(input: AddReactionRequest, options?: RpcOptions): UnaryCall<AddReactionRequest, AddReactionResponse> {
-        const method = this.methods[50], opt = this._transport.mergeOptions(options);
+        const method = this.methods[53], opt = this._transport.mergeOptions(options);
         return stackIntercept<AddReactionRequest, AddReactionResponse>("unary", this._transport, method, opt, input);
     }
     /**
      * Endpoint to remove a reaction from a message.
      *
-     * Servers should only remove a reaction if the user making the request
-     * added the reaction before.
+     * Servers should only remove a reaction if the user making the
+     * request added the reaction before.
+     *
+     * Servers should delete the reaction from the message if it's
+     * reaction count reaches zero.
      *
      * @generated from protobuf rpc: RemoveReaction(protocol.chat.v1.RemoveReactionRequest) returns (protocol.chat.v1.RemoveReactionResponse);
      */
     removeReaction(input: RemoveReactionRequest, options?: RpcOptions): UnaryCall<RemoveReactionRequest, RemoveReactionResponse> {
-        const method = this.methods[51], opt = this._transport.mergeOptions(options);
+        const method = this.methods[54], opt = this._transport.mergeOptions(options);
         return stackIntercept<RemoveReactionRequest, RemoveReactionResponse>("unary", this._transport, method, opt, input);
     }
     // / OWNERS
@@ -1050,7 +1133,7 @@ export class ChatServiceClient implements IChatServiceClient, ServiceInfo {
      * @generated from protobuf rpc: GrantOwnership(protocol.chat.v1.GrantOwnershipRequest) returns (protocol.chat.v1.GrantOwnershipResponse);
      */
     grantOwnership(input: GrantOwnershipRequest, options?: RpcOptions): UnaryCall<GrantOwnershipRequest, GrantOwnershipResponse> {
-        const method = this.methods[52], opt = this._transport.mergeOptions(options);
+        const method = this.methods[55], opt = this._transport.mergeOptions(options);
         return stackIntercept<GrantOwnershipRequest, GrantOwnershipResponse>("unary", this._transport, method, opt, input);
     }
     /**
@@ -1061,7 +1144,7 @@ export class ChatServiceClient implements IChatServiceClient, ServiceInfo {
      * @generated from protobuf rpc: GiveUpOwnership(protocol.chat.v1.GiveUpOwnershipRequest) returns (protocol.chat.v1.GiveUpOwnershipResponse);
      */
     giveUpOwnership(input: GiveUpOwnershipRequest, options?: RpcOptions): UnaryCall<GiveUpOwnershipRequest, GiveUpOwnershipResponse> {
-        const method = this.methods[53], opt = this._transport.mergeOptions(options);
+        const method = this.methods[56], opt = this._transport.mergeOptions(options);
         return stackIntercept<GiveUpOwnershipRequest, GiveUpOwnershipResponse>("unary", this._transport, method, opt, input);
     }
 }

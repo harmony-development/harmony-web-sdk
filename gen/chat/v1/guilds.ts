@@ -4,82 +4,6 @@
 import { MessageType } from "@protobuf-ts/runtime";
 import { Metadata } from "../../harmonytypes/v1/types";
 /**
- * The kind of a guild.
- *
- * @generated from protobuf message protocol.chat.v1.GuildKind
- */
-export interface GuildKind {
-    /**
-     * @generated from protobuf oneof: kind
-     */
-    kind: {
-        oneofKind: "normal";
-        /**
-         * A "normal" guild.
-         *
-         * @generated from protobuf field: protocol.chat.v1.GuildKind.Normal normal = 1;
-         */
-        normal: GuildKind_Normal;
-    } | {
-        oneofKind: "room";
-        /**
-         * A "room" guild.
-         *
-         * @generated from protobuf field: protocol.chat.v1.GuildKind.Room room = 2;
-         */
-        room: GuildKind_Room;
-    } | {
-        oneofKind: "directMessage";
-        /**
-         * A "direct message" guild.
-         *
-         * @generated from protobuf field: protocol.chat.v1.GuildKind.DirectMessage direct_message = 3;
-         */
-        directMessage: GuildKind_DirectMessage;
-    } | {
-        oneofKind: undefined;
-    };
-}
-/**
- * A "normal" guild as in a guild that allows multiple channels.
- *
- * @generated from protobuf message protocol.chat.v1.GuildKind.Normal
- */
-export interface GuildKind_Normal {
-}
-/**
- * A "room" guild as in a guild that only has one channel.
- *
- * - Clients should not show a channel list for guilds of this type.
- *
- * @generated from protobuf message protocol.chat.v1.GuildKind.Room
- */
-export interface GuildKind_Room {
-}
-/**
- * A "direct message" guild as in a guild that has at most two members,
- * and has only one channel.
- *
- * - Clients should not show a channel list for guilds of this type.
- * - Clients should show this guild in the guild list with the profile picture
- * and the username of the other user.
- * - Servers should "upgrade" this guild to a "room" guild if another
- * user joins the guild. A name should be crafted using the algorithm
- * described below:
- *   - Get at most 3 members' usernames, by their
- *   - Concat them with ", " as a seperator.
- *
- * @generated from protobuf message protocol.chat.v1.GuildKind.DirectMessage
- */
-export interface GuildKind_DirectMessage {
-    /**
-     * Whether this direct message was rejected by the invitee or not.
-     *
-     * @generated from protobuf field: bool rejected = 1;
-     */
-    rejected: boolean;
-}
-/**
  * Object representing a guild without the ID part.
  *
  * @generated from protobuf message protocol.chat.v1.Guild
@@ -108,15 +32,9 @@ export interface Guild {
      */
     ownerIds: string[];
     /**
-     * The kind of this guild.
-     *
-     * @generated from protobuf field: protocol.chat.v1.GuildKind kind = 4;
-     */
-    kind?: GuildKind;
-    /**
      * Metadata of the guild.
      *
-     * @generated from protobuf field: optional protocol.harmonytypes.v1.Metadata metadata = 5;
+     * @generated from protobuf field: optional protocol.harmonytypes.v1.Metadata metadata = 4;
      */
     metadata?: Metadata;
 }
@@ -159,7 +77,7 @@ export interface Invite {
     useCount: number;
 }
 /**
- * Invite with ID.
+ * Object representing an invite with the ID part.
  *
  * @generated from protobuf message protocol.chat.v1.InviteWithId
  */
@@ -180,27 +98,48 @@ export interface InviteWithId {
 /**
  * A pending invite.
  *
+ * A pending invite's `server_id` and `location` determines whether
+ * it is unique or not. If two pending invites have the same `server_id`
+ * and `location`, these are considered as the same pending invite.
+ *
  * @generated from protobuf message protocol.chat.v1.PendingInvite
  */
 export interface PendingInvite {
     /**
-     * Invite ID of the invite.
+     * Server ID of the server where the inviter is on.
      *
-     * @generated from protobuf field: string invite_id = 1;
-     */
-    inviteId: string;
-    /**
-     * Server ID of the server the inviter is on.
-     *
-     * @generated from protobuf field: optional string server_id = 2;
+     * @generated from protobuf field: optional string server_id = 1;
      */
     serverId?: string;
     /**
      * User ID of the inviter.
      *
-     * @generated from protobuf field: uint64 inviter_id = 3;
+     * @generated from protobuf field: uint64 inviter_id = 2;
      */
     inviterId: string;
+    /**
+     * @generated from protobuf oneof: location
+     */
+    location: {
+        oneofKind: "guildInviteId";
+        /**
+         * The unique identifier of a user's invite to another
+         * user to join a given guild.
+         *
+         * @generated from protobuf field: string guild_invite_id = 3;
+         */
+        guildInviteId: string;
+    } | {
+        oneofKind: "channelId";
+        /**
+         * The channel ID of the private channel that the user was invited to.
+         *
+         * @generated from protobuf field: uint64 channel_id = 4;
+         */
+        channelId: string;
+    } | {
+        oneofKind: undefined;
+    };
 }
 /**
  * Object representing a guild list entry.
@@ -217,9 +156,9 @@ export interface GuildListEntry {
     /**
      * Server ID of the homeserver of this guild.
      *
-     * @generated from protobuf field: string server_id = 2;
+     * @generated from protobuf field: optional string server_id = 2;
      */
-    serverId: string;
+    serverId?: string;
 }
 /**
  * Request type used in `CreateGuild` endpoint.
@@ -254,78 +193,6 @@ export interface CreateGuildRequest {
 export interface CreateGuildResponse {
     /**
      * Guild ID of the guild that was created.
-     *
-     * @generated from protobuf field: uint64 guild_id = 1;
-     */
-    guildId: string;
-}
-/**
- * Request type used in `CreateRoom` endpoint.
- *
- * @generated from protobuf message protocol.chat.v1.CreateRoomRequest
- */
-export interface CreateRoomRequest {
-    /**
-     * The name of the guild.
-     *
-     * @generated from protobuf field: string name = 1;
-     */
-    name: string;
-    /**
-     * The picture file ID of the guild.
-     *
-     * @generated from protobuf field: optional string picture = 2;
-     */
-    picture?: string;
-    /**
-     * Metadata of the guild.
-     *
-     * @generated from protobuf field: optional protocol.harmonytypes.v1.Metadata metadata = 3;
-     */
-    metadata?: Metadata;
-}
-/**
- * Used in the `CreateRoom` endpoint.
- *
- * @generated from protobuf message protocol.chat.v1.CreateRoomResponse
- */
-export interface CreateRoomResponse {
-    /**
-     * Guild ID of the guild that was created.
-     *
-     * @generated from protobuf field: uint64 guild_id = 1;
-     */
-    guildId: string;
-}
-/**
- * Used in the `CreateDirectMessage` endpoint.
- *
- * @generated from protobuf message protocol.chat.v1.CreateDirectMessageRequest
- */
-export interface CreateDirectMessageRequest {
-    /**
-     * The user name of the user to DM with.
-     *
-     * @generated from protobuf field: string user_name = 1;
-     */
-    userName: string;
-    /**
-     * The server ID of the server the user is on.
-     *
-     * Should be left unspecified if it's a user on the homeserver.
-     *
-     * @generated from protobuf field: optional string server_id = 2;
-     */
-    serverId?: string;
-}
-/**
- * Used in the `CreateDirectMessage` endpoint.
- *
- * @generated from protobuf message protocol.chat.v1.CreateDirectMessageResponse
- */
-export interface CreateDirectMessageResponse {
-    /**
-     * Guild ID of the just created "direct message" guild.
      *
      * @generated from protobuf field: uint64 guild_id = 1;
      */
@@ -508,26 +375,6 @@ export interface UpdateGuildInformationRequest {
  * @generated from protobuf message protocol.chat.v1.UpdateGuildInformationResponse
  */
 export interface UpdateGuildInformationResponse {
-}
-/**
- * Used in the `UpgradeRoomToGuild` endpoint.
- *
- * @generated from protobuf message protocol.chat.v1.UpgradeRoomToGuildRequest
- */
-export interface UpgradeRoomToGuildRequest {
-    /**
-     * Guild ID of the "room" guild to upgrade to a "normal" guild.
-     *
-     * @generated from protobuf field: uint64 guild_id = 1;
-     */
-    guildId: string;
-}
-/**
- * Used in the `UpgradeRoomToGuild` endpoint.
- *
- * @generated from protobuf message protocol.chat.v1.UpgradeRoomToGuildResponse
- */
-export interface UpgradeRoomToGuildResponse {
 }
 /**
  * Used in the `DeleteGuild` endpoint.
@@ -825,9 +672,9 @@ export interface GetPendingInvitesResponse {
     /**
      * The pending invite(s).
      *
-     * @generated from protobuf field: repeated protocol.chat.v1.PendingInvite pending_invites = 1;
+     * @generated from protobuf field: repeated protocol.chat.v1.PendingInvite invites = 1;
      */
-    pendingInvites: PendingInvite[];
+    invites: PendingInvite[];
 }
 /**
  * Used in `RejectPendingInvite` endpoint.
@@ -836,17 +683,34 @@ export interface GetPendingInvitesResponse {
  */
 export interface RejectPendingInviteRequest {
     /**
-     * Invite ID of the pending invite to reject.
+     * Server ID of the server where the inviter is on.
      *
-     * @generated from protobuf field: string invite_id = 1;
-     */
-    inviteId: string;
-    /**
-     * Server ID of the pending invite to reject.
-     *
-     * @generated from protobuf field: optional string server_id = 2;
+     * @generated from protobuf field: optional string server_id = 1;
      */
     serverId?: string;
+    /**
+     * @generated from protobuf oneof: location
+     */
+    location: {
+        oneofKind: "guildInviteId";
+        /**
+         * The unique identifier of a user's invite to another
+         * user to join a given guild.
+         *
+         * @generated from protobuf field: string guild_invite_id = 2;
+         */
+        guildInviteId: string;
+    } | {
+        oneofKind: "channelId";
+        /**
+         * The channel ID of the private channel that the user was invited to.
+         *
+         * @generated from protobuf field: uint64 channel_id = 3;
+         */
+        channelId: string;
+    } | {
+        oneofKind: undefined;
+    };
 }
 /**
  * Used in `RejectPendingInvite` endpoint.
@@ -862,17 +726,34 @@ export interface RejectPendingInviteResponse {
  */
 export interface IgnorePendingInviteRequest {
     /**
-     * ID of the pending invite to ignore.
+     * Server ID of the server where the inviter is on.
      *
-     * @generated from protobuf field: string invite_id = 1;
-     */
-    inviteId: string;
-    /**
-     * Server ID of the pending invite to reject.
-     *
-     * @generated from protobuf field: optional string server_id = 2;
+     * @generated from protobuf field: optional string server_id = 1;
      */
     serverId?: string;
+    /**
+     * @generated from protobuf oneof: location
+     */
+    location: {
+        oneofKind: "guildInviteId";
+        /**
+         * The unique identifier of a user's invite to another
+         * user to join a given guild.
+         *
+         * @generated from protobuf field: string guild_invite_id = 2;
+         */
+        guildInviteId: string;
+    } | {
+        oneofKind: "channelId";
+        /**
+         * The channel ID of the private channel that the user was invited to.
+         *
+         * @generated from protobuf field: uint64 channel_id = 3;
+         */
+        channelId: string;
+    } | {
+        oneofKind: undefined;
+    };
 }
 /**
  * Used in `IgnorePendingInvite` endpoint.
@@ -939,60 +820,13 @@ export enum LeaveReason {
     KICKED = 2
 }
 // @generated message type with reflection information, may provide speed optimized methods
-class GuildKind$Type extends MessageType<GuildKind> {
-    constructor() {
-        super("protocol.chat.v1.GuildKind", [
-            { no: 1, name: "normal", kind: "message", oneof: "kind", T: () => GuildKind_Normal },
-            { no: 2, name: "room", kind: "message", oneof: "kind", T: () => GuildKind_Room },
-            { no: 3, name: "direct_message", kind: "message", oneof: "kind", T: () => GuildKind_DirectMessage }
-        ]);
-    }
-}
-/**
- * @generated MessageType for protobuf message protocol.chat.v1.GuildKind
- */
-export const GuildKind = new GuildKind$Type();
-// @generated message type with reflection information, may provide speed optimized methods
-class GuildKind_Normal$Type extends MessageType<GuildKind_Normal> {
-    constructor() {
-        super("protocol.chat.v1.GuildKind.Normal", []);
-    }
-}
-/**
- * @generated MessageType for protobuf message protocol.chat.v1.GuildKind.Normal
- */
-export const GuildKind_Normal = new GuildKind_Normal$Type();
-// @generated message type with reflection information, may provide speed optimized methods
-class GuildKind_Room$Type extends MessageType<GuildKind_Room> {
-    constructor() {
-        super("protocol.chat.v1.GuildKind.Room", []);
-    }
-}
-/**
- * @generated MessageType for protobuf message protocol.chat.v1.GuildKind.Room
- */
-export const GuildKind_Room = new GuildKind_Room$Type();
-// @generated message type with reflection information, may provide speed optimized methods
-class GuildKind_DirectMessage$Type extends MessageType<GuildKind_DirectMessage> {
-    constructor() {
-        super("protocol.chat.v1.GuildKind.DirectMessage", [
-            { no: 1, name: "rejected", kind: "scalar", T: 8 /*ScalarType.BOOL*/ }
-        ]);
-    }
-}
-/**
- * @generated MessageType for protobuf message protocol.chat.v1.GuildKind.DirectMessage
- */
-export const GuildKind_DirectMessage = new GuildKind_DirectMessage$Type();
-// @generated message type with reflection information, may provide speed optimized methods
 class Guild$Type extends MessageType<Guild> {
     constructor() {
         super("protocol.chat.v1.Guild", [
             { no: 1, name: "name", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
             { no: 2, name: "picture", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
             { no: 3, name: "owner_ids", kind: "scalar", repeat: 1 /*RepeatType.PACKED*/, T: 4 /*ScalarType.UINT64*/ },
-            { no: 4, name: "kind", kind: "message", T: () => GuildKind },
-            { no: 5, name: "metadata", kind: "message", T: () => Metadata }
+            { no: 4, name: "metadata", kind: "message", T: () => Metadata }
         ]);
     }
 }
@@ -1043,9 +877,10 @@ export const InviteWithId = new InviteWithId$Type();
 class PendingInvite$Type extends MessageType<PendingInvite> {
     constructor() {
         super("protocol.chat.v1.PendingInvite", [
-            { no: 1, name: "invite_id", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 2, name: "server_id", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
-            { no: 3, name: "inviter_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ }
+            { no: 1, name: "server_id", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
+            { no: 2, name: "inviter_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+            { no: 3, name: "guild_invite_id", kind: "scalar", oneof: "location", T: 9 /*ScalarType.STRING*/ },
+            { no: 4, name: "channel_id", kind: "scalar", oneof: "location", T: 4 /*ScalarType.UINT64*/ }
         ]);
     }
 }
@@ -1058,7 +893,7 @@ class GuildListEntry$Type extends MessageType<GuildListEntry> {
     constructor() {
         super("protocol.chat.v1.GuildListEntry", [
             { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-            { no: 2, name: "server_id", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
+            { no: 2, name: "server_id", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ }
         ]);
     }
 }
@@ -1092,57 +927,6 @@ class CreateGuildResponse$Type extends MessageType<CreateGuildResponse> {
  * @generated MessageType for protobuf message protocol.chat.v1.CreateGuildResponse
  */
 export const CreateGuildResponse = new CreateGuildResponse$Type();
-// @generated message type with reflection information, may provide speed optimized methods
-class CreateRoomRequest$Type extends MessageType<CreateRoomRequest> {
-    constructor() {
-        super("protocol.chat.v1.CreateRoomRequest", [
-            { no: 1, name: "name", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 2, name: "picture", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
-            { no: 3, name: "metadata", kind: "message", T: () => Metadata }
-        ]);
-    }
-}
-/**
- * @generated MessageType for protobuf message protocol.chat.v1.CreateRoomRequest
- */
-export const CreateRoomRequest = new CreateRoomRequest$Type();
-// @generated message type with reflection information, may provide speed optimized methods
-class CreateRoomResponse$Type extends MessageType<CreateRoomResponse> {
-    constructor() {
-        super("protocol.chat.v1.CreateRoomResponse", [
-            { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ }
-        ]);
-    }
-}
-/**
- * @generated MessageType for protobuf message protocol.chat.v1.CreateRoomResponse
- */
-export const CreateRoomResponse = new CreateRoomResponse$Type();
-// @generated message type with reflection information, may provide speed optimized methods
-class CreateDirectMessageRequest$Type extends MessageType<CreateDirectMessageRequest> {
-    constructor() {
-        super("protocol.chat.v1.CreateDirectMessageRequest", [
-            { no: 1, name: "user_name", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 2, name: "server_id", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ }
-        ]);
-    }
-}
-/**
- * @generated MessageType for protobuf message protocol.chat.v1.CreateDirectMessageRequest
- */
-export const CreateDirectMessageRequest = new CreateDirectMessageRequest$Type();
-// @generated message type with reflection information, may provide speed optimized methods
-class CreateDirectMessageResponse$Type extends MessageType<CreateDirectMessageResponse> {
-    constructor() {
-        super("protocol.chat.v1.CreateDirectMessageResponse", [
-            { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ }
-        ]);
-    }
-}
-/**
- * @generated MessageType for protobuf message protocol.chat.v1.CreateDirectMessageResponse
- */
-export const CreateDirectMessageResponse = new CreateDirectMessageResponse$Type();
 // @generated message type with reflection information, may provide speed optimized methods
 class CreateInviteRequest$Type extends MessageType<CreateInviteRequest> {
     constructor() {
@@ -1288,28 +1072,6 @@ class UpdateGuildInformationResponse$Type extends MessageType<UpdateGuildInforma
  * @generated MessageType for protobuf message protocol.chat.v1.UpdateGuildInformationResponse
  */
 export const UpdateGuildInformationResponse = new UpdateGuildInformationResponse$Type();
-// @generated message type with reflection information, may provide speed optimized methods
-class UpgradeRoomToGuildRequest$Type extends MessageType<UpgradeRoomToGuildRequest> {
-    constructor() {
-        super("protocol.chat.v1.UpgradeRoomToGuildRequest", [
-            { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ }
-        ]);
-    }
-}
-/**
- * @generated MessageType for protobuf message protocol.chat.v1.UpgradeRoomToGuildRequest
- */
-export const UpgradeRoomToGuildRequest = new UpgradeRoomToGuildRequest$Type();
-// @generated message type with reflection information, may provide speed optimized methods
-class UpgradeRoomToGuildResponse$Type extends MessageType<UpgradeRoomToGuildResponse> {
-    constructor() {
-        super("protocol.chat.v1.UpgradeRoomToGuildResponse", []);
-    }
-}
-/**
- * @generated MessageType for protobuf message protocol.chat.v1.UpgradeRoomToGuildResponse
- */
-export const UpgradeRoomToGuildResponse = new UpgradeRoomToGuildResponse$Type();
 // @generated message type with reflection information, may provide speed optimized methods
 class DeleteGuildRequest$Type extends MessageType<DeleteGuildRequest> {
     constructor() {
@@ -1579,7 +1341,7 @@ export const GetPendingInvitesRequest = new GetPendingInvitesRequest$Type();
 class GetPendingInvitesResponse$Type extends MessageType<GetPendingInvitesResponse> {
     constructor() {
         super("protocol.chat.v1.GetPendingInvitesResponse", [
-            { no: 1, name: "pending_invites", kind: "message", repeat: 1 /*RepeatType.PACKED*/, T: () => PendingInvite }
+            { no: 1, name: "invites", kind: "message", repeat: 1 /*RepeatType.PACKED*/, T: () => PendingInvite }
         ]);
     }
 }
@@ -1591,8 +1353,9 @@ export const GetPendingInvitesResponse = new GetPendingInvitesResponse$Type();
 class RejectPendingInviteRequest$Type extends MessageType<RejectPendingInviteRequest> {
     constructor() {
         super("protocol.chat.v1.RejectPendingInviteRequest", [
-            { no: 1, name: "invite_id", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 2, name: "server_id", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ }
+            { no: 1, name: "server_id", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
+            { no: 2, name: "guild_invite_id", kind: "scalar", oneof: "location", T: 9 /*ScalarType.STRING*/ },
+            { no: 3, name: "channel_id", kind: "scalar", oneof: "location", T: 4 /*ScalarType.UINT64*/ }
         ]);
     }
 }
@@ -1614,8 +1377,9 @@ export const RejectPendingInviteResponse = new RejectPendingInviteResponse$Type(
 class IgnorePendingInviteRequest$Type extends MessageType<IgnorePendingInviteRequest> {
     constructor() {
         super("protocol.chat.v1.IgnorePendingInviteRequest", [
-            { no: 1, name: "invite_id", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 2, name: "server_id", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ }
+            { no: 1, name: "server_id", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
+            { no: 2, name: "guild_invite_id", kind: "scalar", oneof: "location", T: 9 /*ScalarType.STRING*/ },
+            { no: 3, name: "channel_id", kind: "scalar", oneof: "location", T: 4 /*ScalarType.UINT64*/ }
         ]);
     }
 }

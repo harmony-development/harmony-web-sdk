@@ -53,11 +53,27 @@ export interface Event {
          */
         userAddedToGuild: Event_UserAddedToGuild;
     } | {
+        oneofKind: "userRemovedFromChannel";
+        /**
+         * User removed from a private channel.
+         *
+         * @generated from protobuf field: protocol.sync.v1.Event.UserRemovedFromChannel user_removed_from_channel = 3;
+         */
+        userRemovedFromChannel: Event_UserRemovedFromChannel;
+    } | {
+        oneofKind: "userAddedToChannel";
+        /**
+         * User added to a private channel.
+         *
+         * @generated from protobuf field: protocol.sync.v1.Event.UserAddedToChannel user_added_to_channel = 4;
+         */
+        userAddedToChannel: Event_UserAddedToChannel;
+    } | {
         oneofKind: "userInvited";
         /**
          * User invited to a guild.
          *
-         * @generated from protobuf field: protocol.sync.v1.Event.UserInvited user_invited = 3;
+         * @generated from protobuf field: protocol.sync.v1.Event.UserInvited user_invited = 5;
          */
         userInvited: Event_UserInvited;
     } | {
@@ -65,7 +81,7 @@ export interface Event {
         /**
          * User rejected a guild invitation.
          *
-         * @generated from protobuf field: protocol.sync.v1.Event.UserRejectedInvite user_rejected_invite = 4;
+         * @generated from protobuf field: protocol.sync.v1.Event.UserRejectedInvite user_rejected_invite = 6;
          */
         userRejectedInvite: Event_UserRejectedInvite;
     } | {
@@ -111,6 +127,44 @@ export interface Event_UserAddedToGuild {
     guildId: string;
 }
 /**
+ * Event sent when an user is removed from a private channel.
+ *
+ * @generated from protobuf message protocol.sync.v1.Event.UserRemovedFromChannel
+ */
+export interface Event_UserRemovedFromChannel {
+    /**
+     * User ID of the user that was removed.
+     *
+     * @generated from protobuf field: uint64 user_id = 1;
+     */
+    userId: string;
+    /**
+     * Channel ID of the channel where the user was.
+     *
+     * @generated from protobuf field: uint64 channel_id = 2;
+     */
+    channelId: string;
+}
+/**
+ * Event sent when an user is added to a private channel.
+ *
+ * @generated from protobuf message protocol.sync.v1.Event.UserAddedToChannel
+ */
+export interface Event_UserAddedToChannel {
+    /**
+     * User ID of the user that was added.
+     *
+     * @generated from protobuf field: uint64 user_id = 1;
+     */
+    userId: string;
+    /**
+     * Channel ID of the channel where the user will be.
+     *
+     * @generated from protobuf field: uint64 channel_id = 2;
+     */
+    channelId: string;
+}
+/**
  * Event sent when a user is invited to a guild.
  *
  * @generated from protobuf message protocol.sync.v1.Event.UserInvited
@@ -129,12 +183,28 @@ export interface Event_UserInvited {
      */
     inviterId: string;
     /**
-     * The unique identifier of a user's invite to another
-     * user to join a given guild.
-     *
-     * @generated from protobuf field: string invite_id = 3;
+     * @generated from protobuf oneof: location
      */
-    inviteId: string;
+    location: {
+        oneofKind: "guildInviteId";
+        /**
+         * The unique identifier of a user's invite to another
+         * user to join a given guild.
+         *
+         * @generated from protobuf field: string guild_invite_id = 3;
+         */
+        guildInviteId: string;
+    } | {
+        oneofKind: "channelId";
+        /**
+         * The channel ID of the private channel that the user was invited to.
+         *
+         * @generated from protobuf field: uint64 channel_id = 4;
+         */
+        channelId: string;
+    } | {
+        oneofKind: undefined;
+    };
 }
 /**
  * Event sent when a user rejects a guild invitation.
@@ -143,23 +213,40 @@ export interface Event_UserInvited {
  */
 export interface Event_UserRejectedInvite {
     /**
-     * Guild ID of the guild the invitee rejected an invite for.
-     *
-     * @generated from protobuf field: uint64 guild_id = 1;
-     */
-    guildId: string;
-    /**
      * User ID of the invitee that rejected the invitation.
      *
-     * @generated from protobuf field: uint64 user_id = 2;
+     * @generated from protobuf field: uint64 user_id = 1;
      */
     userId: string;
     /**
-     * Invite ID of the invite that was rejected.
+     * User ID of the inviter.
      *
-     * @generated from protobuf field: string invite_id = 3;
+     * @generated from protobuf field: uint64 inviter_id = 2;
      */
-    inviteId: string;
+    inviterId: string;
+    /**
+     * @generated from protobuf oneof: location
+     */
+    location: {
+        oneofKind: "guildInviteId";
+        /**
+         * The unique identifier of a user's invite to another
+         * user to join a given guild.
+         *
+         * @generated from protobuf field: string guild_invite_id = 3;
+         */
+        guildInviteId: string;
+    } | {
+        oneofKind: "channelId";
+        /**
+         * The channel ID of the private channel that the user was invited to.
+         *
+         * @generated from protobuf field: uint64 channel_id = 4;
+         */
+        channelId: string;
+    } | {
+        oneofKind: undefined;
+    };
 }
 /**
  * Used in `Pull` endpoint.
@@ -240,8 +327,10 @@ class Event$Type extends MessageType<Event> {
         super("protocol.sync.v1.Event", [
             { no: 1, name: "user_removed_from_guild", kind: "message", oneof: "kind", T: () => Event_UserRemovedFromGuild },
             { no: 2, name: "user_added_to_guild", kind: "message", oneof: "kind", T: () => Event_UserAddedToGuild },
-            { no: 3, name: "user_invited", kind: "message", oneof: "kind", T: () => Event_UserInvited },
-            { no: 4, name: "user_rejected_invite", kind: "message", oneof: "kind", T: () => Event_UserRejectedInvite }
+            { no: 3, name: "user_removed_from_channel", kind: "message", oneof: "kind", T: () => Event_UserRemovedFromChannel },
+            { no: 4, name: "user_added_to_channel", kind: "message", oneof: "kind", T: () => Event_UserAddedToChannel },
+            { no: 5, name: "user_invited", kind: "message", oneof: "kind", T: () => Event_UserInvited },
+            { no: 6, name: "user_rejected_invite", kind: "message", oneof: "kind", T: () => Event_UserRejectedInvite }
         ]);
     }
 }
@@ -276,12 +365,39 @@ class Event_UserAddedToGuild$Type extends MessageType<Event_UserAddedToGuild> {
  */
 export const Event_UserAddedToGuild = new Event_UserAddedToGuild$Type();
 // @generated message type with reflection information, may provide speed optimized methods
+class Event_UserRemovedFromChannel$Type extends MessageType<Event_UserRemovedFromChannel> {
+    constructor() {
+        super("protocol.sync.v1.Event.UserRemovedFromChannel", [
+            { no: 1, name: "user_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+            { no: 2, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ }
+        ]);
+    }
+}
+/**
+ * @generated MessageType for protobuf message protocol.sync.v1.Event.UserRemovedFromChannel
+ */
+export const Event_UserRemovedFromChannel = new Event_UserRemovedFromChannel$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class Event_UserAddedToChannel$Type extends MessageType<Event_UserAddedToChannel> {
+    constructor() {
+        super("protocol.sync.v1.Event.UserAddedToChannel", [
+            { no: 1, name: "user_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+            { no: 2, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ }
+        ]);
+    }
+}
+/**
+ * @generated MessageType for protobuf message protocol.sync.v1.Event.UserAddedToChannel
+ */
+export const Event_UserAddedToChannel = new Event_UserAddedToChannel$Type();
+// @generated message type with reflection information, may provide speed optimized methods
 class Event_UserInvited$Type extends MessageType<Event_UserInvited> {
     constructor() {
         super("protocol.sync.v1.Event.UserInvited", [
             { no: 1, name: "user_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
             { no: 2, name: "inviter_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-            { no: 3, name: "invite_id", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
+            { no: 3, name: "guild_invite_id", kind: "scalar", oneof: "location", T: 9 /*ScalarType.STRING*/ },
+            { no: 4, name: "channel_id", kind: "scalar", oneof: "location", T: 4 /*ScalarType.UINT64*/ }
         ]);
     }
 }
@@ -293,9 +409,10 @@ export const Event_UserInvited = new Event_UserInvited$Type();
 class Event_UserRejectedInvite$Type extends MessageType<Event_UserRejectedInvite> {
     constructor() {
         super("protocol.sync.v1.Event.UserRejectedInvite", [
-            { no: 1, name: "guild_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-            { no: 2, name: "user_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-            { no: 3, name: "invite_id", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
+            { no: 1, name: "user_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+            { no: 2, name: "inviter_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+            { no: 3, name: "guild_invite_id", kind: "scalar", oneof: "location", T: 9 /*ScalarType.STRING*/ },
+            { no: 4, name: "channel_id", kind: "scalar", oneof: "location", T: 4 /*ScalarType.UINT64*/ }
         ]);
     }
 }

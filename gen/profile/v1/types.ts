@@ -3,31 +3,190 @@
 // tslint:disable
 import { MessageType } from "@protobuf-ts/runtime";
 /**
+ * The status information for a user.
+ *
+ * @generated from protobuf message protocol.profile.v1.UserStatus
+ */
+export interface UserStatus {
+    /**
+     * The kind of the status.
+     *
+     * @generated from protobuf field: protocol.profile.v1.UserStatus.Kind kind = 1;
+     */
+    kind: UserStatus_Kind;
+    /**
+     * The message for the status. This is independent of the
+     * activities being performed by the user.
+     *
+     * @generated from protobuf field: string message = 2;
+     */
+    message: string;
+    /**
+     * The activities this user is performing, if any.
+     *
+     * The first activity in this list has the most priority.
+     *
+     * @generated from protobuf field: repeated protocol.profile.v1.UserStatus.Activity activities = 3;
+     */
+    activities: UserStatus_Activity[];
+    /**
+     * The platform the user is on.
+     *
+     * @generated from protobuf field: protocol.profile.v1.UserStatus.Platform platform = 4;
+     */
+    platform: UserStatus_Platform;
+}
+/**
+ * Information about an action the user can use
+ * in the context of an activity.
+ *
+ * @generated from protobuf message protocol.profile.v1.UserStatus.Action
+ */
+export interface UserStatus_Action {
+    /**
+     * URL to open when this action is clicked.
+     *
+     * @generated from protobuf field: string url = 1;
+     */
+    url: string;
+    /**
+     * Name of this action. This must be provided if
+     * an icon isn't provided.
+     *
+     * @generated from protobuf field: optional string name = 2;
+     */
+    name?: string;
+    /**
+     * Icon for this action.
+     * This must be a file ID that points to an image.
+     *
+     * This must be provided if a name isn't provided.
+     *
+     * @generated from protobuf field: optional string icon = 3;
+     */
+    icon?: string;
+}
+/**
+ * Information about an activity the user is performing.
+ *
+ * @generated from protobuf message protocol.profile.v1.UserStatus.Activity
+ */
+export interface UserStatus_Activity {
+    /**
+     * When the user started performing this
+     * activity, in seconds since UNIX epoch.
+     *
+     * @generated from protobuf field: uint64 started = 1;
+     */
+    started: string;
+    /**
+     * Title of this activity.
+     *
+     * @generated from protobuf field: string title = 2;
+     */
+    title: string;
+    /**
+     * Details about this activity.
+     *
+     * @generated from protobuf field: optional string details = 3;
+     */
+    details?: string;
+    /**
+     * An image that relates to the activity.
+     * This must be a file ID that points to an image.
+     *
+     * @generated from protobuf field: optional string image = 4;
+     */
+    image?: string;
+    /**
+     * A color that relates to the activity.
+     *
+     * @generated from protobuf field: optional uint32 color = 5;
+     */
+    color?: number;
+    /**
+     * Actions for this activity.
+     *
+     * @generated from protobuf field: repeated protocol.profile.v1.UserStatus.Action actions = 6;
+     */
+    actions: UserStatus_Action[];
+}
+/**
+ * The possible status kinds a user can have.
+ *
+ * @generated from protobuf enum protocol.profile.v1.UserStatus.Kind
+ */
+export enum UserStatus_Kind {
+    /**
+     * The user is offline (not connected to the server).
+     *
+     * @generated from protobuf enum value: KIND_OFFLINE_UNSPECIFIED = 0;
+     */
+    OFFLINE_UNSPECIFIED = 0,
+    /**
+     * The user is online.
+     *
+     * @generated from protobuf enum value: KIND_ONLINE = 1;
+     */
+    ONLINE = 1,
+    /**
+     * The user is away.
+     *
+     * @generated from protobuf enum value: KIND_IDLE = 2;
+     */
+    IDLE = 2,
+    /**
+     * The user does not want to be disturbed.
+     *
+     * @generated from protobuf enum value: KIND_DO_NOT_DISTURB = 3;
+     */
+    DO_NOT_DISTURB = 3
+}
+/**
+ * The possible platforms a user can be on.
+ *
+ * @generated from protobuf enum protocol.profile.v1.UserStatus.Platform
+ */
+export enum UserStatus_Platform {
+    /**
+     * The user is on a desktop platform.
+     *
+     * @generated from protobuf enum value: PLATFORM_DESKTOP_UNSPECIFIED = 0;
+     */
+    DESKTOP_UNSPECIFIED = 0,
+    /**
+     * The user is on a mobile platform.
+     *
+     * @generated from protobuf enum value: PLATFORM_MOBILE = 1;
+     */
+    MOBILE = 1
+}
+/**
  * Data for a single profile, without the user's ID.
  *
  * @generated from protobuf message protocol.profile.v1.Profile
  */
 export interface Profile {
     /**
-     * the name of the user.
+     * The name of the user.
      *
      * @generated from protobuf field: string user_name = 1;
      */
     userName: string;
     /**
-     * the user's avatar. This must be a file ID that points to an image.
+     * The user's avatar. This must be a file ID.
      *
      * @generated from protobuf field: optional string user_avatar = 2;
      */
     userAvatar?: string;
     /**
-     * the status of the user.
+     * The status of the user.
      *
      * @generated from protobuf field: protocol.profile.v1.UserStatus user_status = 3;
      */
-    userStatus: UserStatus;
+    userStatus?: UserStatus;
     /**
-     * what kind of account the user is, e.g. full, guest, bot.
+     * What kind of account the user is, e.g. full, guest, bot.
      *
      * @generated from protobuf field: protocol.profile.v1.AccountKind account_kind = 4;
      */
@@ -75,26 +234,11 @@ export interface UpdateProfileRequest {
     newUserName?: string;
     /**
      * New user avatar. The avatar will be removed if the string is empty.
+     * This must be a local file ID.
      *
      * @generated from protobuf field: optional string new_user_avatar = 2;
      */
     newUserAvatar?: string;
-    /**
-     * New status of the user.
-     *
-     * @generated from protobuf field: optional protocol.profile.v1.UserStatus new_user_status = 3;
-     */
-    newUserStatus?: UserStatus;
-    /**
-     * New whether the user is a bot or not.
-     *
-     * Deprecated; see bot service and guest handling
-     * in auth.
-     *
-     * @deprecated
-     * @generated from protobuf field: optional bool new_is_bot = 4 [deprecated = true];
-     */
-    newIsBot?: boolean;
 }
 /**
  * Used in `UpdateProfile` endpoint.
@@ -102,6 +246,26 @@ export interface UpdateProfileRequest {
  * @generated from protobuf message protocol.profile.v1.UpdateProfileResponse
  */
 export interface UpdateProfileResponse {
+}
+/**
+ * Used in `UpdateStatus` endpoint.
+ *
+ * @generated from protobuf message protocol.profile.v1.UpdateStatusRequest
+ */
+export interface UpdateStatusRequest {
+    /**
+     * The new user status to use.
+     *
+     * @generated from protobuf field: protocol.profile.v1.UserStatus new_status = 1;
+     */
+    newStatus?: UserStatus;
+}
+/**
+ * Used in `UpdateStatus` endpoint.
+ *
+ * @generated from protobuf message protocol.profile.v1.UpdateStatusResponse
+ */
+export interface UpdateStatusResponse {
 }
 /**
  * Used in `GetAppData` endpoint.
@@ -156,80 +320,83 @@ export interface SetAppDataRequest {
 export interface SetAppDataResponse {
 }
 /**
- * The possible statuses a user can have.
- *
- * @generated from protobuf enum protocol.profile.v1.UserStatus
- */
-export enum UserStatus {
-    /**
-     * User is offline (not connected to the server).
-     *
-     * @generated from protobuf enum value: USER_STATUS_OFFLINE_UNSPECIFIED = 0;
-     */
-    OFFLINE_UNSPECIFIED = 0,
-    /**
-     * User is online (this is the default value if ommitted).
-     *
-     * @generated from protobuf enum value: USER_STATUS_ONLINE = 1;
-     */
-    ONLINE = 1,
-    /**
-     * User is away.
-     *
-     * @generated from protobuf enum value: USER_STATUS_IDLE = 2;
-     */
-    IDLE = 2,
-    /**
-     * User does not want to be disturbed.
-     *
-     * @generated from protobuf enum value: USER_STATUS_DO_NOT_DISTURB = 3;
-     */
-    DO_NOT_DISTURB = 3,
-    /**
-     * User is on mobile.
-     *
-     * @generated from protobuf enum value: USER_STATUS_MOBILE = 4;
-     */
-    MOBILE = 4,
-    /**
-     * User is streaming
-     *
-     * @generated from protobuf enum value: USER_STATUS_STREAMING = 5;
-     */
-    STREAMING = 5
-}
-/**
- * The possible kinds of an account
+ * The possible kinds of an account.
  *
  * @generated from protobuf enum protocol.profile.v1.AccountKind
  */
 export enum AccountKind {
     /**
-     * The account is a full-fledged account controlled by a human
+     * The account is a full-fledged account controlled by a human.
      *
      * @generated from protobuf enum value: ACCOUNT_KIND_FULL_UNSPECIFIED = 0;
      */
     FULL_UNSPECIFIED = 0,
     /**
-     * The account is an account controlled by a bot
+     * The account is an account controlled by a bot.
      *
      * @generated from protobuf enum value: ACCOUNT_KIND_BOT = 1;
      */
     BOT = 1,
     /**
-     * The account is a guest account controlled by a human
+     * The account is a guest account controlled by a human.
      *
      * @generated from protobuf enum value: ACCOUNT_KIND_GUEST = 2;
      */
     GUEST = 2
 }
 // @generated message type with reflection information, may provide speed optimized methods
+class UserStatus$Type extends MessageType<UserStatus> {
+    constructor() {
+        super("protocol.profile.v1.UserStatus", [
+            { no: 1, name: "kind", kind: "enum", T: () => ["protocol.profile.v1.UserStatus.Kind", UserStatus_Kind, "KIND_"] },
+            { no: 2, name: "message", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 3, name: "activities", kind: "message", repeat: 1 /*RepeatType.PACKED*/, T: () => UserStatus_Activity },
+            { no: 4, name: "platform", kind: "enum", T: () => ["protocol.profile.v1.UserStatus.Platform", UserStatus_Platform, "PLATFORM_"] }
+        ]);
+    }
+}
+/**
+ * @generated MessageType for protobuf message protocol.profile.v1.UserStatus
+ */
+export const UserStatus = new UserStatus$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class UserStatus_Action$Type extends MessageType<UserStatus_Action> {
+    constructor() {
+        super("protocol.profile.v1.UserStatus.Action", [
+            { no: 1, name: "url", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 2, name: "name", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
+            { no: 3, name: "icon", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ }
+        ]);
+    }
+}
+/**
+ * @generated MessageType for protobuf message protocol.profile.v1.UserStatus.Action
+ */
+export const UserStatus_Action = new UserStatus_Action$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class UserStatus_Activity$Type extends MessageType<UserStatus_Activity> {
+    constructor() {
+        super("protocol.profile.v1.UserStatus.Activity", [
+            { no: 1, name: "started", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+            { no: 2, name: "title", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 3, name: "details", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
+            { no: 4, name: "image", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
+            { no: 5, name: "color", kind: "scalar", opt: true, T: 13 /*ScalarType.UINT32*/ },
+            { no: 6, name: "actions", kind: "message", repeat: 1 /*RepeatType.PACKED*/, T: () => UserStatus_Action }
+        ]);
+    }
+}
+/**
+ * @generated MessageType for protobuf message protocol.profile.v1.UserStatus.Activity
+ */
+export const UserStatus_Activity = new UserStatus_Activity$Type();
+// @generated message type with reflection information, may provide speed optimized methods
 class Profile$Type extends MessageType<Profile> {
     constructor() {
         super("protocol.profile.v1.Profile", [
             { no: 1, name: "user_name", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
             { no: 2, name: "user_avatar", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
-            { no: 3, name: "user_status", kind: "enum", T: () => ["protocol.profile.v1.UserStatus", UserStatus, "USER_STATUS_"] },
+            { no: 3, name: "user_status", kind: "message", T: () => UserStatus },
             { no: 4, name: "account_kind", kind: "enum", T: () => ["protocol.profile.v1.AccountKind", AccountKind, "ACCOUNT_KIND_"] }
         ]);
     }
@@ -267,9 +434,7 @@ class UpdateProfileRequest$Type extends MessageType<UpdateProfileRequest> {
     constructor() {
         super("protocol.profile.v1.UpdateProfileRequest", [
             { no: 1, name: "new_user_name", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
-            { no: 2, name: "new_user_avatar", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
-            { no: 3, name: "new_user_status", kind: "enum", opt: true, T: () => ["protocol.profile.v1.UserStatus", UserStatus, "USER_STATUS_"] },
-            { no: 4, name: "new_is_bot", kind: "scalar", opt: true, T: 8 /*ScalarType.BOOL*/ }
+            { no: 2, name: "new_user_avatar", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ }
         ]);
     }
 }
@@ -287,6 +452,28 @@ class UpdateProfileResponse$Type extends MessageType<UpdateProfileResponse> {
  * @generated MessageType for protobuf message protocol.profile.v1.UpdateProfileResponse
  */
 export const UpdateProfileResponse = new UpdateProfileResponse$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class UpdateStatusRequest$Type extends MessageType<UpdateStatusRequest> {
+    constructor() {
+        super("protocol.profile.v1.UpdateStatusRequest", [
+            { no: 1, name: "new_status", kind: "message", T: () => UserStatus }
+        ]);
+    }
+}
+/**
+ * @generated MessageType for protobuf message protocol.profile.v1.UpdateStatusRequest
+ */
+export const UpdateStatusRequest = new UpdateStatusRequest$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class UpdateStatusResponse$Type extends MessageType<UpdateStatusResponse> {
+    constructor() {
+        super("protocol.profile.v1.UpdateStatusResponse", []);
+    }
+}
+/**
+ * @generated MessageType for protobuf message protocol.profile.v1.UpdateStatusResponse
+ */
+export const UpdateStatusResponse = new UpdateStatusResponse$Type();
 // @generated message type with reflection information, may provide speed optimized methods
 class GetAppDataRequest$Type extends MessageType<GetAppDataRequest> {
     constructor() {

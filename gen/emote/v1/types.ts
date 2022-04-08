@@ -34,7 +34,7 @@ export interface EmotePack {
  */
 export interface Emote {
     /**
-     * The HMC of the emote. Must point to an image.
+     * The HMC or external URL of the emote. Must point to an image.
      *
      * @generated from protobuf field: string image_id = 1;
      */
@@ -146,7 +146,7 @@ export interface AddEmoteToPackRequest {
      */
     packId: string;
     /**
-     * The file ID of the image to use for the emote.
+     * The file ID or external URL of the image to use for the emote.
      *
      * @generated from protobuf field: string image_id = 2;
      */

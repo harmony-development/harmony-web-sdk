@@ -27,8 +27,8 @@ import { GetBannedUsersResponse } from "./guilds";
 import { GetBannedUsersRequest } from "./guilds";
 import { PreviewGuildResponse } from "./guilds";
 import { PreviewGuildRequest } from "./guilds";
-import { TypingResponse } from "./channels";
-import { TypingRequest } from "./channels";
+import { TypingResponse } from "./messages";
+import { TypingRequest } from "./messages";
 import { GetUserRolesResponse } from "./permissions";
 import { GetUserRolesRequest } from "./permissions";
 import { ManageUserRolesResponse } from "./permissions";
@@ -65,8 +65,8 @@ import { DeleteInviteResponse } from "./guilds";
 import { DeleteInviteRequest } from "./guilds";
 import { DeleteGuildResponse } from "./guilds";
 import { DeleteGuildRequest } from "./guilds";
-import { UpdateMessageTextResponse } from "./messages";
-import { UpdateMessageTextRequest } from "./messages";
+import { UpdateMessageContentResponse } from "./messages";
+import { UpdateMessageContentRequest } from "./messages";
 import { UpdateAllChannelOrderResponse } from "./channels";
 import { UpdateAllChannelOrderRequest } from "./channels";
 import { UpdateChannelOrderResponse } from "./channels";
@@ -95,18 +95,24 @@ import { GetPendingInvitesResponse } from "./guilds";
 import { GetPendingInvitesRequest } from "./guilds";
 import { InviteUserToGuildResponse } from "./guilds";
 import { InviteUserToGuildRequest } from "./guilds";
+import { GetPrivateChannelListResponse } from "./private_channel";
+import { GetPrivateChannelListRequest } from "./private_channel";
 import { GetGuildListResponse } from "./guilds";
 import { GetGuildListRequest } from "./guilds";
 import { CreateChannelResponse } from "./channels";
 import { CreateChannelRequest } from "./channels";
 import { CreateInviteResponse } from "./guilds";
 import { CreateInviteRequest } from "./guilds";
-import { UpgradeRoomToGuildResponse } from "./guilds";
-import { UpgradeRoomToGuildRequest } from "./guilds";
-import { CreateDirectMessageResponse } from "./guilds";
-import { CreateDirectMessageRequest } from "./guilds";
-import { CreateRoomResponse } from "./guilds";
-import { CreateRoomRequest } from "./guilds";
+import { LeavePrivateChannelResponse } from "./private_channel";
+import { LeavePrivateChannelRequest } from "./private_channel";
+import { JoinPrivateChannelResponse } from "./private_channel";
+import { JoinPrivateChannelRequest } from "./private_channel";
+import { DeletePrivateChannelResponse } from "./private_channel";
+import { DeletePrivateChannelRequest } from "./private_channel";
+import { UpdatePrivateChannelMembersResponse } from "./private_channel";
+import { UpdatePrivateChannelMembersRequest } from "./private_channel";
+import { CreatePrivateChannelResponse } from "./private_channel";
+import { CreatePrivateChannelRequest } from "./private_channel";
 import { CreateGuildResponse } from "./guilds";
 import { CreateGuildRequest } from "./guilds";
 import { ServiceType } from "@protobuf-ts/runtime-rpc";
@@ -115,12 +121,15 @@ import { ServiceType } from "@protobuf-ts/runtime-rpc";
  */
 export const ChatService = new ServiceType("protocol.chat.v1.ChatService", [
     { name: "CreateGuild", options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } }, I: CreateGuildRequest, O: CreateGuildResponse },
-    { name: "CreateRoom", options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } }, I: CreateRoomRequest, O: CreateRoomResponse },
-    { name: "CreateDirectMessage", options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } }, I: CreateDirectMessageRequest, O: CreateDirectMessageResponse },
-    { name: "UpgradeRoomToGuild", options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresOwner: true } }, I: UpgradeRoomToGuildRequest, O: UpgradeRoomToGuildResponse },
+    { name: "CreatePrivateChannel", options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } }, I: CreatePrivateChannelRequest, O: CreatePrivateChannelResponse },
+    { name: "UpdatePrivateChannelMembers", options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } }, I: UpdatePrivateChannelMembersRequest, O: UpdatePrivateChannelMembersResponse },
+    { name: "DeletePrivateChannel", options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } }, I: DeletePrivateChannelRequest, O: DeletePrivateChannelResponse },
+    { name: "JoinPrivateChannel", options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } }, I: JoinPrivateChannelRequest, O: JoinPrivateChannelResponse },
+    { name: "LeavePrivateChannel", options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } }, I: LeavePrivateChannelRequest, O: LeavePrivateChannelResponse },
     { name: "CreateInvite", options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "invites.manage.create" } }, I: CreateInviteRequest, O: CreateInviteResponse },
     { name: "CreateChannel", options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "channels.manage.create" } }, I: CreateChannelRequest, O: CreateChannelResponse },
     { name: "GetGuildList", options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } }, I: GetGuildListRequest, O: GetGuildListResponse },
+    { name: "GetPrivateChannelList", options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } }, I: GetPrivateChannelListRequest, O: GetPrivateChannelListResponse },
     { name: "InviteUserToGuild", options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "invites.manage.create" } }, I: InviteUserToGuildRequest, O: InviteUserToGuildResponse },
     { name: "GetPendingInvites", options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } }, I: GetPendingInvitesRequest, O: GetPendingInvitesResponse },
     { name: "RejectPendingInvite", options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } }, I: RejectPendingInviteRequest, O: RejectPendingInviteResponse },
@@ -135,7 +144,7 @@ export const ChatService = new ServiceType("protocol.chat.v1.ChatService", [
     { name: "UpdateChannelInformation", options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "channels.manage.change-information" } }, I: UpdateChannelInformationRequest, O: UpdateChannelInformationResponse },
     { name: "UpdateChannelOrder", options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "channels.manage.move" } }, I: UpdateChannelOrderRequest, O: UpdateChannelOrderResponse },
     { name: "UpdateAllChannelOrder", options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "channels.manage.move" } }, I: UpdateAllChannelOrderRequest, O: UpdateAllChannelOrderResponse },
-    { name: "UpdateMessageText", options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "messages.send" } }, I: UpdateMessageTextRequest, O: UpdateMessageTextResponse },
+    { name: "UpdateMessageContent", options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "messages.send" } }, I: UpdateMessageContentRequest, O: UpdateMessageContentResponse },
     { name: "DeleteGuild", options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresOwner: true } }, I: DeleteGuildRequest, O: DeleteGuildResponse },
     { name: "DeleteInvite", options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "invites.manage.delete" } }, I: DeleteInviteRequest, O: DeleteInviteResponse },
     { name: "DeleteChannel", options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "channels.manage.delete" } }, I: DeleteChannelRequest, O: DeleteChannelResponse },

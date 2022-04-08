@@ -144,64 +144,6 @@ export enum ItemPosition_Position {
      */
     AFTER = 1
 }
-/**
- * An extremely low-quality WebP thumbnail.
- *
- * The resolution is usually no larger than 64x64.
- *
- * @generated from protobuf message protocol.harmonytypes.v1.Minithumbnail
- */
-export interface Minithumbnail {
-    /**
-     * The width of the minithumbnail, in pixels.
-     *
-     * @generated from protobuf field: uint32 width = 1;
-     */
-    width: number;
-    /**
-     * The height of the minithumbnail, in pixels.
-     *
-     * @generated from protobuf field: uint32 height = 2;
-     */
-    height: number;
-    /**
-     * The data of the minithumbnail.
-     *
-     * @generated from protobuf field: bytes data = 3;
-     */
-    data: Uint8Array;
-}
-/**
- * Contains data about an image.
- *
- * @generated from protobuf message protocol.harmonytypes.v1.ImageInfo
- */
-export interface ImageInfo {
-    /**
-     * The height of the image, in pixels.
-     *
-     * @generated from protobuf field: uint32 height = 1;
-     */
-    height: number;
-    /**
-     * The width of the image, in pixels.
-     *
-     * @generated from protobuf field: uint32 width = 2;
-     */
-    width: number;
-    /**
-     * The image's caption.
-     *
-     * @generated from protobuf field: optional string caption = 3;
-     */
-    caption?: string;
-    /**
-     * A thumbnail for the image.
-     *
-     * @generated from protobuf field: optional protocol.harmonytypes.v1.Minithumbnail minithumbnail = 4;
-     */
-    minithumbnail?: Minithumbnail;
-}
 // @generated message type with reflection information, may provide speed optimized methods
 class HarmonyMethodMetadata$Type extends MessageType<HarmonyMethodMetadata> {
     constructor() {
@@ -279,32 +221,3 @@ class ItemPosition$Type extends MessageType<ItemPosition> {
  * @generated MessageType for protobuf message protocol.harmonytypes.v1.ItemPosition
  */
 export const ItemPosition = new ItemPosition$Type();
-// @generated message type with reflection information, may provide speed optimized methods
-class Minithumbnail$Type extends MessageType<Minithumbnail> {
-    constructor() {
-        super("protocol.harmonytypes.v1.Minithumbnail", [
-            { no: 1, name: "width", kind: "scalar", T: 13 /*ScalarType.UINT32*/ },
-            { no: 2, name: "height", kind: "scalar", T: 13 /*ScalarType.UINT32*/ },
-            { no: 3, name: "data", kind: "scalar", T: 12 /*ScalarType.BYTES*/ }
-        ]);
-    }
-}
-/**
- * @generated MessageType for protobuf message protocol.harmonytypes.v1.Minithumbnail
- */
-export const Minithumbnail = new Minithumbnail$Type();
-// @generated message type with reflection information, may provide speed optimized methods
-class ImageInfo$Type extends MessageType<ImageInfo> {
-    constructor() {
-        super("protocol.harmonytypes.v1.ImageInfo", [
-            { no: 1, name: "height", kind: "scalar", T: 13 /*ScalarType.UINT32*/ },
-            { no: 2, name: "width", kind: "scalar", T: 13 /*ScalarType.UINT32*/ },
-            { no: 3, name: "caption", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
-            { no: 4, name: "minithumbnail", kind: "message", T: () => Minithumbnail }
-        ]);
-    }
-}
-/**
- * @generated MessageType for protobuf message protocol.harmonytypes.v1.ImageInfo
- */
-export const ImageInfo = new ImageInfo$Type();

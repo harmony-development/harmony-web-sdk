@@ -2,7 +2,6 @@
 // @generated from protobuf file "profile/v1/stream.proto" (package "protocol.profile.v1", syntax proto3)
 // tslint:disable
 import { MessageType } from "@protobuf-ts/runtime";
-import { AccountKind } from "./types";
 import { UserStatus } from "./types";
 /**
  * Event sent when a user's profile is updated.
@@ -31,26 +30,28 @@ export interface ProfileUpdated {
      * @generated from protobuf field: optional string new_avatar = 3;
      */
     newAvatar?: string;
+}
+/**
+ * Event sent when a user's status is updated.
+ *
+ * Servers should sent this event only to users that can "see" (eg. they are
+ * in the same guild) the user this event was triggered by.
+ *
+ * @generated from protobuf message protocol.profile.v1.StatusUpdated
+ */
+export interface StatusUpdated {
+    /**
+     * User ID of the user that had it's status updated.
+     *
+     * @generated from protobuf field: uint64 user_id = 1;
+     */
+    userId: string;
     /**
      * New status for this user.
      *
-     * @generated from protobuf field: optional protocol.profile.v1.UserStatus new_status = 4;
+     * @generated from protobuf field: protocol.profile.v1.UserStatus new_status = 2;
      */
     newStatus?: UserStatus;
-    /**
-     * New is bot or not for this user.
-     * Deprecated, prefer new_account_kind if set.
-     *
-     * @deprecated
-     * @generated from protobuf field: optional bool new_is_bot = 5 [deprecated = true];
-     */
-    newIsBot?: boolean;
-    /**
-     * The new account kind for this account
-     *
-     * @generated from protobuf field: optional protocol.profile.v1.AccountKind new_account_kind = 6;
-     */
-    newAccountKind?: AccountKind;
 }
 /**
  * Describes an emote service event.
@@ -66,9 +67,17 @@ export interface StreamEvent {
         /**
          * Send the profile updated event.
          *
-         * @generated from protobuf field: protocol.profile.v1.ProfileUpdated profile_updated = 14;
+         * @generated from protobuf field: protocol.profile.v1.ProfileUpdated profile_updated = 1;
          */
         profileUpdated: ProfileUpdated;
+    } | {
+        oneofKind: "statusUpdated";
+        /**
+         * Send the status updated event.
+         *
+         * @generated from protobuf field: protocol.profile.v1.StatusUpdated status_updated = 2;
+         */
+        statusUpdated: StatusUpdated;
     } | {
         oneofKind: undefined;
     };
@@ -79,10 +88,7 @@ class ProfileUpdated$Type extends MessageType<ProfileUpdated> {
         super("protocol.profile.v1.ProfileUpdated", [
             { no: 1, name: "user_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
             { no: 2, name: "new_username", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
-            { no: 3, name: "new_avatar", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
-            { no: 4, name: "new_status", kind: "enum", opt: true, T: () => ["protocol.profile.v1.UserStatus", UserStatus, "USER_STATUS_"] },
-            { no: 5, name: "new_is_bot", kind: "scalar", opt: true, T: 8 /*ScalarType.BOOL*/ },
-            { no: 6, name: "new_account_kind", kind: "enum", opt: true, T: () => ["protocol.profile.v1.AccountKind", AccountKind, "ACCOUNT_KIND_"] }
+            { no: 3, name: "new_avatar", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ }
         ]);
     }
 }
@@ -91,10 +97,24 @@ class ProfileUpdated$Type extends MessageType<ProfileUpdated> {
  */
 export const ProfileUpdated = new ProfileUpdated$Type();
 // @generated message type with reflection information, may provide speed optimized methods
+class StatusUpdated$Type extends MessageType<StatusUpdated> {
+    constructor() {
+        super("protocol.profile.v1.StatusUpdated", [
+            { no: 1, name: "user_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+            { no: 2, name: "new_status", kind: "message", T: () => UserStatus }
+        ]);
+    }
+}
+/**
+ * @generated MessageType for protobuf message protocol.profile.v1.StatusUpdated
+ */
+export const StatusUpdated = new StatusUpdated$Type();
+// @generated message type with reflection information, may provide speed optimized methods
 class StreamEvent$Type extends MessageType<StreamEvent> {
     constructor() {
         super("protocol.profile.v1.StreamEvent", [
-            { no: 14, name: "profile_updated", kind: "message", oneof: "event", T: () => ProfileUpdated }
+            { no: 1, name: "profile_updated", kind: "message", oneof: "event", T: () => ProfileUpdated },
+            { no: 2, name: "status_updated", kind: "message", oneof: "event", T: () => StatusUpdated }
         ]);
     }
 }

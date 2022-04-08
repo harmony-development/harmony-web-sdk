@@ -8,6 +8,8 @@ import type { SetAppDataResponse } from "./types";
 import type { SetAppDataRequest } from "./types";
 import type { GetAppDataResponse } from "./types";
 import type { GetAppDataRequest } from "./types";
+import type { UpdateStatusResponse } from "./types";
+import type { UpdateStatusRequest } from "./types";
 import type { UpdateProfileResponse } from "./types";
 import type { UpdateProfileRequest } from "./types";
 import { stackIntercept } from "@protobuf-ts/runtime-rpc";
@@ -33,6 +35,12 @@ export interface IProfileServiceClient {
      * @generated from protobuf rpc: UpdateProfile(protocol.profile.v1.UpdateProfileRequest) returns (protocol.profile.v1.UpdateProfileResponse);
      */
     updateProfile(input: UpdateProfileRequest, options?: RpcOptions): UnaryCall<UpdateProfileRequest, UpdateProfileResponse>;
+    /**
+     * Updates the user's status.
+     *
+     * @generated from protobuf rpc: UpdateStatus(protocol.profile.v1.UpdateStatusRequest) returns (protocol.profile.v1.UpdateStatusResponse);
+     */
+    updateStatus(input: UpdateStatusRequest, options?: RpcOptions): UnaryCall<UpdateStatusRequest, UpdateStatusResponse>;
     /**
      * Gets app data for a user (this can be used to store user preferences which
      * is synchronized across devices).
@@ -77,13 +85,22 @@ export class ProfileServiceClient implements IProfileServiceClient, ServiceInfo 
         return stackIntercept<UpdateProfileRequest, UpdateProfileResponse>("unary", this._transport, method, opt, input);
     }
     /**
+     * Updates the user's status.
+     *
+     * @generated from protobuf rpc: UpdateStatus(protocol.profile.v1.UpdateStatusRequest) returns (protocol.profile.v1.UpdateStatusResponse);
+     */
+    updateStatus(input: UpdateStatusRequest, options?: RpcOptions): UnaryCall<UpdateStatusRequest, UpdateStatusResponse> {
+        const method = this.methods[2], opt = this._transport.mergeOptions(options);
+        return stackIntercept<UpdateStatusRequest, UpdateStatusResponse>("unary", this._transport, method, opt, input);
+    }
+    /**
      * Gets app data for a user (this can be used to store user preferences which
      * is synchronized across devices).
      *
      * @generated from protobuf rpc: GetAppData(protocol.profile.v1.GetAppDataRequest) returns (protocol.profile.v1.GetAppDataResponse);
      */
     getAppData(input: GetAppDataRequest, options?: RpcOptions): UnaryCall<GetAppDataRequest, GetAppDataResponse> {
-        const method = this.methods[2], opt = this._transport.mergeOptions(options);
+        const method = this.methods[3], opt = this._transport.mergeOptions(options);
         return stackIntercept<GetAppDataRequest, GetAppDataResponse>("unary", this._transport, method, opt, input);
     }
     /**
@@ -92,7 +109,7 @@ export class ProfileServiceClient implements IProfileServiceClient, ServiceInfo 
      * @generated from protobuf rpc: SetAppData(protocol.profile.v1.SetAppDataRequest) returns (protocol.profile.v1.SetAppDataResponse);
      */
     setAppData(input: SetAppDataRequest, options?: RpcOptions): UnaryCall<SetAppDataRequest, SetAppDataResponse> {
-        const method = this.methods[3], opt = this._transport.mergeOptions(options);
+        const method = this.methods[4], opt = this._transport.mergeOptions(options);
         return stackIntercept<SetAppDataRequest, SetAppDataResponse>("unary", this._transport, method, opt, input);
     }
 }
