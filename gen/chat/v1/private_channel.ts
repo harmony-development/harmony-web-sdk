@@ -24,6 +24,12 @@ export interface PrivateChannel {
      * @generated from protobuf field: bool is_dm = 2;
      */
     isDm: boolean;
+    /**
+     * The name of the channel.
+     *
+     * @generated from protobuf field: optional string name = 3;
+     */
+    name?: string;
 }
 /**
  * An entry in the list of private channels.
@@ -43,6 +49,12 @@ export interface PrivateChannelListEntry {
      * @generated from protobuf field: string server_id = 2;
      */
     serverId: string;
+    /**
+     * The data for this channel.
+     *
+     * @generated from protobuf field: protocol.chat.v1.PrivateChannel data = 3;
+     */
+    data?: PrivateChannel;
 }
 /**
  * Request type used in `CreatePrivateChannel` endpoint.
@@ -65,6 +77,12 @@ export interface CreatePrivateChannelRequest {
      * @generated from protobuf field: bool is_dm = 2;
      */
     isDm: boolean;
+    /**
+     * The name of the channel.
+     *
+     * @generated from protobuf field: optional string name = 3;
+     */
+    name?: string;
 }
 /**
  * Response type used in `CreatePrivateChannel` endpoint.
@@ -112,6 +130,32 @@ export interface UpdatePrivateChannelMembersRequest {
  * @generated from protobuf message protocol.chat.v1.UpdatePrivateChannelMembersResponse
  */
 export interface UpdatePrivateChannelMembersResponse {
+}
+/**
+ * Request type used in `UpdatePrivateChannelName` endpoint.
+ *
+ * @generated from protobuf message protocol.chat.v1.UpdatePrivateChannelNameRequest
+ */
+export interface UpdatePrivateChannelNameRequest {
+    /**
+     * The channel ID of the private channel to update the name for.
+     *
+     * @generated from protobuf field: uint64 channel_id = 1;
+     */
+    channelId: string;
+    /**
+     * The new name of the private channel.
+     *
+     * @generated from protobuf field: optional string name = 2;
+     */
+    name?: string;
+}
+/**
+ * Response type used in `UpdatePrivateChannelName` endpoint.
+ *
+ * @generated from protobuf message protocol.chat.v1.UpdatePrivateChannelNameResponse
+ */
+export interface UpdatePrivateChannelNameResponse {
 }
 /**
  * Request type used in `DeletePrivateChannel` endpoint.
@@ -198,7 +242,8 @@ class PrivateChannel$Type extends MessageType<PrivateChannel> {
     constructor() {
         super("protocol.chat.v1.PrivateChannel", [
             { no: 1, name: "members", kind: "scalar", repeat: 1 /*RepeatType.PACKED*/, T: 4 /*ScalarType.UINT64*/ },
-            { no: 2, name: "is_dm", kind: "scalar", T: 8 /*ScalarType.BOOL*/ }
+            { no: 2, name: "is_dm", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
+            { no: 3, name: "name", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ }
         ]);
     }
 }
@@ -211,7 +256,8 @@ class PrivateChannelListEntry$Type extends MessageType<PrivateChannelListEntry> 
     constructor() {
         super("protocol.chat.v1.PrivateChannelListEntry", [
             { no: 1, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-            { no: 2, name: "server_id", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
+            { no: 2, name: "server_id", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 3, name: "data", kind: "message", T: () => PrivateChannel }
         ]);
     }
 }
@@ -224,7 +270,8 @@ class CreatePrivateChannelRequest$Type extends MessageType<CreatePrivateChannelR
     constructor() {
         super("protocol.chat.v1.CreatePrivateChannelRequest", [
             { no: 1, name: "members", kind: "scalar", repeat: 1 /*RepeatType.PACKED*/, T: 4 /*ScalarType.UINT64*/ },
-            { no: 2, name: "is_dm", kind: "scalar", T: 8 /*ScalarType.BOOL*/ }
+            { no: 2, name: "is_dm", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
+            { no: 3, name: "name", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ }
         ]);
     }
 }
@@ -268,6 +315,29 @@ class UpdatePrivateChannelMembersResponse$Type extends MessageType<UpdatePrivate
  * @generated MessageType for protobuf message protocol.chat.v1.UpdatePrivateChannelMembersResponse
  */
 export const UpdatePrivateChannelMembersResponse = new UpdatePrivateChannelMembersResponse$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class UpdatePrivateChannelNameRequest$Type extends MessageType<UpdatePrivateChannelNameRequest> {
+    constructor() {
+        super("protocol.chat.v1.UpdatePrivateChannelNameRequest", [
+            { no: 1, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+            { no: 2, name: "name", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ }
+        ]);
+    }
+}
+/**
+ * @generated MessageType for protobuf message protocol.chat.v1.UpdatePrivateChannelNameRequest
+ */
+export const UpdatePrivateChannelNameRequest = new UpdatePrivateChannelNameRequest$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class UpdatePrivateChannelNameResponse$Type extends MessageType<UpdatePrivateChannelNameResponse> {
+    constructor() {
+        super("protocol.chat.v1.UpdatePrivateChannelNameResponse", []);
+    }
+}
+/**
+ * @generated MessageType for protobuf message protocol.chat.v1.UpdatePrivateChannelNameResponse
+ */
+export const UpdatePrivateChannelNameResponse = new UpdatePrivateChannelNameResponse$Type();
 // @generated message type with reflection information, may provide speed optimized methods
 class DeletePrivateChannelRequest$Type extends MessageType<DeletePrivateChannelRequest> {
     constructor() {

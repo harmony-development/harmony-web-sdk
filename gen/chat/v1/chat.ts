@@ -109,6 +109,8 @@ import { JoinPrivateChannelResponse } from "./private_channel";
 import { JoinPrivateChannelRequest } from "./private_channel";
 import { DeletePrivateChannelResponse } from "./private_channel";
 import { DeletePrivateChannelRequest } from "./private_channel";
+import { UpdatePrivateChannelNameResponse } from "./private_channel";
+import { UpdatePrivateChannelNameRequest } from "./private_channel";
 import { UpdatePrivateChannelMembersResponse } from "./private_channel";
 import { UpdatePrivateChannelMembersRequest } from "./private_channel";
 import { CreatePrivateChannelResponse } from "./private_channel";
@@ -123,6 +125,7 @@ export const ChatService = new ServiceType("protocol.chat.v1.ChatService", [
     { name: "CreateGuild", options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } }, I: CreateGuildRequest, O: CreateGuildResponse },
     { name: "CreatePrivateChannel", options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } }, I: CreatePrivateChannelRequest, O: CreatePrivateChannelResponse },
     { name: "UpdatePrivateChannelMembers", options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } }, I: UpdatePrivateChannelMembersRequest, O: UpdatePrivateChannelMembersResponse },
+    { name: "UpdatePrivateChannelName", options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } }, I: UpdatePrivateChannelNameRequest, O: UpdatePrivateChannelNameResponse },
     { name: "DeletePrivateChannel", options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } }, I: DeletePrivateChannelRequest, O: DeletePrivateChannelResponse },
     { name: "JoinPrivateChannel", options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } }, I: JoinPrivateChannelRequest, O: JoinPrivateChannelResponse },
     { name: "LeavePrivateChannel", options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } }, I: LeavePrivateChannelRequest, O: LeavePrivateChannelResponse },
