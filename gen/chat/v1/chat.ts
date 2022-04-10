@@ -95,6 +95,8 @@ import { GetPendingInvitesResponse } from "./guilds";
 import { GetPendingInvitesRequest } from "./guilds";
 import { InviteUserToGuildResponse } from "./guilds";
 import { InviteUserToGuildRequest } from "./guilds";
+import { GetPrivateChannelResponse } from "./private_channel";
+import { GetPrivateChannelRequest } from "./private_channel";
 import { GetPrivateChannelListResponse } from "./private_channel";
 import { GetPrivateChannelListRequest } from "./private_channel";
 import { GetGuildListResponse } from "./guilds";
@@ -133,6 +135,7 @@ export const ChatService = new ServiceType("protocol.chat.v1.ChatService", [
     { name: "CreateChannel", options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "channels.manage.create" } }, I: CreateChannelRequest, O: CreateChannelResponse },
     { name: "GetGuildList", options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } }, I: GetGuildListRequest, O: GetGuildListResponse },
     { name: "GetPrivateChannelList", options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } }, I: GetPrivateChannelListRequest, O: GetPrivateChannelListResponse },
+    { name: "GetPrivateChannel", options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } }, I: GetPrivateChannelRequest, O: GetPrivateChannelResponse },
     { name: "InviteUserToGuild", options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true, requiresPermissionNode: "invites.manage.create" } }, I: InviteUserToGuildRequest, O: InviteUserToGuildResponse },
     { name: "GetPendingInvites", options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } }, I: GetPendingInvitesRequest, O: GetPendingInvitesResponse },
     { name: "RejectPendingInvite", options: { "protocol.harmonytypes.v1.metadata": { requiresAuthentication: true } }, I: RejectPendingInviteRequest, O: RejectPendingInviteResponse },

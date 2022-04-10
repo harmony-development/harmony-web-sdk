@@ -44,17 +44,39 @@ export interface PrivateChannelListEntry {
      */
     channelId: string;
     /**
-     * The server ID of the homeserver of this private channel.
+     * The server ID of the homeserver of this private channel. If local, this is not set.
      *
-     * @generated from protobuf field: string server_id = 2;
+     * @generated from protobuf field: optional string server_id = 2;
      */
-    serverId: string;
+    serverId?: string;
+}
+/**
+ * Request type used in `GetPrivateChannel` endpoint.
+ *
+ * @generated from protobuf message protocol.chat.v1.GetPrivateChannelRequest
+ */
+export interface GetPrivateChannelRequest {
     /**
-     * The data for this channel.
+     * The IDs of the channels to get data for.
      *
-     * @generated from protobuf field: protocol.chat.v1.PrivateChannel data = 3;
+     * @generated from protobuf field: repeated uint64 channel_ids = 1;
      */
-    data?: PrivateChannel;
+    channelIds: string[];
+}
+/**
+ * Response type used in `GetPrivateChannel` endpoint.
+ *
+ * @generated from protobuf message protocol.chat.v1.GetPrivateChannelResponse
+ */
+export interface GetPrivateChannelResponse {
+    /**
+     * The list of private channels.
+     *
+     * @generated from protobuf field: map<uint64, protocol.chat.v1.PrivateChannel> channels = 1;
+     */
+    channels: {
+        [key: string]: PrivateChannel;
+    };
 }
 /**
  * Request type used in `CreatePrivateChannel` endpoint.
@@ -256,8 +278,7 @@ class PrivateChannelListEntry$Type extends MessageType<PrivateChannelListEntry> 
     constructor() {
         super("protocol.chat.v1.PrivateChannelListEntry", [
             { no: 1, name: "channel_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
-            { no: 2, name: "server_id", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 3, name: "data", kind: "message", T: () => PrivateChannel }
+            { no: 2, name: "server_id", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ }
         ]);
     }
 }
@@ -265,6 +286,30 @@ class PrivateChannelListEntry$Type extends MessageType<PrivateChannelListEntry> 
  * @generated MessageType for protobuf message protocol.chat.v1.PrivateChannelListEntry
  */
 export const PrivateChannelListEntry = new PrivateChannelListEntry$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class GetPrivateChannelRequest$Type extends MessageType<GetPrivateChannelRequest> {
+    constructor() {
+        super("protocol.chat.v1.GetPrivateChannelRequest", [
+            { no: 1, name: "channel_ids", kind: "scalar", repeat: 1 /*RepeatType.PACKED*/, T: 4 /*ScalarType.UINT64*/ }
+        ]);
+    }
+}
+/**
+ * @generated MessageType for protobuf message protocol.chat.v1.GetPrivateChannelRequest
+ */
+export const GetPrivateChannelRequest = new GetPrivateChannelRequest$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class GetPrivateChannelResponse$Type extends MessageType<GetPrivateChannelResponse> {
+    constructor() {
+        super("protocol.chat.v1.GetPrivateChannelResponse", [
+            { no: 1, name: "channels", kind: "map", K: 4 /*ScalarType.UINT64*/, V: { kind: "message", T: () => PrivateChannel } }
+        ]);
+    }
+}
+/**
+ * @generated MessageType for protobuf message protocol.chat.v1.GetPrivateChannelResponse
+ */
+export const GetPrivateChannelResponse = new GetPrivateChannelResponse$Type();
 // @generated message type with reflection information, may provide speed optimized methods
 class CreatePrivateChannelRequest$Type extends MessageType<CreatePrivateChannelRequest> {
     constructor() {
